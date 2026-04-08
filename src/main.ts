@@ -93,55 +93,56 @@ document.addEventListener('keydown', (e) => {
 const workTrack = document.getElementById('workTrack') as HTMLElement | null
 
 if (workTrack) {
+  const track = workTrack
   // --- Clone cards for seamless infinite loop ---
-  const originalCards = Array.from(workTrack.querySelectorAll<HTMLElement>('.work-scroll-card'))
+  const originalCards = Array.from(track.querySelectorAll<HTMLElement>('.work-scroll-card'))
   originalCards.forEach(card => {
     const clone = card.cloneNode(true) as HTMLElement
     clone.setAttribute('aria-hidden', 'true')
-    workTrack.appendChild(clone)
+    track.appendChild(clone)
   })
-  const loopAt = workTrack.scrollWidth / 2
+  const loopAt = track.scrollWidth / 2
 
   // --- Drag to scroll ---
   let isDragging = false
   let startX = 0
   let dragScrollLeft = 0
 
-  workTrack.addEventListener('mousedown', (e) => {
+  track.addEventListener('mousedown', (e) => {
     isDragging = true
-    workTrack.classList.add('is-dragging')
-    startX = e.pageX - workTrack.offsetLeft
-    dragScrollLeft = workTrack.scrollLeft
+    track.classList.add('is-dragging')
+    startX = e.pageX - track.offsetLeft
+    dragScrollLeft = track.scrollLeft
   })
 
   const stopDrag = () => {
     isDragging = false
-    workTrack.classList.remove('is-dragging')
+    track.classList.remove('is-dragging')
   }
 
-  workTrack.addEventListener('mouseup', stopDrag)
+  track.addEventListener('mouseup', stopDrag)
 
-  workTrack.addEventListener('mousemove', (e) => {
+  track.addEventListener('mousemove', (e) => {
     if (!isDragging) return
     e.preventDefault()
-    const x = e.pageX - workTrack.offsetLeft
-    workTrack.scrollLeft = dragScrollLeft - (x - startX) * 1.4
+    const x = e.pageX - track.offsetLeft
+    track.scrollLeft = dragScrollLeft - (x - startX) * 1.4
   })
 
   // --- Prev / Next buttons ---
   const workPrev = document.getElementById('workPrev')
   const workNext = document.getElementById('workNext')
   const getCardStep = () => {
-    const card = workTrack.querySelector<HTMLElement>('.work-scroll-card')
+    const card = track.querySelector<HTMLElement>('.work-scroll-card')
     return card ? card.offsetWidth + 24 : 480
   }
-  workPrev?.addEventListener('click', () => workTrack.scrollBy({ left: -getCardStep(), behavior: 'smooth' }))
-  workNext?.addEventListener('click', () => workTrack.scrollBy({ left: getCardStep(), behavior: 'smooth' }))
+  workPrev?.addEventListener('click', () => track.scrollBy({ left: -getCardStep(), behavior: 'smooth' }))
+  workNext?.addEventListener('click', () => track.scrollBy({ left: getCardStep(), behavior: 'smooth' }))
 
   // --- Arc tilt: rotateY + translateY (cards on sides dip down) ---
   function updateCardTilts() {
-    const cards = workTrack.querySelectorAll<HTMLElement>('.work-scroll-card')
-    const trackRect = workTrack.getBoundingClientRect()
+    const cards = track.querySelectorAll<HTMLElement>('.work-scroll-card')
+    const trackRect = track.getBoundingClientRect()
     const center = trackRect.left + trackRect.width / 2
 
     cards.forEach(card => {
@@ -161,9 +162,9 @@ if (workTrack) {
 
   function tick() {
     if (!isDragging && !autoPaused) {
-      workTrack.scrollLeft += SPEED
-      if (workTrack.scrollLeft >= loopAt) {
-        workTrack.scrollLeft -= loopAt
+      track.scrollLeft += SPEED
+      if (track.scrollLeft >= loopAt) {
+        track.scrollLeft -= loopAt
       }
     }
     updateCardTilts()
@@ -171,12 +172,12 @@ if (workTrack) {
   }
 
   // Pause on hover, resume on leave
-  workTrack.addEventListener('mouseenter', () => { autoPaused = true })
-  workTrack.addEventListener('mouseleave', () => { autoPaused = false; stopDrag() })
+  track.addEventListener('mouseenter', () => { autoPaused = true })
+  track.addEventListener('mouseleave', () => { autoPaused = false; stopDrag() })
 
   // Pause on touch, resume 1.2s after finger lifts
-  workTrack.addEventListener('touchstart', () => { autoPaused = true }, { passive: true })
-  workTrack.addEventListener('touchend',   () => { setTimeout(() => { autoPaused = false }, 1200) }, { passive: true })
+  track.addEventListener('touchstart', () => { autoPaused = true }, { passive: true })
+  track.addEventListener('touchend',   () => { setTimeout(() => { autoPaused = false }, 1200) }, { passive: true })
 
   window.addEventListener('resize', updateCardTilts, { passive: true })
 
