@@ -1,4 +1,5 @@
 import './style.css'
+import { initContactForm } from './components/contact-form'
 
 // ============================================================
 // Hero — apparition au chargement (mask reveal)
@@ -202,6 +203,11 @@ document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
     }
   })
 })
+
+// ============================================================
+// Contact multi-step form
+// ============================================================
+initContactForm()
 
 // ============================================================
 // Smooth scroll for anchor links (offset for fixed nav)

@@ -1,0 +1,856 @@
+/* ============================================================
+   CONTACT MULTI-STEP FORM — Studio Skøne
+   ============================================================ */
+
+/* Section override — position needed for glow pseudo-element */
+#contact {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient glow behind the form */
+#contact::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -12%;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 96, 59, 0.11) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#contact::after {
+  content: '';
+  position: absolute;
+  bottom: -18%;
+  left: -10%;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 96, 59, 0.07) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Wrapper ───────────────────────────────────────────────── */
+
+.cf-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.cf-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cf-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.025em;
+  color: var(--bg);
+}
+
+.cf-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(251, 244, 228, 0.5);
+}
+
+/* ── Progress ──────────────────────────────────────────────── */
+
+.cf-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cf-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Connector line between steps */
+.cf-steps::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: calc(12.5% + 12px);
+  right: calc(12.5% + 12px);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 0;
+}
+
+.cf-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  width: 25%;
+}
+
+.cf-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.cf-step-item.is-active .cf-step-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  box-shadow:
+    0 0 0 4px rgba(196, 96, 59, 0.18),
+    0 0 20px rgba(196, 96, 59, 0.32);
+}
+
+.cf-step-item.is-done .cf-step-num {
+  background: rgba(196, 96, 59, 0.18);
+  border-color: rgba(196, 96, 59, 0.45);
+  color: var(--accent);
+}
+
+.cf-step-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+  transition: color 0.4s var(--ease);
+}
+
+.cf-step-item.is-active .cf-step-label {
+  color: var(--accent);
+}
+
+.cf-step-item.is-done .cf-step-label {
+  color: rgba(196, 96, 59, 0.55);
+}
+
+/* Progress bar */
+.cf-progress-bar {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.cf-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  border-radius: 1px;
+  transition: width 0.55s var(--ease);
+  box-shadow: 0 0 10px rgba(196, 96, 59, 0.5);
+  will-change: width;
+}
+
+/* ── Glass card ────────────────────────────────────────────── */
+
+.cf-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 40px;
+  min-height: 380px;
+  position: relative;
+  box-shadow:
+    0 4px 40px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Subtle grain texture on card */
+.cf-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cf-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Panels ────────────────────────────────────────────────── */
+
+.cf-panel {
+  display: none;
+}
+
+.cf-panel.is-active {
+  display: block;
+}
+
+/* ── Step question ─────────────────────────────────────────── */
+
+.cf-question {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--bg);
+  margin-bottom: 24px;
+  line-height: 1.35;
+}
+
+/* ── Choice cards ──────────────────────────────────────────── */
+
+.cf-choices {
+  display: grid;
+  gap: 10px;
+}
+
+.cf-choices--2col {
+  grid-template-columns: 1fr 1fr;
+}
+
+.cf-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.2s ease;
+  font-family: inherit;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover shine effect */
+.cf-choice::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(196, 96, 59, 0.07) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.cf-choice:hover {
+  border-color: rgba(196, 96, 59, 0.32);
+  background: rgba(196, 96, 59, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+}
+
+.cf-choice:hover::before {
+  opacity: 1;
+}
+
+.cf-choice.is-selected {
+  border-color: var(--accent);
+  background: rgba(196, 96, 59, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(196, 96, 59, 0.22),
+    0 4px 24px rgba(196, 96, 59, 0.14);
+  transform: none;
+}
+
+.cf-choice.is-selected::before {
+  opacity: 1;
+}
+
+.cf-choice-icon {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: rgba(251, 244, 228, 0.22);
+  flex-shrink: 0;
+  width: 22px;
+  text-align: center;
+  line-height: 1;
+  transition: color 0.22s ease;
+}
+
+.cf-choice.is-selected .cf-choice-icon {
+  color: var(--accent);
+}
+
+.cf-choice-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.cf-choice-label {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(251, 244, 228, 0.6);
+  transition: color 0.22s ease, font-weight 0.1s ease;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cf-choice.is-selected .cf-choice-label {
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.cf-choice-sub {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.18);
+  margin-top: 2px;
+  display: block;
+  transition: color 0.22s ease;
+  white-space: nowrap;
+}
+
+.cf-choice.is-selected .cf-choice-sub {
+  color: rgba(196, 96, 59, 0.7);
+}
+
+/* Checkmark bubble */
+.cf-choice-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0);
+  transition:
+    opacity 0.22s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cf-choice.is-selected .cf-choice-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Form fields ───────────────────────────────────────────── */
+
+.cf-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cf-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Floating label field */
+.cf-field {
+  position: relative;
+}
+
+.cf-field input,
+.cf-field textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px 16px 10px;
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  outline: none;
+  resize: none;
+  -webkit-appearance: none;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+  caret-color: var(--accent);
+}
+
+.cf-field input::placeholder,
+.cf-field textarea::placeholder {
+  color: transparent;
+}
+
+/* Focus state */
+.cf-field input:focus,
+.cf-field textarea:focus {
+  border-color: rgba(196, 96, 59, 0.52);
+  background: rgba(196, 96, 59, 0.05);
+  box-shadow: 0 0 0 3px rgba(196, 96, 59, 0.1);
+}
+
+/* Floating label */
+.cf-field label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.28);
+  transition:
+    top 0.2s ease,
+    transform 0.2s ease,
+    font-size 0.2s ease,
+    letter-spacing 0.2s ease,
+    color 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Textarea: label anchored at top */
+.cf-field--area label {
+  top: 16px;
+  transform: none;
+}
+
+/* Float label when filled or focused */
+.cf-field input:focus         + label,
+.cf-field input:not(:placeholder-shown) + label,
+.cf-field textarea:focus      + label,
+.cf-field textarea:not(:placeholder-shown) + label {
+  top: 8px;
+  transform: none;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Textarea: just shift up slightly when filled/focused */
+.cf-field--area textarea:focus      + label,
+.cf-field--area textarea:not(:placeholder-shown) + label {
+  top: 8px;
+  transform: none;
+}
+
+.cf-optional {
+  font-weight: 400;
+  opacity: 0.45;
+  font-size: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Error state */
+.cf-field.has-error input,
+.cf-field.has-error textarea {
+  border-color: rgba(196, 96, 59, 0.65);
+  box-shadow: 0 0 0 2px rgba(196, 96, 59, 0.14);
+}
+
+/* ── RGPD ──────────────────────────────────────────────────── */
+
+.cf-rgpd {
+  margin-top: 6px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  transition: border-color 0.25s ease;
+}
+
+.cf-rgpd.has-error {
+  border-color: rgba(196, 96, 59, 0.45);
+  box-shadow: 0 0 0 2px rgba(196, 96, 59, 0.1);
+}
+
+.cf-rgpd-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* Hide native checkbox */
+.cf-rgpd-row input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Custom checkbox box */
+.cf-rgpd-box {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.cf-rgpd-box.is-checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(196, 96, 59, 0.35);
+}
+
+.cf-rgpd-check-icon {
+  display: none;
+  flex-shrink: 0;
+}
+
+.cf-rgpd-box.is-checked .cf-rgpd-check-icon {
+  display: block;
+}
+
+.cf-rgpd-text {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.65;
+}
+
+.cf-rgpd-required {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cf-rgpd-link {
+  color: rgba(196, 96, 59, 0.75);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(196, 96, 59, 0.35);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.cf-rgpd-link:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* ── Navigation ────────────────────────────────────────────── */
+
+.cf-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+}
+
+.cf-btn-prev {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 13px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+  visibility: hidden;
+}
+
+.cf-btn-prev.is-visible {
+  visibility: visible;
+}
+
+.cf-btn-prev:hover {
+  color: rgba(255, 255, 255, 0.62);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-2px);
+}
+
+.cf-btn-next {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 14px;
+  padding: 14px 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  box-shadow: 0 4px 20px rgba(196, 96, 59, 0.3);
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.cf-btn-next:hover:not(:disabled) {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(196, 96, 59, 0.42);
+}
+
+.cf-btn-next:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Loading state */
+.cf-btn-next.is-loading {
+  pointer-events: none;
+}
+
+.cf-spinner {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid rgba(251, 244, 228, 0.28);
+  border-top-color: var(--bg);
+  border-radius: 50%;
+  animation: cf-spin 0.72s linear infinite;
+  display: none;
+  flex-shrink: 0;
+}
+
+.cf-btn-next.is-loading .cf-spinner {
+  display: block;
+}
+
+.cf-btn-next.is-loading .cf-btn-label {
+  display: none;
+}
+
+@keyframes cf-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success state ─────────────────────────────────────────── */
+
+.cf-success {
+  display: none;
+  text-align: center;
+  padding: 80px 40px 40px;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.cf-success.is-visible {
+  display: flex;
+  animation: cf-success-appear 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cf-success-appear {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cf-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(196, 96, 59, 0.1);
+  border: 1.5px solid rgba(196, 96, 59, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 8px rgba(196, 96, 59, 0.06),
+    0 0 40px rgba(196, 96, 59, 0.16);
+  animation: cf-icon-pulse 2.5s ease-in-out 0.6s infinite;
+}
+
+@keyframes cf-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 8px rgba(196, 96, 59, 0.06), 0 0 40px rgba(196, 96, 59, 0.16); }
+  50%       { box-shadow: 0 0 0 14px rgba(196, 96, 59, 0.04), 0 0 56px rgba(196, 96, 59, 0.22); }
+}
+
+.cf-success-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 500;
+  color: var(--bg);
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+}
+
+.cf-success-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(251, 244, 228, 0.48);
+}
+
+.cf-success-sub {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.32);
+  line-height: 1.65;
+  max-width: 300px;
+}
+
+.cf-success-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.cf-success-tag {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(196, 96, 59, 0.8);
+  background: rgba(196, 96, 59, 0.08);
+  border: 1px solid rgba(196, 96, 59, 0.2);
+  border-radius: 999px;
+  padding: 5px 13px;
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────── */
+
+/* Initial hidden state — éléments prêts à animer */
+.cf-header,
+.cf-progress,
+.cf-card,
+.cf-nav,
+.cf-note {
+  opacity: 0;
+  transform: translateY(52px);
+  transition:
+    opacity   0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger quand .is-revealed est posé sur .cf-wrapper */
+.cf-wrapper.is-revealed .cf-header   { opacity: 1; transform: translateY(0); transition-delay: 0s;    }
+.cf-wrapper.is-revealed .cf-progress { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+.cf-wrapper.is-revealed .cf-card     { opacity: 1; transform: translateY(0); transition-delay: 0.22s; }
+.cf-wrapper.is-revealed .cf-nav      { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
+.cf-wrapper.is-revealed .cf-note     { opacity: 1; transform: translateY(0); transition-delay: 0.4s;  }
+
+/* Respect du préférence système */
+@media (prefers-reduced-motion: reduce) {
+  .cf-header,
+  .cf-progress,
+  .cf-card,
+  .cf-nav,
+  .cf-note {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Footer note ───────────────────────────────────────────── */
+
+.cf-note {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.16);
+  line-height: 1.5;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .cf-card          { padding: 28px 22px; min-height: 340px; }
+  .cf-choices--2col { grid-template-columns: 1fr; }
+  .cf-field-row     { grid-template-columns: 1fr; }
+  .cf-wrapper       { gap: 36px; }
+  .cf-title         { font-size: 1.65rem; }
+}
+
+@media (max-width: 480px) {
+  .cf-card          { padding: 22px 16px; }
+  .cf-question      { font-size: 0.9rem; margin-bottom: 18px; }
+  .cf-btn-next      { padding: 13px 18px; }
+  .cf-btn-prev      { padding: 13px 14px; }
+  .cf-steps::before { display: none; }
+  .cf-success       { padding: 56px 20px 24px; }
+}
