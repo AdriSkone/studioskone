@@ -43,6 +43,74 @@ const revealObserver = new IntersectionObserver(
 revealEls.forEach((el) => revealObserver.observe(el))
 
 // ============================================================
+// Services cards — scatter au scroll (style krumzi)
+// ============================================================
+const sdarkCards = Array.from(document.querySelectorAll<HTMLElement>('.sdark-card'))
+
+if (sdarkCards.length) {
+  // Détacher du système reveal — l'animation scatter prend le relais
+  sdarkCards.forEach((card) => {
+    revealObserver.unobserve(card)
+    // Écraser la transition du reveal (opacity/transform) pour un tracking scroll immédiat
+    card.style.transition = 'background 0.5s ease'
+    card.style.willChange = 'transform, opacity'
+  })
+
+  // Direction de scatter alternée par card : pair = gauche, impair = droite
+  const dirs = sdarkCards.map((_, i) => (i % 2 === 0 ? -1 : 1))
+
+  function applyServicesScatter(): void {
+    const vh = window.innerHeight
+
+    sdarkCards.forEach((card, i) => {
+      const rect = card.getBoundingClientRect()
+      // raw > 0 quand le haut de la card est encore sous 72% du viewport
+      const raw = rect.top - vh * 0.72
+      // t : 0 = en vue ou au-dessus du seuil, 1 = bien en-dessous
+      const t = Math.max(0, Math.min(1, raw / (vh * 0.5)))
+
+      if (t < 0.001) {
+        card.style.transform = 'none'
+        card.style.opacity = '1'
+        return
+      }
+
+      const dir = dirs[i]
+      const tx   = (dir * t * 52).toFixed(2)
+      const ty   = (t * 66).toFixed(2)
+      const sc   = (1 - t * 0.065).toFixed(5)
+      const rot  = (dir * t * 2.8).toFixed(3)
+      // Fade démarre à t=0.42
+      const opacity = t > 0.42
+        ? Math.max(0.28, 1 - (t - 0.42) * 1.25)
+        : 1
+
+      card.style.transform = `translateX(${tx}px) translateY(${ty}px) scale(${sc}) rotate(${rot}deg)`
+      card.style.opacity   = opacity.toFixed(4)
+    })
+  }
+
+  // Throttle via rAF
+  let rafPending = false
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!rafPending) {
+        rafPending = true
+        requestAnimationFrame(() => {
+          applyServicesScatter()
+          rafPending = false
+        })
+      }
+    },
+    { passive: true }
+  )
+
+  window.addEventListener('resize', applyServicesScatter, { passive: true })
+  applyServicesScatter()
+}
+
+// ============================================================
 // Nav — scroll state
 // ============================================================
 const nav = document.getElementById('nav')!
@@ -54,6 +122,23 @@ window.addEventListener(
   },
   { passive: true }
 )
+
+// ============================================================
+// Back to top
+// ============================================================
+const backToTop = document.getElementById('backToTop')!
+
+window.addEventListener(
+  'scroll',
+  () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 400)
+  },
+  { passive: true }
+)
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+})
 
 // ============================================================
 // Mobile nav toggle
@@ -203,6 +288,39 @@ document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
     }
   })
 })
+
+// ============================================================
+// Cookie consent
+// ============================================================
+const COOKIE_KEY = 'skone_cookie_consent'
+const cookieBanner  = document.getElementById('cookieBanner')
+const cookieAccept  = document.getElementById('cookieAccept')
+const cookieDecline = document.getElementById('cookieDecline')
+
+function dismissCookieBanner(): void {
+  if (!cookieBanner) return
+  cookieBanner.classList.remove('is-visible')
+  cookieBanner.classList.add('is-dismissed')
+  cookieBanner.setAttribute('aria-hidden', 'true')
+}
+
+if (cookieBanner && !localStorage.getItem(COOKIE_KEY)) {
+  // Apparition décalée — laisse la page se charger d'abord
+  setTimeout(() => {
+    cookieBanner.classList.add('is-visible')
+    cookieBanner.setAttribute('aria-hidden', 'false')
+  }, 900)
+
+  cookieAccept?.addEventListener('click', () => {
+    localStorage.setItem(COOKIE_KEY, 'accepted')
+    dismissCookieBanner()
+  })
+
+  cookieDecline?.addEventListener('click', () => {
+    localStorage.setItem(COOKIE_KEY, 'declined')
+    dismissCookieBanner()
+  })
+}
 
 // ============================================================
 // Contact multi-step form
