@@ -114,7 +114,7 @@ function buildTemplate(): string {
       <!-- Header -->
       <div class="cf-header">
         <span class="section-label">Contact</span>
-        <h2 class="cf-title">Discutons de <em>votre projet.</em></h2>
+        <h2 class="cf-title"><em>Discutons de</em> votre projet.</h2>
       </div>
 
       <!-- Progress indicator -->
@@ -599,22 +599,27 @@ class ContactForm {
     const btn = this.container.querySelector<HTMLButtonElement>('#cfNext')
     btn?.classList.add('is-loading')
 
-    // ─────────────────────────────────────────────────────────
-    // Replace this setTimeout with a real fetch() call:
-    //
-    // fetch('/api/contact', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(this.data),
-    // })
-    //   .then(r => r.ok ? this.showSuccess() : this.handleError())
-    //   .catch(() => this.handleError())
-    //   .finally(() => btn?.classList.remove('is-loading'))
-    // ─────────────────────────────────────────────────────────
-    setTimeout(() => {
-      btn?.classList.remove('is-loading')
-      this.showSuccess()
-    }, 1400)
+    fetch('https://formspree.io/f/mjgjwdka', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(this.data),
+    })
+      .then(r => r.ok ? this.showSuccess() : this.handleError())
+      .catch(() => this.handleError())
+      .finally(() => btn?.classList.remove('is-loading'))
+  }
+
+  private handleError(): void {
+    const btn = this.container.querySelector<HTMLButtonElement>('#cfNext')
+    if (btn) {
+      btn.classList.add('is-error')
+      const label = btn.querySelector<HTMLElement>('.cf-btn-label')
+      if (label) label.textContent = 'Erreur — réessayer'
+      setTimeout(() => {
+        btn.classList.remove('is-error')
+        if (label) label.textContent = 'Discuter de mon projet'
+      }, 3000)
+    }
   }
 
   // ── Success ────────────────────────────────────────────────
