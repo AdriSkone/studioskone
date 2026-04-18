@@ -25,63 +25,66 @@ Moderne, éditorial et élégant.
 
 ## Typography
 
-### Headlines — Montserrat (Google Fonts)
+### Règle responsive
 
-Utilisé pour : **H1, H2, H3, boutons CTA, section labels**
+> Toutes les tailles typographiques ci-dessous sont définies pour le format **desktop**.
+> Les tailles doivent être ajustées de manière proportionnelle selon le support :
+>
+> - **Desktop** : valeurs par défaut
+> - **Tablet** : réduire de 15 à 20 %
+> - **Mobile** : réduire de 25 à 35 %
+>
+> Veiller à conserver une excellente lisibilité et une hiérarchie visuelle forte sur tous les supports.
+
+---
+
+### Font Pairing
+
+| Rôle | Police |
+|------|--------|
+| Hero titles (H1) | **Barlow Bold** |
+| Section titles (H2, H3) | **Barlow Bold** |
+| Navigation links | **Barlow Bold** |
+| Decorative quote marks | **Barlow Bold** |
+| Body text | **Barlow Regular** |
+| Buttons / labels / forms | **Barlow Regular** |
+| Testimonials / citations | **Barlow Regular** |
+| Prix / montants | **Barlow Regular** |
+| Author names | **Barlow Regular** |
 
 ```css
---font-display: 'Montserrat', system-ui, sans-serif;
+--font-display: 'Barlow', system-ui, sans-serif;
+--font-sans:    'Barlow', system-ui, sans-serif;
 ```
 
-Chargement : `Montserrat:wght@400;500;600;700;800` — subset `latin,latin-ext` (couvre tous les accents français : é è ê ë à â ù û ü ô î ï ç œ æ)
+> Import Google Fonts : `font-family=Barlow:wght@400;700` — subset latin + latin-ext
 
-### Échelle typographique — fluid responsive (`clamp()`)
+---
 
-Calibrée pour atteindre les tailles cibles à **1300px (desktop)**. Calcul : `clamp(min, slope·vw + intercept, max)`.
+### Échelle typographique — Desktop
 
-| Élément | Mobile (≤480) | Tablet (768) | Desktop (1300) | Large (1600) | Weight | Line-height |
-|---------|--------------|--------------|----------------|--------------|--------|-------------|
-| H1      | 32px         | ~42px        | **56px**       | 64px         | 500    | 1.1 (~62px) |
-| H2      | 18px         | ~22px        | **27px**       | 30px         | 800    | 1.0         |
-| H3      | 14px         | ~16px        | **19px**       | 22px         | 700    | 1.53 (~29px)|
-| Body    | 14px         | ~16px        | **18px**       | 20px         | 500    | 1.44 (~26px)|
+| Élément | Police | font-size | font-weight | line-height |
+|---------|--------|-----------|-------------|-------------|
+| Hero title (H1) | Barlow Bold | 64px | 700 | 72px |
+| Section title (H2) | Barlow Bold | 40px | 700 | 48px |
+| Subheading (H3) | Barlow Bold | 24px | 700 | 32px |
+| Body text | Barlow Regular | 18px | 400 | 30px |
+| Button text | Barlow Regular | 16px | 400 | 24px |
+| Form labels | Barlow Regular | 14px | 400 | 20px |
+| Testimonial / citation | Barlow Regular | 20px | 400 | 34px |
+| Prix / montants | Barlow Regular | — | 400 | — |
+| Author name | Barlow Regular | 16px | 400 | 24px |
+| Decorative quote marks | Barlow Bold | 88px | 700 | — |
 
-```css
-h1 { font-size: clamp(2rem, 2.58vw + 1.42rem, 4rem);          line-height: 1.1;  font-weight: 500; }
-h2 { font-size: clamp(1.125rem, 1vw + 0.906rem, 1.875rem);    line-height: 1.0;  font-weight: 800; }
-h3 { font-size: clamp(0.875rem, 0.53vw + 0.756rem, 1.375rem); line-height: 1.53; font-weight: 700; }
-body { font-size: clamp(0.875rem, 0.48vw + 0.769rem, 1.25rem); line-height: 1.44; font-weight: 500; }
-```
+**Decorative quote marks** : `opacity: 0.15` — positionnement absolu en fond de carte.
 
-Style :
+---
+
+### Styles complémentaires
+
 - `letter-spacing: 0.025em` sur tous les titres
-- `letter-spacing: 0.2em` + uppercase sur les section labels
-- Hiérarchie forte : H2 weight 800 vs H1 weight 500 — contraste intentionnel éditorial
-
-### Body text — Sora (Google Fonts)
-
-Utilisé pour : **paragraphes, descriptions, cartes, navigation, footer, boutons secondaires**
-
-```css
---font-sans: 'Sora', system-ui, sans-serif;
-```
-
-Chargement : `Sora:wght@300;400;500;600`
-
-Style :
-- Clean et moderne
-- Très lisible
-- Espacement élégant
-
-### Éléments éditoriaux — Cormorant Garamond (Google Fonts)
-
-Utilisé pour : **citations, stat-numbers, email contact, sous-titres italiques**
-
-```css
---font-serif: 'Cormorant Garamond', Georgia, serif;
-```
-
-Chargement : `Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500`
+- `letter-spacing: 0.2em` + `text-transform: uppercase` sur les section labels
+- Hiérarchie forte : Hero 700 vs Section title 600 — contraste intentionnel éditorial
 
 ---
 
@@ -105,7 +108,7 @@ background:    #C4603A;           /* --accent */
 color:         #FBF4E4;           /* --bg */
 border-radius: 16px;
 padding:       12px 24px;
-font-family:   var(--font-display); /* Montserrat */
+font-family:   var(--font-display); /* Barlow Bold */
 font-weight:   600;
 letter-spacing: 0.08em;
 text-transform: uppercase;
@@ -134,7 +137,7 @@ border:        1.5px solid #C4603A;
 color:         #C4603A;
 border-radius: 16px;              /* rounded-2xl */
 padding:       12px 24px;         /* py-3 px-6 */
-font-family:   var(--font-display); /* Montserrat */
+font-family:   var(--font-display); /* Barlow Bold */
 font-weight:   400;
 letter-spacing: 0.08em;
 text-transform: uppercase;
@@ -146,6 +149,63 @@ Hover :
 background:  rgba(196, 96, 58, 0.08);
 transform:   translateY(-2px);
 box-shadow:  0 4px 16px rgba(196, 96, 58, 0.12);
+```
+
+---
+
+## Testimonials Design
+
+### Section title
+
+Utiliser **Barlow Bold (700)**.
+
+Textes recommandés :
+- *Ce que nos clients disent*
+- *Ils nous ont fait confiance*
+
+### Testimonial text
+
+Utiliser **Barlow Regular (400)** — taille 20px, line-height 34px.
+
+Exemple :
+> "Studio Skone a transformé notre image de marque et notre présence digitale."
+
+### Author
+
+Utiliser **Barlow Regular (400)** — taille 16px, line-height 24px.
+
+Exemple : `— Claire Martin, Fondatrice`
+
+### Quote Styling
+
+Les guillemets décoratifs doivent être :
+
+```css
+font-family: var(--font-display); /* Barlow Bold */
+font-size:   88px;
+font-weight: 700;
+opacity:     0.15;
+position:    absolute;
+```
+
+Placés en fond de carte, ils servent de texture visuelle sans concurrencer le contenu.
+
+### Card Style
+
+```css
+border-radius:    24px;
+background:       rgba(255, 248, 239, 0.6);   /* --card avec transparence */
+border:           1px solid rgba(226, 216, 203, 0.5); /* --border subtil */
+backdrop-filter:  blur(12px);
+-webkit-backdrop-filter: blur(12px);
+box-shadow:       0 4px 24px rgba(0, 0, 0, 0.06);
+transition:       transform 0.4s ease, box-shadow 0.4s ease;
+```
+
+Hover :
+```css
+transform:  translateY(-6px);
+box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
 ```
 
 ---
@@ -201,7 +261,7 @@ padding:    0.05em 0.26em;
 ### Section Labels
 
 ```css
-font-family: var(--font-display);   /* Montserrat */
+font-family: var(--font-display);   /* Barlow Bold */
 font-size: 11px;
 font-weight: 600;
 letter-spacing: 0.2em;
@@ -252,6 +312,6 @@ color: var(--accent);
 |-------------------------------------|--------------------------------------|
 | `/public/logo_skone.svg`            | Logo nav (h: 30px) + footer (h: 24px) |
 | `/public/hero_section_headline.png` | Headline hero — fond transparent     |
-| Google Fonts — Montserrat           | Via CDN, subset latin + latin-ext    |
+| Google Fonts — Barlow               | Via CDN, weights 400 + 700, subset latin + latin-ext |
 
 *Dernière mise à jour : avril 2026*
