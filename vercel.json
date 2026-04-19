@@ -3,6 +3,10 @@
     {
       "source": "/umami-api/:path*",
       "destination": "https://api.umami.is/:path*"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
     }
   ]
 }
