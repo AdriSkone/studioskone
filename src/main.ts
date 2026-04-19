@@ -1,6 +1,15 @@
 import './style.css'
 import { initContactForm } from './components/contact-form'
 
+// Umami Analytics — injecté uniquement si les variables d'environnement sont renseignées
+if (import.meta.env.VITE_UMAMI_WEBSITE_ID && import.meta.env.VITE_UMAMI_SCRIPT_URL) {
+  const s = document.createElement('script')
+  s.defer = true
+  s.src = `${import.meta.env.VITE_UMAMI_SCRIPT_URL}/script.js`
+  s.dataset.websiteId = import.meta.env.VITE_UMAMI_WEBSITE_ID
+  document.head.appendChild(s)
+}
+
 // ============================================================
 // Hero — apparition au chargement (mask reveal)
 // ============================================================

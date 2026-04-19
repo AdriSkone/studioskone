@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/umami-api/:path*",
+      "destination": "https://api.umami.is/:path*"
+    }
+  ]
+}
