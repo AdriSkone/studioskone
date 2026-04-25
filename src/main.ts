@@ -1,5 +1,57 @@
 import './style.css'
+import './hero-mount'
 import { initContactForm } from './components/contact-form'
+
+// ============================================================
+// Custom cursor — accent dot with lerp delay
+// ============================================================
+;(function initCursor() {
+  // Only on pointer devices (no touch)
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+
+  const cursorEl = document.getElementById('cursor')
+  if (!cursorEl) return
+
+  let mouseX = 0
+  let mouseY = 0
+  let curX = 0
+  let curY = 0
+  let visible = false
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+    if (!visible) {
+      // Snap to position on first move — no lag on entry
+      curX = mouseX
+      curY = mouseY
+      visible = true
+      cursorEl.style.opacity = '1'
+    }
+  }, { passive: true })
+
+  document.addEventListener('mouseleave', () => {
+    cursorEl.style.opacity = '0'
+    visible = false
+  })
+
+  document.addEventListener('mouseenter', () => {
+    if (visible) cursorEl.style.opacity = '1'
+  })
+
+  const navEl = document.getElementById('nav')
+  navEl?.addEventListener('mouseenter', () => { cursorEl.style.opacity = '0' })
+  navEl?.addEventListener('mouseleave', () => { if (visible) cursorEl.style.opacity = '1' })
+
+  function tick() {
+    curX += (mouseX - curX) * 0.1
+    curY += (mouseY - curY) * 0.1
+    if (cursorEl) cursorEl.style.transform = `translate(calc(${curX}px - 50%), calc(${curY}px - 50%))`
+    requestAnimationFrame(tick)
+  }
+
+  tick()
+})()
 
 // Umami Analytics — injecté uniquement si les variables d'environnement sont renseignées
 if (import.meta.env.VITE_UMAMI_WEBSITE_ID && import.meta.env.VITE_UMAMI_SCRIPT_URL) {

@@ -48,12 +48,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="cursor" aria-hidden="true"></div>
 
   <!-- NAV -->
   <nav id="nav">
     <div class="nav-inner container">
       <a href="#" class="nav-logo">
-        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img">
+        <img src="/favicon_skone_nav.svg" alt="Studio Skøne" class="nav-logo-img">
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
@@ -69,25 +70,8 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-content">
-      <div class="hero-headline">
-        <h1 class="hero-h1">
-          <span class="hero-h1-line">Création de produits</span>
-          <span class="hero-h1-line"><span class="hero-accent">web</span> et <span class="hero-accent">mobile</span></span>
-        </h1>
-        <h2 class="hero-subtitle">"de la conception au lancement"</h2>
-      </div>
-      <div class="hero-actions">
-        <a href="#work" class="hero-btn-primary">
-          <span>Découvrir nos projets</span>
-          <span class="hero-arrow" aria-hidden="true">→</span>
-        </a>
-        <a href="#contact" class="hero-btn-secondary">Parlons de votre projet</a>
-      </div>
-    </div>
-  </section>
+  <!-- HERO — React mount -->
+  <div id="hero-root"></div>
 
   <!-- MARQUEE TOOLS -->
   <div class="marquee-section" aria-hidden="true">

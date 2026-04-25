@@ -308,10 +308,16 @@ color: var(--accent);
 
 ## Assets
 
-| Fichier                             | Usage                                |
-|-------------------------------------|--------------------------------------|
-| `/public/logo_skone.svg`            | Logo nav (h: 30px) + footer (h: 24px) |
-| `/public/hero_section_headline.png` | Headline hero — fond transparent     |
-| Google Fonts — Barlow               | Via CDN, weights 400 + 700, subset latin + latin-ext |
+| Fichier                             | Usage                                                          |
+|-------------------------------------|----------------------------------------------------------------|
+| `/public/favicon_skone.svg`         | Favicon navigateur — **avec fond** `#f5ede0`                  |
+| `/public/favicon_skone_nav.svg`     | Icône nav (top-left) — **fond transparent**, h: 32px          |
+| `/public/logo_skone_sansh2.svg`     | Wordmark hero plein largeur + usage éditorial                  |
+| `/public/logo_skone.svg`            | Logo alternatif (footer, variantes)                            |
+| `/public/hero_section_headline.png` | Headline hero — fond transparent                               |
+| Google Fonts — Barlow               | Via CDN, weights 400 + 700, subset latin + latin-ext           |
+
+> **Règle icône nav** : toujours utiliser `favicon_skone_nav.svg` (transparent) dans la navigation.
+> Ne jamais utiliser `favicon_skone.svg` dans l'UI — réservé au favicon du navigateur.
 
 *Dernière mise à jour : avril 2026*

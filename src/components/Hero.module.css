@@ -1,0 +1,51 @@
+/* ─── Hero Section ──────────────────────────────────────────── */
+
+.section {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+  background-color: #FBF4E4;
+}
+
+/* ─── Background layers ─────────────────────────────────────── */
+
+/* Warm radial glow — depth, not distraction */
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 38% 45%, rgba(196, 96, 59, 0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 65% at 78% 18%, rgba(232, 137, 90, 0.06) 0%, transparent 60%);
+  filter: blur(72px);
+}
+
+/* Paper grain — remove flat UI feel, 2% opacity */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 280px 280px;
+  opacity: 0.02;
+  mix-blend-mode: overlay;
+}
+
+
+/* ─── Massive logo — ancré en bas avec marges ───────────────── */
+
+.logoBlock {
+  position: relative;
+  z-index: 1;
+  line-height: 0;
+  padding: 0 24px 24px;
+}
+
+.logoMassive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
