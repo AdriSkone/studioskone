@@ -30,9 +30,9 @@ export function Hero() {
       <motion.div
         className={styles.logoBlock}
         style={{ y: logoY }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.1, ease, delay: 0.2 }}
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.6, ease, delay: 0.2 }}
       >
         <img
           src="/logo_skone_sansh2.svg"
