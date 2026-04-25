@@ -40,6 +40,11 @@ html {
   font-size: 16px;
 }
 
+/* Hero mount point — réserve la hauteur avant hydratation React */
+#hero-root {
+  min-height: 100svh;
+}
+
 /* ============================================================
    CUSTOM CURSOR
    ============================================================ */
