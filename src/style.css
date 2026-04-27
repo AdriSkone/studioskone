@@ -1515,26 +1515,12 @@ button {
   .statement-section { padding-block: 56px; }
 }
 
-/* ============================================================
-   STATS STRIP
-   ============================================================ */
 /* ── Notre approche ── */
 #approach {
   background: var(--dark);
   padding: 80px 0 0;
   overflow: hidden;
   position: relative;
-}
-#approach::before {
-  content: '';
-  position: absolute;
-  right: -80px;
-  top: -80px;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(197,96,57,.09) 0%, transparent 65%);
-  pointer-events: none;
 }
 .approach-glow {
   position: absolute;
@@ -1545,6 +1531,7 @@ button {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(197,96,57,.09) 0%, transparent 65%);
   pointer-events: none;
+  z-index: 0;
 }
 .approach-inner {
   padding-bottom: 56px;
@@ -1577,7 +1564,7 @@ button {
 .approach-mid-text {
   flex: 1;
   font-size: 14px;
-  color: rgba(250,238,223,.38);
+  color: rgba(250,238,223,.52);
   line-height: 1.75;
   border-left: 2px solid rgba(197,96,57,.35);
   padding-left: 20px;
