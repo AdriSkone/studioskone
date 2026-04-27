@@ -1349,9 +1349,6 @@ button {
   .approach-mid-text { border-left: none; border-top: 2px solid rgba(197,96,57,.35); padding-left: 0; padding-top: 20px; }
 }
 
-/* ============================================================
-   PROCESS
-   ============================================================ */
 /* ── Process ── */
 #process {
   background: var(--surface);
@@ -1392,6 +1389,7 @@ button {
   line-height: 1;
   pointer-events: none;
   user-select: none;
+  z-index: 0;
 }
 .process-tag {
   display: block;
@@ -1407,12 +1405,14 @@ button {
   font-weight: 700;
   margin-bottom: 10px;
   position: relative;
+  z-index: 1;
 }
 .process-card-text {
   font-size: 13px;
   color: var(--muted);
   line-height: 1.65;
   position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
