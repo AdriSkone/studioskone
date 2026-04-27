@@ -86,7 +86,7 @@ document.querySelectorAll<HTMLElement>('.reveal').forEach((el) => {
     el.parentElement?.querySelectorAll<HTMLElement>(':scope > .reveal') ?? []
   )
   const index = siblings.indexOf(el)
-  el.style.transitionDelay = `${index * 0.11}s`
+  el.style.transitionDelay = `${index * 0.14}s`
 })
 
 const revealObserver = new IntersectionObserver(
@@ -235,100 +235,31 @@ document.addEventListener('keydown', (e) => {
 })
 
 // ============================================================
-// Work — arc carousel with auto-scroll
+// Subtle parallax — section headers shift slightly on scroll
 // ============================================================
-const workTrack = document.getElementById('workTrack') as HTMLElement | null
+const parallaxHeaders = Array.from(
+  document.querySelectorAll<HTMLElement>('#approach .section-header, #work .section-header, #testimonials .section-header, #tarifs .section-header')
+)
 
-if (workTrack) {
-  const track = workTrack
-  // --- Clone cards for seamless infinite loop ---
-  const originalCards = Array.from(track.querySelectorAll<HTMLElement>('.work-scroll-card'))
-  originalCards.forEach(card => {
-    const clone = card.cloneNode(true) as HTMLElement
-    clone.setAttribute('aria-hidden', 'true')
-    track.appendChild(clone)
-  })
-  const loopAt = track.scrollWidth / 2
-
-  // --- Drag to scroll ---
-  let isDragging = false
-  let startX = 0
-  let dragScrollLeft = 0
-
-  track.addEventListener('mousedown', (e) => {
-    isDragging = true
-    track.classList.add('is-dragging')
-    startX = e.pageX - track.offsetLeft
-    dragScrollLeft = track.scrollLeft
-  })
-
-  const stopDrag = () => {
-    isDragging = false
-    track.classList.remove('is-dragging')
-  }
-
-  track.addEventListener('mouseup', stopDrag)
-
-  track.addEventListener('mousemove', (e) => {
-    if (!isDragging) return
-    e.preventDefault()
-    const x = e.pageX - track.offsetLeft
-    track.scrollLeft = dragScrollLeft - (x - startX) * 1.4
-  })
-
-  // --- Prev / Next buttons ---
-  const workPrev = document.getElementById('workPrev')
-  const workNext = document.getElementById('workNext')
-  const getCardStep = () => {
-    const card = track.querySelector<HTMLElement>('.work-scroll-card')
-    return card ? card.offsetWidth + 24 : 480
-  }
-  workPrev?.addEventListener('click', () => track.scrollBy({ left: -getCardStep(), behavior: 'smooth' }))
-  workNext?.addEventListener('click', () => track.scrollBy({ left: getCardStep(), behavior: 'smooth' }))
-
-  // --- Arc tilt: rotateY + translateY (cards on sides dip down) ---
-  function updateCardTilts() {
-    const cards = track.querySelectorAll<HTMLElement>('.work-scroll-card')
-    const trackRect = track.getBoundingClientRect()
-    const center = trackRect.left + trackRect.width / 2
-
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect()
-      const cardCenter = rect.left + rect.width / 2
-      const dist = (cardCenter - center) / (trackRect.width * 0.55)
-      const clamped = Math.max(-1, Math.min(1, dist))
-      card.style.setProperty('--tilt-y',     `${clamped * 22}deg`)
-      card.style.setProperty('--card-scale', `${1 - Math.abs(clamped) * 0.06}`)
-      card.style.setProperty('--translate-y', `${Math.abs(clamped) * 32}px`)
+if (parallaxHeaders.length) {
+  function applyParallax(): void {
+    parallaxHeaders.forEach((header) => {
+      const rect = header.getBoundingClientRect()
+      const centerY = rect.top + rect.height / 2 - window.innerHeight / 2
+      const shift = centerY * 0.06
+      header.style.transform = `translateY(${shift.toFixed(2)}px)`
     })
   }
 
-  // --- Auto-scroll loop ---
-  let autoPaused = false
-  const SPEED = 0.55 // px per frame
-
-  function tick() {
-    if (!isDragging && !autoPaused) {
-      track.scrollLeft += SPEED
-      if (track.scrollLeft >= loopAt) {
-        track.scrollLeft -= loopAt
-      }
+  let parallaxRaf = false
+  window.addEventListener('scroll', () => {
+    if (!parallaxRaf) {
+      parallaxRaf = true
+      requestAnimationFrame(() => { applyParallax(); parallaxRaf = false })
     }
-    updateCardTilts()
-    requestAnimationFrame(tick)
-  }
+  }, { passive: true })
 
-  // Pause on hover, resume on leave
-  track.addEventListener('mouseenter', () => { autoPaused = true })
-  track.addEventListener('mouseleave', () => { autoPaused = false; stopDrag() })
-
-  // Pause on touch, resume 1.2s after finger lifts
-  track.addEventListener('touchstart', () => { autoPaused = true }, { passive: true })
-  track.addEventListener('touchend',   () => { setTimeout(() => { autoPaused = false }, 1200) }, { passive: true })
-
-  window.addEventListener('resize', updateCardTilts, { passive: true })
-
-  requestAnimationFrame(tick)
+  applyParallax()
 }
 
 // ============================================================

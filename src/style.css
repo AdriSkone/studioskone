@@ -793,343 +793,102 @@ button {
   border-color: rgba(196, 96, 59, 0.48);
 }
 
-/* ============================================================
-   SELECTED WORK — Horizontal Scroll
-   ============================================================ */
+/* ── Work — liste éditoriale ── */
 #work {
-  padding-top: 160px;
-  padding-bottom: 180px;
   background: var(--bg);
+  padding: 100px 0;
 }
-
-#work .section-header {
-  margin-bottom: 80px;
-}
-
-/* Stack container */
-.work-stack {
-  padding-inline: 64px;
-  max-width: 1300px;
-  margin-inline: auto;
-}
-
-/* Sticky wrapper per card */
-.work-stack-item {
-  position: sticky;
-  top: calc(80px + var(--idx, 0) * 20px);
-  z-index: calc(10 + var(--idx, 0));
-  padding-bottom: 20px;
-}
-
-/* Card: 2-col split */
-.work-stack-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 520px;
-  background: var(--card);
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 4px 32px rgba(26, 14, 6, 0.08), 0 1px 4px rgba(26, 14, 6, 0.04);
-  transform: scale(calc(1 - var(--buried, 0) * 0.03));
-  transition: box-shadow 0.55s var(--ease), transform 0.55s var(--ease);
-}
-
-.work-stack-card:hover {
-  box-shadow: 0 20px 60px rgba(26, 14, 6, 0.13), 0 4px 16px rgba(26, 14, 6, 0.06);
-}
-
-/* Visual on left, text on right */
-.work-stack-card--flip {
-  direction: rtl;
-}
-.work-stack-card--flip > * {
-  direction: ltr;
-}
-
-/* Text side */
-.work-stack-text {
-  padding: 56px 64px;
+.work-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
 }
-
-.work-stack-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.work-stack-num {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 96px;
-  font-weight: 700;
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  color: var(--text);
-  opacity: 0.05;
-  margin-bottom: 4px;
-  user-select: none;
-}
-
-/* Visual side */
-.work-stack-visual {
-  position: relative;
-  overflow: hidden;
-}
-
-.work-stack-visual .work-mockup {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.9s var(--ease);
-}
-
-.work-stack-visual .work-mockup-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.9s var(--ease);
-}
-
-.work-stack-card:hover .work-stack-visual .work-mockup,
-.work-stack-card:hover .work-stack-visual .work-mockup-img {
-  transform: scale(1.04);
-}
-
-/* Hover overlay */
-.work-stack-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(18, 12, 6, 0.60);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.5s var(--ease);
-}
-
-.work-stack-overlay span {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--bg);
-  letter-spacing: 0.02em;
-  transform: translateY(12px);
-  transition: transform 0.6s var(--ease);
-}
-
-.work-stack-card:hover .work-stack-overlay          { opacity: 1; }
-.work-stack-card:hover .work-stack-overlay span     { transform: translateY(0); }
-
-/* Shared text styles */
-.work-cat {
-  font-family: var(--font-display);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.work-year {
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
 .work-title {
-  font-family: var(--font-display);
-  font-size: 28px;
+  font-size: clamp(32px, 3.5vw, 42px);
   font-weight: 700;
-  color: var(--text);
-  line-height: 1.2;
-  letter-spacing: 0.015em;
-  transition: color 0.35s ease;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
-
-.work-stack-card:hover .work-title { color: var(--accent); }
-
-.work-desc {
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--muted);
-  line-height: 1.65;
-  max-width: 38ch;
-}
-
-.work-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-display);
-  font-size: 11px;
+.work-count {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 64px;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--accent);
-  margin-top: 8px;
-  transition: gap 0.35s var(--ease);
+  opacity: .18;
+  line-height: 1;
 }
+.work-list {
+  border-top: 1px solid var(--border);
+}
+.work-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: padding-left 0.3s var(--ease);
+}
+.work-row:hover { padding-left: 10px; }
+.work-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  color: var(--accent);
+  min-width: 28px;
+}
+.work-info { flex: 1; min-width: 0; }
+.work-name {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.work-tagline {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+.work-row:hover .work-tagline { max-height: 24px; opacity: 1; }
+.work-cat {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  min-width: 110px;
+  text-align: right;
+}
+.work-year {
+  font-size: 12px;
+  color: var(--muted);
+  min-width: 36px;
+  text-align: right;
+}
+.work-thumb {
+  width: 64px;
+  height: 48px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.work-row:hover .work-thumb { opacity: 1; transform: translateX(0); }
 
-.work-cta:hover { gap: 12px; }
-
-/* ---- CSS Mockups ---- */
-
-.work-mockup {
-  width: 100%;
-  height: 100%;
-}
-
-/* Veloria — mobile wellness app */
-.work-mockup--veloria {
-  background: linear-gradient(155deg, #1E0A3C 0%, #6B2FA0 45%, #C4603B 100%);
-  position: relative;
-}
-.work-mockup--veloria::before {
-  content: '';
-  position: absolute;
-  top: 28px; left: 50%; transform: translateX(-50%);
-  width: 48px; height: 5px;
-  background: rgba(255,255,255,0.22);
-  border-radius: 3px;
-}
-.work-mockup--veloria::after {
-  content: '';
-  position: absolute;
-  bottom: 44px; left: 28px; right: 28px;
-  height: 76px;
-  background: rgba(255,255,255,0.09);
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.14);
-  backdrop-filter: blur(4px);
-}
-
-/* Forma Studio — editorial website */
-.work-mockup--forma {
-  background: linear-gradient(145deg, #EDE3D6 0%, #D8C6AE 55%, #C4A882 100%);
-  position: relative;
-}
-.work-mockup--forma::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 30px;
-  background: rgba(255,255,255,0.55);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-.work-mockup--forma::after {
-  content: '';
-  position: absolute;
-  top: 68px; left: 36px;
-  width: 52%; height: 3px;
-  background: rgba(26,26,26,0.32);
-  border-radius: 2px;
-  box-shadow:
-    0 20px 0 rgba(26,26,26,0.18),
-    0 40px 0 rgba(26,26,26,0.10),
-    0 220px 0 40px rgba(196,168,130,0.22);
-}
-
-/* Lune App — SaaS dashboard */
-.work-mockup--lune {
-  background: linear-gradient(145deg, #0B0F1A 0%, #161E33 60%, #0D1117 100%);
-  position: relative;
-}
-.work-mockup--lune::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 38px;
-  background: rgba(255,255,255,0.03);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-.work-mockup--lune::after {
-  content: '';
-  position: absolute;
-  bottom: 44px; left: 24px; right: 24px;
-  height: 88px;
-  background: linear-gradient(100deg,
-    rgba(196, 96, 59, 0.55) 0%,
-    rgba(107, 47, 160, 0.45) 55%,
-    rgba(196, 96, 59, 0.2) 100%);
-  border-radius: 14px;
-  box-shadow: 0 0 48px rgba(196, 96, 59, 0.28);
-}
-
-/* Brume Digital — immersive landing page */
-.work-mockup--brume {
-  background: linear-gradient(150deg, #111A15 0%, #1E3828 50%, #3A6650 100%);
-  position: relative;
-}
-.work-mockup--brume::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 30px;
-  background: rgba(0,0,0,0.28);
-}
-.work-mockup--brume::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 68%;
-  height: 3px;
-  background: rgba(255,255,255,0.45);
-  border-radius: 2px;
-  box-shadow:
-    0 -32px 0 rgba(255,255,255,0.18),
-    0 32px 0 rgba(255,255,255,0.22),
-    0 64px 0 rgba(255,255,255,0.10);
-}
-
-/* Kōen — luxury e-commerce */
-.work-mockup--koen {
-  background: linear-gradient(140deg, #18100A 0%, #2E1E12 45%, #C4A064 100%);
-  position: relative;
-}
-.work-mockup--koen::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 40px;
-  background: rgba(0,0,0,0.38);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.work-mockup--koen::after {
-  content: '';
-  position: absolute;
-  bottom: 40px; right: 36px;
-  width: 76px; height: 76px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.22);
-  box-shadow:
-    0 0 0 8px rgba(196,160,100,0.08),
-    inset 0 0 32px rgba(196,160,100,0.18);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .work-stack { padding-inline: 40px; }
-
-  .work-stack-card {
-    grid-template-columns: 1fr;
-    min-height: unset;
-  }
-
-  .work-stack-card--flip { direction: ltr; }
-
-  .work-stack-visual { height: 280px; order: -1; }
-  .work-stack-text { padding: 36px 40px 40px; }
-  .work-stack-num { font-size: 64px; }
-}
-
-@media (max-width: 600px) {
-  #work { padding-top: 96px; padding-bottom: 96px; }
-  .work-stack { padding-inline: 24px; }
-  .work-stack-text { padding: 28px 24px 36px; }
-  .work-stack-visual { height: 230px; }
-  .work-stack-item { position: static; }
+@media (max-width: 768px) {
+  .work-cat, .work-year { display: none; }
+  .work-thumb { width: 48px; height: 36px; }
+  .work-name { font-size: 17px; }
 }
 
 /* ============================================================
