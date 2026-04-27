@@ -580,206 +580,136 @@ button {
   .services-grid { grid-template-columns: 1fr; }
 }
 
-/* ============================================================
-   TARIFS
-   ============================================================ */
+/* ── Tarifs ── */
 #tarifs {
-  padding-top: 160px;
-  padding-bottom: 160px;
-  background: var(--surface);
+  background: var(--bg);
+  padding: 100px 0;
 }
-
+.tarifs-header { margin-bottom: 56px; }
+.tarifs-title {
+  font-size: clamp(32px, 3.5vw, 42px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-top: 16px;
+}
 .tarifs-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  align-items: end; /* Cards align to bottom — featured protrudes upward */
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 16px;
+  align-items: start;
 }
-
 .tarif-card {
-  background: var(--card);
-  border-radius: 24px;
-  padding: 48px 40px 44px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  background: var(--surface);
   border: 1px solid var(--border);
-  transition:
-    transform    0.45s var(--ease),
-    box-shadow   0.45s var(--ease),
-    border-color 0.3s ease,
-    background   0.3s ease;
-  will-change: transform;
+  border-radius: 20px;
+  padding: 36px 28px;
 }
-
-.tarif-card:not(.tarif-card--featured):hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.10);
-  border-color: rgba(196, 96, 59, 0.20);
-  background: #fffdf9;
-}
-
 .tarif-card--featured {
   background: var(--dark);
-  border-color: rgba(196, 96, 59, 0.28);
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.14),
-    0 0 0 1px rgba(196, 96, 59, 0.10),
-    0 0 48px rgba(196, 96, 59, 0.05);
+  border-color: transparent;
+  position: relative;
+  overflow: hidden;
 }
-
-.tarif-card--featured .tarif-label { color: var(--accent); }
-.tarif-card--featured .tarif-amount { color: var(--bg); }
-.tarif-card--featured .tarif-note  { color: rgba(251, 244, 228, 0.45); }
-.tarif-card--featured .tarif-desc  { color: rgba(251, 244, 228, 0.55); }
-.tarif-card--featured .tarif-list li { color: rgba(251, 244, 228, 0.75); }
-.tarif-card--featured .tarif-list li::before { background: var(--accent); }
-
-.tarif-header {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.tarif-card--featured::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197,96,57,.12) 0%, transparent 65%);
+  pointer-events: none;
 }
-
 .tarif-label {
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
+  margin-bottom: 16px;
 }
-
-.tarif-price {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
 .tarif-amount {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(28px, 3vw, 42px);
-  font-weight: 400;
+  font-size: clamp(36px, 3vw, 48px);
+  font-weight: 600;
   color: var(--dark);
   line-height: 1;
-  opacity: 0.82;
-  transition: opacity 0.25s ease;
 }
-
-.tarif-card:hover .tarif-amount {
-  opacity: 1;
-}
-
+.tarif-card--featured .tarif-amount { color: var(--bg); }
+.tarif-price { margin-bottom: 8px; }
 .tarif-note {
   font-size: 12px;
-  font-weight: 400;
   color: var(--muted);
-  letter-spacing: 0.04em;
+  margin-top: 4px;
 }
-
+.tarif-card--featured .tarif-note { color: rgba(250,238,223,.35); }
+.tarif-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+.tarif-card--featured .tarif-divider { background: rgba(255,255,255,.08); }
 .tarif-desc {
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
-
+.tarif-card--featured .tarif-desc { color: rgba(250,238,223,.50); }
 .tarif-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  flex: 1;
+  gap: 10px;
+  margin-bottom: 28px;
+  list-style: none;
+  padding: 0;
 }
-
-.tarif-list li {
-  font-size: 14px;
-  font-weight: 400;
+.tarif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
   color: var(--dark);
-  padding-left: 18px;
-  position: relative;
-  line-height: 1.5;
+  line-height: 1.4;
 }
-
-.tarif-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.6;
-}
-
+.tarif-item::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.tarif-card--featured .tarif-item { color: rgba(250,238,223,.70); }
 .tarif-cta {
-  align-self: flex-start;
-  margin-top: auto;
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+.tarif-cta--ghost {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--dark);
+}
+.tarif-cta--ghost:hover { border-color: var(--accent); color: var(--accent); }
+.tarif-cta--primary {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  box-shadow: 0 4px 16px rgba(197,96,57,.3);
+}
+.tarif-cta--primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(197,96,57,.38);
 }
 
-@media (max-width: 1000px) {
-  .tarifs-grid { grid-template-columns: 1fr; max-width: 480px; }
-}
-
-@media (max-width: 768px) {
-  #tarifs { padding-top: 96px; padding-bottom: 96px; }
-  .tarif-card { padding: 40px 32px; }
-}
-
-/* ============================================================
-   TARIFS — Premium animation layer
-   ============================================================
-
-   Ordre de cascade intentionnel — ne pas réordonner :
-   (0,3,0) reveal base → (0,4,0) reveal hover → (0,4,0) featured → (0,5,0) featured hover
-   ============================================================ */
-
-/* 1. Scroll reveal — override générique pour les pricing cards */
-.tarif-card.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity      0.6s ease-out,
-    transform    0.6s ease-out,
-    box-shadow   0.45s var(--ease),
-    border-color 0.3s ease,
-    background   0.3s ease;
-  will-change: transform, opacity;
-}
-
-/* 2. État final du reveal — cards au repos */
-.tarif-card.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 3. Hover cards standard — (0,4,0) bat is-visible (0,3,0) — exclut featured */
-.tarif-card.reveal.is-visible:not(.tarif-card--featured):hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.10);
-  border-color: rgba(196, 96, 59, 0.20);
-  background: #fffdf9;
-}
-
-/* 4. Featured — elevated above siblings, protrudes upward */
-.tarif-card--featured.reveal.is-visible {
-  transform: scale(1.04) translateY(-24px);
-  box-shadow:
-    0 20px 64px rgba(0, 0, 0, 0.22),
-    0 0 0 1px rgba(196, 96, 59, 0.18),
-    0 0 80px rgba(196, 96, 59, 0.09);
-}
-
-/* 5. Hover featured */
-.tarif-card--featured.reveal.is-visible:hover {
-  transform: scale(1.05) translateY(-32px);
-  background: var(--dark);
-  box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.26),
-    0 0 0 1px rgba(196, 96, 59, 0.36),
-    0 0 80px rgba(196, 96, 59, 0.14);
-  border-color: rgba(196, 96, 59, 0.48);
+@media (max-width: 900px) {
+  .tarifs-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Work — liste éditoriale ── */
