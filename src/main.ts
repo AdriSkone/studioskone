@@ -198,17 +198,23 @@ if (parallaxHeaders.length) {
 // FAQ — accordion (single open at a time)
 // ============================================================
 document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
-  const btn = item.querySelector<HTMLButtonElement>('.faq-question')
-  if (!btn) return
+  const btn    = item.querySelector<HTMLButtonElement>('.faq-question')
+  const answer = item.querySelector<HTMLElement>('.faq-answer')
+  if (!btn || !answer) return
+
   btn.addEventListener('click', () => {
     const isOpen = item.classList.contains('is-open')
+    // Fermer tous
     document.querySelectorAll<HTMLElement>('.faq-item.is-open').forEach((openItem) => {
       openItem.classList.remove('is-open')
-      openItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false')
+      openItem.querySelector<HTMLButtonElement>('.faq-question')?.setAttribute('aria-expanded', 'false')
+      const a = openItem.querySelector<HTMLElement>('.faq-answer')
+      if (a) a.hidden = true
     })
     if (!isOpen) {
       item.classList.add('is-open')
       btn.setAttribute('aria-expanded', 'true')
+      answer.hidden = false
     }
   })
 })
