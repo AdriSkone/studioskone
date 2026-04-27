@@ -1368,7 +1368,7 @@ button {
   display: block;
   margin-bottom: 4px;
 }
-.testi-slides { position: relative; min-height: 180px; }
+.testi-slides { position: relative; min-height: 260px; }
 .testi-slide {
   position: absolute;
   inset: 0;
@@ -1381,7 +1381,6 @@ button {
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
-  position: relative;
 }
 .testi-quote {
   font-family: var(--font-serif);
