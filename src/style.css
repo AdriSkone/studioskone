@@ -559,7 +559,7 @@ button {
 }
 .service-desc {
   font-size: 13px;
-  color: rgba(250,238,223,.38);
+  color: rgba(250,238,223,.50);
   line-height: 1.6;
   margin-bottom: 20px;
 }
