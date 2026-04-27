@@ -238,7 +238,7 @@ document.addEventListener('keydown', (e) => {
 // Subtle parallax — section headers shift slightly on scroll
 // ============================================================
 const parallaxHeaders = Array.from(
-  document.querySelectorAll<HTMLElement>('#approach .section-header, #work .section-header, #testimonials .section-header, #tarifs .section-header')
+  document.querySelectorAll<HTMLElement>('#approach .section-label, #work .work-header, #testimonials .section-label, #tarifs .section-label')
 )
 
 if (parallaxHeaders.length) {

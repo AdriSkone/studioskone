@@ -857,7 +857,7 @@ button {
   opacity: 0;
   transition: max-height 0.35s var(--ease), opacity 0.35s var(--ease);
 }
-.work-row:hover .work-tagline { max-height: 24px; opacity: 1; }
+.work-row:hover .work-tagline { max-height: 48px; opacity: 1; }
 .work-cat {
   font-size: 11px;
   letter-spacing: .12em;
