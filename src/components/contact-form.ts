@@ -676,6 +676,6 @@ class ContactForm {
 // ============================================================
 
 export function initContactForm(): void {
-  const el = document.querySelector<HTMLElement>('#contact')
+  const el = document.querySelector<HTMLElement>('#contact-form-root')
   if (el) new ContactForm(el)
 }
