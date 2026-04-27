@@ -268,3 +268,41 @@ document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) =>
     window.scrollTo({ top, behavior: 'smooth' })
   })
 })
+
+// ============================================================
+// Témoignages — rotation automatique
+// ============================================================
+;(function initTestimonials() {
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.testi-slide'))
+  const dots   = Array.from(document.querySelectorAll<HTMLElement>('.testi-dot'))
+  if (!slides.length) return
+
+  let current = 0
+  let timer: ReturnType<typeof setInterval>
+
+  function goTo(idx: number): void {
+    slides[current].classList.remove('is-active')
+    dots[current].classList.remove('is-active')
+    dots[current].setAttribute('aria-selected', 'false')
+    current = idx
+    slides[current].classList.add('is-active')
+    dots[current].classList.add('is-active')
+    dots[current].setAttribute('aria-selected', 'true')
+  }
+
+  function startTimer(): void {
+    timer = setInterval(() => {
+      goTo((current + 1) % slides.length)
+    }, 5000)
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer)
+      goTo(Number(dot.dataset.idx))
+      startTimer()
+    })
+  })
+
+  startTimer()
+})()
