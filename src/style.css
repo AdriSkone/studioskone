@@ -668,7 +668,7 @@ button {
   list-style: none;
   padding: 0;
 }
-.tarif-item {
+.tarif-list li {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -676,8 +676,8 @@ button {
   color: var(--dark);
   line-height: 1.4;
 }
-.tarif-item::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
-.tarif-card--featured .tarif-item { color: rgba(250,238,223,.70); }
+.tarif-list li::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.tarif-card--featured .tarif-list li { color: rgba(250,238,223,.70); }
 .tarif-cta {
   display: block;
   text-align: center;
