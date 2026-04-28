@@ -1632,4 +1632,4 @@ button {
   pointer-events: none;
   z-index: 0;
 }
-.has-grain > * { position: relative; z-index: 1; }
+.has-grain > *:not([aria-hidden="true"]) { position: relative; z-index: 1; }
