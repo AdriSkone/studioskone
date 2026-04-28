@@ -493,7 +493,7 @@ button {
 /* ── Services ── */
 #services {
   background: var(--dark);
-  padding: 100px 0;
+  padding: 72px 0 100px;
   overflow: hidden;
   position: relative;
 }
@@ -1382,7 +1382,7 @@ button {
 /* ── Contact ── */
 #contact {
   background: var(--dark);
-  padding: 100px 0 80px;
+  padding: 64px 0 80px;
   overflow: hidden;
 }
 .contact-glow {
