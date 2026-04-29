@@ -1,25 +1,49 @@
-# Studio Skøne — Style Guide
+# Studio Skøne — Style Guide (Premium Upgrade)
 
 ## Brand Identity
 
-Studio créatif digital premium.
-Esthétique minimal luxe.
-Moderne, éditorial et élégant.
+Studio digital créatif premium.
+Positionnement : agence produit & design.
+
+Esthétique :
+- minimal éditorial
+- contraste maîtrisé
+- sophistication discrète
+
+Objectif visuel :
+→ évoquer une direction artistique, pas une interface générique
 
 ---
 
 ## Colors
 
+Palette volontairement chaude, texturée et premium.
+
 | Rôle             | Valeur      | Token CSS       |
 |------------------|-------------|-----------------|
 | Background       | `#FBF4E4`   | `--bg`          |
+| Background deep  | `#F3E8D7`   | `--bg-soft`     |
 | Section alt      | `#E8D1B3`   | `--surface`     |
 | Cards            | `#FFF8EF`   | `--card`        |
 | Primary Accent   | `#C4603B`   | `--accent`      |
 | Accent hover     | `#A84E2E`   | `--accent-dark` |
-| Text Primary     | `#1A1A1A`   | `--dark` `--text` |
+| Text Primary     | `#1A1A1A`   | `--text`        |
 | Text Secondary   | `#6B6B6B`   | `--muted`       |
 | Border           | `#E2D8CB`   | `--border`      |
+
+### NEW — Depth system
+
+```css
+--grain-opacity: 0.03;
+--glow-accent:   rgba(196, 96, 59, 0.18);
+--shadow-soft:   0 8px 30px rgba(0, 0, 0, 0.08);
+```
+
+**Usage :**
+- `--bg-soft` : fonds alternatifs, zones de repos visuel (hover léger, sections de transition)
+- `--grain-opacity` : overlay bruit de texture sur sections premium (pseudo-élément `::after`)
+- `--glow-accent` : lueur douce autour d'éléments accent (box-shadow ou filter)
+- `--shadow-soft` : ombre portée standard hover — remplace les ombres arbitraires
 
 ---
 
@@ -101,47 +125,69 @@ Moderne, éditorial et élégant.
 
 ### Primary CTA
 
-**Usage :** action principale, hero CTA, contact, découverte projets.
+**Usage :** action principale, hero CTA, contact, nav principale.
+
+**Règle systématique :** tout bouton CTA primaire comporte obligatoirement un cercle icône flèche à gauche.
 
 ```css
-background:    #C4603A;           /* --accent */
-color:         #FBF4E4;           /* --bg */
-border-radius: 16px;
-padding:       12px 24px;
-font-family:   var(--font-display); /* Barlow Bold */
+background:    var(--accent);     /* #C4603A */
+color:         var(--bg);         /* #FBF4E4 */
+border-radius: 100px;
+padding:       7px 24px 7px 7px;  /* pill avec icône cercle gauche */
+gap:           16px;
+font-family:   var(--font-display);
 font-weight:   600;
 letter-spacing: 0.08em;
 text-transform: uppercase;
-box-shadow:    0 4px 16px rgba(196, 96, 58, 0.28);
 transition:    background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 ```
 
 Hover :
 ```css
-background:  #A84E2E;             /* --accent-dark */
+background:  var(--accent-dark);  /* #A84E2E */
 transform:   translateY(-2px);
 box-shadow:  0 8px 28px rgba(196, 96, 58, 0.38);
 ```
 
-> Police : **Montserrat** pour tous les labels CTA.
+Icône cercle gauche : `42px`, `background: var(--bg)`, `color: var(--accent)`.
+Hover : animation ring pulse sur le cercle + nudge doux de la flèche (4px, `ease-in-out`, 1.4s, loop infini).
+
+```css
+@keyframes ctaArrow {
+  0%   { transform: translateX(0);   }
+  50%  { transform: translateX(4px); }
+  100% { transform: translateX(0);   }
+}
+/* animation: ctaArrow 1.4s ease-in-out infinite; */
+```
 
 ---
 
 ### Secondary CTA
 
-**Usage :** actions secondaires, ghost buttons, liens d'appui.
+**Usage :** nav CTA, actions secondaires, ghost buttons, liens d'appui.
+
+**Règle systématique :** tout bouton CTA secondaire comporte un dot rond accent à gauche, avec `gap: 10px` entre le dot et le texte.
 
 ```css
-background:    transparent;       /* ou #FBF4E4 */
-border:        1.5px solid #C4603A;
-color:         #C4603A;
-border-radius: 16px;              /* rounded-2xl */
-padding:       12px 24px;         /* py-3 px-6 */
-font-family:   var(--font-display); /* Barlow Bold */
-font-weight:   400;
+background:    transparent;
+border:        1.5px solid var(--accent);
+color:         var(--accent);
+border-radius: 100px;
+padding:       12px 24px;
+gap:           10px;              /* espacement dot → texte */
+font-family:   var(--font-display);
+font-weight:   600;
 letter-spacing: 0.08em;
 text-transform: uppercase;
 transition:    background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+```
+
+Dot :
+```css
+width: 6px; height: 6px;
+border-radius: 50%;
+background: var(--accent);  /* var(--bg) si fond primaire */
 ```
 
 Hover :
@@ -271,6 +317,43 @@ color: var(--accent);
 
 ---
 
+## Hero Layout
+
+Structure validée — ne pas modifier sans validation visuelle préalable.
+
+```
+┌──────────────────────────────────────┐
+│  [tagline gauche]   [statement droit]│
+│                     [CTA bouton]     │
+│                                      │
+│  ████████████████████████████████   │  ← logo pleine largeur
+└──────────────────────────────────────┘
+```
+
+### Logo
+- Pleine largeur, ancré en bas, contenu dans la section (`overflow: hidden`)
+- `padding: 0 32px 32px` — marges égales gauche, droite, bas
+- Fond gradient : `linear-gradient(148deg, #ECE4D0, #F4EDD9, #FBF4E4, #F7EDDB)`
+
+### Texte gauche (tagline)
+- Position : `left: 32px; top: 40%` (aligné sur le bord gauche du logo)
+- Style : 11px, weight 400, `letter-spacing: 0.2em`, `text-transform: uppercase`, `color: #20201E`
+- Badges inline "web" et "mobile" : fond `--accent`, texte `--bg`, `border-radius: 0.28em`
+
+### Texte droit (statement)
+- Position : `right: 32px; top: 40%` (aligné sur le bord droit du logo)
+- Style : `clamp(28px, 4vw, 64px)`, weight 700, `text-align: right`
+- "attire." : `font-weight: 300; font-style: italic`
+- "convertit." : `color: var(--accent)`
+
+### CTA hero
+- Pill bouton : `background: var(--accent); border-radius: 100px; padding: 7px 24px 7px 7px`
+- Cercle icône gauche : `42px, background: var(--bg)`, flèche `color: var(--accent)`
+- Label : 14px, 600, uppercase, `letter-spacing: 0.08em`, `color: var(--bg)`
+- Lien vers `#work`
+
+---
+
 ## Layout
 
 - Split hero (image droite / texte gauche) selon le contexte
@@ -321,3 +404,53 @@ color: var(--accent);
 > Ne jamais utiliser `favicon_skone.svg` dans l'UI — réservé au favicon du navigateur.
 
 *Dernière mise à jour : avril 2026*
+
+---
+
+# DESIGN PRINCIPLES
+
+- Avoid perfect grids
+- Prefer asymmetry
+- Create visual tension
+
+---
+
+# DEPTH SYSTEM
+
+- Add grain overlay (2–3%)
+- Add subtle glow using accent color
+- Use layered backgrounds
+
+---
+
+# LAYOUT RULES
+
+- Mix block sizes
+- Offset elements
+- Avoid repetitive structures
+
+---
+
+# SPACING
+
+- Increase vertical spacing
+- Prioritize breathing room
+
+---
+
+# MOTION
+
+- Add stagger animations
+- Add subtle parallax
+- Keep everything smooth and minimal
+
+---
+
+# GOAL
+
+Design must feel:
+- editorial
+- premium
+- intentional
+
+Never generic.
