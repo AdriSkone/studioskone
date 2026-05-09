@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup — Tarifs & FAQ · Studio Skøne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #FAEEDF;
+      --bg-soft:   #F3E8D7;
+      --surface:   #E9D8C2;
+      --dark:      #181716;
+      --dark-soft: #2A2927;
+      --accent:    #C56039;
+      --accent-dark:#A84B2A;
+      --text:      #20201E;
+      --muted:     rgba(24,23,22,.42);
+      --border:    rgba(24,23,22,.1);
+      --font-sans: 'Barlow', sans-serif;
+      --font-serif:'Cormorant Garamond', serif;
+      --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font-sans);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ── GRAIN overlay ── */
+    .has-grain {
+      position: relative;
+    }
+    .has-grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      border-radius: inherit;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION — NOS TARIFS
+    ══════════════════════════════════════ */
+    #tarifs {
+      background: var(--bg);
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .tarifs-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .tarifs-intro-left h2 {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-top: 12px;
+    }
+
+    .tarifs-intro-left h2 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .tarifs-intro-note {
+      max-width: 240px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      text-align: right;
+    }
+
+    /* ── Grid: centre plus large ── */
+    .tarifs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.18fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .tarif-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      position: relative;
+    }
+
+    /* ── FEATURED CARD ── */
+    .tarif-card--featured {
+      background: var(--dark);
+      border: none;
+      border-radius: 24px;
+      padding: 44px 32px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tarif-card--featured::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,96,57,.16) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .tarif-card--featured::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,96,57,.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Badge "Le plus choisi" en haut du featured */
+    .tarif-popular-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(197,96,57,.15);
+      border: 1px solid rgba(197,96,57,.25);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .tarif-popular-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .tarif-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .tarif-amount {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(36px, 3vw, 52px);
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .tarif-card--featured .tarif-amount {
+      color: var(--bg);
+      font-size: clamp(40px, 3.5vw, 60px);
+    }
+
+    .tarif-price { margin-bottom: 6px; }
+
+    .tarif-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 20px 0;
+    }
+
+    .tarif-card--featured .tarif-desc {
+      color: rgba(250,238,223,.42);
+    }
+
+    .tarif-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    .tarif-card--featured .tarif-divider {
+      background: rgba(255,255,255,.08);
+    }
+
+    .tarif-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .tarif-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--dark);
+      line-height: 1.4;
+    }
+
+    .tarif-list li::before {
+      content: '—';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tarif-card--featured .tarif-list li {
+      color: rgba(250,238,223,.68);
+    }
+
+    .tarif-cta {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s var(--ease);
+      position: relative;
+      z-index: 1;
+    }
+
+    .tarif-cta--ghost {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--dark);
+    }
+
+    .tarif-cta--ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tarif-cta--primary {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      box-shadow: 0 4px 20px rgba(197,96,57,.35);
+    }
+
+    .tarif-cta--primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(197,96,57,.42);
+    }
+
+    /* Ghost serif number behind regular cards */
+    .tarif-ghost {
+      position: absolute;
+      bottom: 24px;
+      right: 20px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 80px;
+      font-weight: 600;
+      color: var(--accent);
+      opacity: .06;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION — FAQ
+    ══════════════════════════════════════ */
+    #faq {
+      background: var(--bg-soft);
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Colonne gauche — header sticky */
+    .faq-head {
+      position: sticky;
+      top: 80px;
+    }
+
+    .faq-main-title {
+      font-size: clamp(32px, 3.5vw, 44px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-top: 12px;
+      margin-bottom: 20px;
+    }
+
+    .faq-main-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .faq-head-note {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .faq-contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .faq-contact-link::after {
+      content: '→';
+      font-style: normal;
+    }
+
+    /* Colonne droite — accordion */
+    .faq-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 0;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+      font-family: var(--font-sans);
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover .faq-q-text { color: var(--accent); }
+
+    .faq-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent);
+      opacity: .38;
+      min-width: 28px;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .faq-item.is-open .faq-num { opacity: 1; }
+
+    .faq-q-text {
+      font-size: 16px;
+      font-weight: 700;
+      flex: 1;
+      transition: color 0.2s;
+    }
+
+    .faq-item.is-open .faq-q-text { color: var(--accent); }
+
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.25s var(--ease), border-color 0.25s;
+      line-height: 1;
+    }
+
+    .faq-item.is-open .faq-icon {
+      transform: rotate(45deg);
+      border-color: var(--accent);
+    }
+
+    .faq-answer {
+      padding: 0 48px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .faq-answer-inner {
+      border-left: 2px solid rgba(197,96,57,.2);
+      padding-left: 16px;
+    }
+
+    /* ══════════════════════════════════════
+       NAV MOCK (juste pour contexte)
+    ══════════════════════════════════════ */
+    .mock-nav {
+      background: rgba(250,238,223,.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .mock-logo {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: .04em;
+    }
+
+    .mock-logo em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* ══════════════════════════════════════
+       ACCORDION INTERACTION
+    ══════════════════════════════════════ */
+    .faq-answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s var(--ease);
+    }
+
+    .faq-item.is-open .faq-answer-wrap {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer-wrap > * { overflow: hidden; }
+
+    /* ══════════════════════════════════════
+       NOTE SECTION (label mock context)
+    ══════════════════════════════════════ */
+    .mock-context-note {
+      background: var(--dark);
+      color: rgba(250,238,223,.5);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="mock-context-note">Mockup visuel · Studio Skøne — Sections Tarifs &amp; FAQ</div>
+
+<nav class="mock-nav">
+  <span class="mock-logo">Studio Sk<em>ø</em>ne</span>
+  <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Mockup only</span>
+</nav>
+
+<!-- ══ TARIFS ══════════════════════════════════ -->
+<section id="tarifs">
+  <div class="container">
+
+    <div class="tarifs-intro">
+      <div class="tarifs-intro-left">
+        <span class="section-label" style="color:var(--accent)">Nos tarifs</span>
+        <h2>Des offres <span style="color:var(--accent)">claires</span>,<br>des résultats concrets.</h2>
+      </div>
+      <p class="tarifs-intro-note">
+        Tous les projets démarrent par un appel gratuit.<br>
+        Pas de frais cachés, pas de surprise en fin de mission.
+      </p>
+    </div>
+
+    <div class="tarifs-grid">
+
+      <!-- Essentiel -->
+      <div class="tarif-card">
+        <span class="tarif-label">Fondation — pour démarrer</span>
+        <div class="tarif-price">
+          <span class="tarif-amount">Dès 900€</span>
+        </div>
+        <p class="tarif-desc">Une base solide pour lancer rapidement une présence digitale premium.</p>
+        <div class="tarif-divider"></div>
+        <ul class="tarif-list">
+          <li>Landing page ou site vitrine (jusqu'à 5 pages)</li>
+          <li>Design sur mesure</li>
+          <li>Responsive mobile-first</li>
+          <li>2 allers-retours inclus</li>
+          <li>Mise en ligne</li>
+          <li>Livraison en 2–3 semaines</li>
+        </ul>
+        <a href="#contact" class="tarif-cta tarif-cta--ghost">Démarrer</a>
+      </div>
+
+      <!-- Studio — Featured -->
+      <div class="tarif-card tarif-card--featured">
+        <span class="tarif-popular-badge">Le plus choisi</span>
+        <span class="tarif-label">Studio — pour performer</span>
+        <div class="tarif-price">
+          <span class="tarif-amount">Dès 2 500€</span>
+        </div>
+        <p class="tarif-desc">Notre offre signature. Un produit digital complet, pensé design, performance et conversion.</p>
+        <div class="tarif-divider"></div>
+        <ul class="tarif-list">
+          <li>Site vitrine, e-commerce ou application web</li>
+          <li>Architecture UX &amp; design sur mesure</li>
+          <li>Animations et interactions soignées</li>
+          <li>SEO technique intégré</li>
+          <li>Ajustements continus</li>
+          <li>Livraison en 4–6 semaines</li>
+        </ul>
+        <a href="#contact" class="tarif-cta tarif-cta--primary">Démarrer →</a>
+      </div>
+
+      <!-- Sur mesure -->
+      <div class="tarif-card">
+        <span class="tarif-label">Sur mesure — pour aller plus loin</span>
+        <div class="tarif-price">
+          <span class="tarif-amount">Sur devis</span>
+        </div>
+        <p class="tarif-desc">Pour les projets ambitieux qui nécessitent une approche produit complète et une équipe dédiée.</p>
+        <div class="tarif-divider"></div>
+        <ul class="tarif-list">
+          <li>Application mobile, SaaS ou plateforme complexe</li>
+          <li>Périmètre défini ensemble</li>
+          <li>Accompagnement dédié</li>
+          <li>Suivi régulier</li>
+          <li>Délais et livrables adaptés</li>
+        </ul>
+        <a href="#contact" class="tarif-cta tarif-cta--ghost">Nous contacter</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-inner">
+
+      <!-- Colonne gauche — header sticky -->
+      <div class="faq-head">
+        <span class="section-label" style="color:var(--accent)">Questions fréquentes</span>
+        <h2 class="faq-main-title">On répond<br>à <span style="color:var(--accent)">tout.</span></h2>
+        <p class="faq-head-note">
+          Vous ne trouvez pas ce que vous cherchez ?<br>
+          Contactez-nous directement.
+        </p>
+        <a href="mailto:hello@studioskone.com" class="faq-contact-link">Écrire au studio</a>
+      </div>
+
+      <!-- Colonne droite — accordion -->
+      <div>
+        <div class="faq-list" role="list">
+
+          <div class="faq-item is-open" role="listitem">
+            <button class="faq-question" aria-expanded="true">
+              <span class="faq-num">01</span>
+              <span class="faq-q-text">Quels types de projets réalisez-vous ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    Landing pages, sites vitrines, e-commerce et applications web — c'est le cœur de notre activité. Pour les projets plus complexes (application mobile, SaaS, plateforme sur mesure), nous établissons un devis adapté.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num">02</span>
+              <span class="faq-q-text">Quels sont vos tarifs ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    L'offre Fondation démarre à 900€ pour un site vitrine jusqu'à 5 pages. L'offre Studio, à partir de 2 500€, couvre les projets plus complets — site multi-pages, e-commerce ou application web. Pour les projets complexes, nous travaillons sur devis. Dans tous les cas, les prix sont clairs dès le premier échange.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num">03</span>
+              <span class="faq-q-text">Quels sont vos délais ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    2 à 3 semaines pour une offre Fondation, 4 à 6 semaines pour une offre Studio. Les projets sur mesure ont des délais définis ensemble au cadrage. Ce sont des engagements, pas des estimations.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num">04</span>
+              <span class="faq-q-text">Combien d'allers-retours sont inclus ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    L'offre Fondation inclut 2 allers-retours sur le design et le contenu. L'offre Studio fonctionne en ajustements continus tout au long du projet — chaque étape est validée avec vous avant de passer à la suivante. Pas de mauvaise surprise en fin de mission.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num">05</span>
+              <span class="faq-q-text">La mise en ligne est-elle incluse ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    Oui, la mise en ligne est incluse dans toutes nos offres. Nous gérons le déploiement, la configuration du domaine et les vérifications techniques. Pour les projets sur mesure, un suivi régulier post-lancement est également prévu.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('is-open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('is-open'));
+      if (!isOpen) item.classList.add('is-open');
+    });
+  });
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@ interface ContactData {
   entreprise:  string
   description: string
   rgpd:        boolean
+  file:        File | null
 }
 
 interface ChoiceConfig {
@@ -35,6 +36,16 @@ interface ChoiceConfig {
 // ============================================================
 // Constants
 // ============================================================
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10 Mo
+const ALLOWED_FILE_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+])
+const ALLOWED_FILE_EXT = /\.(jpe?g|png|pdf|docx?)$/i
 
 const STEPS = [
   { num: '01', label: 'Projet' },
@@ -110,12 +121,6 @@ function buildTemplate(): string {
   return `
   <div class="container">
     <div class="cf-wrapper" id="cfWrapper">
-
-      <!-- Header -->
-      <div class="cf-header">
-        <span class="section-label">Contact</span>
-        <h2 class="cf-title"><em>Discutons de</em> votre projet.</h2>
-      </div>
 
       <!-- Progress indicator -->
       <nav class="cf-progress" aria-label="Progression du formulaire">
@@ -227,6 +232,53 @@ function buildTemplate(): string {
               <label for="cf-description">Description du projet</label>
             </div>
 
+            <!-- Fichier joint — optionnel -->
+            <div class="cf-file-zone" id="cfFileZone">
+              <input
+                type="file"
+                id="cf-file"
+                name="attachment"
+                class="cf-file-input"
+                accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
+                aria-label="Joindre un fichier — optionnel"
+              >
+              <label for="cf-file" class="cf-file-label">
+                <span class="cf-file-icon" aria-hidden="true">
+                  <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+                    <path d="M9.5 1H3C2.17 1 1.5 1.67 1.5 2.5V15.5C1.5 16.33 2.17 17 3 17H13C13.83 17 14.5 16.33 14.5 15.5V6L9.5 1Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9.5 1V6H14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.75 12.25L8 10L10.25 12.25" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 15V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="cf-file-body">
+                  <span class="cf-file-main" id="cfFileName">Joindre un fichier</span>
+                  <span class="cf-file-sub">Brief, maquette, PDF — optionnel · Max 10 Mo</span>
+                </span>
+              </label>
+              <button
+                type="button"
+                class="cf-file-remove"
+                id="cfFileRemove"
+                aria-label="Supprimer le fichier"
+                hidden
+              >
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Honeypot anti-spam — invisible pour les humains, rempli par les bots -->
+            <input
+              type="text"
+              name="_gotcha"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"
+            >
+
             <!-- RGPD -->
             <div class="cf-rgpd" id="cfRgpd">
               <label class="cf-rgpd-row" for="cf-rgpd-check">
@@ -309,6 +361,7 @@ class ContactForm {
     entreprise:  '',
     description: '',
     rgpd:        false,
+    file:        null,
   }
 
   constructor(container: HTMLElement) {
@@ -389,6 +442,52 @@ class ContactForm {
           (this.data as unknown as Record<string, string | boolean>)[key] =
             (e.target as HTMLInputElement).value.trim()
         })
+    })
+
+    // File attachment
+    const fileInput  = root.querySelector<HTMLInputElement>('#cf-file')
+    const fileName   = root.querySelector<HTMLElement>('#cfFileName')
+    const fileZone   = root.querySelector<HTMLElement>('#cfFileZone')
+    const fileRemove = root.querySelector<HTMLButtonElement>('#cfFileRemove')
+
+    fileInput?.addEventListener('change', () => {
+      const file = fileInput.files?.[0] ?? null
+
+      // Refuser fichier trop lourd ou type non autorisé
+      if (file) {
+        const typeOk = ALLOWED_FILE_TYPES.has(file.type) || ALLOWED_FILE_EXT.test(file.name)
+        if (!typeOk) {
+          fileZone?.classList.add('has-error')
+          if (fileName) fileName.textContent = 'Type non autorisé (jpg, png, pdf, doc, docx)'
+          fileInput.value = ''
+          this.data.file = null
+          return
+        }
+        if (file.size > MAX_FILE_SIZE) {
+          fileZone?.classList.add('has-error')
+          if (fileName) fileName.textContent = `Fichier trop lourd (max ${MAX_FILE_SIZE / 1024 / 1024} Mo)`
+          fileInput.value = ''
+          this.data.file = null
+          return
+        }
+      }
+
+      fileZone?.classList.remove('has-error')
+      this.data.file = file
+      if (file && fileName) {
+        fileName.textContent = file.name
+        fileRemove?.removeAttribute('hidden')
+        fileZone?.classList.add('has-file')
+      }
+    })
+
+    fileRemove?.addEventListener('click', (e) => {
+      e.stopPropagation()
+      this.data.file = null
+      if (fileInput) fileInput.value = ''
+      if (fileName) fileName.textContent = 'Joindre un fichier'
+      fileRemove.setAttribute('hidden', '')
+      fileZone?.classList.remove('has-file')
     })
 
     // Clear field error on input
@@ -599,10 +698,20 @@ class ContactForm {
     const btn = this.container.querySelector<HTMLButtonElement>('#cfNext')
     btn?.classList.add('is-loading')
 
+    const formData = new FormData()
+    formData.append('projectType', this.data.projectType)
+    formData.append('budget',      this.data.budget)
+    formData.append('delay',       this.data.delay)
+    formData.append('nom',         this.data.nom)
+    formData.append('email',       this.data.email)
+    formData.append('entreprise',  this.data.entreprise)
+    formData.append('description', this.data.description)
+    if (this.data.file) formData.append('attachment', this.data.file)
+
     fetch('https://formspree.io/f/mjgjwdka', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(this.data),
+      headers: { 'Accept': 'application/json' },
+      body: formData,
     })
       .then(r => r.ok ? this.showSuccess() : this.handleError())
       .catch(() => this.handleError())

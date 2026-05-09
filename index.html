@@ -61,10 +61,12 @@
         <span></span>
       </button>
       <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#approach" class="nav-link">Le studio</a></li>
+        <li><a href="#services" class="nav-link">Expertises</a></li>
+        <li><a href="#process" class="nav-link">Méthode</a></li>
         <li><a href="#work" class="nav-link">Projets</a></li>
         <li><a href="#tarifs" class="nav-link">Tarifs</a></li>
-        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
       <a href="#contact" class="nav-cta">
         <span class="nav-cta-icon">
@@ -78,364 +80,442 @@
     </div>
   </nav>
 
-  <!-- HERO — React mount -->
+  <!-- 1. HERO — React mount -->
   <div id="hero-root"></div>
 
-
-
-  <!-- NOTRE APPROCHE -->
+  <!-- 2. LE STUDIO -->
   <section id="approach" class="has-grain">
-  <div class="approach-glow" aria-hidden="true"></div>
-  <div class="container approach-inner">
-    <p class="section-label reveal">Notre approche</p>
-    <h2 class="approach-title reveal">
-      Un studio bâti sur<br>l'artisanat <em>et l'intention.</em>
-    </h2>
-    <div class="approach-mid reveal">
-      <div class="approach-mid-gap"></div>
-      <p class="approach-mid-text">
-        Studio Skøne est une agence créative dédiée à la construction de marques
-        qui ressentent autant qu'elles impressionnent. Nous croyons que le grand
-        design se trouve à l'intersection de la stratégie, de la beauté et de l'intention.
-      </p>
+    <div class="approach-glow" aria-hidden="true"></div>
+    <div class="container approach-inner">
+      <p class="section-label reveal">Le studio</p>
+      <h2 class="approach-title reveal">
+        Un studio bâti sur le détail<br>et ce qui <span class="text-accent">compte vraiment</span>.
+      </h2>
+      <div class="approach-mid reveal">
+        <div class="approach-mid-gap"></div>
+        <p class="approach-mid-text">
+          Studio Skøne conçoit des produits digitaux où chaque détail compte.
+          À l'intersection du design, de la structure et de la performance, nous créons des expériences claires, utiles et durables.
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="approach-quote-band">
+  </section>
+
+  <!-- 3. CE QUE NOUS CONCEVONS -->
+  <section id="services" class="has-grain">
+    <div class="services-glow" aria-hidden="true"></div>
     <div class="container">
-      <p class="approach-quote-text">
-        "Nous croyons que le grand design se trouve à l'intersection
-        de la stratégie, de la beauté et de l'intention."
-      </p>
-      <span class="approach-quote-author">Studio Skøne</span>
-    </div>
-  </div>
-</section>
-
-  <!-- SELECTED WORK -->
-  <section id="work">
-  <div class="container">
-    <div class="work-header">
-      <div>
-        <p class="section-label reveal">Portfolio</p>
-        <h2 class="work-title reveal">Travaux sélectionnés</h2>
+      <div class="services-header">
+        <p class="section-label reveal">Ce que nous concevons</p>
+        <h2 class="services-title reveal">Nos <em>expertises</em></h2>
       </div>
-      <span class="work-count" aria-hidden="true">06</span>
-    </div>
-    <div class="work-list" role="list">
-
-      <div class="work-row reveal" role="listitem" data-project="cafeo">
-        <span class="work-num" aria-hidden="true">01</span>
-        <div class="work-info">
-          <h3 class="work-name">ele — Ateliers Caféologie</h3>
-          <p class="work-tagline">Site web &amp; identité pour une école de formation café de spécialité</p>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="service-num">01</span>
+          <h3 class="service-title">Landing page &amp; Site vitrine</h3>
+          <p class="service-desc">Sites rapides, orientés conversion, responsive. Du one-pager au site multi-pages sur mesure.</p>
+          <span class="service-tag">Dès 900€</span>
         </div>
-        <span class="work-cat">Site web</span>
-        <span class="work-year">2026</span>
-        <div class="work-thumb" style="background-image:url('/work/cafeo.png')" aria-hidden="true"></div>
-      </div>
-
-      <div class="work-row reveal" role="listitem" data-project="myboat">
-        <span class="work-num" aria-hidden="true">02</span>
-        <div class="work-info">
-          <h3 class="work-name">MyBoat</h3>
-          <p class="work-tagline">Marketplace mobile de vente et achat de bateaux en France</p>
+        <div class="service-card reveal">
+          <span class="service-num">02</span>
+          <h3 class="service-title">Application web &amp; SaaS</h3>
+          <p class="service-desc">Applications complexes, back-office, interfaces métier. Conception et développement complets.</p>
+          <span class="service-tag">Dès 2 500€</span>
         </div>
-        <span class="work-cat">App mobile</span>
-        <span class="work-year">2026</span>
-        <div class="work-thumb" style="background-image:url('/work/myboat.jpg')" aria-hidden="true"></div>
-      </div>
-
-      <div class="work-row reveal" role="listitem" data-project="garantibox">
-        <span class="work-num" aria-hidden="true">03</span>
-        <div class="work-info">
-          <h3 class="work-name">Garantibox</h3>
-          <p class="work-tagline">Plateforme de gestion et suivi des garanties produit</p>
+        <div class="service-card reveal">
+          <span class="service-num">03</span>
+          <h3 class="service-title">Application mobile</h3>
+          <p class="service-desc">iOS &amp; Android, de la maquette au déploiement sur les stores. Approche produit complète, UX pensée mobile-first.</p>
+          <span class="service-tag">Sur devis</span>
         </div>
-        <span class="work-cat">Web App</span>
-        <span class="work-year">2025</span>
-        <div class="work-thumb" style="background-image:url('/work/garantibox.png')" aria-hidden="true"></div>
-      </div>
-
-      <div class="work-row reveal" role="listitem" data-project="niortbasket">
-        <span class="work-num" aria-hidden="true">04</span>
-        <div class="work-info">
-          <h3 class="work-name">Niort Basket</h3>
-          <p class="work-tagline">Refonte du site club — billetterie, boutique et actualités</p>
+        <div class="service-card reveal">
+          <span class="service-num">04</span>
+          <h3 class="service-title">Direction artistique &amp; UI</h3>
+          <p class="service-desc">Maquettes, design systems, prototypes haute fidélité. Identité visuelle et cohérence de marque.</p>
+          <span class="service-tag">Dès 600€</span>
         </div>
-        <span class="work-cat">Site web</span>
-        <span class="work-year">2025</span>
-        <div class="work-thumb" style="background-image:url('/work/niortbasket.png')" aria-hidden="true"></div>
-      </div>
-
-      <div class="work-row reveal" role="listitem" data-project="aurem">
-        <span class="work-num" aria-hidden="true">05</span>
-        <div class="work-info">
-          <h3 class="work-name">Aurem</h3>
-          <p class="work-tagline">Site vitrine haut de gamme pour agence immobilière de luxe</p>
-        </div>
-        <span class="work-cat">Site vitrine</span>
-        <span class="work-year">2025</span>
-        <div class="work-thumb" style="background-image:url('/work/aurem.png')" aria-hidden="true"></div>
-      </div>
-
-      <div class="work-row reveal" role="listitem" data-project="archeon">
-        <span class="work-num" aria-hidden="true">06</span>
-        <div class="work-info">
-          <h3 class="work-name">Archéon</h3>
-          <p class="work-tagline">Portfolio &amp; site vitrine pour cabinet d'architecture</p>
-        </div>
-        <span class="work-cat">Portfolio</span>
-        <span class="work-year">2025</span>
-        <div class="work-thumb" style="background-image:url('/work/archeon.png')" aria-hidden="true"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="services" class="has-grain">
-  <div class="services-glow" aria-hidden="true"></div>
-  <div class="container">
-    <div class="services-header">
-      <p class="section-label reveal">Ce que nous faisons</p>
-      <h2 class="services-title reveal">Nos <em>expertises</em></h2>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <span class="service-num">01</span>
-        <h3 class="service-title">Landing page &amp; Site vitrine</h3>
-        <p class="service-desc">Sites rapides, orientés conversion, responsive. Du one-pager au site multi-pages sur mesure.</p>
-        <span class="service-tag">Dès 900€</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">02</span>
-        <h3 class="service-title">Web App &amp; SaaS</h3>
-        <p class="service-desc">Applications complexes, back-office, interfaces métier. Conception et développement complets.</p>
-        <span class="service-tag">Sur devis</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">03</span>
-        <h3 class="service-title">Application mobile</h3>
-        <p class="service-desc">Apps iOS &amp; Android, de la maquette au déploiement sur les stores. UX pensée mobile-first.</p>
-        <span class="service-tag">Dès 2 500€</span>
-      </div>
-      <div class="service-card reveal">
-        <span class="service-num">04</span>
-        <h3 class="service-title">Direction artistique &amp; UI</h3>
-        <p class="service-desc">Maquettes, design systems, prototypes haute fidélité. Identité visuelle et cohérence de marque.</p>
-        <span class="service-tag">Dès 600€</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-  <!-- PROCESS -->
+  <!-- 4. NOTRE MÉTHODE -->
   <section id="process" class="has-grain">
-  <div class="container">
-    <div class="process-header">
-      <p class="section-label reveal">Comment on travaille</p>
-      <h2 class="process-main-title reveal">4 étapes,<br>0 surprise.</h2>
-    </div>
-    <div class="process-grid">
-      <div class="process-card reveal">
-        <span class="process-bg-num" aria-hidden="true">01</span>
-        <span class="process-tag">Découverte</span>
-        <h3 class="process-card-title">Cadrage du projet</h3>
-        <p class="process-card-text">On discute de vos objectifs, de vos cibles et de vos contenus. On organise un ou plusieurs ateliers pour définir ensemble l'arborescence et le plan de site.</p>
+    <div class="container">
+      <div class="process-head">
+        <p class="section-label reveal">Notre méthode</p>
+        <h2 class="process-main-title reveal">Une méthode claire.<br>Zéro <span class="text-accent">surprise</span>.</h2>
       </div>
-      <div class="process-card reveal">
-        <span class="process-bg-num" aria-hidden="true">02</span>
-        <span class="process-tag">Design</span>
-        <h3 class="process-card-title">Conception visuelle</h3>
-        <p class="process-card-text">Chaque écran est validé avec vous avant le développement. Direction artistique, typographie, mise en page — rien ne part en prod sans validation.</p>
-      </div>
-      <div class="process-card reveal">
-        <span class="process-bg-num" aria-hidden="true">03</span>
-        <span class="process-tag">Développement</span>
-        <h3 class="process-card-title">Build &amp; intégration</h3>
-        <p class="process-card-text">On donne vie aux maquettes. Pixel-perfect, testé sur tous les supports, optimisé pour la performance. Vous suivez l'avancement en temps réel.</p>
-      </div>
-      <div class="process-card reveal">
-        <span class="process-bg-num" aria-hidden="true">04</span>
-        <span class="process-tag">Lancement</span>
-        <h3 class="process-card-title">Mise en ligne &amp; suivi</h3>
-        <p class="process-card-text">Déploiement, formation à la prise en main, suivi post-lancement inclus. On reste disponibles pour les ajustements et les évolutions.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="process-timeline">
 
-  <!-- TARIFS -->
+        <div class="proc-row reveal">
+          <div class="proc-left">
+            <span class="proc-badge">Découverte</span>
+            <h3 class="proc-title proc-title-1">Cadrage du projet</h3>
+            <p class="proc-text proc-text-1">On discute de vos objectifs, de vos cibles et de vos contenus. On organise un ou plusieurs ateliers pour définir ensemble l'arborescence et le plan de site.</p>
+          </div>
+          <div class="proc-mid"><div class="proc-dot proc-dot-1"></div></div>
+          <div class="proc-right"><span class="proc-ghost" aria-hidden="true">01</span></div>
+        </div>
+
+        <div class="proc-row proc-row-flip reveal">
+          <div class="proc-left"><span class="proc-ghost" aria-hidden="true">02</span></div>
+          <div class="proc-mid"><div class="proc-dot proc-dot-2"></div></div>
+          <div class="proc-right">
+            <span class="proc-badge proc-badge-2">Design</span>
+            <h3 class="proc-title proc-title-n">Conception visuelle</h3>
+            <p class="proc-text proc-text-n">Chaque écran est validé avec vous avant le développement. Direction artistique, typographie, mise en page — rien ne part en prod sans validation.</p>
+          </div>
+        </div>
+
+        <div class="proc-row reveal">
+          <div class="proc-left">
+            <span class="proc-badge proc-badge-3">Développement</span>
+            <h3 class="proc-title proc-title-n">Build &amp; intégration</h3>
+            <p class="proc-text proc-text-n">On donne vie aux maquettes. Pixel-perfect, testé sur tous les supports, optimisé pour la performance. Vous suivez l'avancement en temps réel.</p>
+          </div>
+          <div class="proc-mid"><div class="proc-dot proc-dot-3"></div></div>
+          <div class="proc-right"><span class="proc-ghost" aria-hidden="true">03</span></div>
+        </div>
+
+        <div class="proc-row proc-row-flip reveal">
+          <div class="proc-left"><span class="proc-ghost" aria-hidden="true">04</span></div>
+          <div class="proc-mid"><div class="proc-dot proc-dot-4"></div></div>
+          <div class="proc-right">
+            <span class="proc-badge proc-badge-4">Lancement</span>
+            <h3 class="proc-title proc-title-n">Mise en ligne &amp; suivi</h3>
+            <p class="proc-text proc-text-n">Déploiement, formation à la prise en main, suivi post-lancement inclus. On reste disponibles pour les ajustements et les évolutions.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PROJETS -->
+  <section id="work">
+    <div class="container">
+      <div class="work-header">
+        <div>
+          <p class="section-label reveal">Projets</p>
+          <h2 class="work-title reveal">Travaux sélectionnés</h2>
+        </div>
+      </div>
+    </div>
+    <div class="work-carousel-outer">
+      <div class="swiper work-swiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <article class="work-card">
+              <div class="work-card-image">
+                <img src="/work/cafeo.webp" alt="ele — Ateliers Caféologie" loading="lazy">
+                <span class="work-card-badge">Site web</span>
+              </div>
+              <div class="work-card-body">
+                <h3 class="work-card-title">ele — Ateliers Caféologie</h3>
+                <p class="work-card-type">Site web &amp; identité visuelle</p>
+                <div class="work-testi">
+                  <p class="work-testi-quote">"Un résultat qui dépasse nos attentes. L'identité visuelle colle parfaitement à notre univers."</p>
+                  <div class="work-testi-footer">
+                    <div class="work-testi-author">
+                      <div class="work-testi-avatar">LM</div>
+                      <div class="work-testi-meta">
+                        <span class="work-testi-name">Lucas Martin</span>
+                        <span class="work-testi-role">Fondateur, ele</span>
+                      </div>
+                    </div>
+                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="work-card">
+              <div class="work-card-image work-card-image--mockup work-card-image--myboat">
+                <img src="/work/myboat.webp" alt="MyBoat — application mobile" loading="lazy">
+                <span class="work-card-badge">App mobile</span>
+              </div>
+              <div class="work-card-body">
+                <h3 class="work-card-title">MyBoat</h3>
+                <p class="work-card-type">Marketplace iOS &amp; Android</p>
+                <div class="work-testi">
+                  <p class="work-testi-quote">"De la maquette au store en 5 semaines. Exactement ce qu'on voulait, sans aucune surprise."</p>
+                  <div class="work-testi-footer">
+                    <div class="work-testi-author">
+                      <div class="work-testi-avatar">SR</div>
+                      <div class="work-testi-meta">
+                        <span class="work-testi-name">Sébastien Roy</span>
+                        <span class="work-testi-role">CTO, MyBoat</span>
+                      </div>
+                    </div>
+                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="work-card">
+              <div class="work-card-image">
+                <img src="/work/garantibox.png" alt="Garantibox" loading="lazy">
+                <span class="work-card-badge">Web App SaaS</span>
+              </div>
+              <div class="work-card-body">
+                <h3 class="work-card-title">Garantibox</h3>
+                <p class="work-card-type">Plateforme SaaS de gestion SAV</p>
+                <div class="work-testi">
+                  <p class="work-testi-quote">"Interface claire et efficace. Notre équipe a réduit ses délais de traitement de 35%."</p>
+                  <div class="work-testi-footer">
+                    <div class="work-testi-author">
+                      <div class="work-testi-avatar">CD</div>
+                      <div class="work-testi-meta">
+                        <span class="work-testi-name">Claire Dumont</span>
+                        <span class="work-testi-role">Product Lead, Garantibox</span>
+                      </div>
+                    </div>
+                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="work-card">
+              <div class="work-card-image">
+                <img src="/work/niortbasket.png" alt="Niort Basket" loading="lazy">
+                <span class="work-card-badge">Site web</span>
+              </div>
+              <div class="work-card-body">
+                <h3 class="work-card-title">Niort Basket</h3>
+                <p class="work-card-type">Refonte site club &amp; e-commerce</p>
+                <div class="work-testi">
+                  <p class="work-testi-quote">"Site modernisé et billetterie en ligne opérationnelle pour la saison suivante. Impeccable."</p>
+                  <div class="work-testi-footer">
+                    <div class="work-testi-author">
+                      <div class="work-testi-avatar">MP</div>
+                      <div class="work-testi-meta">
+                        <span class="work-testi-name">Marc Perrin</span>
+                        <span class="work-testi-role">Directeur, Niort Basket</span>
+                      </div>
+                    </div>
+                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="work-card">
+              <div class="work-card-image">
+                <img src="/work/aurem.png" alt="Aurem" loading="lazy">
+                <span class="work-card-badge">Site vitrine</span>
+              </div>
+              <div class="work-card-body">
+                <h3 class="work-card-title">Aurem</h3>
+                <p class="work-card-type">Site haut de gamme — immobilier de luxe</p>
+                <div class="work-testi">
+                  <p class="work-testi-quote">"Le prestige qu'on voulait transmettre est là. Les clients le remarquent immédiatement."</p>
+                  <div class="work-testi-footer">
+                    <div class="work-testi-author">
+                      <div class="work-testi-avatar">IM</div>
+                      <div class="work-testi-meta">
+                        <span class="work-testi-name">Isabelle Moreau</span>
+                        <span class="work-testi-role">Directrice, Aurem</span>
+                      </div>
+                    </div>
+                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="work-card">
+              <div class="work-card-image">
+                <img src="/work/archeon.png" alt="Archéon" loading="lazy">
+                <span class="work-card-badge">Portfolio</span>
+              </div>
+              <div class="work-card-body">
+                <h3 class="work-card-title">Archéon</h3>
+                <p class="work-card-type">Portfolio &amp; site vitrine — architecture</p>
+                <div class="work-testi">
+                  <p class="work-testi-quote">"Un portfolio qui représente enfin notre niveau. Simple, beau, efficace. Exactement ça."</p>
+                  <div class="work-testi-footer">
+                    <div class="work-testi-author">
+                      <div class="work-testi-avatar">AG</div>
+                      <div class="work-testi-meta">
+                        <span class="work-testi-name">Antoine Girard</span>
+                        <span class="work-testi-role">Architecte, Archéon</span>
+                      </div>
+                    </div>
+                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+      <div class="work-dots" role="tablist" aria-label="Navigation projets">
+        <button class="work-dot" role="tab" aria-selected="true"  aria-label="Projet 1"><span class="work-dot-fill"></span></button>
+        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 2"><span class="work-dot-fill"></span></button>
+        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 3"><span class="work-dot-fill"></span></button>
+        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 4"><span class="work-dot-fill"></span></button>
+        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 5"><span class="work-dot-fill"></span></button>
+        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 6"><span class="work-dot-fill"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. TARIFS -->
   <section id="tarifs">
     <div class="container">
-      <div class="section-header">
-        <p class="section-label reveal">Nos tarifs</p>
-        <h2 class="section-title reveal">Des offres claires,<br>des résultats concrets</h2>
+      <div class="tarifs-intro">
+        <div>
+          <p class="section-label reveal">Nos tarifs</p>
+          <h2 class="tarifs-intro-title reveal">Des offres <span class="text-accent">claires</span>,<br>des résultats concrets.</h2>
+        </div>
+        <p class="tarifs-intro-note reveal">Tous les projets démarrent par un appel gratuit.<br>Pas de frais cachés, pas de surprise en fin de mission.</p>
       </div>
       <div class="tarifs-grid">
         <div class="tarif-card reveal">
-          <div class="tarif-header">
-            <span class="tarif-label">Essentiel</span>
-            <div class="tarif-price">
-              <span class="tarif-amount">Dès 900€</span>
-            </div>
-            <p class="tarif-desc">Une base solide pour lancer rapidement une présence digitale premium.</p>
+          <span class="tarif-label">Fondation — pour démarrer</span>
+          <div class="tarif-price">
+            <span class="tarif-amount">Dès 900€</span>
           </div>
+          <p class="tarif-desc">Une base solide pour lancer rapidement une présence digitale premium.</p>
+          <div class="tarif-divider"></div>
           <ul class="tarif-list">
-            <li>Landing page ou site one-page</li>
-            <li>Design Figma inclus</li>
+            <li>Landing page ou site vitrine (jusqu'à 5 pages)</li>
+            <li>Design sur mesure</li>
             <li>Responsive mobile-first</li>
-            <li>2 révisions incluses</li>
+            <li>2 allers-retours inclus</li>
+            <li>Mise en ligne</li>
             <li>Livraison en 2–3 semaines</li>
           </ul>
           <a href="#contact" class="tarif-cta tarif-cta--ghost">Démarrer</a>
         </div>
         <div class="tarif-card tarif-card--featured reveal">
-          <div class="tarif-header">
-            <span class="tarif-label">Studio ⭐</span>
-            <div class="tarif-price">
-              <span class="tarif-amount">Dès 2 500€</span>
-            </div>
-            <p class="tarif-desc">Notre offre la plus choisie. Un produit digital complet, pensé design, performance et conversion.</p>
+          <span class="tarif-popular-badge">Le plus choisi</span>
+          <span class="tarif-label">Studio — pour performer</span>
+          <div class="tarif-price">
+            <span class="tarif-amount">Dès 2 500€</span>
           </div>
+          <p class="tarif-desc">Notre offre signature. Un produit digital complet, pensé design, performance et conversion.</p>
+          <div class="tarif-divider"></div>
           <ul class="tarif-list">
-            <li>Site multi-pages ou application mobile</li>
-            <li>Architecture UX &amp; Design Figma</li>
-            <li>Animations &amp; interactions premium</li>
+            <li>Site vitrine, e-commerce ou application web</li>
+            <li>Architecture UX &amp; design sur mesure</li>
+            <li>Animations et interactions soignées</li>
             <li>SEO technique intégré</li>
-            <li>Révisions illimitées</li>
+            <li>Ajustements continus</li>
             <li>Livraison en 4–6 semaines</li>
           </ul>
           <a href="#contact" class="tarif-cta tarif-cta--primary">Démarrer →</a>
         </div>
         <div class="tarif-card reveal">
-          <div class="tarif-header">
-            <span class="tarif-label">Sur mesure</span>
-            <div class="tarif-price">
-              <span class="tarif-amount">Sur devis</span>
-            </div>
-            <p class="tarif-desc">Pour les projets ambitieux qui nécessitent une approche produit complète. Nous construisons avec vous une solution évolutive et scalable.</p>
+          <span class="tarif-label">Sur mesure — pour aller plus loin</span>
+          <div class="tarif-price">
+            <span class="tarif-amount">Sur devis</span>
           </div>
+          <p class="tarif-desc">Pour les projets ambitieux qui nécessitent une approche produit complète et un accompagnement dédié.</p>
+          <div class="tarif-divider"></div>
           <ul class="tarif-list">
+            <li>Application mobile, SaaS ou plateforme complexe</li>
             <li>Périmètre défini ensemble</li>
-            <li>Équipe dédiée</li>
-            <li>Suivi hebdomadaire</li>
-            <li>Délais &amp; livrables sur mesure</li>
+            <li>Accompagnement dédié</li>
+            <li>Suivi régulier</li>
+            <li>Délais et livrables adaptés</li>
           </ul>
           <a href="#contact" class="tarif-cta tarif-cta--ghost">Nous contacter</a>
         </div>
       </div>
+      <p class="tarifs-footnote reveal">Besoin de design seul, sans développement ? — <a href="#contact">dès 600€</a></p>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="has-grain">
-    <div class="container">
-      <p class="section-label testi-label reveal">Ce que nos clients disent</p>
-      <div class="testi-inner">
-        <span class="testi-mark" aria-hidden="true">"</span>
-        <div class="testi-slides" role="region" aria-live="polite" aria-label="Témoignages">
-
-          <div class="testi-slide is-active">
-            <blockquote class="testi-quote">"Studio Skøne a transformé notre idée en un produit que nous sommes fiers de montrer. Livraison en 4 semaines, aucune surprise, résultat au-delà de nos espérances."</blockquote>
-            <div class="testi-author">Thomas Klein</div>
-            <div class="testi-role">CEO, Lune App</div>
-          </div>
-
-          <div class="testi-slide">
-            <blockquote class="testi-quote">"L'approche produit de l'équipe est remarquable. Ils pensent business avant design — et ça change tout. Notre taux de conversion a augmenté de 40% dès le lancement."</blockquote>
-            <div class="testi-author">Léa Moreau</div>
-            <div class="testi-role">Fondatrice, Forma Studio</div>
-          </div>
-
-          <div class="testi-slide">
-            <blockquote class="testi-quote">"Une collaboration fluide, un résultat exceptionnel. Studio Skøne a su capturer l'essence de notre marque et la traduire en une expérience digitale mémorable."</blockquote>
-            <div class="testi-author">Nina Saito</div>
-            <div class="testi-role">Directrice, Kōen</div>
-          </div>
-
-        </div>
-        <div class="testi-nav" role="tablist" aria-label="Témoignages">
-          <button class="testi-dot is-active" role="tab" aria-selected="true" aria-label="Témoignage 1" data-idx="0"></button>
-          <button class="testi-dot" role="tab" aria-selected="false" aria-label="Témoignage 2" data-idx="1"></button>
-          <button class="testi-dot" role="tab" aria-selected="false" aria-label="Témoignage 3" data-idx="2"></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
+  <!-- 7. QUESTIONS FRÉQUENTES -->
   <section id="faq">
     <div class="container">
-      <div class="faq-header">
-        <div>
+      <div class="faq-inner">
+
+        <div class="faq-head">
           <p class="section-label reveal">Questions fréquentes</p>
-          <h2 class="faq-title reveal">On répond<br>à tout.</h2>
+          <h2 class="faq-title reveal">On répond<br>à <span class="text-accent">tout.</span></h2>
+          <p class="faq-head-note reveal">Vous ne trouvez pas ce que vous cherchez ?<br>Contactez-nous directement.</p>
+          <a href="mailto:hello@studioskone.com" class="faq-contact-link reveal">Écrire au studio</a>
         </div>
-        <span class="faq-count" aria-hidden="true">05</span>
-      </div>
-      <div class="faq-list" role="list">
 
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span class="faq-num" aria-hidden="true">01</span>
-            <span class="faq-q-text">Quels types de projets acceptez-vous ?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-answer" hidden>
-            <p>Sites vitrines, landing pages, web apps, SaaS, applications mobiles et direction artistique. Nous travaillons avec des startups, des PME et des créateurs de marque qui veulent des produits digitaux premium.</p>
+        <div class="faq-list" role="list">
+
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">01</span>
+              <span class="faq-q-text">Quels types de projets réalisez-vous ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Landing pages, sites vitrines, e-commerce et applications web — c'est le cœur de notre activité. Pour les projets plus complexes (application mobile, SaaS, plateforme sur mesure), nous établissons un devis adapté.</div>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span class="faq-num" aria-hidden="true">02</span>
-            <span class="faq-q-text">Combien coûte un projet ?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-answer" hidden>
-            <p>Nos formules démarrent à 900€ pour un site vitrine. Pour les projets complexes, nous établissons un devis sur mesure. Contactez-nous pour en discuter — nous sommes transparents sur les prix dès le premier appel.</p>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">02</span>
+              <span class="faq-q-text">Quels sont vos tarifs ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">L'offre Fondation démarre à 900€ pour un site vitrine jusqu'à 5 pages. L'offre Studio, à partir de 2 500€, couvre les projets plus complets — site multi-pages, e-commerce ou application web. Pour les projets complexes, nous travaillons sur devis. Dans tous les cas, les prix sont clairs dès le premier échange.</div>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span class="faq-num" aria-hidden="true">03</span>
-            <span class="faq-q-text">Quels sont vos délais de livraison ?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-answer" hidden>
-            <p>En général : 3 semaines pour un site essentiel, 6 semaines pour une offre Studio complète. Les délais sont définis ensemble au cadrage et respectés — c'est une promesse, pas une estimation.</p>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">03</span>
+              <span class="faq-q-text">Quels sont vos délais ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">2 à 3 semaines pour une offre Fondation, 4 à 6 semaines pour une offre Studio. Les projets sur mesure ont des délais définis ensemble au cadrage. Ce sont des engagements, pas des estimations.</div>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span class="faq-num" aria-hidden="true">04</span>
-            <span class="faq-q-text">Comment se passe la collaboration au quotidien ?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-answer" hidden>
-            <p>Un point de démarrage, des ateliers de cadrage, des validations par étape. Vous avez toujours un accès direct à votre interlocuteur — pas de compte rendu en retard, pas de surprise.</p>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">04</span>
+              <span class="faq-q-text">Combien d'allers-retours sont inclus ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">L'offre Fondation inclut 2 allers-retours sur le design et le contenu. L'offre Studio fonctionne en ajustements continus tout au long du projet — chaque étape est validée avec vous avant de passer à la suivante. Pas de mauvaise surprise en fin de mission.</div>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-item" role="listitem">
-          <button class="faq-question" aria-expanded="false">
-            <span class="faq-num" aria-hidden="true">05</span>
-            <span class="faq-q-text">Comment se passe le suivi après livraison ?</span>
-            <span class="faq-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="faq-answer" hidden>
-            <p>Formation à la prise en main, suivi 30 jours inclus. Pour les évolutions et la maintenance, nous proposons des formules de suivi adaptées à vos besoins.</p>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">05</span>
+              <span class="faq-q-text">La mise en ligne est-elle incluse ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Oui, la mise en ligne est incluse dans toutes nos offres. Nous gérons le déploiement, la configuration du domaine et les vérifications techniques. Pour les projets sur mesure, un suivi régulier post-lancement est également prévu.</div>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT — Multi-step form (injecté par contact-form.ts) -->
+  <!-- 9. TRAVAILLONS ENSEMBLE — Contact (formulaire multi-étapes — ne pas modifier) -->
   <section id="contact" class="has-grain">
     <div class="contact-glow" aria-hidden="true"></div>
     <div class="container contact-inner">
@@ -443,29 +523,8 @@
       <h2 class="contact-title reveal">
         Construisons quelque chose <em>de remarquable.</em>
       </h2>
-      <a href="mailto:hello@studioskone.com" class="contact-email reveal">
-        hello@studioskone.com
-      </a>
       <!-- ContactMultiStepForm monte ici via contact-form.ts -->
-      <div id="contact-form-root"></div>
-      <div class="contact-details reveal">
-        <div class="contact-col">
-          <span class="contact-col-label">New business</span>
-          <span class="contact-col-val">hello@studioskone.com</span>
-        </div>
-        <div class="contact-col">
-          <span class="contact-col-label">Basé à</span>
-          <span class="contact-col-val">Paris, France — Remote</span>
-        </div>
-        <div class="contact-col">
-          <span class="contact-col-label">Suivez-nous</span>
-          <div class="contact-social">
-            <a href="#" class="social-link--light">Instagram</a>
-            <a href="#" class="social-link--light">LinkedIn</a>
-            <a href="#" class="social-link--light">Behance</a>
-          </div>
-        </div>
-      </div>
+      <div id="contact-form-root" class="reveal"></div>
     </div>
   </section>
 

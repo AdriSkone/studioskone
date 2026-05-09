@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B vs C — Comparaison</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #FAEEDF;
+    --dark:      #181716;
+    --dark-soft: #2A2927;
+    --accent:    #C56039;
+  }
+
+  body {
+    background: #0d0c0b;
+    font-family: 'Barlow', system-ui, sans-serif;
+    color: #fff;
+    padding: 64px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .page-sub {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+  }
+
+  hr { border: none; border-top: 1px solid rgba(255,255,255,0.05); }
+
+  /* ── Concept wrapper ── */
+  .concept {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .concept-meta { padding-top: 8px; }
+
+  .concept-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .concept-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+
+  .concept-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.65;
+  }
+
+  .pros-cons {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pro, .con {
+    font-size: 12px;
+    line-height: 1.5;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .pro { color: rgba(250,238,223,0.55); }
+  .con { color: rgba(255,255,255,0.22); }
+
+  .pro::before { content: '+'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .con::before { content: '–'; color: rgba(255,255,255,0.2); font-weight: 700; flex-shrink: 0; }
+
+  /* ── Mini carousel shell ── */
+  .shell {
+    background: var(--dark);
+    border-radius: 20px;
+    padding: 32px 32px 28px;
+    overflow: hidden;
+  }
+
+  .shell-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .sh-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .sh-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(250,238,223,0.9);
+  }
+
+  .cards-row {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  /* ── Mini card ── */
+  .card {
+    flex-shrink: 0;
+    width: 220px;
+    border-radius: 11px;
+    overflow: hidden;
+    background: var(--dark-soft);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card.dim { opacity: 0.26; }
+
+  .card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #2a2520 0%, #1a1614 100%);
+    position: relative;
+  }
+
+  .badge {
+    position: absolute;
+    top: 9px; left: 9px;
+    background: rgba(197,96,57,0.9);
+    color: #FAEEDF;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 100px;
+    transform: rotateZ(-2deg);
+  }
+
+  .card-body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .card-type {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+
+  .card-title {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(250,238,223,0.88);
+    line-height: 1.15;
+  }
+
+  .card-testi {
+    margin-top: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 7px;
+    padding: 8px 10px;
+  }
+
+  .card-testi-q {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 9px;
+    color: rgba(250,238,223,0.48);
+    line-height: 1.5;
+    margin-bottom: 7px;
+  }
+
+  .card-testi-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .avatar {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(197,96,57,0.2);
+    border: 1px solid rgba(197,96,57,0.3);
+    color: var(--accent);
+    font-size: 6px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta { font-size: 7px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+
+  .card-partial {
+    flex-shrink: 0;
+    width: 56px;
+    opacity: 0.2;
+    border-radius: 11px;
+    overflow: hidden;
+    background: var(--dark-soft);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .card-partial .card-img { height: 100%; aspect-ratio: unset; }
+
+  /* ══════════════ OPTION B — Dots ══════════════ */
+  .dots-row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+  .dot {
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.16);
+    transition: all 0.3s;
+  }
+
+  .dot.active {
+    width: 16px;
+    background: var(--accent);
+  }
+
+  .dot:not(.active) { width: 5px; }
+
+  /* ══════════════ OPTION C — Progress bar ══════════════ */
+  .progress-wrap {
+    margin-top: 18px;
+    height: 2px;
+    background: rgba(255,255,255,0.09);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: prog 4.5s linear infinite;
+  }
+
+  @keyframes prog {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+
+  /* ══════════════ OPTION BC — Hybrid ══════════════ */
+  .hybrid-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+  .hdot {
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.16);
+  }
+
+  .hdot:not(.hactive) { width: 5px; }
+
+  .hdot.hactive {
+    width: 36px;
+    background: rgba(197,96,57,0.22);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hdot.hactive::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    animation: hdot-fill 4.5s linear infinite;
+    transform-origin: left;
+  }
+
+  @keyframes hdot-fill {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* Recommended badge */
+  .rec-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(197,96,57,0.14);
+    border: 1px solid rgba(197,96,57,0.28);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div>
+    <p class="page-title">Studio Skøne — Comparaison</p>
+    <p class="page-sub">Option B vs C vs hybride</p>
+  </div>
+
+  <hr>
+
+  <!-- ══ B — Dots ══ -->
+  <div class="concept">
+    <div class="concept-meta">
+      <span class="concept-tag">Option B</span>
+      <p class="concept-name">Dots de position</p>
+      <p class="concept-note">6 points sous le carousel. Le dot actif est une pill allongée.</p>
+      <div class="pros-cons">
+        <p class="pro">Montre où on est dans les 6 projets</p>
+        <p class="pro">Familier, universel</p>
+        <p class="con">Ne communique pas le mouvement</p>
+        <p class="con">Ne donne pas d'info sur l'autoplay</p>
+      </div>
+    </div>
+    <div class="shell">
+      <div class="shell-header">
+        <div>
+          <p class="sh-label">Projets</p>
+          <p class="sh-title">Travaux sélectionnés</p>
+        </div>
+      </div>
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-img"><span class="badge">Site web</span></div>
+          <div class="card-body">
+            <p class="card-type">Site web &amp; identité</p>
+            <p class="card-title">ele — Ateliers Caféologie</p>
+            <div class="card-testi">
+              <p class="card-testi-q">"Un résultat qui dépasse nos attentes."</p>
+              <div class="card-testi-footer"><div class="avatar">LM</div><span class="cta">Voir →</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card dim">
+          <div class="card-img"><span class="badge">App mobile</span></div>
+          <div class="card-body">
+            <p class="card-type">Marketplace iOS &amp; Android</p>
+            <p class="card-title">MyBoat</p>
+            <div class="card-testi">
+              <p class="card-testi-q">"De la maquette au store en 5 semaines."</p>
+              <div class="card-testi-footer"><div class="avatar">SR</div><span class="cta">Voir →</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-partial"><div class="card-img"></div></div>
+      </div>
+      <div class="dots-row">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══ C — Progress bar ══ -->
+  <div class="concept">
+    <div class="concept-meta">
+      <span class="concept-tag">Option C</span>
+      <p class="concept-name">Barre de progression</p>
+      <p class="concept-note">Fine ligne 2px qui se remplit avec le timer autoplay (4,5s).</p>
+      <div class="pros-cons">
+        <p class="pro">Très minimaliste, premium</p>
+        <p class="pro">Communique l'autoplay et crée une urgence douce</p>
+        <p class="con">Ne montre pas la position (projet 1 sur 6)</p>
+        <p class="con">Moins lisible au premier regard</p>
+      </div>
+    </div>
+    <div class="shell">
+      <div class="shell-header">
+        <div>
+          <p class="sh-label">Projets</p>
+          <p class="sh-title">Travaux sélectionnés</p>
+        </div>
+      </div>
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-img"><span class="badge">Site web</span></div>
+          <div class="card-body">
+            <p class="card-type">Site web &amp; identité</p>
+            <p class="card-title">ele — Ateliers Caféologie</p>
+            <div class="card-testi">
+              <p class="card-testi-q">"Un résultat qui dépasse nos attentes."</p>
+              <div class="card-testi-footer"><div class="avatar">LM</div><span class="cta">Voir →</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card dim">
+          <div class="card-img"><span class="badge">App mobile</span></div>
+          <div class="card-body">
+            <p class="card-type">Marketplace iOS &amp; Android</p>
+            <p class="card-title">MyBoat</p>
+            <div class="card-testi">
+              <p class="card-testi-q">"De la maquette au store en 5 semaines."</p>
+              <div class="card-testi-footer"><div class="avatar">SR</div><span class="cta">Voir →</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-partial"><div class="card-img"></div></div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══ BC — Hybride ══ -->
+  <div class="concept">
+    <div class="concept-meta">
+      <span class="rec-badge">★ Recommandé</span>
+      <span class="concept-tag">Option B+C</span>
+      <p class="concept-name">Dots + remplissage progressif</p>
+      <p class="concept-note">Dots de position, mais le dot actif se remplit comme une barre de progression. Le meilleur des deux.</p>
+      <div class="pros-cons">
+        <p class="pro">Montre la position (1 sur 6)</p>
+        <p class="pro">Communique l'autoplay via le remplissage</p>
+        <p class="pro">Élégant, peu courant — distinctif</p>
+      </div>
+    </div>
+    <div class="shell">
+      <div class="shell-header">
+        <div>
+          <p class="sh-label">Projets</p>
+          <p class="sh-title">Travaux sélectionnés</p>
+        </div>
+      </div>
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-img"><span class="badge">Site web</span></div>
+          <div class="card-body">
+            <p class="card-type">Site web &amp; identité</p>
+            <p class="card-title">ele — Ateliers Caféologie</p>
+            <div class="card-testi">
+              <p class="card-testi-q">"Un résultat qui dépasse nos attentes."</p>
+              <div class="card-testi-footer"><div class="avatar">LM</div><span class="cta">Voir →</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card dim">
+          <div class="card-img"><span class="badge">App mobile</span></div>
+          <div class="card-body">
+            <p class="card-type">Marketplace iOS &amp; Android</p>
+            <p class="card-title">MyBoat</p>
+            <div class="card-testi">
+              <p class="card-testi-q">"De la maquette au store en 5 semaines."</p>
+              <div class="card-testi-footer"><div class="avatar">SR</div><span class="cta">Voir →</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-partial"><div class="card-img"></div></div>
+      </div>
+      <div class="hybrid-dots">
+        <div class="hdot hactive"></div>
+        <div class="hdot"></div>
+        <div class="hdot"></div>
+        <div class="hdot"></div>
+        <div class="hdot"></div>
+        <div class="hdot"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

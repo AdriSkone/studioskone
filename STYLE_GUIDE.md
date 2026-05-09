@@ -51,14 +51,11 @@ Palette volontairement chaude, texturée et premium.
 
 ### Règle responsive
 
-> Toutes les tailles typographiques ci-dessous sont définies pour le format **desktop**.
-> Les tailles doivent être ajustées de manière proportionnelle selon le support :
->
-> - **Desktop** : valeurs par défaut
-> - **Tablet** : réduire de 15 à 20 %
-> - **Mobile** : réduire de 25 à 35 %
->
-> Veiller à conserver une excellente lisibilité et une hiérarchie visuelle forte sur tous les supports.
+Typographie fluide avec `clamp()` — aucune media query nécessaire pour les tailles de texte.
+
+```
+clamp(min, preferred·vw, max)
+```
 
 ---
 
@@ -85,30 +82,51 @@ Palette volontairement chaude, texturée et premium.
 
 ---
 
-### Échelle typographique — Desktop
+### Échelle typographique — Fluid clamp()
 
-| Élément | Police | font-size | font-weight | line-height |
-|---------|--------|-----------|-------------|-------------|
-| Hero title (H1) | Barlow Bold | 64px | 700 | 72px |
-| Section title (H2) | Barlow Bold | 40px | 700 | 48px |
-| Subheading (H3) | Barlow Bold | 24px | 700 | 32px |
-| Body text | Barlow Regular | 18px | 400 | 30px |
-| Button text | Barlow Regular | 16px | 400 | 24px |
-| Form labels | Barlow Regular | 14px | 400 | 20px |
-| Testimonial / citation | Barlow Regular | 20px | 400 | 34px |
-| Prix / montants | Barlow Regular | — | 400 | — |
-| Author name | Barlow Regular | 16px | 400 | 24px |
-| Decorative quote marks | Barlow Bold | 88px | 700 | — |
+| Élément | clamp() | min | max | line-height | font-weight |
+|--------|---------|-----|-----|-------------|-------------|
+| H1 (Hero) | `clamp(38px, 5vw, 64px)` | 38px | 64px | 1.1 | 700 |
+| H2 (Section) | `clamp(28px, 3vw, 40px)` | 28px | 40px | 1.2 | 700 |
+| H3 (Subheading) | `clamp(20px, 2vw, 24px)` | 20px | 24px | 1.3 | 700 |
+| Body standard | `clamp(15px, 1.2vw, 18px)` | 15px | 18px | 1.6 | 400 |
+| Small text | `clamp(13px, 1vw, 14px)` | 13px | 14px | — | 400 |
+| Button | `16px` | — | — | 1.5 | 500 |
+| Label / caption | `12px` | — | — | — | 400 |
 
-**Decorative quote marks** : `opacity: 0.15` — positionnement absolu en fond de carte.
+```css
+h1 { font-size: clamp(38px, 5vw, 64px);   line-height: 1.1; font-weight: 700; }
+h2 { font-size: clamp(28px, 3vw, 40px);   line-height: 1.2; font-weight: 700; }
+h3 { font-size: clamp(20px, 2vw, 24px);   line-height: 1.3; font-weight: 700; }
+body { font-size: clamp(15px, 1.2vw, 18px); line-height: 1.6; }
+.small { font-size: clamp(13px, 1vw, 14px); }
+```
+
+**Decorative quote marks** : `font-size: 88px; font-weight: 700; opacity: 0.15` — positionnement absolu en fond de carte.
 
 ---
 
 ### Styles complémentaires
 
-- `letter-spacing: 0.025em` sur tous les titres
+- `letter-spacing: 0.02em` sur H1, H2, H3
 - `letter-spacing: 0.2em` + `text-transform: uppercase` sur les section labels
 - Hiérarchie forte : Hero 700 vs Section title 600 — contraste intentionnel éditorial
+
+### Largeur de texte
+
+```css
+.hero-subtitle { max-width: 560px; }
+.section-text  { max-width: 640px; }
+```
+
+### Rythme vertical
+
+```css
+h1 { margin-bottom: 24px; }
+h2 { margin-bottom: 32px; }
+h3 { margin-bottom: 16px; }
+p  { margin-bottom: 16px; }
+```
 
 ---
 
