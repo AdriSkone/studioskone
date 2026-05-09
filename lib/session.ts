@@ -3,8 +3,8 @@
 // - Cookie = `${sessionId}.${HMAC(SESSION_SECRET, sessionId)}`
 // - Stockage KV : clé `session:${sessionId}` → "1", TTL = SESSION_TTL_SECONDS
 
-import { kvDel, kvGet, kvSet } from './kv.ts'
-import { constantTimeEquals, hmacSign, randomBase64Url } from './security.ts'
+import { kvDel, kvGet, kvSet } from './kv'
+import { constantTimeEquals, hmacSign, randomBase64Url } from './security'
 
 export const SESSION_COOKIE_NAME = 'skone_session'
 export const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30 // 30 jours

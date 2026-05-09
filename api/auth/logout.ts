@@ -1,7 +1,8 @@
 // POST /api/auth/logout — détruit la session côté serveur, supprime le cookie.
 
-import { parseCookies, serializeCookie } from '../../lib/cookies.ts'
-import { destroySession, SESSION_COOKIE_NAME, verifySessionCookie } from '../../lib/session.ts'
+/// <reference types="node" />
+import { parseCookies, serializeCookie } from '../../lib/cookies'
+import { destroySession, SESSION_COOKIE_NAME, verifySessionCookie } from '../../lib/session'
 
 export const config = { runtime: 'edge' }
 

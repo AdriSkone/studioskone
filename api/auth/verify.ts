@@ -1,10 +1,11 @@
 // GET /api/auth/verify?token=xxx — valide le token magic link, crée la session, redirige vers /admin.
 
-import { serializeCookie } from '../../lib/cookies.ts'
-import { kvDel, kvGet } from '../../lib/kv.ts'
-import { checkRateLimit, getClientIp } from '../../lib/rate-limit.ts'
-import { sha256Hex } from '../../lib/security.ts'
-import { createSession, SESSION_COOKIE_NAME, SESSION_TTL_SECONDS } from '../../lib/session.ts'
+/// <reference types="node" />
+import { serializeCookie } from '../../lib/cookies'
+import { kvDel, kvGet } from '../../lib/kv'
+import { checkRateLimit, getClientIp } from '../../lib/rate-limit'
+import { sha256Hex } from '../../lib/security'
+import { createSession, SESSION_COOKIE_NAME, SESSION_TTL_SECONDS } from '../../lib/session'
 
 export const config = { runtime: 'edge' }
 

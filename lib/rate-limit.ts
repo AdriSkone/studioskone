@@ -1,7 +1,7 @@
 // Rate limiting fenêtre fixe basé sur INCR + EXPIRE Redis.
 // Plus simple qu'un sliding window log et suffisant pour les endpoints publics admin.
 
-import { kvIncrWithTtl } from './kv.ts'
+import { kvIncrWithTtl } from './kv'
 
 export interface RateLimitResult {
   allowed: boolean

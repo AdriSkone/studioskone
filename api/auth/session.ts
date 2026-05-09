@@ -1,7 +1,8 @@
 // GET /api/auth/session — { authenticated: true | false }
 
-import { parseCookies } from '../../lib/cookies.ts'
-import { SESSION_COOKIE_NAME, verifySessionCookie } from '../../lib/session.ts'
+/// <reference types="node" />
+import { parseCookies } from '../../lib/cookies'
+import { SESSION_COOKIE_NAME, verifySessionCookie } from '../../lib/session'
 
 export const config = { runtime: 'edge' }
 

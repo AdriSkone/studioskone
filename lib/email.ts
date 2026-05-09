@@ -1,6 +1,6 @@
 // Envoi d'emails via l'API Resend (REST direct, pas de SDK pour éviter une dépendance)
 
-import { escapeHtml } from './security.ts'
+import { escapeHtml } from './security'
 
 const RESEND_API = 'https://api.resend.com/emails'
 

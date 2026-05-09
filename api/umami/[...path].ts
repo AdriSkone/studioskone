@@ -2,8 +2,9 @@
 // Exige une session admin valide. Le token Umami reste côté serveur (jamais exposé au front).
 // Whitelist stricte des chemins pour empêcher l'utilisation comme proxy ouvert.
 
-import { parseCookies } from '../../lib/cookies.ts'
-import { SESSION_COOKIE_NAME, verifySessionCookie } from '../../lib/session.ts'
+/// <reference types="node" />
+import { parseCookies } from '../../lib/cookies'
+import { SESSION_COOKIE_NAME, verifySessionCookie } from '../../lib/session'
 
 export const config = { runtime: 'edge' }
 

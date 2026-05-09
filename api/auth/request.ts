@@ -2,10 +2,11 @@
 // Body : aucun (l'admin n'a qu'un seul email — pas la peine de le saisir).
 // Réponse : 200 {ok:true} dans tous les cas (pas de leak), 429 si rate-limité.
 
-import { sendEmail, magicLinkEmail } from '../../lib/email.ts'
-import { kvSet } from '../../lib/kv.ts'
-import { checkRateLimit, getClientIp } from '../../lib/rate-limit.ts'
-import { randomBase64Url, sha256Hex } from '../../lib/security.ts'
+/// <reference types="node" />
+import { sendEmail, magicLinkEmail } from '../../lib/email'
+import { kvSet } from '../../lib/kv'
+import { checkRateLimit, getClientIp } from '../../lib/rate-limit'
+import { randomBase64Url, sha256Hex } from '../../lib/security'
 
 export const config = { runtime: 'edge' }
 
