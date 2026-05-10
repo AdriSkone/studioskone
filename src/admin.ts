@@ -72,7 +72,10 @@ function getRange(range: Range): { startAt: number; endAt: number; unit: string 
 // ── API ───────────────────────────────────────────────────────────────────────
 
 async function apiGet<T>(path: string, params: Record<string, string | number>): Promise<T> {
-  const url = new URL(`${UMAMI_PROXY}/api${path}`, location.origin)
+  // path = "/websites/{id}/stats" ; le proxy attend "api/websites/{id}/stats" via ?path=
+  const upstreamPath = `api${path}`.replace(/^\/+/, '')
+  const url = new URL(UMAMI_PROXY, location.origin)
+  url.searchParams.set('path', upstreamPath)
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v))
   const res = await fetch(url.toString(), {
     credentials: 'same-origin',
