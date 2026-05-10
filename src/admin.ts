@@ -7,12 +7,21 @@ const WEBSITE_ID = import.meta.env.VITE_UMAMI_WEBSITE_ID ?? ''
 
 type Range = '7d' | '30d' | '90d'
 
+// Format Umami v2 : valeurs plates + objet `comparison` pour la période précédente
+// doc: https://docs.umami.is/docs/api/website-stats
 interface UmamiStats {
-  pageviews: { value: number; prev: number }
-  visitors:  { value: number; prev: number }
-  visits:    { value: number; prev: number }
-  bounces:   { value: number; prev: number }
-  totaltime: { value: number; prev: number }
+  pageviews: number
+  visitors:  number
+  visits:    number
+  bounces:   number
+  totaltime: number
+  comparison: {
+    pageviews: number
+    visitors:  number
+    visits:    number
+    bounces:   number
+    totaltime: number
+  }
 }
 
 interface PageviewPoint     { x: string; y: number }
@@ -183,24 +192,25 @@ function renderSparkline(container: HTMLElement, data: PageviewPoint[]): void {
 // ── HTML builders ─────────────────────────────────────────────────────────────
 
 function statsHTML(s: UmamiStats): string {
-  const avgSec = s.visits.value > 0 ? Math.round(s.totaltime.value / s.visits.value) : 0
-  const bounce = s.visits.value > 0 ? Math.round((s.bounces.value / s.visits.value) * 100) : 0
+  const avgSec = s.visits > 0 ? Math.round(s.totaltime / s.visits) : 0
+  const bounce = s.visits > 0 ? Math.round((s.bounces / s.visits) * 100) : 0
+  const cmp = s.comparison ?? { pageviews: 0, visitors: 0, visits: 0, bounces: 0, totaltime: 0 }
   return `
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">Pageviews</div>
-        <div class="stat-value">${fmt(s.pageviews.value)}</div>
-        <div class="stat-delta ${deltaClass(s.pageviews.value, s.pageviews.prev)}">${pctDelta(s.pageviews.value, s.pageviews.prev)}</div>
+        <div class="stat-value">${fmt(s.pageviews)}</div>
+        <div class="stat-delta ${deltaClass(s.pageviews, cmp.pageviews)}">${pctDelta(s.pageviews, cmp.pageviews)}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Visiteurs uniques</div>
-        <div class="stat-value">${fmt(s.visitors.value)}</div>
-        <div class="stat-delta ${deltaClass(s.visitors.value, s.visitors.prev)}">${pctDelta(s.visitors.value, s.visitors.prev)}</div>
+        <div class="stat-value">${fmt(s.visitors)}</div>
+        <div class="stat-delta ${deltaClass(s.visitors, cmp.visitors)}">${pctDelta(s.visitors, cmp.visitors)}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Sessions</div>
-        <div class="stat-value">${fmt(s.visits.value)}</div>
-        <div class="stat-delta ${deltaClass(s.visits.value, s.visits.prev)}">${pctDelta(s.visits.value, s.visits.prev)}</div>
+        <div class="stat-value">${fmt(s.visits)}</div>
+        <div class="stat-delta ${deltaClass(s.visits, cmp.visits)}">${pctDelta(s.visits, cmp.visits)}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Durée moy. / session</div>
