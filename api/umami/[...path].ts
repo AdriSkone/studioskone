@@ -13,9 +13,9 @@ const WEBSITE_ID = process.env.VITE_UMAMI_WEBSITE_ID ?? ''
 
 // Chemins autorisés — tout ce qui n'est pas matché ici est refusé en 403.
 const ALLOWED_PATTERNS = [
-  /^v1\/websites\/[a-f0-9-]+\/stats$/,
-  /^v1\/websites\/[a-f0-9-]+\/pageviews$/,
-  /^v1\/websites\/[a-f0-9-]+\/metrics$/,
+  /^api\/websites\/[a-f0-9-]+\/stats$/,
+  /^api\/websites\/[a-f0-9-]+\/pageviews$/,
+  /^api\/websites\/[a-f0-9-]+\/metrics$/,
 ]
 
 export default async function handler(req: Request): Promise<Response> {
