@@ -55,7 +55,9 @@ export default async function handler(req: Request): Promise<Response> {
     const upstream = await fetch(targetUrl, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${apiToken}`,
+        // Umami Cloud — auth via header custom (PAS Bearer)
+        // doc: https://docs.umami.is/docs/cloud/api-key
+        'x-umami-api-key': apiToken,
         Accept: 'application/json',
       },
     })

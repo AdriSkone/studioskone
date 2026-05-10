@@ -72,8 +72,9 @@ function getRange(range: Range): { startAt: number; endAt: number; unit: string 
 // ── API ───────────────────────────────────────────────────────────────────────
 
 async function apiGet<T>(path: string, params: Record<string, string | number>): Promise<T> {
-  // path = "/websites/{id}/stats" ; le proxy attend "api/websites/{id}/stats" via ?path=
-  const upstreamPath = `api${path}`.replace(/^\/+/, '')
+  // path = "/websites/{id}/stats" ; le proxy attend "v1/websites/{id}/stats" via ?path=
+  // Umami Cloud sert ses endpoints sous https://api.umami.is/v1/
+  const upstreamPath = `v1${path}`.replace(/^\/+/, '')
   const url = new URL(UMAMI_PROXY, location.origin)
   url.searchParams.set('path', upstreamPath)
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v))
