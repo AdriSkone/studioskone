@@ -68,11 +68,6 @@ export default async function handler(req: Request): Promise<Response> {
       headers: {
         'Content-Type': upstream.headers.get('content-type') ?? 'application/json',
         'Cache-Control': 'no-store',
-        // Debug temporaire — à retirer une fois le bon chemin trouvé
-        'X-Debug-Upstream-Url': targetUrl,
-        'X-Debug-Upstream-Status': String(upstream.status),
-        'X-Debug-Has-Token': apiToken ? 'yes' : 'no',
-        'X-Debug-Token-Prefix': apiToken ? apiToken.slice(0, 4) : 'none',
       },
     })
   } catch (err) {
