@@ -59,13 +59,18 @@ export default async function handler(req: Request): Promise<Response> {
     })
 
     const body = await upstream.text()
-    return new Response(body, {
-      status: upstream.status,
-      headers: {
-        'Content-Type': upstream.headers.get('content-type') ?? 'application/json',
-        'Cache-Control': 'no-store',
-      },
-    })
+
+    // DEBUG temporaire — à retirer une fois le bon chemin Umami trouvé
+    const debugHeaders: Record<string, string> = {
+      'Content-Type': upstream.headers.get('content-type') ?? 'application/json',
+      'Cache-Control': 'no-store',
+      'X-Debug-Upstream-Url': targetUrl,
+      'X-Debug-Upstream-Status': String(upstream.status),
+      'X-Debug-Has-Token': apiToken ? 'yes' : 'no',
+      'X-Debug-Token-Prefix': apiToken ? apiToken.slice(0, 4) : 'none',
+    }
+
+    return new Response(body, { status: upstream.status, headers: debugHeaders })
   } catch (err) {
     console.error('[umami proxy] error:', err)
     return jsonError(502, 'Upstream Umami indisponible')
