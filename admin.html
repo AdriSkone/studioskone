@@ -86,11 +86,27 @@
     }
     .login-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
-    .login-error {
-      color: #c0392b;
+    .login-help {
+      color: var(--muted);
       font-size: 13px;
-      margin-top: 10px;
-      display: none;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    .login-message {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 12px;
+      min-height: 18px;
+    }
+    .login-message.is-success { color: #27ae60; }
+    .login-message.is-error { color: #c0392b; }
+    .login-message.is-info { color: var(--muted); }
+
+    .login-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
     }
 
     /* ── Dashboard ── */
@@ -332,16 +348,12 @@
     <div class="login-box">
       <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="login-logo">
       <h1 class="login-title">Analytics</h1>
-      <p class="login-sub">Accès réservé</p>
-      <input
-        type="password"
-        id="pwd-input"
-        class="login-input"
-        placeholder="Mot de passe"
-        autocomplete="current-password"
-      >
-      <button id="pwd-btn" class="login-btn">Accéder →</button>
-      <p id="pwd-error" class="login-error">Mot de passe incorrect.</p>
+      <p class="login-sub">Connexion par lien sécurisé</p>
+      <p id="login-help" class="login-help">
+        Cliquez sur le bouton ci-dessous : un lien de connexion à usage unique vous sera envoyé par email.
+      </p>
+      <button id="magic-btn" class="login-btn">Recevoir un lien de connexion →</button>
+      <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
     </div>
   </div>
 

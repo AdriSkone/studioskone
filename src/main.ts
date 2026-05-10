@@ -1,6 +1,7 @@
 import './style.css'
 import './hero-mount'
 import { initContactForm } from './components/contact-form'
+import { initWorkCarousel } from './components/work-carousel'
 
 // ============================================================
 // Custom cursor — accent dot with lerp delay
@@ -104,6 +105,25 @@ const revealObserver = new IntersectionObserver(
 revealEls.forEach((el) => revealObserver.observe(el))
 
 // ============================================================
+// Process timeline — activate steps on scroll
+// ============================================================
+const procRows = document.querySelectorAll<HTMLElement>('.proc-row')
+
+const procObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible')
+        procObserver.unobserve(entry.target)
+      }
+    })
+  },
+  { threshold: 0.35 }
+)
+
+procRows.forEach((row) => procObserver.observe(row))
+
+// ============================================================
 // Nav — scroll state
 // ============================================================
 const nav = document.getElementById('nav')!
@@ -170,7 +190,7 @@ document.addEventListener('keydown', (e) => {
 // Subtle parallax — section headers shift slightly on scroll
 // ============================================================
 const parallaxHeaders = Array.from(
-  document.querySelectorAll<HTMLElement>('#approach .section-label, #work .work-header, #testimonials .section-label, #tarifs .section-label')
+  document.querySelectorAll<HTMLElement>('#approach .section-label, #work .work-header, #tarifs .section-label')
 )
 
 if (parallaxHeaders.length) {
@@ -258,6 +278,11 @@ if (cookieBanner && !localStorage.getItem(COOKIE_KEY)) {
 initContactForm()
 
 // ============================================================
+// Work — Swiper carousel
+// ============================================================
+initWorkCarousel()
+
+// ============================================================
 // Smooth scroll for anchor links (offset for fixed nav)
 // ============================================================
 document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) => {
@@ -275,40 +300,3 @@ document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((anchor) =>
   })
 })
 
-// ============================================================
-// Témoignages — rotation automatique
-// ============================================================
-;(function initTestimonials() {
-  const slides = Array.from(document.querySelectorAll<HTMLElement>('.testi-slide'))
-  const dots   = Array.from(document.querySelectorAll<HTMLElement>('.testi-dot'))
-  if (!slides.length) return
-
-  let current = 0
-  let timer: ReturnType<typeof setInterval>
-
-  function goTo(idx: number): void {
-    slides[current].classList.remove('is-active')
-    dots[current].classList.remove('is-active')
-    dots[current].setAttribute('aria-selected', 'false')
-    current = idx
-    slides[current].classList.add('is-active')
-    dots[current].classList.add('is-active')
-    dots[current].setAttribute('aria-selected', 'true')
-  }
-
-  function startTimer(): void {
-    timer = setInterval(() => {
-      goTo((current + 1) % slides.length)
-    }, 5000)
-  }
-
-  dots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      clearInterval(timer)
-      goTo(Number(dot.dataset.idx))
-      startTimer()
-    })
-  })
-
-  startTimer()
-})()

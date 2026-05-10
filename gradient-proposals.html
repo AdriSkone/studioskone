@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Skøne — Propositions dégradés radiaux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #FAEEDF;
+      --bg-soft:     #F3E8D7;
+      --surface:     #E9D8C2;
+      --card:        #FFF8EF;
+      --accent:      #C56039;
+      --accent-dark: #A84E2E;
+      --dark:        #181716;
+      --dark-soft:   #2A2927;
+      --text:        #181716;
+      --muted:       #6B6B6B;
+      --border:      #E2D8CB;
+      --font-serif:  'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Barlow', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: #111;
+      color: #fff;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: #0d0d0d;
+      padding: 48px 40px 32px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .page-header h1 {
+      font-family: var(--font-sans);
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.01em;
+    }
+    .page-header p {
+      font-size: 14px;
+      color: rgba(255,255,255,.4);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    .page-header .meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: rgba(255,255,255,.3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .page-header .meta span { color: var(--accent); }
+
+    /* ── NAV TABS ── */
+    .nav-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 40px;
+      background: #0d0d0d;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .tab-btn {
+      padding: 16px 28px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,.7); }
+    .tab-btn.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── GRAIN overlay ── */
+    .has-grain { position: relative; }
+    .has-grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+    .has-grain > *:not([aria-hidden]) { position: relative; z-index: 2; }
+
+    /* ── PROPOSALS CONTAINER ── */
+    .proposals { display: none; }
+    .proposals.is-active { display: block; }
+
+    /* ── SECTION LABEL (chapeau) ── */
+    .section-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    /* ── SECTION MOCK SHARED ── */
+    .mock-section {
+      padding: 72px 64px;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .mock-section-dark {
+      padding: 72px 64px;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .mock-h2 {
+      font-family: var(--font-sans);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+      max-width: 520px;
+    }
+    .mock-h2 em { font-style: italic; font-weight: 300; }
+    .mock-p {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 440px;
+      margin-top: 16px;
+      opacity: .6;
+    }
+    .mock-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .mock-card {
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(0,0,0,.07);
+    }
+    .mock-card-dark {
+      border-radius: 12px;
+      padding: 20px;
+      background: var(--dark-soft);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .mock-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .mock-card p, .mock-card-dark p { font-size: 12px; opacity: .5; line-height: 1.5; }
+    .mock-card-dark h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--bg); }
+
+    /* ── PROPOSAL SEPARATOR ── */
+    .proposal-sep {
+      padding: 16px 40px;
+      background: rgba(255,255,255,.03);
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .proposal-sep h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .proposal-sep p {
+      font-size: 13px;
+      color: rgba(255,255,255,.35);
+    }
+    .proposal-sep .badge {
+      margin-left: auto;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(197,96,57,.15);
+      border: 1px solid rgba(197,96,57,.25);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    /* ────────────────────────────────────────────────────────
+       PROPOSITION A — "Ember Drift"
+       Orbe accent unique, positionné en alternance gauche/droite
+    ──────────────────────────────────────────────────────── */
+
+    .a-light-right {
+      background: var(--bg);
+    }
+    .a-light-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 65% 75% at 88% 20%, rgba(197,96,57,.32) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .a-surface-left {
+      background: var(--surface);
+    }
+    .a-surface-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 12% 80%, rgba(197,96,57,.28) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .a-dark {
+      background: var(--dark);
+    }
+    .a-dark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 60% at 92% 15%, rgba(197,96,57,.40) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 8%  85%, rgba(197,96,57,.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ────────────────────────────────────────────────────────
+       PROPOSITION B — "Dual Orb"
+       Deux orbes opposés : accent chaud + beige warm
+    ──────────────────────────────────────────────────────── */
+
+    .b-light {
+      background: var(--bg);
+    }
+    .b-light::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 65% at 85% 10%,  rgba(197,96,57,.30) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 55% at 15% 90%,  rgba(220,160,100,.40) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .b-surface {
+      background: var(--surface);
+    }
+    .b-surface::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 60% at 10% 15%,  rgba(197,96,57,.28) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 55% at 90% 85%,  rgba(240,190,130,.42) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .b-dark {
+      background: var(--dark);
+    }
+    .b-dark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 65% at 85% 10%,  rgba(197,96,57,.45) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 50% at 15% 88%,  rgba(197,96,57,.20) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ────────────────────────────────────────────────────────
+       PROPOSITION C — "Vignette chaude"
+       Orbe centré-haut, lumière descendante + vignette en bas
+    ──────────────────────────────────────────────────────── */
+
+    .c-light {
+      background: var(--bg);
+    }
+    .c-light::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -5%,  rgba(197,96,57,.30) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 40% at 50% 110%, rgba(0,0,0,.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .c-surface {
+      background: var(--surface);
+    }
+    .c-surface::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -5%,  rgba(197,96,57,.28) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 40% at 50% 110%, rgba(0,0,0,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .c-dark {
+      background: var(--dark);
+    }
+    .c-dark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(197,96,57,.50) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 40% at 50% 108%, rgba(197,96,57,.15) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ── COMPARISON TOGGLE ── */
+    .compare-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 40px;
+      background: rgba(197,96,57,.06);
+      border-bottom: 1px solid rgba(197,96,57,.15);
+    }
+    .compare-bar p {
+      font-size: 12px;
+      color: rgba(255,255,255,.4);
+      font-style: italic;
+    }
+    .compare-bar strong { color: var(--accent); }
+
+    /* ── CURRENT (no gradient) ── */
+    .current-light  { background: var(--bg);      }
+    .current-surface{ background: var(--surface); }
+    .current-dark   { background: var(--dark);    }
+
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Studio Skøne — Propositions dégradés radiaux</h1>
+    <p>Trois directions visuelles pour les fonds de section. Sélectionne une proposition pour l'approfondir.</p>
+    <div class="meta">
+      <div>Palette <span>#C56039 · #FAEEDF · #E9D8C2 · #181716</span></div>
+      <div>Stack <span>CSS radial-gradient + pseudo-elements</span></div>
+    </div>
+  </div>
+
+  <nav class="nav-tabs">
+    <button class="tab-btn is-active" data-target="current">Actuel (référence)</button>
+    <button class="tab-btn" data-target="propA">A — Ember Drift</button>
+    <button class="tab-btn" data-target="propB">B — Dual Orb</button>
+    <button class="tab-btn" data-target="propC">C — Vignette chaude</button>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════
+       ÉTAT ACTUEL — RÉFÉRENCE
+  ════════════════════════════════════════════════ -->
+  <div class="proposals is-active" id="current">
+
+    <div class="proposal-sep">
+      <h2>Référence</h2>
+      <p>Fonds plats actuels — pas de dégradé radial</p>
+    </div>
+
+    <!-- Section claire --bg -->
+    <div class="mock-section current-light has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Notre approche <em>produit</em></h2>
+      <p class="mock-p" style="color:var(--muted)">De la conception au lancement — design Figma, développement sur mesure et accompagnement IA pour vos projets web et mobile.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Design premium</h4><p style="color:var(--muted)">Interfaces pensées pour convertir et impressionner.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Livraison rapide</h4><p style="color:var(--muted)">MVP en 3–6 semaines, itérations continues.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Approche produit</h4><p style="color:var(--muted)">Chaque décision centrée sur l'impact utilisateur.</p></div>
+      </div>
+    </div>
+
+    <!-- Section surface -->
+    <div class="mock-section current-surface has-grain">
+      <span class="section-label">Process</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Comment nous <em>travaillons</em></h2>
+      <p class="mock-p" style="color:var(--muted)">Un processus clair, itératif, pensé pour minimiser les frictions et maximiser la qualité finale.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">01 · Découverte</h4><p style="color:var(--muted)">Analyse, brief, objectifs.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">02 · Design</h4><p style="color:var(--muted)">Wireframes, UI, prototype.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">03 · Lancement</h4><p style="color:var(--muted)">Développement, tests, mise en ligne.</p></div>
+      </div>
+    </div>
+
+    <!-- Section dark -->
+    <div class="mock-section current-dark has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--bg)">Ce que nous <em>créons</em></h2>
+      <p class="mock-p" style="color:rgba(250,238,223,.45)">Sites vitrine, web apps, applications mobiles, design Figma — du concept au pixel.</p>
+      <div class="mock-cards">
+        <div class="mock-card-dark"><h4>Landing page</h4><p>Dès 900€</p></div>
+        <div class="mock-card-dark"><h4>Web App & SaaS</h4><p>Sur devis</p></div>
+        <div class="mock-card-dark"><h4>App mobile</h4><p>Dès 2 500€</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PROPOSITION A — EMBER DRIFT
+  ════════════════════════════════════════════════ -->
+  <div class="proposals" id="propA">
+
+    <div class="proposal-sep">
+      <h2>A — Ember Drift</h2>
+      <p>Orbe accent unique par section · Asymétrique · Position alternée gauche / droite</p>
+      <span class="badge">Subtil</span>
+    </div>
+
+    <div class="compare-bar">
+      <p><strong>Principe :</strong> Un seul orbe radial accent (#C56039) par section, positionné en alternance haut-droite / bas-gauche. Opacité 7–9% sur fond clair, 11–14% sur fond sombre. Crée un rythme de lecture sans surcharger.</p>
+    </div>
+
+    <!-- Section claire --bg — orbe droite -->
+    <div class="mock-section a-light-right has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Notre approche <em>produit</em></h2>
+      <p class="mock-p" style="color:var(--muted)">De la conception au lancement — design Figma, développement sur mesure et accompagnement IA pour vos projets web et mobile.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Design premium</h4><p style="color:var(--muted)">Interfaces pensées pour convertir et impressionner.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Livraison rapide</h4><p style="color:var(--muted)">MVP en 3–6 semaines, itérations continues.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Approche produit</h4><p style="color:var(--muted)">Chaque décision centrée sur l'impact utilisateur.</p></div>
+      </div>
+    </div>
+
+    <!-- Section surface — orbe gauche -->
+    <div class="mock-section a-surface-left has-grain">
+      <span class="section-label">Process</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Comment nous <em>travaillons</em></h2>
+      <p class="mock-p" style="color:var(--muted)">Un processus clair, itératif, pensé pour minimiser les frictions et maximiser la qualité finale.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">01 · Découverte</h4><p style="color:var(--muted)">Analyse, brief, objectifs.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">02 · Design</h4><p style="color:var(--muted)">Wireframes, UI, prototype.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">03 · Lancement</h4><p style="color:var(--muted)">Développement, tests, mise en ligne.</p></div>
+      </div>
+    </div>
+
+    <!-- Section dark — double orbe -->
+    <div class="mock-section a-dark has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--bg)">Ce que nous <em>créons</em></h2>
+      <p class="mock-p" style="color:rgba(250,238,223,.45)">Sites vitrine, web apps, applications mobiles, design Figma — du concept au pixel.</p>
+      <div class="mock-cards">
+        <div class="mock-card-dark"><h4>Landing page</h4><p>Dès 900€</p></div>
+        <div class="mock-card-dark"><h4>Web App & SaaS</h4><p>Sur devis</p></div>
+        <div class="mock-card-dark"><h4>App mobile</h4><p>Dès 2 500€</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PROPOSITION B — DUAL ORB
+  ════════════════════════════════════════════════ -->
+  <div class="proposals" id="propB">
+
+    <div class="proposal-sep">
+      <h2>B — Dual Orb</h2>
+      <p>Deux orbes par section · Accent chaud + beige warm · Profondeur atmosphérique</p>
+      <span class="badge">Riche</span>
+    </div>
+
+    <div class="compare-bar">
+      <p><strong>Principe :</strong> Deux orbes radiaux opposés diagonalement — un accent (#C56039) en coin + un warm neutre (beige doux) en coin opposé. Crée une impression de profondeur et de chaleur ambiante. Plus "full-service agency".</p>
+    </div>
+
+    <!-- Section claire -->
+    <div class="mock-section b-light has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Notre approche <em>produit</em></h2>
+      <p class="mock-p" style="color:var(--muted)">De la conception au lancement — design Figma, développement sur mesure et accompagnement IA pour vos projets web et mobile.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Design premium</h4><p style="color:var(--muted)">Interfaces pensées pour convertir et impressionner.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Livraison rapide</h4><p style="color:var(--muted)">MVP en 3–6 semaines, itérations continues.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Approche produit</h4><p style="color:var(--muted)">Chaque décision centrée sur l'impact utilisateur.</p></div>
+      </div>
+    </div>
+
+    <!-- Section surface -->
+    <div class="mock-section b-surface has-grain">
+      <span class="section-label">Process</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Comment nous <em>travaillons</em></h2>
+      <p class="mock-p" style="color:var(--muted)">Un processus clair, itératif, pensé pour minimiser les frictions et maximiser la qualité finale.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">01 · Découverte</h4><p style="color:var(--muted)">Analyse, brief, objectifs.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">02 · Design</h4><p style="color:var(--muted)">Wireframes, UI, prototype.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">03 · Lancement</h4><p style="color:var(--muted)">Développement, tests, mise en ligne.</p></div>
+      </div>
+    </div>
+
+    <!-- Section dark -->
+    <div class="mock-section b-dark has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--bg)">Ce que nous <em>créons</em></h2>
+      <p class="mock-p" style="color:rgba(250,238,223,.45)">Sites vitrine, web apps, applications mobiles, design Figma — du concept au pixel.</p>
+      <div class="mock-cards">
+        <div class="mock-card-dark"><h4>Landing page</h4><p>Dès 900€</p></div>
+        <div class="mock-card-dark"><h4>Web App & SaaS</h4><p>Sur devis</p></div>
+        <div class="mock-card-dark"><h4>App mobile</h4><p>Dès 2 500€</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PROPOSITION C — VIGNETTE CHAUDE
+  ════════════════════════════════════════════════ -->
+  <div class="proposals" id="propC">
+
+    <div class="proposal-sep">
+      <h2>C — Vignette chaude</h2>
+      <p>Orbe centré depuis le haut · Lumière descendante · Vignette sombre en bas</p>
+      <span class="badge">Éditorial</span>
+    </div>
+
+    <div class="compare-bar">
+      <p><strong>Principe :</strong> Dégradé radial centré-haut simulant une lumière qui descend depuis le sommet de la section. Vignette légère en bas. Rendu "print éditorial" / agence de luxe. Identique pour toutes les sections, très cohérent.</p>
+    </div>
+
+    <!-- Section claire -->
+    <div class="mock-section c-light has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Notre approche <em>produit</em></h2>
+      <p class="mock-p" style="color:var(--muted)">De la conception au lancement — design Figma, développement sur mesure et accompagnement IA pour vos projets web et mobile.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Design premium</h4><p style="color:var(--muted)">Interfaces pensées pour convertir et impressionner.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Livraison rapide</h4><p style="color:var(--muted)">MVP en 3–6 semaines, itérations continues.</p></div>
+        <div class="mock-card" style="background:var(--card)"><h4 style="color:var(--dark)">Approche produit</h4><p style="color:var(--muted)">Chaque décision centrée sur l'impact utilisateur.</p></div>
+      </div>
+    </div>
+
+    <!-- Section surface -->
+    <div class="mock-section c-surface has-grain">
+      <span class="section-label">Process</span>
+      <h2 class="mock-h2" style="color:var(--dark)">Comment nous <em>travaillons</em></h2>
+      <p class="mock-p" style="color:var(--muted)">Un processus clair, itératif, pensé pour minimiser les frictions et maximiser la qualité finale.</p>
+      <div class="mock-cards">
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">01 · Découverte</h4><p style="color:var(--muted)">Analyse, brief, objectifs.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">02 · Design</h4><p style="color:var(--muted)">Wireframes, UI, prototype.</p></div>
+        <div class="mock-card" style="background:var(--bg)"><h4 style="color:var(--dark)">03 · Lancement</h4><p style="color:var(--muted)">Développement, tests, mise en ligne.</p></div>
+      </div>
+    </div>
+
+    <!-- Section dark -->
+    <div class="mock-section c-dark has-grain">
+      <span class="section-label">Services</span>
+      <h2 class="mock-h2" style="color:var(--bg)">Ce que nous <em>créons</em></h2>
+      <p class="mock-p" style="color:rgba(250,238,223,.45)">Sites vitrine, web apps, applications mobiles, design Figma — du concept au pixel.</p>
+      <div class="mock-cards">
+        <div class="mock-card-dark"><h4>Landing page</h4><p>Dès 900€</p></div>
+        <div class="mock-card-dark"><h4>Web App & SaaS</h4><p>Sur devis</p></div>
+        <div class="mock-card-dark"><h4>App mobile</h4><p>Dès 2 500€</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.proposals');
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('is-active'));
+        panels.forEach(p => p.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        document.getElementById(btn.dataset.target).classList.add('is-active');
+      });
+    });
+  </script>
+</body>
+</html>

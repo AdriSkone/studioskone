@@ -107,10 +107,10 @@
 /* H1 — gauche */
 .heroTaglineText {
   font-family: var(--font-display);
-  font-size: 64px;
+  font-size: clamp(38px, 5vw, 64px);
   font-weight: 700;
-  line-height: 72px;
-  letter-spacing: -0.045em;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
   color: var(--text);
   margin-bottom: 24px;
 }
@@ -122,20 +122,6 @@
 .heroItalic {
   font-style: italic;
   font-weight: 300;
-}
-
-@media (max-width: 768px) {
-  .heroTaglineText {
-    font-size: 52px;
-    line-height: 58px;
-  }
-}
-
-@media (max-width: 480px) {
-  .heroTaglineText {
-    font-size: 40px;
-    line-height: 46px;
-  }
 }
 
 .heroRight {
@@ -267,4 +253,45 @@
   right: 0;
   z-index: 3;
   background: transparent;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .heroTop {
+    padding: 56px 32px 84px;
+    max-width: 720px;
+  }
+  .statementText { max-width: 520px; }
+}
+
+@media (max-width: 600px) {
+  .heroTop {
+    padding: 48px 24px 96px;
+  }
+  .heroTaglineText { margin-bottom: 20px; }
+  .statementText {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 28px;
+  }
+  .heroCtaRow {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .heroCta { padding: 6px 20px 6px 6px; gap: 12px; }
+  .heroCtaIcon { width: 38px; height: 38px; }
+  .heroCtaSecondary { padding: 11px 20px; }
+}
+
+@media (max-width: 480px) {
+  .heroTop {
+    padding: 40px 20px 104px;
+  }
+  .heroCtaLabel { font-size: 12px; letter-spacing: 0.06em; }
+  .statementText {
+    font-size: 15px;
+    line-height: 24px;
+  }
 }

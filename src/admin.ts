@@ -1,45 +1,69 @@
 // ── Config ────────────────────────────────────────────────────────────────────
 
-// Toujours via le proxy local (Vite en dev, Vercel rewrites en prod) pour éviter les erreurs CORS
-const API_URL = '/umami-api'
-const WEBSITE_ID     = import.meta.env.VITE_UMAMI_WEBSITE_ID ?? ''
-const API_TOKEN      = import.meta.env.VITE_UMAMI_API_TOKEN ?? ''
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD ?? ''
-const SESSION_KEY    = 'skone_admin'
+const UMAMI_PROXY = '/api/umami'
+const WEBSITE_ID = import.meta.env.VITE_UMAMI_WEBSITE_ID ?? ''
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 type Range = '7d' | '30d' | '90d'
 
+// Format Umami v2 : valeurs plates + objet `comparison` pour la période précédente
+// doc: https://docs.umami.is/docs/api/website-stats
 interface UmamiStats {
-  pageviews: { value: number; prev: number }
-  visitors:  { value: number; prev: number }
-  visits:    { value: number; prev: number }
-  bounces:   { value: number; prev: number }
-  totaltime: { value: number; prev: number }
+  pageviews: number
+  visitors:  number
+  visits:    number
+  bounces:   number
+  totaltime: number
+  comparison: {
+    pageviews: number
+    visitors:  number
+    visits:    number
+    bounces:   number
+    totaltime: number
+  }
 }
 
 interface PageviewPoint     { x: string; y: number }
 interface PageviewsResponse { pageviews: PageviewPoint[]; sessions: PageviewPoint[] }
 interface MetricItem        { x: string; y: number }
 
+// ── HTML escape — protection XSS sur les champs venant d'Umami (referrers, URLs) ──
+
+function escapeHtml(s: string): string {
+  return String(s).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[c]!))
+}
+
 // ── Auth ──────────────────────────────────────────────────────────────────────
 
-function isAuthenticated(): boolean {
-  return sessionStorage.getItem(SESSION_KEY) === '1'
-}
-
-function authenticate(password: string): boolean {
-  if (!ADMIN_PASSWORD || password === ADMIN_PASSWORD) {
-    sessionStorage.setItem(SESSION_KEY, '1')
-    return true
+async function checkSession(): Promise<boolean> {
+  try {
+    const res = await fetch('/api/auth/session', { credentials: 'same-origin' })
+    if (!res.ok) return false
+    const data = (await res.json()) as { authenticated: boolean }
+    return !!data.authenticated
+  } catch {
+    return false
   }
-  return false
 }
 
-function logout(): void {
-  sessionStorage.removeItem(SESSION_KEY)
-  location.reload()
+async function logout(): Promise<void> {
+  try {
+    await fetch('/api/auth/logout', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'X-Requested-With': 'fetch' },
+    })
+  } catch {
+    // pas bloquant — on recharge de toute façon
+  }
+  location.replace('/admin')
 }
 
 // ── Date range ────────────────────────────────────────────────────────────────
@@ -57,9 +81,21 @@ function getRange(range: Range): { startAt: number; endAt: number; unit: string 
 // ── API ───────────────────────────────────────────────────────────────────────
 
 async function apiGet<T>(path: string, params: Record<string, string | number>): Promise<T> {
-  const url = new URL(`${API_URL}/v1${path}`, location.origin)
+  // path = "/websites/{id}/stats" ; le proxy attend "v1/websites/{id}/stats" via ?path=
+  // Umami Cloud sert ses endpoints sous https://api.umami.is/v1/
+  const upstreamPath = `v1${path}`.replace(/^\/+/, '')
+  const url = new URL(UMAMI_PROXY, location.origin)
+  url.searchParams.set('path', upstreamPath)
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v))
-  const res = await fetch(url.toString(), { headers: { Authorization: `Bearer ${API_TOKEN}` } })
+  const res = await fetch(url.toString(), {
+    credentials: 'same-origin',
+    headers: { Accept: 'application/json' },
+  })
+  if (res.status === 401) {
+    // Session expirée pendant la consultation → retour à l'écran de login
+    location.replace('/admin')
+    throw new Error('Session expirée')
+  }
   if (!res.ok) throw new Error(`Umami ${res.status}: ${path}`)
   return res.json() as Promise<T>
 }
@@ -156,24 +192,25 @@ function renderSparkline(container: HTMLElement, data: PageviewPoint[]): void {
 // ── HTML builders ─────────────────────────────────────────────────────────────
 
 function statsHTML(s: UmamiStats): string {
-  const avgSec = s.visits.value > 0 ? Math.round(s.totaltime.value / s.visits.value) : 0
-  const bounce = s.visits.value > 0 ? Math.round((s.bounces.value / s.visits.value) * 100) : 0
+  const avgSec = s.visits > 0 ? Math.round(s.totaltime / s.visits) : 0
+  const bounce = s.visits > 0 ? Math.round((s.bounces / s.visits) * 100) : 0
+  const cmp = s.comparison ?? { pageviews: 0, visitors: 0, visits: 0, bounces: 0, totaltime: 0 }
   return `
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">Pageviews</div>
-        <div class="stat-value">${fmt(s.pageviews.value)}</div>
-        <div class="stat-delta ${deltaClass(s.pageviews.value, s.pageviews.prev)}">${pctDelta(s.pageviews.value, s.pageviews.prev)}</div>
+        <div class="stat-value">${fmt(s.pageviews)}</div>
+        <div class="stat-delta ${deltaClass(s.pageviews, cmp.pageviews)}">${pctDelta(s.pageviews, cmp.pageviews)}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Visiteurs uniques</div>
-        <div class="stat-value">${fmt(s.visitors.value)}</div>
-        <div class="stat-delta ${deltaClass(s.visitors.value, s.visitors.prev)}">${pctDelta(s.visitors.value, s.visitors.prev)}</div>
+        <div class="stat-value">${fmt(s.visitors)}</div>
+        <div class="stat-delta ${deltaClass(s.visitors, cmp.visitors)}">${pctDelta(s.visitors, cmp.visitors)}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Sessions</div>
-        <div class="stat-value">${fmt(s.visits.value)}</div>
-        <div class="stat-delta ${deltaClass(s.visits.value, s.visits.prev)}">${pctDelta(s.visits.value, s.visits.prev)}</div>
+        <div class="stat-value">${fmt(s.visits)}</div>
+        <div class="stat-delta ${deltaClass(s.visits, cmp.visits)}">${pctDelta(s.visits, cmp.visits)}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Durée moy. / session</div>
@@ -185,27 +222,31 @@ function statsHTML(s: UmamiStats): string {
 
 function metricListHTML(items: MetricItem[], maxVal: number): string {
   if (!items.length) return '<p class="empty-state">Aucune donnée</p>'
-  return items.map(item => `
+  return items.map(item => {
+    const safeX = escapeHtml(item.x)
+    return `
     <div class="metric-row">
-      <span class="metric-url" title="${item.x}">${item.x || '(direct)'}</span>
+      <span class="metric-url" title="${safeX}">${safeX || '(direct)'}</span>
       <div class="metric-bar-wrap">
         <div class="metric-bar-bg">
-          <div class="metric-bar-fill" style="width:${Math.round((item.y / maxVal) * 100)}%"></div>
+          <div class="metric-bar-fill" style="width:${Math.round((Number(item.y) / maxVal) * 100)}%"></div>
         </div>
-        <span class="metric-count">${item.y}</span>
+        <span class="metric-count">${Number(item.y)}</span>
       </div>
-    </div>`).join('')
+    </div>`
+  }).join('')
 }
 
 const DEVICE_COLORS = ['#C4603B', '#A84E2E', '#6B6B6B', '#E8D1B3', '#1A1A1A']
 
 function devicesHTML(items: MetricItem[]): string {
-  const total = items.reduce((s, d) => s + d.y, 0)
+  const total = items.reduce((s, d) => s + Number(d.y), 0)
   return items.map((item, i) => {
-    const pct = total > 0 ? Math.round((item.y / total) * 100) : 0
+    const pct = total > 0 ? Math.round((Number(item.y) / total) * 100) : 0
+    const safeX = escapeHtml(item.x)
     return `<div class="device-item">
       <span class="device-dot" style="background:${DEVICE_COLORS[i % DEVICE_COLORS.length]}"></span>
-      ${item.x || 'Inconnu'} <strong>${pct}%</strong>
+      ${safeX || 'Inconnu'} <strong>${pct}%</strong>
     </div>`
   }).join('')
 }
@@ -254,19 +295,19 @@ async function loadDashboard(range: Range): Promise<void> {
     body.innerHTML = `
       <div class="loading error">
         Erreur de chargement — vérifiez votre configuration Umami.<br>
-        <small>${err instanceof Error ? err.message : String(err)}</small>
+        <small>${escapeHtml(err instanceof Error ? err.message : String(err))}</small>
       </div>`
   }
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// ── Init dashboard ────────────────────────────────────────────────────────────
 
 function showDashboard(): void {
   document.getElementById('login-screen')!.style.display = 'none'
   const dash = document.getElementById('dashboard')!
   dash.style.display = 'flex'
 
-  if (!WEBSITE_ID || !API_TOKEN) {
+  if (!WEBSITE_ID) {
     document.getElementById('config-warning')!.style.display = 'block'
   }
 
@@ -282,27 +323,90 @@ function showDashboard(): void {
     })
   })
 
-  document.getElementById('logout-btn')!.addEventListener('click', logout)
+  document.getElementById('logout-btn')!.addEventListener('click', () => { void logout() })
+}
+
+// ── Init login ────────────────────────────────────────────────────────────────
+
+function showMessage(text: string, kind: 'success' | 'error' | 'info'): void {
+  const el = document.getElementById('login-message')
+  if (!el) return
+  el.textContent = text
+  el.classList.remove('is-success', 'is-error', 'is-info')
+  el.classList.add(`is-${kind}`)
+}
+
+function readErrorParam(): string | null {
+  const params = new URLSearchParams(location.search)
+  const err = params.get('error')
+  if (!err) return null
+  switch (err) {
+    case 'expired_or_used':  return 'Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.'
+    case 'invalid_token':    return 'Lien de connexion invalide.'
+    case 'rate_limited':     return 'Trop de tentatives. Réessayez dans quelques minutes.'
+    case 'invalid_method':   return 'Requête invalide.'
+    case 'server_error':     return 'Erreur serveur. Réessayez.'
+    default:                 return 'Erreur lors de la connexion.'
+  }
 }
 
 function initLogin(): void {
-  const input = document.getElementById('pwd-input') as HTMLInputElement
-  const error = document.getElementById('pwd-error')!
+  const btn = document.getElementById('magic-btn') as HTMLButtonElement | null
+  if (!btn) return
 
-  function tryLogin(): void {
-    if (authenticate(input.value)) {
-      showDashboard()
-    } else {
-      error.style.display = 'block'
-      input.value = ''
-      input.focus()
+  // Affiche un éventuel message d'erreur transmis par /api/auth/verify via ?error=
+  const errMsg = readErrorParam()
+  if (errMsg) {
+    showMessage(errMsg, 'error')
+    // Nettoie l'URL pour éviter de re-afficher l'erreur au reload
+    history.replaceState(null, '', '/admin')
+  }
+
+  async function requestLink(): Promise<void> {
+    btn!.disabled = true
+    showMessage('Envoi en cours…', 'info')
+    try {
+      const res = await fetch('/api/auth/request', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'fetch',
+        },
+        body: '{}',
+      })
+      if (res.status === 429) {
+        showMessage('Trop de tentatives. Réessayez dans 15 minutes.', 'error')
+        return
+      }
+      if (!res.ok) {
+        showMessage('Une erreur est survenue. Réessayez.', 'error')
+        return
+      }
+      showMessage('Lien envoyé. Vérifiez votre boîte mail (valable 10 min).', 'success')
+      btn!.textContent = 'Lien envoyé ✓'
+    } catch {
+      showMessage('Erreur réseau. Réessayez.', 'error')
+    } finally {
+      // On laisse le bouton désactivé après envoi pour éviter le spam (rate limit côté serveur de toute façon)
+      // Mais on le réactive après 30 sec pour permettre un renvoi si le mail n'arrive pas
+      setTimeout(() => {
+        btn!.disabled = false
+        btn!.textContent = 'Renvoyer un lien →'
+      }, 30000)
     }
   }
 
-  document.getElementById('pwd-btn')!.addEventListener('click', tryLogin)
-  input.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Enter') tryLogin()
-  })
+  btn.addEventListener('click', () => { void requestLink() })
 }
 
-isAuthenticated() ? showDashboard() : initLogin()
+// ── Bootstrap ─────────────────────────────────────────────────────────────────
+
+void (async () => {
+  const authenticated = await checkSession()
+  if (authenticated) {
+    showDashboard()
+  } else {
+    initLogin()
+  }
+})()

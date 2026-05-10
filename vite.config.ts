@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   build: {
+    cssTarget: ['safari14', 'chrome90', 'firefox88', 'edge90'],
     rollupOptions: {
       input: {
         main:  resolve(__dirname, 'index.html'),

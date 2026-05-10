@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process — A vs C clair</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #FAEEDF;
+    --bg-soft:   #F3E8D7;
+    --surface:   #E9D8C2;
+    --card:      #FFF8EF;
+    --dark:      #181716;
+    --dark-soft: #2A2927;
+    --accent:    #C56039;
+    --muted:     #6B6B6B;
+    --border:    #E2D8CB;
+    --text:      #181716;
+  }
+
+  body {
+    background: #0d0c0b;
+    font-family: 'Barlow', system-ui, sans-serif;
+    color: #fff;
+    padding: 64px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .page-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .page-title { font-size: 28px; font-weight: 700; color: rgba(255,255,255,0.85); }
+
+  hr { border: none; border-top: 1px solid rgba(255,255,255,0.05); }
+
+  .concept { display: flex; flex-direction: column; gap: 20px; }
+  .c-tag  { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); display: block; margin-bottom: 6px; }
+  .c-name { font-size: 21px; font-weight: 700; color: rgba(255,255,255,0.88); margin-bottom: 6px; }
+  .c-note { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.6; max-width: 620px; }
+
+
+  /* ════════════════════════════════════════
+     OPTION A — Steps horizontaux (v1 originale)
+     Tous les steps également visibles, sans état actif/idle
+  ════════════════════════════════════════ */
+  .shell-a {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 52px 52px 56px;
+  }
+
+  .a-head { margin-bottom: 52px; }
+  .a-slabel { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+  .a-stitle { font-size: 34px; font-weight: 700; color: var(--text); line-height: 1.05; letter-spacing: -0.02em; }
+  .a-stitle em { font-style: normal; color: var(--accent); }
+
+  .a-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .a-grid::before {
+    content: '';
+    position: absolute;
+    top: 21px;
+    left: calc(12.5% + 10px);
+    right: calc(12.5% + 10px);
+    height: 1px;
+    background: linear-gradient(to right, var(--accent) 0%, rgba(197,96,57,0.18) 100%);
+    pointer-events: none;
+  }
+
+  .a-step { padding-right: 28px; }
+
+  .a-dot {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    margin-bottom: 22px;
+    position: relative; z-index: 1;
+  }
+
+  .a-dot-1 { background: var(--dark); border: 2px solid var(--accent); color: var(--accent); box-shadow: 0 0 0 6px rgba(197,96,57,0.1); }
+  .a-dot-2 { background: var(--bg-soft); border: 1.5px solid rgba(197,96,57,0.3); color: rgba(197,96,57,0.6); }
+  .a-dot-3 { background: var(--bg-soft); border: 1.5px solid rgba(197,96,57,0.2); color: rgba(197,96,57,0.4); }
+  .a-dot-4 { background: var(--bg-soft); border: 1.5px solid rgba(197,96,57,0.12); color: rgba(197,96,57,0.25); }
+
+  .a-step-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+  .a-step-title { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
+  .a-step-text  { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+
+  /* ════════════════════════════════════════
+     OPTION C — Timeline alternée — fond CLAIR
+  ════════════════════════════════════════ */
+  .shell-c {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 52px 64px 56px;
+  }
+
+  .c-head { margin-bottom: 52px; }
+  .c-slabel { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+  .c-stitle { font-size: 34px; font-weight: 700; color: var(--dark); line-height: 1.05; letter-spacing: -0.02em; }
+  .c-stitle em { font-style: normal; color: var(--accent); }
+
+  .c-timeline { position: relative; display: flex; flex-direction: column; }
+
+  /* Ligne verticale centrale */
+  .c-timeline::before {
+    content: '';
+    position: absolute;
+    top: 12px; bottom: 12px;
+    left: 50%; transform: translateX(-50%);
+    width: 1px;
+    background: linear-gradient(to bottom,
+      var(--accent) 0%,
+      rgba(197,96,57,0.3) 60%,
+      rgba(197,96,57,0.08) 100%
+    );
+  }
+
+  .c-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    align-items: center;
+    padding: 28px 0;
+    gap: 0;
+  }
+
+  .c-left  { padding-right: 40px; text-align: right; }
+  .c-right { padding-left: 40px; text-align: left; }
+  .c-mid   { display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+
+  .c-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+  }
+
+  .c-dot-1 {
+    background: var(--accent);
+    box-shadow: 0 0 0 5px rgba(197,96,57,0.12), 0 0 0 10px rgba(197,96,57,0.05);
+  }
+
+  .c-dot-2 { background: rgba(197,96,57,0.35); border: 1px solid rgba(197,96,57,0.4); }
+  .c-dot-3 { background: rgba(197,96,57,0.2);  border: 1px solid rgba(197,96,57,0.25); }
+  .c-dot-4 { background: rgba(197,96,57,0.12); border: 1px solid rgba(197,96,57,0.15); }
+
+  .c-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 6px; }
+
+  .c-title-1 { font-size: 16px; font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 6px; }
+  .c-title-n { font-size: 16px; font-weight: 700; color: rgba(24,23,22,0.38); line-height: 1.2; margin-bottom: 6px; }
+
+  .c-text-1 { font-size: 12px; color: var(--muted); line-height: 1.65; }
+  .c-text-n { font-size: 12px; color: rgba(107,107,107,0.4); line-height: 1.65; }
+
+  /* Numéro fantôme dans l'espace libre */
+  .c-ghost {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 52px;
+    font-weight: 600;
+    color: var(--accent);
+    opacity: 0.08;
+    line-height: 1;
+    text-align: center;
+  }
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div>
+    <p class="page-label">Studio Skøne — Process</p>
+    <p class="page-title">Option A vs Option C (fond clair)</p>
+  </div>
+
+  <hr>
+
+  <!-- ══ A ══ -->
+  <div class="concept">
+    <div>
+      <span class="c-tag">Option A — fond --surface</span>
+      <p class="c-name">Steps horizontaux avec connecteur</p>
+      <p class="c-note">Tous les steps visibles. Le dot 01 est plein/sombre, les suivants s'estompent progressivement — suggère une progression naturelle sans masquer le contenu.</p>
+    </div>
+    <div class="shell-a">
+      <div class="a-head">
+        <span class="a-slabel">Notre méthode</span>
+        <h2 class="a-stitle">Une méthode claire.<br>Zéro <em>surprise</em>.</h2>
+      </div>
+      <div class="a-grid">
+        <div class="a-step">
+          <div class="a-dot a-dot-1">01</div>
+          <span class="a-step-badge">Découverte</span>
+          <h3 class="a-step-title">Cadrage du projet</h3>
+          <p class="a-step-text">On discute de vos objectifs, de vos cibles et de vos contenus pour définir ensemble le plan de site.</p>
+        </div>
+        <div class="a-step">
+          <div class="a-dot a-dot-2">02</div>
+          <span class="a-step-badge">Design</span>
+          <h3 class="a-step-title">Conception visuelle</h3>
+          <p class="a-step-text">Chaque écran est validé avant le développement. Rien ne part en prod sans votre accord.</p>
+        </div>
+        <div class="a-step">
+          <div class="a-dot a-dot-3">03</div>
+          <span class="a-step-badge">Développement</span>
+          <h3 class="a-step-title">Build & intégration</h3>
+          <p class="a-step-text">Pixel-perfect, testé sur tous les supports, optimisé pour la performance.</p>
+        </div>
+        <div class="a-step">
+          <div class="a-dot a-dot-4">04</div>
+          <span class="a-step-badge">Lancement</span>
+          <h3 class="a-step-title">Mise en ligne & suivi</h3>
+          <p class="a-step-text">Déploiement, formation, suivi post-lancement inclus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══ C clair ══ -->
+  <div class="concept">
+    <div>
+      <span class="c-tag">Option C — fond --bg-soft (clair)</span>
+      <p class="c-name">Timeline alternée — version claire</p>
+      <p class="c-note">Même structure gauche/droite avec ligne centrale, mais sur fond crème clair. Le dot 01 reste accent, les suivants s'atténuent. Les numéros fantômes occupent l'espace libre.</p>
+    </div>
+    <div class="shell-c">
+      <div class="c-head">
+        <span class="c-slabel">Notre méthode</span>
+        <h2 class="c-stitle">Une méthode claire.<br>Zéro <em>surprise</em>.</h2>
+      </div>
+      <div class="c-timeline">
+
+        <div class="c-row">
+          <div class="c-left">
+            <span class="c-badge">Découverte</span>
+            <h3 class="c-title-1">Cadrage du projet</h3>
+            <p class="c-text-1">On discute de vos objectifs, de vos cibles et de vos contenus pour définir ensemble l'arborescence et le plan de site.</p>
+          </div>
+          <div class="c-mid"><div class="c-dot c-dot-1"></div></div>
+          <div class="c-right"><span class="c-ghost">01</span></div>
+        </div>
+
+        <div class="c-row">
+          <div class="c-left"><span class="c-ghost">02</span></div>
+          <div class="c-mid"><div class="c-dot c-dot-2"></div></div>
+          <div class="c-right">
+            <span class="c-badge" style="color:rgba(197,96,57,0.45)">Design</span>
+            <h3 class="c-title-n">Conception visuelle</h3>
+            <p class="c-text-n">Chaque écran est validé avant le développement. Rien ne part en prod sans votre accord.</p>
+          </div>
+        </div>
+
+        <div class="c-row">
+          <div class="c-left">
+            <span class="c-badge" style="color:rgba(197,96,57,0.3)">Développement</span>
+            <h3 class="c-title-n">Build & intégration</h3>
+            <p class="c-text-n">Pixel-perfect, testé sur tous les supports, optimisé pour la performance.</p>
+          </div>
+          <div class="c-mid"><div class="c-dot c-dot-3"></div></div>
+          <div class="c-right"><span class="c-ghost">03</span></div>
+        </div>
+
+        <div class="c-row">
+          <div class="c-left"><span class="c-ghost">04</span></div>
+          <div class="c-mid"><div class="c-dot c-dot-4"></div></div>
+          <div class="c-right">
+            <span class="c-badge" style="color:rgba(197,96,57,0.2)">Lancement</span>
+            <h3 class="c-title-n">Mise en ligne & suivi</h3>
+            <p class="c-text-n">Déploiement, formation, suivi post-lancement inclus.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
