@@ -8,82 +8,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background:
-    linear-gradient(
-      148deg,
-      #ECE4D0 0%,
-      #F4EDD9 30%,
-      #FBF4E4 54%,
-      #F7EDDB 100%
-    );
+  background: var(--bg);
+  /* Plus de padding-top pour compenser la nav fixe avec bordure 2px */
+  padding-top: 40px;
 }
 
 /* ─── Background layers ─────────────────────────────────────── */
 
-/* Background image — fond_herosection.png à 15% */
-.heroBgImage {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url('/fond_herosection.png');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.15;
-}
-
-/* Directional veil — top shadow + left-side luminous slit */
-.veil {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(130, 100, 65, 0.075) 0%,
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse 38% 85% at 6% 44%,
-      rgba(255, 244, 222, 0.14) 0%,
-      transparent 70%
-    );
-}
-
-/* Multi-layer warm radial glow — more directional, stronger accent */
-.glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 62% 52% at 34% 42%, rgba(197, 96, 57, 0.14) 0%, transparent 64%),
-    radial-gradient(ellipse 44% 62% at 74% 14%, rgba(232, 137, 90, 0.08) 0%, transparent 58%),
-    radial-gradient(ellipse 68% 36% at 20% 94%, rgba(197, 96, 57, 0.12) 0%, transparent 58%),
-    radial-gradient(ellipse 55% 22% at 52% 104%, rgba(197, 96, 57, 0.09) 0%, transparent 68%);
-  filter: blur(62px);
-}
-
-/* Paper grain — 3% opacity */
-.grain {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 280px 280px;
-  opacity: 0.03;
-  mix-blend-mode: overlay;
-}
-
-/* Cursor ambient glow — spring-reactive warm blob */
+/* Néo-brutal soft : on retire les couches atmosphériques (gradient, glow, voile, grain, cursor glow)
+   au profit d'un fond cream solide. Les éléments suivants restent dans le HTML mais ne s'affichent plus. */
+.heroBgImage,
+.veil,
+.glow,
+.grain,
 .cursorGlow {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(197, 96, 57, 0.09) 0%, transparent 70%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  filter: blur(36px);
-  will-change: left, top;
+  display: none;
 }
 
 /* ─── Hero content — grille 1.4fr / 0.8fr ───────────────────── */
@@ -94,14 +33,28 @@
   align-items: flex-start;
   text-align: left;
   gap: 0;
-  width: 100%;
+  width: calc(100% - 64px);
   max-width: 860px;
   margin-inline: auto;
   align-self: center;
-  padding: 60px 40px 72px;
+  /* Néo-brutal soft : card bordée avec offset shadow */
+  background: var(--card);
+  border: 2px solid var(--text);
+  border-radius: 14px;
+  box-shadow: 8px 8px 0 var(--text);
+  padding: 56px 48px;
   position: relative;
   z-index: 2;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+@media (max-width: 700px) {
+  .heroTop {
+    width: calc(100% - 32px);
+    padding: 40px 28px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 0 var(--text);
+  }
 }
 
 /* H1 — gauche */
