@@ -322,13 +322,32 @@ h1.legal-title em {
 
 /* ── Responsive ────────────────────────────────────────────────────────── */
 
+@media (max-width: 900px) {
+  main.legal-main { padding: 56px 28px 72px; }
+}
+
 @media (max-width: 680px) {
-  .legal-header { padding: 0 16px; }
-  main.legal-main { padding: 40px 20px 64px; }
+  .legal-header { padding: 0 20px; }
+  main.legal-main { padding: 40px 24px 64px; }
   .legal-content h2 { font-size: 22px; margin-top: 40px; }
   .legal-content h3 { font-size: 16px; }
   .legal-content table { font-size: 13px; display: block; overflow-x: auto; }
-  .legal-toc { padding: 20px; }
-  .legal-footer { padding: 32px 20px; }
+  .legal-toc { padding: 20px 22px; }
+  .legal-footer { padding: 32px 24px; }
   .legal-footer-inner { flex-direction: column; align-items: flex-start; }
+
+  /* Listes : un peu plus de marge interne pour décoller les puces du bord */
+  .legal-content ul,
+  .legal-content ol { padding-left: 26px; }
+  .legal-intro ul,
+  .legal-intro ol { padding-left: 26px; }
+}
+
+@media (max-width: 420px) {
+  .legal-header { padding: 0 16px; }
+  main.legal-main { padding: 32px 20px 56px; }
+  .legal-content ul,
+  .legal-content ol,
+  .legal-intro ul,
+  .legal-intro ol { padding-left: 24px; }
 }
