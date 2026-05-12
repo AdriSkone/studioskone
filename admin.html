@@ -117,7 +117,7 @@
     }
 
     .dash-header {
-      background: var(--dark);
+      background: var(--accent);
       padding: 0 40px;
       height: 58px;
       display: flex;
@@ -129,7 +129,7 @@
       z-index: 10;
     }
 
-    .dash-logo { height: 20px; filter: brightness(10); }
+    .dash-logo { height: 20px; display: block; }
 
     .dash-header-right {
       display: flex;
@@ -137,10 +137,16 @@
       gap: 16px;
     }
 
-    .dash-site { color: rgba(255,255,255,0.4); font-size: 13px; }
+    .dash-site {
+      color: rgba(29, 29, 27, 0.78);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .dash-site:hover { color: #1D1D1B; opacity: 1; text-decoration: underline; }
 
     .dash-logout {
-      color: rgba(255,255,255,0.65);
+      color: rgba(29, 29, 27, 0.78);
       font-size: 13px;
       background: none;
       border: none;
@@ -150,7 +156,7 @@
       border-radius: 8px;
       transition: background 0.2s, color 0.2s;
     }
-    .dash-logout:hover { background: rgba(255,255,255,0.1); color: white; }
+    .dash-logout:hover { background: rgba(29, 29, 27, 0.12); color: #1D1D1B; }
 
     .dash-content {
       flex: 1;
@@ -360,9 +366,9 @@
   <!-- DASHBOARD -->
   <div id="dashboard">
     <header class="dash-header">
-      <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="dash-logo">
+      <img src="/logo_skone_admin.svg" alt="Studio Skøne" class="dash-logo">
       <div class="dash-header-right">
-        <span class="dash-site">studioskone.com</span>
+        <a href="https://studioskone.com" class="dash-site" target="_blank" rel="noopener">studioskone.com</a>
         <button id="logout-btn" class="dash-logout">Déconnexion</button>
       </div>
     </header>
