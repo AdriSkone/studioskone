@@ -77,138 +77,112 @@
 .cf-progress {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
+/* Steps — boutons inline horizontaux (néo-brutal soft) */
 .cf-steps {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
   position: relative;
 }
-
-/* Connector line between steps */
-.cf-steps::before {
-  content: '';
-  position: absolute;
-  top: 13px;
-  left: calc(12.5% + 12px);
-  right: calc(12.5% + 12px);
-  height: 1px;
-  background: var(--border);
-  z-index: 0;
-}
+.cf-steps::before { content: none; } /* retire l'ancienne ligne connector */
 
 .cf-step-item {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 11px 6px 7px;
+  border: 1.5px solid var(--text);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--muted);
   position: relative;
   z-index: 1;
-  width: 25%;
+  width: auto;
+  transition:
+    background 0.3s var(--ease),
+    color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
 }
 
 .cf-step-num {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #F7EBDE;
-  border: 1px solid var(--border);
+  background: transparent;
+  border: 1.5px solid currentColor;
   font-family: var(--font-display);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: rgba(24, 23, 22, 0.28);
-  display: flex;
+  letter-spacing: 0;
+  color: currentColor;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition:
-    background 0.4s var(--ease),
-    border-color 0.4s var(--ease),
-    color 0.4s var(--ease),
-    box-shadow 0.4s var(--ease);
+  transition: border-color 0.3s var(--ease);
 }
 
-.cf-step-item.is-active .cf-step-num {
+.cf-step-item.is-active {
   background: var(--accent);
-  border-color: var(--accent);
   color: var(--bg);
-  box-shadow:
-    0 0 0 4px rgba(196, 96, 59, 0.18),
-    0 0 20px rgba(196, 96, 59, 0.24);
+  box-shadow: 3px 3px 0 var(--text);
 }
+.cf-step-item.is-active .cf-step-num { border-color: var(--bg); }
 
-.cf-step-item.is-done .cf-step-num {
-  background: rgba(196, 96, 59, 0.1);
-  border-color: rgba(196, 96, 59, 0.35);
-  color: var(--accent);
+.cf-step-item.is-done {
+  background: var(--text);
+  color: var(--bg);
 }
+.cf-step-item.is-done .cf-step-num { border-color: var(--bg); }
 
 .cf-step-label {
   font-family: var(--font-display);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(24, 23, 22, 0.28);
+  color: inherit;
   white-space: nowrap;
-  transition: color 0.4s var(--ease);
 }
+.cf-step-item.is-active .cf-step-label,
+.cf-step-item.is-done .cf-step-label { color: inherit; }
 
-.cf-step-item.is-active .cf-step-label {
-  color: var(--accent);
-}
-
-.cf-step-item.is-done .cf-step-label {
-  color: rgba(196, 96, 59, 0.55);
-}
-
-/* Progress bar */
+/* Progress bar — linéaire, bordée */
 .cf-progress-bar {
-  height: 2px;
-  background: var(--border);
-  border-radius: 1px;
+  height: 6px;
+  background: var(--bg-soft);
+  border: 1.5px solid var(--text);
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .cf-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
-  border-radius: 1px;
+  background: var(--accent);
+  border-radius: 0;
   transition: width 0.55s var(--ease);
-  box-shadow: 0 0 10px rgba(196, 96, 59, 0.35);
+  box-shadow: none;
   will-change: width;
 }
 
-/* ── Glass card ────────────────────────────────────────────── */
+/* ── Card — néo-brutal soft ────────────────────────────────── */
 
 .cf-card {
-  background: #F9EEDF;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 40px;
-  min-height: 380px;
+  background: var(--card);
+  border: 2px solid var(--text);
+  border-radius: 14px;
+  padding: 32px;
+  min-height: 360px;
   position: relative;
-  box-shadow:
-    0 4px 32px rgba(0, 0, 0, 0.06),
-    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  box-shadow: 6px 6px 0 var(--text);
 }
 
-/* Subtle grain texture on card */
-.cf-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
-  opacity: 0.02;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Reset l'ancienne texture grain */
+.cf-card::after { content: none; }
 
 .cf-card > * {
   position: relative;
@@ -252,129 +226,126 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 15px 18px;
-  background: #E8D7C3;
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1.5px solid var(--text);
+  border-radius: 10px;
   cursor: pointer;
   text-align: left;
   transition:
     background 0.22s ease,
+    color 0.22s ease,
     border-color 0.22s ease,
     box-shadow 0.22s ease,
     transform 0.2s ease;
   font-family: inherit;
   width: 100%;
   position: relative;
-  overflow: hidden;
 }
 
-/* Hover shine effect */
-.cf-choice::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(196, 96, 59, 0.06) 0%, transparent 55%);
-  opacity: 0;
-  transition: opacity 0.28s ease;
-}
+/* Néo-brutal soft : pas d'effet shine, transition simple */
+.cf-choice::before { content: none; }
 
 .cf-choice:hover {
-  border-color: rgba(196, 96, 59, 0.32);
-  background: rgba(196, 96, 59, 0.04);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-}
-
-.cf-choice:hover::before {
-  opacity: 1;
+  border-color: var(--text);
+  background: var(--card);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--text);
 }
 
 .cf-choice.is-selected {
-  border-color: var(--accent);
-  background: rgba(196, 96, 59, 0.07);
-  box-shadow:
-    0 0 0 1px rgba(196, 96, 59, 0.2),
-    0 4px 20px rgba(196, 96, 59, 0.1);
+  border-color: var(--text);
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 3px 3px 0 var(--text);
   transform: none;
 }
 
-.cf-choice.is-selected::before {
-  opacity: 1;
-}
-
 .cf-choice-icon {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: rgba(24, 23, 22, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: var(--bg);
+  border: 1.5px solid var(--text);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
   flex-shrink: 0;
-  width: 22px;
-  text-align: center;
   line-height: 1;
-  transition: color 0.22s ease;
+  transition: background 0.22s ease, color 0.22s ease;
 }
 
 .cf-choice.is-selected .cf-choice-icon {
+  background: var(--bg);
   color: var(--accent);
 }
 
 .cf-choice-body {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .cf-choice-label {
   font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: rgba(24, 23, 22, 0.62);
-  transition: color 0.22s ease, font-weight 0.1s ease;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  transition: color 0.22s ease;
   display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .cf-choice.is-selected .cf-choice-label {
-  color: var(--dark);
+  color: var(--bg);
   font-weight: 600;
 }
 
 .cf-choice-sub {
   font-family: var(--font-sans);
-  font-size: 0.68rem;
-  color: rgba(24, 23, 22, 0.3);
-  margin-top: 2px;
+  font-size: 0.75rem;
+  color: var(--muted);
   display: block;
   transition: color 0.22s ease;
-  white-space: nowrap;
+  line-height: 1.3;
 }
 
 .cf-choice.is-selected .cf-choice-sub {
-  color: rgba(196, 96, 59, 0.7);
+  color: rgba(251, 244, 228, 0.78);
 }
 
-/* Checkmark bubble */
+/* Checkmark bubble — toujours visible, cerclé, devient orange-on-cream au selected */
 .cf-choice-check {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--accent);
+  background: transparent;
+  border: 1.5px solid currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  opacity: 0;
-  transform: scale(0);
+  opacity: 0.3;
+  color: var(--text);
   transition:
     opacity 0.22s ease,
-    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease;
 }
 
 .cf-choice.is-selected .cf-choice-check {
   opacity: 1;
-  transform: scale(1);
+  background: var(--bg);
+  color: var(--accent);
+  border-color: var(--bg);
 }
 
 /* ── Form fields ───────────────────────────────────────────── */
