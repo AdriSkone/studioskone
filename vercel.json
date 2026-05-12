@@ -1,9 +1,10 @@
 {
   "rewrites": [
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
-    }
+    { "source": "/admin",                       "destination": "/admin.html" },
+    { "source": "/mentions-legales",            "destination": "/mentions-legales.html" },
+    { "source": "/politique-de-confidentialite", "destination": "/politique-de-confidentialite.html" },
+    { "source": "/cgu",                          "destination": "/cgu.html" },
+    { "source": "/cgv",                          "destination": "/cgv.html" }
   ],
   "headers": [
     {
