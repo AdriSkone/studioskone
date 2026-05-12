@@ -267,8 +267,7 @@ function pageTemplate({ slug, title, lastUpdated, intro, toc, body, footerLinks 
         Retour à l'accueil
       </a>
       <a href="/" class="legal-brand" aria-label="Studio Skøne">
-        <img src="/logo_skone_sansh2.svg" alt="">
-        <span>Studio Skøne</span>
+        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne">
       </a>
     </div>
   </header>

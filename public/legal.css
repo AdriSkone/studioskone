@@ -35,12 +35,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--dark);
-  height: 58px;
+  background: var(--bg);
+  height: 64px;
   display: flex;
   align-items: center;
   padding: 0 32px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--border);
 }
 
 .legal-header-inner {
@@ -57,7 +57,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255,255,255,0.78);
+  color: var(--text);
   text-decoration: none;
   font-size: 13px;
   letter-spacing: 0.04em;
@@ -66,8 +66,8 @@ body {
   transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 .legal-back:hover {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
+  background: rgba(0,0,0,0.05);
+  color: var(--accent);
   transform: translateX(-2px);
 }
 .legal-back svg { display: block; width: 14px; height: 14px; }
@@ -75,17 +75,11 @@ body {
 .legal-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: #fff;
   text-decoration: none;
-  font-size: 13px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  opacity: 0.85;
   transition: opacity 0.2s;
 }
-.legal-brand:hover { opacity: 1; }
-.legal-brand img { height: 20px; display: block; }
+.legal-brand:hover { opacity: 0.75; }
+.legal-brand img { height: 22px; display: block; }
 
 /* ── Layout ─────────────────────────────────────────────────────────────── */
 
