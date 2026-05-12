@@ -69,8 +69,10 @@ export default async function handler(req: Request): Promise<Response> {
 
 function getExpectedOrigins(req: Request): string[] {
   const list: string[] = []
-  if (process.env.BASE_URL) list.push(process.env.BASE_URL)
-  if (process.env.VERCEL_URL) list.push(`https://${process.env.VERCEL_URL}`)
+  const base = process.env.BASE_URL?.trim()
+  if (base) list.push(base.replace(/\/$/, ''))
+  const vercel = process.env.VERCEL_URL?.trim()
+  if (vercel) list.push(`https://${vercel}`)
   // Origin du déploiement courant — Vercel injecte VERCEL_URL pour les previews
   const url = new URL(req.url)
   list.push(`${url.protocol}//${url.host}`)
@@ -78,8 +80,11 @@ function getExpectedOrigins(req: Request): string[] {
 }
 
 function resolveBaseUrl(req: Request): string {
-  if (process.env.BASE_URL) return process.env.BASE_URL
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+  // .trim() défend contre les espaces ajoutés par mégarde dans l'env var Vercel
+  const base = process.env.BASE_URL?.trim()
+  if (base) return base.replace(/\/$/, '')
+  const vercel = process.env.VERCEL_URL?.trim()
+  if (vercel) return `https://${vercel}`
   const url = new URL(req.url)
   return `${url.protocol}//${url.host}`
 }
