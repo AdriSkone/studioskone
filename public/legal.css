@@ -208,15 +208,18 @@ h1.legal-title em {
   color: var(--text);
 }
 
-.legal-content ul, .legal-content ol {
+.legal-content ul, .legal-content ol,
+.legal-intro ul, .legal-intro ol {
   margin: 12px 0 22px;
   padding-left: 22px;
 }
-.legal-content li {
+.legal-content li,
+.legal-intro li {
   margin-bottom: 8px;
   padding-left: 6px;
 }
-.legal-content li::marker { color: var(--accent); }
+.legal-content li::marker,
+.legal-intro li::marker { color: var(--accent); }
 
 .legal-content strong { font-weight: 700; color: var(--dark); }
 .legal-content em { font-style: italic; }
