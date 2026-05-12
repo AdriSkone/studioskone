@@ -322,7 +322,7 @@ button {
 }
 
 @media (max-width: 1024px) {
-  .nav-cta { display: none; }
+  .btn.nav-cta { display: none; }
   .nav-toggle { display: flex; }
 
   .nav-links {
