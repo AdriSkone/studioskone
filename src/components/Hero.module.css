@@ -160,14 +160,15 @@
   }
   .statementText { max-width: 520px; }
   .section::before {
-    top: -180px;
-    left: -180px;
-    width: 720px;
-    height: 720px;
+    top: -160px;
+    left: -160px;
+    width: 600px;
+    height: 600px;
   }
+  /* Sur tablette, on remonte l'accent pour le rendre visible au-dessus du strip */
   .section::after {
-    bottom: -28px;
-    right: -28px;
+    bottom: 88px;
+    right: -36px;
     width: 132px;
     height: 132px;
   }
@@ -188,17 +189,19 @@
     gap: 12px;
     margin-top: 12px;
   }
+  /* Sur mobile, on rapproche l'arc pour qu'il soit visible au-dessus de la card */
   .section::before {
-    top: -140px;
-    left: -140px;
-    width: 520px;
-    height: 520px;
+    top: -90px;
+    left: -90px;
+    width: 320px;
+    height: 320px;
   }
+  /* Et on remonte l'accent au-dessus du strip défilant */
   .section::after {
-    bottom: -24px;
-    right: -24px;
-    width: 108px;
-    height: 108px;
+    bottom: 72px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
   }
 }
 
