@@ -93,7 +93,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease, delay: 0.7 }}
           >
-            De l'idée au lancement, nous concevons des expériences claires, performantes et alignées avec vos objectifs.
+            De l'idée au lancement, je conçois des expériences claires, performantes et alignées avec vos objectifs.
           </motion.p>
           <motion.div
             className={styles.heroCtaRow}
@@ -112,7 +112,7 @@ export function Hero() {
             </a>
             <a href="#work" className={styles.heroCtaSecondary}>
               <span className={styles.heroCtaDot} />
-              <span className={styles.heroCtaLabel}>Voir nos réalisations</span>
+              <span className={styles.heroCtaLabel}>Voir mes réalisations</span>
             </a>
           </motion.div>
         </div>

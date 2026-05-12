@@ -181,7 +181,7 @@ function buildTemplate(): string {
 
         <!-- Étape 4 — Contact -->
         <div class="cf-panel" data-panel="3" role="group" aria-labelledby="cfQ3">
-          <p class="cf-question" id="cfQ3">Parlez-nous de vous</p>
+          <p class="cf-question" id="cfQ3">Parlez-moi de vous</p>
           <div class="cf-fields">
 
             <div class="cf-field-row">
@@ -291,7 +291,7 @@ function buildTemplate(): string {
                 <span class="cf-rgpd-box" id="cfRgpdBox">${buildCheckSvg()}</span>
                 <span class="cf-rgpd-text">
                   <span class="cf-rgpd-required">RGPD*</span>
-                  En soumettant ce formulaire, j'accepte que les informations saisies dans ce formulaire soient utilisées pour permettre de me recontacter. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+                  En soumettant ce formulaire, j'accepte que les informations saisies dans ce formulaire soient utilisées pour permettre de me recontacter. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter la
                   <a
                     href="/politique-de-confidentialite"
                     class="cf-rgpd-link"
@@ -332,7 +332,7 @@ function buildTemplate(): string {
           </svg>
         </div>
         <p class="cf-success-title">Merci, <em>c'est envoyé.</em></p>
-        <p class="cf-success-sub">Nous revenons vers vous sous 24h.</p>
+        <p class="cf-success-sub">Je reviens vers vous sous 24h.</p>
         <div class="cf-success-tags" id="cfSuccessTags"></div>
       </div>
 

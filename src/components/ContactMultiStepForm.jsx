@@ -830,7 +830,7 @@ export default function ContactMultiStepForm() {
       case 3:
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <p style={css.stepQuestion}>Parlez-nous de vous</p>
+            <p style={css.stepQuestion}>Parlez-moi de vous</p>
             <div style={css.inputGroup}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
