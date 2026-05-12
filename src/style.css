@@ -852,6 +852,45 @@ button {
   transform: translateX(4px);
 }
 
+/* Variante avec cercle blanc à gauche (signature Skøne — réservée au Hero) */
+.btn--with-circle {
+  padding-left: 6px;
+  gap: 12px;
+}
+.btn__circle {
+  width: 32px;
+  height: 32px;
+  background: var(--bg);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: box-shadow 0.3s var(--ease);
+}
+.btn__circle svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  will-change: transform;
+}
+.btn--with-circle:hover .btn__circle {
+  animation: btnCirclePulse 1s ease-out infinite;
+}
+.btn--with-circle:hover .btn__circle svg {
+  animation: btnCircleArrow 1.4s ease-in-out infinite;
+}
+
+@keyframes btnCirclePulse {
+  0%   { box-shadow: 0 0 0 0   rgba(196, 96, 58, 0.35); }
+  100% { box-shadow: 0 0 0 10px rgba(196, 96, 58, 0);   }
+}
+@keyframes btnCircleArrow {
+  0%, 100% { transform: translateX(0);   }
+  50%      { transform: translateX(3px); }
+}
+
 @media (max-width: 768px) {
   .btn {
     height: 42px;
@@ -860,11 +899,18 @@ button {
     letter-spacing: 0.06em;
     gap: 8px;
   }
+  .btn--with-circle {
+    padding-left: 5px;
+    gap: 10px;
+  }
+  .btn__circle { width: 30px; height: 30px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
-  .btn__arrow { transition: none; }
+  .btn__arrow,
+  .btn__circle,
+  .btn__circle svg { transition: none; animation: none !important; }
   .btn:hover { transform: none; }
   .btn:hover .btn__arrow { transform: none; }
 }

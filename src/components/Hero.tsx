@@ -101,9 +101,14 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease, delay: 0.9 }}
           >
-            <a href="#contact" className="btn btn--primary">
+            <a href="#contact" className="btn btn--primary btn--with-circle">
+              <span className="btn__circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
               <span>Discutons de votre projet</span>
-              <span className="btn__arrow" aria-hidden="true">→</span>
             </a>
             <a href="#work" className="btn btn--secondary">
               <span className="btn__dot" aria-hidden="true" />
