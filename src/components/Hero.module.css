@@ -148,102 +148,6 @@
   pointer-events: auto;
 }
 
-.heroCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--accent);
-  border-radius: 100px;
-  padding: 7px 24px 7px 7px;
-  text-decoration: none;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.heroCtaSecondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: 1.5px solid var(--accent);
-  border-radius: 100px;
-  padding: 12px 24px;
-  text-decoration: none;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.heroCtaSecondary:hover {
-  background: rgba(196, 96, 58, 0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(196, 96, 58, 0.12);
-}
-
-.heroCtaSecondary .heroCtaLabel {
-  color: var(--accent);
-  padding-right: 0;
-}
-
-.heroCtaDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.heroCta:hover {
-  background: var(--accent-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(196, 96, 58, 0.38);
-}
-
-.heroCtaIcon {
-  width: 42px;
-  height: 42px;
-  background: var(--bg);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: var(--accent);
-  overflow: hidden;
-  transition: box-shadow 0.3s ease;
-}
-
-.heroCta:hover .heroCtaIcon {
-  animation: heroCtaRing 1s ease-out infinite;
-}
-
-.heroCtaIcon svg {
-  will-change: transform, opacity;
-}
-
-.heroCta:hover .heroCtaIcon svg {
-  animation: heroCtaArrow 1.4s ease-in-out infinite;
-}
-
-@keyframes heroCtaArrow {
-  0%   { transform: translateX(0);   }
-  50%  { transform: translateX(4px); }
-  100% { transform: translateX(0);   }
-}
-
-@keyframes heroCtaRing {
-  0%   { box-shadow: 0 0 0 0   rgba(196, 96, 58, 0.35); }
-  100% { box-shadow: 0 0 0 10px rgba(196, 96, 58, 0);   }
-}
-
-.heroCtaLabel {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--bg);
-  padding-right: 4px;
-}
-
 /* ─── Strip services — ancré en bas ─────────────────────────── */
 
 .heroStrip {
@@ -280,16 +184,12 @@
     gap: 12px;
     margin-top: 12px;
   }
-  .heroCta { padding: 6px 20px 6px 6px; gap: 12px; }
-  .heroCtaIcon { width: 38px; height: 38px; }
-  .heroCtaSecondary { padding: 11px 20px; }
 }
 
 @media (max-width: 480px) {
   .heroTop {
     padding: 40px 20px 104px;
   }
-  .heroCtaLabel { font-size: 12px; letter-spacing: 0.06em; }
   .statementText {
     font-size: 15px;
     line-height: 24px;
