@@ -2078,10 +2078,11 @@ button {
   border-radius: 50%;
   background: var(--accent);
   color: var(--bg);
+  border: 2px solid var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(196, 96, 58, 0.32);
+  box-shadow: 3px 3px 0 var(--text);
   cursor: pointer;
   opacity: 0;
   transform: translateY(12px);
@@ -2101,7 +2102,7 @@ button {
 
 .back-to-top:hover {
   background: var(--accent-dark);
-  box-shadow: 0 8px 28px rgba(196, 96, 58, 0.42);
+  box-shadow: 5px 5px 0 var(--text);
   transform: translateY(-2px);
 }
 
