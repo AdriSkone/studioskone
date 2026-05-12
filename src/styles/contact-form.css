@@ -756,7 +756,7 @@
   color: var(--bg);
   background: var(--accent);
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 14px 26px;
   cursor: pointer;
   display: flex;
