@@ -1,9 +1,8 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [],
   server: {
     proxy: {
       '/umami-api': {
@@ -17,8 +16,20 @@ export default defineConfig({
     cssTarget: ['safari14', 'chrome90', 'firefox88', 'edge90'],
     rollupOptions: {
       input: {
-        main:  resolve(__dirname, 'index.html'),
-        admin: resolve(__dirname, 'admin.html'),
+        main:        resolve(__dirname, 'index.html'),
+        admin:       resolve(__dirname, 'admin.html'),
+        myboat:      resolve(__dirname, 'projets/myboat.html'),
+        garantibox:  resolve(__dirname, 'projets/garantibox.html'),
+        cafeo:       resolve(__dirname, 'projets/cafeo.html'),
+        niortBasket: resolve(__dirname, 'projets/niort-basket.html'),
+        aurem:       resolve(__dirname, 'projets/aurem.html'),
+        archeon:     resolve(__dirname, 'projets/archeon.html'),
+      },
+      output: {
+        assetFileNames: (asset) =>
+          asset.name?.endsWith('.woff2')
+            ? 'assets/fonts/[name][extname]'
+            : 'assets/[name]-[hash][extname]',
       },
     },
   },
