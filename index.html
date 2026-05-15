@@ -5,11 +5,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Studio Skøne — Création de produits web &amp; mobile | Design · Figma · IA</title>
-  <meta name="description" content="Studio Skøne crée vos produits web et mobile de la conception au lancement. Design Figma, développement sur mesure, accompagnement IA. Basé à Paris." />
-  <meta name="keywords" content="création site web, Bubble.io, Figma, product builder, studio web Paris, design produit, application mobile, freelance web, Claude AI" />
+  <meta name="description" content="Création de sites web, e-commerce, applications web et mobile à Paris. Design et développement par la même personne, de la maquette au lancement. Dès 900€." />
   <meta name="author" content="Studio Skøne" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.studioskone.com" />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2" crossorigin>
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
@@ -30,7 +30,7 @@
   <meta name="twitter:image"       content="https://www.studioskone.com/og-image.png" />
   <meta name="twitter:image:alt"   content="Studio Skøne — création de produits web & mobile, 100% digital" />
 
-  <!-- Schema.org JSON-LD -->
+  <!-- Schema.org JSON-LD — ProfessionalService -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -38,18 +38,95 @@
     "name": "Studio Skøne",
     "url": "https://www.studioskone.com",
     "email": "contact@studioskone.com",
+    "priceRange": "€€",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Paris",
       "addressCountry": "FR"
     },
+    "areaServed": "FR",
     "description": "Studio Skøne crée des produits web et mobile de la conception au lancement — design Figma, développement sur mesure, accompagnement IA.",
-    "serviceType": ["Création de site web", "Design produit", "Développement Bubble.io", "Application mobile", "Design Figma"]
+    "sameAs": ["https://www.instagram.com/studio.skone/"],
+    "founder": {
+      "@type": "Person",
+      "name": "Adrien Bidet",
+      "jobTitle": "Designer & Développeur",
+      "url": "https://www.studioskone.com"
+    },
+    "serviceType": ["Création de site web", "Design produit", "Application mobile", "Design Figma", "E-commerce"],
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Fondation",
+        "description": "Landing page ou site vitrine jusqu'à 5 pages. Design sur mesure, responsive, mise en ligne incluse. Livraison en 2–3 semaines.",
+        "price": "900",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "name": "Studio",
+        "description": "Site vitrine, e-commerce ou application web. Architecture UX, animations, SEO technique intégré. Livraison en 4–6 semaines.",
+        "price": "2500",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "name": "Sur mesure",
+        "description": "Application mobile, SaaS ou plateforme complexe. Périmètre et délais définis ensemble."
+      }
+    ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+
+  <!-- Schema.org JSON-LD — FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quels types de projets réalisez-vous ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Landing pages, sites vitrines, e-commerce et applications web, principalement. Pour le mobile, le SaaS ou les plateformes plus complexes, je travaille sur devis après un premier échange."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont vos tarifs ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "L'offre Fondation démarre à 900€ pour un site vitrine jusqu'à 5 pages. L'offre Studio, à partir de 2 500€, couvre les projets plus complets : site multi-pages, e-commerce ou application web. Pour les projets complexes, je travaille sur devis. Les prix sont posés dès le premier appel, sans surprise en fin de mission."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont vos délais ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2 à 3 semaines pour une offre Fondation, 4 à 6 semaines pour une offre Studio. Pour les projets sur mesure, les délais sont définis ensemble au cadrage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Combien d'allers-retours sont inclus ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "L'offre Fondation inclut 2 allers-retours sur le design et le contenu. Avec l'offre Studio, chaque étape est validée avec vous avant de passer à la suivante. Tout est réglé au fil du projet, rien ne surgit à la livraison."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "La mise en ligne est-elle incluse ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, dans toutes les offres. Je gère le déploiement, la configuration du domaine et les vérifications techniques. Pour les projets sur mesure, je prévois un suivi post-lancement."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div id="cursor" aria-hidden="true"></div>
@@ -58,7 +135,7 @@
   <nav id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img">
+        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img" width="111" height="28">
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
@@ -84,8 +161,58 @@
     </div>
   </nav>
 
-  <!-- 1. HERO — React mount -->
-  <div id="hero-root"></div>
+  <!-- 1. HERO -->
+  <section id="hero">
+    <div class="hero-top">
+      <h1 class="hero-tagline">
+        Studio de création<br>
+        <span class="hero-accent">web &amp; mobile</span><br>
+        <span class="hero-italic">100% digital</span>
+      </h1>
+      <div class="hero-right">
+        <p class="hero-statement">De l'idée au lancement, je conçois des expériences claires, performantes et alignées avec vos objectifs.</p>
+        <div class="hero-cta-row">
+          <a href="#contact" class="btn btn--primary btn--with-circle">
+            <span class="btn__circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+            <span>Discutons de votre projet</span>
+          </a>
+          <a href="#work" class="btn btn--secondary">
+            <span class="btn__dot" aria-hidden="true"></span>
+            <span>Voir mes réalisations</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-strip" aria-hidden="true">
+      <div class="strip-scroll">
+        <div class="strip-track">
+          <span>Site Vitrine</span><span class="bullet">●</span>
+          <span>E-Commerce</span><span class="bullet">●</span>
+          <span>Application Web &amp; SaaS</span><span class="bullet">●</span>
+          <span>Application Mobile</span><span class="bullet">●</span>
+          <span>Landing Page</span><span class="bullet">●</span>
+          <span>UX / UI Design</span><span class="bullet">●</span>
+          <span>Branding</span><span class="bullet">●</span>
+          <span>SEO &amp; Performance</span><span class="bullet">●</span>
+          <span>Maintenance</span><span class="bullet">●</span>
+          <span>Site Vitrine</span><span class="bullet">●</span>
+          <span>E-Commerce</span><span class="bullet">●</span>
+          <span>Application Web &amp; SaaS</span><span class="bullet">●</span>
+          <span>Application Mobile</span><span class="bullet">●</span>
+          <span>Landing Page</span><span class="bullet">●</span>
+          <span>UX / UI Design</span><span class="bullet">●</span>
+          <span>Branding</span><span class="bullet">●</span>
+          <span>SEO &amp; Performance</span><span class="bullet">●</span>
+          <span>Maintenance</span><span class="bullet">●</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- 2. LE STUDIO -->
   <section id="approach" class="has-grain">
@@ -100,7 +227,7 @@
         <p class="approach-mid-text">
           Je suis Adrien. Je conçois et je développe - jamais l'un sans l'autre.
           <br>
-          Skøne, c'est la conviction qu'un produit cohérent naît quand la même personne tient le pinceau et le marteau.
+          Skøne, c'est ça : un bon produit ne naît que si la même personne tient le pinceau et le marteau.
         </p>
       </div>
     </div>
@@ -118,25 +245,25 @@
         <div class="service-card reveal">
           <span class="service-num">01</span>
           <h3 class="service-title">Landing page &amp; Site vitrine</h3>
-          <p class="service-desc">Sites rapides, orientés conversion, responsive. Du one-pager au site multi-pages sur mesure.</p>
+          <p class="service-desc">Sites rapides et responsive, faits pour convertir. Du one-pager au site complet.</p>
           <span class="service-tag">Dès 900€</span>
         </div>
         <div class="service-card reveal">
           <span class="service-num">02</span>
           <h3 class="service-title">Application web &amp; SaaS</h3>
-          <p class="service-desc">Applications complexes, back-office, interfaces métier. Conception et développement complets.</p>
+          <p class="service-desc">Back-office, interfaces métier et applications web complexes. De la conception au déploiement.</p>
           <span class="service-tag">Dès 2 500€</span>
         </div>
         <div class="service-card reveal">
           <span class="service-num">03</span>
           <h3 class="service-title">Application mobile</h3>
-          <p class="service-desc">iOS &amp; Android, de la maquette au déploiement sur les stores. Approche produit complète, UX pensée mobile-first.</p>
+          <p class="service-desc">iOS et Android, du premier écran jusqu'aux stores. Interface conçue pour le mobile, pas adaptée après coup.</p>
           <span class="service-tag">Sur devis</span>
         </div>
         <div class="service-card reveal">
           <span class="service-num">04</span>
           <h3 class="service-title">Direction artistique &amp; UI</h3>
-          <p class="service-desc">Maquettes, design systems, prototypes haute fidélité. Identité visuelle et cohérence de marque.</p>
+          <p class="service-desc">Maquettes haute fidélité, design systems, identité visuelle. Rien ne part en développement sans validation.</p>
           <span class="service-tag">Dès 600€</span>
         </div>
       </div>
@@ -156,7 +283,7 @@
           <div class="proc-left">
             <span class="proc-badge">Découverte</span>
             <h3 class="proc-title proc-title-1">Cadrage du projet</h3>
-            <p class="proc-text proc-text-1">On discute de vos objectifs, de vos cibles et de vos contenus. On organise un ou plusieurs ateliers pour définir ensemble l'arborescence et le plan de site.</p>
+            <p class="proc-text proc-text-1">On commence par un atelier : vos objectifs, votre audience, ce que vous avez à dire. De là, on structure le plan de site ensemble.</p>
           </div>
           <div class="proc-mid"><div class="proc-dot proc-dot-1"></div></div>
           <div class="proc-right"><span class="proc-ghost" aria-hidden="true">01</span></div>
@@ -168,7 +295,7 @@
           <div class="proc-right">
             <span class="proc-badge proc-badge-2">Design</span>
             <h3 class="proc-title proc-title-n">Conception visuelle</h3>
-            <p class="proc-text proc-text-n">Chaque écran est validé avec vous avant le développement. Direction artistique, typographie, mise en page — rien ne part en prod sans validation.</p>
+            <p class="proc-text proc-text-n">Chaque écran est validé avec vous avant le développement. Typo, mise en page, DA : rien ne part en prod sans votre accord.</p>
           </div>
         </div>
 
@@ -176,7 +303,7 @@
           <div class="proc-left">
             <span class="proc-badge proc-badge-3">Développement</span>
             <h3 class="proc-title proc-title-n">Build &amp; intégration</h3>
-            <p class="proc-text proc-text-n">On donne vie aux maquettes. Pixel-perfect, testé sur tous les supports, optimisé pour la performance. Vous suivez l'avancement en temps réel.</p>
+            <p class="proc-text proc-text-n">Les maquettes deviennent du code. Pixel-perfect, testé sur tous les supports. Vous suivez l'avancement en temps réel.</p>
           </div>
           <div class="proc-mid"><div class="proc-dot proc-dot-3"></div></div>
           <div class="proc-right"><span class="proc-ghost" aria-hidden="true">03</span></div>
@@ -188,7 +315,7 @@
           <div class="proc-right">
             <span class="proc-badge proc-badge-4">Lancement</span>
             <h3 class="proc-title proc-title-n">Mise en ligne &amp; suivi</h3>
-            <p class="proc-text proc-text-n">Déploiement, formation à la prise en main, suivi post-lancement inclus. On reste disponibles pour les ajustements et les évolutions.</p>
+            <p class="proc-text proc-text-n">Mise en ligne, formation à la prise en main, suivi inclus. On est là si quelque chose doit changer après le lancement.</p>
           </div>
         </div>
 
@@ -213,7 +340,7 @@
           <div class="swiper-slide">
             <article class="work-card">
               <div class="work-card-image">
-                <img src="/work/cafeo.webp" alt="ele — Ateliers Caféologie" loading="lazy">
+                <img src="/work/cafeo.webp" alt="Site web et identité visuelle ele — Ateliers Caféologie, réalisés par Studio Skøne" loading="lazy">
                 <span class="work-card-badge">Site web</span>
               </div>
               <div class="work-card-body">
@@ -229,7 +356,7 @@
                         <span class="work-testi-role">Fondateur, ele</span>
                       </div>
                     </div>
-                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                    <a href="/projets/cafeo" class="work-card-cta">Voir le projet →</a>
                   </div>
                 </div>
               </div>
@@ -239,7 +366,7 @@
           <div class="swiper-slide">
             <article class="work-card">
               <div class="work-card-image work-card-image--mockup work-card-image--myboat">
-                <img src="/work/myboat.webp" alt="MyBoat — application mobile" loading="lazy">
+                <img src="/work/myboat.webp" alt="MyBoat — application mobile marketplace bateaux iOS et Android" loading="lazy">
                 <span class="work-card-badge">App mobile</span>
               </div>
               <div class="work-card-body">
@@ -255,7 +382,7 @@
                         <span class="work-testi-role">CTO, MyBoat</span>
                       </div>
                     </div>
-                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                    <a href="/projets/myboat" class="work-card-cta">Voir le projet →</a>
                   </div>
                 </div>
               </div>
@@ -265,7 +392,7 @@
           <div class="swiper-slide">
             <article class="work-card">
               <div class="work-card-image">
-                <img src="/work/garantibox.png" alt="Garantibox" loading="lazy">
+                <img src="/work/garantibox.png" alt="Garantibox — interface plateforme SaaS de gestion SAV" loading="lazy">
                 <span class="work-card-badge">Web App SaaS</span>
               </div>
               <div class="work-card-body">
@@ -281,7 +408,7 @@
                         <span class="work-testi-role">Product Lead, Garantibox</span>
                       </div>
                     </div>
-                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                    <a href="/projets/garantibox" class="work-card-cta">Voir le projet →</a>
                   </div>
                 </div>
               </div>
@@ -291,7 +418,7 @@
           <div class="swiper-slide">
             <article class="work-card">
               <div class="work-card-image">
-                <img src="/work/niortbasket.png" alt="Niort Basket" loading="lazy">
+                <img src="/work/niortbasket.png" alt="Niort Basket — refonte site club de basket et e-commerce billetterie" loading="lazy">
                 <span class="work-card-badge">Site web</span>
               </div>
               <div class="work-card-body">
@@ -307,7 +434,7 @@
                         <span class="work-testi-role">Directeur, Niort Basket</span>
                       </div>
                     </div>
-                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                    <a href="/projets/niort-basket" class="work-card-cta">Voir le projet →</a>
                   </div>
                 </div>
               </div>
@@ -317,7 +444,7 @@
           <div class="swiper-slide">
             <article class="work-card">
               <div class="work-card-image">
-                <img src="/work/aurem.png" alt="Aurem" loading="lazy">
+                <img src="/work/aurem.png" alt="Aurem — site vitrine haut de gamme pour agence immobilier de luxe" loading="lazy">
                 <span class="work-card-badge">Site vitrine</span>
               </div>
               <div class="work-card-body">
@@ -333,7 +460,7 @@
                         <span class="work-testi-role">Directrice, Aurem</span>
                       </div>
                     </div>
-                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                    <a href="/projets/aurem" class="work-card-cta">Voir le projet →</a>
                   </div>
                 </div>
               </div>
@@ -343,7 +470,7 @@
           <div class="swiper-slide">
             <article class="work-card">
               <div class="work-card-image">
-                <img src="/work/archeon.png" alt="Archéon" loading="lazy">
+                <img src="/work/archeon.png" alt="Archéon — portfolio et site vitrine pour cabinet d'architecture" loading="lazy">
                 <span class="work-card-badge">Portfolio</span>
               </div>
               <div class="work-card-body">
@@ -359,7 +486,7 @@
                         <span class="work-testi-role">Architecte, Archéon</span>
                       </div>
                     </div>
-                    <a href="#contact" class="work-card-cta">Voir le projet →</a>
+                    <a href="/projets/archeon" class="work-card-cta">Voir le projet →</a>
                   </div>
                 </div>
               </div>
@@ -467,7 +594,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Landing pages, sites vitrines, e-commerce et applications web — c'est le cœur de mon activité. Pour les projets plus complexes (application mobile, SaaS, plateforme sur mesure), j'établis un devis adapté.</div>
+              <div class="faq-answer-inner">Landing pages, sites vitrines, e-commerce et applications web, principalement. Pour le mobile, le SaaS ou les plateformes plus complexes, je travaille sur devis après un premier échange.</div>
             </div>
           </div>
 
@@ -478,7 +605,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">L'offre Fondation démarre à 900€ pour un site vitrine jusqu'à 5 pages. L'offre Studio, à partir de 2 500€, couvre les projets plus complets — site multi-pages, e-commerce ou application web. Pour les projets complexes, je travaille sur devis. Dans tous les cas, les prix sont clairs dès le premier échange.</div>
+              <div class="faq-answer-inner">L'offre Fondation démarre à 900€ pour un site vitrine jusqu'à 5 pages. L'offre Studio, à partir de 2 500€, couvre les projets plus complets : site multi-pages, e-commerce ou application web. Pour les projets complexes, je travaille sur devis. Les prix sont posés dès le premier appel, sans surprise en fin de mission.</div>
             </div>
           </div>
 
@@ -489,7 +616,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">2 à 3 semaines pour une offre Fondation, 4 à 6 semaines pour une offre Studio. Les projets sur mesure ont des délais définis ensemble au cadrage. Ce sont des engagements, pas des estimations.</div>
+              <div class="faq-answer-inner">2 à 3 semaines pour une offre Fondation, 4 à 6 semaines pour une offre Studio. Pour les projets sur mesure, les délais sont définis ensemble au cadrage. Je m'y tiens.</div>
             </div>
           </div>
 
@@ -500,7 +627,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">L'offre Fondation inclut 2 allers-retours sur le design et le contenu. L'offre Studio fonctionne en ajustements continus tout au long du projet — chaque étape est validée avec vous avant de passer à la suivante. Pas de mauvaise surprise en fin de mission.</div>
+              <div class="faq-answer-inner">L'offre Fondation inclut 2 allers-retours sur le design et le contenu. Avec l'offre Studio, chaque étape est validée avec vous avant de passer à la suivante. Tout est réglé au fil du projet, rien ne surgit à la livraison.</div>
             </div>
           </div>
 
@@ -511,7 +638,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Oui, la mise en ligne est incluse dans toutes mes offres. Je gère le déploiement, la configuration du domaine et les vérifications techniques. Pour les projets sur mesure, un suivi régulier post-lancement est également prévu.</div>
+              <div class="faq-answer-inner">Oui, dans toutes les offres. Je gère le déploiement, la configuration du domaine et les vérifications techniques. Pour les projets sur mesure, je prévois un suivi post-lancement.</div>
             </div>
           </div>
 
@@ -551,9 +678,10 @@
         <!-- Colonne brand -->
         <div class="footer-brand">
           <a href="#" class="footer-logo">
-            <img src="/logo_skone_footer.svg" alt="Studio Skøne" class="footer-logo-img">
+            <img src="/logo_skone_footer.svg" alt="Studio Skøne" class="footer-logo-img" width="103" height="26">
           </a>
           <p class="footer-tagline">Studio digital spécialisé en design produit et expériences web et mobile performantes.</p>
+          <p class="footer-location">📍 Paris, France</p>
         </div>
 
         <!-- Navigation -->
@@ -568,7 +696,7 @@
         <!-- Contact -->
         <div class="footer-contact">
           <a href="mailto:contact@studioskone.com" class="footer-email">contact@studioskone.com</a>
-          <a href="#" class="footer-social-link" aria-label="Instagram">
+          <a href="https://www.instagram.com/studio.skone/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram Studio Skøne">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
