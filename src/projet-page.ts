@@ -64,12 +64,11 @@ if (nav) {
 // ============================================================
 const revealEls = document.querySelectorAll<HTMLElement>('.reveal')
 
-document.querySelectorAll<HTMLElement>('.reveal').forEach((el) => {
+revealEls.forEach((el) => {
   const siblings = Array.from(
     el.parentElement?.querySelectorAll<HTMLElement>(':scope > .reveal') ?? []
   )
-  const index = siblings.indexOf(el)
-  el.style.transitionDelay = `${index * 0.14}s`
+  el.style.transitionDelay = `${siblings.indexOf(el) * 0.14}s`
 })
 
 const revealObserver = new IntersectionObserver(
