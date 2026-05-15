@@ -4,13 +4,6 @@
    ============================================================ */
 
 /* ── Layout de base ── */
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  overflow-x: clip;
-}
-
 .projet-divider {
   height: 1px;
   background: var(--border);
@@ -205,10 +198,8 @@ body {
 
 /* ── TÉMOIGNAGE ── */
 .projet-testi {
-  margin: 0 32px 48px;
+  margin: 0 auto 48px;
   max-width: calc(1100px - 64px);
-  margin-left: auto;
-  margin-right: auto;
   background: var(--dark);
   border-radius: 12px;
   padding: 28px 32px;
@@ -258,10 +249,8 @@ body {
 
 /* ── CTA FINAL ── */
 .projet-cta-section {
-  margin: 0 32px 56px;
+  margin: 0 auto 56px;
   max-width: calc(1100px - 64px);
-  margin-left: auto;
-  margin-right: auto;
   background: var(--dark);
   border-radius: 14px;
   padding: 32px 36px;
