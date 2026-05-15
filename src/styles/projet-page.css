@@ -1,0 +1,323 @@
+/* ============================================================
+   PROJET PAGE — Styles spécifiques
+   Chargé via projet-page.ts (qui importe aussi style.css)
+   ============================================================ */
+
+/* ── Layout de base ── */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+.projet-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 32px;
+}
+
+/* ── NAV ── */
+.projet-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 238, 223, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.projet-nav.is-scrolled {
+  border-color: var(--border);
+  background: rgba(250, 238, 223, 0.96);
+}
+
+.projet-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.projet-nav-logo img {
+  display: block;
+}
+
+.projet-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.projet-nav-back:hover { opacity: 0.7; }
+
+.projet-nav-back svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ── HERO ── */
+.projet-hero {
+  padding: 56px 32px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+.projet-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+}
+
+.projet-title {
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.projet-type {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.projet-desc {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #3a3a3a;
+  max-width: 480px;
+}
+
+.projet-visual {
+  border-radius: 12px;
+  border: 2px solid var(--dark);
+  box-shadow: 6px 6px 0 rgba(24, 23, 22, 0.12);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.projet-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── GALERIE ── */
+.projet-gallery {
+  padding: 40px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.projet-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.projet-gallery-item {
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+}
+
+.projet-gallery-item--wide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+
+.projet-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.projet-gallery-placeholder {
+  background: linear-gradient(135deg, var(--surface) 0%, #c8b098 100%);
+}
+
+.projet-gallery-label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(24, 23, 22, 0.65);
+  color: #faeedf;
+  padding: 3px 8px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* ── CONTEXTE ── */
+.projet-context {
+  padding: 40px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.projet-context-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #3a3a3a;
+  max-width: 700px;
+}
+
+.projet-context-text + .projet-context-text {
+  margin-top: 16px;
+}
+
+/* ── TÉMOIGNAGE ── */
+.projet-testi {
+  margin: 0 32px 48px;
+  max-width: calc(1100px - 64px);
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 28px 32px;
+  border: 1.5px solid var(--dark-soft);
+}
+
+.projet-testi-quote {
+  font-size: 16px;
+  font-style: italic;
+  color: #e9d8c2;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.projet-testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.projet-testi-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #faeedf;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.projet-testi-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #faeedf;
+}
+
+.projet-testi-role {
+  display: block;
+  font-size: 11px;
+  color: #8a7a6a;
+}
+
+/* ── CTA FINAL ── */
+.projet-cta-section {
+  margin: 0 32px 56px;
+  max-width: calc(1100px - 64px);
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--dark);
+  border-radius: 14px;
+  padding: 32px 36px;
+  border: 1.5px solid var(--dark-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.projet-cta-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #faeedf;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.projet-cta-sub {
+  font-size: 13px;
+  color: #8a7a6a;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .projet-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 20px 32px;
+  }
+
+  .projet-visual {
+    max-width: 100%;
+    order: -1;
+  }
+
+  .projet-gallery { padding: 32px 20px; }
+  .projet-context { padding: 32px 20px; }
+  .projet-divider { margin: 0 20px; }
+  .projet-nav-inner { padding: 0 20px; }
+  .projet-testi,
+  .projet-cta-section { margin: 0 20px 32px; }
+}
+
+@media (max-width: 600px) {
+  .projet-gallery-grid { grid-template-columns: 1fr 1fr; }
+  .projet-gallery-item--wide { grid-column: span 2; }
+
+  .projet-cta-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .projet-gallery-grid { grid-template-columns: 1fr; }
+  .projet-gallery-item--wide { grid-column: span 1; aspect-ratio: 4 / 3; }
+}
