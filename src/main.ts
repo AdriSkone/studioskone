@@ -1,5 +1,4 @@
 import './style.css'
-import './hero-mount'
 import { initContactForm } from './components/contact-form'
 import { initWorkCarousel } from './components/work-carousel'
 
@@ -74,6 +73,23 @@ if (heroEl) {
       heroEl.classList.add('hero-loaded')
     })
   })
+}
+
+// Hero top — fade on scroll (replaces Framer Motion logoScrollOpacity)
+const heroTopEl = document.querySelector<HTMLElement>('.hero-top')
+if (heroTopEl) {
+  let heroScrollTicking = false
+  window.addEventListener('scroll', () => {
+    if (!heroScrollTicking) {
+      heroScrollTicking = true
+      requestAnimationFrame(() => {
+        const vh = window.innerHeight
+        const progress = (window.scrollY - vh * 0.35) / (vh * 0.4)
+        heroTopEl.style.opacity = String(Math.max(0, Math.min(1, 1 - progress)))
+        heroScrollTicking = false
+      })
+    }
+  }, { passive: true })
 }
 
 // ============================================================

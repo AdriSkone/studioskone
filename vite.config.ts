@@ -22,8 +22,8 @@ export default defineConfig({
         garantibox:  resolve(__dirname, 'projets/garantibox.html'),
         cafeo:       resolve(__dirname, 'projets/cafeo.html'),
         niortBasket: resolve(__dirname, 'projets/niort-basket.html'),
-        aurem:       resolve(__dirname, 'projets/aurem.html'),
         archeon:     resolve(__dirname, 'projets/archeon.html'),
+        mBivouak:    resolve(__dirname, 'projets/m-bivouak.html'),
       },
       output: {
         assetFileNames: (asset) =>

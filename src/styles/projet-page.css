@@ -159,6 +159,50 @@
   display: block;
 }
 
+/* Écran mobile (screenshot vertical) : centré, sans rognage, sur fond crème */
+.projet-gallery-item--mobile {
+  background: var(--bg-soft);
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.projet-gallery-item--mobile img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Mockup composite (plusieurs écrans) : affiché en entier, sans rognage */
+.projet-visual--contain {
+  background: var(--bg-soft);
+}
+
+.projet-visual--contain img {
+  object-fit: contain;
+}
+
+.projet-gallery-item--contain {
+  background: var(--bg-soft);
+}
+
+.projet-gallery-item--contain img {
+  object-fit: contain;
+}
+
+/* Mockup presque carré dans la case large : ratio resserré pour limiter les bandes */
+.projet-gallery-item--wide.projet-gallery-item--contain {
+  aspect-ratio: 3 / 2;
+}
+
+/* Bandeau pleine largeur (section horizontale type stories) */
+.projet-gallery-item--full {
+  grid-column: 1 / -1;
+  aspect-ratio: 18 / 5;
+}
+
 .projet-gallery-placeholder {
   background: linear-gradient(135deg, var(--surface) 0%, #c8b098 100%);
 }

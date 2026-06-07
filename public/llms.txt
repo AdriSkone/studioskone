@@ -1,0 +1,34 @@
+# Studio Skøne
+
+> Studio digital indépendant spécialisé en design produit et développement web & mobile. Fondé par Adrien Bidet. Basé à Paris, disponible partout en France.
+
+Studio Skøne conçoit et développe des produits numériques — sites vitrines, applications web, e-commerce, applications mobiles — en gérant l'intégralité du projet de la conception au lancement. Une seule personne tient le design et le développement : Adrien Bidet.
+
+## Services et tarifs
+
+- **Landing page & site vitrine** : dès 900 €, livraison 2–3 semaines
+- **Application web, e-commerce & SaaS** : dès 2 500 €, livraison 4–6 semaines
+- **Direction artistique & UI** : dès 600 €
+- **Application mobile iOS & Android** : sur devis
+
+## Méthode de travail
+
+1. Cadrage — atelier de découverte, structure du projet
+2. Conception visuelle — maquettes validées par le client avant développement
+3. Développement — pixel-perfect, testé sur tous les supports
+4. Mise en ligne — déploiement, configuration domaine, suivi post-lancement
+
+## Projets réalisés
+
+- **ele — Ateliers Caféologie** : site web & identité visuelle
+- **MyBoat** : marketplace iOS & Android (5 semaines de la maquette au store)
+- **Garantibox** : application SaaS pour centraliser garanties & factures
+- **Niort Basket** : refonte site club & e-commerce
+- **M.Bivouak** : identité de marque outdoor & boutique Shopify
+- **Archéon** : portfolio & site vitrine architecture
+
+## Contact
+
+- Site : https://www.studioskone.com
+- Email : contact@studioskone.com
+- Instagram : https://www.instagram.com/studio.skone/
