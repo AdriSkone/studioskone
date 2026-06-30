@@ -18,8 +18,16 @@ const RATE_LIMIT_WINDOW = 15 * 60
 const TOKEN_RE = /^[A-Za-z0-9_-]{20,128}$/
 
 export default async function handler(req: Request): Promise<Response> {
-  const ip = getClientIp(req)
-  const rl = await checkRateLimit(`rl:authverify:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW)
+  // Rate limit protégé : si la KV est indisponible, on redirige proprement vers /admin
+  // au lieu de laisser l'erreur remonter en FUNCTION_INVOCATION_FAILED non catché.
+  let rl
+  try {
+    const ip = getClientIp(req)
+    rl = await checkRateLimit(`rl:authverify:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW)
+  } catch (err) {
+    console.error('[auth/verify] rate-limit error:', err)
+    return redirectToAdmin(req, 'server_error')
+  }
   if (!rl.allowed) return redirectToAdmin(req, 'rate_limited')
 
   if (req.method === 'GET') {

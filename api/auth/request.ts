@@ -29,19 +29,21 @@ export default async function handler(req: Request): Promise<Response> {
     return jsonError(403, 'Origin invalide')
   }
 
-  const ip = getClientIp(req)
-  const rl = await checkRateLimit(`rl:authrequest:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW)
-  if (!rl.allowed) {
-    return new Response(JSON.stringify({ error: 'Trop de tentatives. Réessayez plus tard.' }), {
-      status: 429,
-      headers: {
-        'Content-Type': 'application/json',
-        'Retry-After': String(rl.retryAfterSeconds),
-      },
-    })
-  }
-
   try {
+    // Rate limit dans le try : si la KV est indisponible, on dégrade en 500 propre
+    // (message générique) au lieu d'un FUNCTION_INVOCATION_FAILED non catché.
+    const ip = getClientIp(req)
+    const rl = await checkRateLimit(`rl:authrequest:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW)
+    if (!rl.allowed) {
+      return new Response(JSON.stringify({ error: 'Trop de tentatives. Réessayez plus tard.' }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(rl.retryAfterSeconds),
+        },
+      })
+    }
+
     const adminEmail = process.env.ADMIN_EMAIL
     if (!adminEmail) throw new Error('ADMIN_EMAIL manquant')
 
