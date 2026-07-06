@@ -8,6 +8,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main:        resolve(__dirname, 'index.html'),
+        giftmatch:   resolve(__dirname, 'projets/giftmatch.html'),
+        tasq:        resolve(__dirname, 'projets/tasq.html'),
         myboat:      resolve(__dirname, 'projets/myboat.html'),
         garantibox:  resolve(__dirname, 'projets/garantibox.html'),
         cafeo:       resolve(__dirname, 'projets/cafeo.html'),

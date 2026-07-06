@@ -1184,6 +1184,18 @@ button {
   object-position: center 62%;
 }
 
+/* GiftMatch: écran mobile dark chaud — fond terracotta au lieu du bleuté par défaut */
+.work-card-image--giftmatch {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(230, 126, 66, 0.22) 0%, transparent 70%),
+    linear-gradient(160deg, #2a1c14 0%, #1a1109 60%, #0e0906 100%);
+}
+
+.work-card-image--giftmatch img {
+  padding: 16px 12px 0;
+  object-position: center 52%;
+}
+
 /* Badge — top-left of image, néo-brutal rectangle */
 .work-card-badge {
   position: absolute;
