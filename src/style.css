@@ -867,7 +867,7 @@ button {
   color: var(--dark);
   line-height: 1.4;
 }
-.tarif-list li::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.tarif-list li::before { content: '·'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
 .tarif-card--featured .tarif-list li { color: rgba(250,238,223,.68); }
 /* ============================================================
    BOUTONS CTA — système réutilisable (.btn / .btn--primary / .btn--secondary)

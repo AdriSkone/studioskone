@@ -1,7 +1,7 @@
 /**
- * ContactForm — Studio Skøne
+ * ContactForm · Studio Skøne
  * Formulaire de contact multi-étapes, dark luxury.
- * Vanilla TypeScript — aucune dépendance externe.
+ * Vanilla TypeScript · aucune dépendance externe.
  *
  * Usage dans main.ts :
  *   import { initContactForm } from './components/contact-form'
@@ -152,7 +152,7 @@ function buildTemplate(): string {
       <!-- Glass card -->
       <div class="cf-card" id="cfCard">
 
-        <!-- Étape 1 — Type de projet -->
+        <!-- Étape 1 · Type de projet -->
         <div class="cf-panel is-active" data-panel="0" role="group" aria-labelledby="cfQ0">
           <p class="cf-question" id="cfQ0">Quel type de projet souhaitez-vous créer&nbsp;?</p>
           <div class="cf-choices cf-choices--2col">
@@ -163,7 +163,7 @@ function buildTemplate(): string {
           </div>
         </div>
 
-        <!-- Étape 2 — Budget -->
+        <!-- Étape 2 · Budget -->
         <div class="cf-panel" data-panel="1" role="group" aria-labelledby="cfQ1">
           <p class="cf-question" id="cfQ1">Quel est votre budget estimatif&nbsp;?</p>
           <div class="cf-choices">
@@ -171,7 +171,7 @@ function buildTemplate(): string {
           </div>
         </div>
 
-        <!-- Étape 3 — Délai -->
+        <!-- Étape 3 · Délai -->
         <div class="cf-panel" data-panel="2" role="group" aria-labelledby="cfQ2">
           <p class="cf-question" id="cfQ2">Quel est votre délai idéal&nbsp;?</p>
           <div class="cf-choices cf-choices--2col">
@@ -179,7 +179,7 @@ function buildTemplate(): string {
           </div>
         </div>
 
-        <!-- Étape 4 — Contact -->
+        <!-- Étape 4 · Contact -->
         <div class="cf-panel" data-panel="3" role="group" aria-labelledby="cfQ3">
           <p class="cf-question" id="cfQ3">Parlez-moi de vous</p>
           <div class="cf-fields">
@@ -218,7 +218,7 @@ function buildTemplate(): string {
                 autocomplete="organization"
                 aria-label="Entreprise (optionnel)"
               >
-              <label for="cf-entreprise">Entreprise <span class="cf-optional">— optionnel</span></label>
+              <label for="cf-entreprise">Entreprise <span class="cf-optional">· optionnel</span></label>
             </div>
 
             <div class="cf-field cf-field--area" id="cfFieldDesc">
@@ -232,7 +232,7 @@ function buildTemplate(): string {
               <label for="cf-description">Description du projet</label>
             </div>
 
-            <!-- Fichier joint — optionnel -->
+            <!-- Fichier joint · optionnel -->
             <div class="cf-file-zone" id="cfFileZone">
               <input
                 type="file"
@@ -240,7 +240,7 @@ function buildTemplate(): string {
                 name="attachment"
                 class="cf-file-input"
                 accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
-                aria-label="Joindre un fichier — optionnel"
+                aria-label="Joindre un fichier · optionnel"
               >
               <label for="cf-file" class="cf-file-label">
                 <span class="cf-file-icon" aria-hidden="true">
@@ -253,7 +253,7 @@ function buildTemplate(): string {
                 </span>
                 <span class="cf-file-body">
                   <span class="cf-file-main" id="cfFileName">Joindre un fichier</span>
-                  <span class="cf-file-sub">Brief, maquette, PDF — optionnel · Max 10 Mo</span>
+                  <span class="cf-file-sub">Brief, maquette, PDF · optionnel · Max 10 Mo</span>
                 </span>
               </label>
               <button
@@ -269,7 +269,7 @@ function buildTemplate(): string {
               </button>
             </div>
 
-            <!-- Honeypot anti-spam — invisible pour les humains, rempli par les bots -->
+            <!-- Honeypot anti-spam · invisible pour les humains, rempli par les bots -->
             <input
               type="text"
               name="_gotcha"
@@ -418,7 +418,7 @@ class ContactForm {
     // Prev
     root.querySelector('#cfPrev')?.addEventListener('click', () => this.handlePrev())
 
-    // RGPD checkbox — sync custom box
+    // RGPD checkbox · sync custom box
     const rgpdInput = root.querySelector<HTMLInputElement>('#cf-rgpd-check')
     const rgpdBox   = root.querySelector<HTMLElement>('#cfRgpdBox')
     rgpdInput?.addEventListener('change', () => {
@@ -429,7 +429,7 @@ class ContactForm {
       }
     })
 
-    // Text fields — live sync
+    // Text fields · live sync
     const textFields: Array<{ id: string; key: keyof ContactData }> = [
       { id: 'cf-nom',         key: 'nom' },
       { id: 'cf-email',       key: 'email' },
@@ -723,7 +723,7 @@ class ContactForm {
     if (btn) {
       btn.classList.add('is-error')
       const label = btn.querySelector<HTMLElement>('.cf-btn-label')
-      if (label) label.textContent = 'Erreur — réessayer'
+      if (label) label.textContent = 'Erreur · réessayer'
       setTimeout(() => {
         btn.classList.remove('is-error')
         if (label) label.textContent = 'Discuter de mon projet'
