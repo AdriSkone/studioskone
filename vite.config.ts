@@ -16,6 +16,7 @@ export default defineConfig({
         niortBasket: resolve(__dirname, 'projets/niort-basket.html'),
         archeon:     resolve(__dirname, 'projets/archeon.html'),
         mBivouak:    resolve(__dirname, 'projets/m-bivouak.html'),
+        merelEtFils: resolve(__dirname, 'projets/merel-et-fils.html'),
       },
       output: {
         assetFileNames: (asset) =>
