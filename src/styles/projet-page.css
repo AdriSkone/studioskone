@@ -184,6 +184,11 @@
   object-fit: contain;
 }
 
+/* Screenshot sombre : bandes assorties au fond du site plutôt qu'au crème */
+.projet-visual--dark {
+  background: #171210;
+}
+
 .projet-gallery-item--contain {
   background: var(--bg-soft);
 }
