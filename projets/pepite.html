@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pépite | Studio Skøne</title>
+  <meta name="description" content="Réalisation Studio Skøne : Pépite, application mobile de récompenses familiales où l'enfant gagne des étoiles échangeables contre de vraies récompenses." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://studioskone.com/projets/pepite" />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2" crossorigin>
+  <meta property="og:type"        content="article" />
+  <meta property="og:locale"      content="fr_FR" />
+  <meta property="og:site_name"   content="Studio Skøne" />
+  <meta property="og:title"       content="Pépite | Studio Skøne" />
+  <meta property="og:description" content="Application mobile de récompenses familiales : le parent crée les missions, l'enfant gagne des étoiles." />
+  <meta property="og:image"       content="https://studioskone.com/work/pepite.webp" />
+  <meta property="og:url"         content="https://studioskone.com/projets/pepite" />
+</head>
+<body>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <nav class="projet-nav" aria-label="Navigation projet">
+    <div class="projet-nav-inner">
+      <a href="/" class="projet-nav-logo">
+        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" width="111" height="28">
+      </a>
+      <a href="/#work" class="projet-nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        Tous les projets
+      </a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="projet-hero reveal">
+      <div class="projet-hero-left">
+        <span class="projet-badge">App mobile</span>
+        <h1 class="projet-title">Pépite</h1>
+        <p class="projet-type">App mobile de récompenses familiales</p>
+        <p class="projet-desc">Pépite remet le tableau des bonnes actions sur le téléphone de la famille. Le parent crée les missions du quotidien, l'enfant les coche et gagne des étoiles, qu'il échange contre de vraies récompenses décidées à la maison. Un seul appareil, deux espaces : le parent pilote, l'enfant reçoit le téléphone pour son rituel.</p>
+      </div>
+      <div class="projet-visual projet-visual--contain projet-visual--pepite">
+        <img src="/work/pepite.webp" alt="Pépite · écran de passation, « Qui joue aujourd'hui ? » avec une pastille colorée par enfant" loading="eager">
+      </div>
+    </section>
+
+    <div class="projet-divider"></div>
+
+    <section class="projet-gallery reveal">
+      <p class="section-label">Écrans de l'app</p>
+      <div class="projet-gallery-grid">
+          <div class="projet-gallery-item projet-gallery-item--mobile">
+            <img src="/work/pepite-accueil.webp" alt="Pépite · tableau de bord parent avec les enfants du jour et la file à valider" loading="lazy">
+            <span class="projet-gallery-label">Tableau de bord</span>
+          </div>
+          <div class="projet-gallery-item projet-gallery-item--mobile">
+            <img src="/work/pepite-missions.webp" alt="Pépite · liste des missions créées par le parent, avec leur valeur en étoiles" loading="lazy">
+            <span class="projet-gallery-label">Mes missions</span>
+          </div>
+          <div class="projet-gallery-item projet-gallery-item--mobile">
+            <img src="/work/pepite-nouvelle-mission.webp" alt="Pépite · création d'une mission, titre, icône, valeur en étoiles, fréquence et destinataire" loading="lazy">
+            <span class="projet-gallery-label">Nouvelle mission</span>
+          </div>
+          <div class="projet-gallery-item projet-gallery-item--mobile">
+            <img src="/work/pepite-missions-enfant.webp" alt="Pépite · missions du jour côté enfant, deux missions cochées sur trois" loading="lazy">
+            <span class="projet-gallery-label">Missions du jour</span>
+          </div>
+          <div class="projet-gallery-item projet-gallery-item--mobile">
+            <img src="/work/pepite-collection.webp" alt="Pépite · planche de collection où les étoiles gagnées viennent se poser" loading="lazy">
+            <span class="projet-gallery-label">Ma collection</span>
+          </div>
+          <div class="projet-gallery-item projet-gallery-item--mobile">
+            <img src="/work/pepite-boutique.webp" alt="Pépite · boutique de récompenses, « il te manque 10 étoiles » pour choisir le dessert" loading="lazy">
+            <span class="projet-gallery-label">La boutique</span>
+          </div>
+      </div>
+    </section>
+
+    <div class="projet-divider"></div>
+
+    <section class="projet-context reveal">
+      <p class="section-label">Contexte &amp; enjeux</p>
+      <p class="projet-context-text">Les tableaux à gommettes marchent bien jusqu'au jour où la feuille se décolle du frigo. Pépite reprend le principe sans en faire un compteur de points creux : une étoile vaut toujours quelque chose de réel, une sortie, le choix du dessert, un peu d'argent de poche, et c'est la famille qui fixe le prix. Le parti pris tient en trois règles. Cocher une mission fait se poser une gommette, avec son rebond et son ombre colorée, parce que c'est le geste que l'enfant vient chercher. Une mission non faite reste neutre, jamais rouge, jamais grondée, et aucun enfant n'est comparé à un autre. Enfin le code à quatre chiffres protège la sortie du mode enfant, pas l'entrée côté parent : verrouiller le chemin fréquent aurait freiné l'usage quotidien pour rien.</p>
+      <p class="projet-context-text">L'app est en React Native (Expo) et TypeScript strict, avec Expo Router pour la navigation et Reanimated pour les animations d'étoiles. Tout est stocké dans une base SQLite locale : pas de compte, pas de serveur, aucune donnée d'enfant qui quitte l'appareil, ce qui simplifie l'architecture autant que ça règle la question de la conformité. La logique métier est couverte par 78 tests exécutés contre un vrai moteur SQLite en mémoire, contraintes et clés étrangères comprises. Les étoiles sont figées à l'instant du gain : changer le prix d'une mission demain ne retouche pas ce que l'enfant a déjà mérité. Côté design, un système sur mesure inspiré du cahier d'autocollants, formes très arrondies, ombres colorées plutôt que grises, base crème plutôt que blanc clinique, et un jaune réservé à l'étoile et à rien d'autre. Aucun composant n'écrit une couleur ou un rayon en dur, tout passe par des tokens.</p>
+    </section>
+
+    <div class="projet-divider"></div>
+
+    <section class="projet-testi reveal">
+      <blockquote class="projet-testi-quote">"Pas de client sur ce projet : une app née d'un besoin à la maison, où chaque étoile gagnée mène à une vraie récompense décidée en famille."</blockquote>
+      <div class="projet-testi-author">
+        <div class="projet-testi-avatar" aria-hidden="true">SK</div>
+        <div>
+          <span class="projet-testi-name">Studio Skøne</span>
+          <span class="projet-testi-role">Projet auto-initié, en développement</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="projet-cta-section reveal">
+      <div>
+        <p class="projet-cta-title">Un projet similaire en tête ?</p>
+        <p class="projet-cta-sub">Premier échange gratuit, sans engagement.</p>
+      </div>
+      <a href="/#contact" class="btn btn--primary btn--with-circle">
+        <span class="btn__circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+        Démarrer un projet similaire
+      </a>
+    </section>
+
+  </main>
+
+  <script type="module" src="/src/projet-page.ts"></script>
+</body>
+</html>

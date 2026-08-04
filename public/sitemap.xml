@@ -49,6 +49,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://studioskone.com/projets/pepite</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://studioskone.com/mentions-legales</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>yearly</changefreq>

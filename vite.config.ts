@@ -17,6 +17,7 @@ export default defineConfig({
         archeon:     resolve(__dirname, 'projets/archeon.html'),
         mBivouak:    resolve(__dirname, 'projets/m-bivouak.html'),
         merelEtFils: resolve(__dirname, 'projets/merel-et-fils.html'),
+        pepite:      resolve(__dirname, 'projets/pepite.html'),
       },
       output: {
         assetFileNames: (asset) =>
