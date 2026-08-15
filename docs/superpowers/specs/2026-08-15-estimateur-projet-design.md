@@ -72,12 +72,19 @@ apprend au visiteur qu'un site ne se limite pas au design.
 
 Effet de chaque question sur la fourchette :
 
-- **Type** : fixe la base et l'offre. Vitrine et vitrine avec réservation
-  partent de Fondation, boutique en ligne de Studio, application de Sur mesure.
-- **Taille** : déplace la fourchette à l'intérieur de l'offre, et fait basculer
-  de Fondation à Studio au-delà de 5 pages.
-- **Contenus** : élargit le haut de la fourchette quand textes et photos sont à
-  créer. Ne change jamais l'offre recommandée.
+- **Type** : fixe la base. Boutique en ligne part de Studio, application de Sur
+  mesure.
+- **Taille** : déplace la fourchette et détermine l'offre. Une page donne
+  Fondation, au-delà c'est Studio.
+- **Contenus** : élargit le haut de la fourchette. Ne change jamais l'offre
+  recommandée, ni la tranche de budget transmise.
+
+Le seuil de bascule Fondation / Studio est d'**une page**, et non de cinq :
+l'offre Fondation a été ramenée à une page le 2026-08-16. Un site de 2 à 5
+pages relève donc de Studio.
+
+Le choix « en partie » sur les contenus applique la moitié du supplément, soit
++12 %. Le spec initial ne traitait que « à créer ».
 
 ### Grille tarifaire
 
