@@ -79,6 +79,31 @@ Effet de chaque question sur la fourchette :
 - **Contenus** : élargit le haut de la fourchette quand textes et photos sont à
   créer. Ne change jamais l'offre recommandée.
 
+### Grille tarifaire
+
+Établie sur un TJM de 400 €. Chaque fourchette correspond à un nombre de jours
+multiplié par ce taux, ce qui permet de la recalculer si le TJM évolue.
+
+| | 1 page | 2-5 pages | 6-12 pages |
+|---|---|---|---|
+| Vitrine | 900 – 1 200 € | 1 600 – 2 400 € | 2 800 – 4 400 € |
+| Vitrine + réservation/devis | 1 400 – 1 800 € | 2 000 – 3 000 € | 3 200 – 4 800 € |
+| Boutique en ligne | — | 3 000 – 4 400 € | 4 000 – 6 400 € |
+| Application | Aucun chiffre, « à définir ensemble » |
+
+La boutique en ligne n'a pas de variante une page : le choix reste affiché mais
+renvoie la fourchette 2-5 pages.
+
+Contenus à créer : +25 % sur le haut de la fourchette uniquement. Une fourchette
+1 600 – 2 400 € devient 1 600 – 3 000 €. Le bas ne bouge jamais.
+
+Le choix « je ne sais pas encore » sur la taille affiche la fourchette complète
+de la ligne, du plancher 1 page au plafond 6-12 pages.
+
+Cette grille suppose l'offre Fondation limitée à une page. Le libellé
+« jusqu'à 5 pages » a été corrigé dans `index.html` et le JSON-LD le
+2026-08-16, sans quoi la page tarifs contredirait l'estimateur.
+
 ### Sortie
 
 Une fourchette, l'offre correspondante, un délai estimé, puis un bouton
@@ -114,6 +139,12 @@ par l'estimateur : une refonte se décrit mal en trois questions.
 
 Le type « application » et le choix « je ne sais pas encore » envoient `a-def`
 en budget.
+
+Pour tous les autres cas, la tranche transmise est celle qui contient le milieu
+de la fourchette estimée. Une estimation 1 600 – 2 400 € a pour milieu 2 000 €,
+donc `1k-3k`. Une estimation 3 000 – 4 400 € a pour milieu 3 700 €, donc
+`3k-5k`. Le supplément « contenus à créer » est exclu de ce calcul : il élargit
+l'affichage sans déplacer la tranche annoncée au formulaire.
 
 Le délai affiché en sortie est indicatif, déduit de l'offre retenue. Il n'est
 pas transmis : l'estimateur ne pose pas la question, donc `delay` part à `flex`
