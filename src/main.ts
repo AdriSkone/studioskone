@@ -1,4 +1,5 @@
 import './style.css'
+import './styles/estimator.css' // Styles du bloc estimateur (Task 3)
 import { initContactForm } from './components/contact-form'
 import { initWorkCarousel } from './components/work-carousel'
 
