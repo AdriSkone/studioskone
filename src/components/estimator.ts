@@ -16,12 +16,13 @@ export function initEstimator(form: ContactFormHandle | null): void {
   const root = document.querySelector<HTMLElement>('#estimator')
   const formEl = document.querySelector<HTMLFormElement>('#estimatorForm')
   const result = document.querySelector<HTMLElement>('#estimatorResult')
-  if (!root || !formEl || !result) return
-
-  const offerEl = document.querySelector<HTMLElement>('#estimatorOffer')!
-  const rangeEl = document.querySelector<HTMLElement>('#estimatorRange')!
-  const delayEl = document.querySelector<HTMLElement>('#estimatorDelay')!
-  const cta     = document.querySelector<HTMLAnchorElement>('#estimatorCta')!
+  const offerEl = document.querySelector<HTMLElement>('#estimatorOffer')
+  const rangeEl = document.querySelector<HTMLElement>('#estimatorRange')
+  const delayEl = document.querySelector<HTMLElement>('#estimatorDelay')
+  const cta     = document.querySelector<HTMLAnchorElement>('#estimatorCta')
+  // Un seul garde-fou pour les sept sélecteurs : si le markup est incomplet,
+  // le composant se tait plutôt que de risquer un crash sur un `!` isolé.
+  if (!root || !formEl || !result || !offerEl || !rangeEl || !delayEl || !cta) return
 
   let started = false
   let last: ReturnType<typeof estimate> | null = null
@@ -43,14 +44,14 @@ export function initEstimator(form: ContactFormHandle | null): void {
     const r = estimate({ type, size, content })
     last = r
 
-    offerEl.textContent = `Offre ${r.offer}`
-    rangeEl.textContent = r.showPrice && r.min !== null && r.max !== null
+    // Non-null : root/formEl/result/offerEl/rangeEl/delayEl/cta sont déjà
+    // vérifiés par le garde-fou en tête de fonction, mais le contrôle de
+    // flux de TypeScript ne traverse pas cette closure imbriquée.
+    offerEl!.textContent = `Offre ${r.offer}`
+    rangeEl!.textContent = r.showPrice && r.min !== null && r.max !== null
       ? `${euros(r.min)} – ${euros(r.max)}`
       : 'À définir ensemble'
-    delayEl.textContent = `Livraison estimée · ${r.delay}`
-
-    // Non-null : déjà vérifié par le garde-fou en tête de fonction, mais le
-    // contrôle de flux de TypeScript ne traverse pas cette closure.
+    delayEl!.textContent = `Livraison estimée · ${r.delay}`
     result!.hidden = false
     track('estimateur-resultat', { offre: r.offer, type: r.projectType })
   }
