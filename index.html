@@ -686,6 +686,56 @@
         </div>
       </div>
       <p class="tarifs-footnote reveal">Besoin de design seul, sans développement ? <a href="#contact">À partir de 600€</a></p>
+
+      <div class="estimator reveal" id="estimator">
+        <div class="estimator-head">
+          <span class="estimator-eyebrow">Estimation · 30 secondes</span>
+          <h3 class="estimator-title">Pas sûr de l'offre qui vous correspond ?</h3>
+          <p class="estimator-sub">Trois questions, une fourchette. Sans engagement.</p>
+        </div>
+
+        <form class="estimator-form" id="estimatorForm">
+          <fieldset class="estimator-q" data-question="type">
+            <legend class="estimator-legend">Quel type de site ?</legend>
+            <div class="estimator-options">
+              <label class="estimator-opt"><input type="radio" name="type" value="vitrine" required><span>Vitrine</span></label>
+              <label class="estimator-opt"><input type="radio" name="type" value="vitrine-plus"><span>Vitrine avec réservation ou devis</span></label>
+              <label class="estimator-opt"><input type="radio" name="type" value="boutique"><span>Boutique en ligne</span></label>
+              <label class="estimator-opt"><input type="radio" name="type" value="application"><span>Application</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="estimator-q" data-question="size">
+            <legend class="estimator-legend">Quelle taille ?</legend>
+            <div class="estimator-options">
+              <label class="estimator-opt"><input type="radio" name="size" value="1" required><span>Une page</span></label>
+              <label class="estimator-opt"><input type="radio" name="size" value="2-5"><span>2 à 5 pages</span></label>
+              <label class="estimator-opt"><input type="radio" name="size" value="6-12"><span>6 à 12 pages</span></label>
+              <label class="estimator-opt"><input type="radio" name="size" value="inconnu"><span>Je ne sais pas encore</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="estimator-q" data-question="content">
+            <legend class="estimator-legend">Textes et photos prêts ?</legend>
+            <div class="estimator-options">
+              <label class="estimator-opt"><input type="radio" name="content" value="pret" required><span>Oui</span></label>
+              <label class="estimator-opt"><input type="radio" name="content" value="partiel"><span>En partie</span></label>
+              <label class="estimator-opt"><input type="radio" name="content" value="a-creer"><span>Non, à créer</span></label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="estimator-result" id="estimatorResult" aria-live="polite">
+          <div class="estimator-result-inner" hidden>
+            <span class="estimator-result-label">Votre projet ressemble à</span>
+            <p class="estimator-offer" id="estimatorOffer"></p>
+            <p class="estimator-range" id="estimatorRange"></p>
+            <p class="estimator-delay" id="estimatorDelay"></p>
+            <a href="#contact" class="estimator-cta" id="estimatorCta">Discuter de ce projet</a>
+            <p class="estimator-disclaimer">Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

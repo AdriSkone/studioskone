@@ -1,0 +1,166 @@
+.estimator {
+  margin-top: 4.5rem;
+  padding: 2.5rem 2rem 2.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+/* halo d'accent décentré : de la profondeur, pas un aplat */
+.estimator::before {
+  content: '';
+  position: absolute;
+  top: -140px;
+  right: -110px;
+  width: 340px;
+  height: 340px;
+  background: var(--glow-accent);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.estimator-head { max-width: 34rem; margin-bottom: 2rem; }
+
+.estimator-eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.estimator-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.15;
+  margin: 0.6rem 0 0.5rem;
+  color: var(--text);
+}
+
+.estimator-sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+.estimator-q { border: 0; padding: 0; margin: 0 0 1.75rem; }
+
+.estimator-legend {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  padding: 0;
+}
+
+.estimator-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.estimator-opt { position: relative; }
+
+/* le radio reste focusable : accessible sans JS */
+.estimator-opt input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.estimator-opt span {
+  display: block;
+  padding: 0.6rem 1.05rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color var(--transition), background var(--transition),
+              transform var(--transition);
+}
+
+.estimator-opt input:hover + span { border-color: var(--accent); }
+
+.estimator-opt input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.estimator-opt input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  transform: translateY(-1px);
+}
+
+.estimator-result {
+  margin-top: 0.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* #estimatorResult reste en permanence dans l'arbre d'accessibilité pour que
+   aria-live puisse annoncer la première estimation : c'est son contenu
+   interne qui est masqué/révélé, pas la région elle-même. */
+.estimator-result-inner { animation: estimator-in 0.5s var(--ease) both; }
+
+.estimator-result-inner[hidden] { display: none; }
+
+.estimator-result-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.estimator-offer {
+  font-size: 1.25rem;
+  margin: 0.35rem 0 0.15rem;
+  color: var(--text);
+}
+
+.estimator-range {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  margin: 0.25rem 0 0.35rem;
+  color: var(--accent);
+}
+
+.estimator-delay { color: var(--muted); font-size: 0.9rem; margin: 0 0 1.5rem; }
+
+.estimator-cta {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.estimator-cta:hover { background: var(--accent); transform: translateY(-2px); }
+
+.estimator-disclaimer {
+  margin: 1.1rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 32rem;
+}
+
+@keyframes estimator-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 640px) {
+  .estimator { padding: 2rem 1.25rem 2.25rem; border-radius: 18px; }
+  .estimator-options { gap: 0.4rem; }
+  .estimator-opt span { padding: 0.55rem 0.9rem; font-size: 0.85rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .estimator-result-inner { animation: none; }
+  .estimator-opt span,
+  .estimator-cta { transition: none; }
+  .estimator-opt input:checked + span,
+  .estimator-cta:hover { transform: none; }
+}
