@@ -1,6 +1,7 @@
 import './style.css'
 import './styles/estimator.css' // Styles du bloc estimateur (Task 3)
 import { initContactForm } from './components/contact-form'
+import { initEstimator } from './components/estimator'
 import { initWorkCarousel } from './components/work-carousel'
 
 // ============================================================
@@ -293,9 +294,11 @@ if (cookieBanner && !localStorage.getItem(COOKIE_KEY)) {
 // Contact multi-step form
 // ============================================================
 const contactForm = initContactForm()
-// Référence conservée pour un futur composant estimateur (préremplissage
-// via contactForm?.prefill(...) puis contactForm?.jumpToContact()).
-void contactForm
+
+// ============================================================
+// Estimateur de prix · branché au formulaire de contact
+// ============================================================
+initEstimator(contactForm)
 
 // ============================================================
 // Work — Swiper carousel
