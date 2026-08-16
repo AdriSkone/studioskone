@@ -5,7 +5,7 @@
  *
  * Usage dans main.ts :
  *   import { initContactForm } from './components/contact-form'
- *   initContactForm()
+ *   const contactForm = initContactForm()
  */
 
 import '../styles/contact-form.css'
@@ -507,15 +507,17 @@ class ContactForm {
 
   // ── Façade publique (préremplissage depuis un composant externe) ──
 
-  public prefill(values: { projectType: string; budget: string; delay: string }): void {
+  public prefill(values: { projectType: string; budget: string }): void {
     this.data.projectType = values.projectType
     this.data.budget      = values.budget
-    this.data.delay       = values.delay
     this.syncChoiceUI()
   }
 
-  public jumpToContact(): void {
-    const target = STEPS.length - 1
+  // L'estimateur connaît Projet et Budget mais ne pose jamais la question du
+  // délai : il saute jusqu'à cette étape pour la faire répondre au visiteur,
+  // plutôt que de lui attribuer une réponse qu'il n'a pas donnée.
+  public jumpToDelay(): void {
+    const target = 2 // index de l'étape Délai dans STEPS
     if (this.currentStep === target) return
     this.goTo(target, 1)
   }
@@ -821,10 +823,10 @@ class ContactForm {
 // ============================================================
 
 // Façade minimale exposée aux composants externes (ex. estimateur) pour
-// préremplir le formulaire et sauter directement à l'étape Contact.
+// préremplir le formulaire et sauter directement à l'étape Délai.
 export type ContactFormHandle = {
-  prefill(data: { projectType: string; budget: string; delay: string }): void
-  jumpToContact(): void
+  prefill(data: { projectType: string; budget: string }): void
+  jumpToDelay(): void
 }
 
 export function initContactForm(): ContactFormHandle | null {
@@ -833,6 +835,6 @@ export function initContactForm(): ContactFormHandle | null {
   const form = new ContactForm(el)
   return {
     prefill: (data) => form.prefill(data),
-    jumpToContact: () => form.jumpToContact(),
+    jumpToDelay: () => form.jumpToDelay(),
   }
 }

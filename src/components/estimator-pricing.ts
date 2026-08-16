@@ -13,10 +13,13 @@ export type Estimate = {
   max: number | null
   showPrice: boolean
   offer: 'Fondation' | 'Studio' | 'Sur mesure'
+  // L'offre n'est nommée que si le plancher de la fourchette atteint son
+  // prix affiché sur la grille tarifaire (Fondation 900 €, Studio 2 500 €).
+  // Sinon le visiteur lit deux prix contradictoires pour la même offre.
+  offerNamed: boolean
   delay: string
   projectType: 'vitrine' | 'ecommerce' | 'app-web'
   budget: '1k-3k' | '3k-5k' | '5k-10k' | '10k+' | 'a-def'
-  formDelay: 'flex'
 }
 
 type Range = [number, number]
@@ -33,6 +36,13 @@ const CONTENT_UPLIFT: Record<ContentChoice, number> = {
   'pret':    1,
   'partiel': 1.12,
   'a-creer': 1.25,
+}
+
+// Prix affichés sur la grille tarifaire (index.html), sert de référence pour
+// décider si une offre peut être nommée sans se contredire.
+const OFFER_PRICE: Record<'Fondation' | 'Studio', number> = {
+  'Fondation': 900,
+  'Studio':    2500,
 }
 
 const PROJECT_TYPE: Record<SiteType, Estimate['projectType']> = {
@@ -57,9 +67,9 @@ export function estimate(input: EstimateInput): Estimate {
   if (input.type === 'application') {
     return {
       min: null, max: null, showPrice: false,
-      offer: 'Sur mesure',
+      offer: 'Sur mesure', offerNamed: true,
       delay: 'à définir ensemble',
-      projectType, budget: 'a-def', formDelay: 'flex',
+      projectType, budget: 'a-def',
     }
   }
 
@@ -80,11 +90,12 @@ export function estimate(input: EstimateInput): Estimate {
   // Une page relève de Fondation, au-delà de Studio. Une taille inconnue est
   // traitée comme le cas le plus large.
   const offer = input.type === 'boutique' || input.size !== '1' ? 'Studio' : 'Fondation'
+  const offerNamed = base[0] >= OFFER_PRICE[offer]
 
   return {
     min: base[0], max, showPrice: true,
-    offer,
+    offer, offerNamed,
     delay: offer === 'Fondation' ? '2 à 3 semaines' : '4 à 6 semaines',
-    projectType, budget, formDelay: 'flex',
+    projectType, budget,
   }
 }

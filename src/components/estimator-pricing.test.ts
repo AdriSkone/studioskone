@@ -76,9 +76,70 @@ describe('estimate', () => {
     expect(r.offer).toBe('Studio')
   })
 
-  it('le délai transmis au formulaire est toujours flex', () => {
-    for (const type of ['vitrine', 'vitrine-plus', 'boutique', 'application'] as const) {
-      expect(estimate({ type, size: '2-5', content: 'pret' }).formDelay).toBe('flex')
-    }
+  it('vitrine-plus : prix corrects sur les trois tailles', () => {
+    const one = estimate({ type: 'vitrine-plus', size: '1', content: 'pret' })
+    expect(one.min).toBe(1400)
+    expect(one.max).toBe(1800)
+    expect(one.offer).toBe('Fondation')
+
+    const mid = estimate({ type: 'vitrine-plus', size: '2-5', content: 'pret' })
+    expect(mid.min).toBe(2000)
+    expect(mid.max).toBe(3000)
+    expect(mid.offer).toBe('Studio')
+
+    const large = estimate({ type: 'vitrine-plus', size: '6-12', content: 'pret' })
+    expect(large.min).toBe(3200)
+    expect(large.max).toBe(4800)
+    expect(large.offer).toBe('Studio')
+  })
+
+  describe('offerNamed : l\'offre ne se nomme que si le plancher atteint son prix affiché', () => {
+    it('vitrine 2-5 pages : Studio annoncé mais plancher sous 2 500 €, offre non nommée', () => {
+      const r = estimate({ type: 'vitrine', size: '2-5', content: 'pret' })
+      expect(r.offer).toBe('Studio')
+      expect(r.offerNamed).toBe(false)
+    })
+
+    it('vitrine-plus 2-5 pages : plancher sous 2 500 €, offre non nommée', () => {
+      const r = estimate({ type: 'vitrine-plus', size: '2-5', content: 'pret' })
+      expect(r.offer).toBe('Studio')
+      expect(r.offerNamed).toBe(false)
+    })
+
+    it('vitrine taille inconnue : plancher à 900 €, offre non nommée', () => {
+      const r = estimate({ type: 'vitrine', size: 'inconnu', content: 'pret' })
+      expect(r.offer).toBe('Studio')
+      expect(r.offerNamed).toBe(false)
+    })
+
+    it('vitrine-plus taille inconnue : plancher à 1 400 €, offre non nommée', () => {
+      const r = estimate({ type: 'vitrine-plus', size: 'inconnu', content: 'pret' })
+      expect(r.offer).toBe('Studio')
+      expect(r.offerNamed).toBe(false)
+    })
+
+    it('vitrine une page : plancher à 900 €, Fondation nommée', () => {
+      const r = estimate({ type: 'vitrine', size: '1', content: 'pret' })
+      expect(r.offer).toBe('Fondation')
+      expect(r.offerNamed).toBe(true)
+    })
+
+    it('vitrine 6-12 pages : plancher à 2 800 €, Studio nommée', () => {
+      const r = estimate({ type: 'vitrine', size: '6-12', content: 'pret' })
+      expect(r.offer).toBe('Studio')
+      expect(r.offerNamed).toBe(true)
+    })
+
+    it('boutique : plancher toujours au-dessus de 2 500 €, Studio nommée', () => {
+      const r = estimate({ type: 'boutique', size: '2-5', content: 'pret' })
+      expect(r.offer).toBe('Studio')
+      expect(r.offerNamed).toBe(true)
+    })
+
+    it('application : Sur mesure n\'a pas de prix affiché, toujours nommée', () => {
+      const r = estimate({ type: 'application', size: '2-5', content: 'pret' })
+      expect(r.offer).toBe('Sur mesure')
+      expect(r.offerNamed).toBe(true)
+    })
   })
 })

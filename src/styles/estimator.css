@@ -86,7 +86,7 @@
 .estimator-opt input:checked + span {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--bg);
   transform: translateY(-1px);
 }
 
@@ -94,10 +94,14 @@
   margin-top: 0.5rem;
   padding-top: 1.75rem;
   border-top: 1px solid var(--border);
-  animation: estimator-in 0.5s var(--ease) both;
 }
 
-.estimator-result[hidden] { display: none; }
+/* #estimatorResult reste en permanence dans l'arbre d'accessibilité pour que
+   aria-live puisse annoncer la première estimation : c'est son contenu
+   interne qui est masqué/révélé, pas la région elle-même. */
+.estimator-result-inner { animation: estimator-in 0.5s var(--ease) both; }
+
+.estimator-result-inner[hidden] { display: none; }
 
 .estimator-result-label {
   font-size: 0.75rem;
@@ -154,7 +158,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .estimator-result { animation: none; }
+  .estimator-result-inner { animation: none; }
   .estimator-opt span,
   .estimator-cta { transition: none; }
   .estimator-opt input:checked + span,
