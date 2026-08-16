@@ -505,6 +505,21 @@ class ContactForm {
     })
   }
 
+  // ── Façade publique (préremplissage depuis un composant externe) ──
+
+  public prefill(values: { projectType: string; budget: string; delay: string }): void {
+    this.data.projectType = values.projectType
+    this.data.budget      = values.budget
+    this.data.delay       = values.delay
+    this.syncChoiceUI()
+  }
+
+  public jumpToContact(): void {
+    const target = STEPS.length - 1
+    if (this.currentStep === target) return
+    this.goTo(target, 1)
+  }
+
   // ── Choice selection ───────────────────────────────────────
 
   private selectChoice(btn: HTMLElement): void {
@@ -660,6 +675,27 @@ class ContactForm {
     btn.disabled = !canProceed
   }
 
+  // Synchronise l'état visuel des boutons de choix avec this.data.
+  // Différence avec selectChoice() : balaie tout le conteneur (et non le
+  // seul panneau courant), car un prefill renseigne plusieurs étapes d'un coup.
+  private syncChoiceUI(): void {
+    const pairs: Array<[string, string]> = [
+      ['projectType', this.data.projectType],
+      ['budget',      this.data.budget],
+      ['delay',       this.data.delay],
+    ]
+    for (const [field, value] of pairs) {
+      this.container
+        .querySelectorAll<HTMLElement>(`.cf-choice[data-field="${field}"]`)
+        .forEach(btn => {
+          const active = btn.dataset.value === value
+          btn.classList.toggle('is-selected', active)
+          btn.setAttribute('aria-pressed', String(active))
+        })
+    }
+    this.updateNextBtn()
+  }
+
   // ── Validation ─────────────────────────────────────────────
 
   private validate(): boolean {
@@ -784,7 +820,19 @@ class ContactForm {
 // Public init
 // ============================================================
 
-export function initContactForm(): void {
+// Façade minimale exposée aux composants externes (ex. estimateur) pour
+// préremplir le formulaire et sauter directement à l'étape Contact.
+export type ContactFormHandle = {
+  prefill(data: { projectType: string; budget: string; delay: string }): void
+  jumpToContact(): void
+}
+
+export function initContactForm(): ContactFormHandle | null {
   const el = document.querySelector<HTMLElement>('#contact-form-root')
-  if (el) new ContactForm(el)
+  if (!el) return null
+  const form = new ContactForm(el)
+  return {
+    prefill: (data) => form.prefill(data),
+    jumpToContact: () => form.jumpToContact(),
+  }
 }

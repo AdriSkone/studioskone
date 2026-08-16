@@ -291,7 +291,10 @@ if (cookieBanner && !localStorage.getItem(COOKIE_KEY)) {
 // ============================================================
 // Contact multi-step form
 // ============================================================
-initContactForm()
+const contactForm = initContactForm()
+// Référence conservée pour un futur composant estimateur (préremplissage
+// via contactForm?.prefill(...) puis contactForm?.jumpToContact()).
+void contactForm
 
 // ============================================================
 // Work — Swiper carousel
