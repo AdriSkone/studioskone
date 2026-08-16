@@ -7,7 +7,7 @@ describe('estimate', () => {
     expect(r.min).toBe(900)
     expect(r.max).toBe(1200)
     expect(r.offer).toBe('Fondation')
-    expect(r.delay).toBe('2 à 3 semaines')
+    expect(r.delay).toBe('1 à 2 semaines')
     expect(r.projectType).toBe('vitrine')
     expect(r.budget).toBe('1k-3k')
     expect(r.showPrice).toBe(true)

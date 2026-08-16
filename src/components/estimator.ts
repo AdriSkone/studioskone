@@ -36,6 +36,48 @@ export function initEstimator(form: ContactFormHandle | null): void {
   const read = (name: string): string | null =>
     formEl.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? null
 
+  const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)')
+  let animation = 0
+  let derniereFourchette: [number, number] | null = null
+
+  // Les montants défilent jusqu'à leur valeur : c'est le moment où le
+  // visiteur regarde vraiment, donc le seul qui mérite d'être animé.
+  function afficherFourchette(min: number, max: number): void {
+    cancelAnimationFrame(animation)
+
+    if (mouvementReduit.matches) {
+      rangeEl!.textContent = `${euros(min)} – ${euros(max)}`
+      derniereFourchette = [min, max]
+      return
+    }
+
+    const depart = derniereFourchette ?? [0, 0]
+    const debut = performance.now()
+    const DUREE = 480
+
+    // aria-busy le temps du décompte, sinon un lecteur d'écran annoncerait
+    // chaque image intermédiaire de l'animation.
+    result!.setAttribute('aria-busy', 'true')
+
+    const etape = (maintenant: number): void => {
+      const t = Math.min(1, (maintenant - debut) / DUREE)
+      const progression = 1 - Math.pow(1 - t, 3)
+      const a = Math.round((depart[0] + (min - depart[0]) * progression) / 10) * 10
+      const b = Math.round((depart[1] + (max - depart[1]) * progression) / 10) * 10
+      rangeEl!.textContent = `${euros(a)} – ${euros(b)}`
+
+      if (t < 1) {
+        animation = requestAnimationFrame(etape)
+      } else {
+        rangeEl!.textContent = `${euros(min)} – ${euros(max)}`
+        result!.setAttribute('aria-busy', 'false')
+      }
+    }
+
+    animation = requestAnimationFrame(etape)
+    derniereFourchette = [min, max]
+  }
+
   function update(): void {
     if (!started) {
       started = true
@@ -56,9 +98,13 @@ export function initEstimator(form: ContactFormHandle | null): void {
     offerEl!.textContent = r.offerNamed
       ? `Offre ${r.offer}`
       : 'Entre les offres Fondation et Studio · on cadre ensemble'
-    rangeEl!.textContent = r.showPrice && r.min !== null && r.max !== null
-      ? `${euros(r.min)} – ${euros(r.max)}`
-      : 'À définir ensemble'
+    if (r.showPrice && r.min !== null && r.max !== null) {
+      afficherFourchette(r.min, r.max)
+    } else {
+      cancelAnimationFrame(animation)
+      rangeEl!.textContent = 'À définir ensemble'
+      derniereFourchette = null
+    }
 
     // Cas application : la fourchette affiche déjà « à définir ensemble »,
     // répéter la même formule sur la ligne délai serait redondant.

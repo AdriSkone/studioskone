@@ -95,7 +95,7 @@ export function estimate(input: EstimateInput): Estimate {
   return {
     min: base[0], max, showPrice: true,
     offer, offerNamed,
-    delay: offer === 'Fondation' ? '2 à 3 semaines' : '4 à 6 semaines',
+    delay: offer === 'Fondation' ? '1 à 2 semaines' : '4 à 6 semaines',
     projectType, budget,
   }
 }
