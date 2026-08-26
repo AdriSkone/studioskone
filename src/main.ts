@@ -105,7 +105,7 @@ document.querySelectorAll<HTMLElement>('.reveal').forEach((el) => {
     el.parentElement?.querySelectorAll<HTMLElement>(':scope > .reveal') ?? []
   )
   const index = siblings.indexOf(el)
-  el.style.transitionDelay = `${index * 0.14}s`
+  el.style.transitionDelay = `${index * 0.06}s`
 })
 
 const revealObserver = new IntersectionObserver(
@@ -211,6 +211,11 @@ const parallaxHeaders = Array.from(
   document.querySelectorAll<HTMLElement>('#approach .section-label, #work .work-header, #tarifs .section-label')
 )
 
+// Le parallaxe est un déclencheur vestibulaire direct : il se coupe entièrement
+// sous prefers-reduced-motion, et non pas seulement se raccourcit.
+// Il écrit un transform inline, qu'aucune règle CSS ne peut contrer — d'où le garde ici.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
 if (parallaxHeaders.length) {
   function applyParallax(): void {
     parallaxHeaders.forEach((header) => {
@@ -221,15 +226,24 @@ if (parallaxHeaders.length) {
     })
   }
 
+  function clearParallax(): void {
+    parallaxHeaders.forEach((header) => { header.style.transform = '' })
+  }
+
   let parallaxRaf = false
   window.addEventListener('scroll', () => {
-    if (!parallaxRaf) {
-      parallaxRaf = true
-      requestAnimationFrame(() => { applyParallax(); parallaxRaf = false })
-    }
+    if (reduceMotion.matches || parallaxRaf) return
+    parallaxRaf = true
+    requestAnimationFrame(() => { applyParallax(); parallaxRaf = false })
   }, { passive: true })
 
-  applyParallax()
+  // Réagit si le réglage système change en cours de session
+  reduceMotion.addEventListener('change', () => {
+    if (reduceMotion.matches) clearParallax()
+    else applyParallax()
+  })
+
+  if (!reduceMotion.matches) applyParallax()
 }
 
 // ============================================================

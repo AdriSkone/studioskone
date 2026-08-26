@@ -288,17 +288,85 @@ button {
 
 /* Reveal Animations
    ============================================================ */
-.reveal {
-  opacity: 0;
-  transform: translateY(36px);
-  transition:
-    opacity   0.85s var(--ease),
-    transform 0.85s var(--ease);
+/* Vocabulaire de mouvement — trois gestes attribués par rôle.
+   Le geste « pose » dérive du décalage d'ombre dure : l'objet entre depuis
+   la position de son ombre et se pose. Transform + opacity uniquement,
+   les deux composited — aucun layout, aucun repaint. */
+
+:root {
+  --reveal-dur:   0.42s;
+  --reveal-fade:  0.30s;
+  --pose-offset:  10px;   /* 2x l'ombre des cartes (5px) */
+  --pose-offset-s: 8px;   /* 2x l'ombre de la FAQ (4px) */
 }
 
-.reveal.is-visible {
+/* Base — masqué, sans geste par défaut */
+.reveal {
+  opacity: 0;
+  transition: opacity var(--reveal-fade) var(--ease);
+}
+.reveal.is-visible { opacity: 1; }
+
+/* Geste 1 — « pose ». Objets à ombre dure : ils arrivent depuis leur ombre. */
+.service-card.reveal,
+.tarif-card.reveal,
+.proc-row.reveal,
+.estimator.reveal {
+  transform: translate(var(--pose-offset), var(--pose-offset));
+  transition:
+    opacity   var(--reveal-dur) var(--ease),
+    transform var(--reveal-dur) var(--ease);
+}
+.faq-item.reveal {
+  transform: translate(var(--pose-offset-s), var(--pose-offset-s));
+  transition:
+    opacity   var(--reveal-dur) var(--ease),
+    transform var(--reveal-dur) var(--ease);
+}
+.service-card.reveal.is-visible,
+.tarif-card.reveal.is-visible,
+.proc-row.reveal.is-visible,
+.estimator.reveal.is-visible,
+.faq-item.reveal.is-visible {
+  transform: translate(0, 0);
+}
+
+/* Geste 2 — « levée ». Titres et labels : opacité seule, aucun déplacement.
+   Hérité de .reveal ci-dessus, listé ici pour que le rôle soit lisible.
+   NB : #approach .section-label, #work .work-header et #tarifs .section-label
+   reçoivent en plus un transform inline du parallaxe (main.ts), qui l'emporte
+   sur cette règle. Voulu — le parallaxe porte le déplacement, le reveal l'opacité. */
+.section-label.reveal,
+.approach-title.reveal,
+.services-title.reveal,
+.work-title.reveal,
+.process-main-title.reveal,
+.tarifs-intro-title.reveal,
+.faq-title.reveal,
+.contact-title.reveal { transform: none; }
+
+/* Geste 3 — aucun. Texte courant : présent d'emblée.
+   Supprimer ce bloc rend l'animation à ces éléments. */
+.approach-mid.reveal,
+.tarifs-intro-note.reveal,
+.tarifs-footnote.reveal,
+.faq-head-note.reveal,
+.faq-contact-link.reveal {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+  transition: none;
+}
+
+/* Mouvement réduit — couvre l'intégralité du vocabulaire.
+   0.01ms plutôt que 0s : les écouteurs transitionend continuent de se déclencher. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
 }
 
 /* Shared Typography
