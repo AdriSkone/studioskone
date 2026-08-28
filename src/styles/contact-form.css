@@ -35,16 +35,45 @@
   z-index: 0;
 }
 
+/* Habite la colonne libre a droite du formulaire — trait net, jamais de flou. */
+.contact-inner::after {
+  content: '';
+  position: absolute;
+  right: -170px;
+  top: 46%;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 2px solid rgba(24, 23, 22, 0.09);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-inner { position: relative; }
+
+@media (max-width: 1100px) {
+  .contact-inner::after { display: none; }
+}
+
 /* ── Wrapper ───────────────────────────────────────────────── */
+
+/* Le composant monte son propre .container dans #contact-form-root, lui-meme
+   deja dans .container.contact-inner : sans ca, le padding de 64px compte double. */
+#contact-form-root > .container { padding-inline: 0; }
 
 .cf-wrapper {
   position: relative;
   z-index: 1;
-  max-width: 660px;
-  margin-inline: auto;
+  max-width: 700px;
+  /* Aligne sur le titre de la section plutot que centre : meme axe, asymetrie assumee. */
+  margin-inline: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 48px;
+}
+
+@media (max-width: 1100px) {
+  .cf-wrapper { margin-inline: auto; }
 }
 
 /* ── Header ────────────────────────────────────────────────── */
