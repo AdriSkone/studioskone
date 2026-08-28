@@ -1,5 +1,26 @@
 # Studio Skøne — Style Guide (Premium Upgrade)
 
+> # ⚠️ CE DOCUMENT EST PÉRIMÉ — NE PAS L'UTILISER
+>
+> Il décrit une identité (**Barlow**, glow diffus, grain, ombres floues) que le site
+> **n'a plus**. S'en servir produit un rendu hors-marque.
+>
+> **Source de vérité : `src/style.css`** — tokens `:root`, `#hero`, `.hero-top`.
+>
+> | | Ci-dessous (périmé) | `src/style.css` (réel) |
+> |---|---|---|
+> | Typo | Barlow | **Bricolage Grotesque Variable** |
+> | Accent | `#C4603B` | `#C56039` |
+> | Fond | `#FBF4E4` | `#FAEEDF` / `#F3E8D7` |
+> | Texture | grain 0.03 | **trame de points** 26–28px, `#181716` @ 0.13 |
+> | Ombres | `0 8px 30px` floues | **`8px 8px 0` dures**, sans flou |
+> | Bordures | aucune | **`2px solid #181716`** |
+> | Décor | glow diffus | **cercles bordés noir + ombre dure** |
+>
+> Le site est en **néo-brutaliste chaud**, pas en éditorial doux.
+> Conservé uniquement comme archive. Constaté le 2026-08-25.
+
+
 ## Brand Identity
 
 Studio digital créatif premium.
