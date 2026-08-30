@@ -3,6 +3,8 @@
    ============================================================ */
 
 @import '@fontsource-variable/bricolage-grotesque/opsz.css';
+/* Axe de graisse seul : le navigateur ne tire que le subset latin (~29 Ko). */
+@import '@fontsource-variable/fredoka/wght.css';
 
 /* Reset & Variables
    ============================================================ */
@@ -32,6 +34,7 @@
   --font-serif:    'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-display:  'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-sans:     'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-round:    'Fredoka Variable', 'Bricolage Grotesque Variable', system-ui, sans-serif;
 
   --ease:       cubic-bezier(0.16, 1, 0.3, 1);
   --duration:   0.7s;
@@ -420,6 +423,42 @@ button {
     transition-duration: 0.01ms;
     transition-delay: 0s;
   }
+}
+
+/* ============================================================
+   ACCENT TYPOGRAPHIQUE — la règle du seuil
+   ============================================================
+   L'accent n'est pas qu'une couleur : au-dessus de 28px, il change aussi
+   de fonte. La rondeur de Fredoka contre l'arête du Bricolage crée la
+   rupture ; en dessous de ce corps elle la perdrait et amollirait le texte.
+   D'où la règle :
+
+     accent + ≥ 28px  →  var(--font-round)
+     accent + < 28px  →  var(--font-display)   (labels, prix, puces, liens)
+
+   Tous les titres ci-dessous ont un clamp dont le minimum vaut au moins
+   30px : la règle tient donc jusqu'au plus petit écran, sans exception.
+   Ne pas étendre cette liste aux .section-label ni au texte courant. */
+/* Les sélecteurs portent volontairement le nom de balise (h1/h2) : il leur
+   faut une spécificité supérieure à `.text-accent` et à `.services-title em`,
+   qui posent un italique plus loin dans ce fichier. Sans ça, le mot accent
+   ressort en oblique synthétique — Fredoka n'ayant pas de vraie italique,
+   ses rondeurs en sortiraient déformées. */
+h1 .hero-accent,
+h2.approach-title .text-accent,
+h2.process-main-title .text-accent,
+h2.voices-title .text-accent,
+h2.tarifs-intro-title .text-accent,
+h2.faq-title .text-accent,
+h2.services-title em,
+h2.contact-title em {
+  font-family: var(--font-round);
+  font-weight: 600;
+  font-style: normal;
+  /* Fredoka a une hauteur d'x plus généreuse : on compense pour que le mot
+     accent ne paraisse pas plus gros que le reste de la ligne. */
+  font-size: 0.94em;
+  letter-spacing: 0.005em;
 }
 
 /* Shared Typography
@@ -2260,9 +2299,11 @@ button {
   align-items: center;
   justify-content: center;
   margin: 20px 0;
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
+  /* 30px, donc au-dessus du seuil de 28 : la fonte ronde lui revient par la
+     règle, sans exception à écrire. Un « & » isolé supporte ce corps. */
+  font-family: var(--font-round);
+  font-size: 30px;
+  font-weight: 600;
   color: var(--accent);
 }
 
@@ -2271,7 +2312,7 @@ button {
   content: '';
   position: absolute;
   top: 50%;
-  width: calc(50% - 26px);
+  width: calc(50% - 32px);
   height: 2px;
   background: rgba(24, 23, 22, 0.14);
 }

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lettrage accent — concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@600;700;800&family=Comfortaa:wght@600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #FAEEDF;
+    --bg-soft:   #F3E8D7;
+    --surface:   #E9D8C2;
+    --card:      #FFF8EF;
+    --dark:      #181716;
+    --accent:    #C56039;
+    --accent-dark: #A84E2E;
+    --muted:     #6B6B6B;
+    --text:      #181716;
+    --violet:    #7000FF;
+
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --round-a: 'Fredoka', system-ui, sans-serif;
+    --round-b: 'Baloo 2', system-ui, sans-serif;
+    --round-c: 'Comfortaa', system-ui, sans-serif;
+  }
+
+  body {
+    background: #0d0c0b;
+    font-family: var(--font-display);
+    color: #fff;
+    padding: 56px 44px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+
+  .page-head { max-width: 780px; display: flex; flex-direction: column; gap: 14px; }
+  .page-head h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; }
+  .page-head p { font-size: 15px; line-height: 1.6; color: #b9b4ae; }
+  .page-head strong { color: #fff; font-weight: 600; }
+
+  .block { display: flex; flex-direction: column; gap: 22px; }
+  .block-title {
+    font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: center; gap: 12px;
+  }
+  .block-title::after { content:''; flex:1; height:1px; background: rgba(255,255,255,.14); }
+  .block-note { font-size: 13.5px; line-height: 1.6; color: #a8a39d; max-width: 720px; }
+  .block-note b { color: #e8e3dc; font-weight: 600; }
+
+  /* Surface claire = contexte réel du site */
+  .canvas {
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1.1' fill='%23181716' fill-opacity='0.13'/%3E%3C/svg%3E");
+    border: 2px solid var(--dark);
+    border-radius: 14px;
+    padding: 40px 38px;
+    color: var(--text);
+  }
+
+  .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+
+  .specimen {
+    background: var(--card);
+    border: 2px solid var(--dark);
+    border-radius: 12px;
+    box-shadow: 6px 6px 0 var(--dark);
+    padding: 26px 24px 22px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .specimen-label {
+    font-family: var(--font-display);
+    font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .specimen-word { font-size: 52px; line-height: 1; color: var(--accent); }
+  .specimen-meta { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .w-fredoka  { font-family: var(--round-a); font-weight: 600; }
+  .w-baloo    { font-family: var(--round-b); font-weight: 700; }
+  .w-comfortaa{ font-family: var(--round-c); font-weight: 700; }
+  .w-bricolage{ font-family: var(--font-display); font-weight: 800; font-style: italic; }
+
+  /* Titres en contexte */
+  .ctx-title {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 700; line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .ctx-title .lettrage { color: var(--accent); }
+  .ctx-label {
+    font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px; display: block;
+  }
+  .ctx-caption {
+    margin-top: 16px; font-family: var(--font-display);
+    font-size: 12px; color: var(--muted); line-height: 1.55;
+  }
+  .ctx-caption b { color: var(--text); font-weight: 700; }
+
+  /* Carte pinceau & marteau reprise à l'identique */
+  .craft {
+    max-width: 420px; padding: 26px 28px;
+    background: var(--card); border: 2px solid var(--text);
+    border-radius: 14px; box-shadow: 8px 8px 0 var(--text);
+    transform: rotate(-1.2deg);
+    display: flex; flex-direction: column;
+  }
+  .craft-label { font-size: 10px; font-weight: 700; letter-spacing:.18em; text-transform:uppercase; color: var(--accent); }
+  .craft-title { font-size: 26px; font-weight: 700; letter-spacing:-.015em; line-height:1.05; }
+  .craft-items { font-size: 13px; color: var(--muted); line-height:1.6; }
+  .craft-face { display:flex; flex-direction:column; gap:5px; }
+  .craft-join {
+    position: relative; align-self: stretch; display:flex; align-items:center; justify-content:center;
+    margin: 20px 0; color: var(--accent);
+  }
+  .craft-join::before, .craft-join::after {
+    content:''; position:absolute; top:50%; width: calc(50% - 30px); height:2px; background: rgba(24,23,22,.14);
+  }
+  .craft-join::before { left:0; } .craft-join::after { right:0; }
+  .join-round { font-family: var(--round-a); font-weight: 600; font-size: 34px; line-height: 1; }
+  .join-base  { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1; }
+
+  /* Comparatif couleur */
+  .swatch-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .swatch { border: 2px solid var(--dark); border-radius: 12px; padding: 24px 22px; background: var(--bg); }
+  .swatch-word { font-family: var(--round-a); font-weight: 600; font-size: 46px; line-height: 1; }
+  .swatch-meta { margin-top: 14px; font-size: 12px; color: var(--muted); font-family: var(--font-display); line-height:1.6; }
+  .swatch-meta b { color: var(--text); }
+  .ratio { display:inline-block; padding: 2px 8px; border:1.5px solid var(--dark); border-radius: 999px; font-size: 11px; font-weight: 700; }
+  .ratio.ok   { background: #DFF0D8; }
+  .ratio.warn { background: #FFE9C7; }
+  .ratio.bad  { background: #F8D7DA; }
+
+  .side-by-side { display:flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .side-by-side span { font-family: var(--round-a); font-weight:600; font-size: 40px; }
+
+  .niveau {
+    font-family: var(--font-display); font-size: 12px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--text);
+    margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid rgba(24,23,22,.14);
+  }
+  .lab-actuel, .lab-rond {
+    display:block; font-size: 10px; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .lab-actuel { font-family: var(--font-display); }
+  .lab-rond   { font-family: var(--round-a); font-weight: 600; }
+  .lab-legende { margin-top: 8px; font-family: var(--font-display); font-size: 11px; color: var(--muted); }
+  .prix-actuel, .prix-rond { font-size: 42px; font-weight: 700; letter-spacing: -.02em; color: var(--text); }
+  .prix-actuel { font-family: var(--font-display); }
+  .prix-rond   { font-family: var(--round-a); font-weight: 600; }
+  .puces-actuel, .puces-rond { list-style: none; margin-top: 14px; display:flex; flex-direction:column; gap:7px; }
+  .puces-actuel li, .puces-rond li { font-size: 13px; color: var(--muted); position: relative; padding-left: 14px; }
+  .puces-actuel li::before, .puces-rond li::before { content:'·'; position:absolute; left:0; color: var(--accent); font-weight:700; }
+  .puces-actuel { font-family: var(--font-display); }
+  .puces-rond   { font-family: var(--round-a); }
+
+  .verdict {
+    border-left: 3px solid var(--accent); padding-left: 18px;
+    font-size: 14px; line-height: 1.65; color: #d6d1ca; max-width: 760px;
+  }
+  .verdict b { color: #fff; }
+</style>
+</head>
+<body>
+
+  <div class="page-head">
+    <h1>Lettrage accent — quatre pistes</h1>
+    <p>Le « UI/UX » de marcel-apitty n'est pas une police mais un <strong>SVG vectorisé</strong> (5 tracés, aucune balise texte) : le nom de la fonte d'origine n'est pas récupérable. Voici les familles rondes les plus proches, dans <strong>ton accent orange</strong>, plus une option qui n'ajoute aucune police. Tout est à taille réelle, sur ton fond et ta trame.</p>
+  </div>
+
+  <!-- 1. LES CANDIDATES -->
+  <section class="block">
+    <p class="block-title">1 · Les candidates</p>
+    <p class="block-note">Même mot, même corps, même couleur. Les trois premières sont des grotesques géométriques arrondies libres. La quatrième, c'est <b>ton Bricolage</b> en ExtraBold italique — aucune police à charger.</p>
+    <div class="row">
+      <div class="specimen">
+        <span class="specimen-label">Option A · Fredoka</span>
+        <span class="specimen-word w-fredoka">expertises</span>
+        <span class="specimen-meta">La plus proche du modèle. Terminaisons franchement rondes, axe géométrique. Variable, ~28 Ko en woff2.</span>
+      </div>
+      <div class="specimen">
+        <span class="specimen-label">Option B · Baloo 2</span>
+        <span class="specimen-word w-baloo">expertises</span>
+        <span class="specimen-meta">Plus charpentée, contreformes plus fermées. Tient mieux en petit corps que Fredoka.</span>
+      </div>
+      <div class="specimen">
+        <span class="specimen-label">Option C · Comfortaa</span>
+        <span class="specimen-word w-comfortaa">expertises</span>
+        <span class="specimen-meta">La plus ronde, presque un cercle parfait par lettre. Le contraste avec ton néo-brutalisme est le plus violent des trois.</span>
+      </div>
+      <div class="specimen">
+        <span class="specimen-label">Option D · Bricolage 800 italique</span>
+        <span class="specimen-word w-bricolage">expertises</span>
+        <span class="specimen-meta">Aucune police ajoutée, aucun octet de plus. Le contraste vient du poids et de l'inclinaison, pas d'un changement de famille.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. EN CONTEXTE -->
+  <section class="block">
+    <p class="block-title">2 · En contexte, sur tes vrais titres</p>
+    <p class="block-note">Le procédé ne vaut que s'il reste <b>exceptionnel</b>. Ci-dessous, trois emplacements possibles — un seul devrait survivre.</p>
+
+    <div class="canvas">
+      <span class="ctx-label">Ce que je conçois</span>
+      <p class="ctx-title">Mes <span class="lettrage w-fredoka">expertises</span></p>
+      <p class="ctx-caption"><b>Emplacement 1 — titre de section.</b> Le lettrage remplace l'italique synthétique actuel. Position la plus sûre : un seul mot, loin du hero, sans concurrence.</p>
+    </div>
+
+    <div class="canvas">
+      <span class="ctx-label">Travaillons ensemble</span>
+      <p class="ctx-title">Construisons quelque chose <span class="lettrage w-fredoka">de remarquable</span></p>
+      <p class="ctx-caption"><b>Emplacement 2 — titre du contact.</b> Trois mots, c'est déjà trop : le lettrage rond perd sa force dès qu'il fait phrase. À éviter tel quel.</p>
+    </div>
+
+    <div class="canvas" style="display:flex; gap:38px; flex-wrap:wrap; align-items:center;">
+      <div class="craft">
+        <div class="craft-face">
+          <span class="craft-label">Le pinceau</span>
+          <p class="craft-title">Conception</p>
+          <p class="craft-items">UX · Interface · Direction artistique</p>
+        </div>
+        <span class="craft-join"><span class="join-round">&amp;</span></span>
+        <div class="craft-face">
+          <span class="craft-label">Le marteau</span>
+          <p class="craft-title">Développement</p>
+          <p class="craft-items">Intégration · Performance · Mise en ligne</p>
+        </div>
+      </div>
+      <div style="flex:1; min-width:260px;">
+        <p class="ctx-caption" style="margin-top:0;"><b>Emplacement 3 — le « &amp; » de la carte studio.</b> Un seul caractère, déjà isolé entre deux traits, déjà en accent. C'est l'endroit où le lettrage coûte le moins et se remarque le plus. Comparaison ci-dessous.</p>
+        <div class="side-by-side" style="margin-top:18px; color: var(--accent);">
+          <span class="join-round" style="font-size:44px;">&amp;</span>
+          <span class="join-base" style="font-family:var(--font-display); font-weight:700; font-size:30px;">&amp;</span>
+        </div>
+        <p class="ctx-caption" style="font-size:11px;">À gauche Fredoka, à droite ton Bricolage actuel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LA COULEUR -->
+  <section class="block">
+    <p class="block-title">3 · Orange ou violet</p>
+    <p class="block-note">Le violet du modèle est <b>#7000FF</b>. Sur ton fond crème il est plus lisible que ton orange — mais mis <b>côte à côte</b> avec lui, les deux ont presque la même luminance : ils vibrent sans hiérarchie.</p>
+
+    <div class="swatch-row">
+      <div class="swatch">
+        <p class="swatch-word" style="color: var(--accent);">expertises</p>
+        <p class="swatch-meta"><b>Ton accent — #C56039</b><br>Sur <code>--bg</code> : <span class="ratio warn">3.60:1</span><br>Suffisant en grand corps, insuffisant en texte courant.</p>
+      </div>
+      <div class="swatch">
+        <p class="swatch-word" style="color: var(--violet);">expertises</p>
+        <p class="swatch-meta"><b>Le violet — #7000FF</b><br>Sur <code>--bg</code> : <span class="ratio ok">5.64:1</span><br>Meilleur contraste, mais couleur étrangère à ton identité.</p>
+      </div>
+      <div class="swatch">
+        <p class="swatch-word" style="color: var(--violet);">expert<span style="color:var(--accent);">ises</span></p>
+        <p class="swatch-meta"><b>Les deux ensemble</b><br>Violet contre orange : <span class="ratio bad">1.57:1</span><br>Quasi indiscernables en niveaux de gris. Aucun des deux ne domine.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3bis. TOUT L'ACCENT EN POLICE RONDE -->
+  <section class="block">
+    <p class="block-title">3 bis · Et si TOUT l'accent passait en police ronde ?</p>
+    <p class="block-note">L'idée : que l'accent ne soit plus seulement une couleur mais <b>une couleur ET une fonte</b>. Séduisant sur le papier. Ci-dessous, appliqué aux trois niveaux où l'orange apparaît réellement sur ton site.</p>
+
+    <div class="canvas">
+      <p class="niveau">Niveau 1 · Les mots accent dans les grands titres</p>
+      <p class="ctx-title" style="margin-bottom:8px;">Studio de création <span class="lettrage w-fredoka">web &amp; mobile</span></p>
+      <p class="ctx-title" style="margin-bottom:8px;">Conçu et construit par la <span class="lettrage w-fredoka">même personne.</span></p>
+      <p class="ctx-title">Des offres <span class="lettrage w-fredoka">claires</span>, des résultats concrets.</p>
+      <p class="ctx-caption"><b>Ça tient.</b> À ce corps, les rondeurs ont la place de s'exprimer et le contraste avec le Bricolage est net. C'est le seul niveau qui gagne au change.</p>
+    </div>
+
+    <div class="canvas">
+      <p class="niveau">Niveau 2 · Les labels de section</p>
+      <div style="display:flex; gap:48px; flex-wrap:wrap;">
+        <div>
+          <span class="lab-actuel">Ce que je conçois</span>
+          <p class="lab-legende">Bricolage 700 · letterspacing .18em — actuel</p>
+        </div>
+        <div>
+          <span class="lab-rond">Ce que je conçois</span>
+          <p class="lab-legende">Fredoka 600 · même letterspacing</p>
+        </div>
+      </div>
+      <p class="ctx-caption"><b>Ça casse.</b> À 10px en capitales très espacées, les terminaisons rondes deviennent des taches : le mot perd son arête et sa lisibilité. Le letterspacing, qui donnait de la rigueur au Bricolage, ne fait qu'amollir la Fredoka. Ces labels doivent rester en Bricolage.</p>
+    </div>
+
+    <div class="canvas">
+      <p class="niveau">Niveau 3 · Prix, puces, micro-textes</p>
+      <div style="display:flex; gap:44px; flex-wrap:wrap; align-items:flex-start;">
+        <div>
+          <p class="prix-actuel">Dès 2 500€</p>
+          <ul class="puces-actuel">
+            <li>Architecture UX &amp; design sur mesure</li>
+            <li>SEO technique intégré</li>
+          </ul>
+          <p class="lab-legende">Actuel</p>
+        </div>
+        <div>
+          <p class="prix-rond">Dès 2 500€</p>
+          <ul class="puces-rond">
+            <li>Architecture UX &amp; design sur mesure</li>
+            <li>SEO technique intégré</li>
+          </ul>
+          <p class="lab-legende">En Fredoka</p>
+        </div>
+      </div>
+      <p class="ctx-caption"><b>Mitigé — et je m'étais avancé.</b> Le prix en Fredoka tient mieux que je ne l'annonçais : à 42px c'est encore du gros corps, donc les rondeurs respirent. C'est défendable, à condition d'assumer un ton plus doux sur un montant. Les <b>puces</b>, en revanche, ne passent pas : sur du texte courant à 13px, la fonte ronde fatigue et perd en netteté. La ligne de partage n'est donc pas « titres contre le reste », mais bien <b>le corps</b>.</p>
+    </div>
+
+    <p class="verdict" style="margin-top:8px;">
+      <b>Réponse : oui à l'idée, mais pas à « tout ».</b> La règle qui tient, c'est <b>accent + gros corps = police ronde</b> — soit uniquement les mots accentués dans les titres de niveau 1 et 2. En dessous d'environ 24px, la fonte ronde perd ce qui fait sa force et abîme ce que ton Bricolage faisait très bien.<br><br>
+      Une règle systématique reste possible, simplement il lui faut un seuil : <code style="color:var(--accent)">accent + ≥ 28px → rond ; accent + &lt; 28px → Bricolage</code>. C'est net, mémorisable, et ça donne au lettrage la rareté qui le rend efficace.
+    </p>
+  </section>
+
+  <!-- 4. RECOMMANDATION -->
+  <section class="block">
+    <p class="block-title">4 · Ce que je recommande</p>
+    <p class="verdict">
+      <b>Option A (Fredoka) ou D (Bricolage 800), sur l'emplacement 3 — le « &amp; » de la carte studio.</b><br><br>
+      Un seul caractère, déjà isolé, déjà en accent : le geste se voit sans que le site devienne bavard. Si tu veux le tester ailleurs, l'emplacement 1 est le seul autre qui tienne.<br><br>
+      <b>Sur la couleur : reste en orange.</b> Le violet est objectivement plus lisible, mais l'adopter voudrait dire soit remplacer ton accent partout — donc refaire l'identité — soit vivre avec deux accents qui se neutralisent. Le contraste de <b>forme</b> (rond contre anguleux) suffit à créer la rupture que tu cherches ; il n'a pas besoin d'un second contraste de couleur.<br><br>
+      <b>Et si tu ne devais en garder qu'une : l'option D.</b> Elle obtient 80 % de l'effet pour zéro octet et zéro dépendance — ce qui, sur un site que tu as gardé à 114 Ko de JS, compte.
+    </p>
+  </section>
+
+</body>
+</html>
