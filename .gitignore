@@ -35,6 +35,7 @@ Loader_studioskone/
 # Dossiers de WIP visuels lourds
 mockups/
 inspis/
+design-research/
 
 # PDF des documents légaux (générés, on garde juste les sources .md)
 Documents légaux/*.pdf
