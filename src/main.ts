@@ -247,6 +247,67 @@ if (parallaxHeaders.length) {
 }
 
 // ============================================================
+// Geste 4 — « déploiement ». Les cercles de décor s'ouvrent au scroll.
+// ============================================================
+// Le JS ne fait que mesurer : il écrit une progression 0→1 dans --deploy-p.
+// C'est le CSS qui décide ce qu'il en fait. Ça permet d'animer aussi les
+// cercles en ::before / ::after, qui n'existent pas dans le DOM et qu'aucun
+// transform inline ne pourrait atteindre.
+//
+// Deux modes, selon la place de la section :
+//   cross — la section traverse l'écran (défaut, sections de milieu de page)
+//   exit  — la section occupe l'écran au chargement et le quitte (le hero)
+//
+// Même garde que le parallaxe : un rAF en vol, coupure totale sous
+// prefers-reduced-motion, réaction au changement de réglage.
+const deployTargets = Array.from(
+  document.querySelectorAll<HTMLElement>('[data-deploy]')
+)
+
+if (deployTargets.length) {
+  function applyDeploy(): void {
+    deployTargets.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight
+      let raw: number
+
+      if (el.dataset.deploy === 'exit') {
+        // 0 tant que la section est en place, 1 quand elle a fini de sortir
+        raw = -rect.top / (rect.height || vh)
+      } else {
+        // 0 quand la section pointe en bas de l'écran, 1 quand elle en est sortie
+        raw = (vh - rect.top) / (vh + rect.height)
+      }
+
+      const p = Math.min(1, Math.max(0, raw))
+      el.style.setProperty('--deploy-p', p.toFixed(4))
+    })
+  }
+
+  function clearDeploy(): void {
+    deployTargets.forEach((el) => { el.style.removeProperty('--deploy-p') })
+  }
+
+  let deployRaf = false
+  window.addEventListener('scroll', () => {
+    if (reduceMotion.matches || deployRaf) return
+    deployRaf = true
+    requestAnimationFrame(() => { applyDeploy(); deployRaf = false })
+  }, { passive: true })
+
+  window.addEventListener('resize', () => {
+    if (!reduceMotion.matches) applyDeploy()
+  }, { passive: true })
+
+  reduceMotion.addEventListener('change', () => {
+    if (reduceMotion.matches) clearDeploy()
+    else applyDeploy()
+  })
+
+  if (!reduceMotion.matches) applyDeploy()
+}
+
+// ============================================================
 // FAQ — accordion (single open at a time)
 // ============================================================
 document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
