@@ -47,6 +47,13 @@
   border: 2px solid rgba(24, 23, 22, 0.09);
   pointer-events: none;
   z-index: 0;
+  /* --deploy-p est écrit par main.ts. Amplitude plus faible que dans le hero :
+     cette section ferme la page, elle ne l'ouvre pas. */
+  transform:
+    translate3d(0, calc(var(--deploy-p, 0) * -70px), 0)
+    scale(calc(1 + var(--deploy-p, 0) * 0.18));
+  transform-origin: 70% 40%;
+  will-change: transform;
 }
 
 .contact-inner { position: relative; }

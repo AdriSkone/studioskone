@@ -367,7 +367,6 @@ button {
 .service-card.reveal,
 .tarif-card.reveal,
 .proc-row.reveal,
-.voices-card.reveal,
 .approach-craft.reveal,
 .estimator.reveal {
   transform: translate(var(--pose-offset), var(--pose-offset));
@@ -408,7 +407,6 @@ button {
 .work-title.reveal,
 .process-main-title.reveal,
 .tarifs-intro-title.reveal,
-.voices-title.reveal,
 .faq-title.reveal,
 .contact-title.reveal { transform: none; }
 
@@ -458,7 +456,6 @@ button {
 h1 .hero-accent,
 h2.approach-title .text-accent,
 h2.process-main-title .text-accent,
-h2.voices-title .text-accent,
 h2.tarifs-intro-title .text-accent,
 h2.faq-title .text-accent,
 h2.services-title em,
@@ -901,153 +898,6 @@ h2.contact-title em {
   .services-grid { grid-template-columns: 1fr; }
   .services-grid .service-card:nth-child(even) { margin-top: 0; }
   #services { padding: 56px 0 80px; }
-}
-
-/* ── Ce qu'ils en disent ── */
-#voices {
-  position: relative;
-  overflow: hidden;
-  background: var(--surface);
-  border-top: 2px solid var(--text);
-  border-bottom: 2px solid var(--text);
-  padding: clamp(64px, 8vw, 96px) 0;
-}
-
-.voices-decor {
-  position: absolute;
-  left: -220px;
-  bottom: -300px;
-  width: 620px;
-  height: 620px;
-  border-radius: 50%;
-  border: 2px solid rgba(24, 23, 22, 0.13);
-  pointer-events: none;
-  z-index: 0;
-  /* --deploy-p est écrit par main.ts ; le geste est décrit ici. */
-  transform:
-    translate3d(0, calc(var(--deploy-p, 0) * -110px), 0)
-    scale(calc(1 + var(--deploy-p, 0) * 0.62));
-  transform-origin: 30% 70%;
-  will-change: transform;
-}
-
-#voices .container { position: relative; z-index: 1; }
-
-.voices-head { margin-bottom: clamp(40px, 5vw, 60px); }
-
-.voices-head .section-label {
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-.voices-title {
-  font-size: clamp(30px, 3.8vw, 46px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  max-width: 70%;
-}
-
-/* Grille volontairement decalee — jamais alignee au cordeau */
-.voices-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(20px, 2.4vw, 30px);
-  align-items: start;
-}
-
-.voices-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 30px 26px 26px;
-  background: var(--card);
-  border: 2px solid var(--text);
-  border-radius: 14px;
-  box-shadow: 8px 8px 0 var(--text);
-}
-
-/* Les decalages : marges et non transform, pour ne pas ecraser le geste « pose » */
-.voices-card:nth-child(2) { margin-top: 34px; }
-.voices-card:nth-child(3) { margin-top: 12px; }
-
-.voices-mark {
-  font-family: var(--font-display);
-  font-size: 54px;
-  font-weight: 700;
-  line-height: 0.6;
-  color: var(--accent);
-  height: 22px;
-}
-
-.voices-quote {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text);
-  margin: 0;
-  flex: 1;
-}
-
-.voices-who {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-top: 18px;
-  border-top: 2px solid rgba(24, 23, 22, 0.10);
-}
-
-.voices-avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--text);
-  color: var(--card);
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.voices-id {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  line-height: 1.3;
-}
-
-.voices-id strong {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.voices-id span {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--muted);
-}
-
-@media (max-width: 900px) {
-  .voices-title { max-width: 100%; }
-  .voices-grid { grid-template-columns: 1fr 1fr; }
-  .voices-card:nth-child(2) { margin-top: 28px; }
-  .voices-card:nth-child(3) { margin-top: 0; }
-}
-
-@media (max-width: 620px) {
-  .voices-grid { grid-template-columns: 1fr; gap: 20px; }
-  .voices-card { box-shadow: 6px 6px 0 var(--text); }
-  .voices-card:nth-child(2),
-  .voices-card:nth-child(3) { margin-top: 0; }
 }
 
 /* ── Tarifs ── */
