@@ -2083,6 +2083,34 @@ h2.contact-title em {
   pointer-events: none;
   z-index: 0;
 }
+/* Occupe la moitié droite, restée vide sous le titre, et porte le geste
+   de déploiement au premier tiers de la page. Trait net, jamais flou. */
+.approach-decor {
+  position: absolute;
+  right: -180px;
+  top: 34%;
+  width: 580px;
+  height: 580px;
+  border-radius: 50%;
+  border: 2px solid rgba(24, 23, 22, 0.11);
+  pointer-events: none;
+  z-index: 0;
+  transform:
+    translate3d(0, calc(var(--deploy-p, 0) * -130px), 0)
+    scale(calc(1 + var(--deploy-p, 0) * 0.5));
+  transform-origin: 65% 40%;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .approach-decor {
+    width: 400px;
+    height: 400px;
+    right: -190px;
+    top: 42%;
+  }
+}
+
 .approach-inner {
   padding-bottom: 56px;
   position: relative;
