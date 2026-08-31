@@ -1654,6 +1654,13 @@ h2.contact-title em {
   border: 2px solid rgba(197, 96, 57, 0.55);
   pointer-events: none;
   z-index: 0;
+  /* Valeurs élevées à dessein : une section de fin de page n'est jamais
+     traversée entièrement, --deploy-p y plafonne autour de 0.35. */
+  transform:
+    translate3d(0, calc(var(--deploy-p, 0) * -300px), 0)
+    scale(calc(1 + var(--deploy-p, 0) * 1.1));
+  transform-origin: 30% 50%;
+  will-change: transform;
 }
 
 #footer .container {
