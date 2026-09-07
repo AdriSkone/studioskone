@@ -1765,10 +1765,15 @@ h2.contact-title em {
 }
 
 /* Cartouche — néo-brutal soft.
-   Trois formats, un seul bloc : un vrai client porte son verbatim, un projet
-   maison ou un exercice porte une note d'intention. Le badge dit lequel, et
-   c'est lui qui rend la section honnête : aucune vignette ne laisse croire à
-   un client qu'elle n'a pas. */
+   Un bloc, trois catégories, un badge qui dit laquelle. C'est lui qui rend la
+   section honnête : aucune vignette ne laisse croire à un client qu'elle n'a
+   pas, ni à un avis que personne n'a donné.
+
+   À ce jour aucune vignette ne porte de verbatim : le seul projet client du
+   lot n'est pas encore en ligne, donc personne n'a encore eu de quoi donner
+   un avis. Les règles du format « citation » plus bas (.work-testi-quote et
+   le bloc auteur) sont donc dormantes, et gardées exprès : elles reprennent
+   du service au premier vrai retour, sans rien réécrire. */
 .work-testi {
   /* auto et non 10px : les cartes du carousel sont a hauteur uniforme, et un
      cartouche cale en bas aligne les badges d'une vignette a l'autre au lieu
@@ -1819,6 +1824,8 @@ h2.contact-title em {
   min-width: 0;
 }
 
+/* Dormant — voir la note en tête de section. Ne pas supprimer : c'est le
+   format qui accueillera le premier vrai témoignage. */
 .work-testi-quote {
   font-family: var(--font-display);
   font-style: italic;
@@ -1836,6 +1843,7 @@ h2.contact-title em {
   flex-wrap: wrap;
 }
 
+/* Dormant, comme .work-testi-quote : l'auteur d'un témoignage à venir. */
 .work-testi-author {
   display: flex;
   align-items: center;
