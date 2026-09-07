@@ -253,6 +253,11 @@
 }
 
 /* ── TÉMOIGNAGE ── */
+/* ── CARTOUCHE ──
+   Remplace le bloc témoignage. Trois catégories, un badge qui dit laquelle :
+   aucune page ne laisse croire à un client qu'elle n'a pas, ni à un avis que
+   personne n'a donné. Panneau sombre conservé : c'est la respiration de la
+   page, juste avant le CTA. */
 .projet-testi {
   margin: 0 auto 48px;
   max-width: calc(1100px - 64px);
@@ -262,44 +267,35 @@
   border: 1.5px solid var(--dark-soft);
 }
 
-.projet-testi-quote {
-  font-size: 16px;
-  font-style: italic;
-  color: #e9d8c2;
+.projet-testi-badge {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 5px 11px;
+  border: 1.5px solid;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+/* Même hiérarchie que l'accueil : le plus vrai est le plus visible. */
+.projet-testi--client   .projet-testi-badge { background: var(--accent); border-color: var(--accent); color: #faeedf; }
+.projet-testi--studio   .projet-testi-badge { background: #e9d8c2; border-color: #e9d8c2; color: var(--dark); }
+.projet-testi--exercice .projet-testi-badge { background: transparent; border-color: #8a7a6a; color: #e9d8c2; }
+
+/* Ni italique ni guillemets : une note d'intention ne doit pas pouvoir se
+   lire comme un témoignage déguisé. */
+.projet-testi-note {
+  font-size: 15.5px;
   line-height: 1.7;
-  margin-bottom: 20px;
+  color: #e9d8c2;
+  margin-bottom: 16px;
 }
 
-.projet-testi-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.projet-testi-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #faeedf;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.projet-testi-name {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #faeedf;
-}
-
-.projet-testi-role {
-  display: block;
-  font-size: 11px;
+.projet-testi-sign {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #8a7a6a;
 }
 
