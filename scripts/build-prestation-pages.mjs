@@ -379,11 +379,13 @@ function renderPage(page) {
       url: ORIGIN,
       email: 'contact@studioskone.com',
       priceRange: '€€',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Paris',
-        addressCountry: 'FR',
-      },
+      // Pas de bloc `address` : le siège social est une domiciliation
+      // parisienne que le studio n'occupe pas, et le lieu d'exercice est en
+      // Loire-Atlantique. Déclarer l'un ou l'autre serait faux ou
+      // contradictoire avec la fiche d'établissement. `areaServed` dit ce qui
+      // est vrai — la zone couverte — et c'est la forme prévue par
+      // schema.org pour une activité qui se déplace.
+      // L'adresse légale reste où elle doit être : les mentions légales.
     },
     areaServed: page.areaServed.map((n) => ({ '@type': n.type, name: n.name })),
   }
