@@ -2,6 +2,12 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "comment": "Page projet retirée. 301 plutôt que 404 : l'URL était indexée et dans le sitemap.",
+      "source": "/projets/niort-basket",
+      "destination": "/#work",
+      "permanent": true
+    },
+    {
       "source": "/admin",
       "destination": "https://cloud.umami.is/websites/fc6b2c73-8439-44f6-b622-cb5cd51e5926",
       "permanent": false
