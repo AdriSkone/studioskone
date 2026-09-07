@@ -462,6 +462,7 @@ button {
 .garantie.reveal,
 .contact-lead.reveal,
 .tarifs-intro-note.reveal,
+.work-intro.reveal,
 .tarifs-footnote.reveal,
 .faq-head-note.reveal,
 .faq-contact-link.reveal {
@@ -508,6 +509,7 @@ h2.approach-title .text-accent,
 h2.process-main-title .text-accent,
 h2.tarifs-intro-title .text-accent,
 h2.faq-title .text-accent,
+h2.work-title .text-accent,
 h2.garanties-title .text-accent,
 h2.services-title em,
 h2.contact-title em {
@@ -1578,6 +1580,26 @@ h2.contact-title em {
   color: var(--dark);
 }
 
+/* Le chapo occupe la moitie droite, restee vide depuis toujours. Il desamorce
+   l'objection d'anciennete avant que les vignettes ne la fassent naitre. */
+.work-intro {
+  max-width: 520px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.work-intro-strong {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .work-header { flex-direction: column; align-items: flex-start; gap: 28px; }
+  .work-intro { max-width: none; }
+}
+
 /* Outer — aligns left edge with container content */
 .work-carousel-outer {
   padding-left: max(64px, calc((100vw - 1300px) / 2 + 64px));
@@ -1730,26 +1752,71 @@ h2.contact-title em {
   color: var(--text);
 }
 
+/* Le sous-titre portait la categorie, que le badge sur l'image dit deja.
+   Il porte maintenant le parti pris du projet : d'ou la casse normale. */
 .work-card-type {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
   color: var(--muted);
   margin-bottom: 4px;
 }
 
-/* Testimonial block — néo-brutal soft */
+/* Cartouche — néo-brutal soft.
+   Trois formats, un seul bloc : un vrai client porte son verbatim, un projet
+   maison ou un exercice porte une note d'intention. Le badge dit lequel, et
+   c'est lui qui rend la section honnête : aucune vignette ne laisse croire à
+   un client qu'elle n'a pas. */
 .work-testi {
-  margin-top: 10px;
+  /* auto et non 10px : les cartes du carousel sont a hauteur uniforme, et un
+     cartouche cale en bas aligne les badges d'une vignette a l'autre au lieu
+     de les laisser flotter chacun a sa hauteur de texte. */
+  margin-top: auto;
+  padding-top: 14px;
   background: var(--bg);
   border: 1.5px solid var(--text);
   border-radius: 10px;
   padding: 14px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+}
+
+/* Hiérarchie voulue : le client remplit, le projet maison contraste, l'exercice
+   se contente d'un contour. Le plus vrai est le plus visible. */
+.work-testi-badge {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border: 1.5px solid var(--text);
+  border-radius: 5px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.work-testi--client   .work-testi-badge { background: var(--accent); color: var(--bg); }
+.work-testi--studio   .work-testi-badge { background: var(--dark);   color: var(--bg); }
+.work-testi--exercice .work-testi-badge { background: transparent;   color: var(--text); }
+
+/* La note d'intention n'est pas une citation : ni italique, ni guillemets.
+   Elle ne doit surtout pas se lire comme un témoignage déguisé. */
+.work-testi-note {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.work-testi-sign {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  min-width: 0;
 }
 
 .work-testi-quote {
