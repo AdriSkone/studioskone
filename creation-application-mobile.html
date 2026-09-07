@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Création d&#39;application mobile iOS et Android · Skøne</title>
+  <meta name="description" content="Conception et développement d&#39;applications mobiles iOS et Android, du premier écran à la publication sur les stores. Design et code par la même personne. Sur devis." />
+  <meta name="author" content="Studio Skøne" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://studioskone.com/creation-application-mobile" />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2" crossorigin>
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="fr_FR" />
+  <meta property="og:site_name"   content="Studio Skøne" />
+  <meta property="og:title"       content="Création d&#39;application mobile iOS et Android · Skøne" />
+  <meta property="og:description" content="Conception et développement d&#39;applications mobiles iOS et Android, du premier écran à la publication sur les stores. Design et code par la même personne. Sur devis." />
+  <meta property="og:image"       content="https://studioskone.com/og-image.png" />
+  <meta property="og:url"         content="https://studioskone.com/creation-application-mobile" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Création d&#39;application mobile iOS et Android · Skøne" />
+  <meta name="twitter:description" content="Conception et développement d&#39;applications mobiles iOS et Android, du premier écran à la publication sur les stores. Design et code par la même personne. Sur devis." />
+  <meta name="twitter:image"       content="https://studioskone.com/og-image.png" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://studioskone.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Application mobile",
+          "item": "https://studioskone.com/creation-application-mobile"
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Création d'application mobile iOS et Android",
+      "description": "Conception et développement d'applications mobiles iOS et Android, du premier écran à la publication sur les stores. Design et code par la même personne. Sur devis.",
+      "url": "https://studioskone.com/creation-application-mobile",
+      "serviceType": "Développement d'application mobile",
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Studio Skøne",
+        "url": "https://studioskone.com",
+        "email": "contact@studioskone.com",
+        "priceRange": "€€",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Paris",
+          "addressCountry": "FR"
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "France"
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Combien de temps pour créer une application ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Comptez huit à seize semaines pour une première version, publication comprise. Le cadrage prend deux semaines, la conception deux à trois, le développement le reste."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "iOS et Android en même temps ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Je travaille avec une base de code unique pour les deux plateformes, ce qui divise le coût par rapport à deux développements séparés, tout en gardant les codes propres à chaque système."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Faut-il commencer petit ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Presque toujours. Une première version resserrée, mise entre les mains de vrais utilisateurs, vous apprend en un mois ce que six mois de réunions ne vous diront pas. On ajoute ensuite ce qui est réellement demandé."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Et si mon application est refusée par l'App Store ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ça arrive, et c'est prévu. Je gère les échanges avec Apple et les corrections jusqu'à la publication. Les motifs de refus sont connus, la plupart s'anticipent dès la conception."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qui possède le code ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vous. Le code source, les comptes stores et les accès sont à votre nom. Vous pouvez confier la suite à une autre équipe quand vous voulez."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vous faites aussi la partie serveur ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Base de données, comptes utilisateurs, back-office d'administration. C'est souvent la moitié du travail, et c'est compris dans le cadrage."
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img" width="111" height="28">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="/#approach" class="nav-link">Le studio</a></li>
+        <li><a href="/#services" class="nav-link">Prestations</a></li>
+        <li><a href="/#process" class="nav-link">Méthode</a></li>
+        <li><a href="/#work" class="nav-link">Projets</a></li>
+        <li><a href="/#tarifs" class="nav-link">Tarifs</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <span class="nav-availability" aria-hidden="true">
+        <span class="nav-availability-dot"></span>
+        Réponse sous 24&nbsp;h
+      </span>
+      <a href="/#estimator" class="btn btn--primary btn--with-circle nav-cta">
+        <span class="btn__circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        Estimer mon projet
+      </a>
+    </div>
+  </nav>
+
+  <main class="pres-main">
+
+    <header class="pres-hero">
+      <div class="container">
+      <nav class="crumbs" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a><span class="crumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">Application mobile</span>
+      </nav>
+        <h1 class="pres-h1">Création d’applications mobiles <span class="text-accent">iOS et Android</span></h1>
+        <p class="pres-hero-lead">Du premier écran jusqu&#39;à la publication sur l&#39;App Store et le Play Store. Une interface conçue pour le pouce, pas un site web rétréci. Conception et développement par la même personne.</p>
+        <div class="hero-cta-row pres-hero-cta">
+          <a href="/#contact" class="btn btn--primary btn--with-circle">
+            <span class="btn__circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            <span>Parler de mon projet</span>
+          </a>
+          <a href="/#work" class="btn btn--secondary">
+            <span class="btn__dot" aria-hidden="true"></span>
+            <span>Voir les applications</span>
+          </a>
+        </div>
+        <p class="hero-proof pres-hero-proof">
+          <span>Cadrage produit facturé, périmètre écrit</span>
+          <span class="hero-proof-sep" aria-hidden="true">·</span>
+          <span>Prototype sur votre téléphone</span>
+          <span class="hero-proof-sep" aria-hidden="true">·</span>
+          <span>Le code source est à vous</span>
+        </p>
+      </div>
+    </header>
+
+    <section class="pres-section pres-section--alt">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">Ce qui fait échouer</p>
+          <h2 class="pres-title reveal">La plupart des projets d’app <span class="text-accent">meurent avant le store.</span></h2>
+        </div>
+        <p class="pres-lead reveal">Trois causes reviennent tout le temps, et aucune n&#39;est technique.</p>
+        <ul class="probleme-grid" role="list">
+          <li class="symptom-card reveal">
+            <span class="symptom-mark" aria-hidden="true"></span>
+            <p class="symptom-text">Le périmètre a doublé en cours de route. On a voulu tout mettre dans la version 1, le budget a explosé, et rien n&#39;est sorti.</p>
+          </li>
+          <li class="symptom-card reveal">
+            <span class="symptom-mark" aria-hidden="true"></span>
+            <p class="symptom-text">L&#39;interface a été dessinée comme un site web, puis adaptée. Sur téléphone, ça se voit immédiatement, et les gens désinstallent.</p>
+          </li>
+          <li class="symptom-card reveal">
+            <span class="symptom-mark" aria-hidden="true"></span>
+            <p class="symptom-text">Personne n&#39;avait anticipé la publication. Les règles d&#39;Apple et de Google sont strictes, et une app refusée peut perdre des semaines.</p>
+          </li>
+        </ul>
+        <p class="probleme-turn reveal">Un projet mobile réussi,<br><span class="probleme-turn-accent">c’est d’abord un périmètre tenu.</span></p>
+      </div>
+    </section>
+
+    <section class="pres-section">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">Ce que je livre</p>
+          <h2 class="pres-title reveal">De l’idée <span class="text-accent">au store.</span></h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <span class="service-num">01</span>
+            <h3 class="service-title">Le cadrage produit</h3>
+            <p class="service-desc">On définit ensemble ce qui entre dans la version 1 et, surtout, ce qui n&#39;y entre pas. C&#39;est l&#39;étape qui sauve les budgets.</p>
+          </div>
+          <div class="service-card reveal">
+            <span class="service-num">02</span>
+            <h3 class="service-title">La conception d&#39;interface</h3>
+            <p class="service-desc">Chaque écran, chaque état, chaque transition. Pensé pour une main, un pouce, et une connexion parfois mauvaise.</p>
+          </div>
+          <div class="service-card reveal">
+            <span class="service-num">03</span>
+            <h3 class="service-title">Le développement iOS et Android</h3>
+            <p class="service-desc">Une seule base de code pour les deux plateformes. Deux fois moins cher à construire et à faire évoluer que deux applications séparées.</p>
+          </div>
+          <div class="service-card reveal">
+            <span class="service-num">04</span>
+            <h3 class="service-title">La publication sur les stores</h3>
+            <p class="service-desc">Comptes développeur, fiches, visuels, textes, respect des règles Apple et Google, gestion des allers-retours de validation.</p>
+          </div>
+          <div class="service-card reveal">
+            <span class="service-num">05</span>
+            <h3 class="service-title">La partie serveur</h3>
+            <p class="service-desc">Base de données, comptes utilisateurs, back-office d&#39;administration. C&#39;est souvent la moitié du travail, et c&#39;est inclus dans le cadrage.</p>
+          </div>
+          <div class="service-card reveal">
+            <span class="service-num">06</span>
+            <h3 class="service-title">Les mises à jour</h3>
+            <p class="service-desc">Une app n&#39;est jamais finie. Je reste disponible pour les évolutions et pour suivre les nouvelles versions d&#39;iOS et d&#39;Android.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pres-section pres-section--alt">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">La différence</p>
+          <h2 class="pres-title reveal">Le mobile ne pardonne pas <span class="text-accent">l’approximation.</span></h2>
+        </div>
+        <div class="pres-prose reveal">
+          <p>Sur un écran de six pouces, il n'y a pas de place pour rattraper une erreur de conception. Un menu mal pensé, une transition qui saute, un formulaire trop long : l'utilisateur ferme et n'ouvre plus jamais l'application.</p>
+          <p>Quand la même personne dessine et développe, ces arbitrages se prennent en direct, avec l'appareil en main, pas dans un fichier de maquette. Je teste sur un vrai téléphone à chaque étape.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pres-section">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">Le déroulé</p>
+          <h2 class="pres-title reveal">Cinq étapes, <span class="text-accent">un périmètre écrit.</span></h2>
+        </div>
+        <ol class="garanties-grid pres-steps" role="list">
+          <li class="garantie reveal">
+            <span class="garantie-num" aria-hidden="true">01</span>
+            <h3 class="garantie-title">Cadrage produit</h3>
+            <p class="garantie-text">Deux ateliers. Le problème que l&#39;app résout, les utilisateurs, les fonctions de la version 1. On sort avec un périmètre écrit et un budget.</p>
+          </li>
+          <li class="garantie reveal">
+            <span class="garantie-num" aria-hidden="true">02</span>
+            <h3 class="garantie-title">Conception</h3>
+            <p class="garantie-text">Parcours puis maquettes haute fidélité, écran par écran. Vous manipulez un prototype cliquable sur votre téléphone avant tout développement.</p>
+          </li>
+          <li class="garantie reveal">
+            <span class="garantie-num" aria-hidden="true">03</span>
+            <h3 class="garantie-title">Développement</h3>
+            <p class="garantie-text">Construction par blocs livrés au fil de l&#39;eau. Vous installez les versions de test sur votre téléphone et vous suivez l&#39;avancement pour de vrai.</p>
+          </li>
+          <li class="garantie reveal">
+            <span class="garantie-num" aria-hidden="true">04</span>
+            <h3 class="garantie-title">Publication</h3>
+            <p class="garantie-text">Préparation des fiches, envoi aux stores, gestion des retours de validation, mise en ligne.</p>
+          </li>
+          <li class="garantie reveal">
+            <span class="garantie-num" aria-hidden="true">05</span>
+            <h3 class="garantie-title">Suivi</h3>
+            <p class="garantie-text">Corrections, ajustements, évolutions au fil des retours de vos utilisateurs.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="pres-section pres-section--alt">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">Budget</p>
+          <h2 class="pres-title reveal">Combien coûte <span class="text-accent">une application mobile ?</span></h2>
+        </div>
+        <div class="pres-prices">
+          <div class="pres-price reveal">
+            <div class="pres-price-head">
+              <h3 class="pres-price-name">Cadrage produit</h3>
+              <span class="pres-price-amount">sur devis, court</span>
+            </div>
+            <p class="pres-price-desc">Un périmètre, des maquettes et un devis ferme. Vous restez libre de faire développer ailleurs ensuite.</p>
+          </div>
+          <div class="pres-price reveal">
+            <div class="pres-price-head">
+              <h3 class="pres-price-name">Première version</h3>
+              <span class="pres-price-amount">à partir de 6 000 €</span>
+            </div>
+            <p class="pres-price-desc">Une application resserrée, publiée sur les deux stores, mise entre les mains de vrais utilisateurs.</p>
+          </div>
+          <div class="pres-price reveal">
+            <div class="pres-price-head">
+              <h3 class="pres-price-name">Plateforme complète</h3>
+              <span class="pres-price-amount">sur devis</span>
+            </div>
+            <p class="pres-price-desc">Comptes, paiements, notifications, synchronisation hors ligne, connexion à des systèmes existants.</p>
+          </div>
+        </div>
+        <div class="tarifs-truth reveal">
+          <div class="truth-item">
+            <h3 class="truth-title">Pourquoi la fourchette est large</h3>
+            <p class="truth-text">Toute personne qui vous annonce un prix sans avoir défini le périmètre vous vend un devis qui bougera. Le cadrage existe pour transformer une fourchette en chiffre.</p>
+          </div>
+          <div class="truth-item">
+            <h3 class="truth-title">Ce qui pèse le plus</h3>
+            <p class="truth-text">Les comptes utilisateurs, les paiements, les notifications, la synchronisation hors ligne, et la connexion à des systèmes existants.</p>
+          </div>
+          <div class="truth-item">
+            <h3 class="truth-title">Les comptes développeur</h3>
+            <p class="truth-text">À prévoir en plus : le compte Apple à 99 $ par an et le compte Google Play à 25 $ une seule fois. Ils sont ouverts à votre nom.</p>
+          </div>
+        </div>
+        <p class="pres-inline-cta reveal">
+          <a href="/#estimator" class="btn btn--primary btn--with-circle">
+            <span class="btn__circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            <span>Parler de mon application</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="pres-section">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">À regarder</p>
+          <h2 class="pres-title reveal">Trois applications, <span class="text-accent">trois partis pris.</span></h2>
+        </div>
+        <div class="pres-links">
+          <a class="pres-link reveal" href="/projets/giftmatch">
+            <span class="pres-link-tag">Projet de studio</span>
+            <span class="pres-link-title">GiftMatch</span>
+            <span class="pres-link-desc">Transformer trois mots sur une personne en cinq idées cadeaux, en dix secondes.</span>
+            <span class="pres-link-go" aria-hidden="true">→</span>
+          </a>
+          <a class="pres-link reveal" href="/projets/pepite">
+            <span class="pres-link-tag">Projet de studio</span>
+            <span class="pres-link-title">Pépite</span>
+            <span class="pres-link-desc">Deux utilisateurs très différents sur le même téléphone, dont un qui ne lit pas encore.</span>
+            <span class="pres-link-go" aria-hidden="true">→</span>
+          </a>
+          <a class="pres-link reveal" href="/projets/myboat">
+            <span class="pres-link-tag">Exercice de conception</span>
+            <span class="pres-link-title">MyBoat</span>
+            <span class="pres-link-desc">Connaître le prix total d&#39;une location avant la moindre inscription.</span>
+            <span class="pres-link-go" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pres-section pres-section--alt" id="faq">
+      <div class="container">
+        <div class="pres-head">
+          <p class="section-label reveal">Questions fréquentes</p>
+          <h2 class="pres-title reveal">Ce qu’on me demande <span class="text-accent">sur le mobile.</span></h2>
+        </div>
+        <div class="faq-list pres-faq" role="list">
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">01</span>
+              <span class="faq-q-text">Combien de temps pour créer une application ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Comptez huit à seize semaines pour une première version, publication comprise. Le cadrage prend deux semaines, la conception deux à trois, le développement le reste.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">02</span>
+              <span class="faq-q-text">iOS et Android en même temps ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Oui. Je travaille avec une base de code unique pour les deux plateformes, ce qui divise le coût par rapport à deux développements séparés, tout en gardant les codes propres à chaque système.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">03</span>
+              <span class="faq-q-text">Faut-il commencer petit ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Presque toujours. Une première version resserrée, mise entre les mains de vrais utilisateurs, vous apprend en un mois ce que six mois de réunions ne vous diront pas. On ajoute ensuite ce qui est réellement demandé.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">04</span>
+              <span class="faq-q-text">Et si mon application est refusée par l&#39;App Store ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Ça arrive, et c&#39;est prévu. Je gère les échanges avec Apple et les corrections jusqu&#39;à la publication. Les motifs de refus sont connus, la plupart s&#39;anticipent dès la conception.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">05</span>
+              <span class="faq-q-text">Qui possède le code ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Vous. Le code source, les comptes stores et les accès sont à votre nom. Vous pouvez confier la suite à une autre équipe quand vous voulez.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-num" aria-hidden="true">06</span>
+              <span class="faq-q-text">Vous faites aussi la partie serveur ?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <div class="faq-answer-inner">Oui. Base de données, comptes utilisateurs, back-office d&#39;administration. C&#39;est souvent la moitié du travail, et c&#39;est compris dans le cadrage.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pres-cta">
+      <div class="container">
+        <h2 class="pres-cta-title reveal">Racontez-moi <span class="text-accent">votre application.</span></h2>
+        <div class="pres-prose reveal">
+          <p>Trente minutes pour comprendre ce que vous voulez construire, pour qui, et avec quel budget. Je vous dis franchement si le projet tient la route, ce qu&#39;il faut retirer de la version 1, et ce que ça représente.</p>
+        </div>
+        <div class="hero-cta-row pres-cta-row reveal">
+          <a href="/#contact" class="btn btn--primary btn--with-circle">
+            <span class="btn__circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            <span>Écrire au studio</span>
+          </a>
+          <a href="/#work" class="btn btn--secondary">
+            <span class="btn__dot" aria-hidden="true"></span>
+            <span>Voir les réalisations</span>
+          </a>
+        </div>
+        <p class="pres-cta-note reveal">Réponse sous 24 h ouvrées.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-cta">
+        <div class="footer-cta-body">
+          <span class="footer-cta-status">
+            <span class="footer-cta-dot" aria-hidden="true"></span>
+            Réponse sous 24h
+          </span>
+          <span class="footer-cta-text">Disponible pour de nouveaux projets.</span>
+        </div>
+        <a href="/#contact" class="footer-cta-link">
+          <span class="footer-cta-circle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          Parlons-en
+        </a>
+      </div>
+
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo">
+            <img src="/logo_skone_footer.svg" alt="Studio Skøne" class="footer-logo-img" width="103" height="26">
+          </a>
+          <p class="footer-tagline">Studio Skøne — création de sites internet, boutiques en ligne et applications, à Nantes et dans toute la France. Conçus et développés par la même personne, du croquis à la mise en ligne.</p>
+          <p class="footer-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Basé à Nantes · J'interviens à Carquefou, La Chapelle-sur-Erdre, Sucé-sur-Erdre, Nort-sur-Erdre, Treillières, Ancenis — et partout en France en visio.
+          </p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navigation secondaire">
+          <span class="footer-nav-title">Le studio</span>
+          <a href="/#approach">À propos</a>
+          <a href="/#work">Projets</a>
+          <a href="/#tarifs">Tarifs</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+
+        <nav class="footer-nav" aria-label="Prestations">
+          <span class="footer-nav-title">Prestations</span>
+          <a href="/refonte-site-internet">Refonte de site</a>
+          <a href="/creation-site-internet-artisan">Site internet pour artisan</a>
+          <a href="/creation-site-internet-nantes">Création de site internet</a>
+          <a href="/creation-site-ecommerce-nantes">Site e-commerce</a>
+        </nav>
+
+        <div class="footer-contact">
+          <a href="mailto:contact@studioskone.com" class="footer-email">contact@studioskone.com</a>
+          <a href="https://www.instagram.com/studio.skone/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram Studio Skøne">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Studio Skøne. Tous droits réservés.</span>
+        <div class="footer-legal">
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+          <a href="/cgu">CGU</a>
+          <a href="/cgv">CGV</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Remonter en haut de page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script type="module" src="/src/prestation-page.ts"></script>
+</body>
+</html>

@@ -8,6 +8,15 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main:        resolve(__dirname, 'index.html'),
+
+        // Pages prestations — générées par `node scripts/build-prestation-pages.mjs`.
+        // Ne pas les éditer à la main : la source est scripts/prestation-pages-data.mjs.
+        presRefonte:   resolve(__dirname, 'refonte-site-internet.html'),
+        presArtisan:   resolve(__dirname, 'creation-site-internet-artisan.html'),
+        presNantes:    resolve(__dirname, 'creation-site-internet-nantes.html'),
+        presEcommerce: resolve(__dirname, 'creation-site-ecommerce-nantes.html'),
+        presMobile:    resolve(__dirname, 'creation-application-mobile.html'),
+
         giftmatch:   resolve(__dirname, 'projets/giftmatch.html'),
         tasq:        resolve(__dirname, 'projets/tasq.html'),
         myboat:      resolve(__dirname, 'projets/myboat.html'),

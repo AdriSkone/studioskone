@@ -1,0 +1,382 @@
+/* ============================================================
+   PAGES PRESTATIONS
+   ============================================================
+   Ces pages réutilisent au maximum le vocabulaire de l'accueil : .symptom-card
+   pour les listes de symptômes, .service-card pour « ce que je livre »,
+   .garantie pour les étapes de méthode, .truth-item pour les nuances de prix,
+   .faq-item pour l'accordéon. On ne redéfinit ici que ce qui n'existe pas
+   ailleurs — coquille de page, fil d'Ariane, hero, prix, cartes de renvoi.
+
+   Conséquence voulue : une page prestation ne peut pas dériver visuellement de
+   l'accueil, puisqu'elle en partage les composants. */
+
+/* ── Coquille ── */
+.pres-main {
+  /* La nav est fixe et fait 61px de haut, bordure comprise. */
+  padding-top: 61px;
+}
+
+.pres-section {
+  padding: clamp(56px, 7vw, 88px) 0;
+  background: var(--bg);
+  position: relative;
+}
+/* Alternance des fonds : la page se lit par paliers, pas d'un seul tenant. */
+.pres-section--alt { background: var(--bg-soft); }
+
+.pres-head { margin-bottom: clamp(32px, 4vw, 48px); max-width: 760px; }
+
+.pres-title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--dark);
+}
+
+.pres-lead {
+  max-width: 720px;
+  margin-bottom: 28px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.pres-prose { max-width: 720px; }
+.pres-prose p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.pres-prose p + p { margin-top: 14px; }
+
+/* ── Fil d'Ariane ── */
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.crumbs a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.crumbs a:hover { color: var(--accent); }
+.crumbs [aria-current="page"] { color: var(--text); font-weight: 600; }
+.crumb-sep { color: var(--accent); }
+
+/* ── Hero de page ── */
+.pres-hero {
+  background: var(--bg-soft);
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1.1' fill='%23181716' fill-opacity='0.13'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  padding: clamp(40px, 5vw, 64px) 0 clamp(48px, 6vw, 72px);
+  border-bottom: 2px solid var(--text);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Cercle bordé, jamais flou — même famille que #hero::before. */
+.pres-hero::after {
+  content: '';
+  position: absolute;
+  right: -180px;
+  top: -160px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 2px solid rgba(24, 23, 22, 0.10);
+  pointer-events: none;
+}
+.pres-hero > .container { position: relative; z-index: 1; }
+
+.pres-h1 {
+  max-width: 900px;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  margin-bottom: 22px;
+}
+
+.pres-hero-lead {
+  max-width: 660px;
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.pres-hero-context {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  font-family: var(--font-display);
+  font-size: clamp(11px, 1vw, 12.5px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Le hero de l'accueil anime ses CTA au chargement ; ici la page est statique,
+   on neutralise l'état de départ hérité de .hero-cta-row / .hero-proof. */
+.pres-hero-cta,
+.pres-hero-proof,
+.pres-cta-row {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.pres-hero-proof { margin-top: 20px; }
+
+/* ── Points d'une liste en prose ── */
+.pres-points {
+  list-style: none;
+  margin-top: 28px;
+  max-width: 760px;
+  display: grid;
+  gap: 14px;
+}
+.pres-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.pres-point p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+}
+/* Coche dessinée, pas typographiée : elle garde son trait à toute taille. */
+.pres-point-mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  border-radius: 50%;
+  border: 2px solid var(--text);
+  background: var(--accent);
+}
+.pres-point-mark::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 5px;
+  height: 8px;
+  border-right: 2px solid var(--bg);
+  border-bottom: 2px solid var(--bg);
+  transform: rotate(42deg);
+}
+
+/* ── Étapes de méthode ── */
+/* .garanties-grid pose cinq colonnes ; la méthode en compte quatre ou cinq. */
+.pres-steps { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+
+/* ── Prix ── */
+.pres-prices {
+  display: grid;
+  gap: 14px;
+  max-width: 860px;
+}
+.pres-price {
+  background: var(--card);
+  border: 2px solid var(--text);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--text);
+  padding: 20px 24px;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.pres-price:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--text);
+}
+.pres-price-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.pres-price-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.pres-price-amount {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.pres-price-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.pres-inline-cta { margin-top: clamp(28px, 3.5vw, 40px); }
+
+/* ── Cartes de renvoi — c'est le maillage interne, il doit se voir ── */
+.pres-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.pres-link {
+  display: grid;
+  gap: 8px;
+  padding: 22px 24px 20px;
+  background: var(--card);
+  border: 2px solid var(--text);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--text);
+  text-decoration: none;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.pres-link:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--text);
+}
+.pres-link-tag {
+  justify-self: start;
+  padding: 4px 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--text);
+  border-radius: 5px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.pres-link-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--text);
+}
+.pres-link-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.pres-link-go {
+  justify-self: start;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  transition: transform 0.2s var(--ease);
+}
+.pres-link:hover .pres-link-go { transform: translateX(4px); }
+
+/* ── FAQ ── */
+/* L'accueil pose la FAQ en deux colonnes ; ici elle occupe toute la largeur. */
+.pres-faq { max-width: 860px; }
+
+/* ── CTA final ── */
+.pres-cta {
+  background: var(--surface);
+  padding: clamp(64px, 8vw, 96px) 0;
+  border-top: 2px solid var(--text);
+}
+.pres-cta-title {
+  max-width: 760px;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.6vw, 44px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+  color: var(--dark);
+  margin-bottom: 22px;
+}
+.pres-cta-row { margin-top: 32px; }
+.pres-cta-note {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* ── Règle du seuil ──
+   Reprend la règle de style.css : au-dessus de 28px, le mot accent change de
+   fonte. Les sélecteurs portent le nom de balise pour passer devant
+   .text-accent, qui poserait sinon un oblique synthétique sur Fredoka. */
+h1.pres-h1 .text-accent,
+h2.pres-title .text-accent,
+h2.pres-cta-title .text-accent {
+  font-family: var(--font-round);
+  font-weight: 600;
+  font-style: normal;
+  color: var(--accent);
+  font-size: 0.94em;
+  letter-spacing: 0.005em;
+}
+
+/* ── Gestes de reveal ──
+   Même vocabulaire que l'accueil : les objets à ombre dure se « posent »,
+   les titres et le texte courant ne font qu'apparaître. */
+.pres-price.reveal,
+.pres-link.reveal {
+  transform: translate(var(--pose-offset), var(--pose-offset));
+  transition:
+    opacity   var(--reveal-dur) var(--ease),
+    transform var(--reveal-dur) var(--ease);
+}
+.pres-price.reveal.is-visible,
+.pres-link.reveal.is-visible { transform: translate(0, 0); }
+
+.pres-title.reveal,
+.pres-cta-title.reveal { transform: none; }
+
+.pres-lead.reveal,
+.pres-prose.reveal,
+.pres-point.reveal,
+.pres-inline-cta.reveal,
+.pres-cta-note.reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pres-price.reveal,
+  .pres-link.reveal,
+  .pres-price.reveal.is-visible,
+  .pres-link.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition-duration: 0.01ms;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .pres-hero::after { width: 340px; height: 340px; right: -140px; top: -120px; }
+}
+@media (max-width: 700px) {
+  .pres-price { box-shadow: 4px 4px 0 var(--text); }
+  .pres-link  { box-shadow: 4px 4px 0 var(--text); }
+}
