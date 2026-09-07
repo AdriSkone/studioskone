@@ -150,7 +150,7 @@ ${prestations.map((l) => `          <a href="${esc(l.href)}">${esc(l.label)}</a>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
             </svg>
           </a>
-          <a href="https://share.google/nQ42LbkJix6FF8RUv" target="_blank" rel="noopener noreferrer" class="footer-google">
+          <a href="https://maps.google.com/?cid=17161741996888223031" target="_blank" rel="noopener noreferrer" class="footer-google">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
@@ -385,9 +385,10 @@ function renderPage(page) {
       url: ORIGIN,
       email: 'contact@studioskone.com',
       priceRange: '€€',
-      // Identifiant Knowledge Graph de la fiche d'établissement plutôt que le
-      // lien court de partage : le premier est stable, le second peut expirer.
-      sameAs: ['https://www.instagram.com/studio.skone/', 'https://www.google.com/search?kgmid=/g/11njq1hnjr'],
+      // Adresse Maps bâtie sur le CID de la fiche plutôt que sur un lien court
+      // de partage : le CID est l'identifiant permanent de l'établissement,
+      // les liens courts Google ont déjà été retirés par le passé.
+      sameAs: ['https://www.instagram.com/studio.skone/', 'https://maps.google.com/?cid=17161741996888223031'],
       // Pas de bloc `address` : le siège social est une domiciliation
       // parisienne que le studio n'occupe pas, et le lieu d'exercice est en
       // Loire-Atlantique. Déclarer l'un ou l'autre serait faux ou
