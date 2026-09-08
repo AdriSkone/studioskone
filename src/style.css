@@ -3033,7 +3033,12 @@ h2.contact-title em {
 /* Clôture de la section : la dernière objection, hors timeline. */
 .process-closing {
   margin: clamp(40px, 5vw, 60px) auto 0;
-  max-width: 660px;
+  /* Mesuré : la phrase demande 692px sur une ligne. À 660 il manquait 32px,
+     et « cadrage. » restait seule en deuxième ligne. */
+  max-width: 720px;
+  /* Quand l'écran force malgré tout le passage à la ligne, le navigateur
+     équilibre les deux lignes au lieu de laisser un mot orphelin. */
+  text-wrap: balance;
   text-align: center;
   font-family: var(--font-display);
   font-size: clamp(15px, 1.5vw, 17px);
