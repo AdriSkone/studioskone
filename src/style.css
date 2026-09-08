@@ -2245,6 +2245,34 @@ h2.contact-title em {
   color: var(--accent);
 }
 
+/* Numéro de téléphone — même traitement que le lien vers la fiche. La page
+   artisan vend « le bouton d'appel toujours visible » : le studio ne peut pas
+   être le seul site du lot à ne pas afficher le sien. */
+.footer-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--bg);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 200ms ease;
+}
+.footer-phone:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+.footer-phone svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
 /* Lien vers la fiche d'établissement — en toutes lettres plutôt qu'en icône :
    « Voir la fiche Google » dit ce qu'on y trouve, une icône ne le dirait pas.
    C'est par là que passeront les avis, c'est le lien le plus utile du bloc. */
