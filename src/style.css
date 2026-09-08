@@ -27,6 +27,11 @@
   --muted:        #5C5C5C;
   --border:       #E2D8CB;
 
+  /* Hauteur réelle de la barre fixe, bordure de 2px comprise. Mesurée, pas
+     estimée : elle était supposée à 61px à deux endroits, d'où 17px d'erreur.
+     Toute section qui commence sous la nav doit réserver cette bande. */
+  --nav-h: 78px;
+
   --grain-opacity: 0.025;
   --glow-accent:   rgba(197, 96, 57, 0.10);
   --shadow-soft:   0 8px 30px rgba(0, 0, 0, 0.08);
@@ -62,12 +67,16 @@ html, body { width: 100%; max-width: 100vw; }
   background-color: var(--bg-soft);
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1.1' fill='%23181716' fill-opacity='0.13'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  padding-top: 40px;
-  /* Réserve la bande du bandeau défilant (65px), qui est en absolu au bas de
-     la section. Sans ça, la carte centrée l'atteint dès que l'écran descend
-     sous 800px de haut : mesuré à 13px de chevauchement à 780, 53px à 700 —
-     soit un MacBook 13" ordinaire. */
-  padding-bottom: 65px;
+  /* Deux bandes se superposent au hero sans qu'il le sache : la nav en haut,
+     le bandeau défilant en bas. Le centrage les ignorait, et la carte se
+     retrouvait poussée vers le haut — 44px d'air sous la nav contre 82 au
+     dessus du bandeau. On réserve les deux, puis on ajoute la même
+     respiration de chaque côté : les écarts deviennent égaux, et ils suivent
+     la hauteur de l'écran au lieu d'être figés. */
+  --strip-h: 65px;
+  --hero-air: clamp(20px, 4.5vh, 56px);
+  padding-top: calc(var(--nav-h) + var(--hero-air));
+  padding-bottom: calc(var(--strip-h) + var(--hero-air));
 }
 
 #hero::before {

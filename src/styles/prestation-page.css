@@ -12,8 +12,9 @@
 
 /* ── Coquille ── */
 .pres-main {
-  /* La nav est fixe et fait 61px de haut, bordure comprise. */
-  padding-top: 61px;
+  /* La nav est fixe : on réserve sa hauteur réelle. Elle était supposée à
+     61px, elle en fait 78 — 17px de contenu passaient dessous. */
+  padding-top: var(--nav-h);
 }
 
 .pres-section {
@@ -389,7 +390,7 @@ h2.pres-cta-title .text-accent {
    ressemble au reste du site rassure, là où une page système inquiète.
    Aucune classe .reveal ici — voir le commentaire dans 404.html. */
 .err-main {
-  padding-top: 61px;                     /* hauteur de la nav fixe */
+  padding-top: var(--nav-h);             /* hauteur réelle de la nav fixe */
   background: var(--bg-soft);
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1.1' fill='%23181716' fill-opacity='0.13'/%3E%3C/svg%3E");
   background-repeat: repeat;
