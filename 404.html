@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page introuvable · Studio Skøne</title>
+  <meta name="description" content="Cette page n'existe pas. Voici celles qui existent : création de site internet, refonte, e-commerce, application mobile." />
+  <!-- Une page d'erreur n'a rien à faire dans l'index. -->
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2" crossorigin>
+</head>
+<body>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img" width="111" height="28">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="/#approach" class="nav-link">Le studio</a></li>
+        <li><a href="/#services" class="nav-link">Prestations</a></li>
+        <li><a href="/#process" class="nav-link">Méthode</a></li>
+        <li><a href="/#work" class="nav-link">Projets</a></li>
+        <li><a href="/#tarifs" class="nav-link">Tarifs</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <span class="nav-availability" aria-hidden="true">
+        <span class="nav-availability-dot"></span>
+        Réponse sous 24&nbsp;h
+      </span>
+      <a href="/#estimator" class="btn btn--primary btn--with-circle nav-cta">
+        <span class="btn__circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+        Estimer mon projet
+      </a>
+    </div>
+  </nav>
+
+  <!-- Aucune classe .reveal sur cette page : elles démarrent à opacity 0 et
+       dépendent du JavaScript. Sur une page d'erreur, un script qui ne se
+       charge pas laisserait un écran vide — exactement le contraire de ce
+       qu'on cherche ici. Tout est visible d'emblée. -->
+  <main class="err-main">
+    <div class="container err-inner">
+      <span class="err-code" aria-hidden="true">404</span>
+      <h1 class="err-title">Cette page <span class="text-accent">n'existe pas.</span></h1>
+      <p class="err-lead">
+        Ça arrive même aux meilleurs sites. Un lien qui a vieilli, une adresse mal recopiée,
+        une page que j'ai retirée. Voici celles qui existent.
+      </p>
+
+      <div class="pres-links err-links">
+        <a class="pres-link" href="/">
+          <span class="pres-link-tag">Accueil</span>
+          <span class="pres-link-title">Studio Skøne</span>
+          <span class="pres-link-desc">Le studio, la méthode, les réalisations et les tarifs.</span>
+          <span class="pres-link-go" aria-hidden="true">→</span>
+        </a>
+        <a class="pres-link" href="/creation-site-internet-nantes">
+          <span class="pres-link-tag">Prestation</span>
+          <span class="pres-link-title">Création de site internet</span>
+          <span class="pres-link-desc">Site vitrine ou multi-pages, à Nantes et partout en France.</span>
+          <span class="pres-link-go" aria-hidden="true">→</span>
+        </a>
+        <a class="pres-link" href="/refonte-site-internet">
+          <span class="pres-link-tag">Prestation</span>
+          <span class="pres-link-title">Refonte de site</span>
+          <span class="pres-link-desc">Reprendre un site existant sans perdre son référencement.</span>
+          <span class="pres-link-go" aria-hidden="true">→</span>
+        </a>
+        <a class="pres-link" href="/creation-site-ecommerce-nantes">
+          <span class="pres-link-tag">Prestation</span>
+          <span class="pres-link-title">Site e-commerce</span>
+          <span class="pres-link-desc">Boutique en ligne, du catalogue à la première commande.</span>
+          <span class="pres-link-go" aria-hidden="true">→</span>
+        </a>
+        <a class="pres-link" href="/creation-application-mobile">
+          <span class="pres-link-tag">Prestation</span>
+          <span class="pres-link-title">Application mobile</span>
+          <span class="pres-link-desc">iOS et Android, du premier écran à la publication.</span>
+          <span class="pres-link-go" aria-hidden="true">→</span>
+        </a>
+        <a class="pres-link" href="/creation-site-internet-artisan">
+          <span class="pres-link-tag">Prestation</span>
+          <span class="pres-link-title">Site pour artisan</span>
+          <span class="pres-link-desc">Trouvé sur Google, lisible sur téléphone, fait pour l'appel.</span>
+          <span class="pres-link-go" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="hero-cta-row err-cta">
+        <a href="/" class="btn btn--primary btn--with-circle">
+          <span class="btn__circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+          <span>Retour à l'accueil</span>
+        </a>
+        <a href="/#contact" class="btn btn--secondary">
+          <span class="btn__dot" aria-hidden="true"></span>
+          <span>Écrire au studio</span>
+        </a>
+      </div>
+
+      <p class="err-note">
+        Vous cherchiez quelque chose de précis&nbsp;? Écrivez-moi, je réponds moi-même sous 24&nbsp;h ouvrées.
+      </p>
+    </div>
+  </main>
+
+  <script type="module" src="/src/prestation-page.ts"></script>
+</body>
+</html>

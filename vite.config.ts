@@ -8,6 +8,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main:        resolve(__dirname, 'index.html'),
+        // Vercel sert dist/404.html sur toute route inconnue.
+        notFound:    resolve(__dirname, '404.html'),
 
         // Pages prestations — générées par `node scripts/build-prestation-pages.mjs`.
         // Ne pas les éditer à la main : la source est scripts/prestation-pages-data.mjs.
