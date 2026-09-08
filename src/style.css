@@ -63,6 +63,11 @@ html, body { width: 100%; max-width: 100vw; }
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1.1' fill='%23181716' fill-opacity='0.13'/%3E%3C/svg%3E");
   background-repeat: repeat;
   padding-top: 40px;
+  /* Réserve la bande du bandeau défilant (65px), qui est en absolu au bas de
+     la section. Sans ça, la carte centrée l'atteint dès que l'écran descend
+     sous 800px de haut : mesuré à 13px de chevauchement à 780, 53px à 700 —
+     soit un MacBook 13" ordinaire. */
+  padding-bottom: 65px;
 }
 
 #hero::before {
@@ -125,7 +130,9 @@ html, body { width: 100%; max-width: 100vw; }
   border: 2px solid var(--text);
   border-radius: 14px;
   box-shadow: 8px 8px 0 var(--text);
-  padding: 56px 48px;
+  /* 44 et non 56 : le nouveau titre fait trois lignes et le statement quatre,
+     la carte était montée à 637px de haut quel que soit l'écran. */
+  padding: 44px 48px;
   position: relative;
   z-index: 2;
   pointer-events: auto;
@@ -139,7 +146,7 @@ html, body { width: 100%; max-width: 100vw; }
   line-height: 1.1;
   letter-spacing: 0.02em;
   color: var(--text);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   transform: translateY(12px);
   transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
 }
@@ -158,7 +165,7 @@ html, body { width: 100%; max-width: 100vw; }
   line-height: 30px;
   color: var(--text);
   max-width: 560px;
-  margin-bottom: 32px;
+  margin-bottom: 26px;
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
@@ -179,7 +186,7 @@ html, body { width: 100%; max-width: 100vw; }
   text-transform: uppercase;
   color: var(--accent);
   margin-top: -16px;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   opacity: 0;
   transform: translateY(16px);
   /* stagger : entre le statement (0.3s) et les CTA */
@@ -216,7 +223,7 @@ html, body { width: 100%; max-width: 100vw; }
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 16px;
   font-family: var(--font-display);
   font-size: 12.5px;
   font-weight: 500;
@@ -647,6 +654,23 @@ h2.contact-title em {
 .nav-link:hover        { color: var(--text); }
 .nav-link:hover::after { width: 100%; }
 
+/* Un seul groupe à droite, le logo seul à gauche.
+   Mesuré avant : les liens finissaient à 686px et la disponibilité commençait
+   à 1065 — 379px de trou au milieu, l'ensemble massé à gauche.
+
+   Le centrage exact a été essayé puis écarté : le bloc de droite
+   (disponibilité + CTA) fait 407px contre 152 pour le logo, un bloc centré ne
+   peut donc pas être à égale distance des deux. Il collait le CTA dès 1030px
+   — 17px de recouvrement mesuré — et n'aurait tenu qu'au-dessus de 1450px.
+
+   Pousser les liens contre le groupe de droite laisse un seul écart, après le
+   logo. Un vide franc se lit comme un choix ; deux vides inégaux se lisent
+   comme un défaut. Et le flex absorbe la contrainte tout seul : plus aucune
+   collision possible, à aucune largeur. */
+@media (min-width: 1025px) {
+  .nav-links { margin-left: auto; }
+}
+
 /* .nav-cta = simple marqueur de placement utilisé par la règle responsive
    plus bas (display: none sous 1024px). Le styling visuel vient du système .btn. */
 
@@ -1007,7 +1031,9 @@ h2.contact-title em {
    fois avant de basculer sur la réponse. */
 #probleme {
   background: var(--bg);
-  padding: clamp(64px, 8vw, 96px) 0 clamp(56px, 7vw, 84px);
+  /* Bas resserré : la bascule flottait 68px sous les cartes, et son alignement
+     à droite laissait 522px de vide à sa gauche. */
+  padding: clamp(64px, 8vw, 96px) 0 clamp(40px, 5vw, 60px);
   position: relative;
   overflow: hidden;
 }
@@ -1015,12 +1041,14 @@ h2.contact-title em {
 /* Cercle bordé, jamais flou — même famille que #hero::before et .approach-decor. */
 .probleme-decor {
   position: absolute;
-  left: -220px;
-  bottom: -260px;
+  left: -170px;
+  bottom: -210px;
   width: 620px;
   height: 620px;
   border-radius: 50%;
-  border: 2px solid rgba(24, 23, 22, 0.10);
+  /* Remontée et un peu plus dense : le quart bas-gauche n'est plus un oubli
+     mais un contrepoint à la bascule, qui tient le bord droit. */
+  border: 2px solid rgba(24, 23, 22, 0.14);
   pointer-events: none;
   z-index: 0;
 }
@@ -1100,7 +1128,7 @@ h2.contact-title em {
 /* La bascule vers la solution. Alignée à droite : le regard change de bord
    au moment où le propos change de camp. */
 .probleme-turn {
-  margin-top: clamp(44px, 5.5vw, 68px);
+  margin-top: clamp(24px, 3vw, 36px);
   margin-left: auto;
   /* Mesuré : « Rien de tout ça n'est votre métier. » demande 790px à 44px.
      Sous cette largeur, « métier. » se retrouve seul sur sa ligne. */
@@ -3112,20 +3140,33 @@ h2.contact-title em {
   list-style: none;
   align-items: start;
 }
-.garantie { border-top: 2px solid var(--text); padding-top: 16px; }
+/* Filet accent plutôt que noir : cinq colonnes de texte nu sur le même fond
+   que la FAQ juste avant s'effaçaient, alors que c'est la dernière section
+   avant le contact. */
+.garantie { border-top: 2px solid var(--accent); padding-top: 18px; }
 
 /* Escalier — une colonne sur deux descend. Cinq colonnes : le pas alterne
    sans jamais retomber sur une ligne droite. */
 .garanties-grid .garantie:nth-child(2n) { margin-top: clamp(16px, 2vw, 30px); }
 
+/* Pastille bordée à ombre dure — le motif de .service-num, en plus petit.
+   Elle ancre chaque engagement sans ajouter une sixième grille de cartes. */
 .garantie-num {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--accent);
+  color: var(--bg);
+  border: 2px solid var(--text);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--text);
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
 }
 .garantie-title {
   font-family: var(--font-display);
