@@ -542,14 +542,13 @@ function checkNoDuplicates(pages) {
 }
 
 // ── Sitemap ─────────────────────────────────────────────────────────────────
-function updateSitemap(pages) {
+function updateSitemap(pages, dates) {
   const path = join(ROOT, 'public', 'sitemap.xml')
   let xml = readFileSync(path, 'utf-8')
-  const today = new Date().toISOString().slice(0, 10)
 
   const entries = pages.map((p) => `  <url>
     <loc>${ORIGIN}/${p.slug}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${dates[p.slug]}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>`).join('\n')
@@ -565,16 +564,39 @@ function updateSitemap(pages) {
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
+/**
+ * Date de dernière modification à déclarer au sitemap.
+ * Une page dont le rendu n'a pas bougé garde sa date d'origine : dater du jour
+ * une page inchangée dit à Google qu'elle a évolué alors que non, et cette
+ * fausse indication use la confiance qu'il accorde au fichier. On ne redate
+ * que ce qui a réellement changé.
+ */
+function lastmodFor(slug, htmlAvant, htmlApres, today) {
+  if (htmlAvant !== null && htmlAvant === htmlApres) {
+    const xml = readFileSync(join(ROOT, 'public', 'sitemap.xml'), 'utf-8')
+    const m = xml.match(
+      new RegExp(`<loc>${ORIGIN}/${slug}</loc>\\s*<lastmod>([^<]+)</lastmod>`))
+    if (m) return m[1]
+  }
+  return today
+}
+
 function main() {
   checkNoDuplicates(PAGES)
+  const today = new Date().toISOString().slice(0, 10)
+  const dates = {}
   for (const page of PAGES) {
     const html = renderPage(page)
     const out = join(ROOT, `${page.slug}.html`)
+    let avant = null
+    try { avant = readFileSync(out, 'utf-8') } catch { /* première génération */ }
+    dates[page.slug] = lastmodFor(page.slug, avant, html, today)
+    const inchange = avant === html
     writeFileSync(out, html, 'utf-8')
     const words = html.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length
-    console.log(`✓ ${page.slug}.html  (~${words} mots rendus)`)
+    console.log(`✓ ${page.slug}.html  (~${words} mots${inchange ? ', inchangé' : ''})`)
   }
-  updateSitemap(PAGES)
+  updateSitemap(PAGES, dates)
   console.log('\nPenser à `npm run build` : les pages sont des entrées de vite.config.ts.')
 }
 
