@@ -1,0 +1,101 @@
+/* ============================================================
+   STUDIO SKØNE — Tokens
+   Source de vérité unique. Aucune couleur, aucune fonte, aucune
+   durée n'est définie ailleurs dans le projet.
+   ============================================================ */
+
+:root {
+  /* ─── Couleur ──────────────────────────────────────────────
+     Six valeurs. Le terracotta ne couvre jamais plus de 3 % d'un
+     écran : curseur, accent du hero, états actifs, filets.
+
+     Contrastes mesurés (WCAG 2.x) :
+                          papier   papier-ombré   encre
+       encre               15.58       14.17         —
+       terracotta           4.64        4.22 ✗      3.36 ✗
+       terracotta-profond   7.51        6.83        2.07 ✗
+       gris-chaud           5.70        5.18        2.73 ✗
+       papier                 —          1.10 ✗    15.58
+
+     Trois règles qui en découlent, appliquées partout :
+       · Sur fond ombré, le texte d'accent s'écrit en terracotta
+         PROFOND. Le terracotta y échoue à 4.22.
+       · Sur l'encre, ni le terracotta ni le gris chaud ne portent
+         de texte — titres compris. Tout texte en négatif est en
+         papier. Ils ne servent qu'aux filets et aux points d'état.
+       · Le papier et le papier ombré ne se distinguent pas l'un de
+         l'autre (1.10) : jamais l'un sur l'autre pour du texte.  */
+  --color-papier:             #F8EDDE;
+  --color-papier-ombre:       #F1E2CE;
+  --color-encre:              #1C1512;
+  --color-terracotta:         #A95132;
+  --color-terracotta-profond: #7A3823;
+  --color-gris-chaud:         #6B5A4A;
+
+  /* ─── Typographie ─────────────────────────────────────────
+     Bricolage pour les titres, Switzer pour le texte, JetBrains
+     Mono pour la donnée seule : numéro d'étape, prix, année.     */
+  --font-display: 'Bricolage Grotesque', 'Bricolage Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-texte:   'Switzer', 'Switzer Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-data:    'JetBrains Mono', 'Mono Fallback', ui-monospace, monospace;
+
+  /* Échelle à sept niveaux, ratio proche de 1,333. */
+  --text-display: clamp(3.5rem, 8vw, 8.5rem);
+  --text-h1:      clamp(2.75rem, 5.5vw, 5rem);
+  --text-h2:      clamp(2rem, 3.5vw, 3rem);
+  --text-h3:      1.5rem;
+  --text-corps-l: 1.25rem;
+  --text-corps:   1.0625rem;
+  --text-petit:   0.875rem;
+  --text-data:    0.8125rem;
+
+  --tracking-display: -0.035em;
+  --wdth-display:     92;
+
+  /* Interlignage : 0,92 sur les très grandes tailles, 1 sur les
+     grands titres, 1,5 sur le texte courant. */
+  --leading-display: 0.92;
+  --leading-titre:   1;
+  --leading-corps:   1.5;
+
+  /* ─── Espacement ──────────────────────────────────────────
+     Trois valeurs de section, pas quatre. Une section qui semble
+     en demander une quatrième est une section à revoir.          */
+  --spacing-section-s: 96px;
+  --spacing-section-m: 160px;
+  --spacing-section-l: 240px;
+
+  /* ─── Grille ──────────────────────────────────────────────
+     12 colonnes, gouttière 24 px, marges 64 px, 1440 px utiles.  */
+  --grille-colonnes: 12;
+  --grille-gouttiere: 24px;
+  --grille-marge: 64px;
+  --grille-max: 1440px;
+
+  /* ─── Mouvement ───────────────────────────────────────────── */
+  --ease-skone: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-rapide: 200ms;
+  --dur-base:   600ms;
+
+  /* Hauteur de la barre collée, dans ses deux états. Mesurée, pas
+     estimée : toute section qui commence sous la nav réserve cette
+     bande, et le décalage d'ancre s'y accroche. */
+  --nav-h:          96px;
+  --nav-h-reduite:  72px;
+}
+
+/* La marge de grille se resserre avant que les colonnes ne cassent :
+   64 px de marge sur un écran de 390 px ne laisserait rien au texte. */
+@media (max-width: 1023px) {
+  :root { --grille-marge: 32px; }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --grille-marge: 20px;
+    --grille-gouttiere: 16px;
+    --spacing-section-s: 64px;
+    --spacing-section-m: 96px;
+    --spacing-section-l: 128px;
+  }
+}

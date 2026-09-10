@@ -1,0 +1,74 @@
+/* ============================================================
+   Curseur
+   ============================================================ */
+
+#curseur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  color: var(--color-papier);
+  font-family: var(--font-texte);
+  font-size: var(--text-petit);
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  /* La position est écrite en translate3d par le script, à chaque frame.
+     Elle n'est donc jamais animée ici : seuls la forme et la couleur le
+     sont, et le déplacement reste collé à la souris. */
+  transition:
+    width   var(--dur-rapide) var(--ease-skone),
+    height  var(--dur-rapide) var(--ease-skone),
+    padding var(--dur-rapide) var(--ease-skone),
+    border-radius var(--dur-rapide) var(--ease-skone),
+    background var(--dur-rapide) var(--ease-skone),
+    opacity var(--dur-rapide) var(--ease-skone);
+  will-change: transform;
+}
+
+#curseur.est-visible { opacity: 1; }
+
+/* Sur un lien ou un bouton : le point grossit. */
+#curseur.mode-lien { width: 40px; height: 40px; }
+
+/* Sur une image de projet : pastille portant son propre libellé.
+   Le texte vient du DOM (data-curseur-libelle), pas du script. */
+#curseur.mode-projet {
+  width: auto;
+  height: 40px;
+  padding-inline: 18px;
+  border-radius: 20px;
+}
+
+/* Sur un bloc en négatif : le point passe en crème pour rester lisible
+   sur l'encre. Le terracotta n'y tiendrait pas (3.36). */
+#curseur.mode-negatif { background: var(--color-papier); }
+
+.curseur-libelle {
+  opacity: 0;
+  transition: opacity var(--dur-rapide) var(--ease-skone);
+}
+#curseur.mode-projet .curseur-libelle { opacity: 1; }
+
+/* Le curseur système s'efface sur ce que le point remplace, et sur cela
+   seulement. Les champs de saisie et le texte sélectionnable gardent le
+   leur : sans lui, on ne sait plus où l'on écrit ni ce qu'on sélectionne. */
+html.a-curseur a,
+html.a-curseur button,
+html.a-curseur [role="button"],
+html.a-curseur summary,
+html.a-curseur label { cursor: none; }
+
+html.a-curseur input,
+html.a-curseur textarea,
+html.a-curseur select,
+html.a-curseur [contenteditable] { cursor: auto; }

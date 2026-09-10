@@ -1,0 +1,234 @@
+/* ============================================================
+   STUDIO SKØNE — Socle
+   Reset, typographie, grille, filets, focus.
+   Aucune valeur en dur : tout vient de tokens.css.
+   ============================================================ */
+
+@import './tokens.css';
+@import './fonts.css';
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  overflow-x: clip;
+  /* Défilement natif. Le décalage d'ancre est réglé ici plutôt qu'en
+     JavaScript : le navigateur le respecte au clavier, au clic et au
+     rechargement sur une ancre, ce qu'un handler de clic ne fait pas. */
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h-reduite) + 24px);
+}
+
+body {
+  background: var(--color-papier);
+  color: var(--color-encre);
+  font-family: var(--font-texte);
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Évite les lignes veuves d'un seul mot dans les paragraphes. */
+  text-wrap: pretty;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+
+/* ─── Typographie ───────────────────────────────────────────
+   Titres en casse de phrase. Les capitales sont réservées aux
+   deux libellés de statut, et à eux seuls (voir .statut). */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-titre);
+  text-wrap: balance;
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+h1, .t-h1 { font-size: var(--text-h1); }
+h2, .t-h2 { font-size: var(--text-h2); }
+h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
+
+.t-corps-l { font-size: var(--text-corps-l); line-height: var(--leading-corps); }
+.t-corps   { font-size: var(--text-corps);   line-height: var(--leading-corps); }
+.t-petit   { font-size: var(--text-petit);   line-height: 1.4; }
+
+/* Le mono ne sert qu'à la donnée : numéro d'étape, prix, année.
+   Jamais à du texte courant. */
+.t-data {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.t-secondaire { color: var(--color-gris-chaud); }
+
+/* ─── Grille ─────────────────────────────────────────────────
+   12 colonnes. Les sections posent leur contenu dessus plutôt que
+   d'empiler des largeurs maximales arbitraires.
+
+   Deux classes parce qu'il y a deux rôles, et les confondre casse
+   l'imbrication :
+
+     .colonnes  la grille seule — douze pistes et leurs gouttières.
+     .grille    la même chose, plus le cadre de page : largeur maximale,
+                marges latérales, centrage.
+
+   Une .grille dans une .grille ne fonctionne pas, et pas pour une raison
+   de style : son `margin-inline: auto` la rend grid item à marges
+   automatiques, ce qui lui retire son étirement. Elle se réduit alors à
+   sa largeur intrinsèque — la somme de ses gouttières — et ses colonnes
+   tombent à zéro. Une grille imbriquée prend donc .colonnes. */
+.colonnes,
+.grille {
+  display: grid;
+  grid-template-columns: repeat(var(--grille-colonnes), minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+}
+
+.grille {
+  max-width: var(--grille-max);
+  margin-inline: auto;
+  padding-inline: var(--grille-marge);
+}
+
+/* --col ne descend pas plus bas que l'enfant qui la porte.
+
+   Sans cette déclaration, une grille imbriquée dans une autre lègue son
+   propre --col à chacune de ses colonnes : elles réclament toutes la
+   largeur entière et s'empilent au lieu de se ranger côte à côte. Une
+   custom property hérite par défaut ; c'est `inherits: false` qui l'en
+   empêche, et rien d'autre ne le peut. */
+@property --col {
+  syntax: '*';
+  inherits: false;
+}
+
+/* RÈGLE : un enfant de .grille déclare sa place avec --col, JAMAIS avec
+   grid-column. Ce n'est pas un détail de style — c'est ce qui fait que la
+   bascule à 4 colonnes ci-dessous fonctionne. Un `grid-column: 1 / 8`
+   écrit en dur survit au passage en petit écran, réclame une 8e colonne
+   qui n'existe plus, et la grille en fabrique une implicite : la page
+   déborde alors sur la droite. */
+.colonnes > *,
+.grille > * { grid-column: var(--col, auto); }
+
+@media (max-width: 767px) {
+  .colonnes,
+  .grille { --grille-colonnes: 4; }
+
+  /* Le sélecteur est doublé à dessein. --col est déclaré sur l'enfant par
+     chaque composant ; une redéfinition posée sur .grille ne l'atteindrait
+     jamais, puisqu'une propriété définie sur l'élément bat toujours celle
+     dont il hérite. Il faut donc viser l'enfant, et le viser plus fort que
+     le composant qui l'a nommé — d'où .grille.grille, qui pèse deux
+     classes contre une. C'est ce qui évite un !important ici. */
+  .colonnes.colonnes > *,
+  .grille.grille > * { --col: 1 / -1; }
+}
+
+.section-s { padding-block: var(--spacing-section-s); }
+.section-m { padding-block: var(--spacing-section-m); }
+.section-l { padding-block: var(--spacing-section-l); }
+
+/* ─── Filets ─────────────────────────────────────────────────
+   Le site sépare au filet, jamais à l'ombre ni au cadre flou. */
+.filet {
+  border: 0;
+  border-top: 1px solid var(--color-encre);
+  opacity: 0.15;
+}
+.filet--accent { border-top-color: var(--color-terracotta); opacity: 1; }
+.filet--franc  { opacity: 1; }
+
+/* ─── Négatif ────────────────────────────────────────────────
+   Sur l'encre, seul le papier porte du texte. Ni le terracotta
+   (3.36) ni le gris chaud (2.73) n'y passent AA — ils n'y servent
+   qu'aux filets et aux points d'état. */
+.negatif {
+  background: var(--color-encre);
+  color: var(--color-papier);
+}
+.negatif .t-secondaire { color: var(--color-papier); opacity: 0.72; }
+.negatif .filet { border-top-color: var(--color-papier); }
+.negatif .filet--accent { border-top-color: var(--color-terracotta); opacity: 1; }
+
+/* ─── Focus ──────────────────────────────────────────────────
+   Un filet terracotta de 2 px, posé à 4 px. En `outline` et non en
+   `box-shadow` : le projet n'a donc aucune ombre nulle part, pas
+   même l'exception que le cahier des charges tolérait ici.
+   3.36 sur l'encre et 4.64 sur le papier : au-dessus du 3:1 exigé
+   pour un élément non textuel, sur les deux fonds. */
+:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 4px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ─── Mouvement réduit ───────────────────────────────────────
+   Chemin de rendu complet, pas une dégradation : tout est à son état
+   final, rien ne bouge, et le défilement redevient instantané.
+
+   La coupure se fait à la source, en ramenant les deux tokens de durée
+   à zéro. Toute transition du site les consomme — aucune ne code sa
+   durée en dur, le cahier des charges l'interdit — donc toutes
+   s'arrêtent d'un coup, sans qu'aucune règle ait à en surcharger une
+   autre. C'est ce qui permet au projet de n'avoir aucune surcharge forcée.
+
+   Ce que ça ne couvre pas, GSAP le couvre côté script : les pin, les
+   scrub et les séquences ne sont jamais construits sous ce réglage. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-rapide: 0.01ms;
+    --dur-base:   0.01ms;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ─── Accessibilité ──────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Lien d'évitement : premier élément tabulable de chaque page. Caché par
+   découpe et non par translation — une translation laisse l'élément
+   occuper sa place et peut le laisser dépasser en haut de page. */
+.skip-link {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1001;
+  width: 1px; height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  background: var(--color-encre);
+  color: var(--color-papier);
+}
+.skip-link:focus-visible {
+  width: auto; height: auto;
+  padding: 12px 20px;
+  clip-path: none;
+}

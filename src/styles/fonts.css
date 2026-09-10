@@ -1,0 +1,86 @@
+/* ============================================================
+   STUDIO SKØNE — Polices
+   Auto-hébergées depuis /public/fonts. Aucun appel à un CDN.
+   ============================================================ */
+
+/* ─── Les fontes ──────────────────────────────────────────────
+   Bricolage porte deux axes : wght 200-800 et wdth 75-100 %. Le
+   site s'en sert à wdth 92 (--wdth-display). C'est pour cet axe
+   qu'on charge le fichier `wdth` et non le `opsz` : sans lui, la
+   largeur ne serait qu'une déformation synthétique du navigateur. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/bricolage-grotesque-var.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/switzer-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Les fallbacks ajustées ─────────────────────────────────
+   `font-display: swap` affiche le texte tout de suite, dans la
+   fonte système, puis l'échange. Sans correction, cet échange
+   déplace le texte : c'est le décalage qu'on ne veut pas.
+
+   Ces trois familles sont la fonte système, redimensionnée pour
+   occuper exactement la place de la webfont. Le swap devient
+   invisible. Elles ne sont jamais nommées directement : elles
+   vivent dans les piles de `--font-*`, juste derrière la webfont.
+
+   Valeurs MESURÉES, pas estimées — canvas `measureText()` dans
+   Chrome sur une chaîne du copy réel du site, accents et signe €
+   compris, qui pèsent sur la largeur moyenne. Pour refaire la
+   mesure, voir docs/reference-lighthouse.md.
+
+   Helvetica et Arial sont métriquement jumelles : une seule
+   valeur couvre macOS et Windows. Idem Courier / Courier New. */
+@font-face {
+  font-family: 'Bricolage Fallback';
+  src: local('Helvetica'), local('Arial');
+  size-adjust: 100.99%;
+  ascent-override: 92.09%;
+  descent-override: 26.74%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Switzer Fallback';
+  src: local('Helvetica'), local('Arial');
+  size-adjust: 98.79%;
+  ascent-override: 99.20%;
+  descent-override: 25.31%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Mono Fallback';
+  src: local('Courier'), local('Courier New');
+  size-adjust: 99.98%;
+  ascent-override: 102.02%;
+  descent-override: 30.00%;
+  line-gap-override: 0%;
+}

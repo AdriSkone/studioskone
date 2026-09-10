@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fondations · Studio Skøne</title>
+  <!-- Page de travail : elle ne fait pas partie du site public. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/bricolage-grotesque-var.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/switzer-400.woff2" crossorigin>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <main id="contenu">
+    <header class="grille demo-entete">
+      <h1 class="t-display" style="--col: 1 / -1">Fondations.</h1>
+      <p class="t-corps-l demo-note" data-reveal>Six couleurs, sept niveaux typographiques, une grille, trois espacements.
+        Tout ce qui est écrit ici est mesuré, pas estimé : les ratios de contraste sont calculés à partir des
+        tokens eux-mêmes, et les textes sont ceux du site.</p>
+    </header>
+
+    <section class="grille demo-bloc">
+      <h2 class="demo-titre">Couleur</h2>
+      <div class="demo-palette">
+        <div class="demo-echantillon">
+          <div class="demo-aplat" style="background: #F8EDDE"></div>
+          <div class="t-petit"><strong>Papier</strong></div>
+          <div class="t-data">#F8EDDE</div>
+          <div class="t-petit t-secondaire">Fond principal, verrouillé. Traité comme du papier, pas comme un fond de page.</div>
+        </div>
+        <div class="demo-echantillon">
+          <div class="demo-aplat" style="background: #F1E2CE"></div>
+          <div class="t-petit"><strong>Papier ombré</strong></div>
+          <div class="t-data">#F1E2CE</div>
+          <div class="t-petit t-secondaire">Sections alternées.</div>
+        </div>
+        <div class="demo-echantillon">
+          <div class="demo-aplat" style="background: #1C1512"></div>
+          <div class="t-petit"><strong>Encre</strong></div>
+          <div class="t-data">#1C1512</div>
+          <div class="t-petit t-secondaire">Texte principal, sections en négatif. Noir chaud.</div>
+        </div>
+        <div class="demo-echantillon">
+          <div class="demo-aplat" style="background: #A95132"></div>
+          <div class="t-petit"><strong>Terracotta</strong></div>
+          <div class="t-data">#A95132</div>
+          <div class="t-petit t-secondaire">Accent, verrouillé.</div>
+        </div>
+        <div class="demo-echantillon">
+          <div class="demo-aplat" style="background: #7A3823"></div>
+          <div class="t-petit"><strong>Terracotta profond</strong></div>
+          <div class="t-data">#7A3823</div>
+          <div class="t-petit t-secondaire">Survol, accent texte.</div>
+        </div>
+        <div class="demo-echantillon">
+          <div class="demo-aplat" style="background: #6B5A4A"></div>
+          <div class="t-petit"><strong>Gris chaud</strong></div>
+          <div class="t-data">#6B5A4A</div>
+          <div class="t-petit t-secondaire">Texte secondaire uniquement.</div>
+        </div>
+      </div>
+      <p class="t-petit demo-note">Dosage : le terracotta ne couvre jamais plus de 3 % d'un écran. Curseur,
+        accent du hero, états actifs, filets. Jamais d'aplat sur un bloc de contenu.</p>
+    </section>
+
+    <section class="grille demo-bloc">
+      <h2 class="demo-titre">Contraste, texte sur fond</h2>
+      <div class="demo-matrice demo-matrice-tete t-petit">
+        <div></div><div>sur Papier</div><div>sur Papier ombré</div><div>sur Encre</div>
+      </div>
+      <div class="demo-matrice">
+        <div>
+          <div class="t-petit"><strong>Encre</strong></div>
+          <div class="t-data t-secondaire">#1C1512</div>
+        </div>
+        <div class="demo-cellule" style="background: #F8EDDE; color: #1C1512">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">15.58</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #F1E2CE; color: #1C1512">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">14.17</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #1C1512; color: #1C1512">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">1.00</span><span class="demo-echec">échec</span></div>
+        </div>
+      </div>
+      <div class="demo-matrice">
+        <div>
+          <div class="t-petit"><strong>Terracotta</strong></div>
+          <div class="t-data t-secondaire">#A95132</div>
+        </div>
+        <div class="demo-cellule" style="background: #F8EDDE; color: #A95132">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">4.64</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #F1E2CE; color: #A95132">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">4.22</span><span class="demo-echec">AA grand titre</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #1C1512; color: #A95132">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">3.36</span><span class="demo-echec">AA grand titre</span></div>
+        </div>
+      </div>
+      <div class="demo-matrice">
+        <div>
+          <div class="t-petit"><strong>Terracotta profond</strong></div>
+          <div class="t-data t-secondaire">#7A3823</div>
+        </div>
+        <div class="demo-cellule" style="background: #F8EDDE; color: #7A3823">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">7.51</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #F1E2CE; color: #7A3823">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">6.83</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #1C1512; color: #7A3823">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">2.07</span><span class="demo-echec">échec</span></div>
+        </div>
+      </div>
+      <div class="demo-matrice">
+        <div>
+          <div class="t-petit"><strong>Gris chaud</strong></div>
+          <div class="t-data t-secondaire">#6B5A4A</div>
+        </div>
+        <div class="demo-cellule" style="background: #F8EDDE; color: #6B5A4A">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">5.70</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #F1E2CE; color: #6B5A4A">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">5.18</span><span class="">AA</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #1C1512; color: #6B5A4A">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">2.73</span><span class="demo-echec">échec</span></div>
+        </div>
+      </div>
+      <div class="demo-matrice">
+        <div>
+          <div class="t-petit"><strong>Papier</strong></div>
+          <div class="t-data t-secondaire">#F8EDDE</div>
+        </div>
+        <div class="demo-cellule" style="background: #F8EDDE; color: #F8EDDE">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">1.00</span><span class="demo-echec">échec</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #F1E2CE; color: #F8EDDE">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">1.10</span><span class="demo-echec">échec</span></div>
+        </div>
+        <div class="demo-cellule" style="background: #1C1512; color: #F8EDDE">
+          <div class="t-h3">Aa</div>
+          <div class="demo-cellule-pied t-petit"><span class="t-data">15.58</span><span class="">AA</span></div>
+        </div>
+      </div>
+      <p class="t-petit demo-note">AA texte courant : 4,5:1. AA grands titres : 3:1. Sur l'encre, ni le terracotta
+        ni le gris chaud ne portent de texte — filets et points d'état seulement. Tout texte en négatif est en papier.
+        Sur fond ombré, l'accent texte s'écrit en terracotta profond.</p>
+    </section>
+
+    <section class="grille demo-bloc">
+      <h2 class="demo-titre">Échelle, sept niveaux</h2>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">display</div>
+        <div class="t-petit t-secondaire">clamp(3.5rem, 8vw, 8.5rem)<br>Bricolage 800, wdth 92</div>
+        <div class="t-display">Skøne</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">h1</div>
+        <div class="t-petit t-secondaire">clamp(2.75rem, 5.5vw, 5rem)<br>Bricolage 700</div>
+        <div class="t-h1">Conçu et construit par la même personne.</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">h2</div>
+        <div class="t-petit t-secondaire">clamp(2rem, 3.5vw, 3rem)<br>Bricolage 700</div>
+        <div class="t-h2">Une méthode claire. Zéro surprise.</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">h3</div>
+        <div class="t-petit t-secondaire">1.5rem<br>Bricolage 700</div>
+        <div class="t-h3">Le studio est jeune, et je le dis.</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">corps L</div>
+        <div class="t-petit t-secondaire">1.25rem<br>Switzer 400</div>
+        <div class="t-corps-l">Tous les projets démarrent par un appel gratuit de 30 minutes.</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">corps</div>
+        <div class="t-petit t-secondaire">1.0625rem<br>Switzer 400</div>
+        <div class="t-corps">Le prix annoncé est le prix payé. Si le périmètre change, on en parle avant, jamais après.</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">petit</div>
+        <div class="t-petit t-secondaire">0.875rem<br>Switzer 400</div>
+        <div class="t-petit">Le nom de domaine (environ 12 €/an) et l'hébergement (de 0 à 15 €/mois selon le projet).</div>
+      </div>
+      <div class="demo-ligne-typo" data-reveal>
+        <div class="t-data">data</div>
+        <div class="t-petit t-secondaire">0.8125rem<br>JetBrains Mono 400</div>
+        <div class="t-data">01 · Dès 2 500 € · 2026</div>
+      </div>
+      <p class="t-petit demo-note">Titres en casse de phrase, interlettrage serré. Le mono ne sert qu'à la donnée :
+        numéro d'étape, prix, année.</p>
+    </section>
+
+    <section class="grille demo-bloc">
+      <h2 class="demo-titre">Grille</h2>
+      <div class="demo-grille-visible colonnes">
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+        <div class="demo-colonne"></div>
+      </div>
+      <p class="t-petit demo-note">12 colonnes, gouttière 24 px, marges 64 px, 1440 px utiles.
+        Sous 768 px : 4 colonnes, marges 20 px. Espacements verticaux : 96, 160 ou 240 px.</p>
+    </section>
+
+    <section class="grille demo-bloc">
+      <h2 class="demo-titre">Filets</h2>
+      <div style="--col: 1 / -1; display: flex; flex-direction: column; gap: 24px">
+        <div><hr class="filet"><p class="t-petit t-secondaire" style="margin-top: 8px">Filet de séparation</p></div>
+        <div><hr class="filet filet--franc"><p class="t-petit t-secondaire" style="margin-top: 8px">Filet franc</p></div>
+        <div><hr class="filet filet--accent"><p class="t-petit t-secondaire" style="margin-top: 8px">Filet d'accent</p></div>
+      </div>
+    </section>
+
+    <section class="grille demo-bloc">
+      <h2 class="demo-titre">Curseur</h2>
+      <div class="demo-carte">
+        <a href="#contenu" data-curseur="projet" data-curseur-libelle="Voir le projet">
+          <div class="demo-carte-image"></div>
+          <h3 style="margin-top: 16px">ele · Ateliers Caféologie</h3>
+          <p class="t-petit t-secondaire">Survolez l'image : le point devient pastille.</p>
+        </a>
+      </div>
+      <p class="t-petit demo-note">Quatre états : repos 10 px · sur un lien, 40 px · sur une image de projet,
+        pastille · sur l'encre, crème. Désactivé au toucher, sous 1024 px, et en mouvement réduit.</p>
+    </section>
+
+    <section class="grille demo-bloc">
+      <div class="demo-negatif negatif">
+        <h2>Vingt minutes pour savoir ce que vaut votre projet.</h2>
+        <p class="t-corps-l" style="margin-top: 16px; max-width: 46ch">On parle de votre activité, de ce que vous
+          attendez du site, et de votre budget. Je vous dis ce que je ferais, ce que ça coûte et combien de temps
+          ça prend.</p>
+        <hr class="filet filet--accent" style="margin-top: 32px">
+        <p class="t-data" style="margin-top: 16px">30 min</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/fondations.ts"></script>
+</body>
+</html>
