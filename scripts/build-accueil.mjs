@@ -67,7 +67,14 @@ function hero() {
     .map((r) => `<span class="ruban-item">${r}</span>`)
     .join('')
 
+  // Le calque de grille : douze filets verticaux, très pâles, tracés au
+  // chargement. Purement décoratif — il ne porte aucune information et
+  // n'intercepte aucun clic.
+  const filetsGrille = Array.from({ length: 12 }, () => '<span></span>').join('')
+
   return `  <section class="hero" id="hero">
+    <div class="hero-grille" aria-hidden="true">${filetsGrille}</div>
+
     <div class="grille hero-corps">
       <h1 class="t-display hero-titre" style="--col: 1 / -1">
         ${html(C.hero.titre.debut)} <span class="hero-accent">${C.hero.titre.accent}</span> ${C.hero.titre.fin}
@@ -214,14 +221,18 @@ function methode() {
     )
     .join('\n')
 
+  // La colonne de gauche reste en place pendant que les étapes défilent :
+  // le titre de la section ne quitte pas l'écran tant qu'on la parcourt.
   return `  <section class="section-m" id="process">
     <div class="grille">
-      <p class="tete-bloc">${C.methode.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 8">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
-      <div class="etapes" style="--col: 1 / -1">
+      <div class="methode-colonne" style="--col: 1 / span 4">
+        <p class="tete-bloc" style="--col: auto">${C.methode.label}</p>
+        <h2 class="t-h2">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
+        <p class="methode-cloture">${C.methode.cloture}</p>
+      </div>
+      <div class="etapes" style="--col: 6 / span 7">
 ${etapes}
       </div>
-      <p class="methode-cloture" style="--col: 3 / span 7">${C.methode.cloture}</p>
     </div>
   </section>`
 }
@@ -229,23 +240,23 @@ ${etapes}
 function realisations() {
   const cartes = projets
     .map(
-      (p, i) => `        <a class="carte-projet${i === 0 ? '' : ' carte-projet--petite'}" href="/projets/${p.slug}"
-           data-curseur="projet" data-curseur-libelle="${p.lienLibelle}" data-reveal>
-          <img class="carte-projet-image" src="${p.image}" alt="${p.alt}" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">${p.titre}</h3>
-              <span class="carte-projet-type">${p.badge}</span>
+      (p) => `          <a class="carte-projet${p.grand ? ' carte-projet--grande' : ' carte-projet--petite'}" href="/projets/${p.slug}"
+             data-curseur="projet" data-curseur-libelle="${p.lienLibelle}">
+            <img class="carte-projet-image" src="${p.image}" alt="${p.alt}" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">${p.titre}</h3>
+                <span class="carte-projet-type">${p.badge}</span>
+              </div>
+              <p class="carte-projet-tagline">${p.tagline}</p>
+              <p class="carte-projet-nature">${p.nature}</p>
+              <p class="carte-projet-note">${p.note}</p>
+              <div class="carte-projet-meta">
+                <span>${p.signature}</span>
+                <span class="carte-projet-lien">${p.lienLibelle}${fleche}</span>
+              </div>
             </div>
-            <p class="carte-projet-tagline">${p.tagline}</p>
-            <p class="carte-projet-nature">${p.nature}</p>
-            <p class="carte-projet-note">${p.note}</p>
-            <div class="carte-projet-meta">
-              <span>${p.signature}</span>
-              <span class="carte-projet-lien">${p.lienLibelle}${fleche}</span>
-            </div>
-          </div>
-        </a>`
+          </a>`
     )
     .join('\n')
 
@@ -255,10 +266,12 @@ function realisations() {
       <h2 class="t-h1" style="--col: 3 / span 6">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${C.realisations.titre.accent}</h2>
       <p class="realisations-intro" style="--col: 9 / span 4">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
     </div>
-    <div class="grille">
-      <div class="projets-grille" style="--col: 1 / -1">
+
+    <div class="rail" id="rail">
+      <div class="rail-piste" id="railPiste">
 ${cartes}
       </div>
+      <div class="rail-progression" aria-hidden="true"><span class="rail-progression-curseur"></span></div>
     </div>
   </section>`
 }

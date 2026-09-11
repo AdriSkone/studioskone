@@ -10,7 +10,33 @@
 body { padding-top: var(--nav-h); }
 
 /* ─── Hero ──────────────────────────────────────────────────── */
-.hero { padding-top: var(--spacing-section-s); }
+.hero {
+  position: relative;
+  padding-top: var(--spacing-section-s);
+}
+
+/* Le calque de grille. Douze filets à 6 % d'encre — assez pour qu'on
+   devine la structure, pas assez pour qu'on la lise. Il se trace au
+   chargement, colonne après colonne. */
+.hero-grille {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
+  right: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
+  display: grid;
+  grid-template-columns: repeat(var(--grille-colonnes), minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  pointer-events: none;
+  border-right: 1px solid color-mix(in srgb, var(--color-encre) 6%, transparent);
+}
+.hero-grille span {
+  border-left: 1px solid color-mix(in srgb, var(--color-encre) 6%, transparent);
+}
+
+/* Le contenu passe au-dessus du calque. */
+.hero-corps,
+.hero .ruban { position: relative; }
 
 .hero-corps { row-gap: 48px; }
 
@@ -106,29 +132,49 @@ body { padding-top: var(--nav-h); }
   margin-top: 48px;
 }
 
-/* ─── Méthode ───────────────────────────────────────────────── */
-.etapes { margin-top: 48px; }
+/* ─── Méthode ───────────────────────────────────────────────
+   Colonne de gauche collée, étapes qui défilent à droite. Le décalage de
+   120 px la place sous la barre de navigation réduite. */
+.methode-colonne {
+  position: sticky;
+  top: 120px;
+  /* `start`, et non `stretch`.
+
+     Un élément collé a besoin de course : il faut que son conteneur soit
+     plus haut que lui. Étiré, il fait exactement la hauteur de la zone de
+     grille — 697 px contre 697 px — et il n'a alors plus rien à parcourir,
+     donc il ne colle jamais. Réduit à son contenu, il garde la zone entière
+     comme terrain, ce qui lui laisse la différence.
+
+     L'effet reste discret sur un grand écran : quatre étapes tiennent
+     presque dans la fenêtre, il n'y a que quelques centaines de pixels à
+     accompagner. C'est ce que dessine la maquette, on n'allonge pas la
+     section pour rendre l'animation plus voyante. */
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .methode-cloture {
-  margin-top: 32px;
-  font-size: var(--text-petit);
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
   color: var(--color-gris-chaud);
+  max-width: 28em;
+}
+
+/* Sous 1024 px : empilement normal, rien n'est collé. */
+@media (max-width: 1023px) {
+  .methode-colonne {
+    position: static;
+    gap: 24px;
+  }
+  .etapes { margin-top: 48px; }
 }
 
 /* ─── Réalisations ──────────────────────────────────────────── */
 .realisations-intro { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
 .realisations-intro-fort { font-weight: 500; }
-
-/* En attendant le rail piloté par le défilement — moment 2, phase 4 — les
-   projets s'empilent sur la grille. La hiérarchie des maquettes est déjà
-   là : le premier projet occupe deux fois la place des suivants. */
-.projets-grille {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
-  row-gap: 64px;
-  margin-top: 48px;
-}
-.projets-grille > .carte-projet:first-child { grid-column: span 2; }
 
 /* ─── Tarifs ────────────────────────────────────────────────── */
 .tarifs-note { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
@@ -203,8 +249,6 @@ body { padding-top: var(--nav-h); }
   .verites,
   .benefices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .engagements { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .projets-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .projets-grille > .carte-projet:first-child { grid-column: span 2; }
 }
 
 @media (max-width: 767px) {
@@ -213,9 +257,22 @@ body { padding-top: var(--nav-h); }
   .tarifs-grille,
   .verites,
   .benefices,
-  .engagements,
-  .projets-grille { grid-template-columns: 1fr; }
-  .projets-grille > .carte-projet:first-child { grid-column: auto; }
+  .engagements { grid-template-columns: 1fr; }
   .metiers { flex-direction: column; align-items: stretch; }
   .hero-preuves { align-self: start; }
 }
+
+/* ─── Ouverture du hero ─────────────────────────────────────
+   L'état de départ n'est posé que si la séquence va réellement se jouer :
+   c'est le script qui ajoute .est-pose, une fois GSAP chargé et le titre
+   découpé. Sans lui, rien n'est masqué — si le paquet n'arrive pas, la
+   page reste entièrement lisible. */
+.hero-ligne {
+  display: block;
+  overflow: hidden;
+}
+.hero-ligne-interieur { display: block; }
+
+/* Le titre ne doit pas sauter au moment où il est découpé en lignes : le
+   masque ajoute un bloc par ligne, et sans cela l'interlignage changerait. */
+.hero-titre .hero-mot { display: inline-block; }

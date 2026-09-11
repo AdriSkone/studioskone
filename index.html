@@ -236,6 +236,8 @@
 
   <main id="contenu">
   <section class="hero" id="hero">
+    <div class="hero-grille" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
     <div class="grille hero-corps">
       <h1 class="t-display hero-titre" style="--col: 1 / -1">
         Le site que vos clients méritent, <span class="hero-accent">conçu et codé</span> par la même personne.
@@ -392,9 +394,12 @@
 
   <section class="section-m" id="process">
     <div class="grille">
-      <p class="tete-bloc">Ma méthode</p>
-      <h2 class="t-h1" style="--col: 3 / span 8">Une méthode claire.<br>Zéro surprise.</h2>
-      <div class="etapes" style="--col: 1 / -1">
+      <div class="methode-colonne" style="--col: 1 / span 4">
+        <p class="tete-bloc" style="--col: auto">Ma méthode</p>
+        <h2 class="t-h2">Une méthode claire.<br>Zéro surprise.</h2>
+        <p class="methode-cloture">Et si vous n'avez ni textes ni photos : je m'en occupe aussi. C'est prévu dans le cadrage.</p>
+      </div>
+      <div class="etapes" style="--col: 6 / span 7">
           <div class="etape est-active" data-etape="01">
             <span class="etape-numero">01</span>
             <span class="etape-phase">Découverte</span>
@@ -432,7 +437,6 @@
             <p class="etape-temps">Votre temps : 45 min de formation, et le site est à vous.</p>
           </div>
       </div>
-      <p class="methode-cloture" style="--col: 3 / span 7">Et si vous n'avez ni textes ni photos : je m'en occupe aussi. C'est prévu dans le cadrage.</p>
     </div>
   </section>
 
@@ -442,162 +446,164 @@
       <h2 class="t-h1" style="--col: 3 / span 6">Ce que j'ai construit,<br>et pourquoi.</h2>
       <p class="realisations-intro" style="--col: 9 / span 4">Le studio a ouvert récemment. Vous trouverez ici des projets clients, des outils que j'ai conçus pour mes propres besoins, et des exercices de conception menés pour un secteur précis. Chaque projet dit lequel il est. <span class="realisations-intro-fort">Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.</span></p>
     </div>
-    <div class="grille">
-      <div class="projets-grille" style="--col: 1 / -1">
-        <a class="carte-projet" href="/projets/giftmatch"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/giftmatch.png" alt="GiftMatch · application mobile qui génère des idées cadeaux personnalisées par IA" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">GiftMatch</h3>
-              <span class="carte-projet-type">App mobile</span>
+
+    <div class="rail" id="rail">
+      <div class="rail-piste" id="railPiste">
+          <a class="carte-projet carte-projet--grande" href="/projets/cafeo"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/cafeo.webp" alt="Site web et identité visuelle ele · Ateliers Caféologie, réalisés par Studio Skøne" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">ele · Ateliers Caféologie</h3>
+                <span class="carte-projet-type">Site web</span>
+              </div>
+              <p class="carte-projet-tagline">Une identité de torréfacteur qui se tient aussi à l'écran</p>
+              <p class="carte-projet-nature">Projet client</p>
+              <p class="carte-projet-note">Projet client, livré et pas encore en ligne : il n'y a donc pas encore d'avis à afficher. Le besoin : une identité d'atelier de dégustation de café qui tienne aussi bien à l'écran qu'ailleurs, sans tomber dans les codes attendus du secteur.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Mise en ligne à venir</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-            <p class="carte-projet-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
-            <p class="carte-projet-nature">Projet de studio</p>
-            <p class="carte-projet-note">Né d'un besoin réel : je sèche systématiquement sur les cadeaux. J'ai construit une app qui transforme trois mots sur une personne en cinq propositions concrètes.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Produit maison</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="carte-projet carte-projet--grande" href="/projets/merel-et-fils"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/merel-et-fils-hero.webp" alt="Mérel &amp; Fils · site vitrine d'un atelier d'ébénisterie d'art, accueil avec un rabot en gros plan" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">Mérel &amp; Fils</h3>
+                <span class="carte-projet-type">Site web</span>
+              </div>
+              <p class="carte-projet-tagline">Un site d'ébéniste où la matière passe avant le discours</p>
+              <p class="carte-projet-nature">Exercice de conception</p>
+              <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un site d'atelier d'ébénisterie où la première chose que l'on voit est le bois, pas un slogan.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Démo sectorielle</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/cafeo"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/cafeo.webp" alt="Site web et identité visuelle ele · Ateliers Caféologie, réalisés par Studio Skøne" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">ele · Ateliers Caféologie</h3>
-              <span class="carte-projet-type">Site web</span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/giftmatch"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/giftmatch.png" alt="GiftMatch · application mobile qui génère des idées cadeaux personnalisées par IA" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">GiftMatch</h3>
+                <span class="carte-projet-type">App mobile</span>
+              </div>
+              <p class="carte-projet-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
+              <p class="carte-projet-nature">Projet de studio</p>
+              <p class="carte-projet-note">Né d'un besoin réel : je sèche systématiquement sur les cadeaux. J'ai construit une app qui transforme trois mots sur une personne en cinq propositions concrètes.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Produit maison</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-            <p class="carte-projet-tagline">Une identité de torréfacteur qui se tient aussi à l'écran</p>
-            <p class="carte-projet-nature">Projet client</p>
-            <p class="carte-projet-note">Projet client, livré et pas encore en ligne : il n'y a donc pas encore d'avis à afficher. Le besoin : une identité d'atelier de dégustation de café qui tienne aussi bien à l'écran qu'ailleurs, sans tomber dans les codes attendus du secteur.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Mise en ligne à venir</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/myboat"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/myboat.webp" alt="MyBoat · application mobile marketplace bateaux iOS et Android" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">MyBoat</h3>
+                <span class="carte-projet-type">App mobile</span>
+              </div>
+              <p class="carte-projet-tagline">Louer un bateau sans créer de compte pour connaître le prix</p>
+              <p class="carte-projet-nature">Exercice de conception</p>
+              <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique où l'on connaît le prix total, assurance et caution comprises, avant la moindre inscription.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Démo sectorielle</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/myboat"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/myboat.webp" alt="MyBoat · application mobile marketplace bateaux iOS et Android" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">MyBoat</h3>
-              <span class="carte-projet-type">App mobile</span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/garantibox"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/garantibox.png" alt="Garantibox · application SaaS pour centraliser garanties et factures" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">Garantibox</h3>
+                <span class="carte-projet-type">Web App SaaS</span>
+              </div>
+              <p class="carte-projet-tagline">Ajouter sa première garantie sans avoir besoin d'explication</p>
+              <p class="carte-projet-nature">Exercice de conception</p>
+              <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre sa première facture en moins d'une minute, sans tutoriel et sans compte à créer d'abord.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Démo sectorielle</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-            <p class="carte-projet-tagline">Louer un bateau sans créer de compte pour connaître le prix</p>
-            <p class="carte-projet-nature">Exercice de conception</p>
-            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique où l'on connaît le prix total, assurance et caution comprises, avant la moindre inscription.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Démo sectorielle</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/m-bivouak"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/mbivouak.png" alt="M.Bivouak · identité de marque outdoor et boutique Shopify" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">M.Bivouak</h3>
+                <span class="carte-projet-type">Branding &amp; e-commerce</span>
+              </div>
+              <p class="carte-projet-tagline">Identité de marque et boutique, de la première esquisse à la première commande</p>
+              <p class="carte-projet-nature">Projet de studio</p>
+              <p class="carte-projet-note">Ma propre marque, créée de bout en bout : le nom, l'identité, le ton, les visuels produits et la boutique Shopify. Fermée depuis, faute d'avoir trouvé son marché.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Marque maison</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/garantibox"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/garantibox.png" alt="Garantibox · application SaaS pour centraliser garanties et factures" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">Garantibox</h3>
-              <span class="carte-projet-type">Web App SaaS</span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/tasq"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/tasq.png" alt="Tasq · web app de pilotage de projets pour freelances du web et créatifs" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">Tasq</h3>
+                <span class="carte-projet-type">Web App</span>
+              </div>
+              <p class="carte-projet-tagline">Ouvrir un seul outil le matin et savoir quoi faire</p>
+              <p class="carte-projet-nature">Projet de studio</p>
+              <p class="carte-projet-note">Né d'un besoin réel : mes projets, mes devis et mes relances étaient éparpillés entre trois outils et ma mémoire. J'ai construit Tasq pour les freelances qui travaillent seuls.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Produit maison</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-            <p class="carte-projet-tagline">Ajouter sa première garantie sans avoir besoin d'explication</p>
-            <p class="carte-projet-nature">Exercice de conception</p>
-            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre sa première facture en moins d'une minute, sans tutoriel et sans compte à créer d'abord.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Démo sectorielle</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/archeon"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/archeon.png" alt="Archéon · portfolio et site vitrine pour cabinet d'architecture" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">Archéon</h3>
+                <span class="carte-projet-type">Portfolio</span>
+              </div>
+              <p class="carte-projet-tagline">Un portfolio d'architecte où le projet parle avant l'agence</p>
+              <p class="carte-projet-nature">Exercice de conception</p>
+              <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un portfolio d'agence d'architecture où l'on comprend un projet en quelques secondes, sans texte d'intention.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Démo sectorielle</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/m-bivouak"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/mbivouak.png" alt="M.Bivouak · identité de marque outdoor et boutique Shopify" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">M.Bivouak</h3>
-              <span class="carte-projet-type">Branding &amp; e-commerce</span>
+          </a>
+          <a class="carte-projet carte-projet--petite" href="/projets/pepite"
+             data-curseur="projet" data-curseur-libelle="Voir le projet">
+            <img class="carte-projet-image" src="/work/pepite.webp" alt="Pépite · application mobile de récompenses familiales, écran de passation du téléphone à l'enfant" loading="lazy" width="1200" height="750">
+            <div>
+              <div class="carte-projet-tete">
+                <h3 class="carte-projet-titre">Pépite</h3>
+                <span class="carte-projet-type">App mobile</span>
+              </div>
+              <p class="carte-projet-tagline">Une étoile gagnée mène à une vraie récompense, décidée en famille</p>
+              <p class="carte-projet-nature">Projet de studio</p>
+              <p class="carte-projet-note">Né d'un besoin à la maison : les tableaux de récompenses en carton finissent tous au fond d'un tiroir. J'ai fait le pari qu'une récompense décidée ensemble vaut mieux qu'un système de points imposé.</p>
+              <div class="carte-projet-meta">
+                <span>Studio Skøne · Produit maison, en développement</span>
+                <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </div>
             </div>
-            <p class="carte-projet-tagline">Identité de marque et boutique, de la première esquisse à la première commande</p>
-            <p class="carte-projet-nature">Projet de studio</p>
-            <p class="carte-projet-note">Ma propre marque, créée de bout en bout : le nom, l'identité, le ton, les visuels produits et la boutique Shopify. Fermée depuis, faute d'avoir trouvé son marché.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Marque maison</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/tasq"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/tasq.png" alt="Tasq · web app de pilotage de projets pour freelances du web et créatifs" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">Tasq</h3>
-              <span class="carte-projet-type">Web App</span>
-            </div>
-            <p class="carte-projet-tagline">Ouvrir un seul outil le matin et savoir quoi faire</p>
-            <p class="carte-projet-nature">Projet de studio</p>
-            <p class="carte-projet-note">Né d'un besoin réel : mes projets, mes devis et mes relances étaient éparpillés entre trois outils et ma mémoire. J'ai construit Tasq pour les freelances qui travaillent seuls.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Produit maison</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/archeon"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/archeon.png" alt="Archéon · portfolio et site vitrine pour cabinet d'architecture" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">Archéon</h3>
-              <span class="carte-projet-type">Portfolio</span>
-            </div>
-            <p class="carte-projet-tagline">Un portfolio d'architecte où le projet parle avant l'agence</p>
-            <p class="carte-projet-nature">Exercice de conception</p>
-            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un portfolio d'agence d'architecture où l'on comprend un projet en quelques secondes, sans texte d'intention.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Démo sectorielle</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/merel-et-fils"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/merel-et-fils-hero.webp" alt="Mérel &amp; Fils · site vitrine d'un atelier d'ébénisterie d'art, accueil avec un rabot en gros plan" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">Mérel &amp; Fils</h3>
-              <span class="carte-projet-type">Site web</span>
-            </div>
-            <p class="carte-projet-tagline">Un site d'ébéniste où la matière passe avant le discours</p>
-            <p class="carte-projet-nature">Exercice de conception</p>
-            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un site d'atelier d'ébénisterie où la première chose que l'on voit est le bois, pas un slogan.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Démo sectorielle</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </div>
-        </a>
-        <a class="carte-projet carte-projet--petite" href="/projets/pepite"
-           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
-          <img class="carte-projet-image" src="/work/pepite.webp" alt="Pépite · application mobile de récompenses familiales, écran de passation du téléphone à l'enfant" loading="lazy" width="1200" height="750">
-          <div>
-            <div class="carte-projet-tete">
-              <h3 class="carte-projet-titre">Pépite</h3>
-              <span class="carte-projet-type">App mobile</span>
-            </div>
-            <p class="carte-projet-tagline">Une étoile gagnée mène à une vraie récompense, décidée en famille</p>
-            <p class="carte-projet-nature">Projet de studio</p>
-            <p class="carte-projet-note">Né d'un besoin à la maison : les tableaux de récompenses en carton finissent tous au fond d'un tiroir. J'ai fait le pari qu'une récompense décidée ensemble vaut mieux qu'un système de points imposé.</p>
-            <div class="carte-projet-meta">
-              <span>Studio Skøne · Produit maison, en développement</span>
-              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </div>
-          </div>
-        </a>
+          </a>
       </div>
+      <div class="rail-progression" aria-hidden="true"><span class="rail-progression-curseur"></span></div>
     </div>
   </section>
 

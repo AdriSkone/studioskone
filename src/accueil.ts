@@ -4,6 +4,9 @@ import './styles/accueil.css'
 
 import { initCursor } from './scripts/cursor'
 import { initReveal } from './scripts/reveal'
+import { initHero } from './scripts/hero'
+import { initRail } from './scripts/rail'
+import { initMethode } from './scripts/methode'
 import { initFaq } from './scripts/faq'
 import { initNav } from './scripts/nav'
 import { initCookies } from './scripts/cookies'
@@ -21,11 +24,17 @@ if (import.meta.env.VITE_UMAMI_WEBSITE_ID && import.meta.env.VITE_UMAMI_SCRIPT_U
   document.head.appendChild(s)
 }
 
-initCursor()
+// Le curseur s'allume à la fin de l'ouverture du hero — c'est la dernière
+// marche de la séquence. Quand celle-ci ne se joue pas (mouvement réduit,
+// ou retour sur la page dans la même session), le rappel est immédiat.
+initHero(() => initCursor())
+
 initNav()
 initReveal()
 initFaq()
 initCookies()
+initRail()
+initMethode()
 
 // L'estimateur pousse ses réponses dans le formulaire : il lui faut sa poignée.
 const formulaire = initContactForm()

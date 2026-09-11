@@ -1,0 +1,93 @@
+/* ============================================================
+   Rail horizontal des projets
+   ============================================================ */
+
+.rail {
+  position: relative;
+  margin-top: 48px;
+  /* Le rail part de la marge de gauche et sort par la droite : on voit que
+     la série continue au-delà du bord, ce qui dit qu'il y a à faire défiler. */
+  padding-left: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
+  /* Aucun overflow-x : le défilement horizontal est piloté par le
+     défilement vertical, pas par une barre. En dessous de 1024 px, la
+     règle plus bas rend la main au navigateur. */
+  overflow: hidden;
+}
+
+.rail-piste {
+  display: flex;
+  gap: var(--grille-gouttiere);
+  align-items: flex-start;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Les deux formats. Un projet mis en avant occupe deux fois la place d'un
+   autre : c'est la hiérarchie, elle se lit sans être écrite. */
+.carte-projet--grande { width: 640px; }
+.carte-projet--petite { width: 320px; }
+
+@media (min-width: 1440px) {
+  .carte-projet--grande { width: 840px; }
+  .carte-projet--petite { width: 400px; }
+}
+
+.carte-projet--grande .carte-projet-image { aspect-ratio: 16 / 10; }
+.carte-projet--petite .carte-projet-image { aspect-ratio: 4 / 3; }
+.carte-projet--grande .carte-projet-titre { font-size: var(--text-h2); }
+
+/* ─── Indicateur de progression ─────────────────────────────
+   Un filet, et son segment. Il double une information que le mouvement
+   donne déjà : il n'a donc pas à être plus qu'un trait. */
+.rail-progression {
+  position: relative;
+  height: 1px;
+  margin-top: 48px;
+  margin-right: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
+  background: var(--filet-leger);
+}
+
+.rail-progression-curseur {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 20%;
+  background: var(--color-terracotta);
+  transform-origin: left;
+}
+
+/* ─── Pile ──────────────────────────────────────────────────
+   Pas d'épinglage, pas de défilement piloté, pas de largeur fixe : les
+   cartes reprennent la grille.
+
+   Deux cas l'imposent, et le second compte autant que le premier :
+
+     · sous 1024 px, où le geste n'a pas de sens ;
+     · en mouvement réduit, où le script ne translate rien. Sans cette
+       règle, la piste resterait en ligne et plus large que son cadre —
+       lequel masque ce qui dépasse. Sept projets sur neuf seraient
+       simplement hors d'atteinte. Une préférence d'affichage ne doit
+       jamais retirer du contenu. */
+@media (prefers-reduced-motion: reduce), (max-width: 1023px) {
+  .rail {
+    padding-left: 0;
+    overflow: visible;
+  }
+  .rail-piste {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: auto;
+    row-gap: 64px;
+    max-width: var(--grille-max);
+    margin-inline: auto;
+    padding-inline: var(--grille-marge);
+  }
+  .carte-projet--grande,
+  .carte-projet--petite { width: auto; }
+  .carte-projet--grande { grid-column: 1 / -1; }
+  .rail-progression { display: none; }
+}
+
+@media (max-width: 767px) {
+  .rail-piste { grid-template-columns: 1fr; }
+  .carte-projet--grande { grid-column: auto; }
+}
