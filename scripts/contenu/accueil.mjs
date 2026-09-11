@@ -24,10 +24,12 @@ export const nav = {
 }
 
 export const hero = {
+  // L'accent tombe sur la chute, pas sur le milieu de la phrase : c'est
+  // « même personne » qui porte la promesse, et c'est ce que colorent les
+  // maquettes. Le texte, lui, ne bouge pas.
   titre: {
-    debut: 'Le site que vos clients méritent,',
-    accent: 'conçu et codé',
-    fin: 'par la même personne.',
+    avant: 'Le site que vos clients méritent, conçu et codé par la',
+    accent: 'même personne.',
   },
   statement:
     'Je dessine et je développe vos sites et vos applications, du premier croquis à la mise en ligne. ' +

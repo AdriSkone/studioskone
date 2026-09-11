@@ -52,20 +52,11 @@ ${bloc}
 /* ── Sections ─────────────────────────────────────────────────────── */
 
 function hero() {
-  const boutons = C.hero.ctas
-    .map(
-      (c) =>
-        `<a class="bouton bouton--${c.variante}" href="${c.href}">${c.libelle}${c.variante === 'principal' ? fleche : ''}</a>`
-    )
-    .join('\n          ')
-
-  const preuves = C.hero.preuves
-    .map((p) => `<span>${p}</span>`)
-    .join('\n            <span class="hero-preuve-sep" aria-hidden="true">·</span>\n            ')
-
   const piste = [...C.ruban, ...C.ruban]
     .map((r) => `<span class="ruban-item">${r}</span>`)
     .join('')
+
+  const preuves = C.hero.preuves.map((p) => `<span>${p}</span>`).join('\n        ')
 
   // Le calque de grille : douze filets verticaux, très pâles, tracés au
   // chargement. Purement décoratif — il ne porte aucune information et
@@ -77,19 +68,21 @@ function hero() {
 
     <div class="grille hero-corps">
       <h1 class="t-display hero-titre" style="--col: 1 / -1">
-        ${html(C.hero.titre.debut)} <span class="hero-accent">${C.hero.titre.accent}</span> ${C.hero.titre.fin}
+        ${C.hero.titre.avant} <span class="hero-accent">${C.hero.titre.accent}</span>
       </h1>
 
-      <div class="hero-droite" style="--col: 1 / span 5">
-        <p class="t-corps-l">${C.hero.statement}</p>
-        <p class="pastille hero-lieu">${C.hero.lieu}</p>
-        <div class="hero-actions">
-          ${boutons}
+      <p class="hero-statement">${C.hero.statement}</p>
+
+      <div class="hero-actions">
+        <div class="hero-boutons">
+          <a class="bouton bouton--principal" href="${C.hero.ctas[0].href}">${C.hero.ctas[0].libelle}</a>
+          <a class="lien hero-lien" href="${C.hero.ctas[1].href}">${C.hero.ctas[1].libelle}</a>
         </div>
+        <p class="hero-lieu">${C.hero.lieu}</p>
       </div>
 
-      <p class="hero-preuves" style="--col: 8 / span 5">
-            ${preuves}
+      <p class="hero-preuves">
+        ${preuves}
       </p>
     </div>
 

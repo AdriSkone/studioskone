@@ -58,7 +58,17 @@ h1, h2, h3, h4 {
   font-size: var(--text-display);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  text-wrap: balance;
+  /* Pas de `balance` ici. Équilibrer, c'est répartir le texte également
+     entre les lignes plutôt que remplir chacune — le titre casse alors
+     plus tôt que nécessaire et n'occupe plus toute la largeur. Sur un
+     titre de cette taille, où chaque ligne est une mesure du dessin, on
+     laisse le texte aller au bout.
+
+     `wrap`, et non `normal` : la propriété accepte wrap, nowrap, balance,
+     pretty et stable. `normal` n'en fait pas partie, la déclaration est
+     donc rejetée en silence et l'équilibrage de la règle des titres
+     continue de s'appliquer. */
+  text-wrap: wrap;
 }
 
 h1, .t-h1 { font-size: var(--text-h1); }

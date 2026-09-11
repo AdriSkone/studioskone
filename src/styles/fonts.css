@@ -4,13 +4,26 @@
    ============================================================ */
 
 /* ─── Les fontes ──────────────────────────────────────────────
-   Bricolage porte deux axes : wght 200-800 et wdth 75-100 %. Le
-   site s'en sert à wdth 92 (--wdth-display). C'est pour cet axe
-   qu'on charge le fichier `wdth` et non le `opsz` : sans lui, la
-   largeur ne serait qu'une déformation synthétique du navigateur. */
+   Bricolage est chargée dans sa version `standard`, qui porte tous ses
+   axes — la graisse, la largeur, et la taille optique.
+
+   Ce dernier point n'est pas un détail de puriste : à 115 px, le titre du
+   hero mesure 1275 px avec ce fichier et 1455 px avec la version réduite
+   à deux axes, pour 1312 px disponibles. C'est la différence entre le
+   titre des maquettes et un titre qui casse une ligne trop tôt. La taille
+   optique resserre les lettres quand le corps grandit, et le navigateur
+   l'applique tout seul (`font-optical-sizing: auto` est la valeur par
+   défaut) — encore faut-il que la fonte la lui donne.
+
+   Le fichier pèse 131 Ko au lieu de 78. C'est le prix d'un titre juste.
+
+   Le nom change avec le contenu — `-std` et non plus `-var`. Servir un
+   fichier différent sous le même nom laisse les navigateurs qui ont déjà
+   visité le site sur l'ancienne version, et le titre y casse alors au
+   mauvais endroit sans qu'on puisse le voir. */
 @font-face {
   font-family: 'Bricolage Grotesque';
-  src: url('/fonts/bricolage-grotesque-var.woff2') format('woff2-variations');
+  src: url('/fonts/bricolage-grotesque-std.woff2') format('woff2-variations');
   font-weight: 200 800;
   font-stretch: 75% 100%;
   font-style: normal;
@@ -61,9 +74,14 @@
 @font-face {
   font-family: 'Bricolage Fallback';
   src: local('Helvetica'), local('Arial');
-  size-adjust: 100.99%;
-  ascent-override: 92.09%;
-  descent-override: 26.74%;
+  /* Remesurées après le passage au fichier complet : la taille optique
+     resserre les lettres, et la fonte est devenue nettement plus étroite
+     que le repli — 438 contre 482 pour un même corps. Garder les valeurs
+     précédentes (100.99 %) aurait fait sauter le texte au moment du
+     remplacement, exactement ce que le size-adjust est censé empêcher. */
+  size-adjust: 90.90%;
+  ascent-override: 102.31%;
+  descent-override: 29.70%;
   line-gap-override: 0%;
 }
 

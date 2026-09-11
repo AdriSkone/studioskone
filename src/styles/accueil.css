@@ -9,10 +9,82 @@
 /* La barre est fixe : le contenu réserve sa bande. */
 body { padding-top: var(--nav-h); }
 
-/* ─── Hero ──────────────────────────────────────────────────── */
+/* ─── Hero ──────────────────────────────────────────────────
+   Mesures reprises des maquettes : marge haute de 96 px, le bloc du bas
+   à 64 px sous le titre, et un bandeau de preuves à 96 px encore plus bas.
+   ============================================================ */
 .hero {
   position: relative;
   padding-top: var(--spacing-section-s);
+}
+
+.hero-corps { row-gap: 0; align-items: start; }
+
+.hero-titre { margin-bottom: 0; }
+
+/* L'accent est en terracotta plein, pas en terracotta profond : c'est du
+   grand titre, au-dessus de 24 px, où le seuil de contraste est de 3:1 —
+   et 4.64 le dépasse largement. */
+.hero-accent { color: var(--color-terracotta); }
+
+/* Le paragraphe tient six colonnes au-delà de 1440 px, sept en dessous. */
+.hero-statement {
+  --col: 1 / span 7;
+  margin-top: 64px;
+  font-size: var(--text-corps-l);
+  line-height: 1.45;
+}
+
+/* La colonne d'action se pose à droite du paragraphe, sur la même ligne. */
+.hero-actions {
+  --col: 9 / span 4;
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 32px;
+}
+
+/* « Voir les réalisations » est un lien, pas un second bouton : deux
+   cadres côte à côte donneraient deux appels de même poids, alors qu'il
+   n'y en a qu'un. */
+.hero-lien { white-space: nowrap; }
+
+.hero-lieu {
+  font-size: var(--text-petit);
+  color: var(--color-gris-chaud);
+}
+
+@media (min-width: 1440px) {
+  .hero-statement { --col: 1 / span 6; }
+  .hero-actions { --col: 8 / span 5; }
+}
+
+/* Le bandeau de preuves ferme le hero : un filet haut, et des filets
+   verticaux entre les mentions — pas des points. */
+.hero-preuves {
+  --col: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-section-s);
+  padding-top: 16px;
+  border-top: 1px solid var(--filet-moyen);
+  font-size: var(--text-petit);
+  color: var(--color-gris-chaud);
+}
+
+.hero-preuves span { padding-inline: 24px; border-left: 1px solid var(--filet-moyen); }
+.hero-preuves span:first-child { padding-left: 0; border-left: 0; }
+
+.hero .ruban {
+  margin-top: var(--spacing-section-s);
+  margin-inline: calc(var(--grille-marge) * -1);
 }
 
 /* Le calque de grille. Douze filets à 6 % d'encre — assez pour qu'on
@@ -38,26 +110,24 @@ body { padding-top: var(--nav-h); }
 .hero-corps,
 .hero .ruban { position: relative; }
 
-.hero-corps { row-gap: 48px; }
-
-.hero-titre { margin-bottom: 8px; }
-.hero-accent { color: var(--color-terracotta-profond); }
-
-.hero-droite { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
-.hero-lieu { color: var(--color-terracotta-profond); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-
-.hero-preuves {
-  align-self: end;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: var(--text-petit);
-  color: var(--color-gris-chaud);
+/* Sous 768 px : tout s'empile, et les preuves passent en liste à filets. */
+@media (max-width: 767px) {
+  .hero-statement { margin-top: 48px; max-width: 34em; }
+  .hero-actions { margin-top: 40px; }
+  .hero-boutons { flex-direction: column; align-items: stretch; gap: 16px; }
+  .hero-lien { text-align: center; padding-block: 12px; }
+  .hero-preuves {
+    flex-direction: column;
+    margin-top: 48px;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .hero-preuves span {
+    padding: 12px 0;
+    border-left: 0;
+    border-top: 1px solid var(--filet-moyen);
+  }
 }
-.hero-preuve-sep { color: var(--color-terracotta); }
-
-.hero .ruban { margin-top: var(--spacing-section-s); }
 
 /* ─── Problème ──────────────────────────────────────────────── */
 .probleme-titre { font-size: var(--text-h1); margin-bottom: 48px; }
