@@ -11,8 +11,9 @@
   color: var(--color-encre);
 }
 
-/* Rien ne bouge au survol : ni échelle, ni translation. C'est le curseur
-   qui change d'état, et lui seul — d'où le data-curseur sur l'image. */
+/* Rien ne bouge au survol : ni échelle, ni translation. La carte se
+   signale par son titre, qui passe en terracotta profond — et par rien
+   d'autre. */
 .carte-projet-image {
   display: block;
   width: 100%;

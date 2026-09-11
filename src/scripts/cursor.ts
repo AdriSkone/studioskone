@@ -1,8 +1,18 @@
 /**
- * Curseur — un point qui suit la souris, dans quatre états.
+ * Curseur — un point qui suit la souris.
  *
- * Reprend la mécanique éprouvée du site actuel (interpolation dans une
- * boucle rAF, écriture en `transform`) et corrige ce qui lui manquait :
+ * Un seul état : un point de 10 px en terracotta, du début à la fin. Il ne
+ * grossit pas sur les liens, ne devient pas pastille sur les projets, ne
+ * change pas de couleur sur l'encre. C'est un repère, pas un commentaire
+ * sur ce qu'il survole — et un repère qui change de forme se fait remarquer
+ * au lieu de se faire oublier.
+ *
+ * (Le cahier des charges en prévoyait quatre états. Ils ont été écrits,
+ * puis retirés sur décision d'Adri après relecture : le disque de 40 px
+ * recouvrait les mots qu'il désignait, et l'ensemble s'agitait trop.)
+ *
+ * La mécanique reste celle du site d'avant — interpolation dans une boucle
+ * rAF, écriture en `transform` — avec ce qui lui manquait :
  *
  *   · `translate3d` plutôt que `translate`, pour que la position parte sur
  *     sa propre couche. Le point passe au-dessus du rail épinglé et de la
@@ -38,10 +48,6 @@ export function initCursor(): Curseur | null {
   const el = document.createElement('div')
   el.id = 'curseur'
   el.setAttribute('aria-hidden', 'true')
-
-  const libelle = document.createElement('span')
-  libelle.className = 'curseur-libelle'
-  el.appendChild(libelle)
   document.body.appendChild(el)
   document.documentElement.classList.add('a-curseur')
 
@@ -51,7 +57,6 @@ export function initCursor(): Curseur | null {
   let y = 0
   let visible = false
   let frame = 0
-  let modeCourant = ''
 
   function boucle(): void {
     x += (sourisX - x) * TAILLE_LERP
@@ -71,25 +76,6 @@ export function initCursor(): Curseur | null {
     }
   }
 
-  /**
-   * Quatre états, dans cet ordre de priorité. Une carte projet est aussi un
-   * lien : c'est la pastille qui doit gagner, donc elle se teste d'abord.
-   */
-  function modePour(cible: EventTarget | null): string {
-    // `target` n'est pas toujours un Element : un mousemove peut être émis
-    // sur window ou sur document, et l'un comme l'autre ignore `closest`.
-    if (!(cible instanceof Element)) return ''
-
-    const projet = cible.closest<HTMLElement>('[data-curseur="projet"]')
-    if (projet) {
-      libelle.textContent = projet.dataset.curseurLibelle ?? ''
-      return 'mode-projet'
-    }
-    if (cible.closest('a, button, [role="button"], summary')) return 'mode-lien'
-    if (cible.closest('[data-curseur="negatif"], .negatif')) return 'mode-negatif'
-    return ''
-  }
-
   function surMouvement(e: MouseEvent): void {
     sourisX = e.clientX
     sourisY = e.clientY
@@ -101,13 +87,6 @@ export function initCursor(): Curseur | null {
       visible = true
       el.classList.add('est-visible')
       demarrer()
-    }
-
-    const mode = modePour(e.target)
-    if (mode !== modeCourant) {
-      if (modeCourant) el.classList.remove(modeCourant)
-      if (mode) el.classList.add(mode)
-      modeCourant = mode
     }
   }
 

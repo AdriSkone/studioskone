@@ -1,5 +1,8 @@
 /* ============================================================
    Curseur
+   Un point de 10 px en terracotta, identique en permanence. Il ne
+   grossit pas, ne se remplit pas d'un libellé, ne change pas de
+   couleur : c'est un repère, et un repère ne commente pas.
    ============================================================ */
 
 #curseur {
@@ -7,73 +10,20 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--color-terracotta);
-  color: var(--color-papier);
-  font-family: var(--font-texte);
-  font-size: var(--text-petit);
-  font-weight: 500;
-  white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  overflow: hidden;
   /* La position est écrite en translate3d par le script, à chaque frame.
-     Elle n'est donc jamais animée ici : seuls la forme et la couleur le
-     sont, et le déplacement reste collé à la souris. */
-  transition:
-    width   var(--dur-rapide) var(--ease-skone),
-    height  var(--dur-rapide) var(--ease-skone),
-    padding var(--dur-rapide) var(--ease-skone),
-    border-radius var(--dur-rapide) var(--ease-skone),
-    background var(--dur-rapide) var(--ease-skone),
-    border-color var(--dur-rapide) var(--ease-skone),
-    opacity var(--dur-rapide) var(--ease-skone);
+     Elle n'est donc jamais animée ici : seule l'apparition l'est, et le
+     déplacement reste collé à la souris. */
+  transition: opacity var(--dur-rapide) var(--ease-skone);
   will-change: transform;
 }
 
 #curseur.est-visible { opacity: 1; }
-
-/* Sur un lien ou un bouton : le point grossit à 40 px.
-
-   En anneau, et non en disque plein. Un disque de 40 px posé sur une
-   question de FAQ ou un lien de navigation recouvre les mots qu'on est en
-   train de lire — le curseur cache alors ce qu'il désigne. Évidé, il garde
-   sa taille et sa présence, et laisse voir à travers.
-
-   La bordure fait 1 px, comme tous les filets du site. */
-#curseur.mode-lien {
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: 1px solid var(--color-terracotta);
-}
-
-.negatif #curseur.mode-lien,
-#curseur.mode-lien.mode-negatif { border-color: var(--color-papier); }
-
-/* Sur une image de projet : pastille portant son propre libellé.
-   Le texte vient du DOM (data-curseur-libelle), pas du script. */
-#curseur.mode-projet {
-  width: auto;
-  height: 40px;
-  padding-inline: 18px;
-  border-radius: 20px;
-}
-
-/* Sur un bloc en négatif : le point passe en crème pour rester lisible
-   sur l'encre. Le terracotta n'y tiendrait pas (3.36). */
-#curseur.mode-negatif { background: var(--color-papier); }
-
-.curseur-libelle {
-  opacity: 0;
-  transition: opacity var(--dur-rapide) var(--ease-skone);
-}
-#curseur.mode-projet .curseur-libelle { opacity: 1; }
 
 /* Le curseur système s'efface sur ce que le point remplace, et sur cela
    seulement. Les champs de saisie et le texte sélectionnable gardent le

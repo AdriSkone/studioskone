@@ -240,8 +240,7 @@ ${etapes}
 function realisations() {
   const cartes = projets
     .map(
-      (p) => `          <a class="carte-projet${p.grand ? ' carte-projet--grande' : ' carte-projet--petite'}" href="/projets/${p.slug}"
-             data-curseur="projet" data-curseur-libelle="${p.lienLibelle}">
+      (p) => `          <a class="carte-projet${p.grand ? ' carte-projet--grande' : ' carte-projet--petite'}" href="/projets/${p.slug}">
             <img class="carte-projet-image" src="${p.image}" alt="${p.alt}" loading="lazy" width="1200" height="750">
             <div>
               <div class="carte-projet-tete">
