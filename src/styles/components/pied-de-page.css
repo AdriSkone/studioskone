@@ -7,14 +7,20 @@
   border-top: 1px solid var(--color-encre);
 }
 
+.pied-logo {
+  display: block;
+  color: var(--color-encre);
+}
+
 .pied-intro {
-  --col: 1 / span 5;
+  --col: 1 / span 4;
+  margin-top: 20px;
   font-size: 0.9375rem;
   line-height: var(--leading-corps);
 }
 
 .pied-zone {
-  --col: 1 / span 5;
+  --col: 1 / span 4;
   margin-top: 16px;
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
@@ -72,3 +78,25 @@
   transition: color var(--dur-rapide) var(--ease-skone);
 }
 .pied-bas-liens a:hover { color: var(--color-terracotta-profond); }
+
+
+/* ─── Icônes ────────────────────────────────────────────────
+   Un SVG sans width ni height prend la taille que le contexte lui donne —
+   c'est-à-dire, dans une colonne de pied de page, toute la largeur
+   disponible. Les épingles et les téléphones faisaient 700 px de haut.
+   La taille se fixe ici, une fois, pour toutes les icônes du pied. */
+/* `:not(.logo)` : la règle vise les icônes, pas la marque. Sans
+   l'exception, le logo du pied se retrouvait carré, à 17 px de côté. */
+.pied svg:not(.logo) {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: -0.125em;
+}
+
+.pied-zone {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.pied-zone svg { margin-top: 0.28em; }

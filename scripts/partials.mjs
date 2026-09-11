@@ -11,8 +11,43 @@
  * paramètre qui change d'une page à l'autre.
  */
 
+import { readFileSync } from 'node:fs'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import { nav as navAccueil } from './contenu/accueil.mjs'
 import { pied, cookies, studio } from './contenu/site.mjs'
+
+/* ── Logo ─────────────────────────────────────────────────────────────
+   Le vrai logo, et non son nom composé en Bricolage.
+
+   Il est posé en SVG dans le HTML plutôt qu'en <img>, pour une raison
+   précise : le fichier définit ses couleurs dans une balise <style> qui
+   lui est propre, et une image reste étanche à la feuille de styles de la
+   page. Inline, on peut les rebrancher — l'encre sur `currentColor`, donc
+   le logo se retourne tout seul sur fond sombre, et l'accent sur le
+   terracotta du système.
+
+   Les deux teintes d'origine venaient de l'ancienne palette : #1d1d1b
+   pour le noir et #c5603a pour l'accent, là où le nouveau terracotta est
+   #A95132. Même teinte, un ton plus profond. */
+const ici = dirname(fileURLToPath(import.meta.url))
+
+function logoSvg(fichier, classe) {
+  const brut = readFileSync(resolve(ici, '..', 'public', fichier), 'utf8')
+  return brut
+    .replace(/<\?xml[^>]*\?>\s*/, '')
+    .replace(/id="Calque_2"/, `class="${classe}" role="img" aria-label="Studio Skøne"`)
+    .replace(/fill:\s*#c5603a/gi, 'fill: var(--color-terracotta)')
+    .replace(/fill:\s*#1d1d1b/gi, 'fill: currentColor')
+    .replace(/fill:\s*#C56039/gi, 'fill: var(--color-terracotta)')
+    .replace(/fill:\s*#FAEEDF/gi, 'fill: currentColor')
+    // Les identifiants internes sont préfixés : deux logos dans la même
+    // page partageraient sinon leurs classes .cls-1 et .cls-2.
+    .replace(/cls-(\d)/g, `${classe}-c$1`)
+    .replace(/\s+/g, ' ')
+    .trim()
+}
 
 /* ── Icônes ────────────────────────────────────────────────────────────
    Toutes en aria-hidden : elles doublent un texte, elles ne le portent
@@ -43,7 +78,7 @@ export function navigation({ prefixe = '' } = {}) {
 
   return `  <nav class="nav" id="nav" aria-label="Navigation principale">
     <div class="nav-interieur colonnes">
-      <a class="nav-logo" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">Skøne</a>
+      <a class="nav-logo" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
       <button class="nav-bascule" id="navBascule" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLiens">
         <span></span><span></span><span></span>
       </button>
@@ -61,9 +96,14 @@ export function navigation({ prefixe = '' } = {}) {
 /* ── Pied de page ─────────────────────────────────────────────────── */
 
 export function piedDePage({ prefixe = '' } = {}) {
+  // Chaque colonne dit où elle va. Sans --col, la grille les plaçait
+  // d'elle-même, à la suite des blocs précédents — d'où un pied où les
+  // rubriques dérivaient vers la droite sans alignement.
+  const placements = ['6 / span 2', '8 / span 3']
+
   const colonnes = pied.colonnes
     .map(
-      (c) => `        <nav class="pied-colonne" aria-label="${c.aria}">
+      (c, i) => `        <nav class="pied-colonne" style="--col: ${placements[i] ?? 'auto'}" aria-label="${c.aria}">
           <span class="pied-titre">${c.titre}</span>
           <div class="pied-liste">
 ${c.liens.map((l) => `            <a href="${l.href}">${l.libelle}</a>`).join('\n')}
@@ -84,7 +124,8 @@ ${c.liens.map((l) => `            <a href="${l.href}">${l.libelle}</a>`).join('\
         </div>
       </div>
 
-      <p class="pied-intro" style="margin-top: var(--spacing-section-s)">${pied.tagline}</p>
+      <a class="pied-logo" style="--col: 1 / span 4; margin-top: var(--spacing-section-s)" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
+      <p class="pied-intro">${pied.tagline}</p>
       <p class="pied-zone">${icones.lieu} ${pied.zone}</p>
 
 ${colonnes}
