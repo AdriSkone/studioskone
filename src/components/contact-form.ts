@@ -309,13 +309,13 @@ function buildTemplate(): string {
 
       <!-- Navigation -->
       <div class="cf-nav" id="cfNav">
-        <button type="button" class="cf-btn-prev" id="cfPrev" aria-label="Étape précédente">
+        <button type="button" class="cf-btn-prev" id="cfPrev">
           <svg width="13" height="11" viewBox="0 0 13 11" fill="none" aria-hidden="true">
             <path d="M5.5 1L1 5.5L5.5 10M1 5.5H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           Retour
         </button>
-        <button type="button" class="cf-btn-next" id="cfNext" aria-label="Étape suivante">
+        <button type="button" class="cf-btn-next" id="cfNext">
           <span class="cf-btn-label">Continuer</span>
           <svg class="cf-btn-arrow" width="13" height="11" viewBox="0 0 13 11" fill="none" aria-hidden="true">
             <path d="M7.5 1L12 5.5L7.5 10M12 5.5H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

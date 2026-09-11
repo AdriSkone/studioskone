@@ -11,7 +11,8 @@
   <meta name="geo.region" content="FR-44" />
   <meta name="geo.placename" content="Nantes" />
   <link rel="canonical" href="https://studioskone.com" />
-  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/bricolage-grotesque-var.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/switzer-400.woff2" crossorigin>
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
@@ -103,7 +104,7 @@
   }
   </script>
 
-  <!-- Schema.org JSON-LD · FAQPage (miroir exact de la section FAQ) -->
+    <!-- Schema.org JSON-LD · FAQPage (généré depuis le même contenu que la section) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -210,1023 +211,716 @@
   </script>
 </head>
 <body>
-  <div id="cursor" aria-hidden="true"></div>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img" width="111" height="28">
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
+  <nav class="nav" id="nav" aria-label="Navigation principale">
+    <div class="nav-interieur colonnes">
+      <a class="nav-logo" href="#" aria-label="Studio Skøne, accueil">Skøne</a>
+      <button class="nav-bascule" id="navBascule" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLiens">
+        <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="#approach" class="nav-link">Le studio</a></li>
-        <li><a href="#services" class="nav-link">Prestations</a></li>
-        <li><a href="#process" class="nav-link">Méthode</a></li>
-        <li><a href="#work" class="nav-link">Projets</a></li>
-        <li><a href="#tarifs" class="nav-link">Tarifs</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <span class="nav-availability" aria-hidden="true">
-        <span class="nav-availability-dot"></span>
-        Réponse sous 24&nbsp;h
-      </span>
-      <a href="#estimator" class="btn btn--primary btn--with-circle nav-cta">
-        <span class="btn__circle" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </span>
-        Estimer mon projet
-      </a>
+      <div class="nav-liens" id="navLiens">
+          <a class="nav-lien" href="#approach">Le studio</a>
+          <a class="nav-lien" href="#services">Prestations</a>
+          <a class="nav-lien" href="#process">Méthode</a>
+          <a class="nav-lien" href="#work">Projets</a>
+          <a class="nav-lien" href="#tarifs">Tarifs</a>
+          <a class="nav-lien" href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <span class="nav-mention">Réponse sous 24&nbsp;h</span>
+        <a class="bouton bouton--secondaire bouton--compact nav-cta" href="#estimator">Estimer mon projet</a>
+      </div>
     </div>
   </nav>
 
-  <!-- 1. HERO -->
-  <section id="hero" data-deploy="exit">
-    <div class="hero-top">
-      <h1 class="hero-tagline">
-        Le site que vos clients méritent, <span class="hero-accent">conçu et codé</span><br>
-        <span class="hero-italic">par la même personne.</span>
+  <main id="contenu">
+  <section class="hero" id="hero">
+    <div class="grille hero-corps">
+      <h1 class="t-display hero-titre" style="--col: 1 / -1">
+        Le site que vos clients méritent, <span class="hero-accent">conçu et codé</span> par la même personne.
       </h1>
-      <div class="hero-right">
-        <p class="hero-statement">Je dessine et je développe vos sites et vos applications, du premier croquis à la mise en ligne. Un seul interlocuteur, un seul devis, un seul responsable du résultat. Livré en 2 à 6 semaines, à partir de 900&nbsp;€.</p>
-        <p class="hero-location"><span class="hero-location-dot" aria-hidden="true"></span>À Nantes et partout en France</p>
-        <div class="hero-cta-row">
-          <a href="#estimator" class="btn btn--primary btn--with-circle">
-            <span class="btn__circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </span>
-            <span>Estimer mon projet</span>
-          </a>
-          <a href="#work" class="btn btn--secondary">
-            <span class="btn__dot" aria-hidden="true"></span>
-            <span>Voir les réalisations</span>
-          </a>
+
+      <div class="hero-droite" style="--col: 1 / span 5">
+        <p class="t-corps-l">Je dessine et je développe vos sites et vos applications, du premier croquis à la mise en ligne. Un seul interlocuteur, un seul devis, un seul responsable du résultat. Livré en 2 à 6 semaines, à partir de 900&nbsp;€.</p>
+        <p class="pastille hero-lieu">À Nantes et partout en France</p>
+        <div class="hero-actions">
+          <a class="bouton bouton--principal" href="#estimator">Estimer mon projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="bouton bouton--secondaire" href="#work">Voir les réalisations</a>
         </div>
-        <p class="hero-proof">
-          <span>Devis gratuit</span>
-          <span class="hero-proof-sep" aria-hidden="true">·</span>
-          <span>Réponse sous 24&nbsp;h</span>
-          <span class="hero-proof-sep" aria-hidden="true">·</span>
-          <span>Vous êtes propriétaire de votre site</span>
-        </p>
       </div>
+
+      <p class="hero-preuves" style="--col: 8 / span 5">
+            <span>Devis gratuit</span>
+            <span class="hero-preuve-sep" aria-hidden="true">·</span>
+            <span>Réponse sous 24&nbsp;h</span>
+            <span class="hero-preuve-sep" aria-hidden="true">·</span>
+            <span>Vous êtes propriétaire de votre site</span>
+      </p>
     </div>
-    <div class="hero-strip" aria-hidden="true">
-      <div class="strip-scroll">
-        <div class="strip-track">
-          <span>Site Vitrine</span><span class="bullet">●</span>
-          <span>Refonte de site</span><span class="bullet">●</span>
-          <span>E-Commerce</span><span class="bullet">●</span>
-          <span>Application Web &amp; SaaS</span><span class="bullet">●</span>
-          <span>Application Mobile</span><span class="bullet">●</span>
-          <span>Landing Page</span><span class="bullet">●</span>
-          <span>UX / UI Design</span><span class="bullet">●</span>
-          <span>Branding</span><span class="bullet">●</span>
-          <span>SEO &amp; Performance</span><span class="bullet">●</span>
-          <span>Maintenance</span><span class="bullet">●</span>
-          <span>Site Vitrine</span><span class="bullet">●</span>
-          <span>Refonte de site</span><span class="bullet">●</span>
-          <span>E-Commerce</span><span class="bullet">●</span>
-          <span>Application Web &amp; SaaS</span><span class="bullet">●</span>
-          <span>Application Mobile</span><span class="bullet">●</span>
-          <span>Landing Page</span><span class="bullet">●</span>
-          <span>UX / UI Design</span><span class="bullet">●</span>
-          <span>Branding</span><span class="bullet">●</span>
-          <span>SEO &amp; Performance</span><span class="bullet">●</span>
-          <span>Maintenance</span><span class="bullet">●</span>
-        </div>
-      </div>
+
+    <div class="ruban" aria-hidden="true">
+      <div class="ruban-piste"><span class="ruban-item">Site Vitrine</span><span class="ruban-item">Refonte de site</span><span class="ruban-item">E-Commerce</span><span class="ruban-item">Application Web &amp; SaaS</span><span class="ruban-item">Application Mobile</span><span class="ruban-item">Landing Page</span><span class="ruban-item">UX / UI Design</span><span class="ruban-item">Branding</span><span class="ruban-item">SEO &amp; Performance</span><span class="ruban-item">Maintenance</span><span class="ruban-item">Site Vitrine</span><span class="ruban-item">Refonte de site</span><span class="ruban-item">E-Commerce</span><span class="ruban-item">Application Web &amp; SaaS</span><span class="ruban-item">Application Mobile</span><span class="ruban-item">Landing Page</span><span class="ruban-item">UX / UI Design</span><span class="ruban-item">Branding</span><span class="ruban-item">SEO &amp; Performance</span><span class="ruban-item">Maintenance</span></div>
     </div>
   </section>
 
-  <!-- 2. LE PROBLÈME -->
-  <section id="probleme" class="has-grain">
-    <div class="probleme-decor" aria-hidden="true"></div>
-    <div class="container probleme-inner">
-      <div class="probleme-head">
-        <p class="section-label reveal">Vous vous reconnaissez&nbsp;?</p>
-        <h2 class="probleme-title reveal">Votre site ne travaille <span class="text-accent">pas pour vous.</span></h2>
-      </div>
+  <section class="section-m" id="probleme">
+    <div class="grille">
+      <p class="tete-bloc">Vous vous reconnaissez&nbsp;?</p>
+      <h2 class="probleme-titre" style="--col: 3 / span 8">Votre site ne travaille pas pour vous.</h2>
+      <ul class="probleme-liste" style="--col: 3 / span 9">
+        <li class="symptome" data-reveal>Vous n'osez plus donner l'adresse de votre site quand on vous la demande.</li>
+        <li class="symptome" data-reveal>Il date, il rame sur téléphone, et 8&nbsp;visiteurs sur 10 arrivent depuis un mobile.</li>
+        <li class="symptome" data-reveal>Vous payez un abonnement tous les mois pour un site que vous ne pouvez même pas modifier vous-même.</li>
+        <li class="symptome" data-reveal>On vous a livré un template comme celui de trois concurrents de votre ville.</li>
+        <li class="symptome" data-reveal>Vous avez un devis d'agence à 6&nbsp;000&nbsp;€, un autre à 400&nbsp;€ sur une plateforme, et aucune idée de ce qui les sépare.</li>
+        <li class="symptome" data-reveal>Vous n'avez ni le temps ni l'envie de gérer un projet web pendant six mois.</li>
+      </ul>
+    </div>
+  </section>
 
-      <ul class="probleme-grid" role="list">
-        <li class="symptom-card reveal">
-          <span class="symptom-mark" aria-hidden="true"></span>
-          <p class="symptom-text">Vous n'osez plus donner l'adresse de votre site quand on vous la demande.</p>
+  <section class="section-m" id="pivot">
+    <div class="grille">
+      <p class="pivot-texte" style="--col: 1 / span 9">Rien de tout ça n'est votre métier.<br>C'est le mien.</p>
+    </div>
+  </section>
+
+  <section class="section-m" id="approach">
+    <div class="grille">
+      <p class="tete-bloc">Le studio</p>
+      <h2 class="studio-titre" style="--col: 3 / span 8">Conçu et construit par la même personne.</h2>
+
+      <div class="metiers" style="--col: 3 / span 6">
+          <div class="metier">
+            <span class="metier-label">Le pinceau</span>
+            <p class="metier-titre">Conception</p>
+            <p class="metier-items">UX · Interface · Direction artistique</p>
+          </div>
+          <span class="metier-joint" aria-hidden="true">&amp;</span>
+          <div class="metier">
+            <span class="metier-label">Le marteau</span>
+            <p class="metier-titre">Développement</p>
+            <p class="metier-items">Intégration · Performance · Mise en ligne</p>
+          </div>
+      </div>
+      <p class="studio-texte" style="--col: 10 / span 3">Je suis Adrien. Je conçois et je développe. Jamais l'un sans l'autre.<br><br>Skøne, c'est ça : un bon produit ne naît que si la même personne tient le pinceau et le marteau.</p>
+
+      <ul class="benefices" style="--col: 1 / -1">
+        <li class="benefice" data-reveal>
+          <h3 class="benefice-titre">Un seul interlocuteur.</h3>
+          <p class="benefice-texte">Vous expliquez votre métier une fois. Pas de dossier qui se perd entre un designer et un développeur.</p>
         </li>
-        <li class="symptom-card reveal">
-          <span class="symptom-mark" aria-hidden="true"></span>
-          <p class="symptom-text">Il date, il rame sur téléphone, et 8&nbsp;visiteurs sur 10 arrivent depuis un mobile.</p>
+        <li class="benefice" data-reveal>
+          <h3 class="benefice-titre">Rien d'infaisable.</h3>
+          <p class="benefice-texte">Je ne dessine jamais un écran que je ne saurais pas construire. Ce que vous validez en maquette, c'est ce que vous recevez.</p>
         </li>
-        <li class="symptom-card reveal">
-          <span class="symptom-mark" aria-hidden="true"></span>
-          <p class="symptom-text">Vous payez un abonnement tous les mois pour un site que vous ne pouvez même pas modifier vous-même.</p>
-        </li>
-        <li class="symptom-card reveal">
-          <span class="symptom-mark" aria-hidden="true"></span>
-          <p class="symptom-text">On vous a livré un template comme celui de trois concurrents de votre ville.</p>
-        </li>
-        <li class="symptom-card reveal">
-          <span class="symptom-mark" aria-hidden="true"></span>
-          <p class="symptom-text">Vous avez un devis d'agence à 6&nbsp;000&nbsp;€, un autre à 400&nbsp;€ sur une plateforme, et aucune idée de ce qui les sépare.</p>
-        </li>
-        <li class="symptom-card reveal">
-          <span class="symptom-mark" aria-hidden="true"></span>
-          <p class="symptom-text">Vous n'avez ni le temps ni l'envie de gérer un projet web pendant six mois.</p>
+        <li class="benefice" data-reveal>
+          <h3 class="benefice-titre">Le prix d'une seule personne.</h3>
+          <p class="benefice-texte">Pas de chef de projet à facturer, pas de marge d'agence. Le budget part dans le produit.</p>
         </li>
       </ul>
-
-      <p class="probleme-turn reveal">Rien de tout ça n'est votre métier.<br><span class="probleme-turn-accent">C'est le mien.</span></p>
     </div>
   </section>
 
-  <!-- 3. LE STUDIO -->
-  <section id="approach" class="has-grain" data-deploy>
-    <div class="approach-glow" aria-hidden="true"></div>
-    <div class="approach-decor" aria-hidden="true"></div>
-    <!-- La scène porte le portrait en absolu : tout ce qui vient après elle
-         reste hors de son cadre, quelle que soit la hauteur de la section. -->
-    <div class="approach-stage">
-    <div class="approach-portrait" aria-hidden="true">
-      <img class="approach-portrait-img reveal" src="/adrien-studio.webp" alt=""
-           width="624" height="1200" decoding="async" loading="lazy">
-    </div>
-    <div class="container approach-inner">
-      <p class="section-label reveal">Le studio</p>
-      <h2 class="approach-title reveal">
-        Conçu et construit par la <span class="text-accent">même personne.</span>
-      </h2>
-      <div class="approach-mid reveal">
-        <div class="approach-craft reveal">
-          <div class="approach-craft-face">
-            <span class="approach-craft-label">Le pinceau</span>
-            <p class="approach-craft-title">Conception</p>
-            <p class="approach-craft-items">UX · Interface · Direction artistique</p>
-          </div>
-          <span class="approach-craft-join" aria-hidden="true">&amp;</span>
-          <div class="approach-craft-face">
-            <span class="approach-craft-label">Le marteau</span>
-            <p class="approach-craft-title">Développement</p>
-            <p class="approach-craft-items">Intégration · Performance · Mise en ligne</p>
-          </div>
-        </div>
-        <p class="approach-mid-text">
-          Je suis Adrien. Je conçois et je développe. Jamais l'un sans l'autre.
-          <br>
-          Skøne, c'est ça : un bon produit ne naît que si la même personne tient le pinceau et le marteau.
-        </p>
-      </div>
-    </div>
-    </div><!-- /.approach-stage -->
-
-    <div class="container approach-after">
-      <ul class="approach-benefits" role="list">
-        <li class="benefit reveal">
-          <h3 class="benefit-title">Un seul interlocuteur.</h3>
-          <p class="benefit-text">Vous expliquez votre métier une fois. Pas de dossier qui se perd entre un designer et un développeur.</p>
-        </li>
-        <li class="benefit reveal">
-          <h3 class="benefit-title">Rien d'infaisable.</h3>
-          <p class="benefit-text">Je ne dessine jamais un écran que je ne saurais pas construire. Ce que vous validez en maquette, c'est ce que vous recevez.</p>
-        </li>
-        <li class="benefit reveal">
-          <h3 class="benefit-title">Le prix d'une seule personne.</h3>
-          <p class="benefit-text">Pas de chef de projet à facturer, pas de marge d'agence. Le budget part dans le produit.</p>
-        </li>
-      </ul>
-
-      <aside class="approach-young reveal">
-        <p class="approach-young-label">En toute transparence</p>
-        <h3 class="approach-young-title">Le studio est jeune, et je le dis.</h3>
-        <p class="approach-young-text">
-          Studio Skøne a ouvert en 2026. Concrètement, pour vous : j'ai le temps de m'investir sur votre projet, vous ne passez pas après dix autres clients, et mes tarifs de lancement sont plus bas qu'ils ne le seront dans un an.
-        </p>
-        <p class="approach-young-text">
-          En échange, je demande une chose : si le travail vous plaît, un avis honnête et l'autorisation de montrer le projet.
-        </p>
-      </aside>
-    </div>
-  </section>
-
-  <!-- 4. PRESTATIONS -->
-  <section id="services" class="has-grain">
-    <div class="services-glow" aria-hidden="true"></div>
-    <div class="container">
-      <div class="services-header">
-        <p class="section-label reveal">Ce que je construis</p>
-        <h2 class="services-title reveal">Mes <em>prestations</em></h2>
-      </div>
-      <div class="services-grid">
-        <div class="service-card reveal">
-          <span class="service-num">01</span>
-          <h3 class="service-title"><a class="service-link" href="/creation-site-internet-nantes">Site vitrine &amp; landing page</a></h3>
-          <p class="service-who"><span class="service-who-label">Pour qui</span> artisans, commerçants, thérapeutes, indépendants qui veulent être trouvés et contactés.</p>
-          <p class="service-desc">Un site rapide, lisible sur téléphone, pensé pour déclencher l'appel ou le formulaire. Du one-pager au site complet.</p>
-          <span class="service-tag">Dès 900€</span>
-        </div>
-        <div class="service-card reveal">
-          <span class="service-num">02</span>
-          <h3 class="service-title"><a class="service-link" href="/creation-site-ecommerce-nantes">Site e-commerce</a></h3>
-          <p class="service-who"><span class="service-who-label">Pour qui</span> marques et commerçants qui veulent vendre en ligne sans se battre avec leur outil.</p>
-          <p class="service-desc">Boutique Shopify ou sur mesure, fiches produits, paiement, livraison, et une prise en main que vous maîtrisez en une heure.</p>
-          <span class="service-tag">Dès 3 000€</span>
-        </div>
-        <div class="service-card reveal">
-          <span class="service-num">03</span>
-          <h3 class="service-title">Application web &amp; SaaS</h3>
-          <p class="service-who"><span class="service-who-label">Pour qui</span> entreprises et porteurs de projet avec un outil métier à créer ou un process à automatiser.</p>
-          <p class="service-desc">Back-office, interfaces métier, applications complexes. De la conception au déploiement.</p>
-          <span class="service-tag">Dès 2 500€</span>
-        </div>
-        <div class="service-card reveal">
-          <span class="service-num">04</span>
-          <h3 class="service-title"><a class="service-link" href="/creation-application-mobile">Application mobile</a></h3>
-          <p class="service-who"><span class="service-who-label">Pour qui</span> porteurs de projet qui veulent être sur l'App Store et le Play Store, pas juste « avoir une appli ».</p>
-          <p class="service-desc">iOS et Android, du premier écran jusqu'à la publication. Une interface conçue pour le pouce, pas un site rétréci.</p>
-          <span class="service-tag">Sur devis</span>
-        </div>
-        <div class="service-card reveal">
-          <span class="service-num">05</span>
-          <h3 class="service-title"><a class="service-link" href="/refonte-site-internet">Refonte de site</a></h3>
-          <p class="service-who"><span class="service-who-label">Pour qui</span> ceux qui ont déjà un site, qui n'en sont plus fiers, et qui ne veulent pas repartir de zéro.</p>
-          <p class="service-desc">Audit, reprise du contenu existant, nouveau design, migration, redirections. Vous ne perdez pas votre référencement acquis.</p>
-          <span class="service-tag">Dès 1 200€</span>
-        </div>
-        <div class="service-card reveal">
-          <span class="service-num">06</span>
-          <h3 class="service-title">Direction artistique &amp; UI</h3>
-          <p class="service-who"><span class="service-who-label">Pour qui</span> ceux qui ont déjà un développeur, ou qui veulent d'abord voir avant d'engager.</p>
-          <p class="service-desc">Maquettes haute fidélité, design system, identité visuelle. Rien ne part en développement sans votre validation.</p>
-          <span class="service-tag">Dès 600€</span>
-        </div>
+  <section class="section-s" id="transparence">
+    <div class="grille">
+      <p class="tete-bloc">En toute transparence</p>
+      <div class="transparence-corps" style="--col: 3 / span 7">
+        <h3 class="t-h2">Le studio est jeune, et je le dis.</h3>
+        <p>Studio Skøne a ouvert en 2026. Concrètement, pour vous : j'ai le temps de m'investir sur votre projet, vous ne passez pas après dix autres clients, et mes tarifs de lancement sont plus bas qu'ils ne le seront dans un an.</p>
+        <p>En échange, je demande une chose : si le travail vous plaît, un avis honnête et l'autorisation de montrer le projet.</p>
       </div>
     </div>
   </section>
 
-  <!-- 5. MA MÉTHODE -->
-  <section id="process" class="has-grain">
-    <div class="container">
-      <div class="process-head">
-        <p class="section-label reveal">Ma méthode</p>
-        <h2 class="process-main-title reveal">Une méthode claire.<br>Zéro <span class="text-accent">surprise</span>.</h2>
-      </div>
-      <div class="process-timeline">
-
-        <div class="proc-row reveal">
-          <div class="proc-left">
-            <span class="proc-badge">Découverte</span>
-            <h3 class="proc-title proc-title-1">Cadrage du projet</h3>
-            <p class="proc-text proc-text-1">On commence par un atelier : vos objectifs, votre audience, ce que vous avez à dire. De là, on structure le plan de site ensemble.</p>
-            <p class="proc-time"><span class="proc-time-arrow" aria-hidden="true">→</span> Votre temps : 1 h d'échange. C'est tout.</p>
+  <section class="section-m" id="services">
+    <div class="grille">
+      <p class="tete-bloc">Ce que je construis</p>
+      <h2 class="t-h1" style="--col: 3 / span 8">Mes prestations</h2>
+      <div class="prestations-grille" style="--col: 1 / -1">
+        <article class="carte-prestation" data-reveal>
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="/creation-site-internet-nantes">Site vitrine &amp; landing page</a></h3>
+            <span class="carte-prestation-prix">Dès 900€</span>
           </div>
-          <div class="proc-mid"><div class="proc-dot proc-dot-1"></div></div>
-          <div class="proc-right"><span class="proc-ghost" aria-hidden="true">01</span></div>
-        </div>
-
-        <div class="proc-row proc-row-flip reveal">
-          <div class="proc-left"><span class="proc-ghost" aria-hidden="true">02</span></div>
-          <div class="proc-mid"><div class="proc-dot proc-dot-2"></div></div>
-          <div class="proc-right">
-            <span class="proc-badge proc-badge-2">Design</span>
-            <h3 class="proc-title proc-title-n">Conception visuelle</h3>
-            <p class="proc-text proc-text-n">Chaque écran est validé avec vous avant le développement. Typo, mise en page, DA : rien ne part en prod sans votre accord.</p>
-            <p class="proc-time"><span class="proc-time-arrow" aria-hidden="true">→</span> Votre temps : 30 min de retours sur les maquettes.</p>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> artisans, commerçants, thérapeutes, indépendants qui veulent être trouvés et contactés.</p>
+          <p class="carte-prestation-texte">Un site rapide, lisible sur téléphone, pensé pour déclencher l'appel ou le formulaire. Du one-pager au site complet.</p>
+        </article>
+        <article class="carte-prestation" data-reveal>
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="/creation-site-ecommerce-nantes">Site e-commerce</a></h3>
+            <span class="carte-prestation-prix">Dès 3 000€</span>
           </div>
-        </div>
-
-        <div class="proc-row reveal">
-          <div class="proc-left">
-            <span class="proc-badge proc-badge-3">Développement</span>
-            <h3 class="proc-title proc-title-n">Build &amp; intégration</h3>
-            <p class="proc-text proc-text-n">Les maquettes deviennent du code. Pixel-perfect, testé sur tous les supports. Vous suivez l'avancement sur un lien privé, en temps réel.</p>
-            <p class="proc-time"><span class="proc-time-arrow" aria-hidden="true">→</span> Votre temps : zéro. Vous regardez avancer.</p>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> marques et commerçants qui veulent vendre en ligne sans se battre avec leur outil.</p>
+          <p class="carte-prestation-texte">Boutique Shopify ou sur mesure, fiches produits, paiement, livraison, et une prise en main que vous maîtrisez en une heure.</p>
+        </article>
+        <article class="carte-prestation" data-reveal>
+          <div class="carte-prestation-tete">
+            <h3><span class="carte-prestation-titre">Application web &amp; SaaS</span></h3>
+            <span class="carte-prestation-prix">Dès 2 500€</span>
           </div>
-          <div class="proc-mid"><div class="proc-dot proc-dot-3"></div></div>
-          <div class="proc-right"><span class="proc-ghost" aria-hidden="true">03</span></div>
-        </div>
-
-        <div class="proc-row proc-row-flip reveal">
-          <div class="proc-left"><span class="proc-ghost" aria-hidden="true">04</span></div>
-          <div class="proc-mid"><div class="proc-dot proc-dot-4"></div></div>
-          <div class="proc-right">
-            <span class="proc-badge proc-badge-4">Lancement</span>
-            <h3 class="proc-title proc-title-n">Mise en ligne &amp; suivi</h3>
-            <p class="proc-text proc-text-n">Mise en ligne, prise en main en visio, suivi inclus. Je reste joignable si quelque chose doit changer après le lancement.</p>
-            <p class="proc-time"><span class="proc-time-arrow" aria-hidden="true">→</span> Votre temps : 45 min de formation, et le site est à vous.</p>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> entreprises et porteurs de projet avec un outil métier à créer ou un process à automatiser.</p>
+          <p class="carte-prestation-texte">Back-office, interfaces métier, applications complexes. De la conception au déploiement.</p>
+        </article>
+        <article class="carte-prestation" data-reveal>
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="/creation-application-mobile">Application mobile</a></h3>
+            <span class="carte-prestation-prix">Sur devis</span>
           </div>
-        </div>
-
-      </div>
-      <p class="process-closing reveal">Et si vous n'avez ni textes ni photos : je m'en occupe aussi. C'est prévu dans le cadrage.</p>
-    </div>
-  </section>
-
-  <!-- 6. PROJETS -->
-  <section id="work">
-    <div class="container">
-      <div class="work-header">
-        <div>
-          <p class="section-label reveal">Réalisations</p>
-          <h2 class="work-title reveal">Ce que j'ai construit,<br>et <span class="text-accent">pourquoi.</span></h2>
-        </div>
-        <p class="work-intro reveal">
-          Le studio a ouvert récemment. Vous trouverez ici des projets clients, des outils que j'ai conçus pour mes propres besoins, et des exercices de conception menés pour un secteur précis. Chaque projet dit lequel il est.
-          <span class="work-intro-strong">Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.</span>
-        </p>
-      </div>
-    </div>
-    <div class="work-carousel-outer">
-      <div class="swiper work-swiper">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image work-card-image--mockup work-card-image--giftmatch">
-                <img src="/work/giftmatch.png" alt="GiftMatch · application mobile qui génère des idées cadeaux personnalisées par IA" loading="lazy">
-                <span class="work-card-badge">App mobile</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">GiftMatch</h3>
-                <p class="work-card-type">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
-                <div class="work-testi work-testi--studio">
-                  <span class="work-testi-badge">Projet de studio</span>
-                  <p class="work-testi-note">Né d'un besoin réel : je sèche systématiquement sur les cadeaux. J'ai construit une app qui transforme trois mots sur une personne en cinq propositions concrètes.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Produit maison</span>
-                    <a href="/projets/giftmatch" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> porteurs de projet qui veulent être sur l'App Store et le Play Store, pas juste « avoir une appli ».</p>
+          <p class="carte-prestation-texte">iOS et Android, du premier écran jusqu'à la publication. Une interface conçue pour le pouce, pas un site rétréci.</p>
+        </article>
+        <article class="carte-prestation" data-reveal>
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="/refonte-site-internet">Refonte de site</a></h3>
+            <span class="carte-prestation-prix">Dès 1 200€</span>
           </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image">
-                <img src="/work/cafeo.webp" alt="Site web et identité visuelle ele · Ateliers Caféologie, réalisés par Studio Skøne" loading="lazy">
-                <span class="work-card-badge">Site web</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">ele · Ateliers Caféologie</h3>
-                <p class="work-card-type">Une identité de torréfacteur qui se tient aussi à l'écran</p>
-                <div class="work-testi work-testi--client">
-                  <span class="work-testi-badge">Projet client</span>
-                  <p class="work-testi-note">Projet client, livré et pas encore en ligne : il n'y a donc pas encore d'avis à afficher. Le besoin : une identité d'atelier de dégustation de café qui tienne aussi bien à l'écran qu'ailleurs, sans tomber dans les codes attendus du secteur.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Mise en ligne à venir</span>
-                    <a href="/projets/cafeo" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> ceux qui ont déjà un site, qui n'en sont plus fiers, et qui ne veulent pas repartir de zéro.</p>
+          <p class="carte-prestation-texte">Audit, reprise du contenu existant, nouveau design, migration, redirections. Vous ne perdez pas votre référencement acquis.</p>
+        </article>
+        <article class="carte-prestation" data-reveal>
+          <div class="carte-prestation-tete">
+            <h3><span class="carte-prestation-titre">Direction artistique &amp; UI</span></h3>
+            <span class="carte-prestation-prix">Dès 600€</span>
           </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image work-card-image--mockup work-card-image--myboat">
-                <img src="/work/myboat.webp" alt="MyBoat · application mobile marketplace bateaux iOS et Android" loading="lazy">
-                <span class="work-card-badge">App mobile</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">MyBoat</h3>
-                <p class="work-card-type">Louer un bateau sans créer de compte pour connaître le prix</p>
-                <div class="work-testi work-testi--exercice">
-                  <span class="work-testi-badge">Exercice de conception</span>
-                  <p class="work-testi-note">Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique où l'on connaît le prix total, assurance et caution comprises, avant la moindre inscription.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Démo sectorielle</span>
-                    <a href="/projets/myboat" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image">
-                <img src="/work/garantibox.png" alt="Garantibox · application SaaS pour centraliser garanties et factures" loading="lazy">
-                <span class="work-card-badge">Web App SaaS</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">Garantibox</h3>
-                <p class="work-card-type">Ajouter sa première garantie sans avoir besoin d'explication</p>
-                <div class="work-testi work-testi--exercice">
-                  <span class="work-testi-badge">Exercice de conception</span>
-                  <p class="work-testi-note">Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre sa première facture en moins d'une minute, sans tutoriel et sans compte à créer d'abord.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Démo sectorielle</span>
-                    <a href="/projets/garantibox" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image">
-                <img src="/work/mbivouak.png" alt="M.Bivouak · identité de marque outdoor et boutique Shopify" loading="lazy">
-                <span class="work-card-badge">Branding &amp; e-commerce</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">M.Bivouak</h3>
-                <p class="work-card-type">Identité de marque et boutique, de la première esquisse à la première commande</p>
-                <div class="work-testi work-testi--studio">
-                  <span class="work-testi-badge">Projet de studio</span>
-                  <p class="work-testi-note">Ma propre marque, créée de bout en bout : le nom, l'identité, le ton, les visuels produits et la boutique Shopify. Fermée depuis, faute d'avoir trouvé son marché.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Marque maison</span>
-                    <a href="/projets/m-bivouak" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image">
-                <img src="/work/tasq.png" alt="Tasq · web app de pilotage de projets pour freelances du web et créatifs" loading="lazy">
-                <span class="work-card-badge">Web App</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">Tasq</h3>
-                <p class="work-card-type">Ouvrir un seul outil le matin et savoir quoi faire</p>
-                <div class="work-testi work-testi--studio">
-                  <span class="work-testi-badge">Projet de studio</span>
-                  <p class="work-testi-note">Né d'un besoin réel : mes projets, mes devis et mes relances étaient éparpillés entre trois outils et ma mémoire. J'ai construit Tasq pour les freelances qui travaillent seuls.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Produit maison</span>
-                    <a href="/projets/tasq" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image">
-                <img src="/work/archeon.png" alt="Archéon · portfolio et site vitrine pour cabinet d'architecture" loading="lazy">
-                <span class="work-card-badge">Portfolio</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">Archéon</h3>
-                <p class="work-card-type">Un portfolio d'architecte où le projet parle avant l'agence</p>
-                <div class="work-testi work-testi--exercice">
-                  <span class="work-testi-badge">Exercice de conception</span>
-                  <p class="work-testi-note">Pas de client sur ce projet. Le brief que je me suis donné : un portfolio d'agence d'architecture où l'on comprend un projet en quelques secondes, sans texte d'intention.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Démo sectorielle</span>
-                    <a href="/projets/archeon" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image">
-                <img src="/work/merel-et-fils-hero.webp" alt="Mérel &amp; Fils · site vitrine d'un atelier d'ébénisterie d'art, accueil avec un rabot en gros plan" loading="lazy">
-                <span class="work-card-badge">Site web</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">Mérel &amp; Fils</h3>
-                <p class="work-card-type">Un site d'ébéniste où la matière passe avant le discours</p>
-                <div class="work-testi work-testi--exercice">
-                  <span class="work-testi-badge">Exercice de conception</span>
-                  <p class="work-testi-note">Pas de client sur ce projet. Le brief que je me suis donné : un site d'atelier d'ébénisterie où la première chose que l'on voit est le bois, pas un slogan.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Démo sectorielle</span>
-                    <a href="/projets/merel-et-fils" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="swiper-slide">
-            <article class="work-card">
-              <div class="work-card-image work-card-image--mockup work-card-image--pepite">
-                <img src="/work/pepite.webp" alt="Pépite · application mobile de récompenses familiales, écran de passation du téléphone à l'enfant" loading="lazy">
-                <span class="work-card-badge">App mobile</span>
-              </div>
-              <div class="work-card-body">
-                <h3 class="work-card-title">Pépite</h3>
-                <p class="work-card-type">Une étoile gagnée mène à une vraie récompense, décidée en famille</p>
-                <div class="work-testi work-testi--studio">
-                  <span class="work-testi-badge">Projet de studio</span>
-                  <p class="work-testi-note">Né d'un besoin à la maison : les tableaux de récompenses en carton finissent tous au fond d'un tiroir. J'ai fait le pari qu'une récompense décidée ensemble vaut mieux qu'un système de points imposé.</p>
-                  <div class="work-testi-footer">
-                    <span class="work-testi-sign">Studio Skøne · Produit maison, en développement</span>
-                    <a href="/projets/pepite" class="work-card-cta">Voir le projet →</a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-        </div>
-      </div>
-      <div class="work-dots" role="tablist" aria-label="Navigation projets">
-        <button class="work-dot" role="tab" aria-selected="true"  aria-label="Projet 1"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 2"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 3"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 4"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 5"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 6"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 7"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 8"><span class="work-dot-fill"></span></button>
-        <button class="work-dot" role="tab" aria-selected="false" aria-label="Projet 9"><span class="work-dot-fill"></span></button>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> ceux qui ont déjà un développeur, ou qui veulent d'abord voir avant d'engager.</p>
+          <p class="carte-prestation-texte">Maquettes haute fidélité, design system, identité visuelle. Rien ne part en développement sans votre validation.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- 7. TARIFS -->
-  <section id="tarifs">
-    <div class="container">
-      <div class="tarifs-intro">
-        <div>
-          <p class="section-label reveal">Mes tarifs</p>
-          <h2 class="tarifs-intro-title reveal">Des offres <span class="text-accent">claires</span>,<br>des résultats concrets.</h2>
-        </div>
-        <p class="tarifs-intro-note reveal">Tous les projets démarrent par un appel gratuit de 30 minutes. Vous en repartez avec une fourchette et une recommandation, même si on ne travaille pas ensemble.<br>Pas de frais cachés. Pas de surprise en fin de mission.</p>
+  <section class="section-m" id="process">
+    <div class="grille">
+      <p class="tete-bloc">Ma méthode</p>
+      <h2 class="t-h1" style="--col: 3 / span 8">Une méthode claire.<br>Zéro surprise.</h2>
+      <div class="etapes" style="--col: 1 / -1">
+          <div class="etape est-active" data-etape="01">
+            <span class="etape-numero">01</span>
+            <span class="etape-phase">Découverte</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Cadrage du projet</h3>
+              <p class="etape-texte">On commence par un atelier : vos objectifs, votre audience, ce que vous avez à dire. De là, on structure le plan de site ensemble.</p>
+            </div>
+            <p class="etape-temps">Votre temps : 1 h d'échange. C'est tout.</p>
+          </div>
+          <div class="etape" data-etape="02">
+            <span class="etape-numero">02</span>
+            <span class="etape-phase">Design</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Conception visuelle</h3>
+              <p class="etape-texte">Chaque écran est validé avec vous avant le développement. Typo, mise en page, DA : rien ne part en prod sans votre accord.</p>
+            </div>
+            <p class="etape-temps">Votre temps : 30 min de retours sur les maquettes.</p>
+          </div>
+          <div class="etape" data-etape="03">
+            <span class="etape-numero">03</span>
+            <span class="etape-phase">Développement</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Build &amp; intégration</h3>
+              <p class="etape-texte">Les maquettes deviennent du code. Pixel-perfect, testé sur tous les supports. Vous suivez l'avancement sur un lien privé, en temps réel.</p>
+            </div>
+            <p class="etape-temps">Votre temps : zéro. Vous regardez avancer.</p>
+          </div>
+          <div class="etape" data-etape="04">
+            <span class="etape-numero">04</span>
+            <span class="etape-phase">Lancement</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Mise en ligne &amp; suivi</h3>
+              <p class="etape-texte">Mise en ligne, prise en main en visio, suivi inclus. Je reste joignable si quelque chose doit changer après le lancement.</p>
+            </div>
+            <p class="etape-temps">Votre temps : 45 min de formation, et le site est à vous.</p>
+          </div>
       </div>
+      <p class="methode-cloture" style="--col: 3 / span 7">Et si vous n'avez ni textes ni photos : je m'en occupe aussi. C'est prévu dans le cadrage.</p>
+    </div>
+  </section>
 
-      <aside class="tarifs-launch reveal">
-        <div class="tarifs-launch-tag">
-          <span class="tarifs-launch-dot" aria-hidden="true"></span>
-          Offre de lancement
-        </div>
-        <p class="tarifs-launch-text">
-          Le studio démarre. Sur les prochains projets, <strong>−30 %</strong> sur l'offre Fondation et l'offre Studio, en échange d'un témoignage et de l'autorisation de publier le projet.
-        </p>
+  <section class="section-m" id="work">
+    <div class="grille">
+      <p class="tete-bloc">Réalisations</p>
+      <h2 class="t-h1" style="--col: 3 / span 6">Ce que j'ai construit,<br>et pourquoi.</h2>
+      <p class="realisations-intro" style="--col: 9 / span 4">Le studio a ouvert récemment. Vous trouverez ici des projets clients, des outils que j'ai conçus pour mes propres besoins, et des exercices de conception menés pour un secteur précis. Chaque projet dit lequel il est. <span class="realisations-intro-fort">Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.</span></p>
+    </div>
+    <div class="grille">
+      <div class="projets-grille" style="--col: 1 / -1">
+        <a class="carte-projet" href="/projets/giftmatch"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/giftmatch.png" alt="GiftMatch · application mobile qui génère des idées cadeaux personnalisées par IA" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">GiftMatch</h3>
+              <span class="carte-projet-type">App mobile</span>
+            </div>
+            <p class="carte-projet-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
+            <p class="carte-projet-nature">Projet de studio</p>
+            <p class="carte-projet-note">Né d'un besoin réel : je sèche systématiquement sur les cadeaux. J'ai construit une app qui transforme trois mots sur une personne en cinq propositions concrètes.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Produit maison</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/cafeo"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/cafeo.webp" alt="Site web et identité visuelle ele · Ateliers Caféologie, réalisés par Studio Skøne" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">ele · Ateliers Caféologie</h3>
+              <span class="carte-projet-type">Site web</span>
+            </div>
+            <p class="carte-projet-tagline">Une identité de torréfacteur qui se tient aussi à l'écran</p>
+            <p class="carte-projet-nature">Projet client</p>
+            <p class="carte-projet-note">Projet client, livré et pas encore en ligne : il n'y a donc pas encore d'avis à afficher. Le besoin : une identité d'atelier de dégustation de café qui tienne aussi bien à l'écran qu'ailleurs, sans tomber dans les codes attendus du secteur.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Mise en ligne à venir</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/myboat"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/myboat.webp" alt="MyBoat · application mobile marketplace bateaux iOS et Android" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">MyBoat</h3>
+              <span class="carte-projet-type">App mobile</span>
+            </div>
+            <p class="carte-projet-tagline">Louer un bateau sans créer de compte pour connaître le prix</p>
+            <p class="carte-projet-nature">Exercice de conception</p>
+            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique où l'on connaît le prix total, assurance et caution comprises, avant la moindre inscription.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Démo sectorielle</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/garantibox"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/garantibox.png" alt="Garantibox · application SaaS pour centraliser garanties et factures" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">Garantibox</h3>
+              <span class="carte-projet-type">Web App SaaS</span>
+            </div>
+            <p class="carte-projet-tagline">Ajouter sa première garantie sans avoir besoin d'explication</p>
+            <p class="carte-projet-nature">Exercice de conception</p>
+            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre sa première facture en moins d'une minute, sans tutoriel et sans compte à créer d'abord.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Démo sectorielle</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/m-bivouak"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/mbivouak.png" alt="M.Bivouak · identité de marque outdoor et boutique Shopify" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">M.Bivouak</h3>
+              <span class="carte-projet-type">Branding &amp; e-commerce</span>
+            </div>
+            <p class="carte-projet-tagline">Identité de marque et boutique, de la première esquisse à la première commande</p>
+            <p class="carte-projet-nature">Projet de studio</p>
+            <p class="carte-projet-note">Ma propre marque, créée de bout en bout : le nom, l'identité, le ton, les visuels produits et la boutique Shopify. Fermée depuis, faute d'avoir trouvé son marché.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Marque maison</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/tasq"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/tasq.png" alt="Tasq · web app de pilotage de projets pour freelances du web et créatifs" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">Tasq</h3>
+              <span class="carte-projet-type">Web App</span>
+            </div>
+            <p class="carte-projet-tagline">Ouvrir un seul outil le matin et savoir quoi faire</p>
+            <p class="carte-projet-nature">Projet de studio</p>
+            <p class="carte-projet-note">Né d'un besoin réel : mes projets, mes devis et mes relances étaient éparpillés entre trois outils et ma mémoire. J'ai construit Tasq pour les freelances qui travaillent seuls.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Produit maison</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/archeon"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/archeon.png" alt="Archéon · portfolio et site vitrine pour cabinet d'architecture" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">Archéon</h3>
+              <span class="carte-projet-type">Portfolio</span>
+            </div>
+            <p class="carte-projet-tagline">Un portfolio d'architecte où le projet parle avant l'agence</p>
+            <p class="carte-projet-nature">Exercice de conception</p>
+            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un portfolio d'agence d'architecture où l'on comprend un projet en quelques secondes, sans texte d'intention.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Démo sectorielle</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/merel-et-fils"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/merel-et-fils-hero.webp" alt="Mérel &amp; Fils · site vitrine d'un atelier d'ébénisterie d'art, accueil avec un rabot en gros plan" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">Mérel &amp; Fils</h3>
+              <span class="carte-projet-type">Site web</span>
+            </div>
+            <p class="carte-projet-tagline">Un site d'ébéniste où la matière passe avant le discours</p>
+            <p class="carte-projet-nature">Exercice de conception</p>
+            <p class="carte-projet-note">Pas de client sur ce projet. Le brief que je me suis donné : un site d'atelier d'ébénisterie où la première chose que l'on voit est le bois, pas un slogan.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Démo sectorielle</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+        <a class="carte-projet carte-projet--petite" href="/projets/pepite"
+           data-curseur="projet" data-curseur-libelle="Voir le projet" data-reveal>
+          <img class="carte-projet-image" src="/work/pepite.webp" alt="Pépite · application mobile de récompenses familiales, écran de passation du téléphone à l'enfant" loading="lazy" width="1200" height="750">
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">Pépite</h3>
+              <span class="carte-projet-type">App mobile</span>
+            </div>
+            <p class="carte-projet-tagline">Une étoile gagnée mène à une vraie récompense, décidée en famille</p>
+            <p class="carte-projet-nature">Projet de studio</p>
+            <p class="carte-projet-note">Né d'un besoin à la maison : les tableaux de récompenses en carton finissent tous au fond d'un tiroir. J'ai fait le pari qu'une récompense décidée ensemble vaut mieux qu'un système de points imposé.</p>
+            <div class="carte-projet-meta">
+              <span>Studio Skøne · Produit maison, en développement</span>
+              <span class="carte-projet-lien">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-m" id="tarifs">
+    <div class="grille">
+      <p class="tete-bloc">Mes tarifs</p>
+      <h2 class="t-h1" style="--col: 3 / span 5">Des offres claires,<br>des résultats concrets.</h2>
+      <p class="tarifs-note" style="--col: 9 / span 4">Tous les projets démarrent par un appel gratuit de 30 minutes. Vous en repartez avec une fourchette et une recommandation, même si on ne travaille pas ensemble.<br>Pas de frais cachés. Pas de surprise en fin de mission.</p>
+
+      <aside class="tarifs-lancement" style="--col: 1 / -1">
+        <p class="pastille">Offre de lancement</p>
+        <p class="tarifs-lancement-texte">Le studio démarre. Sur les prochains projets, <strong>−30 %</strong> sur l'offre Fondation et l'offre Studio, en échange d'un témoignage et de l'autorisation de publier le projet.</p>
       </aside>
 
-      <div class="tarifs-grid">
-        <div class="tarif-card reveal">
-          <span class="tarif-label">Fondation, pour démarrer</span>
-          <div class="tarif-price">
-            <span class="tarif-amount">Dès 900€</span>
+      <div class="tarifs-grille" style="--col: 1 / -1">
+        <article class="carte-tarif" data-reveal>
+          <div class="carte-tarif-tete">
+            <h3 class="carte-tarif-nom">Fondation, pour démarrer</h3>
           </div>
-          <p class="tarif-desc">De quoi lancer vite un site soigné, sans exploser le budget.</p>
-          <div class="tarif-divider"></div>
-          <ul class="tarif-list">
-            <li>Landing page ou site vitrine d'une page</li>
-            <li>Design sur mesure</li>
-            <li>Responsive mobile-first</li>
-            <li>2 allers-retours inclus</li>
-            <li>Mise en ligne</li>
-            <li>Livraison en 1–2 semaines</li>
+          <p class="carte-tarif-prix">Dès 900€</p>
+          <p class="carte-tarif-resume">De quoi lancer vite un site soigné, sans exploser le budget.</p>
+          <ul class="carte-tarif-liste">
+              <li>Landing page ou site vitrine d'une page</li>
+              <li>Design sur mesure</li>
+              <li>Responsive mobile-first</li>
+              <li>2 allers-retours inclus</li>
+              <li>Mise en ligne</li>
+              <li>Livraison en 1–2 semaines</li>
           </ul>
-          <p class="tarif-vary">Ce qui fait bouger le prix : le nombre de pages, et si les textes et photos sont à créer.</p>
-          <a href="#contact" class="tarif-cta tarif-cta--ghost">Choisir cette offre</a>
-        </div>
-        <div class="tarif-card tarif-card--featured reveal">
-          <span class="tarif-popular-badge">Le plus choisi</span>
-          <span class="tarif-label">Studio, pour performer</span>
-          <div class="tarif-price">
-            <span class="tarif-amount">Dès 2 500€</span>
+          <p class="carte-tarif-note">Ce qui fait bouger le prix : le nombre de pages, et si les textes et photos sont à créer.</p>
+          <a class="bouton bouton--secondaire" href="#contact">Choisir cette offre</a>
+        </article>
+        <article class="carte-tarif carte-tarif--recommandee" data-reveal>
+          <div class="carte-tarif-tete">
+            <h3 class="carte-tarif-nom">Studio, pour performer</h3>
+            <span class="statut statut--nu">Le plus choisi</span>
           </div>
-          <p class="tarif-desc">Mon offre la plus demandée. Un produit complet, aussi soigné côté design que côté performance.</p>
-          <div class="tarif-divider"></div>
-          <ul class="tarif-list">
-            <li>Site vitrine multi-pages ou application web</li>
-            <li>E-commerce à partir de 3 000€</li>
-            <li>Architecture UX &amp; design sur mesure</li>
-            <li>Animations et interactions soignées</li>
-            <li>SEO technique intégré</li>
-            <li>Ajustements continus</li>
-            <li>Livraison en 4–6 semaines</li>
+          <p class="carte-tarif-prix">Dès 2 500€</p>
+          <p class="carte-tarif-resume">Mon offre la plus demandée. Un produit complet, aussi soigné côté design que côté performance.</p>
+          <ul class="carte-tarif-liste">
+              <li>Site vitrine multi-pages ou application web</li>
+              <li>E-commerce à partir de 3 000€</li>
+              <li>Architecture UX &amp; design sur mesure</li>
+              <li>Animations et interactions soignées</li>
+              <li>SEO technique intégré</li>
+              <li>Ajustements continus</li>
+              <li>Livraison en 4–6 semaines</li>
           </ul>
-          <p class="tarif-vary">Ce qui fait bouger le prix : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer.</p>
-          <a href="#contact" class="tarif-cta tarif-cta--primary">Choisir cette offre →</a>
-        </div>
-        <div class="tarif-card reveal">
-          <span class="tarif-label">Sur mesure, pour aller plus loin</span>
-          <div class="tarif-price">
-            <span class="tarif-amount">Sur devis</span>
+          <p class="carte-tarif-note">Ce qui fait bouger le prix : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer.</p>
+          <a class="bouton bouton--principal" href="#contact">Choisir cette offre<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="carte-tarif" data-reveal>
+          <div class="carte-tarif-tete">
+            <h3 class="carte-tarif-nom">Sur mesure, pour aller plus loin</h3>
           </div>
-          <p class="tarif-desc">Pour les projets plus gros, qui demandent un vrai cadrage produit et un suivi rapproché.</p>
-          <div class="tarif-divider"></div>
-          <ul class="tarif-list">
-            <li>Application mobile, SaaS ou plateforme complexe</li>
-            <li>Périmètre défini ensemble</li>
-            <li>Accompagnement dédié</li>
-            <li>Suivi régulier</li>
-            <li>Délais et livrables adaptés</li>
+          <p class="carte-tarif-prix">Sur devis</p>
+          <p class="carte-tarif-resume">Pour les projets plus gros, qui demandent un vrai cadrage produit et un suivi rapproché.</p>
+          <ul class="carte-tarif-liste">
+              <li>Application mobile, SaaS ou plateforme complexe</li>
+              <li>Périmètre défini ensemble</li>
+              <li>Accompagnement dédié</li>
+              <li>Suivi régulier</li>
+              <li>Délais et livrables adaptés</li>
           </ul>
-          <p class="tarif-vary">Ce qui fait bouger le prix : le périmètre de la version 1, les comptes utilisateurs et les paiements.</p>
-          <a href="#contact" class="tarif-cta tarif-cta--ghost">Demander un devis</a>
-        </div>
-      </div>
-      <p class="tarifs-footnote reveal">Besoin de design seul, sans développement ? <a href="#contact">À partir de 600€</a></p>
-
-      <div class="tarifs-truth reveal">
-        <div class="truth-item">
-          <h3 class="truth-title">Ce qui n'est pas compris</h3>
-          <p class="truth-text">Le nom de domaine (environ 12&nbsp;€/an) et l'hébergement (de 0 à 15&nbsp;€/mois selon le projet). Vous payez ces deux postes en direct, à votre nom. Je ne prends pas de marge dessus.</p>
-        </div>
-        <div class="truth-item">
-          <h3 class="truth-title">Comment on paie</h3>
-          <p class="truth-text">En trois fois, sans frais : 30&nbsp;% à la commande, 30&nbsp;% à la validation des maquettes, 40&nbsp;% à la mise en ligne. Le site, le code et tous les accès vous appartiennent, sans abonnement.</p>
-        </div>
-        <div class="truth-item">
-          <h3 class="truth-title">Pour situer</h3>
-          <p class="truth-text">Une agence facture généralement le même site entre 3&nbsp;500 et 8&nbsp;000&nbsp;€, avec un chef de projet à payer entre vous et la personne qui travaille. Une plateforme à 29&nbsp;€/mois vous coûte 350&nbsp;€ par an, à vie, pour un template que trois de vos concurrents utilisent déjà.</p>
-        </div>
+          <p class="carte-tarif-note">Ce qui fait bouger le prix : le périmètre de la version 1, les comptes utilisateurs et les paiements.</p>
+          <a class="bouton bouton--secondaire" href="#contact">Demander un devis</a>
+        </article>
       </div>
 
-      <div class="estimator reveal" id="estimator">
-        <div class="estimator-head">
-          <span class="estimator-eyebrow">Estimation · 30 secondes</span>
-          <h3 class="estimator-title">Pas sûr de l'offre qui vous correspond ?</h3>
-          <p class="estimator-sub">Trois questions, une fourchette. Sans engagement.</p>
+      <p class="tarifs-pied" style="--col: 1 / span 6">Besoin de design seul, sans développement ? <a class="lien" href="#contact">À partir de 600€</a></p>
+
+      <div class="verites" style="--col: 1 / -1">
+        <div class="verite">
+          <h3 class="verite-titre">Ce qui n'est pas compris</h3>
+          <p class="verite-texte">Le nom de domaine (environ 12&nbsp;€/an) et l'hébergement (de 0 à 15&nbsp;€/mois selon le projet). Vous payez ces deux postes en direct, à votre nom. Je ne prends pas de marge dessus.</p>
         </div>
-
-        <form class="estimator-form" id="estimatorForm">
-          <fieldset class="estimator-q" data-question="type">
-            <legend class="estimator-legend">Quel type de site ?</legend>
-            <div class="estimator-options">
-              <label class="estimator-opt"><input type="radio" name="type" value="vitrine" required><span>Vitrine</span></label>
-              <label class="estimator-opt"><input type="radio" name="type" value="vitrine-plus"><span>Vitrine avec réservation ou devis</span></label>
-              <label class="estimator-opt"><input type="radio" name="type" value="boutique"><span>Boutique en ligne</span></label>
-              <label class="estimator-opt"><input type="radio" name="type" value="application"><span>Application</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset class="estimator-q" data-question="size">
-            <legend class="estimator-legend">Quelle taille ?</legend>
-            <div class="estimator-options">
-              <label class="estimator-opt"><input type="radio" name="size" value="1" required><span>Une page</span></label>
-              <label class="estimator-opt"><input type="radio" name="size" value="2-5"><span>2 à 5 pages</span></label>
-              <label class="estimator-opt"><input type="radio" name="size" value="6-12"><span>6 à 12 pages</span></label>
-              <label class="estimator-opt"><input type="radio" name="size" value="inconnu"><span>Je ne sais pas encore</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset class="estimator-q" data-question="content">
-            <legend class="estimator-legend">Textes et photos prêts ?</legend>
-            <div class="estimator-options">
-              <label class="estimator-opt"><input type="radio" name="content" value="pret" required><span>Oui</span></label>
-              <label class="estimator-opt"><input type="radio" name="content" value="partiel"><span>En partie</span></label>
-              <label class="estimator-opt"><input type="radio" name="content" value="a-creer"><span>Non, à créer</span></label>
-            </div>
-          </fieldset>
-        </form>
-
-        <div class="estimator-result" id="estimatorResult" aria-live="polite">
-          <div class="estimator-result-inner" hidden>
-            <span class="estimator-result-label">Votre projet ressemble à</span>
-            <p class="estimator-offer" id="estimatorOffer"></p>
-            <p class="estimator-range" id="estimatorRange"></p>
-            <p class="estimator-delay" id="estimatorDelay"></p>
-            <a href="#contact" class="estimator-cta" id="estimatorCta">Discuter de ce projet</a>
-            <p class="estimator-disclaimer">Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.</p>
-          </div>
+        <div class="verite">
+          <h3 class="verite-titre">Comment on paie</h3>
+          <p class="verite-texte">En trois fois, sans frais : 30&nbsp;% à la commande, 30&nbsp;% à la validation des maquettes, 40&nbsp;% à la mise en ligne. Le site, le code et tous les accès vous appartiennent, sans abonnement.</p>
+        </div>
+        <div class="verite">
+          <h3 class="verite-titre">Pour situer</h3>
+          <p class="verite-texte">Une agence facture généralement le même site entre 3&nbsp;500 et 8&nbsp;000&nbsp;€, avec un chef de projet à payer entre vous et la personne qui travaille. Une plateforme à 29&nbsp;€/mois vous coûte 350&nbsp;€ par an, à vie, pour un template que trois de vos concurrents utilisent déjà.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8. QUESTIONS FRÉQUENTES -->
-  <section id="faq">
-    <div class="container">
-      <div class="faq-inner">
+  <section class="section-s" id="estimator">
+    <div class="grille">
+      <p class="tete-bloc">Estimation · 30 secondes</p>
+      <div class="estimateur-tete" style="--col: 3 / span 7">
+        <h2 class="t-h2">Pas sûr de l'offre qui vous correspond ?</h2>
+        <p class="t-corps-l">Trois questions, une fourchette. Sans engagement.</p>
+      </div>
 
-        <div class="faq-head">
-          <p class="section-label reveal">Questions fréquentes</p>
-          <h2 class="faq-title reveal">Les questions qu'on me pose<br>avant de <span class="text-accent">signer.</span></h2>
-          <p class="faq-head-note reveal">Une question qui n'est pas là ?<br>Écrivez-moi, je réponds moi-même sous 24 h.</p>
-          <a href="mailto:contact@studioskone.com" class="faq-contact-link reveal">Écrire au studio</a>
+      <form class="estimateur-form" id="estimatorForm" style="--col: 3 / span 9">
+        <fieldset class="estimateur-q" data-question="type">
+          <legend class="estimateur-legende">Quel type de site ?</legend>
+          <div class="estimateur-choix">
+            <label class="estimateur-option">
+              <input type="radio" name="type" value="vitrine" required>
+              <span>Vitrine</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="type" value="vitrine-plus">
+              <span>Vitrine avec réservation ou devis</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="type" value="boutique">
+              <span>Boutique en ligne</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="type" value="application">
+              <span>Application</span>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="estimateur-q" data-question="size">
+          <legend class="estimateur-legende">Quelle taille ?</legend>
+          <div class="estimateur-choix">
+            <label class="estimateur-option">
+              <input type="radio" name="size" value="1" required>
+              <span>Une page</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="size" value="2-5">
+              <span>2 à 5 pages</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="size" value="6-12">
+              <span>6 à 12 pages</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="size" value="inconnu">
+              <span>Je ne sais pas encore</span>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="estimateur-q" data-question="content">
+          <legend class="estimateur-legende">Textes et photos prêts ?</legend>
+          <div class="estimateur-choix">
+            <label class="estimateur-option">
+              <input type="radio" name="content" value="pret" required>
+              <span>Oui</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="content" value="partiel">
+              <span>En partie</span>
+            </label>
+            <label class="estimateur-option">
+              <input type="radio" name="content" value="a-creer">
+              <span>Non, à créer</span>
+            </label>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="estimateur-resultat-zone" id="estimatorResult" aria-live="polite" style="--col: 3 / span 8">
+        <div class="estimateur-resultat" hidden>
+          <div class="estimateur-resultat-corps">
+            <span class="t-petit t-secondaire">Votre projet ressemble à</span>
+            <p class="carte-tarif-nom" id="estimatorOffer"></p>
+            <p class="estimateur-prix" id="estimatorRange"></p>
+            <p class="estimateur-mention" id="estimatorDelay"></p>
+          </div>
+          <div class="estimateur-resultat-actions">
+            <a class="bouton bouton--principal" href="#contact" id="estimatorCta">Discuter de ce projet</a>
+          </div>
         </div>
-
-        <div class="faq-list" role="list">
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">01</span>
-              <span class="faq-q-text">Combien coûte un site chez vous ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Un site vitrine démarre à 900 €, un site multi-pages ou une application web à 2 500 €, une boutique en ligne à 3 000 €. Le prix dépend surtout de trois choses : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer. L'estimateur plus haut vous donne une fourchette en 30 secondes.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">02</span>
-              <span class="faq-q-text">Combien de temps ça prend ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Une à deux semaines pour une landing page, quatre à six semaines pour un site complet ou une application web. Le délai est écrit sur le devis. Si je le dépasse de mon fait, vous ne payez pas le dépassement.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">03</span>
-              <span class="faq-q-text">Qu'est-ce que j'ai à fournir ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Une heure d'échange au démarrage, et 30 minutes de retours sur les maquettes. Le reste, je m'en occupe. Si vous avez des textes et des photos, tant mieux. Si vous n'en avez pas, c'est prévu : je rédige les textes et j'organise les visuels.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">04</span>
-              <span class="faq-q-text">Le site m'appartient vraiment ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Oui, entièrement. Le code, le design, le nom de domaine, les accès à l'hébergement : tout est à votre nom, dès la mise en ligne. Vous n'êtes lié à moi par aucun abonnement. Si vous voulez confier la suite à quelqu'un d'autre un jour, vous le pouvez sans rien me demander.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">05</span>
-              <span class="faq-q-text">Je pourrai modifier mon site moi-même ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Oui. Selon le projet, je mets en place une interface d'administration simple pour changer vos textes, vos photos, vos horaires ou vos tarifs. Je vous forme en visio à la mise en ligne, et je vous laisse un guide écrit. Si vous préférez me confier les modifications, c'est possible aussi, à la demande.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">06</span>
-              <span class="faq-q-text">Pourquoi pas Wix, Squarespace ou un site à 400 € ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Parce que ce sont deux besoins différents. Une plateforme vous donne un template que d'autres utilisent, un abonnement à vie, et un site que vous ne pourrez pas emporter ailleurs. C'est une solution honnête si votre site est une carte de visite. Si votre site doit vous apporter des clients, vous faire sortir sur Google et vous ressembler, ça ne suffira pas. Je vous le dirai franchement pendant l'appel si votre besoin relève plutôt de la plateforme.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">07</span>
-              <span class="faq-q-text">Le référencement est-il inclus ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Le référencement technique, oui : structure, vitesse, balises, données structurées, version mobile, indexation. C'est la base sans laquelle rien ne remonte. Le référencement éditorial, celui qui vous fait ranker sur des requêtes précises, demande un travail dans la durée. On peut le prévoir en accompagnement mensuel si vous le souhaitez.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">08</span>
-              <span class="faq-q-text">Combien d'allers-retours sont inclus ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Deux séries de retours sur l'offre Fondation, des ajustements continus sur l'offre Studio. En pratique je n'ai jamais compté, parce que la validation des maquettes avant développement évite les allers-retours coûteux. C'est tout l'intérêt de valider le dessin avant de construire.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">09</span>
-              <span class="faq-q-text">Que se passe-t-il après la mise en ligne ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Un mois de suivi est inclus sur tous les projets : je corrige tout ce qui ne fonctionne pas comme prévu, sans facturer. Au-delà, je reste joignable à la demande, ou avec un forfait de maintenance mensuel si vous préférez ne pas y penser.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">10</span>
-              <span class="faq-q-text">Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Question légitime, et c'est pour ça que tout est à votre nom dès le départ : domaine, hébergement, code, accès. Je travaille avec des technologies standards et documentées, pas avec un système maison que personne d'autre ne saurait reprendre. N'importe quel développeur peut prendre la suite. C'est exactement ce qui n'est pas vrai avec les plateformes propriétaires.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">11</span>
-              <span class="faq-q-text">Le studio est récent. Pourquoi vous faire confiance ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Studio Skøne a ouvert en 2026, et je ne vais pas vous inventer dix ans d'ancienneté. Ce que je peux vous proposer à la place : une maquette complète avant que vous n'engagiez le budget de développement, un devis ferme, un délai écrit, des tarifs de lancement, et une disponibilité que je n'aurai plus dans deux ans. Regardez les projets : ils vous montrent comment je réfléchis, ce qui est plus utile qu'un compteur de clients.</div>
-            </div>
-          </div>
-
-          <div class="faq-item reveal" role="listitem">
-            <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">12</span>
-              <span class="faq-q-text">J'ai déjà un site, faut-il tout refaire ?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer" hidden>
-              <div class="faq-answer-inner">Pas forcément. Je regarde d'abord ce qui existe. Parfois une refonte du design et de la structure suffit et coûte moitié moins qu'un site neuf. Parfois le socle est trop ancien et repartir est plus économique. Je vous dis lequel des deux pendant l'appel gratuit, même si la réponse est « gardez votre site actuel ».</div>
-            </div>
-          </div>
-
-        </div>
+        <p class="estimateur-mention estimateur-disclaimer">Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.</p>
       </div>
     </div>
   </section>
 
-  <!-- 9. GARANTIES -->
-  <section id="garanties" class="has-grain">
-    <div class="container">
-      <div class="garanties-head">
-        <p class="section-label reveal">Mes engagements</p>
-        <h2 class="garanties-title reveal">Ce sur quoi <span class="text-accent">je m'engage.</span></h2>
+  <section class="section-m" id="faq">
+    <div class="grille">
+      <p class="tete-bloc">Questions fréquentes</p>
+      <h2 class="t-h1" style="--col: 3 / span 6">Les questions qu'on me pose<br>avant de signer.</h2>
+      <div class="faq-relance" style="--col: 10 / span 3">
+        <p>Une question qui n'est pas là ?<br>Écrivez-moi, je réponds moi-même sous 24 h.</p>
+        <a class="lien" href="mailto:contact@studioskone.com">Écrire au studio</a>
       </div>
-      <ul class="garanties-grid" role="list">
-        <li class="garantie reveal">
-          <span class="garantie-num" aria-hidden="true">01</span>
-          <h3 class="garantie-title">Devis ferme</h3>
-          <p class="garantie-text">Le prix annoncé est le prix payé. Si le périmètre change, on en parle avant, jamais après.</p>
+      <div class="faq" style="--col: 3 / span 8">
+          <button class="faq-question" type="button"><span class="faq-numero">01</span>Combien coûte un site chez vous ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Un site vitrine démarre à 900 €, un site multi-pages ou une application web à 2 500 €, une boutique en ligne à 3 000 €. Le prix dépend surtout de trois choses : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer. L'estimateur plus haut vous donne une fourchette en 30 secondes.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">02</span>Combien de temps ça prend ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Une à deux semaines pour une landing page, quatre à six semaines pour un site complet ou une application web. Le délai est écrit sur le devis. Si je le dépasse de mon fait, vous ne payez pas le dépassement.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">03</span>Qu'est-ce que j'ai à fournir ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Une heure d'échange au démarrage, et 30 minutes de retours sur les maquettes. Le reste, je m'en occupe. Si vous avez des textes et des photos, tant mieux. Si vous n'en avez pas, c'est prévu : je rédige les textes et j'organise les visuels.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">04</span>Le site m'appartient vraiment ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Oui, entièrement. Le code, le design, le nom de domaine, les accès à l'hébergement : tout est à votre nom, dès la mise en ligne. Vous n'êtes lié à moi par aucun abonnement. Si vous voulez confier la suite à quelqu'un d'autre un jour, vous le pouvez sans rien me demander.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">05</span>Je pourrai modifier mon site moi-même ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Oui. Selon le projet, je mets en place une interface d'administration simple pour changer vos textes, vos photos, vos horaires ou vos tarifs. Je vous forme en visio à la mise en ligne, et je vous laisse un guide écrit. Si vous préférez me confier les modifications, c'est possible aussi, à la demande.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">06</span>Pourquoi pas Wix, Squarespace ou un site à 400 € ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Parce que ce sont deux besoins différents. Une plateforme vous donne un template que d'autres utilisent, un abonnement à vie, et un site que vous ne pourrez pas emporter ailleurs. C'est une solution honnête si votre site est une carte de visite. Si votre site doit vous apporter des clients, vous faire sortir sur Google et vous ressembler, ça ne suffira pas. Je vous le dirai franchement pendant l'appel si votre besoin relève plutôt de la plateforme.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">07</span>Le référencement est-il inclus ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Le référencement technique, oui : structure, vitesse, balises, données structurées, version mobile, indexation. C'est la base sans laquelle rien ne remonte. Le référencement éditorial, celui qui vous fait ranker sur des requêtes précises, demande un travail dans la durée. On peut le prévoir en accompagnement mensuel si vous le souhaitez.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">08</span>Combien d'allers-retours sont inclus ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Deux séries de retours sur l'offre Fondation, des ajustements continus sur l'offre Studio. En pratique je n'ai jamais compté, parce que la validation des maquettes avant développement évite les allers-retours coûteux. C'est tout l'intérêt de valider le dessin avant de construire.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">09</span>Que se passe-t-il après la mise en ligne ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Un mois de suivi est inclus sur tous les projets : je corrige tout ce qui ne fonctionne pas comme prévu, sans facturer. Au-delà, je reste joignable à la demande, ou avec un forfait de maintenance mensuel si vous préférez ne pas y penser.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">10</span>Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Question légitime, et c'est pour ça que tout est à votre nom dès le départ : domaine, hébergement, code, accès. Je travaille avec des technologies standards et documentées, pas avec un système maison que personne d'autre ne saurait reprendre. N'importe quel développeur peut prendre la suite. C'est exactement ce qui n'est pas vrai avec les plateformes propriétaires.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">11</span>Le studio est récent. Pourquoi vous faire confiance ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Studio Skøne a ouvert en 2026, et je ne vais pas vous inventer dix ans d'ancienneté. Ce que je peux vous proposer à la place : une maquette complète avant que vous n'engagiez le budget de développement, un devis ferme, un délai écrit, des tarifs de lancement, et une disponibilité que je n'aurai plus dans deux ans. Regardez les projets : ils vous montrent comment je réfléchis, ce qui est plus utile qu'un compteur de clients.</p></div>
+          <button class="faq-question" type="button"><span class="faq-numero">12</span>J'ai déjà un site, faut-il tout refaire ?<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>Pas forcément. Je regarde d'abord ce qui existe. Parfois une refonte du design et de la structure suffit et coûte moitié moins qu'un site neuf. Parfois le socle est trop ancien et repartir est plus économique. Je vous dis lequel des deux pendant l'appel gratuit, même si la réponse est « gardez votre site actuel ».</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-m" id="garanties">
+    <div class="grille">
+      <p class="tete-bloc">Mes engagements</p>
+      <h2 class="t-h1" style="--col: 3 / span 8">Ce sur quoi je m'engage.</h2>
+      <ul class="engagements" style="--col: 1 / -1">
+        <li class="engagement" data-reveal>
+          <span class="engagement-numero">01</span>
+          <h3 class="engagement-titre">Devis ferme</h3>
+          <p class="engagement-texte">Le prix annoncé est le prix payé. Si le périmètre change, on en parle avant, jamais après.</p>
         </li>
-        <li class="garantie reveal">
-          <span class="garantie-num" aria-hidden="true">02</span>
-          <h3 class="garantie-title">Maquette avant développement</h3>
-          <p class="garantie-text">Vous voyez et validez le résultat avant qu'une seule ligne de code ne soit écrite. Si la direction ne vous convient pas, on s'arrête là.</p>
+        <li class="engagement" data-reveal>
+          <span class="engagement-numero">02</span>
+          <h3 class="engagement-titre">Maquette avant développement</h3>
+          <p class="engagement-texte">Vous voyez et validez le résultat avant qu'une seule ligne de code ne soit écrite. Si la direction ne vous convient pas, on s'arrête là.</p>
         </li>
-        <li class="garantie reveal">
-          <span class="garantie-num" aria-hidden="true">03</span>
-          <h3 class="garantie-title">Délai écrit</h3>
-          <p class="garantie-text">Le délai figure sur le devis. Un retard de mon fait ne vous est pas facturé.</p>
+        <li class="engagement" data-reveal>
+          <span class="engagement-numero">03</span>
+          <h3 class="engagement-titre">Délai écrit</h3>
+          <p class="engagement-texte">Le délai figure sur le devis. Un retard de mon fait ne vous est pas facturé.</p>
         </li>
-        <li class="garantie reveal">
-          <span class="garantie-num" aria-hidden="true">04</span>
-          <h3 class="garantie-title">Tout est à vous</h3>
-          <p class="garantie-text">Code, design, domaine, hébergement, accès. À votre nom, sans abonnement, sans dépendance.</p>
+        <li class="engagement" data-reveal>
+          <span class="engagement-numero">04</span>
+          <h3 class="engagement-titre">Tout est à vous</h3>
+          <p class="engagement-texte">Code, design, domaine, hébergement, accès. À votre nom, sans abonnement, sans dépendance.</p>
         </li>
-        <li class="garantie reveal">
-          <span class="garantie-num" aria-hidden="true">05</span>
-          <h3 class="garantie-title">Un mois de suivi inclus</h3>
-          <p class="garantie-text">Après la mise en ligne, je corrige ce qui doit l'être, sans facturer.</p>
+        <li class="engagement" data-reveal>
+          <span class="engagement-numero">05</span>
+          <h3 class="engagement-titre">Un mois de suivi inclus</h3>
+          <p class="engagement-texte">Après la mise en ligne, je corrige ce qui doit l'être, sans facturer.</p>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- 10. TRAVAILLONS ENSEMBLE · Contact (formulaire multi-étapes · ne pas modifier) -->
-  <section id="contact" class="has-grain" data-deploy>
-    <div class="contact-glow" aria-hidden="true"></div>
-    <div class="container contact-inner">
-      <p class="section-label contact-label reveal">Travaillons ensemble</p>
-      <h2 class="contact-title reveal">
-        Vingt minutes pour savoir<br>ce que vaut <em>votre projet.</em>
-      </h2>
-      <div class="contact-lead reveal">
+  <section class="section-m" id="contact">
+    <div class="grille">
+      <p class="tete-bloc">Travaillons ensemble</p>
+      <h2 class="t-h1" style="--col: 3 / span 8">Vingt minutes pour savoir<br>ce que vaut votre projet.</h2>
+      <div class="contact-lead" style="--col: 3 / span 6">
         <p>On parle de votre activité, de ce que vous attendez du site, et de votre budget. Je vous dis ce que je ferais, ce que ça coûte et combien de temps ça prend.</p>
         <p>Vous repartez avec une recommandation claire, même si vous décidez de ne pas travailler avec moi. Pas de relance commerciale, pas de blabla.</p>
       </div>
-      <!-- ContactMultiStepForm monte ici via contact-form.ts -->
-      <div id="contact-form-root" class="reveal"></div>
+      <div id="contact-form-root" style="--col: 1 / -1"></div>
     </div>
   </section>
+  </main>
 
-  <!-- FOOTER -->
-  <footer id="footer" data-deploy>
-    <div class="container">
-
-      <!-- CTA closing -->
-      <div class="footer-cta">
-        <div class="footer-cta-body">
-          <span class="footer-cta-status">
-            <span class="footer-cta-dot" aria-hidden="true"></span>
-            Réponse sous 24h
-          </span>
-          <span class="footer-cta-text">Disponible pour de nouveaux projets.</span>
+  <footer class="pied" id="footer">
+    <div class="grille">
+      <div class="negatif bloc-negatif bloc-negatif--pleine-largeur" style="--col: 1 / -1">
+        <div class="colonnes">
+          <p class="statut" style="--col: 1 / span 6">Disponible pour de nouveaux projets.</p>
+          <p class="bloc-negatif-mention" style="--col: 9 / span 4">Réponse sous 24h</p>
+          <a class="bouton bouton--principal" style="--col: 1 / span 4; margin-top: 40px" href="#contact">Parlons-en<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
-        <a href="#contact" class="footer-cta-link">
-          <span class="footer-cta-circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </span>
-          Parlons-en
-        </a>
       </div>
 
-      <!-- Grille principale -->
-      <div class="footer-grid">
+      <p class="pied-intro" style="margin-top: var(--spacing-section-s)">Studio Skøne — création de sites internet, boutiques en ligne et applications, à Nantes et dans toute la France. Conçus et développés par la même personne, du croquis à la mise en ligne.</p>
+      <p class="pied-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Basé à Nantes · J'interviens à Carquefou, La Chapelle-sur-Erdre, Sucé-sur-Erdre, Nort-sur-Erdre, Treillières, Ancenis — et partout en France en visio.</p>
 
-        <!-- Colonne brand -->
-        <div class="footer-brand">
-          <a href="#" class="footer-logo">
-            <img src="/logo_skone_footer.svg" alt="Studio Skøne" class="footer-logo-img" width="103" height="26">
-          </a>
-          <p class="footer-tagline">Studio Skøne — création de sites internet, boutiques en ligne et applications, à Nantes et dans toute la France. Conçus et développés par la même personne, du croquis à la mise en ligne.</p>
-          <p class="footer-location">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            Basé à Nantes · J'interviens à Carquefou, La Chapelle-sur-Erdre, Sucé-sur-Erdre, Nort-sur-Erdre, Treillières, Ancenis — et partout en France en visio.
-          </p>
-        </div>
-
-        <!-- Navigation -->
-        <nav class="footer-nav" aria-label="Navigation secondaire">
-          <span class="footer-nav-title">Le studio</span>
-          <a href="#approach">À propos</a>
-          <a href="#work">Projets</a>
-          <a href="#tarifs">Tarifs</a>
-          <a href="#contact">Contact</a>
+        <nav class="pied-colonne" aria-label="Navigation secondaire">
+          <span class="pied-titre">Le studio</span>
+          <div class="pied-liste">
+            <a href="/#approach">À propos</a>
+            <a href="/#work">Projets</a>
+            <a href="/#tarifs">Tarifs</a>
+            <a href="/#contact">Contact</a>
+          </div>
+        </nav>
+        <nav class="pied-colonne" aria-label="Prestations">
+          <span class="pied-titre">Prestations</span>
+          <div class="pied-liste">
+            <a href="/creation-site-internet-nantes">Création de site internet</a>
+            <a href="/creation-site-ecommerce-nantes">Site e-commerce</a>
+            <a href="/creation-application-mobile">Application mobile</a>
+            <a href="/refonte-site-internet">Refonte de site</a>
+            <a href="/creation-site-internet-artisan">Site internet pour artisan</a>
+          </div>
         </nav>
 
-        <!-- Prestations -->
-        <nav class="footer-nav" aria-label="Prestations">
-          <span class="footer-nav-title">Prestations</span>
-          <a href="/creation-site-internet-nantes">Création de site internet</a>
-          <a href="/creation-site-ecommerce-nantes">Site e-commerce</a>
-          <a href="/creation-application-mobile">Application mobile</a>
-          <a href="/refonte-site-internet">Refonte de site</a>
-          <a href="/creation-site-internet-artisan">Site internet pour artisan</a>
-        </nav>
-
-        <!-- Contact -->
-        <div class="footer-contact">
-          <a href="mailto:contact@studioskone.com" class="footer-email">contact@studioskone.com</a>
-          <a href="tel:+33768084752" class="footer-phone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-            07 68 08 47 52
-          </a>
-          <a href="https://www.instagram.com/studio.skone/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram Studio Skøne">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-            </svg>
-          </a>
-          <a href="https://maps.google.com/?cid=17161741996888223031" target="_blank" rel="noopener noreferrer" class="footer-google">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-            Voir la fiche Google
-          </a>
+        <div class="pied-colonne" style="--col: 11 / span 2">
+          <span class="pied-titre">Contact</span>
+          <div class="pied-liste">
+            <a href="mailto:contact@studioskone.com">contact@studioskone.com</a>
+            <a href="tel:+33768084752"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 07 68 08 47 52</a>
+            <a href="https://www.instagram.com/studio.skone/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram</a>
+            <a href="https://maps.google.com/?cid=17161741996888223031" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Voir la fiche Google</a>
+          </div>
         </div>
 
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <!-- Barre basse -->
-      <div class="footer-bottom">
-        <span class="footer-copy">&copy; 2026 Studio Skøne. Tous droits réservés.</span>
-        <div class="footer-legal">
-          <a href="/mentions-legales">Mentions légales</a>
-          <a href="/politique-de-confidentialite">Politique de confidentialité</a>
-          <a href="/cgu">CGU</a>
-          <a href="/cgv">CGV</a>
+      <div class="pied-bas">
+        <span>&copy; 2026 Studio Skøne. Tous droits réservés.</span>
+        <div class="pied-bas-liens">
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+            <a href="/cgu">CGU</a>
+            <a href="/cgv">CGV</a>
         </div>
       </div>
-
     </div>
   </footer>
 
-  <button id="backToTop" class="back-to-top" aria-label="Remonter en haut de page">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <polyline points="18 15 12 9 6 15"/>
-    </svg>
-  </button>
-
-  <!-- COOKIE BANNER -->
-  <div id="cookieBanner" class="cookie-banner" role="dialog" aria-modal="false" aria-label="Gestion des cookies" aria-hidden="true">
-    <div class="cookie-inner">
-      <div class="cookie-text">
-        <p class="cookie-title">Cookies</p>
-        <p class="cookie-desc">Deux cookies de mesure d'audience, rien de plus. Vous pouvez refuser, le site fonctionne pareil.</p>
-      </div>
-      <div class="cookie-actions">
-        <button id="cookieDecline" class="cookie-btn cookie-btn--ghost">Refuser</button>
-        <button id="cookieAccept" class="cookie-btn cookie-btn--primary">Accepter</button>
-      </div>
+  <div class="cookies" id="cookieBanner" role="dialog" aria-modal="false" aria-label="Gestion des cookies" aria-hidden="true">
+    <p class="cookies-titre">Cookies</p>
+    <p class="cookies-texte">Deux cookies de mesure d'audience, rien de plus. Vous pouvez refuser, le site fonctionne pareil.</p>
+    <div class="cookies-actions">
+      <button class="bouton bouton--secondaire" id="cookieDecline" type="button">Refuser</button>
+      <button class="bouton bouton--principal" id="cookieAccept" type="button">Accepter</button>
     </div>
   </div>
 
-  <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/accueil.ts"></script>
 </body>
 </html>

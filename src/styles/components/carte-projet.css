@@ -59,3 +59,37 @@
   color: var(--color-gris-chaud);
   white-space: nowrap;
 }
+
+/* La nature du projet — client, studio ou exercice — et la note qui
+   l'explique. L'ancienne page les portait ; les maquettes ne les montrent
+   pas, mais le copy ne se supprime pas au motif qu'un écran ne l'avait
+   pas dessiné. */
+.carte-projet-nature {
+  font-size: var(--text-petit);
+  font-weight: 500;
+  padding-top: 12px;
+  border-top: 1px solid var(--filet-leger);
+}
+
+.carte-projet-note {
+  margin-top: 8px;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--color-gris-chaud);
+}
+
+.carte-projet-meta {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.carte-projet-lien {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-encre);
+  font-weight: 500;
+  white-space: nowrap;
+}

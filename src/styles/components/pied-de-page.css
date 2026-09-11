@@ -30,7 +30,19 @@
   border-bottom: 1px solid var(--filet-leger);
 }
 
-.pied-liste { display: flex; flex-direction: column; gap: 8px; font-size: 0.9375rem; }
+.pied-liste { display: flex; flex-direction: column; font-size: 0.9375rem; }
+
+/* Une ligne de 0.9375 rem fait 23 px de haut : un pixel sous le minimum
+   qu'une cible doit mesurer. Le padding vertical la porte à 31 px et
+   remplace l'écart entre les liens, qui n'est donc pas perdu. */
+.pied-liste a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 4px;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+.pied-liste a:hover { color: var(--color-terracotta-profond); }
 
 .pied-bas {
   --col: 1 / -1;
@@ -45,4 +57,18 @@
   color: var(--color-gris-chaud);
 }
 
-.pied-bas-liens { display: flex; flex-wrap: wrap; gap: 20px; }
+.pied-bas-liens { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+/* « CGU » et « CGV » sont courts : sans padding, leur cible tombe à
+   21 × 29 px. Le minimum est de 24 dans les deux sens. */
+.pied-bas-liens a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 24px;
+  padding-block: 4px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+.pied-bas-liens a:hover { color: var(--color-terracotta-profond); }

@@ -55,3 +55,18 @@
   line-height: var(--leading-corps);
   color: var(--color-gris-chaud);
 }
+
+/* Le numéro de la question. Les maquettes ne le dessinent pas, mais il est
+   du texte visible de l'ancienne page : il reste, en donnée mono et en
+   retrait, là où il n'encombre pas la question. */
+.faq-numero {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  color: var(--color-gris-chaud);
+  margin-right: 16px;
+  flex: none;
+}
+
+/* La question prend toute la place restante ; le signe reste à droite. */
+.faq-question { justify-content: flex-start; }
+.faq-question .faq-signe { margin-left: auto; }

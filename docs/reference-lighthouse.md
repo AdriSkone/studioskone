@@ -51,3 +51,40 @@ npx --yes lighthouse@12 "<url>" --preset=perf --form-factor=mobile \
   --output=json --output-path=lh.json \
   --chrome-flags="--headless=new --no-sandbox" --quiet
 ```
+
+---
+
+## Après la phase 3 — accueil refaite
+
+Relevé le 11 septembre 2026, même commande, mais **en local** (`vite preview`)
+et non en production : la nouvelle accueil n'est pas déployée. Les chiffres
+ne sont donc pas comparables terme à terme à la référence ci-dessus — un
+serveur local n'a ni la latence ni le CDN de Vercel. Ils disent une
+direction, pas un résultat.
+
+| Page | Perf | A11y | Bonnes pratiques | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| `/` (local) | **97** | **100** | 100 | 100 | 2,4 s | 0 |
+
+Pour mémoire, la même page en production avant refonte : 77 / 94 / 100 / 100,
+LCP 3,8 s.
+
+Les deux échecs d'accessibilité de la référence ont disparu :
+
+- `color-contrast` — la nouvelle palette le règle par construction. Vérifié
+  aussi hors Lighthouse, sur les styles calculés de toute la page : zéro
+  paire sous son seuil.
+- `target-size` — trois corrections ont été nécessaires, toutes mesurées :
+  les liens de texte (21 px), les liens du pied (23 px), « CGU » et « CGV »
+  (21 × 29 px). Le minimum est de 24 px dans les deux sens.
+
+Un troisième échec est apparu en cours de route, `label-content-name-mismatch`,
+sur les deux boutons du formulaire de contact. Il préexistait à la refonte et
+restait masqué par les autres. Leur `aria-label` ne reprenait pas leur texte
+visible — et mentait en plus, puisque le libellé passe de « Continuer » à
+« Envoyer » à la dernière étape pendant que l'`aria-label` restait figé sur
+« Étape suivante ». Les deux ont été retirés : le texte visible est un nom
+accessible exact, et il suit le changement.
+
+**À refaire en production** une fois la branche déployée en preview, avec les
+pages projet et service, qui n'ont pas encore été refaites.

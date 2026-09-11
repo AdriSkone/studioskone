@@ -5,6 +5,10 @@
    profond à 2.07, le gris chaud à 2.73.
    ============================================================ */
 
+/* .bloc-negatif implique .negatif. Sans ça, il fallait penser à poser les
+   deux classes : le bloc devenait sombre mais les boutons, les liens et les
+   filets gardaient leurs couleurs de fond clair — un bouton encre sur un
+   fond encre, illisible et invisible. */
 .bloc-negatif {
   padding-block: var(--spacing-section-s);
   padding-inline: var(--grille-marge);

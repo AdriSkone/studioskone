@@ -1,0 +1,221 @@
+/* ============================================================
+   Page d'accueil — mise en page des sections
+   Les composants vivent dans components/ ; ce fichier ne fait que
+   les poser sur la grille.
+   ============================================================ */
+
+@import './components/nav.css';
+
+/* La barre est fixe : le contenu réserve sa bande. */
+body { padding-top: var(--nav-h); }
+
+/* ─── Hero ──────────────────────────────────────────────────── */
+.hero { padding-top: var(--spacing-section-s); }
+
+.hero-corps { row-gap: 48px; }
+
+.hero-titre { margin-bottom: 8px; }
+.hero-accent { color: var(--color-terracotta-profond); }
+
+.hero-droite { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+.hero-lieu { color: var(--color-terracotta-profond); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+
+.hero-preuves {
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: var(--text-petit);
+  color: var(--color-gris-chaud);
+}
+.hero-preuve-sep { color: var(--color-terracotta); }
+
+.hero .ruban { margin-top: var(--spacing-section-s); }
+
+/* ─── Problème ──────────────────────────────────────────────── */
+.probleme-titre { font-size: var(--text-h1); margin-bottom: 48px; }
+
+.probleme-liste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+}
+.symptome {
+  padding: 20px 0;
+  border-top: 1px solid var(--filet-leger);
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
+}
+
+/* ─── Le pivot ──────────────────────────────────────────────
+   Une phrase, seule, en grand. C'est tout ce que porte la section. */
+.pivot-texte {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h1);
+  line-height: var(--leading-display);
+  letter-spacing: -0.03em;
+}
+
+/* ─── Le studio ─────────────────────────────────────────────── */
+.studio-titre { font-size: var(--text-h1); margin-bottom: 48px; }
+
+.metiers { display: flex; gap: 24px; align-items: center; }
+.metier { flex: 1; padding-top: 16px; border-top: 1px solid var(--color-encre); }
+.metier-label { font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.metier-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h3);
+  letter-spacing: -0.02em;
+  margin-top: 8px;
+}
+.metier-items { font-size: var(--text-petit); color: var(--color-gris-chaud); margin-top: 8px; }
+.metier-joint {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--color-terracotta);
+  flex: none;
+}
+
+.studio-texte { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
+
+.benefices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  margin-top: var(--spacing-section-s);
+}
+.benefice { padding-top: 20px; border-top: 1px solid var(--color-encre); }
+.benefice-titre { font-size: var(--text-h3); }
+.benefice-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+
+/* ─── Transparence ──────────────────────────────────────────── */
+.transparence-corps { display: flex; flex-direction: column; gap: 20px; }
+.transparence-corps p { max-width: 60ch; }
+
+/* ─── Prestations ───────────────────────────────────────────── */
+.prestations-grille {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 48px;
+  margin-top: 48px;
+}
+
+/* ─── Méthode ───────────────────────────────────────────────── */
+.etapes { margin-top: 48px; }
+.methode-cloture {
+  margin-top: 32px;
+  font-size: var(--text-petit);
+  color: var(--color-gris-chaud);
+}
+
+/* ─── Réalisations ──────────────────────────────────────────── */
+.realisations-intro { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
+.realisations-intro-fort { font-weight: 500; }
+
+/* En attendant le rail piloté par le défilement — moment 2, phase 4 — les
+   projets s'empilent sur la grille. La hiérarchie des maquettes est déjà
+   là : le premier projet occupe deux fois la place des suivants. */
+.projets-grille {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 64px;
+  margin-top: 48px;
+}
+.projets-grille > .carte-projet:first-child { grid-column: span 2; }
+
+/* ─── Tarifs ────────────────────────────────────────────────── */
+.tarifs-note { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
+
+.tarifs-lancement {
+  margin-top: 48px;
+  padding: 24px 0;
+  border-top: 1px solid var(--color-terracotta);
+  border-bottom: 1px solid var(--filet-leger);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  align-items: baseline;
+}
+.tarifs-lancement-texte { flex: 1; min-width: 32ch; font-size: 0.9375rem; line-height: var(--leading-corps); }
+
+.tarifs-grille {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 48px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.tarifs-pied { margin-top: 32px; font-size: var(--text-petit); color: var(--color-gris-chaud); }
+
+.verites {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 32px;
+  margin-top: var(--spacing-section-s);
+}
+.verite { padding-top: 20px; border-top: 1px solid var(--filet-moyen); }
+.verite-titre { font-size: var(--text-corps); font-weight: 500; font-family: var(--font-texte); letter-spacing: 0; }
+.verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+
+/* ─── Estimateur ────────────────────────────────────────────── */
+.estimateur-tete { display: flex; flex-direction: column; gap: 12px; }
+.estimateur-form { display: flex; flex-direction: column; gap: 32px; margin-top: 48px; }
+.estimateur-q { border: 0; }
+.estimateur-legende { font-size: var(--text-petit); color: var(--color-gris-chaud); margin-bottom: 16px; }
+.estimateur-resultat-zone { margin-top: 48px; }
+.estimateur-disclaimer { margin-top: 16px; }
+
+/* ─── FAQ ───────────────────────────────────────────────────── */
+.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.faq { margin-top: 48px; }
+
+/* ─── Engagements ───────────────────────────────────────────── */
+.engagements {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 32px;
+  margin-top: 48px;
+}
+.engagement { padding-top: 16px; border-top: 1px solid var(--color-encre); }
+.engagement-numero { font-family: var(--font-data); font-size: var(--text-data); color: var(--color-gris-chaud); }
+.engagement-titre { font-size: var(--text-corps); margin-top: 12px; }
+.engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+
+/* ─── Contact ───────────────────────────────────────────────── */
+.contact-lead { display: flex; flex-direction: column; gap: 16px; }
+#contact-form-root { margin-top: var(--spacing-section-s); }
+
+/* ─── Petit écran ───────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .prestations-grille,
+  .tarifs-grille,
+  .verites,
+  .benefices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .engagements { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projets-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projets-grille > .carte-projet:first-child { grid-column: span 2; }
+}
+
+@media (max-width: 767px) {
+  .probleme-liste,
+  .prestations-grille,
+  .tarifs-grille,
+  .verites,
+  .benefices,
+  .engagements,
+  .projets-grille { grid-template-columns: 1fr; }
+  .projets-grille > .carte-projet:first-child { grid-column: auto; }
+  .metiers { flex-direction: column; align-items: stretch; }
+  .hero-preuves { align-self: start; }
+}

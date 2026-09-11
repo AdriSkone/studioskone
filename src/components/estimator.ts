@@ -16,7 +16,9 @@ export function initEstimator(form: ContactFormHandle | null): void {
   const root = document.querySelector<HTMLElement>('#estimator')
   const formEl = document.querySelector<HTMLFormElement>('#estimatorForm')
   const result = document.querySelector<HTMLElement>('#estimatorResult')
-  const resultInner = document.querySelector<HTMLElement>('.estimator-result-inner')
+  // Renommé avec le reste du système visuel ; c'est le seul sélecteur de ce
+  // module qui ait bougé, les identifiants sont restés les mêmes.
+  const resultInner = document.querySelector<HTMLElement>('.estimateur-resultat')
   const offerEl = document.querySelector<HTMLElement>('#estimatorOffer')
   const rangeEl = document.querySelector<HTMLElement>('#estimatorRange')
   const delayEl = document.querySelector<HTMLElement>('#estimatorDelay')

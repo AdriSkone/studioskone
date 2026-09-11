@@ -34,3 +34,30 @@
 /* La variante de la carte tarif n'a pas de point : le libellé y est déjà
    encadré par le filet d'accent de la carte. */
 .statut--nu::before { display: none; }
+
+/* ─── Pastille ──────────────────────────────────────────────
+   Même forme, casse normale.
+
+   Le point d'accompagnement est utile bien au-delà des deux libellés de
+   statut — le lieu du hero, l'offre de lancement. Mais les capitales, non :
+   elles sont comptées, il y en a deux sur tout le site et pas une de plus.
+   D'où cette variante, qui garde le point et rend la casse. */
+.pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--text-petit);
+  font-weight: 500;
+}
+
+.pastille::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  flex: none;
+}
+
+.negatif .pastille::before,
+.bloc-negatif .pastille::before { background: var(--color-terracotta); }
