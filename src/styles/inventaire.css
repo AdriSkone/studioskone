@@ -77,6 +77,13 @@
   border-color: var(--color-terracotta-profond);
   color: var(--color-papier);
 }
+.lien[data-etat='survol'],
+.lien[data-etat='focus'],
+.lien[data-etat='actif'] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 .lien[data-etat='survol'] { color: var(--color-terracotta-profond); }
 .lien[data-etat='actif']  { color: var(--color-terracotta); }
 .carte-prestation-titre[data-etat='survol'] { color: var(--color-terracotta-profond); }

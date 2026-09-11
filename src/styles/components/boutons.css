@@ -103,17 +103,28 @@
 }
 
 /* ─── Lien de texte ─────────────────────────────────────────
-   Souligné en permanence, et pas seulement au survol. Un lien qui ne se
-   distingue que par sa couleur est une information portée par la couleur
-   seule : le soulignement est ce qui le rend repérable sans elle. */
+   Pas de soulignement au repos : il apparaît au survol, en même temps que
+   le passage en terracotta profond. C'est la règle des maquettes.
+
+   Elle tient parce que ce lien est toujours autonome — posé seul sous son
+   paragraphe, jamais glissé au fil d'une phrase. Sa place suffit alors à
+   le signaler. Un lien inline, lui, ne serait repérable qu'à sa demi-
+   graisse : si le cas se présente un jour, il lui faudra le trait dès le
+   repos. */
 .lien {
   position: relative;
   font-size: var(--text-corps);
   font-weight: 500;
+  text-decoration: none;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+
+.lien:hover,
+.lien:focus-visible,
+.lien:active {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color var(--dur-rapide) var(--ease-skone);
 }
 /* La ligne de texte ne fait que 21 px de haut : en dessous des 24 px
    qu'une cible doit mesurer. Le pseudo-élément agrandit la zone cliquable
