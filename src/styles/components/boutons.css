@@ -1,0 +1,145 @@
+/* ============================================================
+   Boutons et liens
+   ============================================================ */
+
+/* Base commune. Le cadre fait 1 px sur les deux variantes, y compris sur
+   le bouton plein : sans lui, les deux n'auraient pas la même hauteur. */
+.bouton {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 17px 27px;
+  border: 1px solid var(--color-encre);
+  font-family: var(--font-texte);
+  font-size: var(--text-corps);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background var(--dur-rapide) var(--ease-skone),
+    border-color var(--dur-rapide) var(--ease-skone),
+    color var(--dur-rapide) var(--ease-skone);
+}
+
+/* ─── Principal ─────────────────────────────────────────────── */
+.bouton--principal {
+  background: var(--color-encre);
+  color: var(--color-papier);
+}
+.bouton--principal:hover,
+.bouton--principal:active {
+  background: var(--color-terracotta-profond);
+  border-color: var(--color-terracotta-profond);
+}
+
+/* ─── Secondaire ────────────────────────────────────────────── */
+.bouton--secondaire {
+  background: transparent;
+  color: var(--color-encre);
+}
+.bouton--secondaire:hover {
+  background: var(--color-encre);
+  color: var(--color-papier);
+}
+.bouton--secondaire:active {
+  background: var(--color-terracotta-profond);
+  border-color: var(--color-terracotta-profond);
+  color: var(--color-papier);
+}
+
+/* ─── Désactivé ─────────────────────────────────────────────── */
+.bouton:disabled,
+.bouton[aria-disabled='true'] {
+  color: var(--color-gris-chaud);
+  pointer-events: none;
+}
+.bouton--principal:disabled,
+.bouton--principal[aria-disabled='true'] {
+  background: var(--color-papier-ombre);
+  border-color: var(--color-papier-ombre);
+}
+.bouton--secondaire:disabled,
+.bouton--secondaire[aria-disabled='true'] {
+  background: transparent;
+  border-color: var(--filet-moyen);
+}
+
+/* ─── Compact ───────────────────────────────────────────────
+   La barre de navigation, où la hauteur est comptée. */
+.bouton--compact {
+  padding: 11px 19px;
+  font-size: 0.9375rem;
+}
+
+/* En petit écran, un libellé qui ne peut pas se couper déborde de sa
+   colonne — « Voir les réalisations » réclame 207 px là où il n'en reste
+   que 180. On lui rend le droit de passer à la ligne, et le bouton
+   s'étire au lieu de dépasser. */
+@media (max-width: 767px) {
+  .bouton {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* ─── Sur fond encre ────────────────────────────────────────
+   Les rôles s'inversent : le papier devient la surface pleine. Le
+   terracotta ne peut pas servir ici — il tombe à 3.36 sur l'encre. */
+.negatif .bouton--principal {
+  background: var(--color-papier);
+  border-color: var(--color-papier);
+  color: var(--color-encre);
+}
+.negatif .bouton--principal:hover,
+.negatif .bouton--principal:active {
+  background: var(--color-papier-ombre);
+  border-color: var(--color-papier-ombre);
+}
+.negatif .bouton--secondaire {
+  border-color: var(--color-papier);
+  color: var(--color-papier);
+}
+.negatif .bouton--secondaire:hover {
+  background: var(--color-papier);
+  color: var(--color-encre);
+}
+
+/* ─── Lien de texte ─────────────────────────────────────────
+   Souligné en permanence, et pas seulement au survol. Un lien qui ne se
+   distingue que par sa couleur est une information portée par la couleur
+   seule : le soulignement est ce qui le rend repérable sans elle. */
+.lien {
+  position: relative;
+  font-size: var(--text-corps);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+/* La ligne de texte ne fait que 21 px de haut : en dessous des 24 px
+   qu'une cible doit mesurer. Le pseudo-élément agrandit la zone cliquable
+   sans rien déplacer — augmenter le padding, lui, décalerait le texte. */
+.lien::after {
+  content: '';
+  position: absolute;
+  inset: -5px -4px;
+}
+
+.lien:hover  { color: var(--color-terracotta-profond); }
+.lien:active { color: var(--color-terracotta); }
+
+.negatif .lien:hover,
+.negatif .lien:active { color: var(--color-papier-ombre); }
+
+/* ─── Flèche ────────────────────────────────────────────────
+   Jamais un caractère dans la chaîne du libellé : un lecteur d'écran
+   lirait « flèche vers la droite » au milieu de la phrase. */
+.bouton-fleche {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 8px;
+  vertical-align: -0.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}

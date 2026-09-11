@@ -1,0 +1,36 @@
+/* ============================================================
+   Bandeau cookies
+   Collé en bas pendant le défilement, posé dans le dégagement du pied
+   de page une fois la page terminée.
+   ============================================================ */
+
+.cookies {
+  position: fixed;
+  left: var(--grille-marge);
+  bottom: var(--grille-marge);
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(420px, calc(100vw - var(--grille-marge) * 2));
+  padding: 24px;
+  background: var(--color-papier);
+  border: 1px solid var(--color-encre);
+  transform: translateY(calc(100% + var(--grille-marge)));
+  transition: transform var(--dur-base) var(--ease-skone);
+}
+.cookies.est-visible { transform: translateY(0); }
+
+.cookies-titre { font-size: var(--text-corps); font-weight: 500; }
+.cookies-texte { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+
+.cookies-actions { display: flex; gap: 12px; }
+
+/* Les deux boutons partagent la largeur : refuser pèse autant qu'accepter. */
+.cookies-actions .bouton {
+  flex: 1;
+  align-self: auto;
+  padding: 12px 16px;
+  font-size: 0.9375rem;
+  text-align: center;
+}

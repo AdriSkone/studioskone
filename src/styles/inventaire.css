@@ -1,0 +1,89 @@
+/* Page d'inventaire. Sert à regarder les composants ensemble, dans tous
+   leurs états. Ne part pas en production. */
+
+.inv-entete { padding-block: var(--spacing-section-s); }
+.inv-bloc { padding-block: var(--spacing-section-s); border-top: 1px solid var(--filet-moyen); }
+.inv-titre { --col: 1 / span 2; font-size: var(--text-petit); font-weight: 500; }
+.inv-note  { --col: 3 / span 7; font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.inv-note--large { --col: 3 / span 10; }
+.inv-corps { --col: 3 / span 10; margin-top: 32px; }
+.inv-corps--etroit { --col: 3 / span 7; margin-top: 32px; }
+
+/* Les états s'alignent en colonnes, chacun sous son nom. */
+.inv-etats {
+  --col: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 16px;
+  margin-top: 32px;
+  align-items: start;
+}
+.inv-etat-nom { font-size: var(--text-petit); color: var(--color-gris-chaud); }
+
+.inv-trio {
+  --col: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 32px;
+  margin-top: 32px;
+  align-items: start;
+}
+.inv-duo {
+  --col: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: 32px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+/* La nav est en position fixed en production : dans l'inventaire on la
+   pose dans le flux pour pouvoir montrer ses deux états côte à côte. */
+.inv-nav-demo { --col: 1 / -1; margin-top: 24px; }
+.inv-nav-demo .nav { position: relative; }
+
+/* Le bandeau cookies aussi : il est fixed, on le remet dans le flux. */
+.inv-cookies-demo .cookies {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  transform: none;
+}
+
+@media (max-width: 1023px) {
+  .inv-etats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inv-trio  { grid-template-columns: 1fr; }
+  .inv-duo   { grid-template-columns: 1fr; }
+}
+
+/* ─── États figés ───────────────────────────────────────────
+   Une planche doit montrer les cinq états côte à côte, or on ne peut
+   survoler qu'un élément à la fois. data-etat rejoue ce que font :hover,
+   :focus-visible et :active — uniquement ici, jamais sur le site. */
+.bouton--principal[data-etat='survol'],
+.bouton--principal[data-etat='actif'] {
+  background: var(--color-terracotta-profond);
+  border-color: var(--color-terracotta-profond);
+}
+.bouton--secondaire[data-etat='survol'] {
+  background: var(--color-encre);
+  color: var(--color-papier);
+}
+.bouton--secondaire[data-etat='actif'] {
+  background: var(--color-terracotta-profond);
+  border-color: var(--color-terracotta-profond);
+  color: var(--color-papier);
+}
+.lien[data-etat='survol'] { color: var(--color-terracotta-profond); }
+.lien[data-etat='actif']  { color: var(--color-terracotta); }
+.carte-prestation-titre[data-etat='survol'] { color: var(--color-terracotta-profond); }
+.carte-prestation-titre[data-etat='actif']  { color: var(--color-terracotta); }
+.carte-projet[data-etat='actif'] .carte-projet-titre { color: var(--color-terracotta-profond); }
+
+[data-etat='focus'] {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 4px;
+}

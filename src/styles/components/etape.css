@@ -1,0 +1,78 @@
+/* ============================================================
+   Ligne d'étape de méthode
+   La seule séquence numérotée du site, et le premier usage du mono.
+   ============================================================ */
+
+.etapes { display: flex; flex-direction: column; }
+
+.etape {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  padding: 28px 0;
+  border-top: 1px solid var(--filet-leger);
+  color: var(--color-gris-chaud);
+  transition:
+    color var(--dur-rapide) var(--ease-skone),
+    border-color var(--dur-rapide) var(--ease-skone);
+}
+
+/* L'étape en cours reprend l'encre et un filet franc. Deux marques pour
+   un seul état : la couleur seule ne suffirait pas à le signaler. */
+.etape.est-active {
+  border-top-color: var(--color-encre);
+  color: var(--color-encre);
+}
+
+.etape-numero {
+  grid-column: 1 / span 1;
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  padding-top: 6px;
+}
+
+.etape-phase {
+  grid-column: 2 / span 2;
+  font-size: var(--text-petit);
+  font-weight: 500;
+  padding-top: 4px;
+}
+
+.etape-corps {
+  grid-column: 4 / span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.etape-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h3);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.etape-texte { font-size: 0.9375rem; line-height: var(--leading-corps); }
+
+/* Le temps demandé au client, isolé par un filet vertical. */
+.etape-temps {
+  grid-column: 9 / span 2;
+  padding-left: 16px;
+  border-left: 1px solid var(--filet-moyen);
+  font-size: 0.9375rem;
+  line-height: var(--leading-corps);
+  font-weight: 500;
+  transition: border-color var(--dur-rapide) var(--ease-skone);
+}
+.etape.est-active .etape-temps { border-left-color: var(--color-terracotta); }
+
+@media (max-width: 767px) {
+  .etape { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 12px; }
+  .etape-numero { grid-column: 1 / span 1; }
+  .etape-phase  { grid-column: 2 / span 3; }
+  .etape-corps,
+  .etape-temps  { grid-column: 1 / -1; }
+  .etape-temps  { padding-left: 16px; }
+}

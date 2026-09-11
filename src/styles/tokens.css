@@ -32,6 +32,18 @@
   --color-terracotta-profond: #7A3823;
   --color-gris-chaud:         #6B5A4A;
 
+  /* Filets. Trois degrés d'encre diluée, et rien d'autre — les maquettes
+     n'emploient que ces trois valeurs. Déclarés ici pour qu'aucun
+     rgba(28, 21, 18, …) ne se retrouve écrit à la main dans un composant :
+     ce serait une couleur en dur, et une quatrième valeur le jour où l'on
+     se tromperait d'une décimale. */
+  --filet-leger: color-mix(in srgb, var(--color-encre) 12%, transparent);
+  --filet-moyen: color-mix(in srgb, var(--color-encre) 20%, transparent);
+  --filet-fort:  color-mix(in srgb, var(--color-encre) 30%, transparent);
+
+  /* Sur l'encre, les filets se diluent dans le papier et non l'inverse. */
+  --filet-negatif: color-mix(in srgb, var(--color-papier) 24%, transparent);
+
   /* ─── Typographie ─────────────────────────────────────────
      Bricolage pour les titres, Switzer pour le texte, JetBrains
      Mono pour la donnée seule : numéro d'étape, prix, année.     */
@@ -80,7 +92,7 @@
   /* Hauteur de la barre collée, dans ses deux états. Mesurée, pas
      estimée : toute section qui commence sous la nav réserve cette
      bande, et le décalage d'ancre s'y accroche. */
-  --nav-h:          96px;
+  --nav-h:          88px;
   --nav-h-reduite:  72px;
 }
 

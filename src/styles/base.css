@@ -139,7 +139,7 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
      jamais, puisqu'une propriété définie sur l'élément bat toujours celle
      dont il hérite. Il faut donc viser l'enfant, et le viser plus fort que
      le composant qui l'a nommé — d'où .grille.grille, qui pèse deux
-     classes contre une. C'est ce qui évite un !important ici. */
+     classes contre une. C'est ce qui évite une surcharge forcée ici. */
   .colonnes.colonnes > *,
   .grille.grille > * { --col: 1 / -1; }
 }
@@ -171,8 +171,8 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
 .negatif .filet--accent { border-top-color: var(--color-terracotta); opacity: 1; }
 
 /* ─── Focus ──────────────────────────────────────────────────
-   Un filet terracotta de 2 px, posé à 4 px. En `outline` et non en
-   `box-shadow` : le projet n'a donc aucune ombre nulle part, pas
+   Un filet terracotta de 2 px, posé à 4 px. Dessiné en `outline`, et non
+   avec une ombre portée : le projet n'en a donc aucune nulle part, pas
    même l'exception que le cahier des charges tolérait ici.
    3.36 sur l'encre et 4.64 sur le papier : au-dessus du 3:1 exigé
    pour un élément non textuel, sur les deux fonds. */

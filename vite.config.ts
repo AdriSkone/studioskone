@@ -15,6 +15,7 @@ export default defineConfig({
         // inventaire des composants. En noindex, hors sitemap. Elles sortent
         // du build à la recette finale.
         fondations:  resolve(__dirname, 'fondations.html'),
+        composants:  resolve(__dirname, 'composants.html'),
 
         // Pages prestations — générées par `node scripts/build-prestation-pages.mjs`.
         // Ne pas les éditer à la main : la source est scripts/prestation-pages-data.mjs.

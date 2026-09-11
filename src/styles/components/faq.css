@@ -1,0 +1,57 @@
+/* ============================================================
+   Accordéon de FAQ
+   ============================================================ */
+
+.faq { display: flex; flex-direction: column; }
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid var(--filet-moyen);
+  text-align: left;
+  font-size: var(--text-corps-l);
+  font-weight: 500;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+.faq-question:hover { color: var(--color-terracotta-profond); }
+
+/* L'anneau se pose à l'intérieur : une question occupe toute la largeur
+   de sa colonne, un offset positif déborderait de la grille. */
+.faq-question:focus-visible { outline-offset: -2px; }
+
+/* ─── Le signe ──────────────────────────────────────────────
+   Deux traits de 1 px. À l'ouverture, le vertical disparaît : le plus
+   devient un moins. C'est une rotation de rien du tout, et elle dit
+   l'état aussi bien qu'une icône entière. */
+.faq-signe {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.faq-signe::before,
+.faq-signe::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.faq-signe::before { left: 0; top: 7px; width: 16px; height: 1px; }
+.faq-signe::after {
+  left: 7px; top: 0; width: 1px; height: 16px;
+  transition: transform var(--dur-rapide) var(--ease-skone);
+}
+.faq-question[aria-expanded='true'] .faq-signe::after { transform: scaleY(0); }
+
+.faq-reponse {
+  max-width: 34em;
+  padding-bottom: 24px;
+  padding-left: 16px;
+  border-left: 1px solid var(--filet-moyen);
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
+  color: var(--color-gris-chaud);
+}

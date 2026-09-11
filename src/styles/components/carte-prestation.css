@@ -1,0 +1,47 @@
+/* ============================================================
+   Carte prestation
+   Pas de boîte, pas de numéro : un filet haut, un titre lié, un prix
+   en donnée. Six par section.
+   ============================================================ */
+
+.carte-prestation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-encre);
+}
+
+.carte-prestation-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.carte-prestation-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h3);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+.carte-prestation-titre:hover  { color: var(--color-terracotta-profond); }
+.carte-prestation-titre:active { color: var(--color-terracotta); }
+
+.carte-prestation-prix {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  white-space: nowrap;
+}
+
+.carte-prestation-texte {
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--color-gris-chaud);
+}
+
+/* « Pour qui » : l'intitulé reste en encre, la réponse passe en gris. */
+.carte-prestation-cible strong { font-weight: 500; color: var(--color-encre); }

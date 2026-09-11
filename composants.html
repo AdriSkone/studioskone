@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Composants · Studio Skøne</title>
+  <!-- Page de travail : elle ne fait pas partie du site public. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/bricolage-grotesque-var.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/switzer-400.woff2" crossorigin>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <main id="contenu">
+    <header class="grille inv-entete">
+      <h1 class="t-display" style="--col: 1 / -1">Composants.</h1>
+      <p class="t-corps-l inv-note inv-note--large" style="margin-top: 24px">Treize composants, chacun dans ses états.
+        Le copy est celui du site. Le curseur suit la souris sur la planche : il grossit sur les liens, devient pastille
+        sur les images de projet, et passe en crème sur l’encre.</p>
+    </header>
+
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Navigation collée en haut</h2>
+      <p class="inv-note inv-note--large">Avant défilement, posée sur le hero : barre de 88 px, filet léger, bouton secondaire. Après : 88 px deviennent 72, le filet s’affirme, le bouton passe en plein et le lien de la section lue se souligne.</p>
+      <div class="inv-nav-demo">
+        <nav class="nav" aria-label="Navigation principale">
+          <div class="nav-interieur colonnes">
+            <span class="nav-logo">Skøne</span>
+            <div class="nav-liens"><a class="nav-lien" href="#">Le studio</a><a class="nav-lien" href="#">Prestations</a><a class="nav-lien" href="#">Méthode</a><a class="nav-lien" href="#">Projets</a><a class="nav-lien" href="#">Tarifs</a><a class="nav-lien" href="#">Contact</a></div>
+            <div class="nav-actions">
+              <span class="nav-mention">Réponse sous 24 h</span>
+              <a class="bouton bouton--secondaire bouton--compact" href="#">Estimer mon projet</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <p class="inv-etat-nom" style="--col: 1 / -1; margin-top: 32px">Après défilement</p>
+      <div class="inv-nav-demo">
+        <nav class="nav est-reduite" aria-label="Navigation principale">
+          <div class="nav-interieur colonnes">
+            <span class="nav-logo">Skøne</span>
+            <div class="nav-liens"><a class="nav-lien" href="#">Le studio</a><a class="nav-lien" href="#">Prestations</a><a class="nav-lien" href="#" aria-current="true">Méthode</a><a class="nav-lien" href="#">Projets</a><a class="nav-lien" href="#">Tarifs</a><a class="nav-lien" href="#">Contact</a></div>
+            <div class="nav-actions">
+              <span class="nav-mention">Réponse sous 24 h</span>
+              <a class="bouton bouton--principal bouton--compact" href="#">Estimer mon projet</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Boutons et liens</h2>
+      <p class="inv-note inv-note--large">Cinq états chacun. Le changement est franc et dure 200 ms : aucune mise à l’échelle, aucune translation au survol. La flèche est un SVG à part, en aria-hidden — jamais un caractère dans la chaîne du libellé.</p>
+      <div class="inv-etats"><div class="inv-etat-nom">Repos</div><div class="inv-etat-nom">Survol</div><div class="inv-etat-nom">Focus clavier</div><div class="inv-etat-nom">Actif</div><div class="inv-etat-nom">Désactivé</div></div>
+      <div class="inv-etats"><div><a class="bouton bouton--principal" href="#">Estimer mon projet</a></div><div><a class="bouton bouton--principal" href="#" data-etat="survol">Estimer mon projet</a></div><div><a class="bouton bouton--principal" href="#" data-etat="focus">Estimer mon projet</a></div><div><a class="bouton bouton--principal" href="#" data-etat="actif">Estimer mon projet</a></div><div><span class="bouton bouton--principal" aria-disabled="true">Estimer mon projet</span></div></div>
+      <div class="inv-etats"><div><a class="bouton bouton--secondaire" href="#">Voir les réalisations</a></div><div><a class="bouton bouton--secondaire" href="#" data-etat="survol">Voir les réalisations</a></div><div><a class="bouton bouton--secondaire" href="#" data-etat="focus">Voir les réalisations</a></div><div><a class="bouton bouton--secondaire" href="#" data-etat="actif">Voir les réalisations</a></div><div><span class="bouton bouton--secondaire" aria-disabled="true">Voir les réalisations</span></div></div>
+      <div class="inv-etats">
+        <div><a class="lien" href="#">Écrire au studio</a></div>
+        <div><a class="lien" href="#" data-etat="survol">Écrire au studio</a></div>
+        <div><a class="lien" href="#" data-etat="focus">Écrire au studio</a></div>
+        <div><a class="lien" href="#" data-etat="actif">Écrire au studio</a></div>
+        <div class="inv-etat-nom">Pas d’état désactivé</div>
+      </div>
+      <div class="inv-etats">
+        <div><a class="bouton bouton--principal" href="#">Parlons-en<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        <div class="inv-etat-nom" style="grid-column: 2 / -1">Avec flèche, et en version compacte pour la barre de navigation.</div>
+      </div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Cartes projet</h2>
+      <p class="inv-note inv-note--large">Image pleine colonne, angles vifs, sans cadre. La carte entière est un lien. Au survol l’image ne bouge pas : c’est le curseur qui devient pastille. Focus clavier : filet terracotta de 2 px, à 4 px. Actif : le titre passe en terracotta profond.</p>
+      <div class="inv-corps">        <a class="carte-projet" href="#" data-curseur="projet" data-curseur-libelle="Voir le projet">
+          <div class="carte-projet-image" role="img" aria-label="Aperçu du projet"></div>
+          <div>
+            <h3 class="carte-projet-titre">ele · Ateliers Caféologie</h3>
+            <p class="carte-projet-tagline">Une identité de torréfacteur qui se tient aussi à l’écran</p>
+            <div class="carte-projet-meta">
+              <span>Projet client</span>
+              <span>Site web</span>
+              <span>Mise en ligne à venir</span>
+            </div>
+          </div>
+        </a></div>
+      <div class="inv-trio">
+        <div><p class="inv-etat-nom">Repos</p>        <a class="carte-projet carte-projet--petite" href="#" data-curseur="projet" data-curseur-libelle="Voir le projet">
+          <div class="carte-projet-image" role="img" aria-label="Aperçu du projet"></div>
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">GiftMatch</h3>
+              <span class="carte-projet-type">App mobile</span>
+            </div>
+            <p class="carte-projet-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
+            <div class="carte-projet-meta"><span>Projet de studio</span></div>
+          </div>
+        </a></div>
+        <div><p class="inv-etat-nom">Focus clavier</p>        <a class="carte-projet carte-projet--petite" href="#" data-etat="focus" data-curseur="projet" data-curseur-libelle="Voir le projet">
+          <div class="carte-projet-image" role="img" aria-label="Aperçu du projet"></div>
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">GiftMatch</h3>
+              <span class="carte-projet-type">App mobile</span>
+            </div>
+            <p class="carte-projet-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
+            <div class="carte-projet-meta"><span>Projet de studio</span></div>
+          </div>
+        </a></div>
+        <div><p class="inv-etat-nom">Actif</p>        <a class="carte-projet carte-projet--petite" href="#" data-etat="actif" data-curseur="projet" data-curseur-libelle="Voir le projet">
+          <div class="carte-projet-image" role="img" aria-label="Aperçu du projet"></div>
+          <div>
+            <div class="carte-projet-tete">
+              <h3 class="carte-projet-titre">GiftMatch</h3>
+              <span class="carte-projet-type">App mobile</span>
+            </div>
+            <p class="carte-projet-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
+            <div class="carte-projet-meta"><span>Projet de studio</span></div>
+          </div>
+        </a></div>
+      </div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Carte prestation</h2>
+      <p class="inv-note inv-note--large">Pas de boîte, pas de numéro : un filet haut, le titre lié, le prix en donnée mono. Survol : le titre passe en terracotta profond.</p>
+      <div class="inv-trio">        <article class="carte-prestation">
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="#">Site vitrine &amp; landing page</a></h3>
+            <span class="carte-prestation-prix">Dès 900€</span>
+          </div>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> artisans, commerçants, thérapeutes, indépendants qui veulent être trouvés et contactés.</p>
+          <p class="carte-prestation-texte">Un site rapide, lisible sur téléphone, pensé pour déclencher l’appel ou le formulaire. Du one-pager au site complet.</p>
+        </article>        <article class="carte-prestation">
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="#" data-etat="survol">Site e-commerce</a></h3>
+            <span class="carte-prestation-prix">Dès 3 000€</span>
+          </div>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> marques et commerçants qui veulent vendre en ligne sans se battre avec leur outil.</p>
+          <p class="carte-prestation-texte">Boutique Shopify ou sur mesure, fiches produits, paiement, livraison, et une prise en main que vous maîtrisez en une heure.</p>
+        </article>        <article class="carte-prestation">
+          <div class="carte-prestation-tete">
+            <h3><a class="carte-prestation-titre" href="#" data-etat="focus">Refonte de site</a></h3>
+            <span class="carte-prestation-prix">Dès 1 200€</span>
+          </div>
+          <p class="carte-prestation-texte carte-prestation-cible"><strong>Pour qui</strong> ceux qui ont déjà un site, qui n’en sont plus fiers, et qui ne veulent pas repartir de zéro.</p>
+          <p class="carte-prestation-texte">Audit, reprise du contenu existant, nouveau design, migration, redirections. Vous ne perdez pas votre référencement acquis.</p>
+        </article></div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Carte tarif</h2>
+      <p class="inv-note inv-note--large">Standard : filet haut en encre, prix en display, liste à filets. Recommandée : filet d’accent de 2 px, cadre de 1 px, et le libellé « Le plus choisi » — l’un des deux seuls libellés en capitales du site. Aucun aplat de couleur.</p>
+      <div class="inv-duo">        <article class="carte-tarif">
+          <div class="carte-tarif-tete">
+            <h3 class="carte-tarif-nom">Fondation, pour démarrer</h3>
+            
+          </div>
+          <p class="carte-tarif-prix">Dès 900€</p>
+          <p class="carte-tarif-resume">De quoi lancer vite un site soigné, sans exploser le budget.</p>
+          <ul class="carte-tarif-liste"><li>Landing page ou site vitrine d’une page</li><li>Design sur mesure</li><li>Responsive mobile-first</li><li>2 allers-retours inclus</li><li>Mise en ligne</li><li>Livraison en 1–2 semaines</li></ul>
+          <p class="carte-tarif-note">Ce qui fait bouger le prix : le nombre de pages, et si les textes et photos sont à créer.</p>
+          <a class="bouton bouton--secondaire" href="#">Choisir cette offre</a>
+        </article>        <article class="carte-tarif carte-tarif--recommandee">
+          <div class="carte-tarif-tete">
+            <h3 class="carte-tarif-nom">Studio, pour performer</h3>
+            <span class="statut statut--nu">Le plus choisi</span>
+          </div>
+          <p class="carte-tarif-prix">Dès 2 500€</p>
+          <p class="carte-tarif-resume">Mon offre la plus demandée. Un produit complet, aussi soigné côté design que côté performance.</p>
+          <ul class="carte-tarif-liste"><li>Site vitrine multi-pages ou application web</li><li>E-commerce à partir de 3 000€</li><li>Architecture UX &amp; design sur mesure</li><li>Animations et interactions soignées</li><li>SEO technique intégré</li><li>Ajustements continus</li><li>Livraison en 4–6 semaines</li></ul>
+          <p class="carte-tarif-note">Ce qui fait bouger le prix : le nombre de pages, la présence d’une réservation ou d’un paiement, et si les contenus sont à créer.</p>
+          <a class="bouton bouton--principal" href="#">Choisir cette offre</a>
+        </article></div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Ligne d’étape de méthode</h2>
+      <p class="inv-note inv-note--large">La seule séquence numérotée du site, et le premier usage du mono. Dans le bloc collé, l’étape en cours reprend l’encre et un filet franc ; les autres restent en gris chaud. Deux marques pour un état, jamais la couleur seule.</p>
+      <div class="inv-corps"><div class="etapes">          <div class="etape est-active">
+            <span class="etape-numero">01</span>
+            <span class="etape-phase">Découverte</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Cadrage du projet</h3>
+              <p class="etape-texte">On commence par un atelier : vos objectifs, votre audience, ce que vous avez à dire. De là, on structure le plan de site ensemble.</p>
+            </div>
+            <p class="etape-temps">Votre temps : 1 h d’échange. C’est tout.</p>
+          </div>          <div class="etape">
+            <span class="etape-numero">02</span>
+            <span class="etape-phase">Design</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Conception visuelle</h3>
+              <p class="etape-texte">Chaque écran est validé avec vous avant le développement. Typo, mise en page, DA : rien ne part en prod sans votre accord.</p>
+            </div>
+            <p class="etape-temps">Votre temps : 30 min de retours sur les maquettes.</p>
+          </div>          <div class="etape">
+            <span class="etape-numero">03</span>
+            <span class="etape-phase">Développement</span>
+            <div class="etape-corps">
+              <h3 class="etape-titre">Build &amp; intégration</h3>
+              <p class="etape-texte">Les maquettes deviennent du code. Pixel-perfect, testé sur tous les supports. Vous suivez l’avancement sur un lien privé, en temps réel.</p>
+            </div>
+            <p class="etape-temps">Votre temps : zéro. Vous regardez avancer.</p>
+          </div></div></div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Accordéon de FAQ</h2>
+      <p class="inv-note inv-note--large">Une seule réponse ouverte à la fois. Le signe est fait de deux traits de 1 px : à l’ouverture, le vertical s’efface et le plus devient un moins. L’anneau de focus se pose à l’intérieur, la question occupant toute la largeur de sa colonne.</p>
+      <div class="inv-corps--etroit"><div class="faq">            <button class="faq-question" type="button">Combien coûte un site chez vous ?<span class="faq-signe" aria-hidden="true"></span></button>
+            <div class="faq-reponse"><p>Un site vitrine démarre à 900 €, un site multi-pages ou une application web à 2 500 €, une boutique en ligne à 3 000 €. Le prix dépend surtout de trois choses : le nombre de pages, la présence d’une réservation ou d’un paiement, et si les contenus sont à créer.</p></div>            <button class="faq-question" type="button">Combien de temps ça prend ?<span class="faq-signe" aria-hidden="true"></span></button>
+            <div class="faq-reponse"><p>Une à deux semaines pour une landing page, quatre à six semaines pour un site complet ou une application web. Le délai est écrit sur le devis.</p></div>            <button class="faq-question" type="button">Le site m’appartient vraiment ?<span class="faq-signe" aria-hidden="true"></span></button>
+            <div class="faq-reponse"><p>Oui, entièrement. Le code, le design, le nom de domaine, les accès à l’hébergement : tout est à votre nom, dès la mise en ligne.</p></div></div></div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Estimateur</h2>
+      <p class="inv-note inv-note--large">Trois questions, une fourchette. L’option retenue s’inverse en plein : parmi quatre réponses, une simple bordure ne se verrait pas assez. Le résultat est pris entre deux filets francs.</p>
+      <div class="inv-corps">
+        <div class="estimateur-choix"><button class="estimateur-option" type="button" aria-pressed="false">Vitrine</button><button class="estimateur-option" type="button" aria-pressed="true">Vitrine avec réservation ou devis</button><button class="estimateur-option" type="button" aria-pressed="false">Boutique en ligne</button><button class="estimateur-option" type="button" aria-pressed="false">Application</button></div>
+      </div>
+      <div class="inv-corps--etroit">
+        <div class="estimateur-resultat">
+          <div class="estimateur-resultat-corps">
+            <p class="inv-etat-nom">Votre projet ressemble à</p>
+            <p class="carte-tarif-nom">Offre Studio</p>
+            <p class="estimateur-prix">2 500 – 4 000 €</p>
+            <p class="estimateur-mention">Livraison en 4–6 semaines</p>
+          </div>
+          <div class="estimateur-resultat-actions">
+            <a class="bouton bouton--principal" href="#">Discuter de ce projet</a>
+          </div>
+        </div>
+        <p class="estimateur-mention" style="margin-top: 16px">Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.</p>
+      </div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Ruban défilant des prestations</h2>
+      <p class="inv-note inv-note--large">Deux séries identiques qui se translatent d’une demi-longueur : la boucle est invisible. S’arrête au survol et au focus clavier — on ne lit pas une liste qui fuit — et ne défile pas du tout en mouvement réduit.</p>
+      <div class="inv-corps"><div class="ruban"><div class="ruban-piste" aria-hidden="true"><span class="ruban-item">Site Vitrine</span><span class="ruban-item">Refonte de site</span><span class="ruban-item">E-Commerce</span><span class="ruban-item">Application Web &amp; SaaS</span><span class="ruban-item">Application Mobile</span><span class="ruban-item">Landing Page</span><span class="ruban-item">UX / UI Design</span><span class="ruban-item">Branding</span><span class="ruban-item">SEO &amp; Performance</span><span class="ruban-item">Maintenance</span><span class="ruban-item">Site Vitrine</span><span class="ruban-item">Refonte de site</span><span class="ruban-item">E-Commerce</span><span class="ruban-item">Application Web &amp; SaaS</span><span class="ruban-item">Application Mobile</span><span class="ruban-item">Landing Page</span><span class="ruban-item">UX / UI Design</span><span class="ruban-item">Branding</span><span class="ruban-item">SEO &amp; Performance</span><span class="ruban-item">Maintenance</span></div></div></div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Bloc en négatif</h2>
+      <p class="inv-note inv-note--large">Le seul endroit où l’encre devient un fond. Sur ce fond, seul le papier porte du texte : le terracotta y tombe à 3.36, le terracotta profond à 2.07, le gris chaud à 2.73. Le point d’état reste terracotta parce qu’il est décoratif — il double une information déjà écrite.</p>
+      <div class="inv-corps negatif">
+        <div class="bloc-negatif">
+          <p class="statut">Disponible pour de nouveaux projets.</p>
+          <h3 class="bloc-negatif-titre" style="margin-top: 32px">Vingt minutes pour savoir ce que vaut votre projet.</h3>
+          <p style="margin-top: 24px; max-width: 46ch">On parle de votre activité, de ce que vous attendez du site, et de votre budget. Je vous dis ce que je ferais, ce que ça coûte et combien de temps ça prend.</p>
+          <div style="display: flex; gap: 16px; margin-top: 32px; align-items: center">
+            <a class="bouton bouton--principal" href="#">Parlons-en<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="lien" href="#">Écrire au studio</a>
+          </div>
+          <hr class="filet filet--accent" style="margin-top: 40px">
+          <p class="t-data" style="margin-top: 16px">30 min</p>
+        </div>
+      </div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Filets de séparation</h2>
+      <p class="inv-note inv-note--large">Trois degrés d’encre diluée — 12 %, 20 %, 30 % — plus le filet d’accent. Le site sépare au filet, jamais à l’ombre.</p>
+      <div class="inv-corps" style="display: flex; flex-direction: column; gap: 28px">
+        <div><hr class="filet"><p class="inv-etat-nom" style="margin-top: 8px">Séparation · 15 %</p></div>
+        <div><hr class="filet filet--franc"><p class="inv-etat-nom" style="margin-top: 8px">Franc · encre pleine</p></div>
+        <div><hr class="filet filet--accent"><p class="inv-etat-nom" style="margin-top: 8px">Accent · terracotta</p></div>
+      </div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Fiche technique</h2>
+      <p class="inv-note inv-note--large">Deux colonnes : l’intitulé en donnée mono, la valeur en texte. Sert les pages projet.</p>
+      <div class="inv-corps--etroit"><dl class="fiche">            <div class="fiche-ligne">
+              <dt class="fiche-intitule">Rôle</dt>
+              <dd class="fiche-valeur">Design et développement</dd>
+            </div>            <div class="fiche-ligne">
+              <dt class="fiche-intitule">Année</dt>
+              <dd class="fiche-valeur">2026</dd>
+            </div>            <div class="fiche-ligne">
+              <dt class="fiche-intitule">Durée</dt>
+              <dd class="fiche-valeur">5 semaines</dd>
+            </div>            <div class="fiche-ligne">
+              <dt class="fiche-intitule">Stack</dt>
+              <dd class="fiche-valeur">Vite, TypeScript, CSS</dd>
+            </div>            <div class="fiche-ligne">
+              <dt class="fiche-intitule">Statut</dt>
+              <dd class="fiche-valeur">Mise en ligne à venir</dd>
+            </div></dl></div>
+    </section>
+    <section class="grille inv-bloc">
+      <h2 class="inv-titre">Bandeau cookies</h2>
+      <p class="inv-note inv-note--large">Collé en bas pendant le défilement. Les deux boutons partagent la largeur : refuser pèse autant qu’accepter.</p>
+      <div class="inv-corps--etroit inv-cookies-demo">
+        <div class="cookies est-visible">
+          <p class="cookies-titre">Cookies</p>
+          <p class="cookies-texte">Deux cookies de mesure d’audience, rien de plus. Vous pouvez refuser, le site fonctionne pareil.</p>
+          <div class="cookies-actions">
+            <button class="bouton bouton--secondaire" type="button">Refuser</button>
+            <button class="bouton bouton--principal" type="button">Accepter</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/composants.ts"></script>
+</body>
+</html>

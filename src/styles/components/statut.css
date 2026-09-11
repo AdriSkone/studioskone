@@ -1,0 +1,36 @@
+/* ============================================================
+   Statut
+   Les DEUX seuls libellés en capitales de tout le site : l'offre
+   recommandée d'un tarif, et la disponibilité du studio. Toute
+   troisième occurrence de text-transform: uppercase est une erreur.
+   ============================================================ */
+
+.statut {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-terracotta-profond);
+}
+
+/* Sur l'encre, le libellé passe en papier : le terracotta profond y tombe
+   à 2.07, et le terracotta à 3.36. Ni l'un ni l'autre ne porte de texte. */
+.negatif .statut { color: var(--color-papier); }
+
+/* Le point n'est que décoratif — il double une information déjà écrite,
+   il ne la porte pas. C'est à ce titre qu'il peut rester terracotta. */
+.statut::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  flex: none;
+}
+
+/* La variante de la carte tarif n'a pas de point : le libellé y est déjà
+   encadré par le filet d'accent de la carte. */
+.statut--nu::before { display: none; }

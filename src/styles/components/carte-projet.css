@@ -1,0 +1,61 @@
+/* ============================================================
+   Cartes projet
+   Deux formats. Angles vifs, jamais d'arrondi sur l'image, jamais de
+   cadre autour : c'est l'image elle-même qui porte la carte.
+   ============================================================ */
+
+.carte-projet {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--color-encre);
+}
+
+/* Rien ne bouge au survol : ni échelle, ni translation. C'est le curseur
+   qui change d'état, et lui seul — d'où le data-curseur sur l'image. */
+.carte-projet-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--color-papier-ombre);
+}
+
+.carte-projet-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h2);
+  line-height: var(--leading-titre);
+  letter-spacing: -0.025em;
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+.carte-projet:active .carte-projet-titre { color: var(--color-terracotta-profond); }
+
+.carte-projet-tagline { font-size: var(--text-corps); line-height: var(--leading-corps); }
+.carte-projet-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--color-gris-chaud);
+}
+
+/* ─── Petit format ──────────────────────────────────────────── */
+.carte-projet--petite { gap: 16px; }
+.carte-projet--petite .carte-projet-image { aspect-ratio: 4 / 3; }
+.carte-projet--petite .carte-projet-titre { font-size: var(--text-h3); line-height: 1.1; letter-spacing: -0.02em; }
+.carte-projet--petite .carte-projet-tagline { font-size: 0.9375rem; }
+
+.carte-projet-tete {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+}
+.carte-projet-type {
+  font-size: var(--text-petit);
+  color: var(--color-gris-chaud);
+  white-space: nowrap;
+}

@@ -1,0 +1,123 @@
+/* ============================================================
+   Barre de navigation
+   Deux états : posée sur le hero, puis réduite une fois dépassé.
+   ============================================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: var(--color-papier);
+  border-bottom: 1px solid var(--filet-leger);
+  transition:
+    height var(--dur-rapide) var(--ease-skone),
+    border-color var(--dur-rapide) var(--ease-skone);
+}
+
+.nav-interieur {
+  /* .colonnes, posée dans le HTML, fournit la grille ET la règle qui fait
+     consommer --col aux enfants. La redéclarer ici donnerait bien douze
+     pistes, mais sans cette règle : chaque bloc s'auto-placerait sur une
+     seule colonne de 87 px et déborderait par-dessus le suivant. */
+  align-items: center;
+  max-width: var(--grille-max);
+  margin-inline: auto;
+  padding-inline: var(--grille-marge);
+  height: var(--nav-h);
+  transition: height var(--dur-rapide) var(--ease-skone);
+}
+
+/* Une fois le hero dépassé : la barre se resserre, son filet s'affirme, et
+   l'appel à l'action passe en plein. */
+.nav.est-reduite { border-bottom-color: var(--filet-moyen); }
+.nav.est-reduite .nav-interieur { height: var(--nav-h-reduite); }
+
+.nav-logo {
+  --col: 1 / span 2;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.nav-liens {
+  --col: 4 / span 5;
+  display: flex;
+  gap: 32px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-lien {
+  transition: color var(--dur-rapide) var(--ease-skone);
+}
+.nav-lien:hover { color: var(--color-terracotta-profond); }
+
+/* La section en cours de lecture est soulignée. Le soulignement, et non
+   une simple couleur : c'est une information, elle ne peut pas tenir
+   uniquement à la teinte. */
+.nav-lien[aria-current='true'] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+.nav-actions {
+  --col: 9 / span 4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  white-space: nowrap;
+}
+
+.nav-mention { font-size: 0.9375rem; color: var(--color-gris-chaud); }
+
+/* ─── Bascule mobile ─────────────────────────────────────────
+   Trois barres qui deviennent une croix. En bordures et non en fond :
+   le trait fait alors exactement 1 px, comme tous les filets du site. */
+.nav-bascule { display: none; }
+
+@media (max-width: 1023px) {
+  .nav-interieur { display: flex; justify-content: space-between; }
+  .nav-liens {
+    position: fixed;
+    inset: var(--nav-h) 0 auto 0;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--grille-marge);
+    background: var(--color-papier);
+    border-bottom: 1px solid var(--color-encre);
+    transform: translateY(-150%);
+    transition: transform var(--dur-base) var(--ease-skone);
+  }
+  .nav-liens.est-ouvert { transform: translateY(0); }
+  .nav-liens .nav-lien {
+    padding-block: 16px;
+    border-top: 1px solid var(--filet-leger);
+    font-size: var(--text-corps-l);
+  }
+  .nav-mention { display: none; }
+  .nav-bascule {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+  }
+  .nav-bascule span {
+    display: block;
+    height: 1px;
+    background: var(--color-encre);
+    transition: transform var(--dur-rapide) var(--ease-skone),
+                opacity var(--dur-rapide) var(--ease-skone);
+  }
+  .nav-bascule.est-ouvert span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-bascule.est-ouvert span:nth-child(2) { opacity: 0; }
+  .nav-bascule.est-ouvert span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}

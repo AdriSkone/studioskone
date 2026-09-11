@@ -1,0 +1,43 @@
+/* ============================================================
+   Ruban défilant des prestations
+   ============================================================ */
+
+.ruban {
+  border-top: 1px solid var(--filet-moyen);
+  border-bottom: 1px solid var(--filet-moyen);
+  overflow: hidden;
+}
+
+.ruban-piste {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  white-space: nowrap;
+  font-size: var(--text-corps-l);
+  font-weight: 500;
+  width: max-content;
+  animation: ruban-defile 42s linear infinite;
+}
+
+/* S'arrête au survol : on ne peut pas lire une liste qui fuit. */
+.ruban:hover .ruban-piste,
+.ruban:focus-within .ruban-piste { animation-play-state: paused; }
+
+.ruban-item {
+  padding: 0 32px;
+  border-right: 1px solid var(--filet-moyen);
+}
+
+/* La piste contient deux fois la même série ; elle se translate d'une
+   demi-longueur, ce qui la ramène exactement à son point de départ. */
+@keyframes ruban-defile {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* En mouvement réduit, le ruban ne défile pas du tout. Les tokens de
+   durée n'atteignent pas une animation par keyframes : il faut le dire ici. */
+@media (prefers-reduced-motion: reduce) {
+  .ruban-piste { animation: none; }
+  .ruban { overflow-x: auto; }
+}

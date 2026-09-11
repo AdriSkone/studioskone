@@ -1,0 +1,76 @@
+/* ============================================================
+   Estimateur
+   Trois questions, une fourchette.
+   ============================================================ */
+
+.estimateur-choix { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.estimateur-option {
+  padding: 16px 24px;
+  border: 1px solid var(--filet-fort);
+  background: transparent;
+  color: var(--color-encre);
+  font-size: var(--text-corps);
+  font-weight: 500;
+  transition:
+    border-color var(--dur-rapide) var(--ease-skone),
+    background var(--dur-rapide) var(--ease-skone),
+    color var(--dur-rapide) var(--ease-skone);
+}
+.estimateur-option:hover { border-color: var(--color-encre); }
+
+/* L'option retenue s'inverse. Le fond plein, et non une simple bordure :
+   il faut que la réponse choisie se lise d'un coup d'œil parmi quatre. */
+.estimateur-option[aria-pressed='true'] {
+  background: var(--color-encre);
+  border-color: var(--color-encre);
+  color: var(--color-papier);
+}
+
+/* ─── Résultat ──────────────────────────────────────────────
+   Encadré de deux filets francs, haut et bas. */
+.estimateur-resultat {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  align-items: end;
+  padding: 32px 0;
+  border-top: 1px solid var(--color-encre);
+  border-bottom: 1px solid var(--color-encre);
+}
+
+.estimateur-resultat-corps {
+  grid-column: 1 / span 4;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.estimateur-prix {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h2);
+  line-height: var(--leading-titre);
+  letter-spacing: -0.025em;
+}
+
+.estimateur-resultat-actions {
+  grid-column: 6 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.estimateur-mention {
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--color-gris-chaud);
+}
+
+@media (max-width: 767px) {
+  .estimateur-resultat { grid-template-columns: 1fr; row-gap: 24px; }
+  .estimateur-resultat-corps,
+  .estimateur-resultat-actions { grid-column: 1 / -1; }
+}

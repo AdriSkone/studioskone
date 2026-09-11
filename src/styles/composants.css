@@ -1,0 +1,18 @@
+/* Toute la bibliothèque, en un import. Une page qui n'affiche qu'une
+   carte projet n'a pas besoin des quinze : les pages du site importeront
+   les fichiers qu'elles utilisent. Cet index sert la page d'inventaire. */
+@import './components/boutons.css';
+@import './components/statut.css';
+@import './components/nav.css';
+@import './components/carte-projet.css';
+@import './components/carte-prestation.css';
+@import './components/carte-tarif.css';
+@import './components/etape.css';
+@import './components/faq.css';
+@import './components/estimateur.css';
+@import './components/ruban.css';
+@import './components/bloc-negatif.css';
+@import './components/fiche-technique.css';
+@import './components/pied-de-page.css';
+@import './components/cookies.css';
+@import './components/cursor.css';
