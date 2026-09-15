@@ -1,10 +1,10 @@
 /* Page d'inventaire. Sert à regarder les composants ensemble, dans tous
    leurs états. Ne part pas en production. */
 
-.inv-entete { padding-block: var(--spacing-section-s); }
-.inv-bloc { padding-block: var(--spacing-section-s); border-top: 1px solid var(--filet-moyen); }
+.inv-entete { padding-block: var(--section-s); }
+.inv-bloc { padding-block: var(--section-s); border-top: 1px solid var(--filet-moyen); }
 .inv-titre { --col: 1 / span 2; font-size: var(--text-petit); font-weight: 500; }
-.inv-note  { --col: 3 / span 7; font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.inv-note  { --col: 3 / span 7; font-size: var(--text-petit); color: var(--gris); }
 .inv-note--large { --col: 3 / span 10; }
 .inv-corps { --col: 3 / span 10; margin-top: 32px; }
 .inv-corps--etroit { --col: 3 / span 7; margin-top: 32px; }
@@ -19,7 +19,7 @@
   margin-top: 32px;
   align-items: start;
 }
-.inv-etat-nom { font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.inv-etat-nom { font-size: var(--text-petit); color: var(--gris); }
 
 .inv-trio {
   --col: 1 / -1;
@@ -65,17 +65,17 @@
    :focus-visible et :active — uniquement ici, jamais sur le site. */
 .bouton--principal[data-etat='survol'],
 .bouton--principal[data-etat='actif'] {
-  background: var(--color-terracotta-profond);
-  border-color: var(--color-terracotta-profond);
+  background: var(--accent-profond);
+  border-color: var(--accent-profond);
 }
 .bouton--secondaire[data-etat='survol'] {
-  background: var(--color-encre);
-  color: var(--color-papier);
+  background: var(--encre);
+  color: var(--papier);
 }
 .bouton--secondaire[data-etat='actif'] {
-  background: var(--color-terracotta-profond);
-  border-color: var(--color-terracotta-profond);
-  color: var(--color-papier);
+  background: var(--accent-profond);
+  border-color: var(--accent-profond);
+  color: var(--papier);
 }
 .lien[data-etat='survol'],
 .lien[data-etat='focus'],
@@ -84,13 +84,13 @@
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
-.lien[data-etat='survol'] { color: var(--color-terracotta-profond); }
-.lien[data-etat='actif']  { color: var(--color-terracotta); }
-.carte-prestation-titre[data-etat='survol'] { color: var(--color-terracotta-profond); }
-.carte-prestation-titre[data-etat='actif']  { color: var(--color-terracotta); }
-.carte-projet[data-etat='actif'] .carte-projet-titre { color: var(--color-terracotta-profond); }
+.lien[data-etat='survol'] { color: var(--accent-profond); }
+.lien[data-etat='actif']  { color: var(--accent); }
+.carte-prestation-titre[data-etat='survol'] { color: var(--accent-profond); }
+.carte-prestation-titre[data-etat='actif']  { color: var(--accent); }
+.carte-projet[data-etat='actif'] .carte-projet-titre { color: var(--accent-profond); }
 
 [data-etat='focus'] {
-  outline: 2px solid var(--color-terracotta);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }

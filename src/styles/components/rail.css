@@ -44,14 +44,14 @@
   height: 1px;
   margin-top: 48px;
   margin-right: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
-  background: var(--filet-leger);
+  background: var(--filet);
 }
 
 .rail-progression-curseur {
   position: absolute;
   inset: 0 auto 0 0;
   width: 20%;
-  background: var(--color-terracotta);
+  background: var(--accent);
   transform-origin: left;
 }
 

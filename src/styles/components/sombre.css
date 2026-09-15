@@ -1,0 +1,55 @@
+/* ============================================================
+   Registre sombre
+   Quatre sections du site s'y inscrivent, jamais deux à la suite.
+   Transitions franches, bord à bord, sans dégradé.
+
+   Sur ce fond, seul le papier porte du texte. Le bleu de Prusse y tombe
+   à 1.73 de contraste et le gris à 2.98 : ils n'y servent qu'aux filets,
+   aux points d'état et au curseur.
+   ============================================================ */
+
+.sombre {
+  background: var(--sombre);
+  color: var(--sombre-texte);
+}
+
+/* Bord à bord : la section sort des marges de la grille pour toucher les
+   deux côtés de l'écran. La transition est franche, il n'y a rien entre
+   le fond clair et le fond sombre. */
+.sombre--pleine-largeur {
+  margin-inline: calc(var(--grille-marge) * -1);
+  padding-inline: var(--grille-marge);
+  border-radius: var(--rond-pleine);
+}
+
+.sombre-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h1);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-h1);
+}
+
+.sombre-mention { font-size: var(--text-petit); text-align: right; }
+
+/* Le texte secondaire ne passe pas par le gris — il échoue sur ce fond.
+   Il reste en papier, simplement moins appuyé. */
+.sombre .t-secondaire { color: var(--sombre-texte); opacity: 0.72; }
+
+/* Les filets s'y diluent dans le papier, et non dans l'encre. */
+.sombre .filet { border-top-color: var(--filet-sombre); }
+.sombre .filet--accent { border-top-color: var(--accent-clair); opacity: 1; }
+
+/* ─── Tête de bloc ───────────────────────────────────────────
+   Le libellé de section, en marge du titre. Casse de phrase et corps de
+   texte : ce n'est pas un eyebrow en capitales, et il n'en prend pas la
+   place — les capitales restent réservées aux deux libellés de statut. */
+.tete-bloc {
+  --col: 1 / span 2;
+  font-size: var(--text-petit);
+  font-weight: 500;
+  color: var(--gris);
+}
+
+.sombre .tete-bloc { color: var(--sombre-texte); opacity: 0.72; }

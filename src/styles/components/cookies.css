@@ -14,15 +14,16 @@
   gap: 20px;
   width: min(420px, calc(100vw - var(--grille-marge) * 2));
   padding: 24px;
-  background: var(--color-papier);
-  border: 1px solid var(--color-encre);
+  background: var(--papier);
+  border: 1px solid var(--encre);
+  border-radius: var(--rond-bloc);
   transform: translateY(calc(100% + var(--grille-marge)));
-  transition: transform var(--dur-base) var(--ease-skone);
+  transition: transform var(--dur-base) var(--ease);
 }
 .cookies.est-visible { transform: translateY(0); }
 
 .cookies-titre { font-size: var(--text-corps); font-weight: 500; }
-.cookies-texte { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+.cookies-texte { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
 
 .cookies-actions { display: flex; gap: 12px; }
 

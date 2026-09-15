@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 16px;
   padding-top: 20px;
-  border-top: 1px solid var(--color-encre);
+  border-top: 1px solid var(--encre);
 }
 
 .carte-prestation-tete {
@@ -26,10 +26,10 @@
   font-size: var(--text-h3);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  transition: color var(--dur-rapide) var(--ease-skone);
+  transition: color var(--dur-rapide) var(--ease);
 }
-.carte-prestation-titre:hover  { color: var(--color-terracotta-profond); }
-.carte-prestation-titre:active { color: var(--color-terracotta); }
+.carte-prestation-titre:hover  { color: var(--accent-profond); }
+.carte-prestation-titre:active { color: var(--accent); }
 
 .carte-prestation-prix {
   font-family: var(--font-data);
@@ -40,8 +40,8 @@
 .carte-prestation-texte {
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
 }
 
 /* « Pour qui » : l'intitulé reste en encre, la réponse passe en gris. */
-.carte-prestation-cible strong { font-weight: 500; color: var(--color-encre); }
+.carte-prestation-cible strong { font-weight: 500; color: var(--encre); }

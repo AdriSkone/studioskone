@@ -10,14 +10,16 @@
   align-items: center;
   gap: 24px;
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 16px;
+  margin-inline: -16px;
   border-top: 1px solid var(--filet-moyen);
+  border-radius: var(--rond-interactif);
   text-align: left;
   font-size: var(--text-corps-l);
   font-weight: 500;
-  transition: color var(--dur-rapide) var(--ease-skone);
+  transition: color var(--dur-rapide) var(--ease);
 }
-.faq-question:hover { color: var(--color-terracotta-profond); }
+.faq-question:hover { color: var(--accent-profond); }
 
 /* L'anneau se pose à l'intérieur : une question occupe toute la largeur
    de sa colonne, un offset positif déborderait de la grille. */
@@ -42,7 +44,7 @@
 .faq-signe::before { left: 0; top: 7px; width: 16px; height: 1px; }
 .faq-signe::after {
   left: 7px; top: 0; width: 1px; height: 16px;
-  transition: transform var(--dur-rapide) var(--ease-skone);
+  transition: transform var(--dur-rapide) var(--ease);
 }
 .faq-question[aria-expanded='true'] .faq-signe::after { transform: scaleY(0); }
 
@@ -53,7 +55,7 @@
   border-left: 1px solid var(--filet-moyen);
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
 }
 
 /* Le numéro de la question. Les maquettes ne le dessinent pas, mais il est
@@ -62,7 +64,7 @@
 .faq-numero {
   font-family: var(--font-data);
   font-size: var(--text-data);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
   margin-right: 16px;
   flex: none;
 }

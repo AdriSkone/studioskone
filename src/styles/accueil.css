@@ -15,7 +15,7 @@ body { padding-top: var(--nav-h); }
    ============================================================ */
 .hero {
   position: relative;
-  padding-top: var(--spacing-section-s);
+  padding-top: var(--section-s);
 }
 
 .hero-corps { row-gap: 0; align-items: start; }
@@ -25,7 +25,7 @@ body { padding-top: var(--nav-h); }
 /* L'accent est en terracotta plein, pas en terracotta profond : c'est du
    grand titre, au-dessus de 24 px, où le seuil de contraste est de 3:1 —
    et 4.64 le dépasse largement. */
-.hero-accent { color: var(--color-terracotta); }
+.hero-accent { color: var(--accent); }
 
 /* Le paragraphe tient six colonnes au-delà de 1440 px, sept en dessous. */
 .hero-statement {
@@ -58,7 +58,7 @@ body { padding-top: var(--nav-h); }
 
 .hero-lieu {
   font-size: var(--text-petit);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
 }
 
 @media (min-width: 1440px) {
@@ -72,41 +72,29 @@ body { padding-top: var(--nav-h); }
   --col: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  margin-top: var(--spacing-section-s);
+  margin-top: var(--section-s);
   padding-top: 16px;
   border-top: 1px solid var(--filet-moyen);
   font-size: var(--text-petit);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
 }
 
 .hero-preuves span { padding-inline: 24px; border-left: 1px solid var(--filet-moyen); }
 .hero-preuves span:first-child { padding-left: 0; border-left: 0; }
 
 .hero .ruban {
-  margin-top: var(--spacing-section-s);
+  margin-top: var(--section-s);
   margin-inline: calc(var(--grille-marge) * -1);
 }
 
-/* Le calque de grille. Douze filets à 6 % d'encre — assez pour qu'on
-   devine la structure, pas assez pour qu'on la lise. Il se trace au
-   chargement, colonne après colonne. */
-.hero-grille {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
-  right: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
-  display: grid;
-  grid-template-columns: repeat(var(--grille-colonnes), minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
-  pointer-events: none;
-  border-right: 1px solid color-mix(in srgb, var(--color-encre) 6%, transparent);
-}
-.hero-grille span {
-  border-left: 1px solid color-mix(in srgb, var(--color-encre) 6%, transparent);
-}
+/* Pas de calque de grille.
 
-/* Le contenu passe au-dessus du calque. */
+   « Aucun filet vertical. La grille est un système d'alignement, elle
+   n'est pas dessinée. » Les douze filets qui se traçaient ici à
+   l'ouverture ont été retirés : c'est la matière du grain qui donne son
+   corps au fond, pas un quadrillage. */
+
+/* Le contenu passe au-dessus du grain. */
 .hero-corps,
 .hero .ruban { position: relative; }
 
@@ -139,7 +127,7 @@ body { padding-top: var(--nav-h); }
 }
 .symptome {
   padding: 20px 0;
-  border-top: 1px solid var(--filet-leger);
+  border-top: 1px solid var(--filet);
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
 }
@@ -152,15 +140,19 @@ body { padding-top: var(--nav-h); }
   font-stretch: calc(var(--wdth-display) * 1%);
   font-size: var(--text-h1);
   line-height: var(--leading-display);
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tracking-h1);
 }
+
+/* La méthode sur fond sombre : la colonne collée garde ses couleurs de
+   registre, et sa phrase de clôture cesse d'emprunter au gris. */
+.sombre .methode-cloture { color: var(--sombre-texte); opacity: 0.72; }
 
 /* ─── Le studio ─────────────────────────────────────────────── */
 .studio-titre { font-size: var(--text-h1); margin-bottom: 48px; }
 
 .metiers { display: flex; gap: 24px; align-items: center; }
-.metier { flex: 1; padding-top: 16px; border-top: 1px solid var(--color-encre); }
-.metier-label { font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.metier { flex: 1; padding-top: 16px; border-top: 1px solid var(--encre); }
+.metier-label { font-size: var(--text-petit); color: var(--gris); }
 .metier-titre {
   font-family: var(--font-display);
   font-weight: 700;
@@ -169,11 +161,11 @@ body { padding-top: var(--nav-h); }
   letter-spacing: -0.02em;
   margin-top: 8px;
 }
-.metier-items { font-size: var(--text-petit); color: var(--color-gris-chaud); margin-top: 8px; }
+.metier-items { font-size: var(--text-petit); color: var(--gris); margin-top: 8px; }
 .metier-joint {
   font-family: var(--font-display);
   font-size: var(--text-h2);
-  color: var(--color-terracotta);
+  color: var(--accent);
   flex: none;
 }
 
@@ -183,11 +175,11 @@ body { padding-top: var(--nav-h); }
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
-  margin-top: var(--spacing-section-s);
+  margin-top: var(--section-s);
 }
-.benefice { padding-top: 20px; border-top: 1px solid var(--color-encre); }
+.benefice { padding-top: 20px; border-top: 1px solid var(--encre); }
 .benefice-titre { font-size: var(--text-h3); }
-.benefice-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+.benefice-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
 
 /* ─── Transparence ──────────────────────────────────────────── */
 .transparence-corps { display: flex; flex-direction: column; gap: 20px; }
@@ -229,7 +221,7 @@ body { padding-top: var(--nav-h); }
 .methode-cloture {
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
   max-width: 28em;
 }
 
@@ -252,8 +244,8 @@ body { padding-top: var(--nav-h); }
 .tarifs-lancement {
   margin-top: 48px;
   padding: 24px 0;
-  border-top: 1px solid var(--color-terracotta);
-  border-bottom: 1px solid var(--filet-leger);
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--filet);
   display: flex;
   flex-wrap: wrap;
   gap: 16px 32px;
@@ -270,29 +262,29 @@ body { padding-top: var(--nav-h); }
   align-items: start;
 }
 
-.tarifs-pied { margin-top: 32px; font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.tarifs-pied { margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }
 
 .verites {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
   row-gap: 32px;
-  margin-top: var(--spacing-section-s);
+  margin-top: var(--section-s);
 }
 .verite { padding-top: 20px; border-top: 1px solid var(--filet-moyen); }
 .verite-titre { font-size: var(--text-corps); font-weight: 500; font-family: var(--font-texte); letter-spacing: 0; }
-.verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+.verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
 
 /* ─── Estimateur ────────────────────────────────────────────── */
 .estimateur-tete { display: flex; flex-direction: column; gap: 12px; }
 .estimateur-form { display: flex; flex-direction: column; gap: 32px; margin-top: 48px; }
 .estimateur-q { border: 0; }
-.estimateur-legende { font-size: var(--text-petit); color: var(--color-gris-chaud); margin-bottom: 16px; }
+.estimateur-legende { font-size: var(--text-petit); color: var(--gris); margin-bottom: 16px; }
 .estimateur-resultat-zone { margin-top: 48px; }
 .estimateur-disclaimer { margin-top: 16px; }
 
 /* ─── FAQ ───────────────────────────────────────────────────── */
-.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-size: var(--text-petit); color: var(--color-gris-chaud); }
+.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-size: var(--text-petit); color: var(--gris); }
 .faq { margin-top: 48px; }
 
 /* ─── Engagements ───────────────────────────────────────────── */
@@ -303,14 +295,13 @@ body { padding-top: var(--nav-h); }
   row-gap: 32px;
   margin-top: 48px;
 }
-.engagement { padding-top: 16px; border-top: 1px solid var(--color-encre); }
-.engagement-numero { font-family: var(--font-data); font-size: var(--text-data); color: var(--color-gris-chaud); }
-.engagement-titre { font-size: var(--text-corps); margin-top: 12px; }
-.engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--color-gris-chaud); }
+.engagement { padding-top: 16px; border-top: 1px solid var(--encre); }
+.engagement-titre { font-size: var(--text-corps); }
+.engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
 
 /* ─── Contact ───────────────────────────────────────────────── */
 .contact-lead { display: flex; flex-direction: column; gap: 16px; }
-#contact-form-root { margin-top: var(--spacing-section-s); }
+#contact-form-root { margin-top: var(--section-s); }
 
 /* ─── Petit écran ───────────────────────────────────────────── */
 @media (max-width: 1023px) {

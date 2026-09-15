@@ -38,9 +38,9 @@ function logoSvg(fichier, classe) {
   return brut
     .replace(/<\?xml[^>]*\?>\s*/, '')
     .replace(/id="Calque_2"/, `class="${classe}" role="img" aria-label="Studio Skøne"`)
-    .replace(/fill:\s*#c5603a/gi, 'fill: var(--color-terracotta)')
+    .replace(/fill:\s*#c5603a/gi, 'fill: var(--accent)')
     .replace(/fill:\s*#1d1d1b/gi, 'fill: currentColor')
-    .replace(/fill:\s*#C56039/gi, 'fill: var(--color-terracotta)')
+    .replace(/fill:\s*#C56039/gi, 'fill: var(--accent)')
     .replace(/fill:\s*#FAEEDF/gi, 'fill: currentColor')
     // Les identifiants internes sont préfixés : deux logos dans la même
     // page partageraient sinon leurs classes .cls-1 et .cls-2.
@@ -116,15 +116,15 @@ ${c.liens.map((l) => `            <a href="${l.href}">${l.libelle}</a>`).join('\
 
   return `  <footer class="pied" id="footer">
     <div class="grille">
-      <div class="negatif bloc-negatif bloc-negatif--pleine-largeur" style="--col: 1 / -1">
+      <div class="sombre sombre sombre--pleine-largeur" style="--col: 1 / -1">
         <div class="colonnes">
           <p class="statut" style="--col: 1 / span 6">${pied.cta.statut}</p>
-          <p class="bloc-negatif-mention" style="--col: 9 / span 4">${pied.cta.mention}</p>
+          <p class="sombre-mention" style="--col: 9 / span 4">${pied.cta.mention}</p>
           <a class="bouton bouton--principal" style="--col: 1 / span 4; margin-top: 40px" href="${resoudre(pied.cta.lien.href, prefixe)}">${pied.cta.lien.libelle}${fleche}</a>
         </div>
       </div>
 
-      <a class="pied-logo" style="--col: 1 / span 4; margin-top: var(--spacing-section-s)" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
+      <a class="pied-logo" style="--col: 1 / span 4; margin-top: var(--section-s)" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
       <p class="pied-intro">${pied.tagline}</p>
       <p class="pied-zone">${icones.lieu} ${pied.zone}</p>
 

@@ -11,16 +11,17 @@
   align-items: center;
   padding: 16px 24px;
   border: 1px solid var(--filet-fort);
+  border-radius: var(--rond-interactif);
   background: transparent;
-  color: var(--color-encre);
+  color: var(--encre);
   font-size: var(--text-corps);
   font-weight: 500;
   transition:
-    border-color var(--dur-rapide) var(--ease-skone),
-    background var(--dur-rapide) var(--ease-skone),
-    color var(--dur-rapide) var(--ease-skone);
+    border-color var(--dur-rapide) var(--ease),
+    background var(--dur-rapide) var(--ease),
+    color var(--dur-rapide) var(--ease);
 }
-.estimateur-option:hover { border-color: var(--color-encre); }
+.estimateur-option:hover { border-color: var(--encre); }
 
 /* Le bouton radio natif reste dans le DOM — c'est lui qui porte le groupe,
    la navigation aux flèches et l'état coché. Mais son rond bleu système
@@ -43,13 +44,13 @@
 /* L'option retenue s'inverse. Le fond plein, et non une simple bordure :
    parmi quatre réponses, il faut que la sienne se lise d'un coup d'œil. */
 .estimateur-option:has(input:checked) {
-  background: var(--color-encre);
-  border-color: var(--color-encre);
-  color: var(--color-papier);
+  background: var(--encre);
+  border-color: var(--encre);
+  color: var(--papier);
 }
 
 .estimateur-option:has(input:focus-visible) {
-  outline: 2px solid var(--color-terracotta);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
@@ -61,8 +62,8 @@
   column-gap: var(--grille-gouttiere);
   align-items: end;
   padding: 32px 0;
-  border-top: 1px solid var(--color-encre);
-  border-bottom: 1px solid var(--color-encre);
+  border-top: 1px solid var(--encre);
+  border-bottom: 1px solid var(--encre);
 }
 
 .estimateur-resultat-corps {
@@ -92,7 +93,7 @@
 .estimateur-mention {
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
-  color: var(--color-gris-chaud);
+  color: var(--gris);
 }
 
 @media (max-width: 767px) {

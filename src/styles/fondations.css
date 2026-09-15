@@ -1,36 +1,36 @@
 /* Page de démonstration des fondations. Ne sert pas le site : elle sert à
    vérifier que les tokens tiennent, et à les regarder ensemble. */
 
-.demo-entete { padding-block: var(--spacing-section-s) var(--spacing-section-s); }
-.demo-bloc { padding-block: var(--spacing-section-s); }
-.demo-bloc + .demo-bloc { border-top: 1px solid var(--color-encre); }
+.demo-entete { padding-block: var(--section-s) var(--section-s); }
+.demo-bloc { padding-block: var(--section-s); }
+.demo-bloc + .demo-bloc { border-top: 1px solid var(--encre); }
 
 .demo-titre { --col: 1 / -1; margin-bottom: 32px; }
-.demo-note { --col: 1 / 8; margin-top: 16px; color: var(--color-gris-chaud); }
+.demo-note { --col: 1 / 8; margin-top: 16px; color: var(--gris); }
 
 /* Palette — la largeur de chaque colonne suit le dosage réel à l'écran :
    le terracotta ne dépasse jamais 3 % de la surface. */
 .demo-palette { --col: 1 / -1; display: grid; grid-template-columns: 3fr 2fr 3fr 1fr 1fr 2fr; gap: var(--grille-gouttiere); }
 .demo-echantillon { display: flex; flex-direction: column; gap: 8px; }
-.demo-aplat { height: 120px; border: 1px solid var(--color-encre); }
+.demo-aplat { height: 120px; border: 1px solid var(--encre); }
 
 .demo-matrice { --col: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)); gap: var(--grille-gouttiere); }
-.demo-matrice-tete { color: var(--color-gris-chaud); }
-.demo-cellule { display: flex; flex-direction: column; justify-content: space-between; gap: 12px; min-height: 96px; padding: 12px; border: 1px solid var(--color-encre); }
+.demo-matrice-tete { color: var(--gris); }
+.demo-cellule { display: flex; flex-direction: column; justify-content: space-between; gap: 12px; min-height: 96px; padding: 12px; border: 1px solid var(--encre); }
 .demo-cellule-pied { display: flex; justify-content: space-between; gap: 8px; }
-.demo-echec { color: var(--color-terracotta-profond); }
+.demo-echec { color: var(--accent-profond); }
 
 /* Typographie */
-.demo-ligne-typo { --col: 1 / -1; display: grid; grid-template-columns: 140px 220px 1fr; gap: var(--grille-gouttiere); align-items: baseline; padding-block: 20px; border-top: 1px solid var(--color-encre); }
+.demo-ligne-typo { --col: 1 / -1; display: grid; grid-template-columns: 140px 220px 1fr; gap: var(--grille-gouttiere); align-items: baseline; padding-block: 20px; border-top: 1px solid var(--encre); }
 
 /* Grille — les colonnes se voient. */
 .demo-grille-visible { --col: 1 / -1; }
-.demo-colonne { height: 160px; background: var(--color-papier-ombre); border-top: 2px solid var(--color-terracotta); }
+.demo-colonne { height: 160px; background: var(--papier-ombre); border-top: 2px solid var(--accent); }
 
 /* Carte projet factice : sert à déclencher la pastille du curseur. */
 .demo-carte { --col: 1 / 7; }
-.demo-carte-image { aspect-ratio: 4 / 3; background: var(--color-papier-ombre); border: 1px solid var(--color-encre); }
-.demo-negatif { --col: 1 / -1; padding: 48px; }
+.demo-carte-image { aspect-ratio: 4 / 3; background: var(--papier-ombre); border: 1px solid var(--encre); }
+.demo-sombre { --col: 1 / -1; padding: 48px; }
 
 @media (max-width: 767px) {
   .demo-palette,

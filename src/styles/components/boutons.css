@@ -8,53 +8,54 @@
   display: inline-block;
   align-self: flex-start;
   padding: 17px 27px;
-  border: 1px solid var(--color-encre);
+  border: 1px solid var(--encre);
+  border-radius: var(--rond-interactif);
   font-family: var(--font-texte);
   font-size: var(--text-corps);
   font-weight: 500;
   white-space: nowrap;
   transition:
-    background var(--dur-rapide) var(--ease-skone),
-    border-color var(--dur-rapide) var(--ease-skone),
-    color var(--dur-rapide) var(--ease-skone);
+    background var(--dur-rapide) var(--ease),
+    border-color var(--dur-rapide) var(--ease),
+    color var(--dur-rapide) var(--ease);
 }
 
 /* ─── Principal ─────────────────────────────────────────────── */
 .bouton--principal {
-  background: var(--color-encre);
-  color: var(--color-papier);
+  background: var(--encre);
+  color: var(--papier);
 }
 .bouton--principal:hover,
 .bouton--principal:active {
-  background: var(--color-terracotta-profond);
-  border-color: var(--color-terracotta-profond);
+  background: var(--accent-profond);
+  border-color: var(--accent-profond);
 }
 
 /* ─── Secondaire ────────────────────────────────────────────── */
 .bouton--secondaire {
   background: transparent;
-  color: var(--color-encre);
+  color: var(--encre);
 }
 .bouton--secondaire:hover {
-  background: var(--color-encre);
-  color: var(--color-papier);
+  background: var(--encre);
+  color: var(--papier);
 }
 .bouton--secondaire:active {
-  background: var(--color-terracotta-profond);
-  border-color: var(--color-terracotta-profond);
-  color: var(--color-papier);
+  background: var(--accent-profond);
+  border-color: var(--accent-profond);
+  color: var(--papier);
 }
 
 /* ─── Désactivé ─────────────────────────────────────────────── */
 .bouton:disabled,
 .bouton[aria-disabled='true'] {
-  color: var(--color-gris-chaud);
+  color: var(--gris);
   pointer-events: none;
 }
 .bouton--principal:disabled,
 .bouton--principal[aria-disabled='true'] {
-  background: var(--color-papier-ombre);
-  border-color: var(--color-papier-ombre);
+  background: var(--papier-ombre);
+  border-color: var(--papier-ombre);
 }
 .bouton--secondaire:disabled,
 .bouton--secondaire[aria-disabled='true'] {
@@ -83,23 +84,23 @@
 /* ─── Sur fond encre ────────────────────────────────────────
    Les rôles s'inversent : le papier devient la surface pleine. Le
    terracotta ne peut pas servir ici — il tombe à 3.36 sur l'encre. */
-.negatif .bouton--principal {
-  background: var(--color-papier);
-  border-color: var(--color-papier);
-  color: var(--color-encre);
+.sombre .bouton--principal {
+  background: var(--papier);
+  border-color: var(--papier);
+  color: var(--encre);
 }
-.negatif .bouton--principal:hover,
-.negatif .bouton--principal:active {
-  background: var(--color-papier-ombre);
-  border-color: var(--color-papier-ombre);
+.sombre .bouton--principal:hover,
+.sombre .bouton--principal:active {
+  background: var(--papier-ombre);
+  border-color: var(--papier-ombre);
 }
-.negatif .bouton--secondaire {
-  border-color: var(--color-papier);
-  color: var(--color-papier);
+.sombre .bouton--secondaire {
+  border-color: var(--papier);
+  color: var(--papier);
 }
-.negatif .bouton--secondaire:hover {
-  background: var(--color-papier);
-  color: var(--color-encre);
+.sombre .bouton--secondaire:hover {
+  background: var(--papier);
+  color: var(--encre);
 }
 
 /* ─── Lien de texte ─────────────────────────────────────────
@@ -116,7 +117,7 @@
   font-size: var(--text-corps);
   font-weight: 500;
   text-decoration: none;
-  transition: color var(--dur-rapide) var(--ease-skone);
+  transition: color var(--dur-rapide) var(--ease);
 }
 
 .lien:hover,
@@ -135,11 +136,11 @@
   inset: -5px -4px;
 }
 
-.lien:hover  { color: var(--color-terracotta-profond); }
-.lien:active { color: var(--color-terracotta); }
+.lien:hover  { color: var(--accent-profond); }
+.lien:active { color: var(--accent); }
 
-.negatif .lien:hover,
-.negatif .lien:active { color: var(--color-papier-ombre); }
+.sombre .lien:hover,
+.sombre .lien:active { color: var(--papier-ombre); }
 
 /* ─── Flèche ────────────────────────────────────────────────
    Jamais un caractère dans la chaîne du libellé : un lecteur d'écran

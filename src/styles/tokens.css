@@ -1,57 +1,62 @@
 /* ============================================================
    STUDIO SKØNE — Tokens
-   Source de vérité unique. Aucune couleur, aucune fonte, aucune
-   durée n'est définie ailleurs dans le projet.
+   Source de vérité unique, alignée sur STYLE_GUIDE.md.
+   Aucune couleur, aucune fonte, aucune durée n'est définie ailleurs.
    ============================================================ */
 
 :root {
-  /* ─── Couleur ──────────────────────────────────────────────
-     Six valeurs. Le terracotta ne couvre jamais plus de 3 % d'un
-     écran : curseur, accent du hero, états actifs, filets.
-
+  /* ─── Couleur, fond clair ──────────────────────────────────
      Contrastes mesurés (WCAG 2.x) :
-                          papier   papier-ombré   encre
-       encre               15.58       14.17         —
-       terracotta           4.64        4.22 ✗      3.36 ✗
-       terracotta-profond   7.51        6.83        2.07 ✗
-       gris-chaud           5.70        5.18        2.73 ✗
-       papier                 —          1.10 ✗    15.58
+                        papier   papier ombré
+       encre             15.24       13.92     AAA
+       accent             8.83        8.07     AAA
+       accent-profond    11.57       10.57     AAA
+       gris               5.11        4.67     AA
 
-     Trois règles qui en découlent, appliquées partout :
-       · Sur fond ombré, le texte d'accent s'écrit en terracotta
-         PROFOND. Le terracotta y échoue à 4.22.
-       · Sur l'encre, ni le terracotta ni le gris chaud ne portent
-         de texte — titres compris. Tout texte en négatif est en
-         papier. Ils ne servent qu'aux filets et aux points d'état.
-       · Le papier et le papier ombré ne se distinguent pas l'un de
-         l'autre (1.10) : jamais l'un sur l'autre pour du texte.  */
-  --color-papier:             #F8EDDE;
-  --color-papier-ombre:       #F1E2CE;
-  --color-encre:              #1C1512;
-  --color-terracotta:         #A95132;
-  --color-terracotta-profond: #7A3823;
-  --color-gris-chaud:         #6B5A4A;
+     Le gris sur papier ombré est la paire la plus serrée du système,
+     à 4.67 pour un seuil de 4.5. Elle passe, mais elle n'a pas de marge :
+     assombrir le fond ou éclaircir le gris la ferait basculer.            */
+  --papier:         #F6ECDB;
+  --papier-ombre:   #EEE2CC;
+  --encre:          #14181C;
+  --accent:         #12455C;
+  --accent-profond: #0C3242;
+  --gris:           #5F6468;
 
-  /* Filets. Trois degrés d'encre diluée, et rien d'autre — les maquettes
-     n'emploient que ces trois valeurs. Déclarés ici pour qu'aucun
-     rgba(28, 21, 18, …) ne se retrouve écrit à la main dans un composant :
-     ce serait une couleur en dur, et une quatrième valeur le jour où l'on
-     se tromperait d'une décimale. */
-  --filet-leger: color-mix(in srgb, var(--color-encre) 12%, transparent);
-  --filet-moyen: color-mix(in srgb, var(--color-encre) 20%, transparent);
-  --filet-fort:  color-mix(in srgb, var(--color-encre) 30%, transparent);
+  /* ─── Couleur, sections sombres ───────────────────────────
+     Sur l'encre :
+       sombre-texte  15.24  AAA
+       accent-clair   6.70  AA
+       accent         1.73  ÉCHEC — jamais de texte
+       gris           2.98  ÉCHEC — jamais de texte
 
-  /* Sur l'encre, les filets se diluent dans le papier et non l'inverse. */
-  --filet-negatif: color-mix(in srgb, var(--color-papier) 24%, transparent);
+     Le bleu de Prusse ne porte pas de texte sur fond sombre : il y sert
+     aux filets, aux points d'état et au curseur, et à rien d'autre. Tout
+     texte en négatif s'écrit en papier, ou en accent clair.              */
+  --sombre:        #14181C;
+  --sombre-texte:  #F6ECDB;
+  --accent-clair:  #5FA8C4;
 
-  /* ─── Typographie ─────────────────────────────────────────
-     Bricolage pour les titres, Switzer pour le texte, JetBrains
-     Mono pour la donnée seule : numéro d'étape, prix, année.     */
+  /* ─── Filets ──────────────────────────────────────────────
+     Horizontaux uniquement. La grille ne se dessine pas : elle aligne.
+     12 % est la valeur des séparations de section ; les deux autres
+     degrés servent aux bordures de champs et de blocs.                   */
+  --filet:       color-mix(in srgb, var(--encre) 12%, transparent);
+  --filet-moyen: color-mix(in srgb, var(--encre) 20%, transparent);
+  --filet-fort:  color-mix(in srgb, var(--encre) 30%, transparent);
+  --filet-sombre: color-mix(in srgb, var(--sombre-texte) 24%, transparent);
+
+  /* ─── Grain ───────────────────────────────────────────────
+     La matière du site, pas une option. Bruit brun chaud en multiply :
+     un bruit gris désaturerait le papier et le ferait paraître terne.    */
+  --grain-teinte:  #6B5A44;
+  --grain-opacite: 0.09;
+
+  /* ─── Typographie ─────────────────────────────────────────── */
   --font-display: 'Bricolage Grotesque', 'Bricolage Fallback', ui-sans-serif, system-ui, sans-serif;
   --font-texte:   'Switzer', 'Switzer Fallback', ui-sans-serif, system-ui, sans-serif;
   --font-data:    'JetBrains Mono', 'Mono Fallback', ui-monospace, monospace;
 
-  /* Échelle à sept niveaux, ratio proche de 1,333. */
   --text-display: clamp(3.5rem, 8vw, 8.5rem);
   --text-h1:      clamp(2.75rem, 5.5vw, 5rem);
   --text-h2:      clamp(2rem, 3.5vw, 3rem);
@@ -61,53 +66,68 @@
   --text-petit:   0.875rem;
   --text-data:    0.8125rem;
 
+  --wdth-display:      92;
   --tracking-display: -0.035em;
-  --wdth-display:     92;
+  --tracking-h1:      -0.03em;
+  --tracking-h2:      -0.025em;
+  --tracking-h3:      -0.02em;
 
-  /* Interlignage : 0,92 sur les très grandes tailles, 1 sur les
-     grands titres, 1,5 sur le texte courant. */
-  --leading-display: 0.92;
+  --leading-display: 0.90;
   --leading-titre:   1;
   --leading-corps:   1.5;
 
+  /* ─── Rondeur ─────────────────────────────────────────────
+     Quatre valeurs, et aucune intermédiaire. Aucune pilule.             */
+  --rond-interactif: 10px;  /* boutons, champs, choix, en-têtes d'accordéon */
+  --rond-bloc:       16px;  /* blocs de contenu, images, vignettes */
+  --rond-pleine:     0;     /* sections bord à bord */
+
   /* ─── Espacement ──────────────────────────────────────────
-     Trois valeurs de section, pas quatre. Une section qui semble
-     en demander une quatrième est une section à revoir.          */
-  --spacing-section-s: 96px;
-  --spacing-section-m: 160px;
-  --spacing-section-l: 240px;
+     Échelle de 8. Entre sections : trois valeurs, jamais d'intermédiaire. */
+  --section-s: 96px;
+  --section-m: 160px;
+  --section-l: 240px;
 
-  /* ─── Grille ──────────────────────────────────────────────
-     12 colonnes, gouttière 24 px, marges 64 px, 1440 px utiles.  */
-  --grille-colonnes: 12;
+  /* ─── Grille ──────────────────────────────────────────────── */
+  --grille-colonnes:  12;
   --grille-gouttiere: 24px;
-  --grille-marge: 64px;
-  --grille-max: 1440px;
+  --grille-marge:     64px;
+  --grille-max:       1440px;
 
-  /* ─── Mouvement ───────────────────────────────────────────── */
-  --ease-skone: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-rapide: 200ms;
-  --dur-base:   600ms;
+  /* ─── Mouvement ───────────────────────────────────────────
+     Une seule courbe pour tout le site.                                  */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-rapide:   200ms;
+  --dur-moyenne:  300ms;
+  --dur-base:     600ms;
 
-  /* Hauteur de la barre collée, dans ses deux états. Mesurée, pas
-     estimée : toute section qui commence sous la nav réserve cette
-     bande, et le décalage d'ancre s'y accroche. */
-  --nav-h:          88px;
-  --nav-h-reduite:  72px;
+  /* Hauteur de la barre collée, dans ses deux états. */
+  --nav-h:         88px;
+  --nav-h-reduite: 72px;
 }
 
-/* La marge de grille se resserre avant que les colonnes ne cassent :
-   64 px de marge sur un écran de 390 px ne laisserait rien au texte. */
+/* Breakpoints de référence : 390, 768, 1024, 1440. */
 @media (max-width: 1023px) {
-  :root { --grille-marge: 32px; }
+  :root { --grille-marge: 40px; }
 }
 
 @media (max-width: 767px) {
   :root {
-    --grille-marge: 20px;
+    --grille-marge: 40px;
     --grille-gouttiere: 16px;
-    --spacing-section-s: 64px;
-    --spacing-section-m: 96px;
-    --spacing-section-l: 128px;
+    --section-s: 64px;
+    --section-m: 96px;
+    --section-l: 128px;
+  }
+}
+
+/* Le mouvement réduit coupe les durées à la source : toute transition du
+   site les consomme, donc toutes s'arrêtent ensemble, sans qu'aucune règle
+   ait à en surcharger une autre. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-rapide:  0.01ms;
+    --dur-moyenne: 0.01ms;
+    --dur-base:    0.01ms;
   }
 }

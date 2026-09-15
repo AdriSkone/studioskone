@@ -6,7 +6,7 @@
 .fiche {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--color-encre);
+  border-top: 1px solid var(--encre);
 }
 
 .fiche-ligne {
@@ -14,14 +14,14 @@
   grid-template-columns: 1fr 2fr;
   column-gap: var(--grille-gouttiere);
   padding: 14px 0;
-  border-bottom: 1px solid var(--filet-leger);
+  border-bottom: 1px solid var(--filet);
 }
 
 .fiche-intitule {
   font-family: var(--font-data);
   font-size: var(--text-data);
   line-height: 1.7;
-  color: var(--color-gris-chaud);
+  color: var(--gris);
 }
 
 .fiche-valeur { font-size: 0.9375rem; line-height: var(--leading-corps); font-weight: 500; }

@@ -1,9 +1,11 @@
 /**
  * Moment 1 — l'ouverture du hero.
  *
- * Une séquence d'environ deux secondes : les filets de grille se tracent,
- * le titre se lève ligne après ligne, puis le reste, puis le curseur
- * s'allume.
+ * Une séquence d'environ deux secondes : le titre se lève ligne après
+ * ligne, puis le reste, puis le curseur s'allume.
+ *
+ * (Elle commençait par tracer les filets de grille du hero. Ils ont été
+ * retirés : le style guide interdit les filets verticaux.)
  *
  * Elle ne se joue qu'une fois par session. Une animation d'entrée est une
  * première impression ; revue à chaque retour sur l'accueil, elle devient
@@ -145,15 +147,8 @@ export function initHero(auFini?: () => void): void {
       })
 
       suite
-        // Les filets se tracent de haut en bas, l'un après l'autre.
-        .from('.hero-grille span', {
-          scaleY: 0,
-          transformOrigin: 'top',
-          duration: 0.7,
-          stagger: 0.035,
-        })
         // Le titre se lève, ligne après ligne.
-        .from(lignes, { yPercent: 105, duration: 0.9, stagger: 0.09 }, '-=0.35')
+        .from(lignes, { yPercent: 105, duration: 0.9, stagger: 0.09 })
         // Puis ce qui l'accompagne.
         .from('.hero-droite > *', { y: 16, opacity: 0, duration: 0.6, stagger: 0.08 }, '-=0.45')
         .from('.hero-preuves', { opacity: 0, duration: 0.5 }, '-=0.3')

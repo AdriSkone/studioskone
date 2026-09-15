@@ -13,13 +13,13 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-terracotta);
+  background: var(--accent);
   pointer-events: none;
   opacity: 0;
   /* La position est écrite en translate3d par le script, à chaque frame.
      Elle n'est donc jamais animée ici : seule l'apparition l'est, et le
      déplacement reste collé à la souris. */
-  transition: opacity var(--dur-rapide) var(--ease-skone);
+  transition: opacity var(--dur-rapide) var(--ease);
   will-change: transform;
 }
 

@@ -10,18 +10,18 @@
   grid-template-columns: repeat(10, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
   padding: 28px 0;
-  border-top: 1px solid var(--filet-leger);
-  color: var(--color-gris-chaud);
+  border-top: 1px solid var(--filet);
+  color: var(--gris);
   transition:
-    color var(--dur-rapide) var(--ease-skone),
-    border-color var(--dur-rapide) var(--ease-skone);
+    color var(--dur-rapide) var(--ease),
+    border-color var(--dur-rapide) var(--ease);
 }
 
 /* L'étape en cours reprend l'encre et un filet franc. Deux marques pour
    un seul état : la couleur seule ne suffirait pas à le signaler. */
 .etape.est-active {
-  border-top-color: var(--color-encre);
-  color: var(--color-encre);
+  border-top-color: var(--encre);
+  color: var(--encre);
 }
 
 .etape-numero {
@@ -64,9 +64,9 @@
   font-size: 0.9375rem;
   line-height: var(--leading-corps);
   font-weight: 500;
-  transition: border-color var(--dur-rapide) var(--ease-skone);
+  transition: border-color var(--dur-rapide) var(--ease);
 }
-.etape.est-active .etape-temps { border-left-color: var(--color-terracotta); }
+.etape.est-active .etape-temps { border-left-color: var(--accent); }
 
 @media (max-width: 767px) {
   .etape { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 12px; }
@@ -76,3 +76,22 @@
   .etape-temps  { grid-column: 1 / -1; }
   .etape-temps  { padding-left: 16px; }
 }
+
+
+/* ─── Sur fond sombre ───────────────────────────────────────
+   Le gris ne porte pas de texte ici : il tombe à 2.98 sur l'encre. L'état
+   inactif se marque donc par une opacité sur le papier, pas par une
+   seconde couleur. */
+.sombre .etape {
+  color: var(--sombre-texte);
+  opacity: 0.55;
+  border-top-color: var(--filet-sombre);
+}
+
+.sombre .etape.est-active {
+  opacity: 1;
+  border-top-color: var(--sombre-texte);
+}
+
+.sombre .etape-temps { border-left-color: var(--filet-sombre); }
+.sombre .etape.est-active .etape-temps { border-left-color: var(--accent-clair); }

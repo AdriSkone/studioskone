@@ -13,12 +13,12 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-terracotta-profond);
+  color: var(--accent-profond);
 }
 
 /* Sur l'encre, le libellé passe en papier : le terracotta profond y tombe
    à 2.07, et le terracotta à 3.36. Ni l'un ni l'autre ne porte de texte. */
-.negatif .statut { color: var(--color-papier); }
+.sombre .statut { color: var(--papier); }
 
 /* Le point n'est que décoratif — il double une information déjà écrite,
    il ne la porte pas. C'est à ce titre qu'il peut rester terracotta. */
@@ -27,7 +27,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-terracotta);
+  background: var(--accent);
   flex: none;
 }
 
@@ -55,9 +55,9 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-terracotta);
+  background: var(--accent);
   flex: none;
 }
 
-.negatif .pastille::before,
-.bloc-negatif .pastille::before { background: var(--color-terracotta); }
+.sombre .pastille::before,
+.sombre .pastille::before { background: var(--accent); }

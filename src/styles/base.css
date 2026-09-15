@@ -21,8 +21,8 @@ html {
 }
 
 body {
-  background: var(--color-papier);
-  color: var(--color-encre);
+  background: var(--papier);
+  color: var(--encre);
   font-family: var(--font-texte);
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
@@ -38,6 +38,58 @@ ul, ol { list-style: none; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 input, textarea, select { font: inherit; color: inherit; }
+
+
+/* ─── Grain ──────────────────────────────────────────────────
+   La matière du site. Une seule couche pour toute la page, posée
+   DERRIÈRE le contenu : un grain qui passe par-dessus le texte en salit
+   les lettres au lieu de donner du corps au fond.
+
+   Brun chaud et non gris : en multiply, un bruit gris désature le papier
+   et le fait virer au terne. La teinte reste un token — le fichier SVG ne
+   sert que de masque, il ne porte aucune couleur.
+
+   `position: fixed` plutôt qu'un fond répété sur le body : le grain ne
+   défile pas avec la page, ce qui évite l'effet de papier peint qui glisse
+   sous le texte. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: 300px 300px;
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: 300px 300px;
+  mix-blend-mode: multiply;
+  opacity: var(--grain-opacite);
+  pointer-events: none;
+}
+
+/* Sur fond sombre, le multiply brun ne se voit pas : il assombrit ce qui
+   est déjà sombre. La matière doit traverser les deux registres, donc elle
+   y passe en `screen` — le grain éclaircit au lieu d'assombrir. Posé sur
+   la section elle-même, puisque son fond opaque masque la couche globale. */
+.sombre { position: relative; }
+
+.sombre::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: 300px 300px;
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: 300px 300px;
+  mix-blend-mode: screen;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* Le contenu d'une section sombre passe au-dessus de son grain. */
+.sombre > * { position: relative; z-index: 1; }
 
 /* ─── Typographie ───────────────────────────────────────────
    Titres en casse de phrase. Les capitales sont réservées aux
@@ -88,7 +140,7 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
   font-variant-numeric: tabular-nums;
 }
 
-.t-secondaire { color: var(--color-gris-chaud); }
+.t-secondaire { color: var(--gris); }
 
 /* ─── Grille ─────────────────────────────────────────────────
    12 colonnes. Les sections posent leur contenu dessus plutôt que
@@ -154,31 +206,31 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
   .grille.grille > * { --col: 1 / -1; }
 }
 
-.section-s { padding-block: var(--spacing-section-s); }
-.section-m { padding-block: var(--spacing-section-m); }
-.section-l { padding-block: var(--spacing-section-l); }
+.section-s { padding-block: var(--section-s); }
+.section-m { padding-block: var(--section-m); }
+.section-l { padding-block: var(--section-l); }
 
 /* ─── Filets ─────────────────────────────────────────────────
    Le site sépare au filet, jamais à l'ombre ni au cadre flou. */
 .filet {
   border: 0;
-  border-top: 1px solid var(--color-encre);
+  border-top: 1px solid var(--encre);
   opacity: 0.15;
 }
-.filet--accent { border-top-color: var(--color-terracotta); opacity: 1; }
+.filet--accent { border-top-color: var(--accent); opacity: 1; }
 .filet--franc  { opacity: 1; }
 
 /* ─── Négatif ────────────────────────────────────────────────
    Sur l'encre, seul le papier porte du texte. Ni le terracotta
    (3.36) ni le gris chaud (2.73) n'y passent AA — ils n'y servent
    qu'aux filets et aux points d'état. */
-.negatif {
-  background: var(--color-encre);
-  color: var(--color-papier);
+.sombre {
+  background: var(--encre);
+  color: var(--papier);
 }
-.negatif .t-secondaire { color: var(--color-papier); opacity: 0.72; }
-.negatif .filet { border-top-color: var(--color-papier); }
-.negatif .filet--accent { border-top-color: var(--color-terracotta); opacity: 1; }
+.sombre .t-secondaire { color: var(--papier); opacity: 0.72; }
+.sombre .filet { border-top-color: var(--papier); }
+.sombre .filet--accent { border-top-color: var(--accent); opacity: 1; }
 
 /* ─── Focus ──────────────────────────────────────────────────
    Un filet terracotta de 2 px, posé à 4 px. Dessiné en `outline`, et non
@@ -187,7 +239,7 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
    3.36 sur l'encre et 4.64 sur le papier : au-dessus du 3:1 exigé
    pour un élément non textuel, sur les deux fonds. */
 :focus-visible {
-  outline: 2px solid var(--color-terracotta);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 :focus:not(:focus-visible) { outline: none; }
@@ -234,8 +286,8 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
-  background: var(--color-encre);
-  color: var(--color-papier);
+  background: var(--encre);
+  color: var(--papier);
 }
 .skip-link:focus-visible {
   width: auto; height: auto;

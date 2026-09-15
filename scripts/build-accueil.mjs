@@ -58,14 +58,7 @@ function hero() {
 
   const preuves = C.hero.preuves.map((p) => `<span>${p}</span>`).join('\n        ')
 
-  // Le calque de grille : douze filets verticaux, très pâles, tracés au
-  // chargement. Purement décoratif — il ne porte aucune information et
-  // n'intercepte aucun clic.
-  const filetsGrille = Array.from({ length: 12 }, () => '<span></span>').join('')
-
   return `  <section class="hero" id="hero">
-    <div class="hero-grille" aria-hidden="true">${filetsGrille}</div>
-
     <div class="grille hero-corps">
       <h1 class="t-display hero-titre" style="--col: 1 / -1">
         ${C.hero.titre.avant} <span class="hero-accent">${C.hero.titre.accent}</span>
@@ -114,7 +107,7 @@ ${items}
  * donc apparaître qu'ici, et nulle part ailleurs.
  */
 function pivot() {
-  return `  <section class="section-m" id="pivot">
+  return `  <section class="section-m sombre" id="pivot">
     <div class="grille">
       <p class="pivot-texte" style="--col: 1 / span 9">${C.pivot.premiere}<br>${C.pivot.seconde}</p>
     </div>
@@ -216,7 +209,7 @@ function methode() {
 
   // La colonne de gauche reste en place pendant que les étapes défilent :
   // le titre de la section ne quitte pas l'écran tant qu'on la parcourt.
-  return `  <section class="section-m" id="process">
+  return `  <section class="section-m sombre" id="process">
     <div class="grille">
       <div class="methode-colonne" style="--col: 1 / span 4">
         <p class="tete-bloc" style="--col: auto">${C.methode.label}</p>
@@ -399,8 +392,10 @@ ${items}
 function engagements() {
   const items = C.engagements.items
     .map(
+      // Sans numéro : « Numérotation hors les 4 étapes de la méthode »
+      // figure dans les interdits. Cinq engagements ne sont pas une
+      // séquence, ils n'ont pas d'ordre à suivre.
       (e) => `        <li class="engagement" data-reveal>
-          <span class="engagement-numero">${e.numero}</span>
           <h3 class="engagement-titre">${e.titre}</h3>
           <p class="engagement-texte">${e.texte}</p>
         </li>`

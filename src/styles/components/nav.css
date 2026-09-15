@@ -9,11 +9,11 @@
   left: 0;
   right: 0;
   z-index: 900;
-  background: var(--color-papier);
-  border-bottom: 1px solid var(--filet-leger);
-  transition:
-    height var(--dur-rapide) var(--ease-skone),
-    border-color var(--dur-rapide) var(--ease-skone);
+  background: var(--papier);
+  /* Aucun filet sous la barre : le style guide l'interdit explicitement
+     entre la navigation et le hero. La barre se distingue par son fond,
+     et par le resserrement qui suit le défilement. */
+  transition: height var(--dur-rapide) var(--ease);
 }
 
 .nav-interieur {
@@ -26,19 +26,17 @@
   margin-inline: auto;
   padding-inline: var(--grille-marge);
   height: var(--nav-h);
-  transition: height var(--dur-rapide) var(--ease-skone);
+  transition: height var(--dur-rapide) var(--ease);
 }
 
-/* Une fois le hero dépassé : la barre se resserre, son filet s'affirme, et
-   l'appel à l'action passe en plein. */
-.nav.est-reduite { border-bottom-color: var(--filet-moyen); }
+/* Une fois le hero dépassé, la barre se resserre. */
 .nav.est-reduite .nav-interieur { height: var(--nav-h-reduite); }
 
 .nav-logo {
   --col: 1 / span 2;
   display: flex;
   align-items: center;
-  color: var(--color-encre);
+  color: var(--encre);
 }
 
 /* La hauteur du logo est fixée, sa largeur suit son rapport. Le SVG
@@ -59,9 +57,9 @@
 }
 
 .nav-lien {
-  transition: color var(--dur-rapide) var(--ease-skone);
+  transition: color var(--dur-rapide) var(--ease);
 }
-.nav-lien:hover { color: var(--color-terracotta-profond); }
+.nav-lien:hover { color: var(--accent-profond); }
 
 /* La section en cours de lecture est soulignée. Le soulignement, et non
    une simple couleur : c'est une information, elle ne peut pas tenir
@@ -81,7 +79,7 @@
   white-space: nowrap;
 }
 
-.nav-mention { font-size: 0.9375rem; color: var(--color-gris-chaud); }
+.nav-mention { font-size: 0.9375rem; color: var(--gris); }
 
 /* ─── Bascule mobile ─────────────────────────────────────────
    Trois barres qui deviennent une croix. En bordures et non en fond :
@@ -96,15 +94,15 @@
     flex-direction: column;
     gap: 0;
     padding: var(--grille-marge);
-    background: var(--color-papier);
-    border-bottom: 1px solid var(--color-encre);
+    background: var(--papier);
+    border-bottom: 1px solid var(--encre);
     transform: translateY(-150%);
-    transition: transform var(--dur-base) var(--ease-skone);
+    transition: transform var(--dur-base) var(--ease);
   }
   .nav-liens.est-ouvert { transform: translateY(0); }
   .nav-liens .nav-lien {
     padding-block: 16px;
-    border-top: 1px solid var(--filet-leger);
+    border-top: 1px solid var(--filet);
     font-size: var(--text-corps-l);
   }
   .nav-mention { display: none; }
@@ -119,9 +117,9 @@
   .nav-bascule span {
     display: block;
     height: 1px;
-    background: var(--color-encre);
-    transition: transform var(--dur-rapide) var(--ease-skone),
-                opacity var(--dur-rapide) var(--ease-skone);
+    background: var(--encre);
+    transition: transform var(--dur-rapide) var(--ease),
+                opacity var(--dur-rapide) var(--ease);
   }
   .nav-bascule.est-ouvert span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-bascule.est-ouvert span:nth-child(2) { opacity: 0; }
