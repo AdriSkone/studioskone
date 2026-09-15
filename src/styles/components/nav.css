@@ -56,19 +56,64 @@
   white-space: nowrap;
 }
 
-.nav-lien {
-  transition: color var(--dur-rapide) var(--ease);
-}
-.nav-lien:hover { color: var(--accent-profond); }
+/* Le survol ne change ni la couleur ni le soulignement : le libellé
+   glisse vers le haut et sort du cadre pendant qu'une copie identique
+   arrive par le bas. Le mouvement est le seul signal.
 
-/* La section en cours de lecture est soulignée. Le soulignement, et non
-   une simple couleur : c'est une information, elle ne peut pas tenir
-   uniquement à la teinte. */
-.nav-lien[aria-current='true'] {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 6px;
+   La copie est posée par le CSS, via ::after et attr(), et non dupliquée
+   dans le HTML : un lecteur d'écran lirait sinon deux fois le même mot.
+   Le cadre rogne ce qui dépasse, d'où l'overflow. */
+.nav-lien {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  /* La hauteur est fixée pour que le masque ait un cadre : sans elle,
+     l'overflow n'a rien à rogner. */
+  line-height: 1.6;
 }
+
+.nav-lien span {
+  display: block;
+  transition: transform var(--dur-moyenne) var(--ease);
+}
+
+.nav-lien::after {
+  content: attr(data-libelle);
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+  transition: transform var(--dur-moyenne) var(--ease);
+}
+
+.nav-lien:hover span,
+.nav-lien:focus-visible span { transform: translateY(-100%); }
+
+.nav-lien:hover::after,
+.nav-lien:focus-visible::after { transform: translateY(0); }
+
+/* L'entrée de la section en cours de lecture porte un point d'accent.
+   Un point, et non une couleur : l'état ne peut pas tenir à la teinte
+   seule. */
+.nav-lien[aria-current='true']::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Sur une section sombre, la barre inverse ses couleurs. */
+.nav.sur-sombre {
+  background: var(--sombre);
+  color: var(--sombre-texte);
+}
+.nav.sur-sombre .nav-mention { color: var(--sombre-texte); opacity: 0.72; }
+.nav.sur-sombre .nav-cta { border-color: var(--sombre-texte); color: var(--sombre-texte); }
+.nav.sur-sombre .nav-lien[aria-current='true']::before { background: var(--accent-clair); }
 
 .nav-actions {
   --col: 9 / span 4;

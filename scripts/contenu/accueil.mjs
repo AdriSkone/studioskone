@@ -39,7 +39,7 @@ export const hero = {
     { libelle: 'Estimer mon projet',   href: '#estimator', variante: 'principal' },
     { libelle: 'Voir les réalisations', href: '#work',      variante: 'secondaire' },
   ],
-  preuves: ['Devis gratuit', 'Réponse sous 24&nbsp;h', 'Vous êtes propriétaire de votre site'],
+  preuves: ['Devis gratuit', 'Réponse sous 24&nbsp;h', 'Vous êtes propriétaire de votre site', 'Partout en France'],
 }
 
 /** Le ruban du hero. La série est doublée à l'affichage, pas ici. */

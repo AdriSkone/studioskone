@@ -38,6 +38,12 @@ const AJOUTS_AUTORISES = [
   // Le lien Instagram n'était qu'une icône, son nom vivait dans un
   // aria-label. Il est maintenant écrit : un lien doit avoir un nom visible.
   'Instagram',
+  // Quatrième mention du bandeau du hero. Le style guide en demande
+  // quatre, le site n'en avait que trois. Texte donné par Adri le
+  // 15 septembre 2026 — seul ajout de copy du chantier, et il ne sort pas
+  // de nulle part : « partout en France » figure déjà dans le hero et
+  // dans le pied de page.
+  'Partout en France',
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une

@@ -224,26 +224,42 @@ ${etapes}
 }
 
 function realisations() {
-  const cartes = projets
-    .map(
-      (p) => `          <a class="carte-projet${p.grand ? ' carte-projet--grande' : ' carte-projet--petite'}" href="/projets/${p.slug}">
-            <img class="carte-projet-image" src="${p.image}" alt="${p.alt}" loading="lazy" width="1200" height="750">
-            <div>
-              <div class="carte-projet-tete">
-                <h3 class="carte-projet-titre">${p.titre}</h3>
-                <span class="carte-projet-type">${p.badge}</span>
+  /**
+   * Une vignette. `copie` marque les exemplaires que la boucle duplique :
+   * ils sont retirés de l'arbre d'accessibilité et du parcours clavier,
+   * sinon un lecteur d'écran annoncerait neuf projets deux fois et la
+   * tabulation passerait deux fois par chacun.
+   */
+  const vignette = (p, copie = false) => `            <a class="carte-projet" href="/projets/${p.slug}"${
+    copie ? ' aria-hidden="true" tabindex="-1"' : ''
+  }>
+              <img class="carte-projet-image" src="${p.image}" alt="${copie ? '' : p.alt}" loading="lazy" width="1200" height="750">
+              <div>
+                <div class="carte-projet-tete">
+                  <h3 class="carte-projet-titre">${p.titre}</h3>
+                  <span class="carte-projet-type">${p.badge}</span>
+                </div>
+                <p class="carte-projet-tagline">${p.tagline}</p>
+                <p class="carte-projet-nature">${p.nature}</p>
+                <p class="carte-projet-note">${p.note}</p>
+                <div class="carte-projet-meta">
+                  <span>${p.signature}</span>
+                  <span class="carte-projet-lien">${p.lienLibelle}${fleche}</span>
+                </div>
               </div>
-              <p class="carte-projet-tagline">${p.tagline}</p>
-              <p class="carte-projet-nature">${p.nature}</p>
-              <p class="carte-projet-note">${p.note}</p>
-              <div class="carte-projet-meta">
-                <span>${p.signature}</span>
-                <span class="carte-projet-lien">${p.lienLibelle}${fleche}</span>
-              </div>
-            </div>
-          </a>`
-    )
-    .join('\n')
+            </a>`
+
+  // Deux rangées qui défilent en sens inverse. Cinq projets sur la
+  // première, quatre sur la seconde : la série se lit comme un ensemble,
+  // sans qu'aucun projet ne soit mis en avant par sa place.
+  const rangees = [projets.slice(0, 5), projets.slice(5)]
+
+  const piste = (liste, sens) => `        <div class="ruban-projets" data-sens="${sens}">
+          <div class="ruban-projets-piste">
+${liste.map((p) => vignette(p)).join('\n')}
+${liste.map((p) => vignette(p, true)).join('\n')}
+          </div>
+        </div>`
 
   return `  <section class="section-m" id="work">
     <div class="grille">
@@ -252,11 +268,9 @@ function realisations() {
       <p class="realisations-intro" style="--col: 9 / span 4">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
     </div>
 
-    <div class="rail" id="rail">
-      <div class="rail-piste" id="railPiste">
-${cartes}
-      </div>
-      <div class="rail-progression" aria-hidden="true"><span class="rail-progression-curseur"></span></div>
+    <div class="realisations-rubans">
+${piste(rangees[0], 'avant')}
+${piste(rangees[1], 'arriere')}
     </div>
   </section>`
 }

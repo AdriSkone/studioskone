@@ -73,7 +73,13 @@ function resoudre(href, prefixe) {
 
 export function navigation({ prefixe = '' } = {}) {
   const liens = navAccueil.liens
-    .map((l) => `<a class="nav-lien" href="${resoudre(l.href, prefixe)}">${l.libelle}</a>`)
+    // data-libelle nourrit la copie que le CSS fait glisser par le bas.
+    // Elle n'est pas dans le DOM : un lecteur d'écran ne lit donc pas le
+    // libellé deux fois.
+    .map(
+      (l) =>
+        `<a class="nav-lien" href="${resoudre(l.href, prefixe)}" data-libelle="${l.libelle}"><span>${l.libelle}</span></a>`
+    )
     .join('\n          ')
 
   return `  <nav class="nav" id="nav" aria-label="Navigation principale">

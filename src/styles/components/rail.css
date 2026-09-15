@@ -1,93 +1,94 @@
 /* ============================================================
-   Rail horizontal des projets
+   Réalisations — double ruban
+   Deux rangées qui défilent en sens inverse, en continu. Ce n'est plus
+   une section épinglée : le visiteur n'a rien à faire pour que la série
+   se déroule, et rien ne retient son défilement.
    ============================================================ */
 
-.rail {
-  position: relative;
+.realisations-rubans {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grille-gouttiere);
   margin-top: 48px;
-  /* Le rail part de la marge de gauche et sort par la droite : on voit que
-     la série continue au-delà du bord, ce qui dit qu'il y a à faire défiler. */
-  padding-left: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
-  /* Aucun overflow-x : le défilement horizontal est piloté par le
-     défilement vertical, pas par une barre. En dessous de 1024 px, la
-     règle plus bas rend la main au navigateur. */
-  overflow: hidden;
 }
 
-.rail-piste {
+.ruban-projets {
+  /* Le défilement à la souris reste possible : l'animation se met en
+     pause au survol, et la barre native prend le relais. */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ruban-projets::-webkit-scrollbar { display: none; }
+
+.ruban-projets-piste {
   display: flex;
   gap: var(--grille-gouttiere);
-  align-items: flex-start;
   width: max-content;
+  padding-inline: var(--grille-marge);
+  /* La piste contient deux fois la même série et se translate d'une
+     demi-longueur : elle revient exactement à son point de départ, et la
+     boucle ne se voit pas. */
+  animation: ruban-projets 52s linear infinite;
   will-change: transform;
 }
 
-/* Les deux formats. Un projet mis en avant occupe deux fois la place d'un
-   autre : c'est la hiérarchie, elle se lit sans être écrite. */
-.carte-projet--grande { width: 640px; }
-.carte-projet--petite { width: 320px; }
+.ruban-projets[data-sens='arriere'] .ruban-projets-piste {
+  animation-direction: reverse;
+}
+
+.ruban-projets:hover .ruban-projets-piste,
+.ruban-projets:focus-within .ruban-projets-piste {
+  animation-play-state: paused;
+}
+
+@keyframes ruban-projets {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ─── Vignette ──────────────────────────────────────────────
+   Un seul format. « Ratio uniforme 16/10, toutes de la même taille » :
+   deux tailles créaient une hiérarchie entre les projets, là où la série
+   doit se lire comme un ensemble. */
+.carte-projet {
+  width: 400px;
+  flex: none;
+}
+
+.carte-projet-image { aspect-ratio: 16 / 10; }
 
 @media (min-width: 1440px) {
-  .carte-projet--grande { width: 840px; }
-  .carte-projet--petite { width: 400px; }
+  .carte-projet { width: 480px; }
 }
 
-.carte-projet--grande .carte-projet-image { aspect-ratio: 16 / 10; }
-.carte-projet--petite .carte-projet-image { aspect-ratio: 4 / 3; }
-.carte-projet--grande .carte-projet-titre { font-size: var(--text-h2); }
-
-/* ─── Indicateur de progression ─────────────────────────────
-   Un filet, et son segment. Il double une information que le mouvement
-   donne déjà : il n'a donc pas à être plus qu'un trait. */
-.rail-progression {
-  position: relative;
-  height: 1px;
-  margin-top: 48px;
-  margin-right: max(var(--grille-marge), calc((100% - var(--grille-max)) / 2 + var(--grille-marge)));
-  background: var(--filet);
-}
-
-.rail-progression-curseur {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 20%;
-  background: var(--accent);
-  transform-origin: left;
-}
-
-/* ─── Pile ──────────────────────────────────────────────────
-   Pas d'épinglage, pas de défilement piloté, pas de largeur fixe : les
-   cartes reprennent la grille.
-
-   Deux cas l'imposent, et le second compte autant que le premier :
-
-     · sous 1024 px, où le geste n'a pas de sens ;
-     · en mouvement réduit, où le script ne translate rien. Sans cette
-       règle, la piste resterait en ligne et plus large que son cadre —
-       lequel masque ce qui dépasse. Sept projets sur neuf seraient
-       simplement hors d'atteinte. Une préférence d'affichage ne doit
-       jamais retirer du contenu. */
+/* ─── Sous 1024 px, et en mouvement réduit ──────────────────
+   Grille verticale statique. Une préférence d'affichage ne retire jamais
+   de contenu : sans cette règle, la piste resterait plus large que son
+   cadre et les projets hors écran seraient hors d'atteinte. */
 @media (prefers-reduced-motion: reduce), (max-width: 1023px) {
-  .rail {
-    padding-left: 0;
-    overflow: visible;
-  }
-  .rail-piste {
+  .realisations-rubans { gap: 0; }
+
+  .ruban-projets { overflow: visible; }
+
+  .ruban-projets-piste {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     width: auto;
+    column-gap: var(--grille-gouttiere);
     row-gap: 64px;
     max-width: var(--grille-max);
     margin-inline: auto;
-    padding-inline: var(--grille-marge);
+    animation: none;
   }
-  .carte-projet--grande,
-  .carte-projet--petite { width: auto; }
-  .carte-projet--grande { grid-column: 1 / -1; }
-  .rail-progression { display: none; }
+
+  .ruban-projets[data-sens='arriere'] .ruban-projets-piste { padding-top: 64px; }
+
+  .carte-projet { width: auto; }
+
+  /* Les copies de boucle n'ont plus lieu d'être quand rien ne défile. */
+  .ruban-projets-piste .carte-projet[aria-hidden='true'] { display: none; }
 }
 
 @media (max-width: 767px) {
-  .rail-piste { grid-template-columns: 1fr; }
-  .carte-projet--grande { grid-column: auto; }
+  .ruban-projets-piste { grid-template-columns: 1fr; }
 }

@@ -6,10 +6,13 @@
  * — les cartes de l'accueil et, à terme, les pages projet s'en servent
  * toutes les deux.
  *
- * L'ordre est celui des maquettes, et il compte : les deux projets mis en
- * avant — un projet client et un exercice de conception — ouvrent le rail
- * en grand format, les sept autres suivent en petit. C'est `grand` qui le
- * dit, et le rail en tire la largeur et le ratio de chaque carte.
+ * L'ordre est celui des maquettes, et il compte : les deux projets que le
+ * studio met en avant ouvrent la série.
+ *
+ * Le champ `grand` n'est plus lu. Il servait à donner deux formats de
+ * vignette ; le style guide les veut toutes identiques, pour que la série
+ * se lise comme un ensemble plutôt que comme un classement. Il est
+ * conservé le temps qu'on soit sûr de ne pas y revenir.
  *
  * Une seule chose a été retirée des libellés : la flèche « → » qui était
  * écrite dans la chaîne de texte. Le cahier des charges l'interdit, parce
