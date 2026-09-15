@@ -367,3 +367,76 @@ export const contact = {
     'Vous repartez avec une recommandation claire, même si vous décidez de ne pas travailler avec moi. Pas de relance commerciale, pas de blabla.',
   ],
 }
+
+/**
+ * Le parcours unique — estimateur et contact fusionnés.
+ *
+ * Le visiteur ne saisit jamais deux fois la même chose : le type de projet
+ * n'est demandé qu'une fois, et le délai ne l'est plus du tout puisque la
+ * fourchette l'annonce déjà.
+ *
+ * Le budget, lui, reste — et il est demandé AVANT que la fourchette ne
+ * s'affiche. Posé après, le visiteur reprendrait le chiffre qu'on vient de
+ * lui montrer au lieu de donner le sien, et l'écart entre les deux est
+ * précisément ce qui sert à préparer l'appel.
+ *
+ * Les `name` et `value` des trois premières questions sont ceux que lisent
+ * estimator-pricing et ses tests : ils font partie du contrat, pas de la
+ * présentation.
+ */
+export const parcours = {
+  label: 'Estimation · 30 secondes',
+  titre: "Pas sûr de l'offre qui vous correspond ?",
+  sousTitre: 'Trois questions, une fourchette. Sans engagement.',
+
+  questions: [
+    { cle: 'type', legende: 'Quel type de site ?', options: [
+      { valeur: 'vitrine',      libelle: 'Vitrine' },
+      { valeur: 'vitrine-plus', libelle: 'Vitrine avec réservation ou devis' },
+      { valeur: 'boutique',     libelle: 'Boutique en ligne' },
+      { valeur: 'application',  libelle: 'Application' },
+    ]},
+    { cle: 'size', legende: 'Quelle taille ?', options: [
+      { valeur: '1',       libelle: 'Une page' },
+      { valeur: '2-5',     libelle: '2 à 5 pages' },
+      { valeur: '6-12',    libelle: '6 à 12 pages' },
+      { valeur: 'inconnu', libelle: 'Je ne sais pas encore' },
+    ]},
+    { cle: 'content', legende: 'Textes et photos prêts ?', options: [
+      { valeur: 'pret',    libelle: 'Oui' },
+      { valeur: 'partiel', libelle: 'En partie' },
+      { valeur: 'a-creer', libelle: 'Non, à créer' },
+    ]},
+    { cle: 'budget', legende: 'Quel est votre budget estimatif&nbsp;?', options: [
+      { valeur: '1k-3k',  libelle: '1 000 – 3 000 €' },
+      { valeur: '3k-5k',  libelle: '3 000 – 5 000 €' },
+      { valeur: '5k-10k', libelle: '5 000 – 10 000 €' },
+      { valeur: '10k+',   libelle: '10 000 € +' },
+      { valeur: 'a-def',  libelle: 'À définir' },
+    ]},
+  ],
+
+  resultat: {
+    label: 'Votre projet ressemble à',
+    mention: 'Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.',
+  },
+
+  coordonnees: {
+    legende: 'Parlez-moi de vous',
+    champs: [
+      { cle: 'nom',         libelle: 'Nom',                   type: 'text',  requis: true },
+      { cle: 'email',       libelle: 'Email',                 type: 'email', requis: true },
+      { cle: 'description', libelle: 'Description du projet',  type: 'area',  requis: false },
+    ],
+    rgpd: {
+      marque: 'RGPD*',
+      texte: "En soumettant ce formulaire, j'accepte que les informations saisies dans ce formulaire soient utilisées pour permettre de me recontacter. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter la",
+      lien: { libelle: 'politique de confidentialité', href: '/politique-de-confidentialite' },
+    },
+  },
+
+  actions: { precedent: 'Retour', suivant: 'Continuer', envoyer: 'Discuter de mon projet' },
+
+  succes: { titre: 'Merci,', accent: "c'est envoyé.", texte: 'Je reviens vers vous sous 24h.' },
+  erreur: { titre: 'Erreur · réessayer' },
+}

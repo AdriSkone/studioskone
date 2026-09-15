@@ -120,7 +120,7 @@ ${c.liens.map((l) => `            <a href="${l.href}">${l.libelle}</a>`).join('\
 
   const legal = pied.legal.map((l) => `<a href="${l.href}">${l.libelle}</a>`).join('\n            ')
 
-  return `  <footer class="pied" id="footer">
+  return `  <footer class="pied sombre" id="footer">
     <div class="grille">
       <div class="sombre sombre sombre--pleine-largeur" style="--col: 1 / -1">
         <div class="colonnes">

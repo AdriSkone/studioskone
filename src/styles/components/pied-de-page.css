@@ -2,10 +2,11 @@
    Pied de page
    ============================================================ */
 
-.pied {
-  padding-block: var(--section-s);
-  border-top: 1px solid var(--encre);
-}
+.pied { padding-block: var(--section-s); }
+
+/* Le bloc de clôture ouvre le pied : un filet le sépare de ce qui suit,
+   il n'a pas besoin d'un second fond puisque la section est déjà sombre. */
+.pied-clore { padding-bottom: var(--section-s); }
 
 .pied-logo {
   display: block;
@@ -100,3 +101,21 @@
   gap: 8px;
 }
 .pied-zone svg { margin-top: 0.28em; }
+
+
+/* ─── Sur fond sombre ───────────────────────────────────────
+   Le pied entier est passé au registre sombre. Le gris y tombe à 2.98 :
+   il ne porte plus de texte. Le secondaire s'y marque par une opacité sur
+   le papier, comme partout ailleurs dans ce registre. */
+.pied.sombre {
+  border-top: 0;
+  color: var(--sombre-texte);
+}
+
+.pied.sombre .pied-zone,
+.pied.sombre .pied-bas { color: var(--sombre-texte); opacity: 0.72; }
+
+.pied.sombre .pied-titre { border-bottom-color: var(--filet-sombre); }
+.pied.sombre .pied-bas { border-top-color: var(--filet-sombre); }
+.pied.sombre .pied-liste a:hover,
+.pied.sombre .pied-bas-liens a:hover { color: var(--accent-clair); }

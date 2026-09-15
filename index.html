@@ -831,89 +831,152 @@
     </div>
   </section>
 
-  <section class="section-s" id="estimator">
+  <section class="section-m sombre" id="estimator">
     <div class="grille">
       <p class="tete-bloc">Estimation · 30 secondes</p>
-      <div class="estimateur-tete" style="--col: 3 / span 7">
+      <div class="parcours-tete" style="--col: 3 / span 7">
         <h2 class="t-h2">Pas sûr de l'offre qui vous correspond ?</h2>
         <p class="t-corps-l">Trois questions, une fourchette. Sans engagement.</p>
       </div>
 
-      <form class="estimateur-form" id="estimatorForm" style="--col: 3 / span 9">
-        <fieldset class="estimateur-q" data-question="type">
-          <legend class="estimateur-legende">Quel type de site ?</legend>
-          <div class="estimateur-choix">
-            <label class="estimateur-option">
-              <input type="radio" name="type" value="vitrine" required>
-              <span>Vitrine</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="type" value="vitrine-plus">
-              <span>Vitrine avec réservation ou devis</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="type" value="boutique">
-              <span>Boutique en ligne</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="type" value="application">
-              <span>Application</span>
-            </label>
-          </div>
-        </fieldset>
-        <fieldset class="estimateur-q" data-question="size">
-          <legend class="estimateur-legende">Quelle taille ?</legend>
-          <div class="estimateur-choix">
-            <label class="estimateur-option">
-              <input type="radio" name="size" value="1" required>
-              <span>Une page</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="size" value="2-5">
-              <span>2 à 5 pages</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="size" value="6-12">
-              <span>6 à 12 pages</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="size" value="inconnu">
-              <span>Je ne sais pas encore</span>
-            </label>
-          </div>
-        </fieldset>
-        <fieldset class="estimateur-q" data-question="content">
-          <legend class="estimateur-legende">Textes et photos prêts ?</legend>
-          <div class="estimateur-choix">
-            <label class="estimateur-option">
-              <input type="radio" name="content" value="pret" required>
-              <span>Oui</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="content" value="partiel">
-              <span>En partie</span>
-            </label>
-            <label class="estimateur-option">
-              <input type="radio" name="content" value="a-creer">
-              <span>Non, à créer</span>
-            </label>
-          </div>
-        </fieldset>
-      </form>
-
-      <div class="estimateur-resultat-zone" id="estimatorResult" aria-live="polite" style="--col: 3 / span 8">
-        <div class="estimateur-resultat" hidden>
-          <div class="estimateur-resultat-corps">
-            <span class="t-petit t-secondaire">Votre projet ressemble à</span>
-            <p class="carte-tarif-nom" id="estimatorOffer"></p>
-            <p class="estimateur-prix" id="estimatorRange"></p>
-            <p class="estimateur-mention" id="estimatorDelay"></p>
-          </div>
-          <div class="estimateur-resultat-actions">
-            <a class="bouton bouton--principal" href="#contact" id="estimatorCta">Discuter de ce projet</a>
-          </div>
+      <div class="parcours" id="parcours" style="--col: 1 / -1">
+        <div class="parcours-progression" aria-hidden="true">
+          <span class="parcours-progression-remplissage"></span>
         </div>
-        <p class="estimateur-mention estimateur-disclaimer">Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.</p>
+
+        <form class="parcours-form" id="parcoursForm" novalidate>
+        <fieldset class="parcours-ecran" data-ecran="0" data-question="type">
+          <legend class="parcours-legende">Quel type de site ?</legend>
+          <div class="parcours-choix">
+              <label class="parcours-option">
+                <input type="radio" name="type" value="vitrine">
+                <span>Vitrine</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="type" value="vitrine-plus">
+                <span>Vitrine avec réservation ou devis</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="type" value="boutique">
+                <span>Boutique en ligne</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="type" value="application">
+                <span>Application</span>
+              </label>
+          </div>
+        </fieldset>
+        <fieldset class="parcours-ecran" data-ecran="1" data-question="size">
+          <legend class="parcours-legende">Quelle taille ?</legend>
+          <div class="parcours-choix">
+              <label class="parcours-option">
+                <input type="radio" name="size" value="1">
+                <span>Une page</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="size" value="2-5">
+                <span>2 à 5 pages</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="size" value="6-12">
+                <span>6 à 12 pages</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="size" value="inconnu">
+                <span>Je ne sais pas encore</span>
+              </label>
+          </div>
+        </fieldset>
+        <fieldset class="parcours-ecran" data-ecran="2" data-question="content">
+          <legend class="parcours-legende">Textes et photos prêts ?</legend>
+          <div class="parcours-choix">
+              <label class="parcours-option">
+                <input type="radio" name="content" value="pret">
+                <span>Oui</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="content" value="partiel">
+                <span>En partie</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="content" value="a-creer">
+                <span>Non, à créer</span>
+              </label>
+          </div>
+        </fieldset>
+        <fieldset class="parcours-ecran" data-ecran="3" data-question="budget">
+          <legend class="parcours-legende">Quel est votre budget estimatif&nbsp;?</legend>
+          <div class="parcours-choix">
+              <label class="parcours-option">
+                <input type="radio" name="budget" value="1k-3k">
+                <span>1 000 – 3 000 €</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="budget" value="3k-5k">
+                <span>3 000 – 5 000 €</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="budget" value="5k-10k">
+                <span>5 000 – 10 000 €</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="budget" value="10k+">
+                <span>10 000 € +</span>
+              </label>
+              <label class="parcours-option">
+                <input type="radio" name="budget" value="a-def">
+                <span>À définir</span>
+              </label>
+          </div>
+        </fieldset>
+
+          <fieldset class="parcours-ecran" data-ecran="4" data-resultat>
+            <legend class="parcours-legende">Votre projet ressemble à</legend>
+            <div class="parcours-resultat">
+              <p class="parcours-offre" id="parcoursOffre"></p>
+              <p class="parcours-prix" id="parcoursPrix"></p>
+              <p class="parcours-delai" id="parcoursDelai"></p>
+            </div>
+            <p class="parcours-mention">Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.</p>
+          </fieldset>
+
+          <fieldset class="parcours-ecran" data-ecran="5">
+            <legend class="parcours-legende">Parlez-moi de vous</legend>
+            <div class="parcours-champs">
+            <div class="parcours-champ">
+              <label for="p-nom">Nom</label>
+              <input type="text" id="p-nom" name="nom" required>
+            </div>
+            <div class="parcours-champ">
+              <label for="p-email">Email</label>
+              <input type="email" id="p-email" name="email" required>
+            </div>
+            <div class="parcours-champ parcours-champ--area">
+              <label for="p-description">Description du projet</label>
+              <textarea id="p-description" name="description" rows="4"></textarea>
+            </div>
+            </div>
+            <label class="parcours-rgpd">
+              <input type="checkbox" id="p-rgpd" required>
+              <span class="parcours-rgpd-case" aria-hidden="true"></span>
+              <span class="parcours-rgpd-texte">
+                <span class="parcours-rgpd-marque">RGPD*</span>
+                En soumettant ce formulaire, j'accepte que les informations saisies dans ce formulaire soient utilisées pour permettre de me recontacter. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter la
+                <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>.
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="parcours-actions">
+            <button class="bouton bouton--secondaire" type="button" id="parcoursPrecedent">Retour</button>
+            <button class="bouton bouton--principal" type="button" id="parcoursSuivant">Continuer</button>
+          </div>
+        </form>
+
+        <div class="parcours-succes" id="parcoursSucces" role="status" aria-live="polite" hidden>
+          <p class="parcours-succes-titre">Merci, <em>c'est envoyé.</em></p>
+          <p>Je reviens vers vous sous 24h.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -984,7 +1047,7 @@
     </div>
   </section>
 
-  <section class="section-m" id="contact">
+  <section class="section-m sombre" id="contact">
     <div class="grille">
       <p class="tete-bloc">Travaillons ensemble</p>
       <h2 class="t-h1" style="--col: 3 / span 8">Vingt minutes pour savoir<br>ce que vaut votre projet.</h2>
@@ -992,12 +1055,12 @@
         <p>On parle de votre activité, de ce que vous attendez du site, et de votre budget. Je vous dis ce que je ferais, ce que ça coûte et combien de temps ça prend.</p>
         <p>Vous repartez avec une recommandation claire, même si vous décidez de ne pas travailler avec moi. Pas de relance commerciale, pas de blabla.</p>
       </div>
-      <div id="contact-form-root" style="--col: 1 / -1"></div>
+      <a class="bouton bouton--principal" style="--col: 3 / span 3; margin-top: 40px" href="#estimator">Discuter de mon projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </section>
   </main>
 
-  <footer class="pied" id="footer">
+  <footer class="pied sombre" id="footer">
     <div class="grille">
       <div class="sombre sombre sombre--pleine-largeur" style="--col: 1 / -1">
         <div class="colonnes">

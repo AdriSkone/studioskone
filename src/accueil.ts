@@ -12,8 +12,7 @@ import { initNav } from './scripts/nav'
 import { initCookies } from './scripts/cookies'
 import { rafraichirAuChargementDesFontes } from './lib/animations'
 
-import { initContactForm } from './components/contact-form'
-import { initEstimator } from './components/estimator'
+import { initParcours } from './scripts/parcours'
 
 // Umami — injecté seulement si les variables d'environnement sont renseignées.
 if (import.meta.env.VITE_UMAMI_WEBSITE_ID && import.meta.env.VITE_UMAMI_SCRIPT_URL) {
@@ -36,8 +35,7 @@ initCookies()
 initRail()
 initMethode()
 
-// L'estimateur pousse ses réponses dans le formulaire : il lui faut sa poignée.
-const formulaire = initContactForm()
-initEstimator(formulaire)
+// L'estimateur et le formulaire ne font plus qu'un.
+initParcours()
 
 void rafraichirAuChargementDesFontes()

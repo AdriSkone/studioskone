@@ -337,52 +337,107 @@ ${verites}
   </section>`
 }
 
-function estimateur() {
-  const questions = C.estimateur.questions
-    .map((q, qi) => {
+/**
+ * Le parcours unique — estimateur et contact fusionnés.
+ *
+ * Une question par écran. Les écrans sont tous dans le HTML dès le
+ * départ, et c'est le script qui les montre l'un après l'autre : le
+ * contenu reste lisible si le script n'arrive pas, et un moteur
+ * d'indexation voit les questions.
+ *
+ * La progression est un filet qui se remplit, jamais un compteur.
+ */
+function parcours() {
+  const P = C.parcours
+
+  const ecransQuestions = P.questions
+    .map((q, i) => {
       const options = q.options
         .map(
-          (o, oi) =>
-            `            <label class="estimateur-option">
-              <input type="radio" name="${q.cle}" value="${o.valeur}"${oi === 0 ? ' required' : ''}>
-              <span>${o.libelle}</span>
-            </label>`
+          (o) => `              <label class="parcours-option">
+                <input type="radio" name="${q.cle}" value="${o.valeur}">
+                <span>${o.libelle}</span>
+              </label>`
         )
         .join('\n')
-      return `        <fieldset class="estimateur-q" data-question="${q.cle}">
-          <legend class="estimateur-legende">${q.legende}</legend>
-          <div class="estimateur-choix">
+
+      return `        <fieldset class="parcours-ecran" data-ecran="${i}" data-question="${q.cle}">
+          <legend class="parcours-legende">${q.legende}</legend>
+          <div class="parcours-choix">
 ${options}
           </div>
         </fieldset>`
     })
     .join('\n')
 
-  return `  <section class="section-s" id="estimator">
+  const champs = P.coordonnees.champs
+    .map((c) =>
+      c.type === 'area'
+        ? `            <div class="parcours-champ parcours-champ--area">
+              <label for="p-${c.cle}">${c.libelle}</label>
+              <textarea id="p-${c.cle}" name="${c.cle}" rows="4"></textarea>
+            </div>`
+        : `            <div class="parcours-champ">
+              <label for="p-${c.cle}">${c.libelle}</label>
+              <input type="${c.type}" id="p-${c.cle}" name="${c.cle}"${c.requis ? ' required' : ''}>
+            </div>`
+    )
+    .join('\n')
+
+  const rgpd = P.coordonnees.rgpd
+
+  return `  <section class="section-m sombre" id="estimator">
     <div class="grille">
-      <p class="tete-bloc">${C.estimateur.eyebrow}</p>
-      <div class="estimateur-tete" style="--col: 3 / span 7">
-        <h2 class="t-h2">${C.estimateur.titre}</h2>
-        <p class="t-corps-l">${C.estimateur.sousTitre}</p>
+      <p class="tete-bloc">${P.label}</p>
+      <div class="parcours-tete" style="--col: 3 / span 7">
+        <h2 class="t-h2">${P.titre}</h2>
+        <p class="t-corps-l">${P.sousTitre}</p>
       </div>
 
-      <form class="estimateur-form" id="estimatorForm" style="--col: 3 / span 9">
-${questions}
-      </form>
-
-      <div class="estimateur-resultat-zone" id="estimatorResult" aria-live="polite" style="--col: 3 / span 8">
-        <div class="estimateur-resultat" hidden>
-          <div class="estimateur-resultat-corps">
-            <span class="t-petit t-secondaire">${C.estimateur.resultatLabel}</span>
-            <p class="carte-tarif-nom" id="estimatorOffer"></p>
-            <p class="estimateur-prix" id="estimatorRange"></p>
-            <p class="estimateur-mention" id="estimatorDelay"></p>
-          </div>
-          <div class="estimateur-resultat-actions">
-            <a class="bouton bouton--principal" href="#contact" id="estimatorCta">${C.estimateur.resultatCta}</a>
-          </div>
+      <div class="parcours" id="parcours" style="--col: 1 / -1">
+        <div class="parcours-progression" aria-hidden="true">
+          <span class="parcours-progression-remplissage"></span>
         </div>
-        <p class="estimateur-mention estimateur-disclaimer">${C.estimateur.mention}</p>
+
+        <form class="parcours-form" id="parcoursForm" novalidate>
+${ecransQuestions}
+
+          <fieldset class="parcours-ecran" data-ecran="${P.questions.length}" data-resultat>
+            <legend class="parcours-legende">${P.resultat.label}</legend>
+            <div class="parcours-resultat">
+              <p class="parcours-offre" id="parcoursOffre"></p>
+              <p class="parcours-prix" id="parcoursPrix"></p>
+              <p class="parcours-delai" id="parcoursDelai"></p>
+            </div>
+            <p class="parcours-mention">${P.resultat.mention}</p>
+          </fieldset>
+
+          <fieldset class="parcours-ecran" data-ecran="${P.questions.length + 1}">
+            <legend class="parcours-legende">${P.coordonnees.legende}</legend>
+            <div class="parcours-champs">
+${champs}
+            </div>
+            <label class="parcours-rgpd">
+              <input type="checkbox" id="p-rgpd" required>
+              <span class="parcours-rgpd-case" aria-hidden="true"></span>
+              <span class="parcours-rgpd-texte">
+                <span class="parcours-rgpd-marque">${rgpd.marque}</span>
+                ${rgpd.texte}
+                <a href="${rgpd.lien.href}" target="_blank" rel="noopener noreferrer">${rgpd.lien.libelle}</a>.
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="parcours-actions">
+            <button class="bouton bouton--secondaire" type="button" id="parcoursPrecedent">${P.actions.precedent}</button>
+            <button class="bouton bouton--principal" type="button" id="parcoursSuivant">${P.actions.suivant}</button>
+          </div>
+        </form>
+
+        <div class="parcours-succes" id="parcoursSucces" role="status" aria-live="polite" hidden>
+          <p class="parcours-succes-titre">${P.succes.titre} <em>${P.succes.accent}</em></p>
+          <p>${P.succes.texte}</p>
+        </div>
       </div>
     </div>
   </section>`
@@ -437,14 +492,14 @@ ${items}
 
 function contact() {
   const textes = C.contact.textes.map((t) => `        <p>${t}</p>`).join('\n')
-  return `  <section class="section-m" id="contact">
+  return `  <section class="section-m sombre" id="contact">
     <div class="grille">
       <p class="tete-bloc">${C.contact.label}</p>
       <h2 class="t-h1" style="--col: 3 / span 8">${C.contact.titre.debut}<br>${C.contact.titre.suite} ${C.contact.titre.accent}</h2>
       <div class="contact-lead" style="--col: 3 / span 6">
 ${textes}
       </div>
-      <div id="contact-form-root" style="--col: 1 / -1"></div>
+      <a class="bouton bouton--principal" style="--col: 3 / span 3; margin-top: 40px" href="#estimator">${C.parcours.actions.envoyer}${fleche}</a>
     </div>
   </section>`
 }
@@ -466,7 +521,7 @@ ${head}</head>
 ${navigation()}
 
   <main id="contenu">
-${[hero(), ruban(), probleme(), pivot(), studio(), transparence(), prestations(), methode(), realisations(), tarifs(), estimateur(), faqSection(), engagements(), contact()].join('\n\n')}
+${[hero(), ruban(), probleme(), pivot(), studio(), transparence(), prestations(), methode(), realisations(), tarifs(), parcours(), faqSection(), engagements(), contact()].join('\n\n')}
   </main>
 
 ${piedDePage()}

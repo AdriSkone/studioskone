@@ -1,0 +1,223 @@
+/* ============================================================
+   Parcours unique — estimateur et contact fusionnés
+   Une question par écran, sur fond sombre.
+   ============================================================ */
+
+.parcours { margin-top: 64px; }
+
+/* ─── Progression ───────────────────────────────────────────
+   Un filet qui se remplit, jamais un compteur « étape 2 sur 5 » : le
+   visiteur voit où il en est sans qu'on lui annonce ce qui reste. */
+.parcours-progression {
+  height: 1px;
+  background: var(--filet-sombre);
+  margin-bottom: 64px;
+}
+
+.parcours-progression-remplissage {
+  display: block;
+  height: 100%;
+  background: var(--accent-clair);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform var(--dur-base) var(--ease);
+}
+
+/* ─── Écrans ────────────────────────────────────────────────
+   Un seul visible à la fois. `hidden` et non une classe : l'écran replié
+   sort alors de l'arbre d'accessibilité et du parcours clavier, au lieu
+   d'être seulement invisible à l'œil. */
+.parcours-ecran { border: 0; padding: 0; }
+
+.parcours-legende {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h2);
+  line-height: var(--leading-titre);
+  letter-spacing: var(--tracking-h2);
+  margin-bottom: 40px;
+}
+
+/* ─── Choix ─────────────────────────────────────────────────
+   Grandes zones cliquables. Le radio natif reste : c'est lui qui porte le
+   groupe et la navigation aux flèches. Il est rendu transparent et couvre
+   son étiquette, qui s'habille à sa place. */
+.parcours-choix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.parcours-option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 20px 28px;
+  border: 1px solid var(--filet-sombre);
+  border-radius: var(--rond-interactif);
+  font-size: var(--text-corps-l);
+  font-weight: 500;
+  transition:
+    border-color var(--dur-rapide) var(--ease),
+    background var(--dur-rapide) var(--ease),
+    color var(--dur-rapide) var(--ease);
+}
+
+.parcours-option:hover { border-color: var(--sombre-texte); }
+
+.parcours-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  cursor: inherit;
+}
+
+/* L'état retenu est franc : papier plein sur l'encre. Parmi cinq
+   réponses, une bordure seule ne se verrait pas assez. */
+.parcours-option:has(input:checked) {
+  background: var(--sombre-texte);
+  border-color: var(--sombre-texte);
+  color: var(--sombre);
+}
+
+.parcours-option:has(input:focus-visible) {
+  outline: 2px solid var(--accent-clair);
+  outline-offset: 2px;
+}
+
+/* ─── Résultat ──────────────────────────────────────────────── */
+.parcours-resultat { display: flex; flex-direction: column; gap: 12px; }
+
+.parcours-offre { font-size: var(--text-corps-l); font-weight: 500; }
+
+.parcours-prix {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h1);
+  line-height: var(--leading-titre);
+  letter-spacing: var(--tracking-h1);
+}
+
+.parcours-delai { font-size: var(--text-corps); opacity: 0.72; }
+
+.parcours-mention {
+  margin-top: 32px;
+  max-width: 60ch;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  opacity: 0.72;
+}
+
+/* ─── Coordonnées ───────────────────────────────────────────── */
+.parcours-champs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 820px;
+}
+
+.parcours-champ { display: flex; flex-direction: column; gap: 8px; }
+.parcours-champ--area { grid-column: 1 / -1; }
+
+.parcours-champ label { font-size: var(--text-petit); opacity: 0.72; }
+
+.parcours-champ input,
+.parcours-champ textarea {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--filet-sombre);
+  border-radius: var(--rond-interactif);
+  background: transparent;
+  color: var(--sombre-texte);
+  font-family: var(--font-texte);
+  font-size: var(--text-corps);
+  transition: border-color var(--dur-rapide) var(--ease);
+}
+
+.parcours-champ input:hover,
+.parcours-champ textarea:hover { border-color: var(--sombre-texte); }
+
+/* Bordure en accent au focus, sans halo. */
+.parcours-champ input:focus,
+.parcours-champ textarea:focus { border-color: var(--accent-clair); outline: none; }
+.parcours-champ input:focus-visible,
+.parcours-champ textarea:focus-visible { outline: 2px solid var(--accent-clair); outline-offset: 2px; }
+
+.parcours-champ textarea { resize: vertical; min-height: 120px; }
+
+/* ─── Consentement ──────────────────────────────────────────── */
+.parcours-rgpd {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 32px;
+  max-width: 70ch;
+}
+
+.parcours-rgpd input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.parcours-rgpd-case {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  border: 1px solid var(--sombre-texte);
+  border-radius: 4px;
+}
+
+.parcours-rgpd:has(input:checked) .parcours-rgpd-case {
+  background: var(--sombre-texte);
+}
+
+.parcours-rgpd:has(input:focus-visible) .parcours-rgpd-case {
+  outline: 2px solid var(--accent-clair);
+  outline-offset: 3px;
+}
+
+.parcours-rgpd-texte { font-size: var(--text-petit); line-height: var(--leading-corps); opacity: 0.72; }
+.parcours-rgpd-marque { font-weight: 500; opacity: 1; }
+.parcours-rgpd-texte a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ─── Actions ───────────────────────────────────────────────── */
+.parcours-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.parcours-actions .bouton:disabled,
+.parcours-actions .bouton[aria-disabled='true'] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ─── Fin de parcours ───────────────────────────────────────── */
+.parcours-succes { display: flex; flex-direction: column; gap: 12px; }
+
+.parcours-succes-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h2);
+  letter-spacing: var(--tracking-h2);
+}
+.parcours-succes-titre em { color: var(--accent-clair); font-style: normal; }
+
+@media (max-width: 767px) {
+  .parcours-champs { grid-template-columns: 1fr; }
+  .parcours-choix { flex-direction: column; align-items: stretch; }
+  .parcours-actions { flex-direction: column-reverse; }
+  .parcours-actions .bouton { text-align: center; }
+}

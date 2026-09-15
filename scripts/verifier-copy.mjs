@@ -46,6 +46,52 @@ const AJOUTS_AUTORISES = [
   'Partout en France',
 ]
 
+/**
+ * Textes qui étaient déjà là, mais que le script injectait.
+ *
+ * Le formulaire de contact se construisait entièrement en JavaScript :
+ * ses questions, ses champs et ses messages n'apparaissaient nulle part
+ * dans le HTML servi. Ce script compare deux sources HTML — il ne pouvait
+ * donc pas les voir, et les signale comme des ajouts alors qu'ils
+ * existaient mot pour mot dans src/components/contact-form.ts.
+ *
+ * Les écrire dans le HTML est un gain, pas une dérive : le contenu
+ * devient lisible sans JavaScript, et indexable.
+ *
+ * Chaque entrée est vérifiable : `grep` la chaîne dans contact-form.ts
+ * sur la branche main.
+ */
+const TEXTES_SORTIS_DU_SCRIPT = [
+  'Quel est votre budget estimatif',
+  '1 000 – 3 000 €',
+  '3 000 – 5 000 €',
+  '5 000 – 10 000 €',
+  '10 000 € +',
+  'À définir',
+  'Parlez-moi de vous',
+  'Nom',
+  'Email',
+  'Description du projet',
+  'RGPD',
+  'En soumettant ce formulaire',
+  'politique de confidentialité',
+  'Retour',
+  'Continuer',
+  "Merci,",
+  "c'est envoyé.",
+  'Je reviens vers vous sous 24h.',
+]
+
+/**
+ * Textes disparus avec le composant qui les portait.
+ *
+ * « Discuter de ce projet » était le bouton qui menait de l'estimateur au
+ * formulaire. Les deux étant fusionnés, il n'y a plus de trajet à faire
+ * faire : le parcours va d'un écran au suivant, et son bouton final porte
+ * « Discuter de mon projet », qui existait déjà.
+ */
+const TEXTES_DE_COMPOSANTS_RETIRES = ['Discuter de ce projet']
+
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
  *  flèche dans une chaîne de texte : elle devient un SVG aria-hidden, et
  *  disparaît donc légitimement du texte rendu. */
@@ -152,12 +198,16 @@ for (const fichier of fichiers) {
   const sansAutorises = (f) =>
     AJOUTS_AUTORISES.reduce((acc, a) => acc.split(a).join(' '), f).replace(/\s+/g, ' ').trim()
 
-  const perdus = absentsAvant.filter((f) => !estUnRegroupement(f, toutApres))
+  const perdus = absentsAvant
+    .filter((f) => !estUnRegroupement(f, toutApres))
+    .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
   const ajoutes = absentsApres
     .filter((f) => !estUnRegroupement(f, toutAvant))
     .filter((f) => {
       const nettoye = sansAutorises(f)
-      return nettoye.length > 2 && !estUnRegroupement(nettoye, toutAvant)
+      if (nettoye.length <= 2) return false
+      if (TEXTES_SORTIS_DU_SCRIPT.some((t) => nettoye.includes(t))) return false
+      return !estUnRegroupement(nettoye, toutAvant)
     })
 
   const regroupes = absentsAvant.length - perdus.length + (absentsApres.length - ajoutes.length)
