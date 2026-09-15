@@ -82,10 +82,9 @@ body { padding-top: var(--nav-h); }
 .hero-preuves span { padding-inline: 24px; border-left: 1px solid var(--filet-moyen); }
 .hero-preuves span:first-child { padding-left: 0; border-left: 0; }
 
-.hero .ruban {
-  margin-top: var(--section-s);
-  margin-inline: calc(var(--grille-marge) * -1);
-}
+/* Le ruban est une section : il touche les deux bords et n'a pas besoin
+   de sortir des marges d'une autre. */
+.ruban { margin-top: var(--section-s); }
 
 /* Pas de calque de grille.
 
@@ -95,8 +94,7 @@ body { padding-top: var(--nav-h); }
    corps au fond, pas un quadrillage. */
 
 /* Le contenu passe au-dessus du grain. */
-.hero-corps,
-.hero .ruban { position: relative; }
+.hero-corps { position: relative; }
 
 /* Sous 768 px : tout s'empile, et les preuves passent en liste à filets. */
 @media (max-width: 767px) {

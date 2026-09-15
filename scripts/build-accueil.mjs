@@ -52,10 +52,6 @@ ${bloc}
 /* ── Sections ─────────────────────────────────────────────────────── */
 
 function hero() {
-  const piste = [...C.ruban, ...C.ruban]
-    .map((r) => `<span class="ruban-item">${r}</span>`)
-    .join('')
-
   const preuves = C.hero.preuves.map((p) => `<span>${p}</span>`).join('\n        ')
 
   return `  <section class="hero" id="hero">
@@ -79,9 +75,21 @@ function hero() {
       </p>
     </div>
 
-    <div class="ruban" aria-hidden="true">
-      <div class="ruban-piste">${piste}</div>
-    </div>
+  </section>`
+}
+
+/**
+ * Le ruban des prestations. Section à part entière, entre le hero et le
+ * bloc « Votre site ne travaille pas pour vous » — il était jusqu'ici à
+ * l'intérieur du hero, ce qui le liait à une section dont il n'est pas.
+ */
+function ruban() {
+  const piste = [...C.ruban, ...C.ruban]
+    .map((r) => `<span class="ruban-item">${r}</span>`)
+    .join('')
+
+  return `  <section class="ruban" id="ruban" aria-hidden="true">
+    <div class="ruban-piste">${piste}</div>
   </section>`
 }
 
@@ -458,7 +466,7 @@ ${head}</head>
 ${navigation()}
 
   <main id="contenu">
-${[hero(), probleme(), pivot(), studio(), transparence(), prestations(), methode(), realisations(), tarifs(), estimateur(), faqSection(), engagements(), contact()].join('\n\n')}
+${[hero(), ruban(), probleme(), pivot(), studio(), transparence(), prestations(), methode(), realisations(), tarifs(), estimateur(), faqSection(), engagements(), contact()].join('\n\n')}
   </main>
 
 ${piedDePage()}
