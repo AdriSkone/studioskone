@@ -1,0 +1,111 @@
+/* ============================================================
+   Page projet
+   Même système que l'accueil : les composants viennent de components/,
+   ce fichier ne fait que les poser sur la grille.
+   ============================================================ */
+
+@import './components/nav.css';
+
+body { padding-top: var(--nav-h); }
+
+/* ─── Tête ──────────────────────────────────────────────────── */
+.projet-tete { padding-top: var(--section-s); }
+
+.projet-retour { align-self: start; }
+
+.projet-identite {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.projet-titre { margin: 0; }
+
+.projet-type {
+  font-size: var(--text-corps-l);
+  line-height: var(--leading-corps);
+  color: var(--gris);
+}
+
+.projet-desc {
+  align-self: end;
+  margin-top: 48px;
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
+}
+
+.projet-visuel { margin-top: 64px; }
+
+.projet-visuel img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--rond-bloc);
+  background: var(--papier-ombre);
+}
+
+/* ─── Contexte ──────────────────────────────────────────────── */
+.projet-contexte { display: flex; flex-direction: column; gap: 20px; }
+.projet-contexte p { max-width: 62ch; line-height: var(--leading-corps); }
+
+.projet-note { opacity: 0.72; }
+
+.projet-signature {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  opacity: 0.72;
+}
+
+/* ─── Galerie ───────────────────────────────────────────────
+   Deux colonnes, une vue peut en occuper deux. Les images gardent leur
+   rapport : une capture d'écran rognée ne montre plus ce qu'elle montrait. */
+.projet-galerie {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grille-gouttiere) var(--grille-gouttiere);
+}
+
+.projet-vue { display: flex; flex-direction: column; gap: 12px; }
+.projet-vue--large { grid-column: 1 / -1; }
+
+.projet-vue img {
+  width: 100%;
+  border-radius: var(--rond-bloc);
+  background: var(--papier-ombre);
+}
+
+.projet-vue figcaption {
+  font-size: var(--text-petit);
+  color: var(--gris);
+}
+
+/* ─── Suite ─────────────────────────────────────────────────── */
+.projet-cta-sous {
+  align-self: end;
+  font-size: 0.9375rem;
+  line-height: var(--leading-corps);
+  color: var(--gris);
+}
+
+.projet-suite {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grille-gouttiere);
+  margin-top: var(--section-s);
+}
+
+/* Sur une page projet, les vignettes reprennent la colonne : elles ne
+   sont pas dans un ruban. */
+.projet-suite .carte-projet { width: auto; }
+
+@media (max-width: 1023px) {
+  .projet-suite { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+  .projet-galerie,
+  .projet-suite { grid-template-columns: 1fr; }
+  .projet-vue--large { grid-column: auto; }
+  .projet-desc { margin-top: 24px; }
+}

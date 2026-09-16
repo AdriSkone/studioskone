@@ -126,6 +126,26 @@ function normaliser(l) {
     .trim()
 }
 
+/**
+ * Le texte des partiels communs — barre de navigation, pied de page,
+ * bandeau cookies — et des vignettes de projet.
+ *
+ * Les pages projet n'avaient ni pied de page ni navigation complète :
+ * elles les reçoivent, et tout ce texte apparaît donc comme ajouté. Il
+ * n'est pourtant écrit nulle part de neuf — il vient de l'accueil, où
+ * cette même vérification l'a déjà comparé mot pour mot à l'ancienne
+ * version.
+ *
+ * On lit donc l'accueil : un fragment qui s'y trouve déjà n'est pas un
+ * ajout de copy, c'est un partiel qui arrive sur une page qui en manquait.
+ */
+let texteAccueil = ''
+try {
+  texteAccueil = fragments(readFileSync('index.html', 'utf8')).join(' ')
+} catch {
+  /* l'accueil n'est pas toujours là — la comparaison se fait sans */
+}
+
 const fichiers = process.argv.slice(2)
 if (!fichiers.length) {
   console.error('usage : node scripts/verifier-copy.mjs <fichier.html> [...]')
@@ -207,6 +227,8 @@ for (const fichier of fichiers) {
       const nettoye = sansAutorises(f)
       if (nettoye.length <= 2) return false
       if (TEXTES_SORTIS_DU_SCRIPT.some((t) => nettoye.includes(t))) return false
+      // Déjà présent sur l'accueil : c'est un partiel, pas un ajout.
+      if (fichier !== 'index.html' && estUnRegroupement(nettoye, texteAccueil)) return false
       return !estUnRegroupement(nettoye, toutAvant)
     })
 
