@@ -173,8 +173,8 @@ ${b.notes.map((n) => `          <div class="truth-item">
           </div>`).join('\n')}
         </div>
         <p class="pres-inline-cta reveal">
-          <a href="/#estimator" class="bouton bouton--principal">${FLECHE}
-            <span>${esc(b.cta)}</span>
+          <a href="/#estimator" class="bouton bouton--principal">
+            <span>${esc(b.cta)}</span>${FLECHE}
           </a>
         </p>
       </div>
@@ -234,8 +234,8 @@ ${b.items.map(([q, a], i) => `          <div class="faq-item reveal" role="listi
 ${b.paragraphs.map((p) => `          <p>${esc(p)}</p>`).join('\n')}
         </div>
         <div class="hero-cta-row pres-cta-row reveal">
-          <a href="${esc(b.primary.href)}" class="bouton bouton--principal">${FLECHE}
-            <span>${esc(b.primary.label)}</span>
+          <a href="${esc(b.primary.href)}" class="bouton bouton--principal">
+            <span>${esc(b.primary.label)}</span>${FLECHE}
           </a>
 ${b.secondary ? `          <a href="${esc(b.secondary.href)}" class="bouton bouton--secondaire">
             <span>${esc(b.secondary.label)}</span>
@@ -342,8 +342,8 @@ ${renderBreadcrumb(page)}
         <h1 class="pres-h1">${page.h1}</h1>
         <p class="pres-hero-lead">${esc(page.lead)}</p>
 ${page.context ? `        <p class="pres-hero-context"><span class="hero-location-dot" aria-hidden="true"></span>${esc(page.context)}</p>\n` : ''}        <div class="hero-cta-row pres-hero-cta">
-          <a href="${esc(page.ctas[0].href)}" class="bouton bouton--principal">${FLECHE}
-            <span>${esc(page.ctas[0].label)}</span>
+          <a href="${esc(page.ctas[0].href)}" class="bouton bouton--principal">
+            <span>${esc(page.ctas[0].label)}</span>${FLECHE}
           </a>
           <a href="${esc(page.ctas[1].href)}" class="bouton bouton--secondaire">
             <span>${esc(page.ctas[1].label)}</span>
