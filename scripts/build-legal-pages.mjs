@@ -250,7 +250,7 @@ function pageTemplate({ slug, title, lastUpdated, intro, toc, body, footerLinks 
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/favicon_skone.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon-2026.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${esc(title)} — Studio Skøne</title>
   <meta name="description" content="${esc(title)} du site studioskone.com — Studio Skøne, agence digitale parisienne.">
