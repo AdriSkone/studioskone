@@ -11,11 +11,8 @@ export default defineConfig({
         // Vercel sert dist/404.html sur toute route inconnue.
         notFound:    resolve(__dirname, '404.html'),
 
-        // Pages de travail de la refonte : démonstration des fondations et
-        // inventaire des composants. En noindex, hors sitemap. Elles sortent
-        // du build à la recette finale.
-        fondations:  resolve(__dirname, 'fondations.html'),
-        composants:  resolve(__dirname, 'composants.html'),
+        // fondations.html et composants.html, pages de travail de la refonte,
+        // restent hors du build : consultables avec `npm run dev` seulement.
 
         // Pages prestations — générées par `node scripts/build-prestation-pages.mjs`.
         // Ne pas les éditer à la main : la source est scripts/prestation-pages-data.mjs.
