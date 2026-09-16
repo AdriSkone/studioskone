@@ -115,7 +115,7 @@ export const projets = [
     note: "Né d'un besoin réel : mes projets, mes devis et mes relances étaient éparpillés entre trois outils et ma mémoire. J'ai construit Tasq pour les freelances qui travaillent seuls.",
     signature: "Studio Skøne · Produit maison",
     lienLibelle: "Voir le projet",
-    image: '/work/tasq.png',
+    image: '/work/tasq-dashboard.webp',
     alt: "Tasq · web app de pilotage de projets pour freelances du web et créatifs",
     grand: false,
   },

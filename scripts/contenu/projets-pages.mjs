@@ -447,18 +447,18 @@ export const pagesProjet = {
     "badge": "Web App",
     "type": "Web App de pilotage de projets freelance",
     "desc": "Tasq aide les freelances du web et créatifs à piloter leurs projets clients. L'idée : mettre le projet au centre plutôt que la facture, pour ne jamais laisser filer une relance, une livraison ou un paiement.",
-    "heroImg": "/work/tasq.png",
+    "heroImg": "/work/tasq-dashboard.webp",
     "heroAlt": "Tasq · dashboard « ce qui demande ton attention aujourd'hui »",
     "contexteTitre": "",
     "galerie": [
       {
-        "src": "/work/tasq.png",
+        "src": "/work/tasq-dashboard.webp",
         "alt": "Tasq · dashboard « À traiter » avec relances et encaissements en attente",
         "label": "Dashboard",
         "large": true
       },
       {
-        "src": "/work/tasq-landing.png",
+        "src": "/work/tasq-landing.webp",
         "alt": "Tasq · landing page « Tes projets clients, enfin tous au même endroit »",
         "label": "Landing",
         "large": false

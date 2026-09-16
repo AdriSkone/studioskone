@@ -46,6 +46,26 @@ function balises(html) {
 }
 
 /**
+ * Les balises dont le changement est voulu, et pourquoi.
+ *
+ * Une entrée par balise réellement modifiée, avec sa raison. Tout ce qui
+ * n'est pas listé ici et qui change fait échouer la vérification — c'est
+ * le but du script.
+ */
+const CHANGEMENTS_DECLARES = {
+  'projets/tasq.html': {
+    'meta:og:image':
+      "L'image de partage montrait Tasq dans son ancienne charte " +
+      'terracotta, abandonnée en septembre 2026 au profit du « calme ' +
+      "japonais ». Le fichier /work/tasq.png a été remplacé ; l'ancien " +
+      "n'existe plus, et laisser la balise pointer dessus casserait " +
+      'toute prévisualisation de la page. La nouvelle image est un PNG ' +
+      "de 1200 × 630 et non le WebP du site : plusieurs réseaux sociaux " +
+      'ne lisent pas encore le WebP dans une og:image.',
+  },
+}
+
+/**
  * Les alt d'image dont la disparition est admise, et pourquoi.
  *
  * Le logo était une image portant alt="Studio Skøne" dans la barre et dans
@@ -77,10 +97,14 @@ for (const fichier of process.argv.slice(2)) {
   const b = balises(apres)
   const soucis = []
 
+  const declares = CHANGEMENTS_DECLARES[fichier] || {}
+
   for (const [cle, val] of a) {
     if (!b.has(cle)) soucis.push(`  − ${cle} : SUPPRIMÉE`)
-    else if (b.get(cle) !== val)
+    else if (b.get(cle) !== val) {
+      if (declares[cle]) continue
       soucis.push(`  ≠ ${cle}\n      avant : ${val.slice(0, 110)}\n      après : ${b.get(cle).slice(0, 110)}`)
+    }
   }
   for (const cle of b.keys()) {
     if (!a.has(cle) && !cle.startsWith('meta:viewport') && !cle.startsWith('meta:charset'))
