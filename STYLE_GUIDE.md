@@ -1,495 +1,239 @@
-# Studio Skøne — Style Guide (Premium Upgrade)
+# STYLE_GUIDE.md — Studio Skøne
 
-> # ⚠️ CE DOCUMENT EST PÉRIMÉ — NE PAS L'UTILISER
->
-> Il décrit une identité (**Barlow**, glow diffus, grain, ombres floues) que le site
-> **n'a plus**. S'en servir produit un rendu hors-marque.
->
-> **Source de vérité : `src/style.css`** — tokens `:root`, `#hero`, `.hero-top`.
->
-> | | Ci-dessous (périmé) | `src/style.css` (réel) |
-> |---|---|---|
-> | Typo | Barlow | **Bricolage Grotesque Variable** |
-> | Accent | `#C4603B` | `#C56039` |
-> | Fond | `#FBF4E4` | `#FAEEDF` / `#F3E8D7` |
-> | Texture | grain 0.03 | **trame de points** 26–28px, `#181716` @ 0.13 |
-> | Ombres | `0 8px 30px` floues | **`8px 8px 0` dures**, sans flou |
-> | Bordures | aucune | **`2px solid #181716`** |
-> | Décor | glow diffus | **cercles bordés noir + ombre dure** |
->
-> Le site est en **néo-brutaliste chaud**, pas en éditorial doux.
-> Conservé uniquement comme archive. Constaté le 2026-08-25.
-
-
-## Brand Identity
-
-Studio digital créatif premium.
-Positionnement : agence produit & design.
-
-Esthétique :
-- minimal éditorial
-- contraste maîtrisé
-- sophistication discrète
-
-Objectif visuel :
-→ évoquer une direction artistique, pas une interface générique
+> Référence unique de la refonte 2026. Toute valeur de design vient d'ici.
+> En cas de contradiction entre ce fichier et une maquette, ce fichier gagne, sauf pour la mise en page.
 
 ---
 
-## Colors
+## 0. Règles absolues
 
-Palette volontairement chaude, texturée et premium.
-
-| Rôle             | Valeur      | Token CSS       |
-|------------------|-------------|-----------------|
-| Background       | `#FBF4E4`   | `--bg`          |
-| Background deep  | `#F3E8D7`   | `--bg-soft`     |
-| Section alt      | `#E8D1B3`   | `--surface`     |
-| Cards            | `#FFF8EF`   | `--card`        |
-| Primary Accent   | `#C4603B`   | `--accent`      |
-| Accent hover     | `#A84E2E`   | `--accent-dark` |
-| Text Primary     | `#1A1A1A`   | `--text`        |
-| Text Secondary   | `#6B6B6B`   | `--muted`       |
-| Border           | `#E2D8CB`   | `--border`      |
-
-### NEW — Depth system
-
-```css
---grain-opacity: 0.03;
---glow-accent:   rgba(196, 96, 59, 0.18);
---shadow-soft:   0 8px 30px rgba(0, 0, 0, 0.08);
-```
-
-**Usage :**
-- `--bg-soft` : fonds alternatifs, zones de repos visuel (hover léger, sections de transition)
-- `--grain-opacity` : overlay bruit de texture sur sections premium (pseudo-élément `::after`)
-- `--glow-accent` : lueur douce autour d'éléments accent (box-shadow ou filter)
-- `--shadow-soft` : ombre portée standard hover — remplace les ombres arbitraires
+1. **Le copywriting ne change jamais.** Pas un mot, pas une virgule, pas un titre. Les textes viennent de studioskone.com. Si un texte ne rentre pas dans une mise en page, on change la mise en page.
+2. **Aucune régression SEO.** URL, meta, canonical, Open Graph, geo, données structurées et attributs alt repris à l'identique.
+3. **Aucune ombre, aucun dégradé, aucun flou.** Seules exceptions : l'anneau de focus clavier, et un futur menu déroulant ou une modale, où l'ombre signale une vraie superposition.
+4. **Un seul mot en accent sur tout le site** : « même personne » dans le hero. Aucun autre titre, sur aucune page, n'a de mot coloré.
 
 ---
 
-## Typography
+## 1. Couleur
 
-### Règle responsive
+### Fond clair
 
-Typographie fluide avec `clamp()` — aucune media query nécessaire pour les tailles de texte.
+| Token | Valeur | Usage |
+|---|---|---|
+| `--papier` | `#F6ECDB` | Fond principal |
+| `--papier-ombre` | `#EEE2CC` | Blocs, rubans, variations de surface |
+| `--encre` | `#14181C` | Texte principal |
+| `--accent` | `#12455C` | Bleu de Prusse. Accent sur fond clair |
+| `--accent-profond` | `#0C3242` | Survols et états actifs |
+| `--gris` | `#5F6468` | Texte secondaire |
 
-```
-clamp(min, preferred·vw, max)
-```
+### Sections sombres
 
----
+| Token | Valeur | Usage |
+|---|---|---|
+| `--sombre` | `#14181C` | Fond des sections en négatif |
+| `--sombre-texte` | `#F6ECDB` | Texte sur sombre |
+| `--accent-clair` | `#5FA8C4` | Accent sur fond sombre, à ajuster après mesure |
 
-### Font Pairing
+**Le bleu de Prusse ne porte jamais de texte sur fond sombre**, son contraste est insuffisant. Sur sombre, il ne sert qu'aux filets et aux points d'état.
 
-| Rôle | Police |
-|------|--------|
-| Hero titles (H1) | **Barlow Bold** |
-| Section titles (H2, H3) | **Barlow Bold** |
-| Navigation links | **Barlow Bold** |
-| Decorative quote marks | **Barlow Bold** |
-| Body text | **Barlow Regular** |
-| Buttons / labels / forms | **Barlow Regular** |
-| Testimonials / citations | **Barlow Regular** |
-| Prix / montants | **Barlow Regular** |
-| Author names | **Barlow Regular** |
+Toutes les paires texte/fond doivent être vérifiées en WCAG AA. Toute valeur qui échoue est assombrie et signalée.
 
-```css
---font-display: 'Barlow', system-ui, sans-serif;
---font-sans:    'Barlow', system-ui, sans-serif;
-```
+### Dosage
 
-> Import Google Fonts : `font-family=Barlow:wght@400;700` — subset latin + latin-ext
+L'accent ne dépasse jamais 3 % de la surface d'un écran. En dehors du mot du hero, ses seuls usages sont fonctionnels : bouton principal, survols, états actifs, anneaux de focus, filets d'accent, points d'état, curseur.
 
 ---
 
-### Échelle typographique — Fluid clamp()
+## 2. Le grain
 
-| Élément | clamp() | min | max | line-height | font-weight |
-|--------|---------|-----|-----|-------------|-------------|
-| H1 (Hero) | `clamp(38px, 5vw, 64px)` | 38px | 64px | 1.1 | 700 |
-| H2 (Section) | `clamp(28px, 3vw, 40px)` | 28px | 40px | 1.2 | 700 |
-| H3 (Subheading) | `clamp(20px, 2vw, 24px)` | 20px | 24px | 1.3 | 700 |
-| Body standard | `clamp(15px, 1.2vw, 18px)` | 15px | 18px | 1.6 | 400 |
-| Small text | `clamp(13px, 1vw, 14px)` | 13px | 14px | — | 400 |
-| Button | `16px` | — | — | 1.5 | 500 |
-| Label / caption | `12px` | — | — | — | 400 |
+C'est la matière du site, elle n'est pas optionnelle.
 
-```css
-h1 { font-size: clamp(38px, 5vw, 64px);   line-height: 1.1; font-weight: 700; }
-h2 { font-size: clamp(28px, 3vw, 40px);   line-height: 1.2; font-weight: 700; }
-h3 { font-size: clamp(20px, 2vw, 24px);   line-height: 1.3; font-weight: 700; }
-body { font-size: clamp(15px, 1.2vw, 18px); line-height: 1.6; }
-.small { font-size: clamp(13px, 1vw, 14px); }
-```
-
-**Decorative quote marks** : `font-size: 88px; font-weight: 700; opacity: 0.15` — positionnement absolu en fond de carte.
+- Bruit fin, non répétitif, **teinté brun chaud `#6B5A44`**
+- Mode `multiply`, opacité **9 %**
+- **Jamais un bruit gris** : en multiply, il désature le papier et le fait paraître terne
+- Appliqué **en fond uniquement**, derrière tout le contenu. Jamais sur une couche qui recouvre le texte, sinon les lettres sont salies.
+- **Une seule couche pour toute la page**, pas une par section
+- Sur les sections sombres, le multiply brun n'est pas visible : passer en `screen` ou `soft-light`, valeur à calibrer. La matière doit traverser les deux registres.
 
 ---
 
-### Styles complémentaires
+## 3. Typographie
 
-- `letter-spacing: 0.02em` sur H1, H2, H3
-- `letter-spacing: 0.2em` + `text-transform: uppercase` sur les section labels
-- Hiérarchie forte : Hero 700 vs Section title 600 — contraste intentionnel éditorial
+| Rôle | Famille | Réglages |
+|---|---|---|
+| Display | **Bricolage Grotesque** (variable) | Graisses 700 et 800, `font-stretch: 92%`, interlettrage -0.02em à -0.035em, interlignage 0.90 à 1.0 sur les grandes tailles |
+| Texte | **Switzer** | 400 et 500, longueur de ligne sous 75 caractères |
+| Donnée | **JetBrains Mono** | 400, 12 à 13 px |
 
-### Largeur de texte
+Échelle en `clamp()` :
 
-```css
-.hero-subtitle { max-width: 560px; }
-.section-text  { max-width: 640px; }
+```
+display  clamp(3.5rem, 8vw, 8.5rem)   Bricolage 800, wdth 92, -0.035em
+h1       clamp(2.75rem, 5.5vw, 5rem)  Bricolage 800, wdth 92, -0.03em
+h2       clamp(2rem, 3.5vw, 3rem)     Bricolage 700, -0.025em
+h3       1.5rem                        Bricolage 700, -0.02em
+corps L  1.25rem                       Switzer 400
+corps    1.0625rem                     Switzer 400
+petit    0.875rem                      Switzer 400
+data     0.8125rem                     JetBrains Mono 400
 ```
 
-### Rythme vertical
+- Titres en **casse de phrase**, jamais en capitales
+- Le monospace ne sert qu'à de la donnée réelle : prix, numéros d'étape, durées, années
+- **Deux `text-transform: uppercase` maximum sur toute la page**, et uniquement pour une information de statut
 
-```css
-h1 { margin-bottom: 24px; }
-h2 { margin-bottom: 32px; }
-h3 { margin-bottom: 16px; }
-p  { margin-bottom: 16px; }
-```
+Polices auto-hébergées en `@font-face` depuis `/public/fonts`, préchargées, `font-display: swap`, `size-adjust` pour éviter tout décalage. Aucun CDN de polices.
 
 ---
 
-## Spacing
+## 4. Rondeur
 
-- Large white space — `padding-block: 140px` desktop, `96px` mobile
-- Premium vertical rhythm entre chaque section
-- Container : `max-width: 1300px`, `padding-inline: 64px → 40px → 24px`
-- Sections aérées, jamais de contenu dense
+| Élément | Valeur |
+|---|---|
+| Interactifs : boutons, champs, boutons de choix, en-têtes d'accordéon | **10 px** |
+| Blocs de contenu | **16 px** |
+| Images de projet et vignettes | **16 px** |
+| Sections pleine largeur, bord à bord | **0** |
 
----
-
-## CTA Button Design System
-
-### Primary CTA
-
-**Usage :** action principale, hero CTA, contact, nav principale.
-
-**Règle systématique :** tout bouton CTA primaire comporte obligatoirement un cercle icône flèche à gauche.
-
-```css
-background:    var(--accent);     /* #C4603A */
-color:         var(--bg);         /* #FBF4E4 */
-border-radius: 100px;
-padding:       7px 24px 7px 7px;  /* pill avec icône cercle gauche */
-gap:           16px;
-font-family:   var(--font-display);
-font-weight:   600;
-letter-spacing: 0.08em;
-text-transform: uppercase;
-transition:    background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-```
-
-Hover :
-```css
-background:  var(--accent-dark);  /* #A84E2E */
-transform:   translateY(-2px);
-box-shadow:  0 8px 28px rgba(196, 96, 58, 0.38);
-```
-
-Icône cercle gauche : `42px`, `background: var(--bg)`, `color: var(--accent)`.
-Hover : animation ring pulse sur le cercle + nudge doux de la flèche (4px, `ease-in-out`, 1.4s, loop infini).
-
-```css
-@keyframes ctaArrow {
-  0%   { transform: translateX(0);   }
-  50%  { transform: translateX(4px); }
-  100% { transform: translateX(0);   }
-}
-/* animation: ctaArrow 1.4s ease-in-out infinite; */
-```
+Aucune valeur intermédiaire ailleurs. Aucune pilule.
 
 ---
 
-### Secondary CTA
+## 5. Grille et espacement
 
-**Usage :** nav CTA, actions secondaires, ghost buttons, liens d'appui.
-
-**Règle systématique :** tout bouton CTA secondaire comporte un dot rond accent à gauche, avec `gap: 10px` entre le dot et le texte.
-
-```css
-background:    transparent;
-border:        1.5px solid var(--accent);
-color:         var(--accent);
-border-radius: 100px;
-padding:       12px 24px;
-gap:           10px;              /* espacement dot → texte */
-font-family:   var(--font-display);
-font-weight:   600;
-letter-spacing: 0.08em;
-text-transform: uppercase;
-transition:    background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-```
-
-Dot :
-```css
-width: 6px; height: 6px;
-border-radius: 50%;
-background: var(--accent);  /* var(--bg) si fond primaire */
-```
-
-Hover :
-```css
-background:  rgba(196, 96, 58, 0.08);
-transform:   translateY(-2px);
-box-shadow:  0 4px 16px rgba(196, 96, 58, 0.12);
-```
+- 12 colonnes, gouttière 24 px, marges 40 px en mobile et 64 px au-delà, largeur max 1440 px
+- **Aucun filet vertical.** La grille est un système d'alignement, elle n'est pas dessinée.
+- Filets horizontaux uniquement, 1 px, encre à 12 % d'opacité, en séparation entre sections. Jamais dans une zone sans contenu.
+- **Pas de filet entre la navigation et le hero.**
+- Espacement vertical sur une échelle de 8 px. Entre sections : **96, 160 ou 240 px**. Trois valeurs, jamais une intermédiaire.
+- Les blocs ne sont jamais centrés par défaut. L'asymétrie est la norme.
+- Breakpoints de référence : **390, 768, 1024, 1440**.
 
 ---
 
-## Testimonials Design
+## 6. Rythme clair / sombre
 
-### Section title
+Quatre sections sombres, jamais deux à la suite. Transitions franches, bord à bord, sans dégradé.
 
-Utiliser **Barlow Bold (700)**.
+| # | Section | Fond |
+|---|---|---|
+| 1 | Hero | clair |
+| 2 | Ruban des prestations | clair |
+| 3 | Votre site ne travaille pas pour vous | clair |
+| 4 | Rien de tout ça n'est votre métier | **sombre** |
+| 5 | Le studio, avec le portrait | clair |
+| 6 | Transparence | clair |
+| 7 | Prestations | clair |
+| 8 | Méthode | **sombre** |
+| 9 | Réalisations, double ruban | clair |
+| 10 | Tarifs | clair |
+| 11 | Estimateur et contact fusionnés | **sombre** |
+| 12 | FAQ | clair |
+| 13 | Engagements | clair |
+| 14 | Contact et pied de page | **sombre** |
 
-Textes recommandés :
-- *Ce que nos clients disent*
-- *Ils nous ont fait confiance*
-
-### Testimonial text
-
-Utiliser **Barlow Regular (400)** — taille 20px, line-height 34px.
-
-Exemple :
-> "Studio Skone a transformé notre image de marque et notre présence digitale."
-
-### Author
-
-Utiliser **Barlow Regular (400)** — taille 16px, line-height 24px.
-
-Exemple : `— Claire Martin, Fondatrice`
-
-### Quote Styling
-
-Les guillemets décoratifs doivent être :
-
-```css
-font-family: var(--font-display); /* Barlow Bold */
-font-size:   88px;
-font-weight: 700;
-opacity:     0.15;
-position:    absolute;
-```
-
-Placés en fond de carte, ils servent de texture visuelle sans concurrencer le contenu.
-
-### Card Style
-
-```css
-border-radius:    24px;
-background:       rgba(255, 248, 239, 0.6);   /* --card avec transparence */
-border:           1px solid rgba(226, 216, 203, 0.5); /* --border subtil */
-backdrop-filter:  blur(12px);
--webkit-backdrop-filter: blur(12px);
-box-shadow:       0 4px 24px rgba(0, 0, 0, 0.06);
-transition:       transform 0.4s ease, box-shadow 0.4s ease;
-```
-
-Hover :
-```css
-transform:  translateY(-6px);
-box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
-```
+L'ordre des sections ne change pas.
 
 ---
 
-## Components
+## 7. Composants
 
-### Boutons
+**Navigation.** Collée en haut, sans filet de séparation avec le hero. Au survol, le libellé glisse vers le haut et sort du cadre pendant qu'une copie identique arrive par le bas, en masque, 300 ms. Aucun soulignement, aucun changement de couleur : le mouvement est le seul signal. L'entrée active porte un point de 4 px en accent. Sur les sections sombres, le texte passe automatiquement en `--sombre-texte` et le CTA en contour clair, transition 200 ms.
 
-Voir **CTA Button Design System** ci-dessus pour les specs complètes.
+**Bouton principal.** Fond `--accent`, texte `--papier`, radius 10 px. Survol : fond `--accent-profond`. Aucun scale, aucune ombre.
 
-Résumé rapide :
-- `border-radius: 16px` sur tous les boutons
-- Transition `0.3s ease` — jamais brutale
-- Lift `translateY(-2px)` au hover sur primaire et secondaire
-- Ombre portée accent sur primaire, ombre subtile sur secondaire
+**Bouton secondaire et lien de texte.** Soulignement qui se redessine de gauche à droite, 250 ms. Le texte passe en accent.
 
-### Cartes (Work)
+**Hero.** Titre pleine largeur en display. Paragraphe à gauche, bloc d'action à droite avec les deux boutons **sur une même ligne**, bouton plein à gauche, lien souligné à droite, 24 px entre les deux. Bandeau de réassurance à quatre mentions séparées par des filets verticaux. Une seule forme graphique : un grand arc en débord du bord droit, 8 à 10 % d'opacité, dans la moitié basse, jamais derrière un mot. Le hero reste sous la hauteur d'écran et la section suivante affleure sur 80 à 120 px.
 
-```css
-border-radius: 24px;          /* rounded-3xl */
-overflow: hidden;
-box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-transition: transform 0.55s, box-shadow 0.55s;
-```
+**Vignette de projet.** Ratio uniforme 16/10, **toutes de la même taille**, radius 16 px, cadrage sur le haut du site, jamais rognée sur son contenu. Aucun badge posé dessus, aucun cadre de navigateur dessiné. Au survol, l'image ne bouge pas : le curseur passe en pastille « Voir le projet » et le titre passe en accent.
 
-Hover :
-```css
-transform: translateY(-6px);
-box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-```
+**Réalisations.** Double ruban défilant, deux rangées en sens inverse, 45 à 60 s par cycle, boucle sans couture par duplication, arrêt au survol, défilement possible à la souris. Sous 1024 px : grille verticale statique.
 
-- Lift premium au hover
-- Image avec `scale(1.04)` et overlay texte italic
-- `work-info` avec `padding: 20px 24px 24px` et fond `--bg`
+**Prestations.** Six blocs de tailles variables selon l'importance. **Aucune numérotation**, ce n'est pas une séquence. Prix en JetBrains Mono.
 
-### Hero Badges
+**Tarifs.** Trois offres. **Aucun filet entre les lignes d'une liste** : une liste se lit par l'espace. L'offre recommandée se distingue franchement, par la taille, l'air et la densité de fond : plus de colonnes, prix en display, peut dépasser verticalement. **Jamais d'aplat en couleur d'accent derrière une offre.**
 
-Deux badges dans le hero headline :
+**Estimateur et contact, parcours unique.** L'estimateur et le formulaire sont fusionnés : le visiteur ne saisit jamais deux fois la même information. Une question par écran, en display, grandes zones cliquables. Progression par un filet horizontal qui se remplit, jamais un compteur « étape 2 sur 5 ». Navigation clavier complète. La fourchette s'affiche après les trois questions, puis deux champs seulement.
 
-| Variante | Usage | Style |
-|----------|-------|-------|
-| `--filled` | "web", "mobile" | Fond `--accent` plein, texte `--bg` |
+**Méthode.** Quatre étapes numérotées, **seule séquence numérotée du site**. Sticky sur fond sombre, l'étape active se distingue nettement.
 
-```css
-background: var(--accent);  /* #C4603A */
-color:      var(--bg);      /* #FBF4E4 */
-border-radius: 0.28em;
-padding:    0.05em 0.26em;
-```
+**Engagements.** Cinq items, aucune numérotation.
 
 ---
 
-### Section Labels
+## 8. Curseur
 
-```css
-font-family: var(--font-display);   /* Barlow Bold */
-font-size: 11px;
-font-weight: 600;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(--accent);
-```
+Existant, conservé. Point de 10 px en accent, `position: fixed`, suivi par interpolation en `requestAnimationFrame`, position en `transform: translate3d()`.
+
+Quatre états : repos 10 px · sur un élément cliquable, 40 px et `cursor: none` sur la cible · sur une vignette projet, pastille « Voir le projet » · sur fond sombre, couleur `--papier`.
+
+Désactivé sous 1024 px, sur `(pointer: coarse)` et en `prefers-reduced-motion`. Ne remplace jamais le curseur système sur les champs et le texte sélectionnable. Une seule instance dans le layout.
 
 ---
 
-## Hero Layout
+## 9. Mouvement
 
-Structure validée — ne pas modifier sans validation visuelle préalable.
+**Principe : rien ne bouge en Z.** Aucun soulèvement, aucune ombre, aucune profondeur simulée. Tout se joue dans le plan : masque, glissement, couleur.
 
-```
-┌──────────────────────────────────────┐
-│  [tagline gauche]   [statement droit]│
-│                     [CTA bouton]     │
-│                                      │
-│  ████████████████████████████████   │  ← logo pleine largeur
-└──────────────────────────────────────┘
-```
+Courbe unique : `cubic-bezier(0.16, 1, 0.3, 1)`. Survols 200 ms, révélations 600 ms.
 
-### Logo
-- Pleine largeur, ancré en bas, contenu dans la section (`overflow: hidden`)
-- `padding: 0 32px 32px` — marges égales gauche, droite, bas
-- Fond gradient : `linear-gradient(148deg, #ECE4D0, #F4EDD9, #FBF4E4, #F7EDDB)`
+**Partout :** révélation par masque vertical avec translation de 16 px, déclenchée à 85 % du viewport, jouée une seule fois · cascade de 60 ms dans les listes · chiffres qui s'incrémentent à l'entrée dans le viewport · formes graphiques en parallaxe très lente, jamais de mouvement autonome.
 
-### Texte gauche (tagline)
-- Position : `left: 32px; top: 40%` (aligné sur le bord gauche du logo)
-- Style : 11px, weight 400, `letter-spacing: 0.2em`, `text-transform: uppercase`, `color: #20201E`
-- Badges inline "web" et "mobile" : fond `--accent`, texte `--bg`, `border-radius: 0.28em`
+**Quatre moments orchestrés :**
+1. Hero au chargement : titre ligne par ligne, puis paragraphe et boutons, puis le curseur. Deux secondes, une seule fois par session.
+2. Double ruban des réalisations.
+3. Méthode en sticky sur fond sombre.
+4. Estimateur plein écran, 250 ms entre étapes.
 
-### Texte droit (statement)
-- Position : `right: 32px; top: 40%` (aligné sur le bord droit du logo)
-- Style : `clamp(28px, 4vw, 64px)`, weight 700, `text-align: right`
-- "attire." : `font-weight: 300; font-style: italic`
-- "convertit." : `color: var(--accent)`
+**Survols détaillés :** ligne de prestation, un filet en accent se trace de gauche à droite et le prix passe en accent · bouton de choix, fond et bordure changent d'un coup, état sélectionné franc en encre sur papier · champ de formulaire, bordure en accent au focus, sans halo · accordéon, ouverture en hauteur 350 ms, indicateur en trait qui pivote de 90°, jamais un chevron qui rebondit.
 
-### CTA hero
-- Pill bouton : `background: var(--accent); border-radius: 100px; padding: 7px 24px 7px 7px`
-- Cercle icône gauche : `42px, background: var(--bg)`, flèche `color: var(--accent)`
-- Label : 14px, 600, uppercase, `letter-spacing: 0.08em`, `color: var(--bg)`
-- Lien vers `#work`
+**Focus clavier :** anneau de 2 px en accent, décalé de 2 px. Jamais supprimé, jamais remplacé par le curseur personnalisé. Seule exception à l'interdiction des effets de contour.
+
+**`prefers-reduced-motion: reduce` :** tout est visible à l'état final immédiatement. Pas de pin, pas de scrub, pas de parallaxe. Les rubans deviennent des grilles statiques. Les formes graphiques sont supprimées. Les survols ne gardent que le changement de couleur.
 
 ---
 
-## Layout
+## 10. Interdits
 
-- Split hero (image droite / texte gauche) selon le contexte
-- Responsive mobile-first — breakpoints : 1100px / 768px / 600px / 480px
-- Grid éditoriale — about 2 col, services 2×2, work 2 col + 1 full-width
-- Rythme de section aéré et intentionnel
+Vérifiables par `grep`, doivent revenir vides.
 
----
-
-## Animations
-
-```css
---ease:     cubic-bezier(0.16, 1, 0.3, 1);
---duration: 0.7s;
-```
-
-- Scroll reveal : `opacity + translateY(36px)` via `IntersectionObserver`
-- Stagger frères : `index × 0.11s` de `transition-delay`
-- Boutons : sweep couleur de gauche à droite, `0.55s`
-- Cartes : lift `translateY(-6px)`, `0.55s`
-- Transitions : toujours `smooth`, jamais brutales
+- `box-shadow`, `drop-shadow`, `filter: blur`, sauf anneau de focus
+- `linear-gradient`, `radial-gradient`
+- Toute couleur en dur : uniquement des tokens
+- `!important`
+- Effet de verre dépoli ou de transparence sur un bouton
+- Radius hors des quatre valeurs de la section 4
+- `text-transform: uppercase` au-delà des deux libellés autorisés
+- Flèche dans une chaîne de texte de bouton : si nécessaire, SVG à part, `aria-hidden`
+- Trame de points, quadrillage, motif géométrique en fond
+- Badge en pilule posé sur une image
+- Numérotation hors les 4 étapes de la méthode
+- Plus d'un mot en accent sur tout le site
 
 ---
 
-## Ton éditorial
+## 11. Stack et implémentation
 
-**Français. Premium. Minimal. Confiant. Expert.**
-
-- Phrases courtes
-- Pas de superlatifs creux
-- Copywriting direct et élégant
-- Ton agence internationale, pas startup
-
----
-
-## Assets
-
-| Fichier                             | Usage                                                          |
-|-------------------------------------|----------------------------------------------------------------|
-| `/public/favicon_skone.svg`         | Favicon navigateur — **avec fond** `#f5ede0`                  |
-| `/public/favicon_skone_nav.svg`     | Icône nav (top-left) — **fond transparent**, h: 32px          |
-| `/public/logo_skone_sansh2.svg`     | Wordmark hero plein largeur + usage éditorial                  |
-| `/public/logo_skone.svg`            | Logo alternatif (footer, variantes)                            |
-| `/public/hero_section_headline.png` | Headline hero — fond transparent                               |
-| Google Fonts — Barlow               | Via CDN, weights 400 + 700, subset latin + latin-ext           |
-
-> **Règle icône nav** : toujours utiliser `favicon_skone_nav.svg` (transparent) dans la navigation.
-> Ne jamais utiliser `favicon_skone.svg` dans l'UI — réservé au favicon du navigateur.
-
-*Dernière mise à jour : avril 2026*
+- **Vite en multi-pages**, TypeScript strict, CSS natif écrit à la main. Pas de framework de composants, pas de migration.
+- Tokens déclarés une seule fois dans `:root`, fichier `src/styles/tokens.css`. Aucun second endroit où une couleur est définie.
+- **GSAP + ScrollTrigger** en vanilla, seule librairie d'animation. Importés en dynamique, chargés au-delà de 1024 px quand l'animation ne concerne que le desktop. Contextes via `gsap.context()`, nettoyés au démontage. Un seul `ScrollTrigger.refresh()` après chargement des polices.
+- **Pas de Lenis, pas de scroll lissé.** Scroll natif.
+- Un module TypeScript par comportement, qui ne s'initialise que si sa cible existe dans la page.
+- Données des projets et des prestations dans des fichiers typés, pas en dur dans le HTML.
+- Navigation, pied de page et bandeau cookies factorisés une seule fois.
+- Hébergement Vercel. Umami conservé intact.
 
 ---
 
-# DESIGN PRINCIPLES
+## 12. Performance et accessibilité
 
-- Avoid perfect grids
-- Prefer asymmetry
-- Create visual tension
-
----
-
-# DEPTH SYSTEM
-
-- Add grain overlay (2–3%)
-- Add subtle glow using accent color
-- Use layered backgrounds
-
----
-
-# LAYOUT RULES
-
-- Mix block sizes
-- Offset elements
-- Avoid repetitive structures
-
----
-
-# SPACING
-
-- Increase vertical spacing
-- Prioritize breathing room
-
----
-
-# MOTION
-
-- Add stagger animations
-- Add subtle parallax
-- Keep everything smooth and minimal
-
----
-
-# GOAL
-
-Design must feel:
-- editorial
-- premium
-- intentional
-
-Never generic.
+- Lighthouse mobile : Performance 90 minimum, Accessibilité 100, Bonnes pratiques 100, SEO 100. Aucun score en baisse par rapport à l'existant.
+- LCP sous 2.0 s en 4G simulée, CLS sous 0.05
+- Images en WebP, `srcset` et `sizes`, dimensions déclarées, `loading="lazy"` sauf sur le hero
+- Structure de titres logique, un seul `h1` par page
+- Navigation complète au clavier, accordéons et estimateur inclus
+- `aria-expanded` et `aria-controls` sur les accordéons
+- Le ruban s'arrête au survol et en `prefers-reduced-motion`
+- Aucune information portée par la couleur seule
