@@ -1,0 +1,175 @@
+/* ============================================================
+   Pages prestation
+   Le markup vient du générateur, qui n'a pas changé : ce sont ses
+   classes `pres-*` qui sont réhabillées avec les tokens du système.
+   ============================================================ */
+
+@import './components/nav.css';
+
+body { padding-top: var(--nav-h); }
+
+.pres-main {
+  display: grid;
+  grid-template-columns: repeat(var(--grille-colonnes), minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  max-width: var(--grille-max);
+  margin-inline: auto;
+  padding-inline: var(--grille-marge);
+}
+.pres-main > * { grid-column: 3 / span 8; }
+
+/* ─── Fil d'Ariane ──────────────────────────────────────────── */
+.pres-breadcrumb {
+  grid-column: 1 / -1;
+  padding-block: 24px;
+  font-size: var(--text-petit);
+  color: var(--gris);
+}
+.pres-breadcrumb a { text-decoration: underline; text-underline-offset: 3px; }
+.pres-breadcrumb a:hover { color: var(--accent-profond); }
+
+/* ─── Hero ──────────────────────────────────────────────────── */
+.pres-hero { grid-column: 1 / -1; padding-block: var(--section-s) 0; }
+
+.pres-hero h1 {
+  font-size: var(--text-h1);
+  letter-spacing: var(--tracking-h1);
+  max-width: 18ch;
+}
+
+.pres-hero-lead {
+  margin-top: 32px;
+  max-width: 62ch;
+  font-size: var(--text-corps-l);
+  line-height: 1.45;
+}
+
+.pres-hero-context {
+  margin-top: 20px;
+  max-width: 62ch;
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
+  color: var(--gris);
+}
+
+/* ─── Sections ──────────────────────────────────────────────── */
+.pres-section { padding-block: var(--section-s); }
+
+.pres-head {
+  font-size: var(--text-h2);
+  letter-spacing: var(--tracking-h2);
+  margin-bottom: 32px;
+}
+
+.pres-section h3 { font-size: var(--text-h3); margin-top: 32px; }
+.pres-section p { margin-top: 16px; line-height: var(--leading-corps); max-width: 68ch; }
+
+.pres-section ul { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+.pres-section li { line-height: var(--leading-corps); }
+
+/* ─── Offres ────────────────────────────────────────────────── */
+.pres-prices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grille-gouttiere);
+  margin-top: 32px;
+}
+
+.pres-price {
+  padding-top: 24px;
+  border-top: 1px solid var(--encre);
+}
+
+.pres-price-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.pres-price-name { font-size: var(--text-corps); font-weight: 500; }
+
+.pres-price-amount {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  white-space: nowrap;
+}
+
+.pres-price-desc {
+  margin-top: 12px;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--gris);
+}
+
+/* ─── Liens vers d'autres pages ─────────────────────────────── */
+.pres-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grille-gouttiere);
+  margin-top: 32px;
+}
+
+.pres-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--filet);
+  transition: border-color var(--dur-rapide) var(--ease);
+}
+.pres-link:hover { border-top-color: var(--accent); }
+
+.pres-link-tag { font-size: var(--text-petit); color: var(--gris); }
+
+.pres-link-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h3);
+  letter-spacing: var(--tracking-h3);
+  transition: color var(--dur-rapide) var(--ease);
+}
+.pres-link:hover .pres-link-title { color: var(--accent-profond); }
+
+.pres-link-desc { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+.pres-link-go { font-size: var(--text-petit); font-weight: 500; }
+
+/* ─── Appel à l'action ──────────────────────────────────────── */
+.pres-cta {
+  grid-column: 1 / -1;
+  margin-inline: calc(var(--grille-marge) * -1);
+  padding: var(--section-s) var(--grille-marge);
+  background: var(--sombre);
+  color: var(--sombre-texte);
+}
+
+.pres-cta h2 { font-size: var(--text-h2); letter-spacing: var(--tracking-h2); }
+.pres-cta p { margin-top: 16px; max-width: 54ch; line-height: var(--leading-corps); }
+.pres-cta .bouton { margin-top: 32px; }
+
+@media (max-width: 1023px) {
+  .pres-main > * { grid-column: 1 / -1; }
+  .pres-prices,
+  .pres-links { grid-template-columns: 1fr; }
+}
+
+/* ─── Page 404 ──────────────────────────────────────────────── */
+.err-code {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  color: var(--gris);
+}
+
+.err-titre { margin-top: 16px; }
+.err-accent { color: var(--accent); }
+
+.err-lead {
+  margin-top: 24px;
+  font-size: var(--text-corps-l);
+  line-height: 1.45;
+}
+
+.err-liens { margin-top: var(--section-s); }
+.err-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: var(--section-s); }
+.err-note { margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }

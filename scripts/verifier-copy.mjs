@@ -206,7 +206,22 @@ for (const fichier of fichiers) {
       }
       // Un mot isolé se retrouve partout : il ne prouve rien. Il faut au
       // moins deux mots consécutifs pour parler de morceau retrouvé.
-      if (pris < 2) return false
+      if (pris < 2) {
+        /**
+         * Dernier recours : une liste réordonnée.
+         *
+         * Le pied de page classe ses liens autrement et retire celui de la
+         * page courante. Les libellés sont tous là, mais plus dans le même
+         * ordre et jamais deux à la suite — la couverture de gauche à
+         * droite ne peut alors rien recouvrir.
+         *
+         * On vérifie donc que chaque mot du fragment se trouve quelque part
+         * dans la cible. Réservé aux fragments courts : sur une phrase
+         * entière, retrouver les mots un par un ne prouverait rien.
+         */
+        if (mots.length <= 16) return mots.every((m) => cible.includes(m))
+        return false
+      }
       i += pris
     }
     return true

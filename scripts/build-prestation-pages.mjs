@@ -6,7 +6,7 @@
  * Sortie : un fichier HTML par page à la racine du dépôt (ex. `refonte-site-internet.html`).
  * `cleanUrls` côté Vercel sert ces fichiers sur `/refonte-site-internet`.
  * Chaque page est aussi une entrée de `vite.config.ts` : elle passe donc par le
- * pipeline Vite et charge `/src/prestation-page.ts`.
+ * pipeline Vite et charge `/src/prestation.ts`.
  *
  * Pourquoi un générateur plutôt que cinq fichiers écrits à la main : les cinq
  * pages partagent leur coquille (nav, fil d'Ariane, footer, JSON-LD) et ne
@@ -25,6 +25,7 @@ import { writeFileSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { PAGES } from './prestation-pages-data.mjs'
+import { navigation, piedDePage, bandeauCookies } from './partials.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -47,33 +48,9 @@ function jsonLd(obj) {
 const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`
 
 function renderNav() {
-  return `  <nav id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <img src="/logo_skone_sansh2.svg" alt="Studio Skøne" class="nav-logo-img" width="111" height="28">
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="/#approach" class="nav-link">Le studio</a></li>
-        <li><a href="/#services" class="nav-link">Prestations</a></li>
-        <li><a href="/#process" class="nav-link">Méthode</a></li>
-        <li><a href="/#work" class="nav-link">Projets</a></li>
-        <li><a href="/#tarifs" class="nav-link">Tarifs</a></li>
-        <li><a href="/#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <span class="nav-availability" aria-hidden="true">
-        <span class="nav-availability-dot"></span>
-        Réponse sous 24&nbsp;h
-      </span>
-      <a href="/#estimator" class="btn btn--primary btn--with-circle nav-cta">
-        <span class="btn__circle" aria-hidden="true">${ARROW}</span>
-        Estimer mon projet
-      </a>
-    </div>
-  </nav>`
+  // La barre de navigation vient du partiel partagé : une seule
+  // définition pour les quinze pages.
+  return navigation({ prefixe: '/' })
 }
 
 // ── Coquille : fil d'Ariane ─────────────────────────────────────────────────
@@ -93,91 +70,9 @@ function renderBreadcrumb(page) {
 
 // ── Coquille : footer ───────────────────────────────────────────────────────
 function renderFooter(currentSlug) {
-  const prestations = PAGES
-    .map((p) => ({ href: '/' + p.slug, label: p.footerLabel }))
-    .filter((l) => l.href !== '/' + currentSlug)
-
-  return `  <footer id="footer">
-    <div class="container">
-      <div class="footer-cta">
-        <div class="footer-cta-body">
-          <span class="footer-cta-status">
-            <span class="footer-cta-dot" aria-hidden="true"></span>
-            Réponse sous 24h
-          </span>
-          <span class="footer-cta-text">Disponible pour de nouveaux projets.</span>
-        </div>
-        <a href="/#contact" class="footer-cta-link">
-          <span class="footer-cta-circle" aria-hidden="true">${ARROW}</span>
-          Parlons-en
-        </a>
-      </div>
-
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="footer-logo">
-            <img src="/logo_skone_footer.svg" alt="Studio Skøne" class="footer-logo-img" width="103" height="26">
-          </a>
-          <p class="footer-tagline">Studio Skøne — création de sites internet, boutiques en ligne et applications, à Nantes et dans toute la France. Conçus et développés par la même personne, du croquis à la mise en ligne.</p>
-          <p class="footer-location">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            Basé à Nantes · J'interviens à Carquefou, La Chapelle-sur-Erdre, Sucé-sur-Erdre, Nort-sur-Erdre, Treillières, Ancenis — et partout en France en visio.
-          </p>
-        </div>
-
-        <nav class="footer-nav" aria-label="Navigation secondaire">
-          <span class="footer-nav-title">Le studio</span>
-          <a href="/#approach">À propos</a>
-          <a href="/#work">Projets</a>
-          <a href="/#tarifs">Tarifs</a>
-          <a href="/#contact">Contact</a>
-        </nav>
-
-        <nav class="footer-nav" aria-label="Prestations">
-          <span class="footer-nav-title">Prestations</span>
-${prestations.map((l) => `          <a href="${esc(l.href)}">${esc(l.label)}</a>`).join('\n')}
-        </nav>
-
-        <div class="footer-contact">
-          <a href="mailto:contact@studioskone.com" class="footer-email">contact@studioskone.com</a>
-          <a href="tel:+33768084752" class="footer-phone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-            07 68 08 47 52
-          </a>
-          <a href="https://www.instagram.com/studio.skone/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram Studio Skøne">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-            </svg>
-          </a>
-          <a href="https://maps.google.com/?cid=17161741996888223031" target="_blank" rel="noopener noreferrer" class="footer-google">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-            Voir la fiche Google
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <div class="footer-bottom">
-        <span class="footer-copy">&copy; 2026 Studio Skøne. Tous droits réservés.</span>
-        <div class="footer-legal">
-          <a href="/mentions-legales">Mentions légales</a>
-          <a href="/politique-de-confidentialite">Politique de confidentialité</a>
-          <a href="/cgu">CGU</a>
-          <a href="/cgv">CGV</a>
-        </div>
-      </div>
-    </div>
-  </footer>`
+  // Le pied de page et le bandeau cookies viennent eux aussi du partiel.
+  // Ces pages n'avaient pas de bandeau, alors qu'elles chargent Umami.
+  return piedDePage({ prefixe: '/', pageCourante: '/' + currentSlug }) + '\n\n' + bandeauCookies()
 }
 
 // ── Blocs de contenu ────────────────────────────────────────────────────────
@@ -477,7 +372,7 @@ ${renderFooter(page.slug)}
     </svg>
   </button>
 
-  <script type="module" src="/src/prestation-page.ts"></script>
+  <script type="module" src="/src/prestation.ts"></script>
 </body>
 </html>
 `

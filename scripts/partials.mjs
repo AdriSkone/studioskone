@@ -101,7 +101,14 @@ export function navigation({ prefixe = '' } = {}) {
 
 /* ── Pied de page ─────────────────────────────────────────────────── */
 
-export function piedDePage({ prefixe = '' } = {}) {
+/**
+ * @param prefixe  Les ancres repassent par « / » depuis une page intérieure.
+ * @param pageCourante  Chemin de la page affichée. Son entrée est retirée de
+ *   la liste des prestations : un lien vers la page qu'on est en train de
+ *   lire n'a rien à offrir, et il dilue le maillage interne. Comportement
+ *   repris du générateur des pages prestation, qui le faisait déjà.
+ */
+export function piedDePage({ prefixe = '', pageCourante = '' } = {}) {
   // Chaque colonne dit où elle va. Sans --col, la grille les plaçait
   // d'elle-même, à la suite des blocs précédents — d'où un pied où les
   // rubriques dérivaient vers la droite sans alignement.
@@ -112,7 +119,10 @@ export function piedDePage({ prefixe = '' } = {}) {
       (c, i) => `        <nav class="pied-colonne" style="--col: ${placements[i] ?? 'auto'}" aria-label="${c.aria}">
           <span class="pied-titre">${c.titre}</span>
           <div class="pied-liste">
-${c.liens.map((l) => `            <a href="${l.href}">${l.libelle}</a>`).join('\n')}
+${c.liens
+  .filter((l) => l.href !== pageCourante)
+  .map((l) => `            <a href="${l.href}">${l.libelle}</a>`)
+  .join('\n')}
           </div>
         </nav>`
     )
