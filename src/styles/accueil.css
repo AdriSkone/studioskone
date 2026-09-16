@@ -56,11 +56,6 @@ body { padding-top: var(--nav-h); }
    n'y en a qu'un. */
 .hero-lien { white-space: nowrap; }
 
-.hero-lieu {
-  font-size: var(--text-petit);
-  color: var(--gris);
-}
-
 @media (min-width: 1440px) {
   .hero-statement { --col: 1 / span 6; }
   .hero-actions { --col: 8 / span 5; }
@@ -145,8 +140,34 @@ body { padding-top: var(--nav-h); }
    registre, et sa phrase de clôture cesse d'emprunter au gris. */
 .sombre .methode-cloture { color: var(--sombre-texte); opacity: 0.72; }
 
-/* ─── Le studio ─────────────────────────────────────────────── */
-.studio-titre { font-size: var(--text-h1); margin-bottom: 48px; }
+/* ─── Le studio ─────────────────────────────────────────────
+   Le portrait tient la colonne de gauche sur toute la hauteur de la
+   section ; le texte se range à sa droite. Les lignes sont posées à la
+   main parce que le portrait les traverse toutes.
+
+   L'image est sortie du flux : elle prend la hauteur que le texte donne à
+   la section, au lieu de l'imposer et de creuser un vide sous les
+   bénéfices. */
+.studio-label    { --col: 1 / span 3;  grid-row: 1; position: relative; z-index: 1; }
+.studio-portrait { --col: 1 / span 3;  grid-row: 1 / span 3; position: relative; margin: 0; }
+.studio-titre    { --col: 4 / span 9;  grid-row: 1; font-size: var(--text-h1); margin-bottom: 48px; }
+.metiers         { --col: 4 / span 6;  grid-row: 2; }
+.studio-texte    { --col: 10 / span 3; grid-row: 2; }
+.benefices       { --col: 4 / -1;      grid-row: 3; }
+
+/* La photo est déjà détourée sur blanc. En multiply, le blanc devient
+   papier et le fondu du bas se perd dans la page ; en niveaux de gris,
+   elle quitte le terracotta de l'ancienne charte pour l'encre. */
+.studio-portrait img {
+  position: absolute;
+  inset: 64px 0 0;
+  width: 100%;
+  height: calc(100% - 64px);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: grayscale(1) contrast(1.08);
+  mix-blend-mode: multiply;
+}
 
 .metiers { display: flex; gap: 24px; align-items: center; }
 .metier { flex: 1; padding-top: 16px; border-top: 1px solid var(--encre); }
@@ -172,6 +193,7 @@ body { padding-top: var(--nav-h); }
 .benefices {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-self: start;
   column-gap: var(--grille-gouttiere);
   margin-top: var(--section-s);
 }
@@ -308,6 +330,13 @@ body { padding-top: var(--nav-h); }
   .verites,
   .benefices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .engagements { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Le portrait passe au-dessus du titre, à largeur mesurée. */
+  .studio-label, .studio-portrait, .studio-titre,
+  .metiers, .studio-texte, .benefices { --col: 1 / -1; grid-row: auto; }
+  .studio-portrait { max-width: 220px; margin-bottom: 32px; }
+  .studio-portrait img { position: static; height: auto; }
+  .studio-texte { margin-top: 32px; }
 }
 
 @media (max-width: 767px) {

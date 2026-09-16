@@ -34,12 +34,11 @@ export const hero = {
   statement:
     'Je dessine et je développe vos sites et vos applications, du premier croquis à la mise en ligne. ' +
     'Un seul interlocuteur, un seul devis, un seul responsable du résultat. Livré en 2 à 6 semaines, à partir de 900&nbsp;€.',
-  lieu: 'À Nantes et partout en France',
   ctas: [
     { libelle: 'Estimer mon projet',   href: '#estimator', variante: 'principal' },
     { libelle: 'Voir les réalisations', href: '#work',      variante: 'secondaire' },
   ],
-  preuves: ['Devis gratuit', 'Réponse sous 24&nbsp;h', 'Vous êtes propriétaire de votre site', 'Partout en France'],
+  preuves: ['Devis gratuit', 'Réponse sous 24&nbsp;h', 'Vous êtes propriétaire de votre site', 'À Nantes et partout en France'],
 }
 
 /** Le ruban du hero. La série est doublée à l'affichage, pas ici. */

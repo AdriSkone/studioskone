@@ -67,7 +67,6 @@ function hero() {
           <a class="bouton bouton--principal" href="${C.hero.ctas[0].href}">${C.hero.ctas[0].libelle}</a>
           <a class="lien hero-lien" href="${C.hero.ctas[1].href}">${C.hero.ctas[1].libelle}</a>
         </div>
-        <p class="hero-lieu">${C.hero.lieu}</p>
       </div>
 
       <p class="hero-preuves">
@@ -144,15 +143,19 @@ function studio() {
 
   return `  <section class="section-m" id="approach">
     <div class="grille">
-      <p class="tete-bloc">${C.studio.label}</p>
-      <h2 class="studio-titre" style="--col: 3 / span 8">${C.studio.titre.debut} ${C.studio.titre.accent}</h2>
+      <p class="tete-bloc studio-label">${C.studio.label}</p>
+      <figure class="studio-portrait">
+        <img src="/adrien-studio.webp" alt="Adrien, fondateur de Studio Skøne, bras croisés et souriant"
+             width="624" height="1200" decoding="async" loading="lazy">
+      </figure>
+      <h2 class="studio-titre">${C.studio.titre.debut} ${C.studio.titre.accent}</h2>
 
-      <div class="metiers" style="--col: 3 / span 6">
+      <div class="metiers">
 ${metiers}
       </div>
-      <p class="studio-texte" style="--col: 10 / span 3">${C.studio.texte[0]}<br><br>${C.studio.texte[1]}</p>
+      <p class="studio-texte">${C.studio.texte[0]}<br><br>${C.studio.texte[1]}</p>
 
-      <ul class="benefices" style="--col: 1 / -1">
+      <ul class="benefices">
 ${benefices}
       </ul>
     </div>

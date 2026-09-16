@@ -38,12 +38,6 @@ const AJOUTS_AUTORISES = [
   // Le lien Instagram n'était qu'une icône, son nom vivait dans un
   // aria-label. Il est maintenant écrit : un lien doit avoir un nom visible.
   'Instagram',
-  // Quatrième mention du bandeau du hero. Le style guide en demande
-  // quatre, le site n'en avait que trois. Texte donné par Adri le
-  // 15 septembre 2026 — seul ajout de copy du chantier, et il ne sort pas
-  // de nulle part : « partout en France » figure déjà dans le hero et
-  // dans le pied de page.
-  'Partout en France',
 ]
 
 /**
@@ -91,6 +85,25 @@ const TEXTES_SORTIS_DU_SCRIPT = [
  * « Discuter de mon projet », qui existait déjà.
  */
 const TEXTES_DE_COMPOSANTS_RETIRES = ['Discuter de ce projet']
+
+/**
+ * Textes remplacés à la demande d'Adri : l'ancien texte, et celui qui le
+ * remplace.
+ *
+ * « Partout en France » fermait le bandeau du hero, et « À Nantes et
+ * partout en France » vivait seul sous les boutons : la même idée, dite
+ * deux fois à quelques centimètres. Le 16 septembre 2026, Adri a demandé
+ * que la phrase complète prenne la place de la courte dans le bandeau.
+ *
+ * Le contrôle reste strict : l'ancien fragment, une fois le remplacement
+ * appliqué, doit se retrouver TEL QUEL dans la nouvelle page. Retirer
+ * seulement l'ancien texte aurait laissé le reste du fragment à la
+ * comparaison mot à mot, qui retrouve « Vous », « êtes » ou « site »
+ * n'importe où — et une vraie perte serait passée.
+ */
+const REMPLACEMENTS_DEMANDES = [
+  { avant: 'Partout en France', apres: 'À Nantes et partout en France' },
+]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
  *  flèche dans une chaîne de texte : elle devient un SVG aria-hidden, et
@@ -233,8 +246,12 @@ for (const fichier of fichiers) {
   const sansAutorises = (f) =>
     AJOUTS_AUTORISES.reduce((acc, a) => acc.split(a).join(' '), f).replace(/\s+/g, ' ').trim()
 
+  const remplace = (f) =>
+    REMPLACEMENTS_DEMANDES.reduce((acc, r) => acc.split(r.avant).join(r.apres), f)
+
   const perdus = absentsAvant
     .filter((f) => !estUnRegroupement(f, toutApres))
+    .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
     .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
   const ajoutes = absentsApres
     .filter((f) => !estUnRegroupement(f, toutAvant))

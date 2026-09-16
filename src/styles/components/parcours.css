@@ -209,6 +209,9 @@
 
 /* ─── Fin de parcours ───────────────────────────────────────── */
 .parcours-succes { display: flex; flex-direction: column; gap: 12px; }
+/* Le display: flex ci-dessus écrase l'attribut hidden : sans cette règle,
+   le remerciement s'affiche avant même la première réponse. */
+.parcours-succes[hidden] { display: none; }
 
 .parcours-succes-titre {
   font-family: var(--font-display);
