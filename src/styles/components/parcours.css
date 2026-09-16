@@ -174,7 +174,11 @@
   height: 18px;
   margin-top: 3px;
   border: 1px solid var(--sombre-texte);
-  border-radius: 4px;
+  /* Angle vif, et non var(--rond-interactif) : 10 px sur un carré de 18
+     en feraient presque un cercle, et une case à cocher ronde se lit
+     comme un bouton radio — un choix unique au lieu d'un consentement.
+     Le système n'a pas de valeur intermédiaire, c'est donc zéro. */
+  border-radius: var(--rond-pleine);
 }
 
 .parcours-rgpd:has(input:checked) .parcours-rgpd-case {

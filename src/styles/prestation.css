@@ -1,43 +1,65 @@
 /* ============================================================
-   Pages prestation
+   Pages prestation et page 404
    Le markup vient du générateur, qui n'a pas changé : ce sont ses
-   classes `pres-*` qui sont réhabillées avec les tokens du système.
+   classes qui sont réhabillées avec les tokens du système.
    ============================================================ */
 
 @import './components/nav.css';
 
 body { padding-top: var(--nav-h); }
 
-.pres-main {
-  display: grid;
-  grid-template-columns: repeat(var(--grille-colonnes), minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
+/* Le conteneur de ces pages : même cadre que la grille du site, mais en
+   colonne unique — leur contenu est du texte long, pas une mise en page. */
+.container {
   max-width: var(--grille-max);
   margin-inline: auto;
   padding-inline: var(--grille-marge);
 }
-.pres-main > * { grid-column: 3 / span 8; }
 
 /* ─── Fil d'Ariane ──────────────────────────────────────────── */
-.pres-breadcrumb {
-  grid-column: 1 / -1;
-  padding-block: 24px;
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-block: 20px;
   font-size: var(--text-petit);
   color: var(--gris);
 }
-.pres-breadcrumb a { text-decoration: underline; text-underline-offset: 3px; }
-.pres-breadcrumb a:hover { color: var(--accent-profond); }
+
+/* Sans padding, un lien de fil d'Ariane fait 21 px de haut : sous les
+   24 px qu'une cible doit mesurer. */
+.crumbs a {
+  display: inline-block;
+  padding-block: 4px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-rapide) var(--ease);
+}
+.crumbs a:hover { color: var(--accent-profond); }
+.crumb-sep { opacity: 0.5; }
 
 /* ─── Hero ──────────────────────────────────────────────────── */
-.pres-hero { grid-column: 1 / -1; padding-block: var(--section-s) 0; }
+.pres-hero { padding-block: var(--section-s); }
 
-.pres-hero h1 {
+.pres-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: calc(var(--wdth-display) * 1%);
   font-size: var(--text-h1);
+  line-height: var(--leading-titre);
   letter-spacing: var(--tracking-h1);
   max-width: 18ch;
 }
 
-.pres-hero-lead {
+/* Un seul mot en accent sur tout le site, et c'est « même personne » dans
+   le hero de l'accueil. Ici, l'accent typographique n'a pas cours : le
+   mot reste en encre. */
+.text-accent { color: inherit; }
+
+.pres-hero-lead,
+.pres-lead {
   margin-top: 32px;
   max-width: 62ch;
   font-size: var(--text-corps-l);
@@ -47,38 +69,147 @@ body { padding-top: var(--nav-h); }
 .pres-hero-context {
   margin-top: 20px;
   max-width: 62ch;
-  font-size: var(--text-corps);
   line-height: var(--leading-corps);
   color: var(--gris);
 }
 
-/* ─── Sections ──────────────────────────────────────────────── */
-.pres-section { padding-block: var(--section-s); }
-
-.pres-head {
-  font-size: var(--text-h2);
-  letter-spacing: var(--tracking-h2);
-  margin-bottom: 32px;
+.pres-hero-cta,
+.hero-cta-row,
+.pres-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 40px;
 }
 
-.pres-section h3 { font-size: var(--text-h3); margin-top: 32px; }
-.pres-section p { margin-top: 16px; line-height: var(--leading-corps); max-width: 68ch; }
+.pres-hero-proof,
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--filet-moyen);
+  font-size: var(--text-petit);
+  color: var(--gris);
+}
+.hero-proof span,
+.pres-hero-proof span { padding-inline: 20px; border-left: 1px solid var(--filet-moyen); }
+.hero-proof span:first-child,
+.pres-hero-proof span:first-child { padding-left: 0; border-left: 0; }
+.hero-proof-sep { display: none; }
 
-.pres-section ul { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
-.pres-section li { line-height: var(--leading-corps); }
+/* ─── Sections ──────────────────────────────────────────────── */
+.pres-section { padding-block: var(--section-s); }
+.pres-section--alt { background: var(--papier-ombre); }
+
+.pres-title,
+.pres-head {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h2);
+  line-height: var(--leading-titre);
+  letter-spacing: var(--tracking-h2);
+  max-width: 22ch;
+}
+
+.section-label {
+  font-size: var(--text-petit);
+  font-weight: 500;
+  color: var(--gris);
+  margin-bottom: 16px;
+}
+
+.pres-prose { margin-top: 32px; max-width: 68ch; }
+.pres-prose p { margin-top: 16px; line-height: var(--leading-corps); }
+.pres-prose h3 { font-size: var(--text-h3); margin-top: 40px; }
+
+/* ─── Listes à points ───────────────────────────────────────── */
+.pres-points {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  max-width: 74ch;
+}
+
+.pres-point {
+  display: flex;
+  gap: 16px;
+  padding-block: 20px;
+  border-top: 1px solid var(--filet);
+  line-height: var(--leading-corps);
+}
+
+/* Un filet court en accent, pas une puce ronde : le site sépare au filet. */
+.pres-point-mark {
+  flex: none;
+  width: 16px;
+  height: 1px;
+  margin-top: 0.75em;
+  background: var(--accent);
+}
+
+/* ─── Cartes ────────────────────────────────────────────────── */
+.services-grid,
+.probleme-grid,
+.tarifs-truth {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grille-gouttiere) var(--grille-gouttiere);
+  margin-top: 48px;
+}
+
+.service-card,
+.symptom-card,
+.truth-item {
+  padding-top: 20px;
+  border-top: 1px solid var(--encre);
+}
+
+.service-num {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  color: var(--gris);
+}
+
+.service-title,
+.truth-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h3);
+  letter-spacing: var(--tracking-h3);
+  margin-top: 12px;
+}
+
+.service-desc,
+.symptom-text,
+.truth-text {
+  margin-top: 12px;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--gris);
+}
+
+.symptom-mark {
+  display: block;
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+}
+.symptom-card { border-top: 0; padding-top: 0; }
+.symptom-text { margin-top: 16px; }
 
 /* ─── Offres ────────────────────────────────────────────────── */
 .pres-prices {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--grille-gouttiere);
-  margin-top: 32px;
+  margin-top: 48px;
 }
 
-.pres-price {
-  padding-top: 24px;
-  border-top: 1px solid var(--encre);
-}
+.pres-price { padding-top: 24px; border-top: 1px solid var(--encre); }
 
 .pres-price-head {
   display: flex;
@@ -102,12 +233,63 @@ body { padding-top: var(--nav-h); }
   color: var(--gris);
 }
 
+/* ─── FAQ ───────────────────────────────────────────────────── */
+.pres-faq { padding-block: var(--section-s); }
+.faq-list { display: flex; flex-direction: column; margin-top: 40px; max-width: 74ch; }
+
+.faq-item + .faq-item { margin-top: 0; }
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 16px;
+  margin-inline: -16px;
+  border-top: 1px solid var(--filet-moyen);
+  border-radius: var(--rond-interactif);
+  text-align: left;
+  font-size: var(--text-corps-l);
+  font-weight: 500;
+  transition: color var(--dur-rapide) var(--ease);
+}
+.faq-question:hover { color: var(--accent-profond); }
+.faq-question:focus-visible { outline-offset: -2px; }
+
+.faq-num {
+  flex: none;
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  color: var(--gris);
+}
+
+.faq-q-text { flex: 1; }
+
+/* Le signe pivote d'un quart de tour à l'ouverture : jamais un chevron
+   qui rebondit. */
+.faq-icon {
+  flex: none;
+  font-size: var(--text-corps-l);
+  font-weight: 400;
+  line-height: 1;
+  transition: transform var(--dur-moyenne) var(--ease);
+}
+.faq-question[aria-expanded='true'] .faq-icon { transform: rotate(45deg); }
+
+.faq-answer-inner {
+  padding: 0 0 24px 16px;
+  border-left: 1px solid var(--filet-moyen);
+  line-height: var(--leading-corps);
+  color: var(--gris);
+  max-width: 62ch;
+}
+
 /* ─── Liens vers d'autres pages ─────────────────────────────── */
 .pres-links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--grille-gouttiere);
-  margin-top: 32px;
+  margin-top: 48px;
 }
 
 .pres-link {
@@ -135,41 +317,83 @@ body { padding-top: var(--nav-h); }
 .pres-link-desc { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
 .pres-link-go { font-size: var(--text-petit); font-weight: 500; }
 
-/* ─── Appel à l'action ──────────────────────────────────────── */
+/* ─── Appels à l'action ─────────────────────────────────────── */
+.pres-inline-cta {
+  padding: 32px 0;
+  border-top: 1px solid var(--filet-moyen);
+  border-bottom: 1px solid var(--filet-moyen);
+  margin-block: 48px;
+}
+
+/* Le bloc de clôture est en registre sombre : il porte donc la classe,
+   sans quoi ses boutons resteraient encre sur encre — invisibles. */
 .pres-cta {
-  grid-column: 1 / -1;
-  margin-inline: calc(var(--grille-marge) * -1);
-  padding: var(--section-s) var(--grille-marge);
+  padding-block: var(--section-s);
   background: var(--sombre);
   color: var(--sombre-texte);
 }
 
-.pres-cta h2 { font-size: var(--text-h2); letter-spacing: var(--tracking-h2); }
-.pres-cta p { margin-top: 16px; max-width: 54ch; line-height: var(--leading-corps); }
-.pres-cta .bouton { margin-top: 32px; }
+.pres-cta-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h2);
+  letter-spacing: var(--tracking-h2);
+  max-width: 20ch;
+}
+
+.pres-cta-note { margin-top: 16px; max-width: 54ch; line-height: var(--leading-corps); opacity: 0.72; }
+
+/* ─── Remonter en haut ──────────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  right: var(--grille-marge);
+  bottom: var(--grille-marge);
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--encre);
+  border-radius: var(--rond-interactif);
+  background: var(--papier);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-rapide) var(--ease), background var(--dur-rapide) var(--ease);
+}
+.back-to-top.is-visible { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { background: var(--papier-ombre); }
+.back-to-top svg { width: 18px; height: 18px; }
+
+/* ─── Page 404 ──────────────────────────────────────────────── */
+.err-code { font-family: var(--font-data); font-size: var(--text-data); color: var(--gris); }
+.err-titre { margin-top: 16px; }
+.err-accent { color: var(--accent); }
+.err-lead { margin-top: 24px; font-size: var(--text-corps-l); line-height: 1.45; }
+.err-liens { margin-top: var(--section-s); }
+.err-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: var(--section-s); }
+.err-note { margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }
 
 @media (max-width: 1023px) {
-  .pres-main > * { grid-column: 1 / -1; }
+  .services-grid,
+  .probleme-grid,
+  .tarifs-truth { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pres-prices,
   .pres-links { grid-template-columns: 1fr; }
 }
 
-/* ─── Page 404 ──────────────────────────────────────────────── */
-.err-code {
-  font-family: var(--font-data);
-  font-size: var(--text-data);
-  color: var(--gris);
+@media (max-width: 767px) {
+  .services-grid,
+  .probleme-grid,
+  .tarifs-truth { grid-template-columns: 1fr; }
+  .hero-proof span,
+  .pres-hero-proof span {
+    padding: 12px 0;
+    border-left: 0;
+    border-top: 1px solid var(--filet-moyen);
+    width: 100%;
+  }
+  .pres-hero-proof,
+  .hero-proof { flex-direction: column; padding-top: 0; border-top: 0; }
 }
-
-.err-titre { margin-top: 16px; }
-.err-accent { color: var(--accent); }
-
-.err-lead {
-  margin-top: 24px;
-  font-size: var(--text-corps-l);
-  line-height: 1.45;
-}
-
-.err-liens { margin-top: var(--section-s); }
-.err-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: var(--section-s); }
-.err-note { margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }

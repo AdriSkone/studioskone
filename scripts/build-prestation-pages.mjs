@@ -25,7 +25,7 @@ import { writeFileSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { PAGES } from './prestation-pages-data.mjs'
-import { navigation, piedDePage, bandeauCookies } from './partials.mjs'
+import { navigation, piedDePage, bandeauCookies, fleche as FLECHE } from './partials.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -173,8 +173,7 @@ ${b.notes.map((n) => `          <div class="truth-item">
           </div>`).join('\n')}
         </div>
         <p class="pres-inline-cta reveal">
-          <a href="/#estimator" class="btn btn--primary btn--with-circle">
-            <span class="btn__circle" aria-hidden="true">${ARROW}</span>
+          <a href="/#estimator" class="bouton bouton--principal">${FLECHE}
             <span>${esc(b.cta)}</span>
           </a>
         </p>
@@ -228,19 +227,17 @@ ${b.items.map(([q, a], i) => `          <div class="faq-item reveal" role="listi
 
   /** CTA final. */
   cta(b) {
-    return `    <section class="pres-cta">
+    return `    <section class="pres-cta sombre">
       <div class="container">
         <h2 class="pres-cta-title reveal">${b.h2}</h2>
         <div class="pres-prose reveal">
 ${b.paragraphs.map((p) => `          <p>${esc(p)}</p>`).join('\n')}
         </div>
         <div class="hero-cta-row pres-cta-row reveal">
-          <a href="${esc(b.primary.href)}" class="btn btn--primary btn--with-circle">
-            <span class="btn__circle" aria-hidden="true">${ARROW}</span>
+          <a href="${esc(b.primary.href)}" class="bouton bouton--principal">${FLECHE}
             <span>${esc(b.primary.label)}</span>
           </a>
-${b.secondary ? `          <a href="${esc(b.secondary.href)}" class="btn btn--secondary">
-            <span class="btn__dot" aria-hidden="true"></span>
+${b.secondary ? `          <a href="${esc(b.secondary.href)}" class="bouton bouton--secondaire">
             <span>${esc(b.secondary.label)}</span>
           </a>\n` : ''}        </div>
         <p class="pres-cta-note reveal">${esc(b.note)}</p>
@@ -345,12 +342,10 @@ ${renderBreadcrumb(page)}
         <h1 class="pres-h1">${page.h1}</h1>
         <p class="pres-hero-lead">${esc(page.lead)}</p>
 ${page.context ? `        <p class="pres-hero-context"><span class="hero-location-dot" aria-hidden="true"></span>${esc(page.context)}</p>\n` : ''}        <div class="hero-cta-row pres-hero-cta">
-          <a href="${esc(page.ctas[0].href)}" class="btn btn--primary btn--with-circle">
-            <span class="btn__circle" aria-hidden="true">${ARROW}</span>
+          <a href="${esc(page.ctas[0].href)}" class="bouton bouton--principal">${FLECHE}
             <span>${esc(page.ctas[0].label)}</span>
           </a>
-          <a href="${esc(page.ctas[1].href)}" class="btn btn--secondary">
-            <span class="btn__dot" aria-hidden="true"></span>
+          <a href="${esc(page.ctas[1].href)}" class="bouton bouton--secondaire">
             <span>${esc(page.ctas[1].label)}</span>
           </a>
         </div>
