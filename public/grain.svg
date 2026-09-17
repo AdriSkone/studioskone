@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
   <!--
     Bruit de fond. Il ne porte pas sa couleur : il ne sert que de masque.
-    La teinte vient du CSS (--grain-teinte), pour qu'elle reste un token et
+    La teinte vient du CSS (token grain-teinte), pour qu'elle reste un token et
     ne soit pas enfermée dans un fichier d'image.
 
     fractalNoise et non turbulence : le premier donne un grain fin et
