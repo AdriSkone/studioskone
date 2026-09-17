@@ -24,16 +24,24 @@
   --gris:           #5F6468;
 
   /* ─── Couleur, sections sombres ───────────────────────────
-     Sur l'encre :
-       sombre-texte  15.24  AAA
-       accent-clair   6.70  AA
-       accent         1.73  ÉCHEC — jamais de texte
-       gris           2.98  ÉCHEC — jamais de texte
+     Sur le fond sombre :
+       sombre-texte  15.02  AAA
+       accent-clair   6.60  AA
+       accent         1.70  ÉCHEC — jamais de texte
+       gris           2.94  ÉCHEC — jamais de texte
+
+     Le fond sombre n'est pas l'encre : c'est une encre teintée vers
+     l'accent, presque noire mais habitée. L'écart est volontairement
+     faible (+9 % de luminance) — assez pour quitter le noir neutre, pas
+     assez pour devenir une couleur. Le bleu de Prusse plein a été écarté
+     comme fond : il deviendrait une surface au lieu d'un accent, et plus
+     aucune couleur ne resterait pour les signaux (accent-clair y tombe à
+     3.88).
 
      Le bleu de Prusse ne porte pas de texte sur fond sombre : il y sert
      aux filets, aux points d'état et au curseur, et à rien d'autre. Tout
      texte en négatif s'écrit en papier, ou en accent clair.              */
-  --sombre:        #14181C;
+  --sombre:        #121A20;
   --sombre-texte:  #F6ECDB;
   --accent-clair:  #5FA8C4;
 

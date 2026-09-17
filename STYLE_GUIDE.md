@@ -31,7 +31,7 @@
 
 | Token | Valeur | Usage |
 |---|---|---|
-| `--sombre` | `#14181C` | Fond des sections en négatif |
+| `--sombre` | `#121A20` | Fond des sections en négatif : encre teintée vers l'accent (texte 15.02, accent clair 6.60). Le bleu de Prusse plein est écarté comme fond. |
 | `--sombre-texte` | `#F6ECDB` | Texte sur sombre |
 | `--accent-clair` | `#5FA8C4` | Accent sur fond sombre, à ajuster après mesure |
 
