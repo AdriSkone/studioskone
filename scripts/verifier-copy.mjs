@@ -157,6 +157,18 @@ const TARIFS_RETIRES = [
   'Pour les projets plus gros, qui demandent un vrai cadrage produit et un suivi rapproché.',
   'Ce qui fait bouger le prix : le périmètre de la version 1, les comptes utilisateurs et les paiements.',
   "Le nom de domaine (environ 12",
+  // Prix des cards Prestations et réponses de FAQ, remplacés le 18
+  // septembre 2026 par la nouvelle grille à trois formules.
+  'Dès 3 000€',
+  'Dès 1 200€',
+  'Dès 600€',
+  'Un site vitrine démarre à 900 €, un site multi-pages ou une application web à 2 500 €, une boutique en ligne à 3 000 €.',
+  'Une à deux semaines pour une landing page, quatre à six semaines pour un site complet ou une application web.',
+  "Deux séries de retours sur l'offre Fondation, des ajustements continus sur l'offre Studio.",
+  // Ce fragment d'une ancienne card tarif ne se recomposait, avant ce
+  // chantier, qu'en empruntant une phrase de la FAQ 01 ci-dessus : les
+  // deux ont changé le même jour, il faut donc le déclarer explicitement.
+  "Ce qui fait bouger le prix : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer.",
 ]
 
 const TARIFS_AJOUTES = [
@@ -190,6 +202,8 @@ const TARIFS_AJOUTES = [
   'Suivi rapproché tout au long du projet',
   'Rédaction des textes : 200 € par page',
   'Séance photo : sur devis, avec un photographe partenaire',
+  // Réponse de FAQ 02, remplacée le 18 septembre 2026.
+  'Cinq jours ouvrés pour une page, trois semaines pour un site complet',
   'Le site vous appartient.',
   'Le code est à vous, pas loué.',
   "Je conçois, je développe, je mets en ligne.",

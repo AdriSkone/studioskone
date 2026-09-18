@@ -58,6 +58,7 @@ const CHANGEMENTS_DECLARES = {
     'meta:og:description':     'Idem meta description.',
     'meta:twitter:description':'Idem meta description.',
     'jsonld:ProfessionalService': 'Les six Offer deviennent trois formules à prix fermes (900, 1900, 3000) plus l’option design à 600, avec priceCurrency et availability.',
+    'jsonld:FAQPage': 'Les réponses aux questions 01, 02 et 08 suivent la même nouvelle grille tarifaire (900 / 1 900 / 3 000, délais en jours et en semaines) que le reste de la page.',
   },
   'projets/tasq.html': {
     'meta:og:image':
