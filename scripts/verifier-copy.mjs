@@ -123,7 +123,6 @@ const TARIFS_RETIRES = [
   'Le plus choisi',
   'Dès 900€',
   'Dès 2 500€',
-  'Sur devis',
   "sur l'offre Fondation et l'offre Studio",
   'De quoi lancer vite un site soigné, sans exploser le budget.',
   'Mon offre la plus demandée',
