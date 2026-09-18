@@ -60,6 +60,35 @@ const CHANGEMENTS_DECLARES = {
     'jsonld:ProfessionalService': 'Les six Offer deviennent trois formules à prix fermes (900, 1900, 3000) plus l’option design à 600, avec priceCurrency et availability.',
     'jsonld:FAQPage': 'Les réponses aux questions 01, 02 et 08 suivent la même nouvelle grille tarifaire (900 / 1 900 / 3 000, délais en jours et en semaines) que le reste de la page.',
   },
+  'refonte-site-internet.html': {
+    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'meta:og:description':     'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'meta:twitter:description':'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'jsonld:Service':          'Nouvelle grille tarifaire du 18 septembre 2026 : la description reprend le nouveau prix (900 €).',
+    'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai d’une refonte suit la même grille.',
+  },
+  'creation-site-internet-artisan.html': {
+    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'meta:og:description':     'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'meta:twitter:description':'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'jsonld:Service':          'Nouvelle grille tarifaire du 18 septembre 2026 : la description reprend le nouveau délai (5 jours ouvrés).',
+    'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le temps demandé au client suit la même grille.',
+  },
+  'creation-site-internet-nantes.html': {
+    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026 : aucun changement de prix ou de délai dans cette balise, la clé est ajoutée par cohérence avec les autres pages prestations.',
+    'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai de création suit la même grille.',
+  },
+  'creation-site-ecommerce-nantes.html': {
+    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'meta:og:description':     'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'meta:twitter:description':'Nouvelle grille tarifaire du 18 septembre 2026.',
+    'jsonld:Service':          'Nouvelle grille tarifaire du 18 septembre 2026 : la description reprend « à partir de 3 000 € » au lieu de « dès 3 000 € ».',
+    'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai d’ouverture suit la même grille (délais définis au cadrage).',
+  },
+  'creation-application-mobile.html': {
+    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026 : aucun changement de prix ou de délai dans cette balise, la clé est ajoutée par cohérence avec les autres pages prestations.',
+    'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai suit la même grille (délais définis au cadrage).',
+  },
   'projets/tasq.html': {
     'meta:og:image':
       "L'image de partage montrait Tasq dans son ancienne charte " +

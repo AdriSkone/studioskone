@@ -27,7 +27,7 @@ export const PAGES = [
     slug: 'refonte-site-internet',
     footerLabel: 'Refonte de site',
     title: 'Refonte de site internet · Studio Skøne · Nantes',
-    description: 'Refonte de votre site internet sans perdre votre référencement : audit, nouveau design, migration et redirections. Dès 1 200 €. Devis gratuit sous 24 h.',
+    description: 'Refonte de votre site internet sans perdre votre référencement : audit, nouveau design, migration et redirections. Dès 900 €. Devis gratuit sous 24 h.',
     serviceName: 'Refonte de site internet',
     serviceType: 'Refonte de site internet',
     geo: true,
@@ -35,7 +35,7 @@ export const PAGES = [
     breadcrumb: [{ name: 'Refonte de site internet', url: '/refonte-site-internet' }],
 
     h1: 'Refonte de <span class="text-accent">site internet</span>',
-    lead: "Votre site existe, il fonctionne, mais il ne vous ressemble plus et il ne vous rapporte rien. On ne repart pas forcément de zéro. J'audite, je reprends ce qui mérite de l'être, et je reconstruis le reste. Dès 1 200 €.",
+    lead: "Votre site existe, il fonctionne, mais il ne vous ressemble plus et il ne vous rapporte rien. On ne repart pas forcément de zéro. J'audite, je reprends ce qui mérite de l'être, et je reconstruis le reste. Dès 900 €.",
     ctas: [
       { label: 'Demander un audit gratuit', href: '/#contact' },
       { label: 'Voir les réalisations', href: '/#work' },
@@ -89,8 +89,8 @@ export const PAGES = [
         label: 'Budget',
         h2: 'Combien coûte <span class="text-accent">une refonte ?</span>',
         tiers: [
-          { name: 'Rafraîchissement', price: 'dès 1 200 €', desc: "Nouveau design sur la structure existante, corrections mobile et vitesse. Quand le socle est sain." },
-          { name: 'Refonte complète', price: 'dès 2 500 €', desc: "Nouvelle structure, nouveau design, contenu repris, migration et redirections. Le cas le plus fréquent." },
+          { name: "Refonte d'une page", price: '900 €', desc: "Nouveau design sur une page complète, reprise du contenu existant, corrections mobile et vitesse. Livrée en 5 jours ouvrés, une fois vos textes et vos photos réunis." },
+          { name: 'Refonte complète, 4 à 6 pages', price: '1 900 €', desc: "Nouvelle structure sur l'ensemble du site, nouveau design, contenu repris, migration et redirections. Livrée en 3 semaines, une fois vos textes et vos photos réunis." },
           { name: 'Changement de technologie', price: 'sur devis', desc: "Quand le site actuel repose sur une base obsolète, ou sur un outil dont vous voulez sortir." },
         ],
         notes: [
@@ -110,7 +110,7 @@ export const PAGES = [
           ['Je peux garder mon nom de domaine ?',
            "Oui, toujours. Et si votre domaine est actuellement détenu par votre ancien prestataire, je vous aide à le récupérer à votre nom."],
           ['Combien de temps prend une refonte ?',
-           "Deux à trois semaines pour un rafraîchissement, quatre à six pour une refonte complète. L'audit prend quelques jours et démarre le processus."],
+           "Cinq jours ouvrés pour une refonte d'une page, trois semaines pour une refonte complète, une fois vos textes et vos photos réunis. L'audit prend quelques jours et démarre le processus."],
           ["Et si mon ancien prestataire ne me donne pas les accès ?",
            "C'est fréquent, et ce n'est pas bloquant. Le contenu public peut être récupéré, et le domaine peut être transféré par des procédures prévues pour ça. Je vous accompagne sur ces démarches."],
           ['Vous travaillez sur WordPress, Wix, Squarespace ?',
@@ -150,7 +150,7 @@ export const PAGES = [
     slug: 'creation-site-internet-artisan',
     footerLabel: 'Site internet pour artisan',
     title: 'Création de site internet pour artisan · Studio Skøne',
-    description: "Sites internet pour artisans du bâtiment et de l'artisanat : trouvé sur Google, lisible sur téléphone, fait pour déclencher l'appel. Dès 900 €, livré en deux semaines.",
+    description: "Sites internet pour artisans du bâtiment et de l'artisanat : trouvé sur Google, lisible sur téléphone, fait pour déclencher l'appel. Dès 900 €, livré en 5 jours ouvrés dès réception de vos textes et de vos photos.",
     serviceName: 'Création de site internet pour artisan',
     serviceType: 'Création de site vitrine pour artisan',
     geo: true,
@@ -158,7 +158,7 @@ export const PAGES = [
     breadcrumb: [{ name: 'Site internet pour artisan', url: '/creation-site-internet-artisan' }],
 
     h1: 'Création de site internet <span class="text-accent">pour artisans</span>',
-    lead: "Un site qui vous fait trouver sur Google, qui se lit sur un téléphone à une main, et qui déclenche l'appel. Pensé pour votre métier, pas pour un concours de design. Dès 900 €, livré en deux semaines.",
+    lead: "Un site qui vous fait trouver sur Google, qui se lit sur un téléphone à une main, et qui déclenche l'appel. Pensé pour votre métier, pas pour un concours de design. Dès 900 €, livré en 5 jours ouvrés dès réception de vos textes et de vos photos.",
     ctas: [
       { label: 'Estimer mon site', href: '/#estimator' },
       { label: 'Voir un exemple', href: '/projets/merel-et-fils' },
@@ -231,10 +231,11 @@ export const PAGES = [
       {
         kind: 'pricing',
         label: 'Budget',
-        h2: 'Deux formats, <span class="text-accent">deux prix.</span>',
+        h2: 'Trois formats, <span class="text-accent">trois prix.</span>',
         tiers: [
-          { name: 'Site artisan essentiel', price: '900 €', desc: "Une page complète : présentation, réalisations, zones, garanties, appel et formulaire de devis. Livré en deux semaines, fiche Google Business comprise." },
-          { name: 'Site artisan complet', price: 'dès 1 800 €', desc: "Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients. Meilleure base pour le référencement local." },
+          { name: 'Site artisan, une page', price: '900 €', desc: "Une page complète : présentation, réalisations, zones, garanties, appel et formulaire de devis, avec la fiche Google Business. Livrée en 5 jours ouvrés dès réception de vos textes et de vos photos." },
+          { name: 'Site artisan complet', price: '1 900 €', desc: "Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients. Meilleure base pour le référencement local. Livrée en 3 semaines dès réception de vos textes et de vos photos." },
+          { name: 'Avec réservation ou espace client', price: 'sur devis', desc: "Prise de rendez-vous en ligne, espace client pour suivre un chantier, ou connexion à votre outil de facturation. Le périmètre est cadré avec vous avant devis." },
         ],
         notes: [
           { t: 'Toujours compris', d: "Les textes écrits par moi, la mise en ligne, la formation et un mois de suivi. Vous n'avez aucun contenu à préparer avant de commencer." },
@@ -264,7 +265,7 @@ export const PAGES = [
           ["Je n'y connais rien en informatique.",
            "C'est prévu. Vous n'avez aucun outil à apprendre pendant le projet. À la livraison, je vous montre en trente minutes comment changer une photo ou un texte, et je vous laisse un guide. Si vous préférez me confier les modifications, c'est possible aussi."],
           ['Combien de temps ça va me prendre ?',
-           "Environ deux heures au total, réparties sur les trois semaines du projet. Vous n'avez pas à vous en occuper entre les rendez-vous."],
+           "Environ deux heures au total, réparties sur les cinq jours ouvrés ou les trois semaines du projet selon la formule choisie. Vous n'avez pas à vous en occuper entre les rendez-vous."],
           ['Est-ce que ça vaut le coup si je travaille déjà par le bouche-à-oreille ?',
            "Le bouche-à-oreille finit toujours sur Google. Quand on vous recommande, la personne tape votre nom pour vérifier avant d'appeler. S'il n'y a rien, ou quelque chose de daté, une partie des recommandations se perd en route."],
           ["Et si je veux ajouter des choses plus tard ?",
@@ -299,7 +300,7 @@ export const PAGES = [
     breadcrumb: [{ name: 'Création de site internet à Nantes', url: '/creation-site-internet-nantes' }],
 
     h1: 'Création de site internet <span class="text-accent">à Nantes</span>',
-    lead: "Je conçois et je développe votre site du premier croquis à la mise en ligne. Une seule personne au dessin et au code, un seul interlocuteur, un seul responsable du résultat. Livré en 2 à 6 semaines, à partir de 900 €.",
+    lead: "Je conçois et je développe votre site du premier croquis à la mise en ligne. Une seule personne au dessin et au code, un seul interlocuteur, un seul responsable du résultat. Livré en 5 jours ouvrés pour une page, en 3 semaines pour un site complet, à partir du moment où j'ai vos textes et vos photos. Dès 900 €.",
     context: "Je me déplace sur Nantes et l'agglomération, et je travaille en visio partout en France.",
     ctas: [
       { label: 'Estimer mon projet', href: '/#estimator' },
@@ -363,9 +364,9 @@ export const PAGES = [
         label: 'Budget',
         h2: 'Combien coûte un site internet <span class="text-accent">à Nantes ?</span>',
         tiers: [
-          { name: "Site vitrine d'une page", price: 'dès 900 €', desc: "Design sur mesure, mobile, mise en ligne. Livré en 1 à 2 semaines." },
-          { name: 'Site multi-pages', price: 'dès 2 500 €', desc: "Architecture complète, référencement technique, animations. Livré en 4 à 6 semaines." },
-          { name: 'Avec réservation ou espace client', price: 'sur devis', desc: "Selon les fonctionnalités à construire et les outils à connecter." },
+          { name: "Site d'une page", price: '900 €', desc: "Design sur mesure, mobile, mise en ligne. Livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos." },
+          { name: 'Site complet, 4 à 6 pages', price: '1 900 €', desc: "Architecture complète, référencement technique, animations. Livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
+          { name: 'Avec réservation ou paiement', price: 'à partir de 3 000 €', desc: "Selon les fonctionnalités à construire et les outils à connecter." },
         ],
         notes: [
           { t: 'Ce qui fait varier le devis', d: "Le nombre de pages, la présence d'une réservation ou d'un paiement, et si les textes et photos sont à créer de zéro." },
@@ -389,7 +390,7 @@ export const PAGES = [
         h2: 'Ce qu’on me demande <span class="text-accent">à Nantes.</span>',
         items: [
           ['Combien de temps pour créer un site internet ?',
-           "Une à deux semaines pour un site d'une page, quatre à six semaines pour un site complet. Le délai est écrit sur le devis, et un retard de mon fait ne vous est pas facturé."],
+           "Cinq jours ouvrés pour un site d'une page, trois semaines pour un site complet, à partir du moment où j'ai vos textes et vos photos. Le délai est écrit sur le devis, et un retard de mon fait ne vous est pas facturé."],
           ['Vous vous déplacez sur Nantes ?',
            "Oui, pour l'atelier de cadrage et pour la formation à la livraison si vous le souhaitez. Le reste se fait à distance, ce qui va plus vite pour tout le monde."],
           ['Est-ce que je serai bien référencé sur Google ?',
@@ -433,7 +434,7 @@ export const PAGES = [
     slug: 'creation-site-ecommerce-nantes',
     footerLabel: 'Site e-commerce',
     title: 'Création de site e-commerce à Nantes · Studio Skøne',
-    description: "Création de boutiques en ligne à Nantes : Shopify ou sur mesure. Fiches produits, paiement, livraison, et une prise en main que vous maîtrisez. Dès 3 000 €.",
+    description: "Création de boutiques en ligne à Nantes : Shopify ou sur mesure. Fiches produits, paiement, livraison, et une prise en main que vous maîtrisez. À partir de 3 000 €.",
     serviceName: 'Création de site e-commerce à Nantes',
     serviceType: 'Création de boutique en ligne',
     geo: true,
@@ -441,7 +442,7 @@ export const PAGES = [
     breadcrumb: [{ name: 'Site e-commerce à Nantes', url: '/creation-site-ecommerce-nantes' }],
 
     h1: 'Création de site e-commerce <span class="text-accent">à Nantes</span>',
-    lead: "Une boutique en ligne qui vend, pas un catalogue en ligne. Fiches produits, paiement, livraison, gestion des stocks : je conçois et je développe l'ensemble, et je vous forme à le piloter seul. Dès 3 000 €.",
+    lead: "Une boutique en ligne qui vend, pas un catalogue en ligne. Fiches produits, paiement, livraison, gestion des stocks : je conçois et je développe l'ensemble, et je vous forme à le piloter seul. À partir de 3 000 €.",
     ctas: [
       { label: 'Estimer ma boutique', href: '/#estimator' },
       { label: 'Voir une marque construite', href: '/projets/m-bivouak' },
@@ -504,8 +505,8 @@ export const PAGES = [
         label: 'Budget',
         h2: 'Trois formats, <span class="text-accent">selon votre catalogue.</span>',
         tiers: [
-          { name: 'Boutique essentielle', price: 'dès 3 000 €', desc: "Jusqu'à 30 produits, design sur mesure, paiement, livraison, formation. Livrée en 4 à 6 semaines." },
-          { name: 'Boutique complète', price: 'dès 5 000 €', desc: "Catalogue large, variantes, promotions, comptes clients, automatisations marketing, structure pensée pour le référencement." },
+          { name: 'Boutique essentielle', price: 'à partir de 3 000 €', desc: "Jusqu'à 30 produits, design sur mesure, paiement, livraison, formation. Délais définis au cadrage." },
+          { name: 'Boutique complète', price: 'sur devis', desc: "Catalogue large, variantes, promotions, comptes clients, automatisations marketing, structure pensée pour le référencement." },
           { name: 'Sur mesure', price: 'sur devis', desc: "Abonnements, ventes privées, place de marché, connexion à votre logiciel de gestion." },
         ],
         notes: [
@@ -540,7 +541,7 @@ export const PAGES = [
           ['Est-ce que vous faites aussi les photos produits ?',
            "Non, ce n'est pas mon métier. Je peux vous orienter vers un photographe, et je vous dis précisément quels cadrages et quels formats il me faut."],
           ['En combien de temps ma boutique peut-elle ouvrir ?',
-           "Quatre à six semaines pour une boutique essentielle, à condition d'avoir les visuels et les informations produits. C'est presque toujours le catalogue qui fixe le rythme, pas le développement."],
+           "Les délais sont définis au cadrage, une fois votre catalogue, vos visuels et vos informations produits réunis. C'est presque toujours le catalogue qui fixe le rythme, pas le développement."],
         ],
       },
       {
@@ -633,8 +634,8 @@ export const PAGES = [
         label: 'Budget',
         h2: 'Combien coûte <span class="text-accent">une application mobile ?</span>',
         tiers: [
-          { name: 'Cadrage produit', price: 'sur devis, court', desc: "Un périmètre, des maquettes et un devis ferme. Vous restez libre de faire développer ailleurs ensuite." },
-          { name: 'Première version', price: 'à partir de 6 000 €', desc: "Une application resserrée, publiée sur les deux stores, mise entre les mains de vrais utilisateurs." },
+          { name: 'Cadrage produit', price: 'sur devis', desc: "Un périmètre, des maquettes et un devis ferme. Vous restez libre de faire développer ailleurs ensuite." },
+          { name: 'Première version', price: 'à partir de 3 000 €', desc: "Une application resserrée, publiée sur les deux stores, mise entre les mains de vrais utilisateurs." },
           { name: 'Plateforme complète', price: 'sur devis', desc: "Comptes, paiements, notifications, synchronisation hors ligne, connexion à des systèmes existants." },
         ],
         notes: [
@@ -660,7 +661,7 @@ export const PAGES = [
         h2: 'Ce qu’on me demande <span class="text-accent">sur le mobile.</span>',
         items: [
           ['Combien de temps pour créer une application ?',
-           "Comptez huit à seize semaines pour une première version, publication comprise. Le cadrage prend deux semaines, la conception deux à trois, le développement le reste."],
+           "Les délais sont définis au cadrage, une fois le périmètre de la version 1 fixé. Le cadrage prend deux semaines, la conception deux à trois, le développement le reste."],
           ['iOS et Android en même temps ?',
            "Oui. Je travaille avec une base de code unique pour les deux plateformes, ce qui divise le coût par rapport à deux développements séparés, tout en gardant les codes propres à chaque système."],
           ['Faut-il commencer petit ?',

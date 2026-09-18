@@ -169,6 +169,34 @@ const TARIFS_RETIRES = [
   // chantier, qu'en empruntant une phrase de la FAQ 01 ci-dessus : les
   // deux ont changé le même jour, il faut donc le déclarer explicitement.
   "Ce qui fait bouger le prix : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer.",
+
+  // Task 6 — les cinq pages prestations, 18 septembre 2026. Anciens
+  // paliers et délais retirés au profit de la grille commune (900 € /
+  // 1 900 € / à partir de 3 000 €). Les mots avec apostrophe sont notés
+  // avec un espace : `esc()` transforme l'apostrophe en `&#39;`, que le
+  // comparateur réduit ensuite à un espace, comme n'importe quelle entité.
+  'Dès 1 200 €', '1 200 €', 'Rafraîchissement',
+  'Nouveau design sur la structure existante, corrections mobile et vitesse. Quand le socle est sain.',
+  '2 500 €',
+  'Nouvelle structure, nouveau design, contenu repris, migration et redirections. Le cas le plus fréquent.',
+  'Deux à trois semaines pour un rafraîchissement, quatre à six pour une refonte complète.',
+  'Pensé pour votre métier, pas pour un concours de design.',
+  'Site artisan essentiel',
+  'formulaire de devis. Livré en deux semaines, fiche Google Business comprise.',
+  '1 800 €',
+  'Environ deux heures au total, réparties sur les trois semaines du projet.',
+  'Je conçois et je développe votre site du premier croquis à la mise en ligne. Une seule personne au dessin et au code, un seul interlocuteur, un seul responsable du résultat.',
+  'Site vitrine d une page',
+  'Design sur mesure, mobile, mise en ligne. Livré en 1 à 2 semaines.',
+  'Site multi-pages',
+  'Architecture complète, référencement technique, animations. Livré en 4 à 6 semaines.',
+  'Avec réservation ou espace client',
+  'quatre à six semaines pour un site complet. Le délai est écrit sur le devis',
+  'Une boutique en ligne qui vend, pas un catalogue en ligne.',
+  'design sur mesure, paiement, livraison, formation. Livrée en 4 à 6 semaines.',
+  'Quatre à six semaines pour une boutique essentielle',
+  'sur devis, court',
+  'Comptez huit à seize semaines pour une première version, publication comprise.',
 ]
 
 const TARIFS_AJOUTES = [
@@ -216,6 +244,21 @@ const TARIFS_AJOUTES = [
   'La maintenance après livraison, si vous en voulez une.',
   'En deux fois : la moitié à la commande, la moitié à la mise en ligne. En trois fois sur les projets sur mesure',
   'Une agence facture généralement le même site entre 3 500 et 8 000',
+
+  // Task 6 — les cinq pages prestations, 18 septembre 2026. Nouveaux
+  // paliers et délais, un par page, avec le vocabulaire de son métier.
+  "Refonte complète, 4 à 6 pages",
+  'trois semaines pour une refonte complète, une fois vos textes et vos photos réunis.',
+  'Nouveau design sur une page complète, reprise du contenu existant, corrections mobile et vitesse.',
+  'Nouvelle structure sur l ensemble du site, nouveau design, contenu repris, migration et redirections.',
+  'Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients. Meilleure base pour le référencement local.',
+  'Trois formats, trois prix.',
+  'Avec réservation ou espace client',
+  'Prise de rendez-vous en ligne, espace client pour suivre un chantier, ou connexion à votre outil de facturation.',
+  'réparties sur les cinq jours ouvrés ou les trois semaines du projet selon la formule choisie.',
+  'trois semaines pour un site complet, à partir du moment où',
+  'une fois votre catalogue, vos visuels et vos informations produits réunis.',
+  'Les délais sont définis au cadrage, une fois le périmètre de la version 1 fixé.',
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
