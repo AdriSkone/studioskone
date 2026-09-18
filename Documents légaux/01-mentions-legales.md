@@ -1,6 +1,6 @@
 # Mentions légales
 
-*Dernière mise à jour : 6 mai 2026*
+*Dernière mise à jour : 18 septembre 2026*
 
 Conformément aux dispositions des articles 6-III et 19 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (dite « LCEN »), il est porté à la connaissance des utilisateurs et visiteurs du site **studioskone.com** les présentes mentions légales.
 

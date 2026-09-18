@@ -119,6 +119,11 @@ const REMPLACEMENTS_DEMANDES = [
   // rétablit la correspondance sans toucher au HTML produit ni au
   // normaliseur.
   { avant: "Lieu d'exercice", apres: 'Lieu d exercice' },
+  // Revue finale, point 8 — 18 septembre 2026. Les CGV et les mentions
+  // légales ont changé de fond ce jour-là (formules de paiement, adresse
+  // de domiciliation vs lieu d'exercice) sans que leur date affichée ne
+  // suive : elle portait encore le 6 mai 2026.
+  { avant: 'Dernière mise à jour : 6 mai 2026', apres: 'Dernière mise à jour : 18 septembre 2026' },
 ]
 
 /**
@@ -219,7 +224,18 @@ const TARIFS_RETIRES = [
   // côte à côte. La règle resserrée le signale à raison — c'est un
   // changement de prix voulu par ce chantier, pas une perte : il se déclare
   // ici comme les autres prix retirés.
-  'sur devis',
+  //
+  // Revue finale, point 2 — cette déclaration n'avait aucune portée de
+  // fichier : une chaîne aussi courte que « sur devis » pardonnait toute
+  // perte qui la contient, sur n'importe laquelle des pages vérifiées, alors
+  // qu'elle ne visait que ce seul palier de creation-site-internet-nantes.html
+  // (les autres pages qui affichent encore « sur devis », artisan,
+  // e-commerce, mobile, refonte, n'ont rien perdu : leur carte l'affiche
+  // toujours). Elle porte donc désormais le nom du fichier qu'elle vise :
+  // `f.includes(t)` ne s'applique plus que quand `fichier` correspond (voir
+  // le filtre `perdus` plus bas), ce qui referme le trou sans revenir à
+  // « sur devis » retrouvé n'importe où ailleurs.
+  { fichier: 'creation-site-internet-nantes.html', texte: 'sur devis' },
 
   // Correction 1 — mode de paiement, 18 septembre 2026. Le studio annonçait
   // encore « en trois fois » sur trois pages prestations, alors que
@@ -255,7 +271,45 @@ const TARIFS_RETIRES = [
   'Acompte de 30 % à la commande, à la signature du devis. Le démarrage des travaux est conditionné à l encaissement de cet acompte.',
   'Solde à la livraison finale, dans un délai de 30 jours à compter de la date d émission de la facture.',
   'Pour les projets d envergure, le devis peut prévoir un échéancier intermédiaire (par exemple : 30 % à la commande, 40 % à mi-parcours, 30 % à la livraison).',
+
+  // Revue finale, point 10 — essai de resserrement du repli long (jusqu'à
+  // seize mots), 18 septembre 2026. Le resserrement a exposé trois anciens
+  // paliers de prix, sur les pages e-commerce et application mobile, que
+  // la version permissive du repli laissait passer comme de simples
+  // regroupements alors qu'ils ont bel et bien disparu au profit de la
+  // grille commune (remplacés par « sur devis » sur ces deux cartes, déjà
+  // couvert par ailleurs).
+  'dès 3 000 €', 'dès 5 000 €', 'à partir de 6 000 €',
+
+  // Revue finale, point 1 — FAQ 03, 18 septembre 2026. La réponse disait la
+  // rédaction comprise par défaut (« c'est prévu : je rédige les textes et
+  // j'organise les visuels ») alors qu'elle est une option facturée, comme
+  // le dit déjà la carte Une page et la liste d'options.
+  "Une heure d'échange au démarrage, et 30 minutes de retours sur les maquettes. Le reste, je m'en occupe. Si vous avez des textes et des photos, tant mieux. Si vous n'en avez pas, c'est prévu : je rédige les textes et j'organise les visuels.",
+
+  // Revue finale, point 4 — écran de résultat du parcours, 18 septembre
+  // 2026. « Estimation indicative » contredisait les prix fermes annoncés
+  // par les boutons qui mènent à cet écran.
+  'Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.',
+
+  // Revue finale, point 3 — domaine à 15 € par an, 18 septembre 2026. Les
+  // pages prestations donnaient encore 12 € ou « une quinzaine d'euros »,
+  // quand l'accueil annonce 15 € depuis les tâches précédentes.
+  'Comptez une quinzaine d euros par an pour le domaine.',
+  'Le nom de domaine, autour de 12 € par an, et l hébergement, de 0 à 15 € par mois. Vous les payez en direct, à votre nom, sans marge de ma part.',
 ]
+
+/**
+ * Une entrée de TARIFS_RETIRES est soit une chaîne (s'applique à tout
+ * fichier, comme la quasi-totalité des entrées ci-dessus), soit un objet
+ * `{ fichier, texte }` qui restreint la déclaration au seul fichier nommé —
+ * pour les fragments trop courts ou trop génériques pour rester sûrs sans
+ * cette portée (voir « sur devis » ci-dessus).
+ */
+function correspondTarifRetire(entree, fragment, fichier) {
+  if (typeof entree === 'string') return fragment.includes(entree)
+  return entree.fichier === fichier && fragment.includes(entree.texte)
+}
 
 const TARIFS_AJOUTES = [
   'Une page', 'Site complet', 'Sur mesure',
@@ -337,6 +391,37 @@ const TARIFS_AJOUTES = [
   // miroir dans TARIFS_RETIRES ci-dessus).
   'Pour les projets sur mesure : 30 % à la commande, 40 % à la validation des maquettes, 30 % à la mise en ligne.',
   'Le solde est payable dans un délai de 30 jours à compter de la date d émission de la facture.',
+
+  // Revue finale, point 10 — essai de resserrement du repli long, 18
+  // septembre 2026. Le resserrement a exposé six fragments réellement
+  // nouveaux de ce chantier, jusque-là couverts par accident par la
+  // version permissive du repli (chaque mot pris isolément existait déjà
+  // ailleurs sur la page, sans jamais être voisin) plutôt que déclarés.
+  'Application web ou mobile sur devis',
+  'Cadrage du produit avant le premier écran',
+  'Design seul, sans développement : à partir de 600 €',
+  "Le nom de domaine, environ 15 € par an, à votre nom.",
+  'Site artisan, une page',
+  "Site d une page",
+  'Avec réservation ou paiement',
+
+  // Revue finale, point 1 — FAQ 03, 18 septembre 2026 (voir la déclaration
+  // miroir dans TARIFS_RETIRES ci-dessus).
+  "Si vous n'en avez pas, je peux les rédiger, en option, à 200 € la page.",
+
+  // Revue finale, point 4 — écran de résultat du parcours, 18 septembre
+  // 2026 (voir la déclaration miroir dans TARIFS_RETIRES ci-dessus).
+  'Prix ferme sur les formules Une page et Site complet, estimation à cadrer ensemble sur le sur mesure, le tout hors taxes.',
+
+  // Revue finale, point 3 — domaine à 15 € par an, 18 septembre 2026 (voir
+  // la déclaration miroir dans TARIFS_RETIRES ci-dessus).
+  'Comptez 15 € par an pour le domaine.',
+
+  // Revue finale, point 8 — date des documents légaux, 18 septembre 2026.
+  // Le remplacement demandé (REMPLACEMENTS_DEMANDES) protège l'ancienne
+  // date contre une fausse alerte de perte ; il ne dispense pas de déclarer
+  // la nouvelle, qui est un texte que la page n'avait jamais porté.
+  'Dernière mise à jour : 18 septembre 2026',
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
@@ -460,11 +545,22 @@ function estUnRegroupement(fragment, cible) {
        * ordre et jamais deux à la suite — la couverture de gauche à
        * droite ne peut alors rien recouvrir.
        *
-       * On vérifie donc que chaque mot du fragment se trouve quelque part
-       * dans la cible. Réservé aux fragments courts : sur une phrase
-       * entière, retrouver les mots un par un ne prouverait rien.
+       * Resserré comme la porte des fragments courts (tâche 11) : un mot
+       * isolé retrouvé n'importe où ne prouve rien, deux mots consécutifs
+       * retrouvés côte à côte, si. On exige donc que CHAQUE paire de mots
+       * voisins du fragment (et pas seulement chaque mot pris seul) se
+       * retrouve, quelque part, encore voisine dans la cible. Un libellé
+       * réordonné garde ses mots voisins tels quels ; un mot qui a
+       * vraiment disparu casse au moins une des paires qui le touchent.
+       * Réservé aux fragments courts : sur une phrase entière, retrouver
+       * des paires de mots ne prouverait rien.
        */
-      if (mots.length <= 16) return mots.every((m) => cible.includes(m))
+      if (mots.length <= 16) {
+        for (let k = 0; k < mots.length - 1; k++) {
+          if (!cible.includes(mots.slice(k, k + 2).join(' '))) return false
+        }
+        return true
+      }
       return false
     }
     i += pris
@@ -522,7 +618,7 @@ function executerCli(fichiers) {
       .filter((f) => !estUnRegroupement(f, toutApres))
       .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
       .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
-      .filter((f) => !TARIFS_RETIRES.some((t) => f.includes(t)))
+      .filter((f) => !TARIFS_RETIRES.some((t) => correspondTarifRetire(t, f, fichier)))
     const ajoutes = absentsApres
       .filter((f) => !estUnRegroupement(f, toutAvant))
       .filter((f) => {

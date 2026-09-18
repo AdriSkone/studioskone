@@ -310,8 +310,6 @@ body { padding-top: var(--nav-h); }
   line-height: var(--leading-corps);
 }
 
-.tarifs-pied { margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }
-
 @media (max-width: 1023px) {
   .tarifs-grille { grid-template-columns: 1fr; }
   .tarifs-arguments { grid-template-columns: 1fr 1fr; }

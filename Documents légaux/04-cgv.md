@@ -1,6 +1,6 @@
 # Conditions Générales de Vente (CGV)
 
-*Dernière mise à jour : 6 mai 2026*
+*Dernière mise à jour : 18 septembre 2026*
 
 Les présentes Conditions Générales de Vente (ci-après « CGV ») régissent l'ensemble des prestations de services proposées par :
 

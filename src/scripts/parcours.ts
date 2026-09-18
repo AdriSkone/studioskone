@@ -1,12 +1,12 @@
 /**
  * Le parcours unique — estimateur et formulaire de contact fusionnés.
  *
- * Une question par écran, six écrans : quatre questions, la fourchette,
+ * Une question par écran, six écrans : quatre questions, le résultat,
  * puis les coordonnées. Le visiteur ne saisit jamais deux fois la même
  * chose — le type de projet n'est demandé qu'une fois, et le délai plus du
- * tout puisque la fourchette l'annonce.
+ * tout puisque le résultat l'annonce.
  *
- * Le budget est demandé AVANT que la fourchette ne s'affiche. Posé après,
+ * Le budget est demandé AVANT que le résultat ne s'affiche. Posé après,
  * le visiteur reprendrait le chiffre qu'on vient de lui montrer au lieu de
  * donner le sien.
  *
@@ -14,8 +14,8 @@
  * les montrer l'un après l'autre. Si le script n'arrive pas, la page reste
  * lisible et les questions restent indexables.
  *
- * Le calcul de la fourchette n'est pas ici : il vit dans
- * components/estimator-pricing, qui est pur et couvert par dix-huit tests.
+ * Le calcul du prix n'est pas ici : il vit dans
+ * components/estimator-pricing, qui est pur et couvert par dix tests.
  * Ce module ne fait que lui passer les réponses.
  */
 
@@ -226,10 +226,14 @@ export function initParcours(): void {
    * coche alors les réponses correspondantes et démarre à la question
    * suivante : le visiteur qui a déjà choisi sa formule ne la ressaisit pas.
    */
+  // « sur-mesure » ne pré-sélectionne plus rien : cette carte couvre aussi
+  // bien les boutiques que les applications, et cocher « boutique » à sa
+  // place orientait à tort tout porteur de projet d'application vers une
+  // estimation de boutique. Le parcours démarre alors à la première
+  // question, comme sans paramètre.
   const PRESELECTION: Record<string, { type: SiteType; size?: SizeChoice }> = {
     'une-page':    { type: 'vitrine', size: '1' },
     'site-complet': { type: 'vitrine', size: '2-5' },
-    'sur-mesure':  { type: 'boutique' },
   }
 
   function cocher(nom: string, valeur: string): boolean {

@@ -84,17 +84,21 @@
 /* Le bouton tombe en bas de carte, aligné sur les trois. */
 .carte-tarif .bouton { margin-top: auto; align-self: flex-start; }
 
-/* Sous 768 px : la formule recommandée passe en premier, et la liste se
-   replie pour que le bouton reste atteignable sans dérouler la carte. */
+/* Sous 1023 px, la grille passe déjà sur une colonne (voir
+   .tarifs-grille) : la carte recommandée doit y passer en premier, et
+   perdre le débord vertical qui la faisait mordre sur ses voisines. */
+@media (max-width: 1023px) {
+  .carte-tarif--recommandee { order: -1; margin-block: 0; }
+}
+
 /* Sous 768 px, le bouton remonte avant la liste : le visiteur n'a pas à
    dérouler sept lignes pour l'atteindre. L'ordre du DOM ne bouge pas, donc
    ni la lecture au clavier ni celle d'un lecteur d'écran ne changent —
    c'est pourquoi on ordonne en flex plutôt que de replier la liste dans un
    <details>, qui aurait caché le contenu à l'indexation. */
 @media (max-width: 767px) {
-  .carte-tarif--recommandee { order: -1; margin-block: 0; padding: 28px 24px 32px; }
+  .carte-tarif--recommandee { padding: 28px 24px 32px; }
   .carte-tarif--recommandee .carte-tarif-prix { font-size: var(--text-h2); }
-  .carte-tarif { display: flex; flex-direction: column; }
   .carte-tarif-delai { order: 1; }
   .carte-tarif .bouton { order: 2; margin-top: 8px; }
   .carte-tarif-liste { order: 3; gap: 10px; }

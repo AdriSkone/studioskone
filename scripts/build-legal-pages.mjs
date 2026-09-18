@@ -10,11 +10,13 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { ORIGIN, lastmodFor, ecrireLastmod } from './sitemap.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const SRC_DIR = join(ROOT, 'Documents légaux')
 const OUT_DIR = join(ROOT, 'public')
+const SITEMAP_PATH = join(OUT_DIR, 'sitemap.xml')
 
 // ── Mapping markdown filename → URL slug + page title + footer label ─────────
 const PAGES = [
@@ -318,7 +320,18 @@ function buildPage(page, allPages) {
     footerLinks: allPages,
   })
   const outPath = join(OUT_DIR, `${page.slug}.html`)
+
+  // Sitemap : ne redate cette page légale que si son rendu a vraiment changé.
+  let avant = null
+  try { avant = readFileSync(outPath, 'utf-8') } catch { /* première génération */ }
+
   writeFileSync(outPath, html, 'utf-8')
+
+  const today = new Date().toISOString().slice(0, 10)
+  const loc = `${ORIGIN}/${page.slug}`
+  const lastmod = lastmodFor(SITEMAP_PATH, loc, avant, html, today)
+  ecrireLastmod(SITEMAP_PATH, loc, lastmod)
+
   return outPath
 }
 

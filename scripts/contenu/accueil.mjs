@@ -386,7 +386,7 @@ export const faq = {
   items: [
     { numero: '01', q: 'Combien coûte un site chez vous ?', r: "Une page à 900 €, un site complet de quatre à six pages à 1 900 €, une boutique en ligne ou une application à partir de 3 000 €. Le prix est ferme : il figure sur le devis et ne bouge pas si le périmètre ne bouge pas." },
     { numero: '02', q: 'Combien de temps ça prend ?', r: "Cinq jours ouvrés pour une page, trois semaines pour un site complet, à partir du moment où j'ai vos textes et vos photos. Le délai est écrit sur le devis. Si je le dépasse de mon fait, vous ne payez pas le dépassement." },
-    { numero: '03', q: "Qu'est-ce que j'ai à fournir ?", r: "Une heure d'échange au démarrage, et 30 minutes de retours sur les maquettes. Le reste, je m'en occupe. Si vous avez des textes et des photos, tant mieux. Si vous n'en avez pas, c'est prévu : je rédige les textes et j'organise les visuels." },
+    { numero: '03', q: "Qu'est-ce que j'ai à fournir ?", r: "Une heure d'échange au démarrage, et 30 minutes de retours sur les maquettes. Le reste, je m'en occupe. Si vous avez des textes et des photos, tant mieux. Si vous n'en avez pas, je peux les rédiger, en option, à 200 € la page." },
     { numero: '04', q: "Le site m'appartient vraiment ?", r: "Oui, entièrement. Le code, le design, le nom de domaine, les accès à l'hébergement : tout est à votre nom, dès la mise en ligne. Vous n'êtes lié à moi par aucun abonnement. Si vous voulez confier la suite à quelqu'un d'autre un jour, vous le pouvez sans rien me demander." },
     { numero: '05', q: 'Je pourrai modifier mon site moi-même ?', r: "Oui. Selon le projet, je mets en place une interface d'administration simple pour changer vos textes, vos photos, vos horaires ou vos tarifs. Je vous forme en visio à la mise en ligne, et je vous laisse un guide écrit. Si vous préférez me confier les modifications, c'est possible aussi, à la demande." },
     { numero: '06', q: 'Pourquoi pas Wix, Squarespace ou un site à 400 € ?', r: "Parce que ce sont deux besoins différents. Une plateforme vous donne un template que d'autres utilisent, un abonnement à vie, et un site que vous ne pourrez pas emporter ailleurs. C'est une solution honnête si votre site est une carte de visite. Si votre site doit vous apporter des clients, vous faire sortir sur Google et vous ressembler, ça ne suffira pas. Je vous le dirai franchement pendant l'appel si votre besoin relève plutôt de la plateforme." },
@@ -470,7 +470,7 @@ export const parcours = {
 
   resultat: {
     label: 'Votre projet ressemble à',
-    mention: 'Estimation indicative et hors taxes, établie à partir de vos réponses. Le devis est posé après un premier échange.',
+    mention: 'Prix ferme sur les formules Une page et Site complet, estimation à cadrer ensemble sur le sur mesure, le tout hors taxes.',
   },
 
   coordonnees: {

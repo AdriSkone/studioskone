@@ -70,7 +70,11 @@ export function estimate(input: EstimateInput): Estimate {
     }
   }
 
-  const unePage = input.type === 'vitrine' && input.size === '1'
+  // Une taille encore inconnue reste sur la formule la moins chère : annoncer
+  // d'emblée le plancher de Site complet (1 900 €) survendrait un projet qui
+  // tiendra peut-être sur une seule page, à 900 €. L'ajustement prévient que
+  // le nombre de pages peut faire basculer sur Site complet.
+  const unePage = input.type === 'vitrine' && (input.size === '1' || input.size === 'inconnu')
   const formule: Formule = unePage ? 'Une page' : 'Site complet'
 
   // « À partir de » dès que le périmètre dépasse la formule : réservation
@@ -81,11 +85,13 @@ export function estimate(input: EstimateInput): Estimate {
   // Une seule phrase d'ajustement, par ordre de priorité : le périmètre
   // d'abord, les contenus ensuite.
   const ajustement =
-    input.size === '6-12'
-      ? 'Au-delà de six pages, on ajuste ensemble.'
-      : input.content === 'a-creer'
-        ? 'Rédaction des textes en option : 200 € par page.'
-        : null
+    input.type === 'vitrine' && input.size === 'inconnu'
+      ? 'Selon le nombre de pages, on passe à la formule Site complet, à 1 900 €.'
+      : input.size === '6-12'
+        ? 'Au-delà de six pages, on ajuste ensemble.'
+        : input.content === 'a-creer'
+          ? 'Rédaction des textes en option : 200 € par page.'
+          : null
 
   return {
     formule,

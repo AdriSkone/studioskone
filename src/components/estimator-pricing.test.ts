@@ -60,10 +60,12 @@ describe('formule et prix ferme', () => {
     expect(r.ajustement).toBe('Rédaction des textes en option : 200 € par page.')
   })
 
-  it('une taille inconnue reste sur Site complet, prix à partir de', () => {
+  it('une taille inconnue reste sur Une page, à partir de 900 €, avec un ajustement vers Site complet', () => {
     const r = estimate({ type: 'vitrine', size: 'inconnu', content: 'pret' })
-    expect(r.formule).toBe('Site complet')
+    expect(r.formule).toBe('Une page')
+    expect(r.prix).toBe(900)
     expect(r.prixDepuis).toBe(true)
+    expect(r.ajustement).toBe('Selon le nombre de pages, on passe à la formule Site complet, à 1 900 €.')
     expect(r.budget).toBe('a-def')
   })
 

@@ -54,9 +54,11 @@ function balises(html) {
  */
 const CHANGEMENTS_DECLARES = {
   'index.html': {
-    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026 : le délai passe de « 2 à 6 semaines » à « 5 jours à 3 semaines ».',
-    'meta:og:description':     'Idem meta description.',
-    'meta:twitter:description':'Idem meta description.',
+    // La balise meta:description elle-même n'a pas changé : seules ces deux
+    // balises portaient le délai, désormais « 5 jours à 3 semaines » au lieu
+    // de « 2 à 6 semaines ».
+    'meta:og:description':     'Nouvelle grille tarifaire du 18 septembre 2026 : le délai passe de « 2 à 6 semaines » à « 5 jours à 3 semaines ».',
+    'meta:twitter:description':'Nouvelle grille tarifaire du 18 septembre 2026 : le délai passe de « 2 à 6 semaines » à « 5 jours à 3 semaines ».',
     'jsonld:ProfessionalService': 'Les six Offer deviennent trois formules à prix fermes (900, 1900, 3000) plus l’option design à 600, avec priceCurrency et availability.',
     'jsonld:FAQPage': 'Les réponses aux questions 01, 02 et 08 suivent la même nouvelle grille tarifaire (900 / 1 900 / 3 000, délais en jours et en semaines) que le reste de la page.',
   },
@@ -75,7 +77,6 @@ const CHANGEMENTS_DECLARES = {
     'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le temps demandé au client suit la même grille.',
   },
   'creation-site-internet-nantes.html': {
-    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026 : aucun changement de prix ou de délai dans cette balise, la clé est ajoutée par cohérence avec les autres pages prestations.',
     'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai de création suit la même grille.',
   },
   'creation-site-ecommerce-nantes.html': {
@@ -86,7 +87,6 @@ const CHANGEMENTS_DECLARES = {
     'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai d’ouverture suit la même grille (délais définis au cadrage).',
   },
   'creation-application-mobile.html': {
-    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026 : aucun changement de prix ou de délai dans cette balise, la clé est ajoutée par cohérence avec les autres pages prestations.',
     'jsonld:FAQPage':          'Nouvelle grille tarifaire du 18 septembre 2026 : la réponse sur le délai suit la même grille (délais définis au cadrage).',
   },
   'projets/tasq.html': {

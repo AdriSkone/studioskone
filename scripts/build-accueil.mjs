@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url'
 import * as C from './contenu/accueil.mjs'
 import { projets } from './contenu/projets.mjs'
 import { navigation, piedDePage, bandeauCookies, fleche } from './partials.mjs'
+import { ORIGIN, lastmodFor, ecrireLastmod } from './sitemap.mjs'
 
 const ici = dirname(fileURLToPath(import.meta.url))
 const racine = resolve(ici, '..')
@@ -571,5 +572,15 @@ ${bandeauCookies()}
 </html>
 `
 
-writeFileSync(resolve(racine, 'index.html'), page, 'utf8')
+const cheminIndex = resolve(racine, 'index.html')
+let avant = null
+try { avant = readFileSync(cheminIndex, 'utf8') } catch { /* première génération */ }
+
+writeFileSync(cheminIndex, page, 'utf8')
 console.log(`✅ index.html — ${page.split('\n').length} lignes`)
+
+// Sitemap : ne redate l'accueil que si son rendu a vraiment changé.
+const sitemapPath = resolve(racine, 'public/sitemap.xml')
+const today = new Date().toISOString().slice(0, 10)
+const lastmod = lastmodFor(sitemapPath, `${ORIGIN}/`, avant, page, today)
+ecrireLastmod(sitemapPath, `${ORIGIN}/`, lastmod)
