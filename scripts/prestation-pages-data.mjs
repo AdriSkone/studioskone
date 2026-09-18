@@ -126,7 +126,7 @@ export const PAGES = [
         items: [
           { tag: 'Prestation', href: '/creation-site-internet-nantes', title: 'Création de site internet à Nantes', desc: "Si le site est à construire plutôt qu'à reprendre." },
           { tag: 'Prestation', href: '/creation-site-internet-artisan', title: 'Site internet pour artisan', desc: "Si vous êtes du bâtiment ou de l'artisanat d'art." },
-          { tag: 'Tarifs', href: '/#tarifs', title: 'La grille tarifaire complète', desc: "Les trois offres, ce qui n'est pas compris, et le paiement en trois fois." },
+          { tag: 'Tarifs', href: '/#tarifs', title: 'La grille tarifaire complète', desc: "Les trois formules, ce qui n'est pas compris, et le paiement en deux fois." },
         ],
       },
       {
@@ -239,7 +239,7 @@ export const PAGES = [
         ],
         notes: [
           { t: 'Toujours compris', d: "Les textes écrits par moi, la mise en ligne, la formation et un mois de suivi. Vous n'avez aucun contenu à préparer avant de commencer." },
-          { t: 'Le paiement', d: "En trois fois sans frais. Rien n'est dû avant que vous ayez validé les maquettes de votre site." },
+          { t: 'Le paiement', d: "En deux fois : la moitié à la commande, la moitié une fois le site en ligne." },
           { t: 'Ce qui reste à votre charge', d: "Le nom de domaine et l'hébergement, payés en direct et à votre nom. Comptez une quinzaine d'euros par an pour le domaine." },
         ],
         cta: 'Estimer mon site en 30 secondes',
@@ -371,7 +371,7 @@ export const PAGES = [
         notes: [
           { t: 'Ce qui fait varier le devis', d: "Le nombre de pages, la présence d'une réservation ou d'un paiement, et si les textes et photos sont à créer de zéro." },
           { t: 'Les deux postes annexes', d: "Le nom de domaine, autour de 12 € par an, et l'hébergement, de 0 à 15 € par mois. Vous les payez en direct, à votre nom, sans marge de ma part." },
-          { t: 'Étalement', d: "Paiement en trois fois sans frais, réparti entre la commande, la validation des maquettes et la mise en ligne." },
+          { t: 'Étalement', d: "En deux fois sur les formules Une page et Site complet, la moitié à la commande et la moitié à la mise en ligne. En trois fois pour les projets sur mesure." },
         ],
         cta: 'Estimer mon projet en 30 secondes',
       },

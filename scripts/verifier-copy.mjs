@@ -197,6 +197,14 @@ const TARIFS_RETIRES = [
   'Quatre à six semaines pour une boutique essentielle',
   'sur devis, court',
   'Comptez huit à seize semaines pour une première version, publication comprise.',
+
+  // Correction 1 — mode de paiement, 18 septembre 2026. Le studio annonçait
+  // encore « en trois fois » sur trois pages prestations, alors que
+  // l'accueil (tâches précédentes) est déjà passé à « en deux fois » sauf
+  // sur les projets sur mesure.
+  "et le paiement en trois fois.",
+  'En trois fois sans frais.',
+  'Paiement en trois fois sans frais, réparti entre la commande, la validation des maquettes et la mise en ligne.',
 ]
 
 const TARIFS_AJOUTES = [
@@ -259,6 +267,9 @@ const TARIFS_AJOUTES = [
   'trois semaines pour un site complet, à partir du moment où',
   'une fois votre catalogue, vos visuels et vos informations produits réunis.',
   'Les délais sont définis au cadrage, une fois le périmètre de la version 1 fixé.',
+
+  // Correction 1 — mode de paiement, 18 septembre 2026.
+  "et le paiement en deux fois.",
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
