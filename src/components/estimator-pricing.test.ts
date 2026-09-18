@@ -41,6 +41,12 @@ describe('formule et prix ferme', () => {
     expect(r.delay).toBe('défini au cadrage')
   })
 
+  it('une boutique avec fiches produits à créer signale aussi l’option rédaction', () => {
+    const r = estimate({ type: 'boutique', size: '2-5', content: 'a-creer' })
+    expect(r.formule).toBe('Sur mesure')
+    expect(r.ajustement).toBe('Rédaction des textes en option : 200 € par page.')
+  })
+
   it('une application ne s’annonce pas en prix', () => {
     const r = estimate({ type: 'application', size: 'inconnu', content: 'a-creer' })
     expect(r.formule).toBe('Sur mesure')

@@ -17,7 +17,12 @@ export type Estimate = {
   /** Une seule phrase d'ajustement, ou null. Jamais deux à la fois. */
   ajustement: string | null
   projectType: 'vitrine' | 'ecommerce' | 'app-web'
-  budget: '1k-3k' | '3k-5k' | '5k-10k' | '10k+' | 'a-def'
+  // La tranche déduite du projet — pas la réponse du visiteur à la question
+  // budget du formulaire, qui vit ailleurs. Restreinte aux valeurs que le
+  // calcul produit réellement : vitrine/vitrine-plus rendent '1k-3k' ou
+  // 'a-def', boutique rend toujours '3k-5k', application rend 'a-def'.
+  // '5k-10k' et '10k+' n'ont pas de cas d'entrée qui les atteigne.
+  budget: '1k-3k' | '3k-5k' | 'a-def'
 }
 
 // Les prix fermes de la grille tarifaire. Le module ne calcule plus de
@@ -52,9 +57,16 @@ export function estimate(input: EstimateInput): Estimate {
   }
 
   if (input.type === 'boutique') {
+    // Même règle de priorité que pour une vitrine — le périmètre d'abord,
+    // les contenus ensuite — sauf qu'une boutique n'a pas de cas « au-delà
+    // de six pages ». Des fiches produits à écrire appellent la même
+    // option rédaction qu'une vitrine sans textes.
+    const ajustement = input.content === 'a-creer'
+      ? 'Rédaction des textes en option : 200 € par page.'
+      : null
     return {
       formule: 'Sur mesure', prix: PRIX['Sur mesure'], prixDepuis: true, showPrice: true,
-      delay: DELAI['Sur mesure'], ajustement: null, projectType, budget: '3k-5k',
+      delay: DELAI['Sur mesure'], ajustement, projectType, budget: '3k-5k',
     }
   }
 
