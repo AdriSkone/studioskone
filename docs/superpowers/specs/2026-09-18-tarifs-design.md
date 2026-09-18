@@ -36,11 +36,15 @@ paiement se compte sans calculette, et ce qui n'est pas inclus est écrit.
 3. **Hébergement : à la charge du client**, comme aujourd'hui et comme
    l'article 8.1 des CGV. La mention « hébergement inclus » du brief est
    retirée de la formule Une page.
-4. **Délais : 1 semaine pour Une page, 3 semaines pour Site complet**, définis
-   au cadrage pour Sur mesure. Toujours suivis de leur condition, dans la même
-   phrase : « à partir du moment où j'ai vos textes et vos photos ».
+4. **Délais : 5 jours ouvrés pour Une page, 3 semaines pour Site complet**,
+   définis au cadrage pour Sur mesure. Formulations arrêtées le 19 septembre,
+   la condition faisant partie de la phrase et jamais reléguée en note :
+   « Livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos
+   photos. » et « Livré en 3 semaines, à partir du moment où j'ai vos textes
+   et vos photos. »
    Contrepartie opérationnelle, non écrite sur le site : une seule Une page en
-   cours à la fois.
+   cours à la fois. C'est la condition pour tenir 5 jours ouvrés avec deux
+   projets en parallèle.
 5. **Pas de page /tarifs dédiée** pour l'instant. La section `#tarifs` de
    l'accueil reçoit déjà les liens des pages prestations et du pied de page.
 6. **« Pour situer » garde ses chiffres** (agence 3 500–8 000 €, plateforme à
@@ -58,11 +62,25 @@ avec trois corrections issues des décisions ci-dessus :
 - « Mise en ligne et hébergement inclus » devient « Mise en ligne incluse ».
   L'hébergement rejoint « Ce qui reste à votre charge », avec sa fourchette
   actuelle (0 à 15 € par mois) et le rappel qu'il est payé en direct.
-- « Livré en 5 jours ouvrés » devient « Livré en 1 semaine ».
+- Le délai de la formule 1 reste « Livré en 5 jours ouvrés » (formulation
+  arrêtée le 19 septembre, après un aller-retour sur « 1 semaine »).
 - « Paiement en deux fois. La moitié au lancement, la moitié à la mise en
   ligne. Trois fois au-delà de 2 000 € » devient « Paiement en deux fois. La
   moitié à la commande, la moitié à la mise en ligne. En trois fois pour les
   projets sur mesure. »
+
+**Bandeau de l'offre de lancement, formulation définitive :** « Le studio
+démarre. Sur les prochains projets, −30 % sur les formules Une page et Site
+complet, en échange d'un témoignage et de l'autorisation de publier le
+projet. »
+
+**La ligne d'écart de la formule 2.** Sous son paragraphe, une ligne
+distincte — ni puce, ni note — justifie le passage de 900 € à 1 900 € :
+l'architecture du site, une page par service pour le référencement, et les
+contenus à produire pour chacune. Ce n'est pas la même chose avec plus de
+pages, et le visiteur doit le comprendre sans le demander. Visuellement, elle
+se détache du paragraphe par un filet au-dessus et un texte en corps plein,
+pas en gris : c'est un argument, pas une mention.
 
 Les options sous les cartes : design seul à partir de 600 €, rédaction des
 textes 200 € par page, séance photo sur devis avec un photographe partenaire.
@@ -107,16 +125,16 @@ Chaque ligne est une contradiction relevée dans le code le 18 septembre.
 
 | Où | Ce qui est écrit aujourd'hui | Ce qui le remplace |
 |---|---|---|
-| `accueil.mjs` hero | « Livré en 2 à 6 semaines, à partir de 900 € » | « Livré en 1 à 3 semaines, à partir de 900 € » |
+| `accueil.mjs` hero | « Livré en 2 à 6 semaines, à partir de 900 € » | « Livré en 5 jours à 3 semaines, à partir de 900 € » |
 | `head-accueil.html` meta, og, twitter | « livré en 2 à 6 semaines » | même délai que le hero |
 | `head-accueil.html` JSON-LD | 6 `Offer` : Fondation 900, Studio 2500, Refonte 1200, E-commerce 3000, DA 600, Sur mesure | 3 `Offer` alignées sur les formules, plus DA 600 en option |
 | Cards Prestations | « App web dès 2 500 € », « Refonte dès 1 200 € » | prix des trois formules |
 | FAQ 01 | « multi-pages ou application web à 2 500 € » | 900 / 1 900 / dès 3 000 |
-| FAQ 02 | « une à deux semaines… quatre à six semaines » | 1 semaine / 3 semaines |
+| FAQ 02 | « une à deux semaines… quatre à six semaines » | 5 jours ouvrés / 3 semaines |
 | FAQ 08 | « ajustements continus sur l'offre Studio » | deux séries / trois séries |
 | `verites` paiement | « 30 % / 30 % / 40 % » | 50/50, et 30/40/30 sur mesure |
 | `verites` hébergement | déjà à la charge du client | inchangé, repris dans la carte |
-| Page Artisan | « dès 1 800 € », « livré en deux semaines » | 900 / 1 900, 1 semaine / 3 semaines |
+| Page Artisan | « dès 1 800 € », « livré en deux semaines » | 900 / 1 900, 5 jours ouvrés / 3 semaines |
 | Page Nantes | « dès 2 500 € », « 4 à 6 semaines » | idem |
 | Page Refonte | « dès 1 200 € », « dès 2 500 € » | 900 / 1 900, sur mesure au-delà |
 | Page E-commerce | « dès 3 000 € », « dès 5 000 € » | Sur mesure, à partir de 3 000 € |
@@ -134,7 +152,7 @@ nouvelle offre.
 
 | Type choisi | Taille | Résultat |
 |---|---|---|
-| Vitrine | 1 page | Une page — 900 € — 1 semaine |
+| Vitrine | 1 page | Une page — 900 € — 5 jours ouvrés |
 | Vitrine | 2-5 ou 6-12 pages | Site complet — 1 900 € — 3 semaines |
 | Vitrine avec réservation ou devis | toutes | Site complet — à partir de 1 900 € |
 | Boutique en ligne | toutes | Sur mesure — à partir de 3 000 € |
