@@ -17,6 +17,7 @@
 
 import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
 
 /** Les balises qui coupent une phrase. Les balises en ligne n'en coupent pas :
  *  un titre dont un mot est coloré par un span reste une seule phrase. */
@@ -208,6 +209,18 @@ const TARIFS_RETIRES = [
   'sur devis, court',
   'Comptez huit à seize semaines pour une première version, publication comprise.',
 
+  // Tâche 11 — resserrement du vérificateur, 18 septembre 2026. Ce prix de
+  // la carte « Avec réservation ou espace client », sur
+  // creation-site-internet-nantes.html, est celui que le trou visait
+  // exactement : disparu de la carte (remplacé par « à partir de 3 000 € »,
+  // déjà déclaré dans TARIFS_AJOUTES), il passait la porte des fragments de
+  // deux mots parce que « sur » et « devis » vivent chacun ailleurs sur la
+  // page (« Le délai est écrit sur le devis », « Devis gratuit »…), jamais
+  // côte à côte. La règle resserrée le signale à raison — c'est un
+  // changement de prix voulu par ce chantier, pas une perte : il se déclare
+  // ici comme les autres prix retirés.
+  'sur devis',
+
   // Correction 1 — mode de paiement, 18 septembre 2026. Le studio annonçait
   // encore « en trois fois » sur trois pages prestations, alors que
   // l'accueil (tâches précédentes) est déjà passé à « en deux fois » sauf
@@ -380,131 +393,169 @@ try {
   /* l'accueil n'est pas toujours là — la comparaison se fait sans */
 }
 
-const fichiers = process.argv.slice(2)
-if (!fichiers.length) {
-  console.error('usage : node scripts/verifier-copy.mjs <fichier.html> [...]')
-  process.exit(2)
-}
+/**
+ * Un fragment absent n'est pas forcément perdu : la refonte regroupe le
+ * texte autrement. « Le plus choisi Studio, pour performer » devient un
+ * badge et un titre séparés — les deux mots sont là, la boîte qui les
+ * tenait ensemble a changé.
+ *
+ * On tranche en découpant le fragment en fenêtres de cinq mots. Si
+ * chacune se retrouve dans la nouvelle page, rien n'a disparu : seul le
+ * découpage a bougé. S'il en manque une, c'est du texte perdu.
+ */
+function estUnRegroupement(fragment, cible) {
+  // On tente de recouvrir le fragment avec des morceaux qui existent tels
+  // quels dans la cible, en avançant de gauche à droite et en prenant à
+  // chaque fois le plus long morceau possible. Si tout le fragment est
+  // recouvert, aucun mot n'a disparu — seules les boîtes qui les tenaient
+  // ensemble ont changé, y compris quand elles se sont interverties.
+  const mots = fragment.split(' ')
 
-let echecs = 0
-
-for (const fichier of fichiers) {
-  let avant
-  try {
-    avant = execSync(`git show main:${fichier}`, { encoding: 'utf8', maxBuffer: 20e6 })
-  } catch {
-    console.log(`— ${fichier} : absent de main, rien à comparer`)
-    continue
-  }
-
-  const fragmentsAvant = fragments(avant)
-  const fragmentsApres = fragments(readFileSync(fichier, 'utf8'))
-
-  // Le texte complet de chaque version, en une seule chaîne. Un fragment
-  // est conservé s'il s'y retrouve, quel que soit son nouveau découpage.
-  const toutApres = fragmentsApres.join(' ')
-  const toutAvant = fragmentsAvant.join(' ')
-
-  /**
-   * Un fragment absent n'est pas forcément perdu : la refonte regroupe le
-   * texte autrement. « Le plus choisi Studio, pour performer » devient un
-   * badge et un titre séparés — les deux mots sont là, la boîte qui les
-   * tenait ensemble a changé.
-   *
-   * On tranche en découpant le fragment en fenêtres de cinq mots. Si
-   * chacune se retrouve dans la nouvelle page, rien n'a disparu : seul le
-   * découpage a bougé. S'il en manque une, c'est du texte perdu.
-   */
-  function estUnRegroupement(fragment, cible) {
-    // On tente de recouvrir le fragment avec des morceaux qui existent tels
-    // quels dans la cible, en avançant de gauche à droite et en prenant à
-    // chaque fois le plus long morceau possible. Si tout le fragment est
-    // recouvert, aucun mot n'a disparu — seules les boîtes qui les tenaient
-    // ensemble ont changé, y compris quand elles se sont interverties.
-    const mots = fragment.split(' ')
-
-    // Un fragment très court — « 01 Découverte » — réunit deux mots qui
-    // existaient déjà, mais qui n'étaient pas voisins : le numéro d'étape
-    // vivait à l'écart de son intitulé. Exiger deux mots consécutifs le
-    // condamnerait à tort, alors que rien n'a été écrit de neuf.
-    if (mots.length <= 3) return mots.every((m) => cible.includes(m))
-
-    let i = 0
-    while (i < mots.length) {
-      let pris = 0
-      for (let j = mots.length; j > i; j--) {
-        if (cible.includes(mots.slice(i, j).join(' '))) {
-          pris = j - i
-          break
-        }
-      }
-      // Un mot isolé se retrouve partout : il ne prouve rien. Il faut au
-      // moins deux mots consécutifs pour parler de morceau retrouvé.
-      if (pris < 2) {
-        /**
-         * Dernier recours : une liste réordonnée.
-         *
-         * Le pied de page classe ses liens autrement et retire celui de la
-         * page courante. Les libellés sont tous là, mais plus dans le même
-         * ordre et jamais deux à la suite — la couverture de gauche à
-         * droite ne peut alors rien recouvrir.
-         *
-         * On vérifie donc que chaque mot du fragment se trouve quelque part
-         * dans la cible. Réservé aux fragments courts : sur une phrase
-         * entière, retrouver les mots un par un ne prouverait rien.
-         */
-        if (mots.length <= 16) return mots.every((m) => cible.includes(m))
-        return false
-      }
-      i += pris
+  // Un fragment de deux ou trois mots est trop court pour la couverture
+  // par fenêtres ci-dessous (elle exige au moins deux mots consécutifs
+  // retrouvés, ce qui, sur deux mots au total, revient à exiger le
+  // fragment entier — donc à ne jamais tolérer de regroupement).
+  //
+  // La version précédente contournait ça en acceptant chaque mot du
+  // fragment trouvé N'IMPORTE OÙ dans la cible, indépendamment des autres.
+  // C'était le trou : « Sur devis », le prix d'une carte de prestation, a
+  // pu disparaître entièrement sans que rien ne s'allume, parce que « Sur »
+  // vit dans « Sur mesure » et « devis » dans « Demander un devis » — deux
+  // mots réels, mais qui n'ont jamais été voisins.
+  //
+  // On exige donc qu'au moins deux mots CONSÉCUTIFS du fragment (une
+  // fenêtre de deux) se retrouvent côte à côte dans la cible. Sur un
+  // fragment de deux mots, cela revient à chercher le fragment entier :
+  // c'est voulu, un prix ou un libellé de deux mots n'a pas de fenêtre
+  // plus petite où se cacher. Sur un fragment de trois mots — le cas
+  // « 01 Découverte », où le numéro d'étape et son intitulé restent
+  // voisins dans le HTML (des <span> en ligne, jamais séparés par un bloc)
+  // — la première ou la deuxième paire suffit, ce qui couvre aussi bien le
+  // fragment intact que les cas où seul le premier ou le dernier mot a été
+  // déplacé.
+  if (mots.length <= 3) {
+    for (let i = 0; i < mots.length - 1; i++) {
+      if (cible.includes(mots.slice(i, i + 2).join(' '))) return true
     }
-    return true
+    return false
   }
 
-  const absentsAvant = fragmentsAvant.filter((f) => !toutApres.includes(f))
-  const absentsApres = fragmentsApres.filter((f) => !toutAvant.includes(f))
-
-  const sansAutorises = (f) =>
-    AJOUTS_AUTORISES.reduce((acc, a) => acc.split(a).join(' '), f).replace(/\s+/g, ' ').trim()
-
-  const remplace = (f) =>
-    REMPLACEMENTS_DEMANDES.reduce((acc, r) => acc.split(r.avant).join(r.apres), f)
-
-  const perdus = absentsAvant
-    .filter((f) => !estUnRegroupement(f, toutApres))
-    .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
-    .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
-    .filter((f) => !TARIFS_RETIRES.some((t) => f.includes(t)))
-  const ajoutes = absentsApres
-    .filter((f) => !estUnRegroupement(f, toutAvant))
-    .filter((f) => {
-      const nettoye = sansAutorises(f)
-      if (nettoye.length <= 2) return false
-      if (TEXTES_SORTIS_DU_SCRIPT.some((t) => nettoye.includes(t))) return false
-      if (TARIFS_AJOUTES.some((t) => nettoye.includes(t))) return false
-      // Déjà présent sur l'accueil : c'est un partiel, pas un ajout.
-      if (fichier !== 'index.html' && estUnRegroupement(nettoye, texteAccueil)) return false
-      return !estUnRegroupement(nettoye, toutAvant)
-    })
-
-  const regroupes = absentsAvant.length - perdus.length + (absentsApres.length - ajoutes.length)
-
-  if (!perdus.length && !ajoutes.length) {
-    const note = regroupes ? `, ${regroupes} simplement regroupé(s)` : ''
-    console.log(`✅ ${fichier} — copy identique (${fragmentsAvant.length} fragments vérifiés${note})`)
-    continue
+  let i = 0
+  while (i < mots.length) {
+    let pris = 0
+    for (let j = mots.length; j > i; j--) {
+      if (cible.includes(mots.slice(i, j).join(' '))) {
+        pris = j - i
+        break
+      }
+    }
+    // Un mot isolé se retrouve partout : il ne prouve rien. Il faut au
+    // moins deux mots consécutifs pour parler de morceau retrouvé.
+    if (pris < 2) {
+      /**
+       * Dernier recours : une liste réordonnée.
+       *
+       * Le pied de page classe ses liens autrement et retire celui de la
+       * page courante. Les libellés sont tous là, mais plus dans le même
+       * ordre et jamais deux à la suite — la couverture de gauche à
+       * droite ne peut alors rien recouvrir.
+       *
+       * On vérifie donc que chaque mot du fragment se trouve quelque part
+       * dans la cible. Réservé aux fragments courts : sur une phrase
+       * entière, retrouver les mots un par un ne prouverait rien.
+       */
+      if (mots.length <= 16) return mots.every((m) => cible.includes(m))
+      return false
+    }
+    i += pris
   }
-
-  echecs++
-  console.log(`\n❌ ${fichier}`)
-  if (perdus.length) {
-    console.log(`\n  ${perdus.length} fragment(s) de l'ancienne page INTROUVABLE(S) dans la nouvelle :`)
-    perdus.forEach((l) => console.log(`    − ${l.slice(0, 130)}`))
-  }
-  if (ajoutes.length) {
-    console.log(`\n  ${ajoutes.length} fragment(s) AJOUTÉ(S), absents de l'ancienne page :`)
-    ajoutes.forEach((l) => console.log(`    + ${l.slice(0, 130)}`))
-  }
+  return true
 }
 
-process.exit(echecs ? 1 : 0)
+// Le script s'exécute soit en CLI (`node scripts/verifier-copy.mjs …`), soit
+// importé par scripts/verifier-copy.test.mjs pour tester `estUnRegroupement`
+// et `fragments` isolément. Le bloc ci-dessous — argv, `git show`,
+// `process.exit` — ne doit tourner que dans le premier cas : un import ne
+// doit ni exiger de fichiers en argument, ni terminer le process de test.
+const estAppeleDirectement =
+  process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href
+
+if (estAppeleDirectement) {
+  executerCli(process.argv.slice(2))
+}
+
+function executerCli(fichiers) {
+  if (!fichiers.length) {
+    console.error('usage : node scripts/verifier-copy.mjs <fichier.html> [...]')
+    process.exit(2)
+  }
+
+  let echecs = 0
+
+  for (const fichier of fichiers) {
+    let avant
+    try {
+      avant = execSync(`git show main:${fichier}`, { encoding: 'utf8', maxBuffer: 20e6 })
+    } catch {
+      console.log(`— ${fichier} : absent de main, rien à comparer`)
+      continue
+    }
+
+    const fragmentsAvant = fragments(avant)
+    const fragmentsApres = fragments(readFileSync(fichier, 'utf8'))
+
+    // Le texte complet de chaque version, en une seule chaîne. Un fragment
+    // est conservé s'il s'y retrouve, quel que soit son nouveau découpage.
+    const toutApres = fragmentsApres.join(' ')
+    const toutAvant = fragmentsAvant.join(' ')
+
+    const absentsAvant = fragmentsAvant.filter((f) => !toutApres.includes(f))
+    const absentsApres = fragmentsApres.filter((f) => !toutAvant.includes(f))
+
+    const sansAutorises = (f) =>
+      AJOUTS_AUTORISES.reduce((acc, a) => acc.split(a).join(' '), f).replace(/\s+/g, ' ').trim()
+
+    const remplace = (f) =>
+      REMPLACEMENTS_DEMANDES.reduce((acc, r) => acc.split(r.avant).join(r.apres), f)
+
+    const perdus = absentsAvant
+      .filter((f) => !estUnRegroupement(f, toutApres))
+      .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
+      .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
+      .filter((f) => !TARIFS_RETIRES.some((t) => f.includes(t)))
+    const ajoutes = absentsApres
+      .filter((f) => !estUnRegroupement(f, toutAvant))
+      .filter((f) => {
+        const nettoye = sansAutorises(f)
+        if (nettoye.length <= 2) return false
+        if (TEXTES_SORTIS_DU_SCRIPT.some((t) => nettoye.includes(t))) return false
+        if (TARIFS_AJOUTES.some((t) => nettoye.includes(t))) return false
+        // Déjà présent sur l'accueil : c'est un partiel, pas un ajout.
+        if (fichier !== 'index.html' && estUnRegroupement(nettoye, texteAccueil)) return false
+        return !estUnRegroupement(nettoye, toutAvant)
+      })
+
+    const regroupes = absentsAvant.length - perdus.length + (absentsApres.length - ajoutes.length)
+
+    if (!perdus.length && !ajoutes.length) {
+      const note = regroupes ? `, ${regroupes} simplement regroupé(s)` : ''
+      console.log(`✅ ${fichier} — copy identique (${fragmentsAvant.length} fragments vérifiés${note})`)
+      continue
+    }
+
+    echecs++
+    console.log(`\n❌ ${fichier}`)
+    if (perdus.length) {
+      console.log(`\n  ${perdus.length} fragment(s) de l'ancienne page INTROUVABLE(S) dans la nouvelle :`)
+      perdus.forEach((l) => console.log(`    − ${l.slice(0, 130)}`))
+    }
+    if (ajoutes.length) {
+      console.log(`\n  ${ajoutes.length} fragment(s) AJOUTÉ(S), absents de l'ancienne page :`)
+      ajoutes.forEach((l) => console.log(`    + ${l.slice(0, 130)}`))
+    }
+  }
+
+  process.exit(echecs ? 1 : 0)
+}
+
+export { fragments, normaliser, estUnRegroupement }
