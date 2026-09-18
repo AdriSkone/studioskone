@@ -59,9 +59,9 @@ body::before {
   z-index: -1;
   background: var(--grain-teinte);
   mask-image: url('/grain.svg');
-  mask-size: 300px 300px;
+  mask-size: var(--grain-taille) var(--grain-taille);
   -webkit-mask-image: url('/grain.svg');
-  -webkit-mask-size: 300px 300px;
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
   mix-blend-mode: multiply;
   opacity: var(--grain-opacite);
   pointer-events: none;
@@ -80,11 +80,11 @@ body::before {
   z-index: 0;
   background: var(--grain-teinte);
   mask-image: url('/grain.svg');
-  mask-size: 300px 300px;
+  mask-size: var(--grain-taille) var(--grain-taille);
   -webkit-mask-image: url('/grain.svg');
-  -webkit-mask-size: 300px 300px;
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
   mix-blend-mode: screen;
-  opacity: 0.16;
+  opacity: var(--grain-opacite-sombre);
   pointer-events: none;
 }
 

@@ -57,8 +57,15 @@
   /* ─── Grain ───────────────────────────────────────────────
      La matière du site, pas une option. Bruit brun chaud en multiply :
      un bruit gris désaturerait le papier et le ferait paraître terne.    */
-  --grain-teinte:  #6B5A44;
-  --grain-opacite: 0.09;
+  --grain-teinte:   #6B5A44;
+  --grain-opacite:  0.12;  /* sur le papier, en multiply */
+  --grain-opacite-sombre: 0.22;  /* sur les sections sombres, en screen */
+
+  /* La taille du motif commande la taille des grains : le bruit est généré
+     sur 300 px et étiré à 480, ce qui les grossit de 60 %. À 300 px, et
+     plus encore sur un écran à deux pixels par point, le grain devenait
+     une brume uniforme au lieu d'une matière. */
+  --grain-taille:   480px;
 
   /* ─── Typographie ─────────────────────────────────────────── */
   --font-display: 'Bricolage Grotesque', 'Bricolage Fallback', ui-sans-serif, system-ui, sans-serif;

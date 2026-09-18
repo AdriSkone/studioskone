@@ -50,11 +50,12 @@ L'accent ne dépasse jamais 3 % de la surface d'un écran. En dehors du mot du h
 C'est la matière du site, elle n'est pas optionnelle.
 
 - Bruit fin, non répétitif, **teinté brun chaud `#6B5A44`**
-- Mode `multiply`, opacité **9 %**
+- Mode `multiply`, opacité **12 %** sur le papier ; `screen`, opacité **22 %** sur les sections sombres
+- Motif de 300 px **étiré à 480 px** (`--grain-taille`) : c'est la taille des grains, pas l'opacité, qui fait passer d'une brume invisible à une matière
 - **Jamais un bruit gris** : en multiply, il désature le papier et le fait paraître terne
 - Appliqué **en fond uniquement**, derrière tout le contenu. Jamais sur une couche qui recouvre le texte, sinon les lettres sont salies.
 - **Une seule couche pour toute la page**, pas une par section
-- Sur les sections sombres, le multiply brun n'est pas visible : passer en `screen` ou `soft-light`, valeur à calibrer. La matière doit traverser les deux registres.
+- Sur les sections sombres, le multiply brun n'est pas visible : il y passe en `screen` à 22 %. La matière traverse les deux registres.
 
 ---
 
