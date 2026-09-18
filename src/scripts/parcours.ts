@@ -108,12 +108,14 @@ export function initParcours(): void {
     const delai = document.getElementById('parcoursDelai')
     if (!offre || !prix || !delai) return
 
-    offre.textContent = r.offerNamed
-      ? `Offre ${r.offer}`
-      : 'Entre les offres Fondation et Studio · on cadre ensemble'
+    // Fixation minimale pour compiler avec la nouvelle signature de
+    // estimator-pricing (formule + prix ferme) : le vrai branchement,
+    // avec l'affichage de l'ajustement, est fait dans la tâche suivante.
+    offre.textContent = `Formule ${r.formule}`
 
-    if (r.showPrice && r.min !== null && r.max !== null) {
-      prix.textContent = `${r.min.toLocaleString('fr-FR')} – ${r.max.toLocaleString('fr-FR')} €`
+    if (r.showPrice && r.prix !== null) {
+      const prefixe = r.prixDepuis ? 'à partir de ' : ''
+      prix.textContent = `${prefixe}${r.prix.toLocaleString('fr-FR')} €`
       delai.hidden = false
       delai.textContent = `Livraison estimée · ${r.delay}`
     } else {
