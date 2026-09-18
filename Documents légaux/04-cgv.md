@@ -125,12 +125,11 @@ Les prix s'entendent hors frais annexes éventuels (achat de licences logicielle
 
 ### 5.2 Modalités de paiement
 
-Sauf disposition contraire prévue au devis, les modalités de paiement sont les suivantes :
+Pour les formules **Une page** et **Site complet** : **50 %** à la commande, à la signature du devis, et **50 %** à la mise en ligne. Le démarrage des travaux est conditionné à l'encaissement du premier versement.
 
-- **Acompte de 30 %** à la commande, à la signature du devis. Le démarrage des travaux est conditionné à l'encaissement de cet acompte.
-- **Solde** à la livraison finale, dans un délai de **30 jours** à compter de la date d'émission de la facture.
+Pour les **projets sur mesure** : **30 %** à la commande, **40 %** à la validation des maquettes, **30 %** à la mise en ligne.
 
-Pour les projets d'envergure, le devis peut prévoir un échéancier intermédiaire (par exemple : 30 % à la commande, 40 % à mi-parcours, 30 % à la livraison).
+Le solde est payable dans un délai de **30 jours** à compter de la date d'émission de la facture.
 
 ### 5.3 Moyens de paiement
 

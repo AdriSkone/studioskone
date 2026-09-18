@@ -229,6 +229,19 @@ const TARIFS_RETIRES = [
   // Correction 2/5 — même clause, ancienne ponctuation (phrase à part
   // entière) : la reformulation la rattache désormais par une virgule.
   'Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients. Meilleure base pour le référencement local.',
+
+  // Tâche 10 — CGV, article 5.2, 18 septembre 2026. Le contrat disait
+  // « acompte de 30 %, solde à la livraison », alors que le site annonce
+  // depuis les tâches précédentes un paiement en deux fois (50/50) sur les
+  // formules Une page et Site complet, et en trois fois (30/40/30) sur le
+  // sur mesure. L'article est réécrit pour suivre les formules réellement
+  // vendues. Les apostrophes ci-dessous sont notées avec un espace, comme
+  // pour la tâche 6 : `esc()` transforme l'apostrophe en `&#39;`, que ce
+  // comparateur réduit à un espace, comme n'importe quelle entité.
+  'Sauf disposition contraire prévue au devis, les modalités de paiement sont les suivantes :',
+  'Acompte de 30 % à la commande, à la signature du devis. Le démarrage des travaux est conditionné à l encaissement de cet acompte.',
+  'Solde à la livraison finale, dans un délai de 30 jours à compter de la date d émission de la facture.',
+  'Pour les projets d envergure, le devis peut prévoir un échéancier intermédiaire (par exemple : 30 % à la commande, 40 % à mi-parcours, 30 % à la livraison).',
 ]
 
 const TARIFS_AJOUTES = [
@@ -306,6 +319,11 @@ const TARIFS_AJOUTES = [
   'Nouvelle structure sur l ensemble du site, nouveau design, contenu repris, migration et redirections, livré en 3 semaines',
   'trois semaines pour une refonte complète, à partir du moment où',
   'galerie de chantiers, avis clients, meilleure base pour le référencement local',
+
+  // Tâche 10 — CGV, article 5.2, 18 septembre 2026 (voir la déclaration
+  // miroir dans TARIFS_RETIRES ci-dessus).
+  'Pour les projets sur mesure : 30 % à la commande, 40 % à la validation des maquettes, 30 % à la mise en ligne.',
+  'Le solde est payable dans un délai de 30 jours à compter de la date d émission de la facture.',
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
