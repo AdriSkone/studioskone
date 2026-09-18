@@ -37,7 +37,7 @@ paiement se compte sans calculette, et ce qui n'est pas inclus est écrit.
    l'article 8.1 des CGV. La mention « hébergement inclus » du brief est
    retirée de la formule Une page.
 4. **Délais : 5 jours ouvrés pour Une page, 3 semaines pour Site complet**,
-   définis au cadrage pour Sur mesure. Formulations arrêtées le 19 septembre,
+   définis au cadrage pour Sur mesure. Formulations arrêtées le 18 septembre,
    la condition faisant partie de la phrase et jamais reléguée en note :
    « Livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos
    photos. » et « Livré en 3 semaines, à partir du moment où j'ai vos textes
@@ -63,7 +63,7 @@ avec trois corrections issues des décisions ci-dessus :
   L'hébergement rejoint « Ce qui reste à votre charge », avec sa fourchette
   actuelle (0 à 15 € par mois) et le rappel qu'il est payé en direct.
 - Le délai de la formule 1 reste « Livré en 5 jours ouvrés » (formulation
-  arrêtée le 19 septembre, après un aller-retour sur « 1 semaine »).
+  arrêtée après un aller-retour sur « 1 semaine »).
 - « Paiement en deux fois. La moitié au lancement, la moitié à la mise en
   ligne. Trois fois au-delà de 2 000 € » devient « Paiement en deux fois. La
   moitié à la commande, la moitié à la mise en ligne. En trois fois pour les
@@ -113,9 +113,11 @@ Sous les cartes, pleine largeur : « Dans toutes les formules » (4 arguments),
 « Ce qui reste à votre charge » (3 lignes), puis « Pour situer ».
 
 **Mobile.** Les trois cartes s'empilent, la formule 2 en premier. Le bouton
-reste atteignable sans dérouler toute la liste : sous 768 px, la liste des
-inclus est repliée derrière un `<details>` dont le résumé annonce le nombre
-d'éléments, et le bouton passe au-dessus d'elle.
+reste atteignable sans dérouler toute la liste : sous 768 px, il remonte
+au-dessus de la liste des inclus, par l'ordre d'affichage en flex. L'ordre
+du DOM ne change pas — ni le clavier, ni les lecteurs d'écran, ni
+l'indexation ne sont affectés, ce qu'un `<details>` replié n'aurait pas
+garanti.
 
 Livrables de recette : 390, 768, 1024 et 1440 px.
 
