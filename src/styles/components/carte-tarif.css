@@ -1,29 +1,27 @@
 /* ============================================================
    Carte tarif
-   Deux variantes. La recommandée se distingue par un cadre et un filet
-   d'accent — jamais par un aplat de couleur.
+   Trois formules. La recommandée se distingue par la place et l'air —
+   jamais par un aplat de couleur : sur ce site, l'accent ne porte pas de
+   surface.
    ============================================================ */
 
 .carte-tarif {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--encre);
-}
-
-.carte-tarif--recommandee {
-  padding: 24px 24px 28px;
-  border: 1px solid var(--encre);
-  border-radius: var(--rond-bloc);
-  border-top: 2px solid var(--accent);
-}
-
-.carte-tarif-tete {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   gap: 16px;
+  padding: 28px 24px 32px;
+  border: 1px solid var(--filet-moyen);
+  border-radius: var(--rond-bloc);
+  background: var(--papier);
+}
+
+/* Plus de colonnes, plus d'air, un prix d'un cran plus grand, et elle
+   dépasse verticalement ses voisines. */
+.carte-tarif--recommandee {
+  padding: 40px 32px 44px;
+  margin-block: -16px;
+  border-color: var(--encre);
+  background: var(--papier-ombre);
 }
 
 .carte-tarif-nom { font-size: var(--text-corps); font-weight: 500; }
@@ -36,11 +34,31 @@
   line-height: var(--leading-titre);
   letter-spacing: -0.025em;
 }
+.carte-tarif--recommandee .carte-tarif-prix { font-size: var(--text-h1); }
 
+/* Le h3 porte la prestation pour le référencement ; visuellement, il ne
+   doit pas concurrencer le prix. */
+.carte-tarif-h3 {
+  font-family: var(--font-texte);
+  font-weight: 500;
+  font-size: var(--text-petit);
+  letter-spacing: 0;
+  color: var(--gris);
+}
+
+.carte-tarif-positionnement { font-size: var(--text-corps); font-weight: 500; }
 .carte-tarif-resume { font-size: 0.9375rem; line-height: var(--leading-corps); }
 
-/* Une liste se lit par l'espace, pas par des filets : les traits entre
-   chaque ligne faisaient un tableau là où il n'y a qu'une énumération. */
+/* La ligne qui justifie l'écart de prix : un argument, pas une mention.
+   Corps plein, détaché par un filet, jamais en gris. */
+.carte-tarif-ecart {
+  padding-top: 16px;
+  border-top: 1px solid var(--accent);
+  font-size: 0.9375rem;
+  line-height: var(--leading-corps);
+}
+
+/* Une liste se lit par l'espace, pas par des filets. */
 .carte-tarif-liste {
   display: flex;
   flex-direction: column;
@@ -49,8 +67,36 @@
   line-height: var(--leading-corps);
 }
 
+.carte-tarif-delai {
+  font-family: var(--font-data);
+  font-size: var(--text-data);
+  line-height: 1.5;
+  padding-top: 16px;
+  border-top: 1px solid var(--filet);
+}
+
 .carte-tarif-note {
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
   color: var(--gris);
+}
+
+/* Le bouton tombe en bas de carte, aligné sur les trois. */
+.carte-tarif .bouton { margin-top: auto; align-self: flex-start; }
+
+/* Sous 768 px : la formule recommandée passe en premier, et la liste se
+   replie pour que le bouton reste atteignable sans dérouler la carte. */
+/* Sous 768 px, le bouton remonte avant la liste : le visiteur n'a pas à
+   dérouler sept lignes pour l'atteindre. L'ordre du DOM ne bouge pas, donc
+   ni la lecture au clavier ni celle d'un lecteur d'écran ne changent —
+   c'est pourquoi on ordonne en flex plutôt que de replier la liste dans un
+   <details>, qui aurait caché le contenu à l'indexation. */
+@media (max-width: 767px) {
+  .carte-tarif--recommandee { order: -1; margin-block: 0; padding: 28px 24px 32px; }
+  .carte-tarif--recommandee .carte-tarif-prix { font-size: var(--text-h2); }
+  .carte-tarif { display: flex; flex-direction: column; }
+  .carte-tarif-delai { order: 1; }
+  .carte-tarif .bouton { order: 2; margin-top: 8px; }
+  .carte-tarif-liste { order: 3; gap: 10px; }
+  .carte-tarif-note { order: 4; }
 }
