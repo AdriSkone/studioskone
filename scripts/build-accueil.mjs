@@ -287,25 +287,41 @@ ${piste(rangees[1], 'arriere')}
 }
 
 function tarifs() {
-  const offres = C.tarifs.offres
-    .map((o) => {
-      const badge = o.badge ? `\n            <span class="statut statut--nu">${o.badge}</span>` : ''
-      const items = o.inclus.map((i) => `              <li>${i}</li>`).join('\n')
-      const variante = o.recommandee ? 'principal' : 'secondaire'
-      return `        <article class="carte-tarif${o.recommandee ? ' carte-tarif--recommandee' : ''}" data-reveal>
-          <div class="carte-tarif-tete">
-            <h3 class="carte-tarif-nom">${o.nom}</h3>${badge}
-          </div>
-          <p class="carte-tarif-prix">${o.prix}</p>
-          <p class="carte-tarif-resume">${o.resume}</p>
+  const cartes = C.tarifs.formules
+    .map((f) => {
+      const items = f.inclus.map((i) => `              <li>${i}</li>`).join('\n')
+      const variante = f.recommandee ? 'principal' : 'secondaire'
+      // La ligne d'écart n'existe que sur la formule recommandée : elle
+      // répond à « pourquoi le double pour trois pages de plus ? ».
+      const ecart = f.ecart ? `\n          <p class="carte-tarif-ecart">${f.ecart}</p>` : ''
+      const variation = f.variation ? `\n          <p class="carte-tarif-note">${f.variation}</p>` : ''
+      return `        <article class="carte-tarif${f.recommandee ? ' carte-tarif--recommandee' : ''}" data-reveal>
+          <p class="carte-tarif-nom">${f.nom}</p>
+          <p class="carte-tarif-prix">${f.prix}</p>
+          <h3 class="carte-tarif-h3">${f.h3}</h3>
+          <p class="carte-tarif-positionnement">${f.positionnement}</p>
+          <p class="carte-tarif-resume">${f.paragraphe}</p>${ecart}
           <ul class="carte-tarif-liste">
 ${items}
           </ul>
-          <p class="carte-tarif-note">${o.variation}</p>
-          <a class="bouton bouton--${variante}" href="${o.cta.href}">${o.cta.libelle}${o.cta.fleche ? fleche : ''}</a>
+          <p class="carte-tarif-delai">${f.delai}</p>${variation}
+          <a class="bouton bouton--${variante}" href="${f.cta.href}" data-umami-event="${f.cta.umami}">${f.cta.libelle}${f.cta.fleche ? fleche : ''}</a>
         </article>`
     })
     .join('\n')
+
+  const options = C.tarifs.options.items.map((o) => `          <li>${o}</li>`).join('\n')
+
+  const toujours = C.tarifs.toujours.items
+    .map(
+      (i) => `          <div class="tarifs-argument">
+            <h3 class="tarifs-argument-titre">${i.titre}</h3>
+            <p class="tarifs-argument-texte">${i.texte}</p>
+          </div>`
+    )
+    .join('\n')
+
+  const charge = C.tarifs.charge.items.map((i) => `          <li>${i}</li>`).join('\n')
 
   const verites = C.tarifs.verites
     .map(
@@ -328,10 +344,29 @@ ${items}
       </aside>
 
       <div class="tarifs-grille" style="--col: 1 / -1">
-${offres}
+${cartes}
       </div>
 
-      <p class="tarifs-pied" style="--col: 1 / span 6">${C.tarifs.notePied.avant} <a class="lien" href="${C.tarifs.notePied.href}">${C.tarifs.notePied.lien}</a></p>
+      <div class="tarifs-options" style="--col: 1 / -1">
+        <p class="tarifs-options-intro">${C.tarifs.options.intro}</p>
+        <ul class="tarifs-options-liste">
+${options}
+        </ul>
+      </div>
+
+      <div class="tarifs-toujours" style="--col: 1 / -1">
+        <p class="tete-bloc" style="--col: auto">${C.tarifs.toujours.titre}</p>
+        <div class="tarifs-arguments">
+${toujours}
+        </div>
+      </div>
+
+      <div class="tarifs-charge" style="--col: 1 / -1">
+        <p class="tete-bloc" style="--col: auto">${C.tarifs.charge.titre}</p>
+        <ul class="tarifs-charge-liste">
+${charge}
+        </ul>
+      </div>
 
       <div class="verites" style="--col: 1 / -1">
 ${verites}

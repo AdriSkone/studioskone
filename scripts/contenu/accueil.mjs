@@ -205,72 +205,125 @@ export const tarifs = {
     tag: 'Offre de lancement',
     avant: 'Le studio démarre. Sur les prochains projets,',
     remise: '−30 %',
-    apres: "sur l'offre Fondation et l'offre Studio, en échange d'un témoignage et de l'autorisation de publier le projet.",
+    apres: "sur les formules Une page et Site complet, en échange d'un témoignage et de l'autorisation de publier le projet.",
   },
-  offres: [
+  /**
+   * `nom` est le nom court, lisible en tête de carte. `h3` est le titre
+   * réellement rendu : il porte la prestation, pour le référencement.
+   */
+  formules: [
     {
-      nom: 'Fondation, pour démarrer',
-      prix: 'Dès 900€',
+      nom: 'Une page',
+      h3: 'Site internet une page',
+      prix: '900 €',
       recommandee: false,
-      resume: 'De quoi lancer vite un site soigné, sans exploser le budget.',
+      positionnement: 'Pour exister en ligne sans attendre.',
+      paragraphe:
+        'Une seule page, mais complète : qui vous êtes, ce que vous faites, comment vous joindre. ' +
+        "C'est souvent tout ce dont un artisan a besoin pour être trouvé et appelé.",
       inclus: [
-        "Landing page ou site vitrine d'une page",
-        'Design sur mesure',
-        'Responsive mobile-first',
-        '2 allers-retours inclus',
-        'Mise en ligne',
-        'Livraison en 1–2 semaines',
+        'Design sur mesure, à votre image',
+        'Une page, tous les contenus essentiels',
+        'Formulaire de contact ou de demande de devis',
+        'Pensé pour le mobile en premier',
+        'Fiche Google et référencement local configurés',
+        'Deux séries de retouches incluses',
+        'Mise en ligne incluse',
       ],
-      variation: 'Ce qui fait bouger le prix : le nombre de pages, et si les textes et photos sont à créer.',
-      cta: { libelle: 'Choisir cette offre', href: '#contact' },
+      delai: "Livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos.",
+      variation: 'Ce qui fait bouger le prix : la rédaction des textes et la création des photos, si vous ne les avez pas.',
+      cta: { libelle: 'Choisir cette formule', href: '/?formule=une-page#estimator', umami: 'tarif-une-page' },
     },
     {
-      nom: 'Studio, pour performer',
-      prix: 'Dès 2 500€',
+      nom: 'Site complet',
+      h3: 'Site vitrine complet, 4 à 6 pages',
+      prix: '1 900 €',
       recommandee: true,
-      badge: 'Le plus choisi',
-      resume: 'Mon offre la plus demandée. Un produit complet, aussi soigné côté design que côté performance.',
+      positionnement: 'Recommandé si vous avez plusieurs services à présenter.',
+      paragraphe:
+        'Quatre à six pages pour détailler votre offre, montrer vos réalisations et être trouvé ' +
+        'sur les recherches de votre métier dans votre secteur.',
+      // La seule ligne qui justifie le passage de 900 à 1 900 €. Traitée en
+      // argument, pas en mention : sans elle, le visiteur croit payer des
+      // pages en plus.
+      ecart:
+        "Ce qui change vraiment par rapport à la formule Une page : ce n'est pas le nombre de pages qui coûte, " +
+        "c'est l'architecture du site, une page dédiée par service pour le référencement, et les contenus à produire pour chacune.",
       inclus: [
-        'Site vitrine multi-pages ou application web',
-        'E-commerce à partir de 3 000€',
-        'Architecture UX &amp; design sur mesure',
+        'Tout ce que contient la formule Une page',
+        '4 à 6 pages : accueil, services, réalisations, à propos, contact',
+        'Une page par service, pour le référencement',
         'Animations et interactions soignées',
-        'SEO technique intégré',
-        'Ajustements continus',
-        'Livraison en 4–6 semaines',
+        'Référencement technique intégré',
+        'Trois séries de retouches incluses',
       ],
-      variation: "Ce qui fait bouger le prix : le nombre de pages, la présence d'une réservation ou d'un paiement, et si les contenus sont à créer.",
-      cta: { libelle: 'Choisir cette offre', href: '#contact', fleche: true },
+      delai: "Livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos.",
+      variation:
+        'Ce qui fait bouger le prix : le nombre de pages au-delà de six, la prise de rendez-vous ou le paiement en ligne, et les contenus à créer.',
+      cta: { libelle: 'Choisir cette formule', href: '/?formule=site-complet#estimator', umami: 'tarif-site-complet', fleche: true },
     },
     {
-      nom: 'Sur mesure, pour aller plus loin',
-      prix: 'Sur devis',
+      nom: 'Sur mesure',
+      h3: 'E-commerce et applications sur mesure',
+      prix: 'À partir de 3 000 €',
       recommandee: false,
-      resume: 'Pour les projets plus gros, qui demandent un vrai cadrage produit et un suivi rapproché.',
+      positionnement: "Quand un site vitrine ne suffit plus.",
+      paragraphe:
+        'Boutique en ligne, application web ou mobile, outil métier. On définit le périmètre ensemble ' +
+        'avant de chiffrer, et vous savez où vous allez avant de signer.',
       inclus: [
-        'Application mobile, SaaS ou plateforme complexe',
-        'Périmètre défini ensemble',
-        'Accompagnement dédié',
-        'Suivi régulier',
-        'Délais et livrables adaptés',
+        'Boutique en ligne à partir de 3 000 €',
+        'Application web ou mobile sur devis',
+        'Cadrage du produit avant le premier écran',
+        'Périmètre et budget définis ensemble',
+        'Suivi rapproché tout au long du projet',
       ],
-      variation: 'Ce qui fait bouger le prix : le périmètre de la version 1, les comptes utilisateurs et les paiements.',
-      cta: { libelle: 'Demander un devis', href: '#contact' },
+      delai: 'Délais définis au cadrage.',
+      variation: null,
+      cta: { libelle: 'Demander un devis', href: '/?formule=sur-mesure#estimator', umami: 'tarif-sur-mesure' },
     },
   ],
-  notePied: { avant: 'Besoin de design seul, sans développement ?', lien: 'À partir de 600€', href: '#contact' },
+  options: {
+    intro: 'En option, sur toutes les formules :',
+    items: [
+      'Design seul, sans développement : à partir de 600 €',
+      'Rédaction des textes : 200 € par page',
+      'Séance photo : sur devis, avec un photographe partenaire',
+    ],
+  },
+  toujours: {
+    titre: 'Dans toutes les formules',
+    items: [
+      { titre: 'Le site vous appartient.', texte: "Le code est à vous, pas loué. Vous pouvez partir avec, quand vous voulez." },
+      { titre: 'Un seul interlocuteur.', texte: "Je conçois, je développe, je mets en ligne. Vous n'avez qu'un numéro." },
+      { titre: 'Paiement en deux fois.', texte: 'La moitié à la commande, la moitié à la mise en ligne. En trois fois pour les projets sur mesure.' },
+      { titre: 'Aucun abonnement obligatoire.', texte: 'Pas de mensualité pour garder votre site en ligne.' },
+    ],
+  },
+  charge: {
+    titre: 'Ce qui reste à votre charge',
+    items: [
+      "Le nom de domaine, environ 15&nbsp;€ par an, à votre nom.",
+      "L'hébergement, de 0 à 15&nbsp;€ par mois selon le projet, payé en direct et à votre nom. Je ne prends pas de marge dessus.",
+      'Les contenus, si vous préférez les rédiger vous-même. Sinon je m&rsquo;en occupe, c&rsquo;est une option.',
+      "La maintenance après livraison, si vous en voulez une. Elle n'est jamais imposée.",
+    ],
+  },
   verites: [
     {
-      titre: "Ce qui n'est pas compris",
-      texte: "Le nom de domaine (environ 12&nbsp;€/an) et l'hébergement (de 0 à 15&nbsp;€/mois selon le projet). Vous payez ces deux postes en direct, à votre nom. Je ne prends pas de marge dessus.",
-    },
-    {
       titre: 'Comment on paie',
-      texte: 'En trois fois, sans frais : 30&nbsp;% à la commande, 30&nbsp;% à la validation des maquettes, 40&nbsp;% à la mise en ligne. Le site, le code et tous les accès vous appartiennent, sans abonnement.',
+      texte:
+        'En deux fois : la moitié à la commande, la moitié à la mise en ligne. En trois fois sur les projets sur mesure — ' +
+        '30&nbsp;% à la commande, 40&nbsp;% à la validation des maquettes, 30&nbsp;% à la mise en ligne. ' +
+        'Le site, le code et tous les accès vous appartiennent, sans abonnement.',
     },
     {
       titre: 'Pour situer',
-      texte: 'Une agence facture généralement le même site entre 3&nbsp;500 et 8&nbsp;000&nbsp;€, avec un chef de projet à payer entre vous et la personne qui travaille. Une plateforme à 29&nbsp;€/mois vous coûte 350&nbsp;€ par an, à vie, pour un template que trois de vos concurrents utilisent déjà.',
+      texte:
+        'Une agence facture généralement le même site entre 3&nbsp;500 et 8&nbsp;000&nbsp;€, avec un chef de projet à payer entre vous et la personne qui travaille. ' +
+        'Une plateforme à 29&nbsp;€/mois vous coûte 350&nbsp;€ par an, à vie, pour un template que trois de vos concurrents utilisent déjà. ' +
+        "Je ne suis pas moins cher parce que j'en fais moins. Je suis moins cher parce qu'il n'y a personne à payer entre vous et moi. " +
+        "Pas de chef de projet qui transmet, pas de commercial qui vend, pas de bureaux à financer. Le même travail, sans la chaîne.",
     },
   ],
 }

@@ -105,6 +105,101 @@ const REMPLACEMENTS_DEMANDES = [
   { avant: 'Partout en France', apres: 'À Nantes et partout en France' },
 ]
 
+/**
+ * Chantier tarifs du 18 septembre 2026.
+ *
+ * C'est le seul chantier du site où le copy change volontairement : les
+ * trois offres (Fondation, Studio, Sur mesure) deviennent trois formules à
+ * prix fermes, décidées avec Adri et consignées dans
+ * docs/superpowers/specs/2026-09-18-tarifs-design.md.
+ *
+ * Les deux listes ci-dessous ne désactivent rien : tout fragment qui n'y
+ * figure pas continue d'échouer, y compris dans les sections voisines.
+ */
+const TARIFS_RETIRES = [
+  'Fondation, pour démarrer',
+  'Studio, pour performer',
+  'Sur mesure, pour aller plus loin',
+  'Le plus choisi',
+  'Dès 900€',
+  'Dès 2 500€',
+  'Sur devis',
+  "sur l'offre Fondation et l'offre Studio",
+  'De quoi lancer vite un site soigné, sans exploser le budget.',
+  'Mon offre la plus demandée',
+  "Landing page ou site vitrine d'une page",
+  'Responsive mobile-first',
+  '2 allers-retours inclus',
+  'Livraison en 1–2 semaines',
+  'Site vitrine multi-pages ou application web',
+  'E-commerce à partir de 3 000€',
+  'Architecture UX & design sur mesure',
+  'SEO technique intégré',
+  'Ajustements continus',
+  'Livraison en 4–6 semaines',
+  'Application mobile, SaaS ou plateforme complexe',
+  'Périmètre défini ensemble',
+  'Accompagnement dédié',
+  'Suivi régulier',
+  'Délais et livrables adaptés',
+  'Besoin de design seul, sans développement ?',
+  'À partir de 600€',
+  "Ce qui n'est pas compris",
+  'En trois fois, sans frais : 30 % à la commande, 30 % à la validation des maquettes, 40 % à la mise en ligne.',
+  'Choisir cette offre',
+  // Phrases complètes des anciennes offres, non couvertes par les fragments
+  // courts ci-dessus : le comparateur les signale sinon comme perdues.
+  'Ce qui fait bouger le prix : le nombre de pages, et si les textes et photos sont à créer.',
+  'Pour les projets plus gros, qui demandent un vrai cadrage produit et un suivi rapproché.',
+  'Ce qui fait bouger le prix : le périmètre de la version 1, les comptes utilisateurs et les paiements.',
+  "Le nom de domaine (environ 12",
+]
+
+const TARIFS_AJOUTES = [
+  'Une page', 'Site complet', 'Sur mesure',
+  'Site internet une page', 'Site vitrine complet, 4 à 6 pages', 'E-commerce et applications sur mesure',
+  '900 €', '1 900 €', 'À partir de 3 000 €',
+  'Pour exister en ligne sans attendre.',
+  'Recommandé si vous avez plusieurs services à présenter.',
+  'Quand un site vitrine ne suffit plus.',
+  'Choisir cette formule', 'Demander un devis',
+  'Livré en 5 jours ouvrés', 'Livré en 3 semaines', 'Délais définis au cadrage.',
+  'Dans toutes les formules', 'Ce qui reste à votre charge', 'En option, sur toutes les formules :',
+  // Fragments complets des nouvelles formules, non couverts par les
+  // fragments courts ci-dessus : le comparateur les signale sinon comme
+  // ajoutés.
+  'Une seule page, mais complète : qui vous êtes',
+  'Design sur mesure, à votre image',
+  'Formulaire de contact ou de demande de devis',
+  'Pensé pour le mobile en premier',
+  'Fiche Google et référencement local configurés',
+  'Deux séries de retouches incluses',
+  'Mise en ligne incluse',
+  'Ce qui fait bouger le prix : la rédaction des textes et la création des photos',
+  'Quatre à six pages pour détailler votre offre',
+  '4 à 6 pages : accueil, services, réalisations, à propos, contact',
+  'Référencement technique intégré',
+  'Trois séries de retouches incluses',
+  'Ce qui fait bouger le prix : le nombre de pages au-delà de six',
+  'Boutique en ligne, application web ou mobile, outil métier',
+  'Périmètre et budget définis ensemble',
+  'Suivi rapproché tout au long du projet',
+  'Rédaction des textes : 200 € par page',
+  'Séance photo : sur devis, avec un photographe partenaire',
+  'Le site vous appartient.',
+  'Le code est à vous, pas loué.',
+  "Je conçois, je développe, je mets en ligne.",
+  'Paiement en deux fois.',
+  'La moitié à la commande, la moitié à la mise en ligne. En trois fois pour les projets sur mesure.',
+  'Aucun abonnement obligatoire.',
+  'Pas de mensualité pour garder votre site en ligne.',
+  "L'hébergement, de 0 à 15",
+  'Les contenus, si vous préférez les rédiger vous-même.',
+  'La maintenance après livraison, si vous en voulez une.',
+  'En deux fois : la moitié à la commande, la moitié à la mise en ligne. En trois fois sur les projets sur mesure',
+  'Une agence facture généralement le même site entre 3 500 et 8 000',
+]
+
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
  *  flèche dans une chaîne de texte : elle devient un SVG aria-hidden, et
  *  disparaît donc légitimement du texte rendu. */
@@ -253,12 +348,14 @@ for (const fichier of fichiers) {
     .filter((f) => !estUnRegroupement(f, toutApres))
     .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
     .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
+    .filter((f) => !TARIFS_RETIRES.some((t) => f.includes(t)))
   const ajoutes = absentsApres
     .filter((f) => !estUnRegroupement(f, toutAvant))
     .filter((f) => {
       const nettoye = sansAutorises(f)
       if (nettoye.length <= 2) return false
       if (TEXTES_SORTIS_DU_SCRIPT.some((t) => nettoye.includes(t))) return false
+      if (TARIFS_AJOUTES.some((t) => nettoye.includes(t))) return false
       // Déjà présent sur l'accueil : c'est un partiel, pas un ajout.
       if (fichier !== 'index.html' && estUnRegroupement(nettoye, texteAccueil)) return false
       return !estUnRegroupement(nettoye, toutAvant)
