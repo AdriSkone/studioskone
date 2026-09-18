@@ -193,4 +193,4 @@ En cas de différend portant sur l'interprétation ou l'exécution des présente
 Pour toute question relative aux présentes CGU :
 
 **E-mail** : contact@studioskone.com
-**Adresse postale** : studio skøne — Adrien Bidet, 60 rue François 1er, 75008 Paris, France
+**Adresse postale** : studio skøne · Adrien Bidet, 60 rue François 1er, 75008 Paris, France

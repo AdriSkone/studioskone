@@ -13,7 +13,8 @@ Le site **studioskone.com** est édité par :
 - **Nom commercial** : studio skøne
 - **Responsable de la publication** : Adrien Bidet
 - **Statut juridique** : entrepreneur individuel sous le régime de la micro-entreprise
-- **Adresse** : 60 rue François 1er, 75008 Paris, France
+- **Adresse de domiciliation** : 60 rue François 1er, 75008 Paris, France
+- **Lieu d'exercice** : activité exercée depuis Nantes (Loire-Atlantique)
 - **E-mail** : contact@studioskone.com
 - **Site web** : https://studioskone.com
 - **SIRET** : 949 342 992 00029
@@ -106,4 +107,4 @@ Les présentes mentions légales sont régies par le droit français. En cas de 
 Pour toute question relative aux présentes mentions légales ou au fonctionnement du site :
 
 **E-mail** : contact@studioskone.com
-**Adresse postale** : studio skøne — Adrien Bidet, 60 rue François 1er, 75008 Paris, France
+**Adresse postale** : studio skøne · Adrien Bidet, 60 rue François 1er, 75008 Paris, France

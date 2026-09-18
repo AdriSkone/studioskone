@@ -108,6 +108,16 @@ const TEXTES_DE_COMPOSANTS_RETIRES = ['Discuter de ce projet']
 const REMPLACEMENTS_DEMANDES = [
   { avant: 'Partout en France', apres: 'À Nantes et partout en France' },
   { avant: 'Livré en 2 à 6 semaines', apres: 'Livré en 5 jours à 3 semaines' },
+  // Tâche 9 — pages légales, 18 septembre 2026. Aucun changement de texte
+  // ici : le générateur (scripts/build-legal-pages.mjs) passe ce bloc par
+  // `esc()`, qui transforme l'apostrophe de « Lieu d'exercice » en
+  // `&#39;`. Comme n'importe quelle entité, ce comparateur la réduit
+  // ensuite à un espace (voir le commentaire au-dessus de TARIFS_RETIRES),
+  // ce qui casse la correspondance mot à mot avec la version sur `main`,
+  // qui porte l'apostrophe telle quelle. La déclaration ci-dessous
+  // rétablit la correspondance sans toucher au HTML produit ni au
+  // normaliseur.
+  { avant: "Lieu d'exercice", apres: 'Lieu d exercice' },
 ]
 
 /**

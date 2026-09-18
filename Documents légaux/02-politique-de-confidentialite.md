@@ -30,7 +30,7 @@ Lorsque vous remplissez le formulaire de contact présent sur le site, les donn�
 - **Adresse e-mail** (obligatoire)
 - **Nom de l'entreprise** (facultatif)
 - **Description du projet** (obligatoire)
-- **Fichier joint** (facultatif) — par exemple : cahier des charges, brief, document de référence
+- **Fichier joint** (facultatif) · par exemple : cahier des charges, brief, document de référence
 
 Les champs obligatoires sont nécessaires pour pouvoir vous répondre. À défaut, votre demande ne pourra être traitée.
 
@@ -58,10 +58,10 @@ Conformément à l'article 6 du RGPD, chaque traitement repose sur une base lég
 
 | Finalité du traitement | Données concernées | Base légale (RGPD) |
 |---|---|---|
-| Répondre aux demandes de contact et établir un devis | Nom, e-mail, entreprise, description du projet, fichier joint | Mesures précontractuelles prises à la demande de la personne concernée — art. 6.1.b RGPD |
-| Réaliser des statistiques de fréquentation anonymisées (Umami) | Données agrégées | Intérêt légitime du responsable du traitement à mesurer l'audience de son site — art. 6.1.f RGPD |
-| Assurer la sécurité et le bon fonctionnement du site (logs techniques) | Adresse IP, logs serveur | Intérêt légitime — art. 6.1.f RGPD |
-| Conserver les échanges commerciaux dans le cadre de la relation client | E-mails, données de contact | Intérêt légitime / exécution contractuelle — art. 6.1.b et 6.1.f RGPD |
+| Répondre aux demandes de contact et établir un devis | Nom, e-mail, entreprise, description du projet, fichier joint | Mesures précontractuelles prises à la demande de la personne concernée · art. 6.1.b RGPD |
+| Réaliser des statistiques de fréquentation anonymisées (Umami) | Données agrégées | Intérêt légitime du responsable du traitement à mesurer l'audience de son site · art. 6.1.f RGPD |
+| Assurer la sécurité et le bon fonctionnement du site (logs techniques) | Adresse IP, logs serveur | Intérêt légitime · art. 6.1.f RGPD |
+| Conserver les échanges commerciaux dans le cadre de la relation client | E-mails, données de contact | Intérêt légitime / exécution contractuelle · art. 6.1.b et 6.1.f RGPD |
 
 Pour les traitements fondés sur l'**intérêt légitime**, le responsable du traitement a procédé à une **mise en balance des intérêts en présence**, conformément aux recommandations de la CNIL. Cette analyse permet de s'assurer que l'intérêt poursuivi par studio skøne (mesure d'audience non intrusive, sécurité du service, suivi de la relation client) ne porte pas une atteinte disproportionnée aux droits et libertés des personnes concernées, compte tenu notamment du caractère limité des données traitées et des attentes raisonnables des utilisateurs. Les éléments de cette mise en balance peuvent être communiqués sur demande à contact@studioskone.com.
 
@@ -114,7 +114,7 @@ En cas de violation de données à caractère personnel susceptible d'engendrer 
 
 ## 7. Transfert de données hors Union européenne
 
-L'hébergement du site est assuré par Vercel Inc., société établie aux États-Unis. À ce titre, certaines données — **principalement de nature technique (données de navigation, requêtes serveur, données nécessaires au fonctionnement du site)** — peuvent être transférées en dehors de l'Union européenne dans le cadre de l'exploitation du site.
+L'hébergement du site est assuré par Vercel Inc., société établie aux États-Unis. À ce titre, certaines données, **principalement de nature technique (données de navigation, requêtes serveur, données nécessaires au fonctionnement du site)**, peuvent être transférées en dehors de l'Union européenne dans le cadre de l'exploitation du site.
 
 Ces transferts sont encadrés par les garanties prévues par le RGPD :
 
@@ -144,7 +144,7 @@ Conformément aux articles 15 à 22 du RGPD et à la loi Informatique et Libert�
 Pour exercer l'un de ces droits, vous pouvez adresser votre demande :
 
 - **Par e-mail** : contact@studioskone.com
-- **Par courrier postal** : studio skøne — Adrien Bidet, 60 rue François 1er, 75008 Paris, France
+- **Par courrier postal** : studio skøne · Adrien Bidet, 60 rue François 1er, 75008 Paris, France
 
 Afin de nous permettre de vérifier votre identité, il pourra vous être demandé de joindre une copie d'un titre d'identité. Une réponse vous sera apportée dans un délai d'un mois à compter de la réception de votre demande, conformément à l'article 12 du RGPD. Ce délai pourra être prolongé de deux mois en cas de demande complexe ou de demandes nombreuses.
 
@@ -206,4 +206,4 @@ studio skøne se réserve le droit de modifier la présente politique de confide
 Pour toute question relative à la présente politique de confidentialité ou au traitement de vos données personnelles :
 
 **E-mail** : contact@studioskone.com
-**Adresse postale** : studio skøne — Adrien Bidet, 60 rue François 1er, 75008 Paris, France
+**Adresse postale** : studio skøne · Adrien Bidet, 60 rue François 1er, 75008 Paris, France

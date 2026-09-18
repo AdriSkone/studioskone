@@ -252,8 +252,8 @@ function pageTemplate({ slug, title, lastUpdated, intro, toc, body, footerLinks 
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="/favicon-2026.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(title)} — Studio Skøne</title>
-  <meta name="description" content="${esc(title)} du site studioskone.com — Studio Skøne, agence digitale parisienne.">
+  <title>${esc(title)} · Studio Skøne</title>
+  <meta name="description" content="${esc(title)} du site studioskone.com · Studio Skøne, agence digitale parisienne.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">

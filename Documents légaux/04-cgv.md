@@ -4,7 +4,7 @@
 
 Les présentes Conditions Générales de Vente (ci-après « CGV ») régissent l'ensemble des prestations de services proposées par :
 
-- **studio skøne** — nom commercial d'Adrien Bidet, exerçant en qualité d'entrepreneur individuel sous le régime de la micro-entreprise
+- **studio skøne** · nom commercial d'Adrien Bidet, exerçant en qualité d'entrepreneur individuel sous le régime de la micro-entreprise
 - **Adresse** : 60 rue François 1er, 75008 Paris, France
 - **SIRET** : 949 342 992 00029
 - **Code APE** : 6201Z
@@ -18,7 +18,7 @@ Les présentes CGV s'appliquent à tout Client, qu'il agisse à titre **professi
 
 ---
 
-## Article 1 — Objet et champ d'application
+## Article 1 · Objet et champ d'application
 
 ### 1.1 Objet
 
@@ -47,7 +47,7 @@ Le Prestataire se réserve le droit de modifier les présentes CGV à tout momen
 
 ---
 
-## Article 2 — Devis et commande
+## Article 2 · Devis et commande
 
 ### 2.1 Établissement du devis
 
@@ -81,7 +81,7 @@ Toute modification du périmètre du projet sollicitée par le Client après acc
 
 ---
 
-## Article 3 — Prestations
+## Article 3 · Prestations
 
 ### 3.1 Description
 
@@ -101,7 +101,7 @@ Chaque partie s'engage à considérer comme confidentielles toutes les informati
 
 ---
 
-## Article 4 — Obligations du Client
+## Article 4 · Obligations du Client
 
 La bonne exécution des prestations suppose une collaboration active du Client. Le Client s'engage à :
 
@@ -115,7 +115,7 @@ La bonne exécution des prestations suppose une collaboration active du Client. 
 
 ---
 
-## Article 5 — Tarifs et modalités de paiement
+## Article 5 · Tarifs et modalités de paiement
 
 ### 5.1 Prix
 
@@ -153,7 +153,7 @@ Le Prestataire conserve la propriété pleine et entière des livrables, en ce c
 
 ---
 
-## Article 6 — Délais et livraison
+## Article 6 · Délais et livraison
 
 ### 6.1 Délais
 
@@ -182,7 +182,7 @@ Les corrections sollicitées dans le cadre du recettage ne peuvent porter que su
 
 ---
 
-## Article 7 — Propriété intellectuelle
+## Article 7 · Propriété intellectuelle
 
 ### 7.1 Principe : cession différée et conditionnée
 
@@ -226,7 +226,7 @@ Sauf demande contraire formalisée au devis, le Prestataire pourra inscrire de m
 
 ---
 
-## Article 8 — Hébergement, nom de domaine et services tiers
+## Article 8 · Hébergement, nom de domaine et services tiers
 
 ### 8.1 Principe
 
@@ -248,7 +248,7 @@ Sauf disposition contraire prévue au devis, **la prestation initiale n'inclut n
 
 ---
 
-## Article 9 — Garanties
+## Article 9 · Garanties
 
 ### 9.1 Garantie de conformité
 
@@ -271,7 +271,7 @@ Le Prestataire ne garantit pas :
 
 ---
 
-## Article 10 — Responsabilité
+## Article 10 · Responsabilité
 
 ### 10.1 Limitation de responsabilité
 
@@ -298,7 +298,7 @@ Aucune des parties ne pourra être tenue responsable de l'inexécution ou du ret
 
 ---
 
-## Article 11 — Résiliation
+## Article 11 · Résiliation
 
 ### 11.1 Résiliation pour manquement
 
@@ -319,7 +319,7 @@ La résiliation n'affecte pas les clauses qui, par leur nature, sont destinées 
 
 ---
 
-## Article 12 — Données personnelles
+## Article 12 · Données personnelles
 
 Dans le cadre de l'exécution des prestations, le Prestataire peut être amené à traiter des données personnelles relatives au Client (interlocuteurs, signataires) ou à des tiers (utilisateurs du site livré).
 
@@ -344,7 +344,7 @@ Pour le traitement des données du Client lui-même (gestion commerciale, compta
 
 ---
 
-## Article 13 — Droit de rétractation (Clients consommateurs)
+## Article 13 · Droit de rétractation (Clients consommateurs)
 
 Conformément aux articles L.221-18 et suivants du Code de la consommation, le Client ayant la qualité de **consommateur** dispose d'un délai de **14 jours** à compter de la conclusion du contrat à distance pour exercer son droit de rétractation, sans avoir à justifier de motif.
 
@@ -357,7 +357,7 @@ Le présent article ne s'applique pas aux Clients agissant à titre professionne
 
 ---
 
-## Article 14 — Médiation et règlement des litiges
+## Article 14 · Médiation et règlement des litiges
 
 ### 14.1 Résolution amiable
 
@@ -377,13 +377,13 @@ Pour les Clients ayant la qualité de consommateur, les règles légales de comp
 
 ---
 
-## Article 15 — Droit applicable
+## Article 15 · Droit applicable
 
 Les présentes CGV sont soumises au **droit français**.
 
 ---
 
-## Article 16 — Dispositions diverses
+## Article 16 · Dispositions diverses
 
 ### 16.1 Intégralité
 
@@ -405,7 +405,7 @@ Pour l'exécution des présentes, les parties élisent domicile aux adresses ind
 
 ## Contact
 
-**studio skøne — Adrien Bidet**
+**studio skøne · Adrien Bidet**
 60 rue François 1er, 75008 Paris, France
 E-mail : contact@studioskone.com
 SIRET : 949 342 992 00029
