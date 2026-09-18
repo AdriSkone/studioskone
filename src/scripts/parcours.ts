@@ -108,20 +108,17 @@ export function initParcours(): void {
     const delai = document.getElementById('parcoursDelai')
     if (!offre || !prix || !delai) return
 
-    // Fixation minimale pour compiler avec la nouvelle signature de
-    // estimator-pricing (formule + prix ferme) : le vrai branchement,
-    // avec l'affichage de l'ajustement, est fait dans la tâche suivante.
     offre.textContent = `Formule ${r.formule}`
 
     if (r.showPrice && r.prix !== null) {
-      const prefixe = r.prixDepuis ? 'à partir de ' : ''
-      prix.textContent = `${prefixe}${r.prix.toLocaleString('fr-FR')} €`
+      const montant = `${r.prix.toLocaleString('fr-FR')} €`
+      prix.textContent = r.prixDepuis ? `À partir de ${montant}` : montant
       delai.hidden = false
-      delai.textContent = `Livraison estimée · ${r.delay}`
+      delai.textContent = r.ajustement
+        ? `Livraison · ${r.delay} — ${r.ajustement}`
+        : `Livraison · ${r.delay}`
     } else {
       prix.textContent = 'À définir ensemble'
-      // La fourchette dit déjà « à définir » : le répéter sur la ligne
-      // du délai serait redondant.
       delai.hidden = true
       delai.textContent = ''
     }
@@ -140,8 +137,24 @@ export function initParcours(): void {
       if (champ) donnees.append(cle, champ.value.trim())
     })
 
+    // La formule et le prix affichés partent avec la demande : sans eux,
+    // le mail ne dit pas ce que le visiteur a vu à l'écran.
+    const r = estimate({
+      type: reponse('type') as SiteType,
+      size: reponse('size') as SizeChoice,
+      content: reponse('content') as ContentChoice,
+    })
+    donnees.append('formule', r.formule)
+    donnees.append('prixAffiche', r.prix === null ? 'à définir' : `${r.prixDepuis ? 'à partir de ' : ''}${r.prix} €`)
+
     suivant!.disabled = true
     suivant!.classList.add('est-en-cours')
+
+    // Umami ne pose pas de cookie : rien à demander au visiteur.
+    ;(window as unknown as { umami?: { track: (n: string, d?: unknown) => void } }).umami?.track(
+      'estimation-envoyee',
+      { formule: r.formule }
+    )
 
     void fetch(ENDPOINT, {
       method: 'POST',
@@ -208,6 +221,31 @@ export function initParcours(): void {
     }
   })
 
-  montrer(0, false)
+  /**
+   * Les boutons des cartes tarifaires arrivent avec ?formule=… Le parcours
+   * coche alors les réponses correspondantes et démarre à la question
+   * suivante : le visiteur qui a déjà choisi sa formule ne la ressaisit pas.
+   */
+  const PRESELECTION: Record<string, { type: SiteType; size?: SizeChoice }> = {
+    'une-page':    { type: 'vitrine', size: '1' },
+    'site-complet': { type: 'vitrine', size: '2-5' },
+    'sur-mesure':  { type: 'boutique' },
+  }
+
+  function cocher(nom: string, valeur: string): boolean {
+    const champ = form!.querySelector<HTMLInputElement>(`input[name="${nom}"][value="${valeur}"]`)
+    if (!champ) return false
+    champ.checked = true
+    return true
+  }
+
+  const formule = new URLSearchParams(location.search).get('formule')
+  const pre = formule ? PRESELECTION[formule] : undefined
+  let depart = 0
+  if (pre) {
+    if (cocher('type', pre.type)) depart = 1
+    if (pre.size && cocher('size', pre.size)) depart = 2
+  }
+  montrer(depart, false)
   majBoutonSuivant()
 }
