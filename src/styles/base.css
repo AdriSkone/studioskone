@@ -201,9 +201,23 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
      jamais, puisqu'une propriété définie sur l'élément bat toujours celle
      dont il hérite. Il faut donc viser l'enfant, et le viser plus fort que
      le composant qui l'a nommé — d'où .grille.grille, qui pèse deux
-     classes contre une. C'est ce qui évite une surcharge forcée ici. */
+     classes contre une.
+
+     Ça ne suffit pourtant pas partout : les générateurs posent --col en
+     style inline sur certains enfants (les titres de section, les notes
+     à droite du titre — --col: 3 / span N et 9 / span 4). Un style inline
+     bat n'importe quel sélecteur de feuille de style, doublé ou non, quelle
+     que soit sa spécificité. Sans !important ici, ces enfants gardent leur
+     colonne de bureau sous 768 px, réclament une 13e ligne de grille qui
+     n'existe pas à quatre colonnes, la grille fabrique alors les colonnes
+     implicites manquantes — et TOUS les autres enfants en --col: 1 / -1,
+     y compris ceux posés proprement par une classe, se retrouvent à
+     partager leur piste avec ces colonnes implicites presque vides : la
+     grille entière s'effondre à la largeur de ses gouttières. C'est le
+     seul endroit du site où un !important est nécessaire, précisément
+     parce que c'est le seul endroit où on doit battre un style inline. */
   .colonnes.colonnes > *,
-  .grille.grille > * { --col: 1 / -1; }
+  .grille.grille > * { --col: 1 / -1 !important; }
 }
 
 .section-s { padding-block: var(--section-s); }
