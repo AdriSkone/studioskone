@@ -89,8 +89,8 @@ export const PAGES = [
         label: 'Budget',
         h2: 'Combien coûte <span class="text-accent">une refonte ?</span>',
         tiers: [
-          { name: "Refonte d'une page", price: '900 €', desc: "Nouveau design sur une page complète, reprise du contenu existant, corrections mobile et vitesse. Livrée en 5 jours ouvrés, une fois vos textes et vos photos réunis." },
-          { name: 'Refonte complète, 4 à 6 pages', price: '1 900 €', desc: "Nouvelle structure sur l'ensemble du site, nouveau design, contenu repris, migration et redirections. Livrée en 3 semaines, une fois vos textes et vos photos réunis." },
+          { name: "Refonte d'une page", price: '900 €', desc: "Nouveau design sur une page complète, reprise du contenu existant, corrections mobile et vitesse, livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos." },
+          { name: 'Refonte complète, 4 à 6 pages', price: '1 900 €', desc: "Nouvelle structure sur l'ensemble du site, nouveau design, contenu repris, migration et redirections, livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
           { name: 'Changement de technologie', price: 'sur devis', desc: "Quand le site actuel repose sur une base obsolète, ou sur un outil dont vous voulez sortir." },
         ],
         notes: [
@@ -110,7 +110,7 @@ export const PAGES = [
           ['Je peux garder mon nom de domaine ?',
            "Oui, toujours. Et si votre domaine est actuellement détenu par votre ancien prestataire, je vous aide à le récupérer à votre nom."],
           ['Combien de temps prend une refonte ?',
-           "Cinq jours ouvrés pour une refonte d'une page, trois semaines pour une refonte complète, une fois vos textes et vos photos réunis. L'audit prend quelques jours et démarre le processus."],
+           "Cinq jours ouvrés pour une refonte d'une page, trois semaines pour une refonte complète, à partir du moment où j'ai vos textes et vos photos. L'audit prend quelques jours et démarre le processus."],
           ["Et si mon ancien prestataire ne me donne pas les accès ?",
            "C'est fréquent, et ce n'est pas bloquant. Le contenu public peut être récupéré, et le domaine peut être transféré par des procédures prévues pour ça. Je vous accompagne sur ces démarches."],
           ['Vous travaillez sur WordPress, Wix, Squarespace ?',
@@ -150,7 +150,7 @@ export const PAGES = [
     slug: 'creation-site-internet-artisan',
     footerLabel: 'Site internet pour artisan',
     title: 'Création de site internet pour artisan · Studio Skøne',
-    description: "Sites internet pour artisans du bâtiment et de l'artisanat : trouvé sur Google, lisible sur téléphone, fait pour déclencher l'appel. Dès 900 €, livré en 5 jours ouvrés dès réception de vos textes et de vos photos.",
+    description: "Sites internet pour artisans du bâtiment et de l'artisanat : trouvé sur Google, lisible sur téléphone, fait pour déclencher l'appel. Dès 900 €, livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos.",
     serviceName: 'Création de site internet pour artisan',
     serviceType: 'Création de site vitrine pour artisan',
     geo: true,
@@ -158,7 +158,7 @@ export const PAGES = [
     breadcrumb: [{ name: 'Site internet pour artisan', url: '/creation-site-internet-artisan' }],
 
     h1: 'Création de site internet <span class="text-accent">pour artisans</span>',
-    lead: "Un site qui vous fait trouver sur Google, qui se lit sur un téléphone à une main, et qui déclenche l'appel. Pensé pour votre métier, pas pour un concours de design. Dès 900 €, livré en 5 jours ouvrés dès réception de vos textes et de vos photos.",
+    lead: "Un site qui vous fait trouver sur Google, qui se lit sur un téléphone à une main, et qui déclenche l'appel. Pensé pour votre métier, pas pour un concours de design. Dès 900 €, livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos.",
     ctas: [
       { label: 'Estimer mon site', href: '/#estimator' },
       { label: 'Voir un exemple', href: '/projets/merel-et-fils' },
@@ -233,8 +233,8 @@ export const PAGES = [
         label: 'Budget',
         h2: 'Trois formats, <span class="text-accent">trois prix.</span>',
         tiers: [
-          { name: 'Site artisan, une page', price: '900 €', desc: "Une page complète : présentation, réalisations, zones, garanties, appel et formulaire de devis, avec la fiche Google Business. Livrée en 5 jours ouvrés dès réception de vos textes et de vos photos." },
-          { name: 'Site artisan complet', price: '1 900 €', desc: "Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients. Meilleure base pour le référencement local. Livrée en 3 semaines dès réception de vos textes et de vos photos." },
+          { name: 'Site artisan, une page', price: '900 €', desc: "Une page complète : présentation, réalisations, zones, garanties, appel et formulaire de devis, avec la fiche Google Business, livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos." },
+          { name: 'Site artisan complet', price: '1 900 €', desc: "Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients, meilleure base pour le référencement local, livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
           { name: 'Avec réservation ou espace client', price: 'sur devis', desc: "Prise de rendez-vous en ligne, espace client pour suivre un chantier, ou connexion à votre outil de facturation. Le périmètre est cadré avec vous avant devis." },
         ],
         notes: [

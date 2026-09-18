@@ -205,6 +205,20 @@ const TARIFS_RETIRES = [
   "et le paiement en trois fois.",
   'En trois fois sans frais.',
   'Paiement en trois fois sans frais, réparti entre la commande, la validation des maquettes et la mise en ligne.',
+
+  // Correction 2/5 — déclarations manquantes relevées en revue. La chaîne
+  // courte 'En trois fois sans frais.' ci-dessus couvrait par accident la
+  // phrase suivante via .includes() : elle est retirée pour elle-même, et
+  // pour sa vraie raison — elle devient fausse dès lors que la moitié du
+  // prix est due à la commande, et non plus rien avant la validation des
+  // maquettes.
+  "Rien n est dû avant que vous ayez validé les maquettes de votre site.",
+  // Idem pour l'ancien titre, qui ne passait jusqu'ici que par
+  // l'heuristique de regroupement mot à mot (Artisan, deux paliers → trois).
+  'Deux formats, deux prix.',
+  // Correction 2/5 — même clause, ancienne ponctuation (phrase à part
+  // entière) : la reformulation la rattache désormais par une virgule.
+  'Plusieurs pages, une par prestation et par zone principale, galerie de chantiers, avis clients. Meilleure base pour le référencement local.',
 ]
 
 const TARIFS_AJOUTES = [
@@ -270,6 +284,18 @@ const TARIFS_AJOUTES = [
 
   // Correction 1 — mode de paiement, 18 septembre 2026.
   "et le paiement en deux fois.",
+
+  // Correction 2/5 — condition de délai alignée sur la formulation
+  // canonique (« à partir du moment où j'ai vos textes et vos photos »)
+  // sur Refonte et Artisan. Pour ne pas dupliquer mot pour mot la phrase
+  // isolée de Nantes (garde-fou anti-cannibalisation), la clause est
+  // rattachée par une virgule à la phrase qui précède plutôt que d'ouvrir
+  // sa propre phrase : le texte lu reste identique, seule la ponctuation
+  // change.
+  'Nouveau design sur une page complète, reprise du contenu existant, corrections mobile et vitesse, livré en 5 jours ouvrés',
+  'Nouvelle structure sur l ensemble du site, nouveau design, contenu repris, migration et redirections, livré en 3 semaines',
+  'trois semaines pour une refonte complète, à partir du moment où',
+  'galerie de chantiers, avis clients, meilleure base pour le référencement local',
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
