@@ -100,9 +100,14 @@ const TEXTES_DE_COMPOSANTS_RETIRES = ['Discuter de ce projet']
  * seulement l'ancien texte aurait laissé le reste du fragment à la
  * comparaison mot à mot, qui retrouve « Vous », « êtes » ou « site »
  * n'importe où — et une vraie perte serait passée.
+ *
+ * Le statement du hero annonçait « Livré en 2 à 6 semaines » : le chantier
+ * tarifs du 18 septembre 2026 aligne ce délai sur celui des cards
+ * Prestations et de la FAQ, « 5 jours à 3 semaines ».
  */
 const REMPLACEMENTS_DEMANDES = [
   { avant: 'Partout en France', apres: 'À Nantes et partout en France' },
+  { avant: 'Livré en 2 à 6 semaines', apres: 'Livré en 5 jours à 3 semaines' },
 ]
 
 /**

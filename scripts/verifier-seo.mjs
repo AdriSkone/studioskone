@@ -53,6 +53,12 @@ function balises(html) {
  * le but du script.
  */
 const CHANGEMENTS_DECLARES = {
+  'index.html': {
+    'meta:description':        'Nouvelle grille tarifaire du 18 septembre 2026 : le délai passe de « 2 à 6 semaines » à « 5 jours à 3 semaines ».',
+    'meta:og:description':     'Idem meta description.',
+    'meta:twitter:description':'Idem meta description.',
+    'jsonld:ProfessionalService': 'Les six Offer deviennent trois formules à prix fermes (900, 1900, 3000) plus l’option design à 600, avec priceCurrency et availability.',
+  },
   'projets/tasq.html': {
     'meta:og:image':
       "L'image de partage montrait Tasq dans son ancienne charte " +
