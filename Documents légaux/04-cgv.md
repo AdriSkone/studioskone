@@ -129,7 +129,9 @@ Pour les formules **Une page** et **Site complet** : **50 %** à la commande, à
 
 Pour les **projets sur mesure** : **30 %** à la commande, **40 %** à la validation des maquettes, **30 %** à la mise en ligne.
 
-Le solde est payable dans un délai de **30 jours** à compter de la date d'émission de la facture.
+Le dernier versement est exigible à la mise en ligne. La facture correspondante est émise à cette date et payable sous **15 jours**.
+
+Conformément à l'article 5.5, la cession des droits sur les livrables ne devient effective qu'à l'encaissement de ce dernier versement.
 
 ### 5.3 Moyens de paiement
 
@@ -156,11 +158,17 @@ Le Prestataire conserve la propriété pleine et entière des livrables, en ce c
 
 ### 6.1 Délais
 
-Les délais indiqués dans le devis sont donnés à titre indicatif et **ne constituent pas un engagement ferme**, sauf mention contraire expresse. Ils sont calculés en jours ouvrés et démarrent à compter :
+Les délais figurent au devis. Ils constituent un **engagement ferme** du Prestataire, dans les conditions définies ci-après.
 
-- de la signature du devis,
-- de l'encaissement de l'acompte,
-- et de la réception de l'ensemble des éléments nécessaires fournis par le Client.
+Ils sont calculés en jours ouvrés et courent à compter du dernier survenu de ces trois événements :
+
+- la signature du devis,
+- l'encaissement du premier versement prévu à l'article 5.2,
+- la réception de l'ensemble des éléments nécessaires à la réalisation — textes, images, accès aux comptes et services — fournis par le Client.
+
+Ils sont **suspendus** pendant toute période d'attente d'un élément ou d'une validation demandés au Client, et reprennent à compter de leur réception.
+
+Si le Prestataire dépasse le délai de son fait, le dépassement n'est pas facturé au Client. Passé une mise en demeure écrite restée sans effet pendant **15 jours**, le Client peut résoudre le contrat dans les conditions de l'article 11.
 
 ### 6.2 Causes de prolongation
 
@@ -171,7 +179,7 @@ Les délais peuvent être prolongés en cas de :
 - cas de force majeure ;
 - circonstances indépendantes de la volonté du Prestataire.
 
-Aucune pénalité de retard ne pourra être appliquée au Prestataire à ce titre.
+Dans ces cas, le délai est prolongé d'une durée au moins équivalente à celle du retard constaté, et aucune pénalité ne peut être appliquée au Prestataire à ce titre.
 
 ### 6.3 Recettage
 
@@ -237,10 +245,11 @@ Lorsque le Prestataire est amené à créer ou paramétrer des comptes pour le c
 
 ### 8.3 Maintenance et évolutions
 
-Sauf disposition contraire prévue au devis, **la prestation initiale n'inclut ni maintenance corrective continue, ni maintenance évolutive, ni assistance technique post-livraison.**
+La prestation initiale comprend un **mois de suivi**, défini ci-dessous. Au-delà de ce mois, et sauf disposition contraire prévue au devis, elle **n'inclut ni maintenance corrective continue, ni maintenance évolutive, ni assistance technique.**
 
 À ce titre, il convient de distinguer :
 
+- **Le mois de suivi inclus** : pendant **30 jours** à compter de la mise en ligne, le Prestataire corrige gratuitement ce qui ne fonctionne pas comme prévu et procède aux retouches mineures de contenu — une coordonnée, un horaire, un tarif, le remplacement d'une image fournie par le Client. Ce suivi s'entend d'interventions ponctuelles ; il n'ouvre droit ni à de nouvelles pages, ni à de nouvelles fonctionnalités, ni à une modification de la direction artistique. Il couvre la même période que la garantie de conformité prévue à l'article 9.1, avec laquelle il se confond.
 - **Correction des défauts de conformité** : pendant la durée de la garantie prévue à l'article 9.1, le Prestataire prend en charge gratuitement la correction des défauts de conformité au cahier des charges contractuel, dans les conditions et limites de cet article. Cette garantie couvre exclusivement les bugs résultant de la prestation, à l'exclusion des situations visées à l'article 9.1.
 - **Évolutions, ajouts de fonctionnalités, adaptations** : toute demande d'évolution, d'ajout de fonctionnalité, d'adaptation à un nouveau besoin, de mise à jour technique liée à l'évolution de l'environnement (nouvelles versions de navigateurs, systèmes d'exploitation, services tiers…) ou de modification graphique relève d'une prestation distincte, hors périmètre, et fera l'objet d'un devis complémentaire.
 - **Maintenance dans la durée** : la souscription d'un contrat de maintenance distinct (corrective, évolutive ou de tierce maintenance applicative) peut être proposée par le Prestataire, dans des conditions tarifaires et fonctionnelles définies séparément.
@@ -251,7 +260,7 @@ Sauf disposition contraire prévue au devis, **la prestation initiale n'inclut n
 
 ### 9.1 Garantie de conformité
 
-Le Prestataire garantit que les livrables sont conformes au cahier des charges contractuel. Pendant **30 jours** à compter de la livraison, le Prestataire corrigera gratuitement tout défaut de conformité dûment signalé par écrit par le Client, à l'exception :
+Le Prestataire garantit que les livrables sont conformes au cahier des charges contractuel. Pendant **30 jours** à compter de la mise en ligne — période identique à celle du mois de suivi prévu à l'article 8.3 —, le Prestataire corrigera gratuitement tout défaut de conformité dûment signalé par écrit par le Client, à l'exception :
 
 - des dysfonctionnements résultant d'une mauvaise utilisation du livrable par le Client ou un tiers ;
 - des modifications apportées au livrable par le Client ou un tiers sans l'accord du Prestataire ;

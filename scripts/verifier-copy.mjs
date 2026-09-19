@@ -138,6 +138,18 @@ const REMPLACEMENTS_DEMANDES = [
  * figure pas continue d'échouer, y compris dans les sections voisines.
  */
 const TARIFS_RETIRES = [
+  /**
+   * CGV — les phrases que la mise en cohérence du 19 septembre 2026 retire,
+   * et pourquoi. Elles disaient l'inverse de ce que le site promet.
+   * Déclarées avec leur fichier, pour ne rien pardonner ailleurs.
+   */
+  { fichier: 'public/cgv.html', texte: 'Le solde est payable dans un délai de 30 jours' },
+  { fichier: 'public/cgv.html', texte: 'donnés à titre indicatif' },
+  { fichier: 'public/cgv.html', texte: 'encaissement de l' },
+  { fichier: 'public/cgv.html', texte: 'Aucune pénalité de retard ne pourra être appliquée au Prestataire à ce titre.' },
+  { fichier: 'public/cgv.html', texte: 'Sauf disposition contraire prévue au devis, la prestation initiale n' },
+  { fichier: 'public/cgv.html', texte: 'Pendant 30 jours à compter de la livraison' },
+
   'Fondation, pour démarrer',
   'Studio, pour performer',
   'Sur mesure, pour aller plus loin',
@@ -422,6 +434,41 @@ const TARIFS_AJOUTES = [
   // date contre une fausse alerte de perte ; il ne dispense pas de déclarer
   // la nouvelle, qui est un texte que la page n'avait jamais porté.
   'Dernière mise à jour : 18 septembre 2026',
+
+  /**
+   * CGV, articles 5.2, 6.1, 6.2, 8.3 et 9.1 — mise en cohérence du contrat
+   * avec ce que le site promet, décidée par Adri le 19 septembre 2026.
+   *
+   * Le site vend des délais fermes et « un mois de suivi inclus » ; le
+   * contrat disait des délais « indicatifs » et n'engageait aucune
+   * assistance après livraison. C'est le contrat qui fait foi en cas de
+   * litige, mais c'est la promesse qui a convaincu le client : l'écart se
+   * retournait contre le studio.
+   *
+   * À RELIRE PAR ADRI, et idéalement par un juriste : document contractuel.
+   */
+  'Ils constituent un',
+  'engagement ferme',
+  'du Prestataire, dans les conditions définies ci-après.',
+  'encaissement du premier versement prévu',
+  'ensemble des éléments nécessaires à la réalisation',
+  'Ils sont',
+  'suspendus',
+  "pendant toute période d'attente d'un élément ou d'une validation demandés au Client",
+  'Si le Prestataire dépasse le délai de son fait, le dépassement',
+  'Passé une mise en demeure écrite restée sans effet pendant',
+  "le Client peut résoudre le contrat dans les conditions de l'article 11",
+  'durée au moins équivalente à celle du retard constaté',
+  'La prestation initiale comprend un',
+  'mois de suivi',
+  'Le mois de suivi inclus',
+  'le Prestataire corrige gratuitement ce qui ne fonctionne pas comme prévu',
+  "il n'ouvre droit ni à de nouvelles pages, ni à de nouvelles fonctionnalités",
+  "Il couvre la même période que la garantie de conformité prévue à l'article 9.1",
+  "période identique à celle du mois de suivi prévu à l'article 8.3",
+  'Le dernier versement est exigible à la mise en ligne',
+  'La facture correspondante est émise à cette date et payable sous',
+  'cession des droits sur les livrables ne devient effective',
 ]
 
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
