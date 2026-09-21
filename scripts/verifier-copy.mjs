@@ -39,149 +39,6 @@ const AJOUTS_AUTORISES = [
   // Le lien Instagram n'était qu'une icône, son nom vivait dans un
   // aria-label. Il est maintenant écrit : un lien doit avoir un nom visible.
   'Instagram',
-  // Correctif mobile du 21 septembre 2026 — bouton qui replie du contenu
-  // sous 768 px, jamais montré sur la page d'avant. Son frère « Voir les 6
-  // autres réalisations » a été retiré le même jour avec le repli des
-  // réalisations — voir TEXTES_DE_COMPOSANTS_RETIRES.
-  'Voir ce qui est compris',
-  // Lot 3 du 21 septembre 2026 — « Ce qui reste à votre charge » passe en
-  // cartes, et Adri a demandé que le chiffre de chacune devienne l'élément
-  // principal, en grand, en JetBrains Mono. Le texte d'origine reste
-  // intact sous ce résumé (voir scripts/contenu/accueil.mjs, `tarifs.charge.items`) :
-  // ces quatre chiffres s'ajoutent au texte, ils ne le remplacent pas.
-  '15 € / an',
-  '0 à 15 € / mois',
-  'Option',
-]
-
-/**
- * Textes qui étaient déjà là, mais que le script injectait.
- *
- * Le formulaire de contact se construisait entièrement en JavaScript :
- * ses questions, ses champs et ses messages n'apparaissaient nulle part
- * dans le HTML servi. Ce script compare deux sources HTML — il ne pouvait
- * donc pas les voir, et les signale comme des ajouts alors qu'ils
- * existaient mot pour mot dans src/components/contact-form.ts.
- *
- * Les écrire dans le HTML est un gain, pas une dérive : le contenu
- * devient lisible sans JavaScript, et indexable.
- *
- * Chaque entrée est vérifiable : `grep` la chaîne dans contact-form.ts
- * sur la branche main.
- */
-const TEXTES_SORTIS_DU_SCRIPT = [
-  'Quel est votre budget estimatif',
-  '1 000 – 3 000 €',
-  '3 000 – 5 000 €',
-  '5 000 – 10 000 €',
-  '10 000 € +',
-  'À définir',
-  'Parlez-moi de vous',
-  'Nom',
-  'Email',
-  'Description du projet',
-  'RGPD',
-  'En soumettant ce formulaire',
-  'politique de confidentialité',
-  'Retour',
-  'Continuer',
-  "Merci,",
-  "c'est envoyé.",
-  'Je reviens vers vous sous 24h.',
-]
-
-/**
- * Textes disparus avec le composant qui les portait.
- *
- * « Discuter de ce projet » était le bouton qui menait de l'estimateur au
- * formulaire. Les deux étant fusionnés, il n'y a plus de trajet à faire
- * faire : le parcours va d'un écran au suivant, et son bouton final porte
- * « Discuter de mon projet », qui existait déjà.
- *
- * Lot 3 du 21 septembre 2026 — Adri a demandé de retirer la numérotation
- * de la FAQ de l'accueil (`.faq-numero`) : le style guide réserve les
- * numéros aux quatre étapes de la méthode. `numero` reste dans
- * scripts/contenu/accueil.mjs (d'autres usages en dépendent), mais le
- * générateur ne l'imprime plus dans le bouton — voir `faqSection()` dans
- * scripts/build-accueil.mjs.
- *
- * fragments() remplace chaque balise, y compris les balises en ligne comme
- * `<span>`, par une espace avant de recomposer le texte. Le numéro et la
- * question de l'ancien balisage (`<span class="faq-numero">01</span>${f.q}`)
- * redevenaient donc « 01 Combien coûte un site chez vous ? », numéro
- * compris — et c'est ce fragment entier, pas seulement le numéro, qui
- * disparaît du texte rendu. Ils sont donc déclarés ici, avec le composant
- * qui les portait, plutôt que dans TARIFS_RETIRES.
- */
-const TEXTES_DE_COMPOSANTS_RETIRES = [
-  'Discuter de ce projet',
-  '01 Combien coûte un site chez vous',
-  '02 Combien de temps ça prend',
-  "03 Qu'est-ce que j'ai à fournir",
-  "04 Le site m'appartient vraiment",
-  '05 Je pourrai modifier mon site moi-même',
-  '06 Pourquoi pas Wix, Squarespace ou un site à 400',
-  '07 Le référencement est-il inclus',
-  "08 Combien d'allers-retours sont inclus",
-  '09 Que se passe-t-il après la mise en ligne',
-  "10 Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose",
-  '11 Le studio est récent. Pourquoi vous faire confiance',
-  "12 J'ai déjà un site, faut-il tout refaire",
-
-  // Lot 4 du 21 septembre 2026 — Adri a confirmé le retrait de la
-  // numérotation restante hors la méthode : la FAQ des cinq pages
-  // prestations (`.faq-num`) et les cartes « Ce que je livre »
-  // (`.service-num`). Voir `BLOCKS.faq` et `BLOCKS.deliver` dans
-  // scripts/build-prestation-pages.mjs, et prestation.css.
-  //
-  // Le numéro de `.service-num` ne laisse aucun fragment détectable une
-  // fois retiré : il précède un `<h3>`, une balise qui coupe déjà les
-  // fragments, si bien que « 01 » n'a jamais été soudé au titre qui le
-  // suit — seule la FAQ, dont le numéro vit dans un `<span>` en ligne à
-  // l'intérieur du même `<button>` que la question, recomposait un seul
-  // fragment « 0X Question », qu'il faut donc déclarer ici question par
-  // question, une page à la fois.
-  '01 Mon site sera-t-il hors ligne pendant la refonte',
-  '02 Je peux garder mon nom de domaine',
-  '03 Combien de temps prend une refonte',
-  '04 Et si mon ancien prestataire ne me donne pas les accès',
-  '05 Vous travaillez sur WordPress, Wix, Squarespace',
-  '06 Combien de temps avant de voir un effet sur mes visites',
-
-  'Je n ai ni textes ni photos. C est possible quand même',
-  'Est-ce que je vais apparaître sur Google',
-  'Je n y connais rien en informatique.',
-  'Combien de temps ça va me prendre',
-  'Est-ce que ça vaut le coup si je travaille déjà par le bouche-à-oreille',
-  'Et si je veux ajouter des choses plus tard',
-
-  'Combien de temps pour créer un site internet',
-  'Vous vous déplacez sur Nantes',
-  'Est-ce que je serai bien référencé sur Google',
-  'Mon site m appartiendra',
-  'Vous travaillez avec quelles technologies',
-  'J ai déjà un site, faut-il tout refaire',
-
-  'Shopify ou site sur mesure',
-  'Combien coûte Shopify tous les mois',
-  'Je pourrai ajouter mes produits moi-même',
-  'Vous gérez la reprise de mon catalogue existant',
-  'Est-ce que vous faites aussi les photos produits',
-  'En combien de temps ma boutique peut-elle ouvrir',
-
-  'Combien de temps pour créer une application',
-  'iOS et Android en même temps',
-  'Faut-il commencer petit',
-  "Et si mon application est refusée par l App Store",
-  'Qui possède le code',
-  'Vous faites aussi la partie serveur',
-
-  // Correctif mobile du 21 septembre 2026 — « Voir les 6 autres
-  // réalisations » (déclaré plus haut comme ajout autorisé) disparaît à
-  // son tour : le ruban de cartes à défilement horizontal donne accès
-  // aux neuf projets sans repli, voir components/rail.css et
-  // scripts/build-accueil.mjs, `realisations()`.
-  'Voir les 6 autres réalisations',
 ]
 
 /**
@@ -235,6 +92,14 @@ const REMPLACEMENTS_DEMANDES = [
  * figure pas continue d'échouer, y compris dans les sections voisines.
  */
 const TARIFS_RETIRES = [
+  /**
+   * Le bouton « Voir les 6 autres réalisations » n'a vécu que deux jours :
+   * il repliait la pile de projets sur mobile. Le ruban de cartes à
+   * défilement horizontal le rend inutile — les neuf projets tiennent
+   * désormais sur une seule ligne qu'on fait glisser au doigt.
+   */
+  { fichier: 'index.html', texte: 'Voir les 6 autres réalisations' },
+
   /**
    * CGV — les phrases que la mise en cohérence du 19 septembre 2026 retire,
    * et pourquoi. Elles disaient l'inverse de ce que le site promet.

@@ -199,7 +199,6 @@ export const realisations = {
   // et scripts/build-accueil.mjs, `realisations()`. Le champ reste ici,
   // comme `numero` plus bas : on ne supprime pas une donnée de contenu
   // parce qu'un générateur a cessé de l'imprimer.
-  voirPlus: 'Voir les 6 autres réalisations',
 }
 
 export const tarifs = {
