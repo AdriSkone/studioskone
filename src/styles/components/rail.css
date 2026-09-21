@@ -94,6 +94,12 @@
    visibles et il n'aurait rien à faire. */
 .realisations-plus { display: none; }
 
+/* rail.ts pose `hidden` une fois les six cartes ouvertes : le bouton n'a
+   plus rien à faire. `.bouton` fixe déjà `display: inline-block` avec la
+   même spécificité qu'un attribut — sans cette règle, elle l'emporterait
+   sur le `[hidden]` du navigateur et le bouton resterait affiché. */
+.realisations-toggle[hidden] { display: none; }
+
 @media (max-width: 767px) {
   .ruban-projets-piste {
     grid-template-columns: 1fr;
