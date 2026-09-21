@@ -91,7 +91,76 @@ const REMPLACEMENTS_DEMANDES = [
  * Les deux listes ci-dessous ne désactivent rien : tout fragment qui n'y
  * figure pas continue d'échouer, y compris dans les sections voisines.
  */
+/**
+ * Textes qui étaient déjà là, mais que le script injectait.
+ *
+ * Le formulaire de contact se construisait entièrement en JavaScript :
+ * ses questions, ses champs et ses messages n'apparaissaient nulle part
+ * dans le HTML servi. Ce script compare deux sources HTML — il ne pouvait
+ * donc pas les voir, et les signale comme des ajouts alors qu'ils
+ * existaient mot pour mot dans src/components/contact-form.ts.
+ *
+ * Les écrire dans le HTML est un gain, pas une dérive : le contenu
+ * devient lisible sans JavaScript, et indexable.
+ *
+ * Chaque entrée est vérifiable : `grep` la chaîne dans contact-form.ts
+ * sur la branche main.
+ */
+const TEXTES_SORTIS_DU_SCRIPT = [
+  'Quel est votre budget estimatif',
+  '1 000 – 3 000 €',
+  '3 000 – 5 000 €',
+  '5 000 – 10 000 €',
+  '10 000 € +',
+  'À définir',
+  'Parlez-moi de vous',
+  'Nom',
+  'Email',
+  'Description du projet',
+  'RGPD',
+  'En soumettant ce formulaire',
+  'politique de confidentialité',
+  'Retour',
+  'Continuer',
+  "Merci,",
+  "c'est envoyé.",
+  'Je reviens vers vous sous 24h.',
+]
+
+/**
+ * Textes disparus avec le composant qui les portait.
+ *
+ * Cette déclaration avait été supprimée par mégarde le 21 septembre, alors
+ * que le filtre qui l'utilise, lui, était resté. Le défaut ne se voyait
+ * pas : la ligne fautive ne s'exécute que lorsqu'un fragment a réellement
+ * disparu, c'est-à-dire précisément quand le vérificateur doit alerter.
+ * Le reste du temps, il passait au vert.
+ */
+const TEXTES_DE_COMPOSANTS_RETIRES = [
+  'Discuter de ce projet',
+  '01 Combien coûte un site chez vous',
+  '02 Combien de temps ça prend',
+  "03 Qu'est-ce que j'ai à fournir",
+  "04 Le site m'appartient vraiment",
+  '05 Je pourrai modifier mon site moi-même',
+  '06 Pourquoi pas Wix, Squarespace ou un site à 400',
+  '07 Le référencement est-il inclus',
+  "08 Combien d'allers-retours sont inclus",
+  '09 Que se passe-t-il après la mise en ligne',
+  "10 Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose",
+  '11 Le studio est récent. Pourquoi vous faire confiance',
+  "12 J'ai déjà un site, faut-il tout refaire",
+]
+
 const TARIFS_RETIRES = [
+  /**
+   * La carte de prestation disait « 900 € » puis « du one-pager au site
+   * complet » : un visiteur pouvait en conclure qu'un site complet coûte
+   * 900 €, alors que la grille le vend 1 900 €. Formulation validée par
+   * Adri le 21 septembre 2026.
+   */
+  { fichier: 'index.html', texte: 'Du one-pager au site complet.' },
+
   /**
    * Le bouton « Voir les 6 autres réalisations » n'a vécu que deux jours :
    * il repliait la pile de projets sur mobile. Le ruban de cartes à
@@ -286,6 +355,9 @@ function correspondTarifRetire(entree, fragment, fichier) {
 }
 
 const TARIFS_AJOUTES = [
+  // Sa remplaçante, même carte, même raison.
+  "Du one-pager à la page de vente. Au-delà, c'est la formule Site complet.",
+
   'Une page', 'Site complet', 'Sur mesure',
   'Site internet une page', 'Site vitrine complet, 4 à 6 pages', 'E-commerce et applications sur mesure',
   '900 €', '1 900 €', 'À partir de 3 000 €',

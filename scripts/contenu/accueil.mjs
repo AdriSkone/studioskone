@@ -115,7 +115,7 @@ export const prestations = {
       titre: 'Site vitrine &amp; landing page',
       href: '/creation-site-internet-nantes',
       cible: 'artisans, commerçants, thérapeutes, indépendants qui veulent être trouvés et contactés.',
-      texte: "Un site rapide, lisible sur téléphone, pensé pour déclencher l'appel ou le formulaire. Du one-pager au site complet.",
+      texte: "Un site rapide, lisible sur téléphone, pensé pour déclencher l'appel ou le formulaire. Du one-pager à la page de vente. Au-delà, c'est la formule Site complet.",
       prix: '900 €',
     },
     {
