@@ -1,7 +1,8 @@
 /* ============================================================
    Carte prestation
-   Pas de boîte, pas de numéro : un filet haut, un titre lié, un prix
-   en donnée. Six par section.
+   Pas de boîte, pas de numéro, plus de filet haut : un titre lié, un prix
+   en donnée, séparés de leurs voisins par l'espace de la grille. Six par
+   section.
    ============================================================ */
 
 .carte-prestation {
@@ -9,7 +10,6 @@
   flex-direction: column;
   gap: 16px;
   padding-top: 20px;
-  border-top: 1px solid var(--encre);
 }
 
 .carte-prestation-tete {

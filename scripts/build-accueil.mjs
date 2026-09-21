@@ -340,7 +340,14 @@ ${items}
     )
     .join('\n')
 
-  const charge = C.tarifs.charge.items.map((i) => `          <li>${i}</li>`).join('\n')
+  const charge = C.tarifs.charge.items
+    .map(
+      (i) => `          <li class="tarifs-charge-carte">
+            <p class="tarifs-charge-chiffre">${i.chiffre}</p>
+            <p class="tarifs-charge-texte">${i.texte}</p>
+          </li>`
+    )
+    .join('\n')
 
   const verites = C.tarifs.verites
     .map(
@@ -501,10 +508,15 @@ ${champs}
 }
 
 function faqSection() {
+  // Plus de numérotation : le style guide la réserve aux quatre étapes de
+  // la méthode. `numero` reste dans le contenu (scripts/contenu/accueil.mjs)
+  // pour ce qui en dépend encore ailleurs, mais n'est plus rendu ici.
   const items = C.faq.items
     .map(
-      (f) => `          <button class="faq-question" type="button"><span class="faq-numero">${f.numero}</span>${f.q}<span class="faq-signe" aria-hidden="true"></span></button>
-          <div class="faq-reponse"><p>${f.r}</p></div>`
+      (f) => `        <div class="faq-item">
+          <button class="faq-question" type="button">${f.q}<span class="faq-signe" aria-hidden="true"></span></button>
+          <div class="faq-reponse"><p>${f.r}</p></div>
+        </div>`
     )
     .join('\n')
 

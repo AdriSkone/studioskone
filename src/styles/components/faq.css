@@ -2,17 +2,30 @@
    Accordéon de FAQ
    ============================================================ */
 
-.faq { display: flex; flex-direction: column; }
+/* Plus de filets entre les questions : l'espace seul les sépare, et la
+   question ouverte se distingue par un bloc plein — fond --papier-ombre,
+   rayon 16 px — plutôt que par un trait. */
+.faq { display: flex; flex-direction: column; row-gap: 4px; }
+
+.faq-item {
+  /* La question et sa réponse portent 16 px de padding horizontal (voir
+     plus bas) : ce négatif les ramène à l'aplomb de la colonne, comme le
+     faisait l'ancien `margin-inline` posé sur la question seule. */
+  margin-inline: -16px;
+  border-radius: var(--rond-bloc);
+  transition: background-color var(--dur-moyenne) var(--ease);
+}
+.faq-item:has(.faq-question[aria-expanded='true']) {
+  background: var(--papier-ombre);
+}
 
 .faq-question {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 24px;
   width: 100%;
   padding: 20px 16px;
-  margin-inline: -16px;
-  border-top: 1px solid var(--filet-moyen);
   border-radius: var(--rond-interactif);
   text-align: left;
   font-size: var(--text-corps-l);
@@ -25,15 +38,18 @@
    de sa colonne, un offset positif déborderait de la grille. */
 .faq-question:focus-visible { outline-offset: -2px; }
 
+/* La question prend toute la place restante ; le signe reste à droite. */
+.faq-question .faq-signe { margin-left: auto; }
+
 /* ─── Le signe ──────────────────────────────────────────────
-   Deux traits de 1 px. À l'ouverture, le vertical disparaît : le plus
-   devient un moins. C'est une rotation de rien du tout, et elle dit
-   l'état aussi bien qu'une icône entière. */
+   Deux traits de 1 px qui forment un plus. À l'ouverture, l'ensemble
+   pivote de 45° et devient une croix : jamais un chevron qui rebondit. */
 .faq-signe {
   position: relative;
   width: 16px;
   height: 16px;
   flex: none;
+  transition: transform var(--dur-moyenne) var(--ease);
 }
 .faq-signe::before,
 .faq-signe::after {
@@ -42,33 +58,16 @@
   background: currentColor;
 }
 .faq-signe::before { left: 0; top: 7px; width: 16px; height: 1px; }
-.faq-signe::after {
-  left: 7px; top: 0; width: 1px; height: 16px;
-  transition: transform var(--dur-rapide) var(--ease);
-}
-.faq-question[aria-expanded='true'] .faq-signe::after { transform: scaleY(0); }
+.faq-signe::after { left: 7px; top: 0; width: 1px; height: 16px; }
+.faq-question[aria-expanded='true'] .faq-signe { transform: rotate(45deg); }
 
 .faq-reponse {
   max-width: 34em;
-  padding-bottom: 24px;
-  padding-left: 16px;
-  border-left: 1px solid var(--filet-moyen);
+  padding: 0 16px 24px;
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
-  color: var(--gris);
+  /* Ouverte, la réponse vit dans le même bloc --papier-ombre que sa
+     question : --gris y tombe à 4.67, le texte secondaire s'écrit en
+     --encre. */
+  color: var(--encre);
 }
-
-/* Le numéro de la question. Les maquettes ne le dessinent pas, mais il est
-   du texte visible de l'ancienne page : il reste, en donnée mono et en
-   retrait, là où il n'encombre pas la question. */
-.faq-numero {
-  font-family: var(--font-data);
-  font-size: var(--text-data);
-  color: var(--gris);
-  margin-right: 16px;
-  flex: none;
-}
-
-/* La question prend toute la place restante ; le signe reste à droite. */
-.faq-question { justify-content: flex-start; }
-.faq-question .faq-signe { margin-left: auto; }

@@ -43,6 +43,14 @@ const AJOUTS_AUTORISES = [
   // replient du contenu sous 768 px, jamais montrés sur la page d'avant.
   'Voir les 6 autres réalisations',
   'Voir ce qui est compris',
+  // Lot 3 du 21 septembre 2026 — « Ce qui reste à votre charge » passe en
+  // cartes, et Adri a demandé que le chiffre de chacune devienne l'élément
+  // principal, en grand, en JetBrains Mono. Le texte d'origine reste
+  // intact sous ce résumé (voir scripts/contenu/accueil.mjs, `tarifs.charge.items`) :
+  // ces quatre chiffres s'ajoutent au texte, ils ne le remplacent pas.
+  '15 € / an',
+  '0 à 15 € / mois',
+  'Option',
 ]
 
 /**
@@ -88,8 +96,37 @@ const TEXTES_SORTIS_DU_SCRIPT = [
  * formulaire. Les deux étant fusionnés, il n'y a plus de trajet à faire
  * faire : le parcours va d'un écran au suivant, et son bouton final porte
  * « Discuter de mon projet », qui existait déjà.
+ *
+ * Lot 3 du 21 septembre 2026 — Adri a demandé de retirer la numérotation
+ * de la FAQ de l'accueil (`.faq-numero`) : le style guide réserve les
+ * numéros aux quatre étapes de la méthode. `numero` reste dans
+ * scripts/contenu/accueil.mjs (d'autres usages en dépendent), mais le
+ * générateur ne l'imprime plus dans le bouton — voir `faqSection()` dans
+ * scripts/build-accueil.mjs.
+ *
+ * fragments() remplace chaque balise, y compris les balises en ligne comme
+ * `<span>`, par une espace avant de recomposer le texte. Le numéro et la
+ * question de l'ancien balisage (`<span class="faq-numero">01</span>${f.q}`)
+ * redevenaient donc « 01 Combien coûte un site chez vous ? », numéro
+ * compris — et c'est ce fragment entier, pas seulement le numéro, qui
+ * disparaît du texte rendu. Ils sont donc déclarés ici, avec le composant
+ * qui les portait, plutôt que dans TARIFS_RETIRES.
  */
-const TEXTES_DE_COMPOSANTS_RETIRES = ['Discuter de ce projet']
+const TEXTES_DE_COMPOSANTS_RETIRES = [
+  'Discuter de ce projet',
+  '01 Combien coûte un site chez vous',
+  '02 Combien de temps ça prend',
+  "03 Qu'est-ce que j'ai à fournir",
+  "04 Le site m'appartient vraiment",
+  '05 Je pourrai modifier mon site moi-même',
+  '06 Pourquoi pas Wix, Squarespace ou un site à 400',
+  '07 Le référencement est-il inclus',
+  "08 Combien d'allers-retours sont inclus",
+  '09 Que se passe-t-il après la mise en ligne',
+  "10 Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose",
+  '11 Le studio est récent. Pourquoi vous faire confiance',
+  "12 J'ai déjà un site, faut-il tout refaire",
+]
 
 /**
  * Textes remplacés à la demande d'Adri : l'ancien texte, et celui qui le

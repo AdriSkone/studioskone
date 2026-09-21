@@ -61,21 +61,18 @@ body { padding-top: var(--nav-h); }
   .hero-actions { --col: 8 / span 5; }
 }
 
-/* Le bandeau de preuves ferme le hero : un filet haut, et des filets
-   verticaux entre les mentions — pas des points. */
+/* Le bandeau de preuves ferme le hero : quatre mentions séparées par
+   l'espace seul, aucun trait — ni au-dessus, ni entre elles. */
 .hero-preuves {
   --col: 1 / -1;
   display: flex;
   flex-wrap: wrap;
+  column-gap: 48px;
+  row-gap: 12px;
   margin-top: var(--section-s);
-  padding-top: 16px;
-  border-top: 1px solid var(--filet-moyen);
   font-size: var(--text-petit);
   color: var(--gris);
 }
-
-.hero-preuves span { padding-inline: 24px; border-left: 1px solid var(--filet-moyen); }
-.hero-preuves span:first-child { padding-left: 0; border-left: 0; }
 
 /* Le ruban est une section : il touche les deux bords et n'a pas besoin
    de sortir des marges d'une autre. */
@@ -91,7 +88,8 @@ body { padding-top: var(--nav-h); }
 /* Le contenu passe au-dessus du grain. */
 .hero-corps { position: relative; }
 
-/* Sous 768 px : tout s'empile, et les preuves passent en liste à filets.
+/* Sous 768 px : tout s'empile, et les preuves passent en colonne, toujours
+   séparées par l'espace seul.
 
    Correctif mobile du 21 septembre 2026 — le titre à 56 px cassait sur
    sept lignes et poussait le bouton du hero au ras du pli (796 px sur un
@@ -108,28 +106,22 @@ body { padding-top: var(--nav-h); }
   .hero-lien { text-align: center; padding-block: 12px; }
   .hero-preuves {
     flex-direction: column;
+    row-gap: 12px;
     margin-top: 40px;
-    padding-top: 0;
-    border-top: 0;
-  }
-  .hero-preuves span {
-    padding: 12px 0;
-    border-left: 0;
-    border-top: 1px solid var(--filet-moyen);
   }
 }
 
 /* ─── Problème ──────────────────────────────────────────────── */
 .probleme-titre { font-size: var(--text-h1); margin-bottom: 48px; }
 
+/* Une liste courte de phrases : l'espace seul la porte, aucun trait. */
 .probleme-liste {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
+  row-gap: 20px;
 }
 .symptome {
-  padding: 20px 0;
-  border-top: 1px solid var(--filet);
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
 }
@@ -174,8 +166,9 @@ body { padding-top: var(--nav-h); }
   mix-blend-mode: multiply;
 }
 
+/* Deux colonnes courtes : l'espace seul les sépare, aucun trait. */
 .metiers { display: flex; gap: 24px; align-items: center; }
-.metier { flex: 1; padding-top: 16px; border-top: 1px solid var(--encre); }
+.metier { flex: 1; }
 .metier-label { font-size: var(--text-petit); color: var(--gris); }
 .metier-titre {
   font-family: var(--font-display);
@@ -195,16 +188,24 @@ body { padding-top: var(--nav-h); }
 
 .studio-texte { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
 
+/* Trois avantages, en cartes : deux colonnes sur desktop, une sur mobile. */
 .benefices {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-self: start;
   column-gap: var(--grille-gouttiere);
+  row-gap: var(--grille-gouttiere);
   margin-top: var(--section-s);
 }
-.benefice { padding-top: 20px; border-top: 1px solid var(--encre); }
+.benefice {
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+}
 .benefice-titre { font-size: var(--text-h3); }
-.benefice-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+/* Sur --papier-ombre, --gris tombe à 4.67 : le texte secondaire d'une
+   carte s'écrit en --encre. */
+.benefice-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 /* ─── Transparence ──────────────────────────────────────────── */
 .transparence-corps { display: flex; flex-direction: column; gap: 20px; }
@@ -258,46 +259,75 @@ body { padding-top: var(--nav-h); }
 .tarifs-options-liste { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: var(--text-petit); }
 
 .tarifs-toujours, .tarifs-charge { margin-top: var(--section-s); }
+
+/* « Dans toutes les formules » : quatre cartes, 2 × 2 sur desktop. */
 .tarifs-arguments {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
-  row-gap: 24px;
+  row-gap: var(--grille-gouttiere);
   margin-top: 24px;
 }
-.tarifs-argument { padding-top: 16px; border-top: 1px solid var(--encre); }
-.tarifs-argument-titre { font-family: var(--font-texte); font-size: var(--text-corps); font-weight: 500; letter-spacing: 0; }
-.tarifs-argument-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+.tarifs-argument {
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+}
+.tarifs-argument-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: var(--text-h3);
+  letter-spacing: var(--tracking-h3);
+}
+.tarifs-argument-texte { margin-top: 8px; font-family: var(--font-texte); font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
+/* « Ce qui reste à votre charge » : même grille de cartes, mais le chiffre
+   mène — c'est le fond inversé du bloc précédent : là, ce que fait le
+   studio ; ici, ce qui reste au client. */
 .tarifs-charge-liste {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--grille-gouttiere);
+  row-gap: var(--grille-gouttiere);
   margin-top: 24px;
-  max-width: 70ch;
-  font-size: 0.9375rem;
-  line-height: var(--leading-corps);
 }
+.tarifs-charge-carte {
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+}
+.tarifs-charge-chiffre {
+  font-family: var(--font-data);
+  font-size: var(--text-h3);
+  color: var(--encre);
+}
+.tarifs-charge-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 @media (max-width: 1023px) {
   .tarifs-grille { grid-template-columns: 1fr; }
-  .tarifs-arguments { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 767px) {
   .tarifs-grille { display: flex; flex-direction: column; }
-  .tarifs-arguments { grid-template-columns: 1fr; }
+  .tarifs-arguments,
+  .tarifs-charge-liste { grid-template-columns: 1fr; }
 }
 
+/* Les deux « vérités » : même traitement en carte. */
 .verites {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
-  row-gap: 32px;
+  row-gap: var(--grille-gouttiere);
   margin-top: var(--section-s);
 }
-.verite { padding-top: 20px; border-top: 1px solid var(--filet-moyen); }
+.verite {
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+}
 .verite-titre { font-size: var(--text-corps); font-weight: 500; font-family: var(--font-texte); letter-spacing: 0; }
-.verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+.verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 /* ─── Estimateur ────────────────────────────────────────────── */
 .estimateur-tete { display: flex; flex-direction: column; gap: 12px; }
@@ -311,17 +341,23 @@ body { padding-top: var(--nav-h); }
 .faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-size: var(--text-petit); color: var(--gris); }
 .faq { margin-top: 48px; }
 
-/* ─── Engagements ───────────────────────────────────────────── */
+/* ─── Engagements ─────────────────────────────────────────────
+   Cinq cartes, deux colonnes sur desktop : la dernière tombe seule sur
+   sa ligne, ce qui est voulu — l'asymétrie est la norme sur ce site. */
 .engagements {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
-  row-gap: 32px;
+  row-gap: var(--grille-gouttiere);
   margin-top: 48px;
 }
-.engagement { padding-top: 16px; border-top: 1px solid var(--encre); }
+.engagement {
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+}
 .engagement-titre { font-size: var(--text-corps); }
-.engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+.engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 /* ─── Contact ───────────────────────────────────────────────── */
 .contact-lead { display: flex; flex-direction: column; gap: 16px; }
@@ -329,10 +365,9 @@ body { padding-top: var(--nav-h); }
 
 /* ─── Petit écran ───────────────────────────────────────────── */
 @media (max-width: 1023px) {
-  .prestations-grille,
-  .verites,
-  .benefices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .engagements { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* .verites, .benefices et .engagements sont déjà à deux colonnes en
+     base : rien à resserrer ici. */
+  .prestations-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   /* Le portrait passe au-dessus du titre, à largeur mesurée. */
   .studio-label, .studio-portrait, .studio-titre,

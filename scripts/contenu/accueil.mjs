@@ -308,11 +308,15 @@ export const tarifs = {
   },
   charge: {
     titre: 'Ce qui reste à votre charge',
+    // Chantier « lot 3 » du 21 septembre 2026 — les quatre lignes deviennent
+    // des cartes, et Adri a demandé que le chiffre porte la carte : `chiffre`
+    // est un résumé en donnée, ajouté à côté du texte d'origine, qui reste
+    // mot pour mot celui d'avant (voir REMARQUES, verifier-copy.mjs).
     items: [
-      "Le nom de domaine, environ 15&nbsp;€ par an, à votre nom.",
-      "L'hébergement, de 0 à 15&nbsp;€ par mois selon le projet, payé en direct et à votre nom. Je ne prends pas de marge dessus.",
-      'Les contenus, si vous préférez les rédiger vous-même. Sinon je m&rsquo;en occupe, c&rsquo;est une option.',
-      "La maintenance après livraison, si vous en voulez une. Elle n'est jamais imposée.",
+      { chiffre: '15 € / an', texte: "Le nom de domaine, environ 15&nbsp;€ par an, à votre nom." },
+      { chiffre: '0 à 15 € / mois', texte: "L'hébergement, de 0 à 15&nbsp;€ par mois selon le projet, payé en direct et à votre nom. Je ne prends pas de marge dessus." },
+      { chiffre: 'Option', texte: 'Les contenus, si vous préférez les rédiger vous-même. Sinon je m&rsquo;en occupe, c&rsquo;est une option.' },
+      { chiffre: 'Option', texte: "La maintenance après livraison, si vous en voulez une. Elle n'est jamais imposée." },
     ],
   },
   verites: [
