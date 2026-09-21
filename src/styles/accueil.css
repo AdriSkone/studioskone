@@ -47,14 +47,39 @@ body { padding-top: var(--nav-h); }
 .hero-boutons {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 24px 32px;
+  /* Le bouton et le lien partagent la même ligne de base : centrés, le
+     lien flottait deux pixels trop haut à côté du cadre du bouton. */
+  align-items: baseline;
+  gap: 24px;
 }
 
 /* « Voir les réalisations » est un lien, pas un second bouton : deux
    cadres côte à côte donneraient deux appels de même poids, alors qu'il
    n'y en a qu'un. */
-.hero-lien { white-space: nowrap; }
+/* Au repos, le lien est souligné : c'est ce qui le distingue d'un bouton
+   et dit qu'il mène ailleurs dans la page. Le style guide le demande
+   explicitement à côté du bouton plein. */
+.hero-lien {
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Entre 768 et 1023 px, le bloc d'action n'occupait que quatre colonnes
+   d'une grille de douze : 202 px, trop peu pour poser le bouton et le lien
+   côte à côte, qui passaient donc l'un sous l'autre. Il prend la largeur
+   qu'il lui faut. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-actions { --col: 1 / span 8; margin-top: 40px; }
+}
+
+/* Entre 1024 et 1439 px, une colonne ne fait que 53 px : quatre en font
+   300, cinq 359, et le bouton avec son écart et le lien en demandent 377.
+   Il en faut donc six. */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .hero-actions { --col: 7 / span 6; }
+}
 
 @media (min-width: 1440px) {
   .hero-statement { --col: 1 / span 6; }
@@ -102,8 +127,27 @@ body { padding-top: var(--nav-h); }
   .hero-titre { font-size: var(--text-h1); }
   .hero-statement { margin-top: 32px; max-width: 34em; font-size: 1rem; }
   .hero-actions { margin-top: 28px; }
-  .hero-boutons { flex-direction: column; align-items: stretch; gap: 16px; }
-  .hero-lien { text-align: center; padding-block: 12px; }
+  /* Les deux actions s'empilent, pleine largeur, sans décalage. Le lien
+     « Voir les réalisations » prend l'allure d'un bouton secondaire :
+     au doigt, un lien de texte est une cible trop mince. */
+  .hero-boutons { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-lien {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 52px;
+    padding: 14px 24px;
+    border: 1px solid var(--encre);
+    border-radius: var(--rond-interactif);
+    text-decoration: none;
+  }
+  .hero-boutons .bouton {
+    justify-content: flex-start;
+    /* align-items: stretch ne suffit pas : le bouton porte align-self
+       flex-start, qui le ramène à sa largeur de contenu. */
+    width: 100%;
+    align-self: stretch;
+  }
   .hero-preuves {
     flex-direction: column;
     row-gap: 12px;

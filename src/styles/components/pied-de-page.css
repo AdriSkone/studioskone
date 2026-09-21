@@ -8,10 +8,15 @@
    il n'a pas besoin d'un second fond puisque la section est déjà sombre. */
 .pied-clore { padding-bottom: var(--section-s); }
 
+/* Le pied est une section sombre : le mot passe au papier, et le point
+   du logo au bleu clair — le bleu de Prusse y tombe à 1.7 de contraste,
+   il n'y est lisible ni comme texte ni comme signe. La règle vise la
+   classe interne du SVG, posée par partials.mjs. */
 .pied-logo {
   display: block;
-  color: var(--encre);
+  color: var(--sombre-texte);
 }
+.pied-logo .logo .logo-c1 { fill: var(--accent-clair); }
 
 .pied-intro {
   --col: 1 / span 4;
@@ -29,6 +34,13 @@
 }
 
 .pied-colonne { display: flex; flex-direction: column; gap: 10px; }
+
+/* Sous 1024 px, les colonnes passent sous le paragraphe de localisation :
+   sans cet écart, « Le studio » venait s'y coller et se lisait comme la
+   suite de la phrase. */
+@media (max-width: 1023px) {
+  .pied-colonne { margin-top: 48px; }
+}
 
 .pied-titre {
   font-size: var(--text-petit);
