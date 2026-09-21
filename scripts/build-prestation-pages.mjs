@@ -104,8 +104,7 @@ ${b.turn ? `        <p class="probleme-turn reveal">${b.turn}</p>\n` : ''}      
           <h2 class="pres-title reveal">${b.h2}</h2>
         </div>
         <div class="services-grid">
-${b.items.map((it, i) => `          <div class="service-card reveal">
-            <span class="service-num">${String(i + 1).padStart(2, '0')}</span>
+${b.items.map((it) => `          <div class="service-card reveal">
             <h3 class="service-title">${esc(it.t)}</h3>
             <p class="service-desc">${esc(it.d)}</p>
           </div>`).join('\n')}
@@ -210,9 +209,8 @@ ${b.items.map((it) => `          <a class="pres-link reveal" href="${esc(it.href
           <h2 class="pres-title reveal">${b.h2}</h2>
         </div>
         <div class="faq-list pres-faq" role="list">
-${b.items.map(([q, a], i) => `          <div class="faq-item reveal" role="listitem">
+${b.items.map(([q, a]) => `          <div class="faq-item reveal" role="listitem">
             <button class="faq-question" aria-expanded="false">
-              <span class="faq-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
               <span class="faq-q-text">${esc(q)}</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>

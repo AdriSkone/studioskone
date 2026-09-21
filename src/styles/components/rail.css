@@ -3,6 +3,16 @@
    Deux rangées qui défilent en sens inverse, en continu. Ce n'est plus
    une section épinglée : le visiteur n'a rien à faire pour que la série
    se déroule, et rien ne retient son défilement.
+
+   Correctif du 21 septembre 2026 — les cartes tenaient jusqu'ici toute la
+   largeur de l'écran et s'empilaient sous 1024 px (1 086 px de haut sur
+   mobile). Le ruban de cartes remplace l'empilement : les cartes sont
+   petites, toutes de la même taille, et défilent horizontalement partout,
+   à la souris et à la molette sur un pointeur fin, au doigt ailleurs. Le
+   traitement provisoire — trois cartes visibles, bouton « Voir les 6
+   autres réalisations », cartes repliées à hauteur nulle — disparaît avec
+   lui : le défilement horizontal donne accès aux neuf projets sans rien
+   replier.
    ============================================================ */
 
 .realisations-rubans {
@@ -13,10 +23,17 @@
 }
 
 .ruban-projets {
-  /* Le défilement à la souris reste possible : l'animation se met en
-     pause au survol, et la barre native prend le relais. */
+  /* Le défilement manuel reste toujours possible : à la souris ou au
+     pavé tactile quand l'animation est en pause, au doigt quand elle ne
+     tourne pas du tout (voir le bloc pointer: coarse plus bas).
+     La marge de la grille vit ici, sur le conteneur qui défile, jamais sur
+     la piste qu'on anime : posée sur la piste, elle s'ajoutait à la
+     largeur dont `-50%` est une fraction, et la boucle sautait de la
+     moitié de la marge à chaque tour. */
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-inline: var(--grille-marge);
 }
 .ruban-projets::-webkit-scrollbar { display: none; }
 
@@ -24,10 +41,11 @@
   display: flex;
   gap: var(--grille-gouttiere);
   width: max-content;
-  padding-inline: var(--grille-marge);
-  /* La piste contient deux fois la même série et se translate d'une
-     demi-longueur : elle revient exactement à son point de départ, et la
-     boucle ne se voit pas. */
+  /* La piste contient deux fois la même série. Dix cartes n'ont que neuf
+     intervalles : la translation qui ramène exactement au point de départ
+     n'est donc pas -50 % pile, mais -50 % moins un demi-intervalle — sans
+     quoi la boucle sautait d'un demi-`--grille-gouttiere` à chaque tour,
+     hérité de l'intervalle manquant après la dixième carte. */
   animation: ruban-projets 52s linear infinite;
   will-change: transform;
 }
@@ -36,6 +54,7 @@
   animation-direction: reverse;
 }
 
+/* Arrêt au survol : on ne peut pas lire une série qui continue de fuir. */
 .ruban-projets:hover .ruban-projets-piste,
 .ruban-projets:focus-within .ruban-projets-piste {
   animation-play-state: paused;
@@ -43,102 +62,83 @@
 
 @keyframes ruban-projets {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(calc(-50% - (var(--grille-gouttiere) / 2)), 0, 0); }
 }
 
-/* ─── Vignette ──────────────────────────────────────────────
-   Un seul format. « Ratio uniforme 16/10, toutes de la même taille » :
-   deux tailles créaient une hiérarchie entre les projets, là où la série
-   doit se lire comme un ensemble. */
-.carte-projet {
-  width: 400px;
+/* ─── Carte ─────────────────────────────────────────────────
+   260 à 280 px sur mobile, 340 à 360 sur desktop : toutes identiques,
+   pour que la série se lise comme un ensemble plutôt que comme un
+   classement. Le format plein (défini dans carte-projet.css, utilisé sur
+   les pages projet) ne s'applique pas ici : le ruban a son propre gabarit,
+   plus dense. */
+.ruban-projets-piste .carte-projet {
+  width: 270px;
   flex: none;
+  gap: 16px;
 }
 
-.carte-projet-image { aspect-ratio: 16 / 10; }
+@media (min-width: 768px) {
+  .ruban-projets-piste .carte-projet { width: 340px; }
+}
 
 @media (min-width: 1440px) {
-  .carte-projet { width: 480px; }
+  .ruban-projets-piste .carte-projet { width: 360px; }
 }
 
-/* ─── Sous 1024 px, et en mouvement réduit ──────────────────
-   Grille verticale statique. Une préférence d'affichage ne retire jamais
-   de contenu : sans cette règle, la piste resterait plus large que son
-   cadre et les projets hors écran seraient hors d'atteinte. */
-@media (prefers-reduced-motion: reduce), (max-width: 1023px) {
-  .realisations-rubans { gap: 0; }
+/* Ratio uniforme, cadrée sur le haut du sujet, jamais rognée sur son
+   contenu — déjà la valeur par défaut de .carte-projet-image, réaffirmée
+   ici parce que c'est une contrainte du ruban, pas un hasard hérité. */
+.ruban-projets-piste .carte-projet-image { aspect-ratio: 16 / 10; }
 
-  .ruban-projets { overflow: visible; }
+/* Sous l'image : le nom, le type, puis le statut du projet — le texte
+   long (le grain du projet, la signature) est présent au complet dans le
+   DOM, lisible par Google et par un lecteur d'écran, mais visuellement
+   resserré à deux lignes : une carte de 270 à 360 px ne peut pas porter
+   un paragraphe entier sans redevenir énorme. */
+.ruban-projets-piste .carte-projet-titre {
+  font-size: var(--text-h3);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.ruban-projets-piste .carte-projet-tete { gap: 8px; }
+
+.ruban-projets-piste .carte-projet-tagline { font-size: var(--text-petit); }
+
+.ruban-projets-piste .carte-projet-note {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.ruban-projets-piste .carte-projet-meta {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+
+/* ─── Défilement manuel : tactile et mouvement réduit ────────
+   Jamais d'auto-défilement sur écran tactile, ni en mouvement réduit :
+   dans les deux cas, le geste reste entièrement sous la main du
+   visiteur. `scroll-snap` ancre chaque carte, et la carte suivante
+   dépasse toujours du bord — les cartes plus étroites que le viewport
+   laissent naturellement voir un bout de la suivante. */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ruban-projets {
+    /* `scroll-snap-type` s'applique au conteneur qui défile, pas à la
+       piste qu'il contient : posé sur la piste, il n'ancre rien. */
+    scroll-snap-type: x mandatory;
+  }
 
   .ruban-projets-piste {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: auto;
-    column-gap: var(--grille-gouttiere);
-    row-gap: 64px;
-    max-width: var(--grille-max);
-    margin-inline: auto;
     animation: none;
   }
 
-  .ruban-projets[data-sens='arriere'] .ruban-projets-piste { padding-top: 64px; }
+  .ruban-projets-piste .carte-projet {
+    scroll-snap-align: start;
+  }
 
-  .carte-projet { width: auto; }
-
-  /* Les copies de boucle n'ont plus lieu d'être quand rien ne défile. */
+  /* Les copies de boucle ne servent qu'à masquer le point de retour de
+     l'animation : sans elle, elles ne feraient que doubler la série. */
   .ruban-projets-piste .carte-projet[aria-hidden='true'] { display: none; }
-}
-
-/* ─── Bouton « Voir les 6 autres réalisations » ──────────────
-   N'existe que sous 768 px : au-delà, les neuf projets sont déjà tous
-   visibles et il n'aurait rien à faire. */
-.realisations-plus { display: none; }
-
-/* rail.ts pose `hidden` une fois les six cartes ouvertes : le bouton n'a
-   plus rien à faire. `.bouton` fixe déjà `display: inline-block` avec la
-   même spécificité qu'un attribut — sans cette règle, elle l'emporterait
-   sur le `[hidden]` du navigateur et le bouton resterait affiché. */
-.realisations-toggle[hidden] { display: none; }
-
-@media (max-width: 767px) {
-  .ruban-projets-piste {
-    grid-template-columns: 1fr;
-    /* L'espacement ne vient plus du gap de grille, qui laisserait un vide
-       fixe même derrière une carte repliée à zéro : il vient de la marge
-       de chaque carte, qui disparaît avec elle. */
-    row-gap: 0;
-  }
-  .ruban-projets[data-sens='arriere'] .ruban-projets-piste { padding-top: 0; }
-  .carte-projet:not(:last-child) { margin-bottom: 64px; }
-
-  /* Seules les trois premières cartes réelles restent visibles : les deux
-     dernières de la première rangée, et toute la seconde. Jamais de
-     display: none — les six projets repliés restent dans le DOM, lisibles
-     par Google et par un lecteur d'écran, seule leur hauteur visible tombe
-     à zéro. Les copies de boucle (`aria-hidden`) ne sont jamais
-     concernées : elles sont déjà masquées par la règle du bloc précédent. */
-  .ruban-projets[data-sens='avant'] .carte-projet:nth-child(n + 4):not([aria-hidden]),
-  .ruban-projets[data-sens='arriere'] .carte-projet:not([aria-hidden]) {
-    max-height: 0;
-    margin-bottom: 0;
-    overflow: hidden;
-  }
-
-  /* Au clic sur le bouton, rail.ts pose cette classe sur le conteneur : les
-     six cartes retrouvent leur hauteur et leur marge. */
-  .realisations-rubans.est-etendu .ruban-projets[data-sens='avant'] .carte-projet:nth-child(n + 4):not([aria-hidden]),
-  .realisations-rubans.est-etendu .ruban-projets[data-sens='arriere'] .carte-projet:not([aria-hidden]) {
-    max-height: none;
-    margin-bottom: 64px;
-    overflow: visible;
-  }
-  .realisations-rubans.est-etendu .ruban-projets[data-sens='arriere'] .ruban-projets-piste {
-    padding-top: 64px;
-  }
-
-  .realisations-plus {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-  }
 }

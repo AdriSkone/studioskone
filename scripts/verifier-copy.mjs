@@ -39,9 +39,10 @@ const AJOUTS_AUTORISES = [
   // Le lien Instagram n'était qu'une icône, son nom vivait dans un
   // aria-label. Il est maintenant écrit : un lien doit avoir un nom visible.
   'Instagram',
-  // Correctif mobile du 21 septembre 2026 — deux nouveaux boutons qui
-  // replient du contenu sous 768 px, jamais montrés sur la page d'avant.
-  'Voir les 6 autres réalisations',
+  // Correctif mobile du 21 septembre 2026 — bouton qui replie du contenu
+  // sous 768 px, jamais montré sur la page d'avant. Son frère « Voir les 6
+  // autres réalisations » a été retiré le même jour avec le repli des
+  // réalisations — voir TEXTES_DE_COMPOSANTS_RETIRES.
   'Voir ce qui est compris',
   // Lot 3 du 21 septembre 2026 — « Ce qui reste à votre charge » passe en
   // cartes, et Adri a demandé que le chiffre de chacune devienne l'élément
@@ -126,6 +127,61 @@ const TEXTES_DE_COMPOSANTS_RETIRES = [
   "10 Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose",
   '11 Le studio est récent. Pourquoi vous faire confiance',
   "12 J'ai déjà un site, faut-il tout refaire",
+
+  // Lot 4 du 21 septembre 2026 — Adri a confirmé le retrait de la
+  // numérotation restante hors la méthode : la FAQ des cinq pages
+  // prestations (`.faq-num`) et les cartes « Ce que je livre »
+  // (`.service-num`). Voir `BLOCKS.faq` et `BLOCKS.deliver` dans
+  // scripts/build-prestation-pages.mjs, et prestation.css.
+  //
+  // Le numéro de `.service-num` ne laisse aucun fragment détectable une
+  // fois retiré : il précède un `<h3>`, une balise qui coupe déjà les
+  // fragments, si bien que « 01 » n'a jamais été soudé au titre qui le
+  // suit — seule la FAQ, dont le numéro vit dans un `<span>` en ligne à
+  // l'intérieur du même `<button>` que la question, recomposait un seul
+  // fragment « 0X Question », qu'il faut donc déclarer ici question par
+  // question, une page à la fois.
+  '01 Mon site sera-t-il hors ligne pendant la refonte',
+  '02 Je peux garder mon nom de domaine',
+  '03 Combien de temps prend une refonte',
+  '04 Et si mon ancien prestataire ne me donne pas les accès',
+  '05 Vous travaillez sur WordPress, Wix, Squarespace',
+  '06 Combien de temps avant de voir un effet sur mes visites',
+
+  'Je n ai ni textes ni photos. C est possible quand même',
+  'Est-ce que je vais apparaître sur Google',
+  'Je n y connais rien en informatique.',
+  'Combien de temps ça va me prendre',
+  'Est-ce que ça vaut le coup si je travaille déjà par le bouche-à-oreille',
+  'Et si je veux ajouter des choses plus tard',
+
+  'Combien de temps pour créer un site internet',
+  'Vous vous déplacez sur Nantes',
+  'Est-ce que je serai bien référencé sur Google',
+  'Mon site m appartiendra',
+  'Vous travaillez avec quelles technologies',
+  'J ai déjà un site, faut-il tout refaire',
+
+  'Shopify ou site sur mesure',
+  'Combien coûte Shopify tous les mois',
+  'Je pourrai ajouter mes produits moi-même',
+  'Vous gérez la reprise de mon catalogue existant',
+  'Est-ce que vous faites aussi les photos produits',
+  'En combien de temps ma boutique peut-elle ouvrir',
+
+  'Combien de temps pour créer une application',
+  'iOS et Android en même temps',
+  'Faut-il commencer petit',
+  "Et si mon application est refusée par l App Store",
+  'Qui possède le code',
+  'Vous faites aussi la partie serveur',
+
+  // Correctif mobile du 21 septembre 2026 — « Voir les 6 autres
+  // réalisations » (déclaré plus haut comme ajout autorisé) disparaît à
+  // son tour : le ruban de cartes à défilement horizontal donne accès
+  // aux neuf projets sans repli, voir components/rail.css et
+  // scripts/build-accueil.mjs, `realisations()`.
+  'Voir les 6 autres réalisations',
 ]
 
 /**

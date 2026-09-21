@@ -84,8 +84,17 @@ function hero() {
  * l'intérieur du hero, ce qui le liait à une section dont il n'est pas.
  */
 function ruban() {
-  const piste = [...C.ruban, ...C.ruban]
-    .map((r) => `<span class="ruban-item">${r}</span>`)
+  // Les prestations sont séparées par l'espace et un point de 6 px en
+  // accent — jamais un filet. Le point vit aussi à la jointure entre les
+  // deux séries dupliquées : la boucle doit se lire comme la même liste
+  // qui continue, pas comme deux blocs recollés.
+  const serie = [...C.ruban, ...C.ruban]
+  const piste = serie
+    .map((r, i) => {
+      const item = `<span class="ruban-item">${r}</span>`
+      const point = i < serie.length - 1 ? '<span class="ruban-point" aria-hidden="true"></span>' : ''
+      return item + point
+    })
     .join('')
 
   return `  <section class="ruban" id="ruban" aria-hidden="true">
@@ -289,10 +298,6 @@ ${liste.map((p) => vignette(p, true)).join('\n')}
     <div class="realisations-rubans" id="realisationsRubans">
 ${piste(rangees[0], 'avant')}
 ${piste(rangees[1], 'arriere')}
-    </div>
-
-    <div class="realisations-plus">
-      <button type="button" class="bouton bouton--secondaire realisations-toggle" id="realisationsToggle" aria-expanded="false" aria-controls="realisationsRubans">${C.realisations.voirPlus}</button>
     </div>
   </section>`
 }

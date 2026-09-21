@@ -175,12 +175,6 @@ body { padding-top: var(--nav-h); }
   border-radius: var(--rond-bloc);
 }
 
-.service-num {
-  font-family: var(--font-data);
-  font-size: var(--text-data);
-  color: var(--gris);
-}
-
 .service-title,
 .truth-title {
   font-family: var(--font-display);
@@ -288,13 +282,6 @@ body { padding-top: var(--nav-h); }
 }
 .faq-question:hover { color: var(--accent-profond); }
 .faq-question:focus-visible { outline-offset: -2px; }
-
-.faq-num {
-  flex: none;
-  font-family: var(--font-data);
-  font-size: var(--text-data);
-  color: var(--gris);
-}
 
 .faq-q-text { flex: 1; }
 

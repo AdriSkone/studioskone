@@ -3,8 +3,6 @@
    ============================================================ */
 
 .ruban {
-  border-top: 1px solid var(--filet-moyen);
-  border-bottom: 1px solid var(--filet-moyen);
   overflow: hidden;
 }
 
@@ -25,7 +23,18 @@
 
 .ruban-item {
   padding: 0 32px;
-  border-right: 1px solid var(--filet-moyen);
+}
+
+/* Le séparateur : un vrai cercle de 6 px en accent, jamais un point médian
+   typographique. Il fait écho au point du logo. L'espace qui l'entoure
+   vient du padding de `.ruban-item` de part et d'autre — aucune marge
+   propre n'est nécessaire ici. */
+.ruban-point {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 /* La piste contient deux fois la même série ; elle se translate d'une

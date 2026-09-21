@@ -193,7 +193,12 @@ export const realisations = {
   introFort:
     "Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.",
   // Correctif mobile du 21 septembre 2026 : sous 768 px, seules les trois
-  // premières cartes s'affichent, ce bouton révèle les six autres.
+  // premières cartes s'affichaient, ce bouton révélait les six autres.
+  // Retiré le même jour par le ruban de cartes à défilement horizontal,
+  // qui donne accès aux neuf projets sans repli — voir components/rail.css
+  // et scripts/build-accueil.mjs, `realisations()`. Le champ reste ici,
+  // comme `numero` plus bas : on ne supprime pas une donnée de contenu
+  // parce qu'un générateur a cessé de l'imprimer.
   voirPlus: 'Voir les 6 autres réalisations',
 }
 
