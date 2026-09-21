@@ -151,9 +151,11 @@ L'ordre des sections ne change pas.
 
 **Hero.** Titre pleine largeur en display. Paragraphe à gauche, bloc d'action à droite avec les deux boutons **sur une même ligne**, bouton plein à gauche, lien souligné à droite, 24 px entre les deux. Bandeau de réassurance à quatre mentions séparées par l'espace seul, aucun filet. Une seule forme graphique : un grand arc en débord du bord droit, 8 à 10 % d'opacité, dans la moitié basse, jamais derrière un mot. Le hero reste sous la hauteur d'écran et la section suivante affleure sur 80 à 120 px.
 
+**Ruban des prestations.** Bandeau défilant sous le hero. **Aucun filet** — ni au-dessus, ni en dessous, ni entre les prestations. Les éléments sont séparés par un grand espace et un point de 6 px en accent (un vrai cercle, jamais un point médian typographique) : il fait écho au point du logo. Arrêt au survol et au focus.
+
 **Vignette de projet.** Ratio uniforme 16/10, **toutes de la même taille**, radius 16 px, cadrage sur le haut du site, jamais rognée sur son contenu. Aucun badge posé dessus, aucun cadre de navigateur dessiné. Au survol, l'image ne bouge pas : le curseur passe en pastille « Voir le projet » et le titre passe en accent.
 
-**Réalisations.** Double ruban défilant, deux rangées en sens inverse, 45 à 60 s par cycle, boucle sans couture par duplication, arrêt au survol, défilement possible à la souris. Sous 1024 px : grille verticale statique.
+**Réalisations.** Cartes de 260 à 280 px sur mobile, 340 à 360 px sur desktop, toutes de la même taille. Double ruban, deux rangées en sens inverse, 45 à 60 s par cycle, boucle sans couture par duplication, arrêt au survol, défilement possible à la souris. Jamais d'auto-défilement sur écran tactile (`pointer: coarse`) ni en mouvement réduit : dans les deux cas, le défilement redevient entièrement manuel, avec un ancrage par carte (`scroll-snap`) et la carte suivante qui dépasse pour montrer qu'il y a une suite. Les copies de boucle, dupliquées dans le DOM pour la couture, portent `aria-hidden="true"` et ne sont jamais focalisables ; sans le défilement automatique elles n'ont plus lieu d'être et sont masquées.
 
 **Prestations.** Six blocs de tailles variables selon l'importance. **Aucune numérotation**, ce n'est pas une séquence. Prix en JetBrains Mono.
 
@@ -195,7 +197,7 @@ Courbe unique : `cubic-bezier(0.16, 1, 0.3, 1)`. Survols 200 ms, révélations 6
 
 **Focus clavier :** anneau de 2 px en accent, décalé de 2 px. Jamais supprimé, jamais remplacé par le curseur personnalisé. Seule exception à l'interdiction des effets de contour.
 
-**`prefers-reduced-motion: reduce` :** tout est visible à l'état final immédiatement. Pas de pin, pas de scrub, pas de parallaxe. Les rubans deviennent des grilles statiques. Les formes graphiques sont supprimées. Les survols ne gardent que le changement de couleur.
+**`prefers-reduced-motion: reduce` :** tout est visible à l'état final immédiatement. Pas de pin, pas de scrub, pas de parallaxe. Les rubans s'arrêtent : le défilement redevient entièrement manuel, comme sur `pointer: coarse`. Les formes graphiques sont supprimées. Les survols ne gardent que le changement de couleur.
 
 ---
 
