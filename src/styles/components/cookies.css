@@ -47,12 +47,21 @@
     right: 0;
     bottom: 0;
     width: 100%;
+    gap: 12px;
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
     border-radius: 0;
-    padding: 20px 24px calc(20px + env(safe-area-inset-bottom));
+    /* La zone sûre tient compte de la barre de Safari sur iPhone : sans
+       elle, les deux boutons passent sous la barre d'adresse. */
+    padding: 16px var(--grille-marge) calc(16px + env(safe-area-inset-bottom));
     transform: translateY(100%);
   }
   .cookies.est-visible { transform: translateY(0); }
+
+  /* Format compact : le titre et le texte tiennent sur deux lignes, les
+     deux boutons restent côte à côte sous le pouce. */
+  .cookies-titre { font-size: var(--text-petit); }
+  .cookies-texte { font-size: var(--text-data); line-height: 1.45; }
+  .cookies-actions .bouton { padding-block: 12px; }
 }
