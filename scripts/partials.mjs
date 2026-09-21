@@ -85,15 +85,23 @@ export function navigation({ prefixe = '' } = {}) {
   return `  <nav class="nav" id="nav" aria-label="Navigation principale">
     <div class="nav-interieur colonnes">
       <a class="nav-logo" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
-      <button class="nav-bascule" id="navBascule" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLiens">
-        <span></span><span></span><span></span>
+      <button class="nav-bascule" id="navBascule" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navPanneau">
+        <span></span><span></span>
       </button>
-      <div class="nav-liens" id="navLiens">
+      <!-- Un seul panneau porte les liens ET le bouton d'action. Sous
+           1024 px il devient le menu plein écran ; au-delà, il passe en
+           display:contents et ses deux enfants reprennent leur place dans
+           la grille, comme s'il n'existait pas. Cela évite de dupliquer le
+           bouton dans le HTML pour le mobile : un lecteur d'écran
+           l'annoncerait deux fois. -->
+      <div class="nav-panneau" id="navPanneau">
+        <div class="nav-liens" id="navLiens">
           ${liens}
-      </div>
-      <div class="nav-actions">
-        <span class="nav-mention">${navAccueil.mention}</span>
-        <a class="bouton bouton--secondaire bouton--compact nav-cta" href="${resoudre(navAccueil.cta.href, prefixe)}">${navAccueil.cta.libelle}</a>
+        </div>
+        <div class="nav-actions">
+          <span class="nav-mention">${navAccueil.mention}</span>
+          <a class="bouton bouton--secondaire bouton--compact nav-cta" href="${resoudre(navAccueil.cta.href, prefixe)}">${navAccueil.cta.libelle}</a>
+        </div>
       </div>
     </div>
   </nav>`

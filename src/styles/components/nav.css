@@ -47,6 +47,10 @@
   width: auto;
 }
 
+/* Au-dessus de 1024 px, le panneau n'existe pas visuellement : ses deux
+   enfants prennent directement leur place dans la grille de la barre. */
+.nav-panneau { display: contents; }
+
 .nav-liens {
   --col: 4 / span 5;
   display: flex;
@@ -133,40 +137,151 @@
 
 @media (max-width: 1023px) {
   .nav-interieur { display: flex; justify-content: space-between; }
-  .nav-liens {
-    position: fixed;
-    inset: var(--nav-h) 0 auto 0;
+
+  /* Le logo se cale sur la hauteur d'un doigt, pas sur celle du desktop. */
+  .logo { height: 24px; }
+
+  /* Menu ouvert, le logo reste lisible au-dessus du panneau : il garde sa
+     fonction de retour à l'accueil, et passe au papier sur le fond sombre. */
+  .nav-logo { position: relative; z-index: 2; }
+  .nav.est-menu-ouvert .nav-logo { color: var(--sombre-texte); }
+
+  /* Le menu plein écran. Registre sombre, comme les quatre sections du
+     site : changer de registre dit qu'on a quitté la page, là où un
+     panneau papier l'aurait seulement recouverte. */
+  .nav-panneau {
+    display: flex;
     flex-direction: column;
-    gap: 0;
-    padding: var(--grille-marge);
-    background: var(--papier);
-    border-bottom: 1px solid var(--encre);
-    transform: translateY(-150%);
-    transition: transform var(--dur-base) var(--ease);
+    justify-content: space-between;
+    gap: 48px;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    padding: calc(var(--nav-h) + 40px) var(--grille-marge)
+             calc(40px + env(safe-area-inset-bottom)) var(--grille-marge);
+    background: var(--sombre);
+    color: var(--sombre-texte);
+    overflow-y: auto;
+    /* Fermé, le panneau est retiré du flux ET de la tabulation :
+       `visibility` fait les deux, là où une simple translation laisserait
+       les liens focalisables hors de l'écran. */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity var(--dur-moyenne) var(--ease),
+                transform var(--dur-moyenne) var(--ease),
+                visibility 0s linear var(--dur-moyenne);
   }
-  .nav-liens.est-ouvert { transform: translateY(0); }
-  .nav-liens .nav-lien {
-    padding-block: 16px;
-    border-top: 1px solid var(--filet);
-    font-size: var(--text-corps-l);
+  .nav-panneau.est-ouvert {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
   }
+
+  /* La matière traverse les deux registres : le fond opaque du menu
+     masquerait la couche de grain de la page, il reprend donc la sienne,
+     en `screen` comme toutes les surfaces sombres. */
+  .nav-panneau::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--grain-teinte);
+    mask-image: url('/grain.svg');
+    mask-size: var(--grain-taille) var(--grain-taille);
+    -webkit-mask-image: url('/grain.svg');
+    -webkit-mask-size: var(--grain-taille) var(--grain-taille);
+    mix-blend-mode: screen;
+    opacity: var(--grain-opacite-sombre);
+  }
+
+  .nav-liens {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    white-space: normal;
+  }
+
+  /* Les entrées passent en display, à la taille d'un titre de section :
+     le menu devient une page, pas une liste de réglages. */
+  .nav-panneau .nav-lien {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: calc(var(--wdth-display) * 1%);
+    font-size: var(--text-h2);
+    letter-spacing: var(--tracking-h2);
+    line-height: 1.15;
+    padding-block: 6px;
+    /* Le glissement du survol n'a pas de sens au doigt : la copie posée
+       en ::after est neutralisée ici. */
+    overflow: visible;
+  }
+  .nav-panneau .nav-lien::after { display: none; }
+
+  /* Cascade de 60 ms, jouée à l'ouverture seulement. */
+  .nav-panneau .nav-lien,
+  .nav-panneau .nav-actions { opacity: 0; transform: translateY(12px); }
+  .nav-panneau.est-ouvert .nav-lien,
+  .nav-panneau.est-ouvert .nav-actions {
+    animation: nav-entree var(--dur-base) var(--ease) forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+  @keyframes nav-entree { to { opacity: 1; transform: none; } }
+
+  .nav-actions { display: flex; flex-direction: column; gap: 16px; }
   .nav-mention { display: none; }
+
+  /* Dans le menu, le bouton devient principal et pleine largeur : c'est
+     la seule action de l'écran. */
+  .nav-panneau .nav-cta {
+    justify-content: center;
+    width: 100%;
+    padding-block: 16px;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--papier);
+  }
+
+  /* ─── Le bouton : deux traits qui deviennent une croix ─────────
+     La même icône se transforme, jamais de disparition suivie d'une
+     réapparition. */
   .nav-bascule {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     width: 44px;
     height: 44px;
+    z-index: 2;
+    color: var(--encre);
+    transition: transform var(--dur-moyenne) var(--ease);
   }
   .nav-bascule span {
     display: block;
-    height: 1px;
-    background: var(--encre);
-    transition: transform var(--dur-rapide) var(--ease),
-                opacity var(--dur-rapide) var(--ease);
+    height: 1.5px;
+    background: currentColor;
+    transition: transform var(--dur-moyenne) var(--ease);
   }
-  .nav-bascule.est-ouvert span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-bascule.est-ouvert span:nth-child(2) { opacity: 0; }
-  .nav-bascule.est-ouvert span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  /* Ouvert, le bouton est posé sur le menu sombre. */
+  .nav-bascule.est-ouvert { color: var(--sombre-texte); }
+  .nav-bascule.est-ouvert span:nth-child(1) { transform: translateY(4.75px) rotate(45deg); }
+  .nav-bascule.est-ouvert span:nth-child(2) { transform: translateY(-4.75px) rotate(-45deg); }
+
+  /* À la fermeture, la croix pivote d'un quart de tour pendant qu'elle
+     redevient deux traits. */
+  .nav-bascule.est-en-fermeture { transform: rotate(90deg); }
+}
+
+/* Mouvement réduit : ouverture et fermeture instantanées, sans rotation. */
+@media (prefers-reduced-motion: reduce) {
+  .nav-panneau,
+  .nav-panneau .nav-lien,
+  .nav-panneau .nav-actions,
+  .nav-bascule,
+  .nav-bascule span { transition: none; animation: none; }
+  .nav-panneau.est-ouvert .nav-lien,
+  .nav-panneau.est-ouvert .nav-actions { opacity: 1; transform: none; }
+  .nav-bascule.est-en-fermeture { transform: none; }
 }
