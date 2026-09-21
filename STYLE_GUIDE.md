@@ -107,6 +107,9 @@ Aucune valeur intermédiaire ailleurs. Aucune pilule.
 - **Aucun filet vertical.** La grille est un système d'alignement, elle n'est pas dessinée.
 - Filets horizontaux uniquement, 1 px, encre à 12 % d'opacité, en séparation entre sections. Jamais dans une zone sans contenu.
 - **Pas de filet entre la navigation et le hero.**
+- **Aucun filet comme séparateur de liste.** Un filet sépare des sections, jamais les items d'une même liste. Deux traitements selon le contenu :
+  - **Liste courte de phrases** (symptômes, bandeau de réassurance du hero) : l'espace seul, aucun trait, un espacement vertical franc.
+  - **Liste d'arguments avec un titre et un texte** (engagements, avantages, formules, nuances de tarifs) : des cartes. Fond `--papier-ombre` (ou `--papier` quand la carte tombe dans une section déjà `--papier-ombre`), rayon 16 px, padding généreux, aucune bordure, aucune ombre. Grille de deux colonnes sur desktop, une colonne sur mobile. Dans une carte à fond `--papier-ombre`, le texte secondaire s'écrit en `--encre`, jamais en `--gris`, qui y tombe à 4.67 de contraste.
 - Espacement vertical sur une échelle de 8 px. Entre sections : **96, 160 ou 240 px**. Trois valeurs, jamais une intermédiaire.
 - Les blocs ne sont jamais centrés par défaut. L'asymétrie est la norme.
 - Breakpoints de référence : **390, 768, 1024, 1440**.
@@ -146,7 +149,7 @@ L'ordre des sections ne change pas.
 
 **Bouton secondaire et lien de texte.** Soulignement qui se redessine de gauche à droite, 250 ms. Le texte passe en accent.
 
-**Hero.** Titre pleine largeur en display. Paragraphe à gauche, bloc d'action à droite avec les deux boutons **sur une même ligne**, bouton plein à gauche, lien souligné à droite, 24 px entre les deux. Bandeau de réassurance à quatre mentions séparées par des filets verticaux. Une seule forme graphique : un grand arc en débord du bord droit, 8 à 10 % d'opacité, dans la moitié basse, jamais derrière un mot. Le hero reste sous la hauteur d'écran et la section suivante affleure sur 80 à 120 px.
+**Hero.** Titre pleine largeur en display. Paragraphe à gauche, bloc d'action à droite avec les deux boutons **sur une même ligne**, bouton plein à gauche, lien souligné à droite, 24 px entre les deux. Bandeau de réassurance à quatre mentions séparées par l'espace seul, aucun filet. Une seule forme graphique : un grand arc en débord du bord droit, 8 à 10 % d'opacité, dans la moitié basse, jamais derrière un mot. Le hero reste sous la hauteur d'écran et la section suivante affleure sur 80 à 120 px.
 
 **Vignette de projet.** Ratio uniforme 16/10, **toutes de la même taille**, radius 16 px, cadrage sur le haut du site, jamais rognée sur son contenu. Aucun badge posé dessus, aucun cadre de navigateur dessiné. Au survol, l'image ne bouge pas : le curseur passe en pastille « Voir le projet » et le titre passe en accent.
 
