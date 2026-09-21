@@ -145,10 +145,6 @@ body { padding-top: var(--nav-h); }
   letter-spacing: var(--tracking-h1);
 }
 
-/* La méthode sur fond sombre : la colonne collée garde ses couleurs de
-   registre, et sa phrase de clôture cesse d'emprunter au gris. */
-.sombre .methode-cloture { color: var(--sombre-texte); opacity: 0.72; }
-
 /* ─── Le studio ─────────────────────────────────────────────
    Le portrait tient la colonne de gauche sur toute la hauteur de la
    section ; le texte se range à sa droite. Les lignes sont posées à la
@@ -224,44 +220,8 @@ body { padding-top: var(--nav-h); }
 }
 
 /* ─── Méthode ───────────────────────────────────────────────
-   Colonne de gauche collée, étapes qui défilent à droite. Le décalage de
-   120 px la place sous la barre de navigation réduite. */
-.methode-colonne {
-  position: sticky;
-  top: 120px;
-  /* `start`, et non `stretch`.
-
-     Un élément collé a besoin de course : il faut que son conteneur soit
-     plus haut que lui. Étiré, il fait exactement la hauteur de la zone de
-     grille — 697 px contre 697 px — et il n'a alors plus rien à parcourir,
-     donc il ne colle jamais. Réduit à son contenu, il garde la zone entière
-     comme terrain, ce qui lui laisse la différence.
-
-     L'effet reste discret sur un grand écran : quatre étapes tiennent
-     presque dans la fenêtre, il n'y a que quelques centaines de pixels à
-     accompagner. C'est ce que dessine la maquette, on n'allonge pas la
-     section pour rendre l'animation plus voyante. */
-  align-self: start;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.methode-cloture {
-  font-size: var(--text-corps);
-  line-height: var(--leading-corps);
-  color: var(--gris);
-  max-width: 28em;
-}
-
-/* Sous 1024 px : empilement normal, rien n'est collé. */
-@media (max-width: 1023px) {
-  .methode-colonne {
-    position: static;
-    gap: 24px;
-  }
-  .etapes { margin-top: 48px; }
-}
+   La mise en page de la frise (tête, scène, tracé, étapes) vit dans
+   components/etape.css, avec le reste du composant qu'elle habille. */
 
 /* ─── Réalisations ──────────────────────────────────────────── */
 .realisations-intro { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }

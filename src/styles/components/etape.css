@@ -1,97 +1,236 @@
 /* ============================================================
-   Ligne d'étape de méthode
-   La seule séquence numérotée du site, et le premier usage du mono.
+   Méthode — frise animée.
+
+   Une seule scène, deux mises en page : à partir de 1024 px le tracé est
+   horizontal et la section s'épingle pendant qu'on la parcourt ; en
+   dessous, le tracé devient vertical et suit le défilement normal, sans
+   épingle.
+
+   Tout l'allumage (remplissage du tracé, opacité des étapes, points
+   atteints) est piloté par src/scripts/methode.ts au moyen de
+   ScrollTrigger — jamais par une transition CSS. Cette feuille ne décrit
+   que deux états :
+
+     · PAR DÉFAUT (mouvement réduit, ou script qui n'a pas chargé) : le
+       tracé est plein et les quatre étapes sont pleinement allumées —
+       c'est ce qui garantit que le contenu reste lisible sans
+       JavaScript, sans dépendre d'une classe que seul le script pose.
+     · une fois le script en charge, il ajoute `.methode--animee` sur la
+       section : cette classe éteint le tracé et les étapes, et c'est
+       elle seule qui laisse `.est-atteinte` / `.est-active` — posées par
+       le script au pixel du défilement — les rallumer une à une.
+
+   Les durées ne quittent jamais leur pleine opacité, dans aucun état :
+   c'est l'argument de la section (1 h + 30 min + zéro + 45 min,
+   additionnés d'un coup d'œil), et l'opacité ne porte donc que sur
+   l'intitulé et le texte de l'étape — jamais sur sa durée.
    ============================================================ */
 
-.etapes { display: flex; flex-direction: column; }
+.methode { --retrait: 0.5; }
 
-.etape {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
-  padding: 28px 0;
-  border-top: 1px solid var(--filet);
-  color: var(--gris);
-  transition:
-    color var(--dur-rapide) var(--ease),
-    border-color var(--dur-rapide) var(--ease);
+/* ─── Tête de section ───────────────────────────────────────── */
+.methode .grille { align-items: end; }
+
+.methode-cloture {
+  font-size: var(--text-corps);
+  line-height: var(--leading-corps);
+  opacity: 0.72;
+  max-width: 28em;
 }
 
-/* L'étape en cours reprend l'encre et un filet franc. Deux marques pour
-   un seul état : la couleur seule ne suffirait pas à le signaler. */
-.etape.est-active {
-  border-top-color: var(--encre);
-  color: var(--encre);
-}
+/* ─── Scène ──────────────────────────────────────────────────── */
+.methode-scene { position: relative; margin-top: 88px; }
+.methode-liste { position: relative; }
 
-.etape-numero {
-  grid-column: 1 / span 1;
-  font-family: var(--font-data);
-  font-size: var(--text-data);
-  padding-top: 6px;
-}
+/* Décor seul : jamais lu, jamais annoncé. */
+.rail-h, .rail-v { display: none; }
+.rail-h-plein, .rail-v-plein { position: absolute; inset: 0; background: var(--accent-clair); }
 
-.etape-phase {
-  grid-column: 2 / span 2;
-  font-size: var(--text-petit);
-  font-weight: 500;
-  padding-top: 4px;
-}
+.etapes { list-style: none; }
+.etape { position: relative; }
 
-.etape-corps {
-  grid-column: 4 / span 4;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.etape-tete { display: flex; gap: 12px; align-items: baseline; font-size: var(--text-petit); }
+.etape-numero { font-family: var(--font-data); font-size: var(--text-data); color: var(--accent-clair); }
+.etape-phase { font-weight: 500; }
 
 .etape-titre {
   font-family: var(--font-display);
   font-weight: 700;
   font-stretch: calc(var(--wdth-display) * 1%);
   font-size: var(--text-h3);
+  letter-spacing: var(--tracking-h3);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  margin-top: 12px;
+}
+.etape-texte { font-size: 0.9375rem; line-height: var(--leading-corps); margin-top: 8px; }
+.etape-temps { font-size: 0.9375rem; font-weight: 500; line-height: var(--leading-corps); }
+
+/* Le point : cerclé et plein par défaut (mouvement réduit, script
+   absent) — « toutes les étapes allumées ». L'anneau de l'étape active et
+   le remplissage progressif du point n'existent que sous
+   `.methode--animee`, plus bas. */
+.point {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-clair);
+  background: var(--accent-clair);
+  outline: 1.5px solid var(--accent-clair);
+  outline-offset: 4px;
+  z-index: 2;
 }
 
-.etape-texte { font-size: 0.9375rem; line-height: var(--leading-corps); }
+/* ============================================================
+   Grand écran (≥1024 px) : tracé horizontal, section épinglée.
+   ============================================================ */
+@media (min-width: 1024px) {
+  /* La scène occupe tout l'écran pendant l'épingle : la section réserve
+     déjà `--section-m` en haut et en bas (`.section-m`), il ne manque que
+     le contenu pour remplir le reste. */
+  .methode .grille { min-height: calc(100vh - (var(--section-m) * 2)); align-content: center; }
 
-/* Le temps demandé au client, isolé par un filet vertical. */
-.etape-temps {
-  grid-column: 9 / span 2;
-  padding-left: 16px;
-  border-left: 1px solid var(--filet-moyen);
-  font-size: 0.9375rem;
-  line-height: var(--leading-corps);
-  font-weight: 500;
-  transition: border-color var(--dur-rapide) var(--ease);
+  /* D'un bord de l'écran à l'autre, quelle que soit la largeur de la
+     grille : le tracé sort des marges de la page. */
+  .rail-h {
+    display: block;
+    position: absolute;
+    top: 5.75px;
+    left: calc(50% - 50vw);
+    width: 100vw;
+    height: 1.5px;
+    background: var(--filet-sombre);
+  }
+  .rail-h-plein { transform: none; transform-origin: left; }
+
+  /* Quatre rangées communes aux quatre colonnes (subgrid) : les durées
+     tombent sur la même ligne quelle que soit la longueur des textes —
+     l'argument de la section tient dans cet alignement au pixel près. */
+  .etapes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    column-gap: var(--grille-gouttiere);
+    position: relative;
+  }
+  .etape {
+    grid-row: span 4;
+    display: grid;
+    grid-template-rows: subgrid;
+    padding-top: 40px;
+    padding-right: 20px;
+  }
+  .point { left: 0; top: 0; }
+  .etape-tete  { grid-row: 1; }
+  .etape-temps { grid-row: 2; }
+  .etape-titre { grid-row: 3; margin-top: 0; }
+  .etape-texte { grid-row: 4; margin-top: 8px; }
+
+  .etape-temps {
+    position: relative;
+    margin: 14px 0 22px;
+    padding: 14px 0 16px;
+    border-top: 1px solid var(--accent-clair);
+    border-bottom: 1px solid var(--filet-sombre);
+  }
+  /* Filet épaissi au-dessus de la durée active : une marque de forme, en
+     plus de la lumière des textes. Posé en surimpression, sans décaler
+     le reste. */
+  .etape-temps::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: -2px;
+    height: 3px;
+    background: var(--accent-clair);
+    transform: none;
+    transform-origin: left;
+  }
 }
-.etape.est-active .etape-temps { border-left-color: var(--accent); }
 
-@media (max-width: 767px) {
-  .etape { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 12px; }
-  .etape-numero { grid-column: 1 / span 1; }
-  .etape-phase  { grid-column: 2 / span 3; }
-  .etape-corps,
-  .etape-temps  { grid-column: 1 / -1; }
-  .etape-temps  { padding-left: 16px; }
+/* ============================================================
+   Sous 1024 px : même principe à la verticale, sans épingle.
+   ============================================================ */
+@media (max-width: 1023px) {
+  .methode-scene { margin-top: 56px; }
+
+  .rail-v {
+    display: block;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 1.5px;
+    background: var(--filet-sombre);
+  }
+  .rail-v-plein { transform: none; transform-origin: top; }
+
+  .etapes { padding-left: 40px; display: flex; flex-direction: column; gap: 44px; }
+  .point { left: -40px; top: 4px; }
+
+  .etape { display: flex; flex-direction: column; }
+  .etape-tete  { order: 1; }
+  .etape-temps { order: 2; align-self: flex-start; margin-top: 12px; margin-bottom: 4px; position: relative; }
+  .etape-titre { order: 3; }
+  .etape-texte { order: 4; }
+
+  /* La durée reste accrochée à la ligne par un petit trait, jamais en
+     retrait — même principe qu'en haut, à l'horizontale. */
+  .etape-temps::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 33px;
+    height: 1.5px;
+    background: var(--accent-clair);
+  }
 }
 
+/* ============================================================
+   Une fois le script en charge : le tracé part à zéro, les étapes
+   s'éteignent, et c'est le défilement — jamais une transition — qui les
+   rallume une à une.
+   ============================================================ */
+.methode--animee .rail-h-plein { transform: scaleX(0); }
+.methode--animee .rail-v-plein { transform: scaleY(0); }
 
-/* ─── Sur fond sombre ───────────────────────────────────────
-   Le gris ne porte pas de texte ici : il tombe à 2.98 sur l'encre. L'état
-   inactif se marque donc par une opacité sur le papier, pas par une
-   seconde couleur. */
-.sombre .etape {
-  color: var(--sombre-texte);
-  opacity: 0.55;
-  border-top-color: var(--filet-sombre);
+.methode--animee .point {
+  border-color: var(--filet-sombre);
+  background: var(--sombre);
+  outline: none;
+}
+/* Les points déjà atteints restent pleins. */
+.methode--animee .etape.est-atteinte .point {
+  border-color: var(--accent-clair);
+  background: var(--accent-clair);
+}
+/* L'anneau de l'étape active : une marque de forme, en plus de la
+   lumière des textes — l'état ne repose jamais sur la seule opacité. */
+.methode--animee .etape.est-active .point {
+  outline: 1.5px solid var(--accent-clair);
+  outline-offset: 4px;
 }
 
-.sombre .etape.est-active {
-  opacity: 1;
-  border-top-color: var(--sombre-texte);
+/* L'opacité quitte l'étape pour ses seuls textes : la durée n'en hérite
+   jamais. `--actif` par défaut à 1 pour que la toute première étape,
+   déjà marquée `.est-active` par le HTML servi, reste pleine le temps
+   que le script prenne la main. */
+.methode--animee .etape { --actif: 1; }
+.methode--animee .etape-tete,
+.methode--animee .etape-titre,
+.methode--animee .etape-texte {
+  opacity: calc(var(--retrait) + (1 - var(--retrait)) * var(--actif, 1));
 }
+.methode--animee .etape-phase { color: var(--sombre-texte); }
+.methode--animee .etape.est-active .etape-phase { color: var(--accent-clair); }
 
-.sombre .etape-temps { border-left-color: var(--filet-sombre); }
-.sombre .etape.est-active .etape-temps { border-left-color: var(--accent-clair); }
+@media (min-width: 1024px) {
+  .methode--animee .etape-temps { border-top-color: var(--filet-sombre); }
+  .methode--animee .etape.est-atteinte .etape-temps { border-top-color: var(--accent-clair); }
+  .methode--animee .etape-temps::before { transform: scaleX(0); }
+  .methode--animee .etape.est-active .etape-temps::before { transform: none; }
+}
+@media (max-width: 1023px) {
+  .methode--animee .etape-temps::before { background: var(--filet-sombre); }
+  .methode--animee .etape.est-atteinte .etape-temps::before { background: var(--accent-clair); }
+}

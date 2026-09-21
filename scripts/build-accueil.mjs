@@ -207,29 +207,35 @@ ${cartes}
 function methode() {
   const etapes = C.methode.etapes
     .map(
-      (e, i) => `          <div class="etape${i === 0 ? ' est-active' : ''}" data-etape="${e.numero}">
-            <span class="etape-numero">${e.numero}</span>
-            <span class="etape-phase">${e.phase}</span>
-            <div class="etape-corps">
-              <h3 class="etape-titre">${e.titre}</h3>
-              <p class="etape-texte">${e.texte}</p>
-            </div>
+      (e, i) => `          <li class="etape${i === 0 ? ' est-active' : ''}" data-etape="${e.numero}">
+            <span class="point" aria-hidden="true"></span>
+            <p class="etape-tete"><span class="etape-numero">${e.numero}</span><span class="etape-phase">${e.phase}</span></p>
+            <h3 class="etape-titre">${e.titre}</h3>
+            <p class="etape-texte">${e.texte}</p>
             <p class="etape-temps">${e.temps}</p>
-          </div>`
+          </li>`
     )
     .join('\n')
 
-  // La colonne de gauche reste en place pendant que les étapes défilent :
-  // le titre de la section ne quitte pas l'écran tant qu'on la parcourt.
-  return `  <section class="section-m sombre" id="process">
+  // La frise s'épingle et se remplit au défilement à partir de 1024 px
+  // (src/scripts/methode.ts pilote un tracé horizontal ; en dessous,
+  // le tracé devient vertical et suit le défilement normal, sans
+  // épingle). Sans JavaScript ou en mouvement réduit,
+  // components/etape.css affiche les quatre étapes pleinement lisibles,
+  // tracé plein, sans épingle : voir l'en-tête de ce fichier CSS.
+  return `  <section class="section-m sombre methode" id="process">
     <div class="grille">
-      <div class="methode-colonne" style="--col: 1 / span 4">
-        <p class="tete-bloc" style="--col: auto">${C.methode.label}</p>
-        <h2 class="t-h2">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
-        <p class="methode-cloture">${C.methode.cloture}</p>
-      </div>
-      <div class="etapes" style="--col: 6 / span 7">
+      <p class="tete-bloc" style="--col: 1 / -1">${C.methode.label}</p>
+      <h2 class="t-h2" style="--col: 1 / span 6">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
+      <p class="methode-cloture" style="--col: 8 / span 5">${C.methode.cloture}</p>
+      <div class="methode-scene" style="--col: 1 / -1">
+        <div class="rail-h" aria-hidden="true"><div class="rail-h-plein"></div></div>
+        <div class="methode-liste">
+          <div class="rail-v" aria-hidden="true"><div class="rail-v-plein"></div></div>
+          <ol class="etapes">
 ${etapes}
+          </ol>
+        </div>
       </div>
     </div>
   </section>`
