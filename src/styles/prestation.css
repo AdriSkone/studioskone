@@ -83,20 +83,17 @@ body { padding-top: var(--nav-h); }
   margin-top: 40px;
 }
 
+/* Quatre mentions séparées par l'espace seul, aucun trait. */
 .pres-hero-proof,
 .hero-proof {
   display: flex;
   flex-wrap: wrap;
+  column-gap: 40px;
+  row-gap: 12px;
   margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid var(--filet-moyen);
   font-size: var(--text-petit);
   color: var(--gris);
 }
-.hero-proof span,
-.pres-hero-proof span { padding-inline: 20px; border-left: 1px solid var(--filet-moyen); }
-.hero-proof span:first-child,
-.pres-hero-proof span:first-child { padding-left: 0; border-left: 0; }
 .hero-proof-sep { display: none; }
 
 /* ─── Sections ──────────────────────────────────────────────── */
@@ -133,11 +130,11 @@ body { padding-top: var(--nav-h); }
   max-width: 74ch;
 }
 
+/* Une liste courte : l'espace seul la porte, le filet ne sépare plus. */
 .pres-point {
   display: flex;
   gap: 16px;
-  padding-block: 20px;
-  border-top: 1px solid var(--filet);
+  padding-block: 12px;
   line-height: var(--leading-corps);
 }
 
@@ -160,11 +157,22 @@ body { padding-top: var(--nav-h); }
   margin-top: 48px;
 }
 
-.service-card,
-.symptom-card,
+/* « Ce que je livre » et les nuances de tarifs sont des arguments à
+   titre + texte : des cartes. Les symptômes restent une liste courte de
+   phrases, séparée par l'espace seul (voir .symptom-card plus bas). */
+.service-card {
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+}
+
+/* .truth-item vit dans une section déjà --papier-ombre
+   (.pres-section--alt) : sa carte prend --papier, sinon elle se
+   confondrait avec le fond de la section. */
 .truth-item {
-  padding-top: 20px;
-  border-top: 1px solid var(--encre);
+  padding: 28px;
+  background: var(--papier);
+  border-radius: var(--rond-bloc);
 }
 
 .service-num {
@@ -183,10 +191,24 @@ body { padding-top: var(--nav-h); }
   margin-top: 12px;
 }
 
-.service-desc,
-.symptom-text,
+/* .service-card est sur --papier-ombre : --gris y tombe à 4.67, le texte
+   secondaire s'écrit en --encre. .truth-item est sur --papier (voir
+   ci-dessus) : --gris y reste AA, pas besoin d'assombrir. */
+.service-desc {
+  margin-top: 12px;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--encre);
+}
 .truth-text {
   margin-top: 12px;
+  font-size: var(--text-petit);
+  line-height: var(--leading-corps);
+  color: var(--gris);
+}
+
+.symptom-text {
+  margin-top: 16px;
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
   color: var(--gris);
@@ -198,8 +220,6 @@ body { padding-top: var(--nav-h); }
   height: 1px;
   background: var(--accent);
 }
-.symptom-card { border-top: 0; padding-top: 0; }
-.symptom-text { margin-top: 16px; }
 
 /* ─── Offres ────────────────────────────────────────────────── */
 .pres-prices {
@@ -209,7 +229,9 @@ body { padding-top: var(--nav-h); }
   margin-top: 48px;
 }
 
-.pres-price { padding-top: 24px; border-top: 1px solid var(--encre); }
+/* Comme .truth-item : la section « Tarifs » est déjà --papier-ombre
+   (.pres-section--alt), la carte prend --papier pour rester visible. */
+.pres-price { padding: 28px; background: var(--papier); border-radius: var(--rond-bloc); }
 
 .pres-price-head {
   display: flex;
@@ -237,7 +259,20 @@ body { padding-top: var(--nav-h); }
 .pres-faq { padding-block: var(--section-s); }
 .faq-list { display: flex; flex-direction: column; margin-top: 40px; max-width: 74ch; }
 
-.faq-item + .faq-item { margin-top: 0; }
+/* Plus de filet entre les questions : l'espace seul les sépare. La
+   question ouverte prend un fond plein plutôt qu'un trait. */
+.faq-item {
+  margin-inline: -16px;
+  margin-top: 4px;
+  border-radius: var(--rond-bloc);
+  transition: background-color var(--dur-moyenne) var(--ease);
+}
+/* La FAQ vit dans une section déjà --papier-ombre (.pres-section--alt) :
+   la question ouverte prend --papier, sinon elle se confondrait avec le
+   fond de la section. */
+.faq-item:has(.faq-question[aria-expanded='true']) {
+  background: var(--papier);
+}
 
 .faq-question {
   display: flex;
@@ -245,8 +280,6 @@ body { padding-top: var(--nav-h); }
   gap: 16px;
   width: 100%;
   padding: 20px 16px;
-  margin-inline: -16px;
-  border-top: 1px solid var(--filet-moyen);
   border-radius: var(--rond-interactif);
   text-align: left;
   font-size: var(--text-corps-l);
@@ -277,9 +310,10 @@ body { padding-top: var(--nav-h); }
 .faq-question[aria-expanded='true'] .faq-icon { transform: rotate(45deg); }
 
 .faq-answer-inner {
-  padding: 0 0 24px 16px;
-  border-left: 1px solid var(--filet-moyen);
+  padding: 0 16px 24px;
   line-height: var(--leading-corps);
+  /* La réponse ouverte vit dans le bloc --papier ci-dessus, pas
+     --papier-ombre : --gris y reste AA. */
   color: var(--gris);
   max-width: 62ch;
 }
@@ -296,13 +330,12 @@ body { padding-top: var(--nav-h); }
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 20px;
-  border-top: 1px solid var(--filet);
-  transition: border-color var(--dur-rapide) var(--ease);
+  padding: 28px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
 }
-.pres-link:hover { border-top-color: var(--accent); }
 
-.pres-link-tag { font-size: var(--text-petit); color: var(--gris); }
+.pres-link-tag { font-size: var(--text-petit); color: var(--encre); }
 
 .pres-link-title {
   font-family: var(--font-display);
@@ -314,7 +347,7 @@ body { padding-top: var(--nav-h); }
 }
 .pres-link:hover .pres-link-title { color: var(--accent-profond); }
 
-.pres-link-desc { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+.pres-link-desc { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 .pres-link-go { font-size: var(--text-petit); font-weight: 500; }
 
 /* ─── Appels à l'action ─────────────────────────────────────── */
@@ -387,13 +420,6 @@ body { padding-top: var(--nav-h); }
   .services-grid,
   .probleme-grid,
   .tarifs-truth { grid-template-columns: 1fr; }
-  .hero-proof span,
-  .pres-hero-proof span {
-    padding: 12px 0;
-    border-left: 0;
-    border-top: 1px solid var(--filet-moyen);
-    width: 100%;
-  }
   .pres-hero-proof,
-  .hero-proof { flex-direction: column; padding-top: 0; border-top: 0; }
+  .hero-proof { flex-direction: column; row-gap: 12px; }
 }
