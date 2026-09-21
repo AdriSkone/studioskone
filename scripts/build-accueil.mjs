@@ -280,31 +280,43 @@ ${liste.map((p) => vignette(p, true)).join('\n')}
       <p class="realisations-intro" style="--col: 9 / span 4">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
     </div>
 
-    <div class="realisations-rubans">
+    <div class="realisations-rubans" id="realisationsRubans">
 ${piste(rangees[0], 'avant')}
 ${piste(rangees[1], 'arriere')}
+    </div>
+
+    <div class="realisations-plus">
+      <button type="button" class="bouton bouton--secondaire realisations-toggle" id="realisationsToggle" aria-expanded="false" aria-controls="realisationsRubans">${C.realisations.voirPlus}</button>
     </div>
   </section>`
 }
 
 function tarifs() {
   const cartes = C.tarifs.formules
-    .map((f) => {
-      const items = f.inclus.map((i) => `              <li>${i}</li>`).join('\n')
+    .map((f, i) => {
+      const items = f.inclus.map((it) => `                <li>${it}</li>`).join('\n')
       const variante = f.recommandee ? 'principal' : 'secondaire'
       // La ligne d'écart n'existe que sur la formule recommandée : elle
       // répond à « pourquoi le double pour trois pages de plus ? ».
       const ecart = f.ecart ? `\n          <p class="carte-tarif-ecart">${f.ecart}</p>` : ''
       const variation = f.variation ? `\n          <p class="carte-tarif-note">${f.variation}</p>` : ''
+      // Correctif mobile du 21 septembre 2026 : la liste des inclus se
+      // replie sous 768 px derrière un bouton. Elle reste dans le DOM,
+      // rognée par une hauteur maximale — jamais par display: none — pour
+      // rester lisible par Google et par un lecteur d'écran.
+      const idListe = `tarif-inclus-${i}`
       return `        <article class="carte-tarif${f.recommandee ? ' carte-tarif--recommandee' : ''}" data-reveal>
           <p class="carte-tarif-nom">${f.nom}</p>
           <p class="carte-tarif-prix">${f.prix}</p>
           <h3 class="carte-tarif-h3">${f.h3}</h3>
           <p class="carte-tarif-positionnement">${f.positionnement}</p>
           <p class="carte-tarif-resume">${f.paragraphe}</p>${ecart}
-          <ul class="carte-tarif-liste">
+          <div class="carte-tarif-liste-bloc">
+            <ul class="carte-tarif-liste" id="${idListe}">
 ${items}
-          </ul>
+            </ul>
+            <button type="button" class="lien carte-tarif-toggle" aria-expanded="false" aria-controls="${idListe}">${C.tarifs.voirInclus}</button>
+          </div>
           <p class="carte-tarif-delai">${f.delai}</p>${variation}
           <a class="bouton bouton--${variante}" href="${f.cta.href}" data-umami-event="${f.cta.umami}">${f.cta.libelle}${f.cta.fleche ? fleche : ''}</a>
         </article>`

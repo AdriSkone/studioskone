@@ -417,7 +417,7 @@
       <p class="realisations-intro" style="--col: 9 / span 4">Le studio a ouvert récemment. Vous trouverez ici des projets clients, des outils que j'ai conçus pour mes propres besoins, et des exercices de conception menés pour un secteur précis. Chaque projet dit lequel il est. <span class="realisations-intro-fort">Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.</span></p>
     </div>
 
-    <div class="realisations-rubans">
+    <div class="realisations-rubans" id="realisationsRubans">
         <div class="ruban-projets" data-sens="avant">
           <div class="ruban-projets-piste">
             <a class="carte-projet" href="/projets/cafeo">
@@ -715,6 +715,10 @@
           </div>
         </div>
     </div>
+
+    <div class="realisations-plus">
+      <button type="button" class="bouton bouton--secondaire realisations-toggle" id="realisationsToggle" aria-expanded="false" aria-controls="realisationsRubans">Voir les 6 autres réalisations</button>
+    </div>
   </section>
 
   <section class="section-m" id="tarifs">
@@ -735,15 +739,18 @@
           <h3 class="carte-tarif-h3">Site internet une page</h3>
           <p class="carte-tarif-positionnement">Pour exister en ligne sans attendre.</p>
           <p class="carte-tarif-resume">Une seule page, mais complète : qui vous êtes, ce que vous faites, comment vous joindre. C'est souvent tout ce dont un artisan a besoin pour être trouvé et appelé.</p>
-          <ul class="carte-tarif-liste">
-              <li>Design sur mesure, à votre image</li>
-              <li>Une page, tous les contenus essentiels</li>
-              <li>Formulaire de contact ou de demande de devis</li>
-              <li>Pensé pour le mobile en premier</li>
-              <li>Fiche Google et référencement local configurés</li>
-              <li>Deux séries de retouches incluses</li>
-              <li>Mise en ligne incluse</li>
-          </ul>
+          <div class="carte-tarif-liste-bloc">
+            <ul class="carte-tarif-liste" id="tarif-inclus-0">
+                <li>Design sur mesure, à votre image</li>
+                <li>Une page, tous les contenus essentiels</li>
+                <li>Formulaire de contact ou de demande de devis</li>
+                <li>Pensé pour le mobile en premier</li>
+                <li>Fiche Google et référencement local configurés</li>
+                <li>Deux séries de retouches incluses</li>
+                <li>Mise en ligne incluse</li>
+            </ul>
+            <button type="button" class="lien carte-tarif-toggle" aria-expanded="false" aria-controls="tarif-inclus-0">Voir ce qui est compris</button>
+          </div>
           <p class="carte-tarif-delai">Livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos.</p>
           <p class="carte-tarif-note">Ce qui fait bouger le prix : la rédaction des textes et la création des photos, si vous ne les avez pas.</p>
           <a class="bouton bouton--secondaire" href="/?formule=une-page#estimator" data-umami-event="tarif-une-page">Choisir cette formule</a>
@@ -755,14 +762,17 @@
           <p class="carte-tarif-positionnement">Recommandé si vous avez plusieurs services à présenter.</p>
           <p class="carte-tarif-resume">Quatre à six pages pour détailler votre offre, montrer vos réalisations et être trouvé sur les recherches de votre métier dans votre secteur.</p>
           <p class="carte-tarif-ecart">Ce qui change vraiment par rapport à la formule Une page : ce n'est pas le nombre de pages qui coûte, c'est l'architecture du site, une page dédiée par service pour le référencement, et les contenus à produire pour chacune.</p>
-          <ul class="carte-tarif-liste">
-              <li>Tout ce que contient la formule Une page</li>
-              <li>4 à 6 pages : accueil, services, réalisations, à propos, contact</li>
-              <li>Une page par service, pour le référencement</li>
-              <li>Animations et interactions soignées</li>
-              <li>Référencement technique intégré</li>
-              <li>Trois séries de retouches incluses</li>
-          </ul>
+          <div class="carte-tarif-liste-bloc">
+            <ul class="carte-tarif-liste" id="tarif-inclus-1">
+                <li>Tout ce que contient la formule Une page</li>
+                <li>4 à 6 pages : accueil, services, réalisations, à propos, contact</li>
+                <li>Une page par service, pour le référencement</li>
+                <li>Animations et interactions soignées</li>
+                <li>Référencement technique intégré</li>
+                <li>Trois séries de retouches incluses</li>
+            </ul>
+            <button type="button" class="lien carte-tarif-toggle" aria-expanded="false" aria-controls="tarif-inclus-1">Voir ce qui est compris</button>
+          </div>
           <p class="carte-tarif-delai">Livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos.</p>
           <p class="carte-tarif-note">Ce qui fait bouger le prix : le nombre de pages au-delà de six, la prise de rendez-vous ou le paiement en ligne, et les contenus à créer.</p>
           <a class="bouton bouton--principal" href="/?formule=site-complet#estimator" data-umami-event="tarif-site-complet">Choisir cette formule<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -773,13 +783,16 @@
           <h3 class="carte-tarif-h3">E-commerce et applications sur mesure</h3>
           <p class="carte-tarif-positionnement">Quand un site vitrine ne suffit plus.</p>
           <p class="carte-tarif-resume">Boutique en ligne, application web ou mobile, outil métier. On définit le périmètre ensemble avant de chiffrer, et vous savez où vous allez avant de signer.</p>
-          <ul class="carte-tarif-liste">
-              <li>Boutique en ligne à partir de 3 000 €</li>
-              <li>Application web ou mobile sur devis</li>
-              <li>Cadrage du produit avant le premier écran</li>
-              <li>Périmètre et budget définis ensemble</li>
-              <li>Suivi rapproché tout au long du projet</li>
-          </ul>
+          <div class="carte-tarif-liste-bloc">
+            <ul class="carte-tarif-liste" id="tarif-inclus-2">
+                <li>Boutique en ligne à partir de 3 000 €</li>
+                <li>Application web ou mobile sur devis</li>
+                <li>Cadrage du produit avant le premier écran</li>
+                <li>Périmètre et budget définis ensemble</li>
+                <li>Suivi rapproché tout au long du projet</li>
+            </ul>
+            <button type="button" class="lien carte-tarif-toggle" aria-expanded="false" aria-controls="tarif-inclus-2">Voir ce qui est compris</button>
+          </div>
           <p class="carte-tarif-delai">Délais définis au cadrage.</p>
           <a class="bouton bouton--secondaire" href="/?formule=sur-mesure#estimator" data-umami-event="tarif-sur-mesure">Demander un devis</a>
         </article>

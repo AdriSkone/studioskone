@@ -39,6 +39,10 @@ const AJOUTS_AUTORISES = [
   // Le lien Instagram n'était qu'une icône, son nom vivait dans un
   // aria-label. Il est maintenant écrit : un lien doit avoir un nom visible.
   'Instagram',
+  // Correctif mobile du 21 septembre 2026 — deux nouveaux boutons qui
+  // replient du contenu sous 768 px, jamais montrés sur la page d'avant.
+  'Voir les 6 autres réalisations',
+  'Voir ce qui est compris',
 ]
 
 /**

@@ -10,6 +10,7 @@ import { initMethode } from './scripts/methode'
 import { initFaq } from './scripts/faq'
 import { initNav } from './scripts/nav'
 import { initCookies } from './scripts/cookies'
+import { initTarifs } from './scripts/tarifs'
 import { rafraichirAuChargementDesFontes } from './lib/animations'
 
 import { initParcours } from './scripts/parcours'
@@ -34,6 +35,7 @@ initFaq()
 initCookies()
 initRail()
 initMethode()
+initTarifs()
 
 // L'estimateur et le formulaire ne font plus qu'un.
 initParcours()

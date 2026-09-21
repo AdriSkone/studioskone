@@ -31,6 +31,22 @@
 .carte-prestation-titre:hover  { color: var(--accent-profond); }
 .carte-prestation-titre:active { color: var(--accent); }
 
+/* Sous 768 px, le titre ne mesure que 29 px de haut : une cible tactile
+   doit en faire 44. Un pseudo-élément agrandit la zone cliquable — la
+   même technique que .lien (voir components/boutons.css) — sans toucher
+   à la taille du texte. */
+@media (max-width: 767px) {
+  a.carte-prestation-titre {
+    position: relative;
+    display: inline-block;
+  }
+  a.carte-prestation-titre::after {
+    content: '';
+    position: absolute;
+    inset: -10px -8px;
+  }
+}
+
 .carte-prestation-prix {
   font-family: var(--font-data);
   font-size: var(--text-data);

@@ -35,3 +35,24 @@
   font-size: 0.9375rem;
   text-align: center;
 }
+
+/* Sous 768 px, la carte flottante tombait exactement à l'endroit du bouton
+   du hero : les deux se disputaient le même coin bas-gauche de l'écran.
+   Le bandeau s'ancre plutôt en bas, sur toute la largeur, comme une
+   feuille — il ne recouvre plus jamais un bouton de contenu, et respecte
+   la zone sûre d'un iPhone à encoche. */
+@media (max-width: 767px) {
+  .cookies {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    padding: 20px 24px calc(20px + env(safe-area-inset-bottom));
+    transform: translateY(100%);
+  }
+  .cookies.est-visible { transform: translateY(0); }
+}

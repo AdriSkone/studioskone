@@ -82,7 +82,11 @@ window.addEventListener('load', () => setTimeout(() => {
   });
 
   document.querySelectorAll('a,button').forEach(el=>{
-    const r=el.getBoundingClientRect(); if(!r.width||el.classList.contains('skip-link'))return;
+    // Une hauteur nulle n'est pas une petite cible, c'est une cible
+    // repliée : les cartes Réalisations et les inclus des tarifs se
+    // rognent à max-height: 0 sous 768 px, pas à display: none, pour
+    // rester lisibles par Google et un lecteur d'écran une fois repliés.
+    const r=el.getBoundingClientRect(); if(!r.width||!r.height||el.classList.contains('skip-link'))return;
     if(el.getAttribute('aria-hidden')==='true')return;
     const a=getComputedStyle(el,'::after');
     let h=r.height,w=r.width;

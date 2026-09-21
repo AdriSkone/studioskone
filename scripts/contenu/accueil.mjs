@@ -192,6 +192,9 @@ export const realisations = {
     'et des exercices de conception menés pour un secteur précis. Chaque projet dit lequel il est.',
   introFort:
     "Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.",
+  // Correctif mobile du 21 septembre 2026 : sous 768 px, seules les trois
+  // premières cartes s'affichent, ce bouton révèle les six autres.
+  voirPlus: 'Voir les 6 autres réalisations',
 }
 
 export const tarifs = {
@@ -201,6 +204,9 @@ export const tarifs = {
     "Tous les projets démarrent par un appel gratuit de 30 minutes. Vous en repartez avec une fourchette et une recommandation, même si on ne travaille pas ensemble.",
     'Pas de frais cachés. Pas de surprise en fin de mission.',
   ],
+  // Correctif mobile du 21 septembre 2026 : sous 768 px, la liste des
+  // inclus de chaque carte se replie derrière ce bouton.
+  voirInclus: 'Voir ce qui est compris',
   lancement: {
     tag: 'Offre de lancement',
     avant: 'Le studio démarre. Sur les prochains projets,',

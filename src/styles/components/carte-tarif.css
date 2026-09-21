@@ -67,9 +67,16 @@
   line-height: var(--leading-corps);
 }
 
+/* Le bouton de repli n'existe que sous 768 px (voir plus bas) : au-delà,
+   la liste est toujours entièrement visible et il ne sert à rien. */
+.carte-tarif-toggle { display: none; }
+
+/* La ligne de délai est la plus regardée de la carte : c'est elle qui dit
+   quand le site sera en ligne. Elle passe en --text-petit sur tous les
+   écrans, pas seulement sous 768 px — 13 px la rendait trop discrète. */
 .carte-tarif-delai {
   font-family: var(--font-data);
-  font-size: var(--text-data);
+  font-size: var(--text-petit);
   line-height: 1.5;
   padding-top: 16px;
   border-top: 1px solid var(--filet);
@@ -101,6 +108,28 @@
   .carte-tarif--recommandee .carte-tarif-prix { font-size: var(--text-h2); }
   .carte-tarif-delai { order: 1; }
   .carte-tarif .bouton { order: 2; margin-top: 8px; }
-  .carte-tarif-liste { order: 3; gap: 10px; }
+  .carte-tarif-liste-bloc { order: 3; }
+  .carte-tarif-liste { gap: 10px; }
   .carte-tarif-note { order: 4; }
+
+  /* Une carte de trois formules à sept lignes d'inclus chacune fait à elle
+     seule plus d'un écran. La liste se replie derrière un bouton : le
+     texte reste dans le DOM, seule sa hauteur visible tombe à zéro. Pas de
+     display: none, pour que Google et un lecteur d'écran le lisent quand
+     même. */
+  .carte-tarif-liste {
+    max-height: 0;
+    overflow: hidden;
+  }
+  .carte-tarif-liste-bloc.est-ouvert .carte-tarif-liste {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .carte-tarif-toggle {
+    display: inline-block;
+    margin-top: 4px;
+    /* La cible tactile est reprise de .lien (voir components/boutons.css) :
+       son pseudo-élément s'agrandit déjà sous 768 px. */
+  }
 }

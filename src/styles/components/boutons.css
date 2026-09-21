@@ -136,6 +136,12 @@
   inset: -5px -4px;
 }
 
+/* Sous 768 px, la cible doit mesurer 44 px : le pseudo-élément grandit
+   encore, toujours sans toucher au texte ni à sa taille. */
+@media (max-width: 767px) {
+  .lien::after { inset: -12px -10px; }
+}
+
 .lien:hover  { color: var(--accent-profond); }
 .lien:active { color: var(--accent); }
 

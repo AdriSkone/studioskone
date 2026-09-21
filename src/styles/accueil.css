@@ -91,15 +91,24 @@ body { padding-top: var(--nav-h); }
 /* Le contenu passe au-dessus du grain. */
 .hero-corps { position: relative; }
 
-/* Sous 768 px : tout s'empile, et les preuves passent en liste à filets. */
+/* Sous 768 px : tout s'empile, et les preuves passent en liste à filets.
+
+   Correctif mobile du 21 septembre 2026 — le titre à 56 px cassait sur
+   sept lignes et poussait le bouton du hero au ras du pli (796 px sur un
+   390 × 844). Il reprend --text-h1, déjà conçu pour retomber à 44 px sous
+   768 px : aucun mot ne change, seul le corps du titre baisse d'un cran.
+   Les marges resserrent d'autant pour que le bouton remonte au-dessus de
+   700 px. */
 @media (max-width: 767px) {
-  .hero-statement { margin-top: 48px; max-width: 34em; }
-  .hero-actions { margin-top: 40px; }
+  .hero { padding-top: 48px; }
+  .hero-titre { font-size: var(--text-h1); }
+  .hero-statement { margin-top: 32px; max-width: 34em; font-size: 1rem; }
+  .hero-actions { margin-top: 28px; }
   .hero-boutons { flex-direction: column; align-items: stretch; gap: 16px; }
   .hero-lien { text-align: center; padding-block: 12px; }
   .hero-preuves {
     flex-direction: column;
-    margin-top: 48px;
+    margin-top: 40px;
     padding-top: 0;
     border-top: 0;
   }

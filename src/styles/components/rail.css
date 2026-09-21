@@ -89,6 +89,50 @@
   .ruban-projets-piste .carte-projet[aria-hidden='true'] { display: none; }
 }
 
+/* ─── Bouton « Voir les 6 autres réalisations » ──────────────
+   N'existe que sous 768 px : au-delà, les neuf projets sont déjà tous
+   visibles et il n'aurait rien à faire. */
+.realisations-plus { display: none; }
+
 @media (max-width: 767px) {
-  .ruban-projets-piste { grid-template-columns: 1fr; }
+  .ruban-projets-piste {
+    grid-template-columns: 1fr;
+    /* L'espacement ne vient plus du gap de grille, qui laisserait un vide
+       fixe même derrière une carte repliée à zéro : il vient de la marge
+       de chaque carte, qui disparaît avec elle. */
+    row-gap: 0;
+  }
+  .ruban-projets[data-sens='arriere'] .ruban-projets-piste { padding-top: 0; }
+  .carte-projet:not(:last-child) { margin-bottom: 64px; }
+
+  /* Seules les trois premières cartes réelles restent visibles : les deux
+     dernières de la première rangée, et toute la seconde. Jamais de
+     display: none — les six projets repliés restent dans le DOM, lisibles
+     par Google et par un lecteur d'écran, seule leur hauteur visible tombe
+     à zéro. Les copies de boucle (`aria-hidden`) ne sont jamais
+     concernées : elles sont déjà masquées par la règle du bloc précédent. */
+  .ruban-projets[data-sens='avant'] .carte-projet:nth-child(n + 4):not([aria-hidden]),
+  .ruban-projets[data-sens='arriere'] .carte-projet:not([aria-hidden]) {
+    max-height: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+
+  /* Au clic sur le bouton, rail.ts pose cette classe sur le conteneur : les
+     six cartes retrouvent leur hauteur et leur marge. */
+  .realisations-rubans.est-etendu .ruban-projets[data-sens='avant'] .carte-projet:nth-child(n + 4):not([aria-hidden]),
+  .realisations-rubans.est-etendu .ruban-projets[data-sens='arriere'] .carte-projet:not([aria-hidden]) {
+    max-height: none;
+    margin-bottom: 64px;
+    overflow: visible;
+  }
+  .realisations-rubans.est-etendu .ruban-projets[data-sens='arriere'] .ruban-projets-piste {
+    padding-top: 64px;
+  }
+
+  .realisations-plus {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
 }
