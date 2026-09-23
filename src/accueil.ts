@@ -9,14 +9,20 @@ import { initRail } from './scripts/rail'
 import { initMethode } from './scripts/methode'
 import { initFaq } from './scripts/faq'
 import { initNav } from './scripts/nav'
-import { initCookies } from './scripts/cookies'
+import { initCookies, lireConsentement } from './scripts/cookies'
 import { initTarifs } from './scripts/tarifs'
 import { rafraichirAuChargementDesFontes } from './lib/animations'
 
 import { initParcours } from './scripts/parcours'
 
-// Umami — injecté seulement si les variables d'environnement sont renseignées.
-if (import.meta.env.VITE_UMAMI_WEBSITE_ID && import.meta.env.VITE_UMAMI_SCRIPT_URL) {
+// Umami ne se charge qu'avec un consentement donné et mémorisé. Le
+// bandeau annonce « vous pouvez refuser » : le charger avant la réponse,
+// ou malgré un refus, rendrait cette phrase fausse.
+if (
+  import.meta.env.VITE_UMAMI_WEBSITE_ID &&
+  import.meta.env.VITE_UMAMI_SCRIPT_URL &&
+  lireConsentement() === 'accepted'
+) {
   const s = document.createElement('script')
   s.defer = true
   s.src = `${import.meta.env.VITE_UMAMI_SCRIPT_URL}/script.js`
