@@ -243,3 +243,21 @@ Vérifiables par `grep`, doivent revenir vides.
 - `aria-expanded` et `aria-controls` sur les accordéons
 - Le ruban s'arrête au survol et en `prefers-reduced-motion`
 - Aucune information portée par la couleur seule
+
+---
+
+## 13. Boutons — une règle unique, sans exception
+
+Tout `.bouton`, seul ou en groupe, sur toute page et à toute largeur :
+
+- Libellé centré à l'horizontale et à la verticale.
+- Hauteur commune à tous les boutons d'un même groupe, **48 px minimum**.
+- Padding horizontal et rayon (10 px) communs à tous les boutons d'un même groupe.
+- Empilés sur mobile : chacun occupe 100 % de la largeur de son conteneur.
+- Côte à côte sur desktop, un groupe est soit à **largeurs égales**, soit **entièrement dimensionné par son contenu** — jamais un mélange des deux dans le même groupe.
+
+Le hero fait exception à l'empilement, pas au reste : ses deux actions gardent leur traitement propre (bouton plein et lien souligné, pas deux boutons), mais partagent la même hauteur.
+
+## 14. Espacement titre / texte
+
+Entre un titre en display (`.t-h1`, `.t-h2`, `h1`, `h2`, `.sombre-titre`, `.pivot-texte`, ou toute variante qui en reprend `--leading-display` ou `--leading-titre`) et le paragraphe qui le suit directement : **32 px minimum sur mobile, 48 px minimum au-delà**. La règle vaut partout où un titre précède un texte, pas seulement dans une section donnée — un titre à côté duquel un texte est simplement aligné (note de tête de section, sous-titre en colonne séparée) n'est pas concerné : elle ne s'applique qu'à la relation verticale, titre au-dessus, texte en dessous.
