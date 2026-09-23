@@ -47,11 +47,17 @@ body { padding-top: var(--nav-h); }
 .hero-boutons {
   display: flex;
   flex-wrap: wrap;
-  /* Le bouton et le lien partagent la même ligne de base : centrés, le
-     lien flottait deux pixels trop haut à côté du cadre du bouton. */
-  align-items: baseline;
+  /* Le bouton et le lien se répondent sur la même ligne de texte.
+     `baseline` ne le faisait pas : .bouton porte align-self: flex-start
+     pour ne pas s'étirer dans les colonnes, et un align-self posé sur
+     l'enfant bat toujours l'align-items du conteneur. Le lien se calait
+     donc sur le haut du cadre, son libellé 18 px au-dessus de celui du
+     bouton — l'écart que le cadre rendait visible. On centre, et on
+     redonne au bouton le droit de se centrer ici seulement. */
+  align-items: center;
   gap: 24px;
 }
+.hero-boutons .bouton { align-self: center; }
 
 /* « Voir les réalisations » est un lien, pas un second bouton : deux
    cadres côte à côte donneraient deux appels de même poids, alors qu'il

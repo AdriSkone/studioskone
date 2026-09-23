@@ -218,6 +218,19 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
      parce que c'est le seul endroit où on doit battre un style inline. */
   .colonnes.colonnes > *,
   .grille.grille > * { --col: 1 / -1 !important; }
+
+  /* Cette même bascule colle le texte sous son titre. Ce qui était posé
+     à côté du titre sur bureau — la note de la section Tarifs, l'intro
+     des Réalisations, la clôture de la Méthode, la relance de la FAQ —
+     tombe dessous sans rien entre les deux : le paragraphe démarre
+     exactement sur la ligne basse du titre, dans les jambages.
+
+     La règle vit ici et pas dans chaque section, parce que la cause est
+     la bascule, pas la section. Elle est écrite en `:where` pour ne rien
+     peser : 32 px est un plancher, et la moindre classe de composant qui
+     déclare sa propre marge le remplace sans avoir à lutter. */
+  :where(.grille, .colonnes) > :where(h1, h2, .t-h1, .t-h2, .sombre-titre)
+    + :is(p, div, ul, ol) { margin-top: 32px; }
 }
 
 .section-s { padding-block: var(--section-s); }
