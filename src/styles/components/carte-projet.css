@@ -25,6 +25,12 @@
 }
 
 .carte-projet-titre {
+  /* Sans ce `min-width`, un titre long ne se voit jamais offrir la
+     chance de passer à la ligne : un enfant flex refuse par défaut de
+     rétrécir sous la largeur de son contenu (min-width: auto), donc il
+     déborde de .carte-projet-tete au lieu de se replier — visible
+     surtout sur les cartes étroites du ruban mobile. */
+  min-width: 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-stretch: calc(var(--wdth-display) * 1%);

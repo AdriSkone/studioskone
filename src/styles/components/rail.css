@@ -37,6 +37,27 @@
 }
 .ruban-projets::-webkit-scrollbar { display: none; }
 
+/* Lot 6 — sous 768 px, la première carte se cale sur une marge de page de
+   24 px, plus resserrée que la marge générale du site (40 px sous
+   1024 px) : le ruban veut montrer qu'on est déjà à mi-carte suivante à
+   l'écran, la marge générale laissait trop de vide à droite. Le
+   scroll-padding reprend la même valeur pour que l'ancrage au clavier ou
+   au balayage retombe pile sur cette marge, jamais dessous. */
+@media (max-width: 767px) {
+  .ruban-projets {
+    padding-inline: 24px;
+    scroll-padding-left: 24px;
+    /* L'ancrage vaut à toutes les largeurs de poche, pas seulement au
+       doigt : le bloc plus bas (pointer: coarse, prefers-reduced-motion)
+       arrête en plus l'animation automatique, ce qui reste conditionné à
+       ces deux préférences et ne change pas ici. */
+    scroll-snap-type: x mandatory;
+  }
+  .ruban-projets-piste .carte-projet {
+    scroll-snap-align: start;
+  }
+}
+
 .ruban-projets-piste {
   display: flex;
   gap: var(--grille-gouttiere);
@@ -77,6 +98,15 @@
   gap: 16px;
 }
 
+/* Lot 6 — sous 768 px, la carte fixe à 270 px débordait ou se coupait
+   selon la largeur réelle de l'écran (elle ne s'y adaptait pas). 78 % de
+   la largeur d'écran, plafonné à 300 px : la carte suivante dépasse
+   toujours assez pour signaler qu'il y a une suite, sans jamais toucher
+   le bord opposé sur les écrans les plus étroits. */
+@media (max-width: 767px) {
+  .ruban-projets-piste .carte-projet { width: min(78vw, 300px); }
+}
+
 @media (min-width: 768px) {
   .ruban-projets-piste .carte-projet { width: 340px; }
 }
@@ -112,9 +142,17 @@
   overflow: hidden;
 }
 
+/* Lot 6 — le gap de 16 px de .carte-projet gouverne déjà l'écart entre
+   l'image, le titre, la description et le lien ; ces trois marges et ce
+   filet, hérités du format plein (pages projet), s'ajoutaient par-dessus
+   et cassaient la régularité dans la carte dense du ruban. Rien n'est
+   perdu : le texte reste, seul l'espacement redevient homogène. */
+.ruban-projets-piste .carte-projet-nature { padding-top: 0; border-top: 0; }
+.ruban-projets-piste .carte-projet-note { margin-top: 0; }
 .ruban-projets-piste .carte-projet-meta {
   flex-wrap: wrap;
   row-gap: 4px;
+  margin-top: 0;
 }
 
 /* ─── Défilement manuel : tactile et mouvement réduit ────────

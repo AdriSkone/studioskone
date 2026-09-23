@@ -458,9 +458,23 @@ body { padding-top: var(--nav-h); }
    c'est le script qui ajoute .est-pose, une fois GSAP chargé et le titre
    découpé. Sans lui, rien n'est masqué — si le paquet n'arrive pas, la
    page reste entièrement lisible. */
+/* Lot 6 — un accent circonflexe (« même personne ») dépassait le haut de
+   sa ligne et se faisait rogner par ce masque : à un interlignage serré,
+   la boîte de ligne colle au-dessus des lettres sans laisser de place aux
+   diacritiques. Le padding-top ouvre cette place au-dessus du texte, sans
+   toucher à `.hero-ligne-interieur` : la translation d'entrée du script
+   (`yPercent: 105`, calculée sur la hauteur propre de l'intérieur) n'en
+   est donc pas affectée, seule la fenêtre de rognage s'agrandit.
+   Pas de marge négative pour compenser : deux `.hero-ligne` consécutifs
+   n'ont entre eux qu'un nœud texte d'espacement, qui ne les empêche pas
+   de collapser — une marge négative y aurait rapproché les lignes de bien
+   plus que prévu et déplacé le rognage sur la ligne précédente. Le titre
+   descend donc de 0.2em, ce qui reste sans conséquence visible sur une
+   section qui n'a rien juste au-dessus. */
 .hero-ligne {
   display: block;
   overflow: hidden;
+  padding-top: 0.2em;
 }
 .hero-ligne-interieur { display: block; }
 

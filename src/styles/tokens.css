@@ -133,6 +133,13 @@
     --section-s: 64px;
     --section-m: 96px;
     --section-l: 128px;
+
+    /* Lot 6 — un accent circonflexe se rogne dès que l'interlignage d'un
+       titre display descend sous 1.0 : au-dessus de 767 px, 0.90 à 0.92
+       restent la norme (STYLE_GUIDE.md), mais sur mobile aucun titre ne
+       doit plus y descendre. Un seul token, consommé par .t-display,
+       .sombre-titre et .pivot-texte : les trois se corrigent d'un coup. */
+    --leading-display: 1;
   }
 }
 
