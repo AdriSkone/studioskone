@@ -5,6 +5,14 @@
 
 .parcours { margin-top: 64px; }
 
+/* Lot 6 — le h2 et son sous-titre n'avaient aucune marge entre eux : le
+   texte touchait les jambages du titre, comme dans la section Contact.
+   Même règle que partout : 48 px de bureau, 32 sous 768 px. */
+.parcours-tete { display: flex; flex-direction: column; gap: 48px; }
+@media (max-width: 767px) {
+  .parcours-tete { gap: 32px; }
+}
+
 /* ─── Progression ───────────────────────────────────────────
    Un filet qui se remplit, jamais un compteur « étape 2 sur 5 » : le
    visiteur voit où il en est sans qu'on lui annonce ce qui reste. */
@@ -201,6 +209,14 @@
   margin-top: 48px;
 }
 
+/* Lot 6 — « Continuer » et « Retour » n'ont pas le même nombre de
+   caractères : à contenu égal (même padding, même police), ils
+   n'avaient donc ni la même largeur ni le même alignement. Plutôt que de
+   les laisser dimensionnés par leur texte, ils se partagent la ligne à
+   parts égales — l'un des deux traitements que permet la règle du style
+   guide, l'autre étant « tous dimensionnés par leur contenu ». */
+.parcours-actions .bouton { flex: 1 1 0; }
+
 .parcours-actions .bouton:disabled,
 .parcours-actions .bouton[aria-disabled='true'] {
   opacity: 0.4;
@@ -226,5 +242,7 @@
   .parcours-champs { grid-template-columns: 1fr; }
   .parcours-choix { flex-direction: column; align-items: stretch; }
   .parcours-actions { flex-direction: column-reverse; }
-  .parcours-actions .bouton { text-align: center; }
+  /* Empilés, les deux boutons reprennent 100 % de la largeur de leur
+     conteneur : le partage à parts égales n'a de sens qu'à l'horizontale. */
+  .parcours-actions .bouton { flex: none; width: 100%; text-align: center; }
 }

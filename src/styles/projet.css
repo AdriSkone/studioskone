@@ -22,7 +22,13 @@ body { padding-top: var(--nav-h); }
 
 .projet-titre { margin: 0; }
 
+/* Lot 6 — le h1 et cette ligne partagent le gap:12px de .projet-identite ;
+   36 px de plus portent l'écart titre/texte à 48 sur cette seule paire
+   (20 px sous 768 px, pour un total de 32 — voir le bloc mobile). Le
+   badge au-dessus du titre garde le gap seul : la règle ne vise que la
+   sortie du titre. */
 .projet-type {
+  margin-top: 36px;
   font-size: var(--text-corps-l);
   line-height: var(--leading-corps);
   color: var(--gris);
@@ -108,4 +114,5 @@ body { padding-top: var(--nav-h); }
   .projet-suite { grid-template-columns: 1fr; }
   .projet-vue--large { grid-column: auto; }
   .projet-desc { margin-top: 24px; }
+  .projet-type { margin-top: 20px; }
 }

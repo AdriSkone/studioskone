@@ -58,9 +58,12 @@ body { padding-top: var(--nav-h); }
    mot reste en encre. */
 .text-accent { color: inherit; }
 
+/* Lot 6 — 48 px de bureau, 32 sous 768 px (voir le bloc mobile plus bas) :
+   la même règle que le reste du site pour l'écart entre un titre et le
+   paragraphe qui le suit. */
 .pres-hero-lead,
 .pres-lead {
-  margin-top: 32px;
+  margin-top: 48px;
   max-width: 62ch;
   font-size: var(--text-corps-l);
   line-height: 1.45;
@@ -82,6 +85,11 @@ body { padding-top: var(--nav-h); }
   gap: 16px 24px;
   margin-top: 40px;
 }
+
+/* Lot 6 — les deux boutons sont dimensionnés par leur contenu (le style
+   guide autorise ce traitement, à condition de ne jamais le mélanger avec
+   des largeurs égales) : même hauteur et même padding suffisent, ils
+   viennent tous deux de .bouton. */
 
 /* Quatre mentions séparées par l'espace seul, aucun trait. */
 .pres-hero-proof,
@@ -118,7 +126,8 @@ body { padding-top: var(--nav-h); }
   margin-bottom: 16px;
 }
 
-.pres-prose { margin-top: 32px; max-width: 68ch; }
+/* Lot 6 — même règle titre/texte que ci-dessus : 48 px de bureau. */
+.pres-prose { margin-top: 48px; max-width: 68ch; }
 .pres-prose p { margin-top: 16px; line-height: var(--leading-corps); }
 .pres-prose h3 { font-size: var(--text-h3); margin-top: 40px; }
 
@@ -390,7 +399,9 @@ body { padding-top: var(--nav-h); }
 .err-code { font-family: var(--font-data); font-size: var(--text-data); color: var(--gris); }
 .err-titre { margin-top: 16px; }
 .err-accent { color: var(--accent); }
-.err-lead { margin-top: 24px; font-size: var(--text-corps-l); line-height: 1.45; }
+/* Lot 6 — 24 px passait sous le plancher desktop de 48 (32 sous 768 px,
+   voir le bloc mobile plus bas). */
+.err-lead { margin-top: 48px; font-size: var(--text-corps-l); line-height: 1.45; }
 .err-liens { margin-top: var(--section-s); }
 .err-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: var(--section-s); }
 .err-note { margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }
@@ -409,4 +420,28 @@ body { padding-top: var(--nav-h); }
   .tarifs-truth { grid-template-columns: 1fr; }
   .pres-hero-proof,
   .hero-proof { flex-direction: column; row-gap: 12px; }
+
+  /* Lot 6 — écart titre/texte, 32 px sous 768 px (48 au-delà, réglé plus
+     haut dans ce fichier). */
+  .pres-hero-lead,
+  .pres-lead,
+  .pres-prose,
+  .err-lead { margin-top: 32px; }
+
+  /* Lot 6 — groupes de boutons : empilés, pleine largeur, jamais un
+     mélange de largeurs. Les deux CTA sont ici deux .bouton réels (pas un
+     bouton + un lien comme dans le hero de l'accueil), donc pas de
+     traitement particulier à préserver. */
+  .pres-hero-cta,
+  .hero-cta-row,
+  .pres-cta-row,
+  .err-actions {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+  .pres-hero-cta .bouton,
+  .hero-cta-row .bouton,
+  .pres-cta-row .bouton,
+  .err-actions .bouton { width: 100%; }
 }

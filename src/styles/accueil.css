@@ -131,18 +131,21 @@ body { padding-top: var(--nav-h); }
      « Voir les réalisations » prend l'allure d'un bouton secondaire :
      au doigt, un lien de texte est une cible trop mince. */
   .hero-boutons { flex-direction: column; align-items: stretch; gap: 12px; }
+  /* Lot 6 — libellés centrés, comme partout ailleurs sur le site, et
+     même padding que .bouton (17px 27px) pour une hauteur réellement
+     identique : à 14px 24px, le lien mesurait 56 px contre 62 pour le
+     bouton — un écart visible une fois les deux boîtes bord à bord. */
   .hero-lien {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    min-height: 52px;
-    padding: 14px 24px;
+    justify-content: center;
+    padding: 17px 27px;
     border: 1px solid var(--encre);
     border-radius: var(--rond-interactif);
     text-decoration: none;
   }
   .hero-boutons .bouton {
-    justify-content: flex-start;
+    justify-content: center;
     /* align-items: stretch ne suffit pas : le bouton porte align-self
        flex-start, qui le ramène à sa largeur de contenu. */
     width: 100%;
@@ -254,6 +257,12 @@ body { padding-top: var(--nav-h); }
 /* ─── Transparence ──────────────────────────────────────────── */
 .transparence-corps { display: flex; flex-direction: column; gap: 20px; }
 .transparence-corps p { max-width: 60ch; }
+/* Lot 6 — le h3.t-h2 et le premier paragraphe partagent ce flex column,
+   donc son `gap` de 20 px : 28 px de plus portent l'écart titre/texte à
+   48 px de bureau (le mobile retombe à 12, pour un total de 32, dans le
+   bloc 767 px plus haut). Les paragraphes suivants gardent le gap seul :
+   la règle ne vise que la sortie du titre, pas le rythme interne du bloc. */
+.transparence-corps h3 + p { margin-top: 28px; }
 
 /* ─── Prestations ───────────────────────────────────────────── */
 .prestations-grille {

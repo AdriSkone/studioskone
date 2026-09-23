@@ -3,9 +3,27 @@
    ============================================================ */
 
 /* Base commune. Le cadre fait 1 px sur les deux variantes, y compris sur
-   le bouton plein : sans lui, les deux n'auraient pas la même hauteur. */
+   le bouton plein : sans lui, les deux n'auraient pas la même hauteur.
+
+   Lot 6 — règle unique de cohérence, tous groupes de boutons confondus
+   (hero, estimateur, cartes tarifaires, menu mobile, pied de page, pages
+   prestations) : libellé centré à l'horizontale ET à la verticale, 48 px
+   de hauteur minimum, même padding horizontal et même rayon dans un même
+   groupe. `inline-flex` remplace `inline-block` : un padding égal en haut
+   et en bas ne suffit pas à centrer verticalement dès qu'une icône
+   (`.bouton-fleche`) ou un demi-interligne asymétrique s'en mêle — le
+   centrage flex, lui, est exact quel que soit le contenu.
+
+   Pas de `min-height` ici : avec le padding de 17 px et l'interlignage de
+   1.5 hérité du corps de texte, la hauteur réelle avoisine déjà 61 px,
+   bien au-dessus du plancher de 48. Le seul format qui reste sous ce
+   plancher est `.bouton--compact`, qui porte donc sa propre règle plus
+   bas — sans toucher au bandeau cookies, qui a son padding et sa hauteur
+   propres et n'est pas concerné par ce chantier. */
 .bouton {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   align-self: flex-start;
   padding: 17px 27px;
   border: 1px solid var(--encre);
@@ -64,8 +82,11 @@
 }
 
 /* ─── Compact ───────────────────────────────────────────────
-   La barre de navigation, où la hauteur est comptée. */
+   La barre de navigation, où la hauteur est comptée. Seul format qui,
+   avec son padding réduit, retombait sous le plancher commun de 48 px
+   (46,5 px mesurés) : le `min-height` se pose ici, et seulement ici. */
 .bouton--compact {
+  min-height: 48px;
   padding: 11px 19px;
   font-size: 0.9375rem;
 }
