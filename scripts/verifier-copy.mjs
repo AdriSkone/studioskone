@@ -78,6 +78,11 @@ const REMPLACEMENTS_DEMANDES = [
   // de domiciliation vs lieu d'exercice) sans que leur date affichée ne
   // suive : elle portait encore le 6 mai 2026.
   { avant: 'Dernière mise à jour : 6 mai 2026', apres: 'Dernière mise à jour : 18 septembre 2026' },
+  // Lot 6 — hero, 23 septembre 2026. Adri a tranché l'ambiguïté du
+  // statement : la fourchette « 5 jours à 3 semaines » couvrait deux
+  // formules distinctes (Une page / Site complet) et se lisait comme un
+  // seul intervalle continu. Trois mots ajoutés, rien d'autre ne bouge.
+  { avant: 'Livré en 5 jours à 3 semaines, à partir de 900', apres: 'Livré en 5 jours à 3 semaines selon la formule, à partir de 900' },
 ]
 
 /**

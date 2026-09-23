@@ -33,7 +33,7 @@ export const hero = {
   },
   statement:
     'Je dessine et je développe vos sites et vos applications, du premier croquis à la mise en ligne. ' +
-    'Un seul interlocuteur, un seul devis, un seul responsable du résultat. Livré en 5 jours à 3 semaines, à partir de 900&nbsp;€.',
+    'Un seul interlocuteur, un seul devis, un seul responsable du résultat. Livré en 5 jours à 3 semaines selon la formule, à partir de 900&nbsp;€.',
   ctas: [
     { libelle: 'Estimer mon projet',   href: '#estimator', variante: 'principal' },
     { libelle: 'Voir les réalisations', href: '#work',      variante: 'secondaire' },
