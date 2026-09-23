@@ -256,8 +256,21 @@ Tout `.bouton`, seul ou en groupe, sur toute page et à toute largeur :
 - Empilés sur mobile : chacun occupe 100 % de la largeur de son conteneur.
 - Côte à côte sur desktop, un groupe est soit à **largeurs égales**, soit **entièrement dimensionné par son contenu** — jamais un mélange des deux dans le même groupe.
 
-Le hero fait exception à l'empilement, pas au reste : ses deux actions gardent leur traitement propre (bouton plein et lien souligné, pas deux boutons), mais partagent la même hauteur.
+Le hero est le seul groupe qui mêle un bouton et un lien. Sous 768 px les deux prennent la même boîte — même cadre, même padding, même hauteur, pleine largeur. Au-dessus, le lien redevient un lien souligné, sans cadre : sa boîte est alors plus basse que celle du bouton, et c'est voulu. Ce qui doit s'aligner à ce moment-là n'est plus la boîte mais **le libellé** — les deux textes partagent la même ligne, au pixel.
+
+Attention au piège qui a produit le défaut : `.bouton` porte `align-self: flex-start` pour ne pas s'étirer dans les colonnes. Posé sur l'enfant, il bat l'`align-items` du conteneur. Un groupe qui veut centrer ou aligner ses enfants doit donc redonner explicitement son `align-self` au bouton.
 
 ## 14. Espacement titre / texte
 
-Entre un titre en display (`.t-h1`, `.t-h2`, `h1`, `h2`, `.sombre-titre`, `.pivot-texte`, ou toute variante qui en reprend `--leading-display` ou `--leading-titre`) et le paragraphe qui le suit directement : **32 px minimum sur mobile, 48 px minimum au-delà**. La règle vaut partout où un titre précède un texte, pas seulement dans une section donnée — un titre à côté duquel un texte est simplement aligné (note de tête de section, sous-titre en colonne séparée) n'est pas concerné : elle ne s'applique qu'à la relation verticale, titre au-dessus, texte en dessous.
+Entre un titre en display (`.t-h1`, `.t-h2`, `h1`, `h2`, `.sombre-titre`, `.pivot-texte`, ou toute variante qui en reprend `--leading-display` ou `--leading-titre`) et le paragraphe qui le suit directement : **32 px minimum sur mobile, 48 px minimum au-delà**. La règle vaut partout où un titre précède un texte, pas seulement dans une section donnée — elle ne s'applique qu'à la relation verticale, titre au-dessus, texte en dessous.
+
+Un texte posé **à côté** du titre (note de tête de section, sous-titre en colonne séparée) n'est pas concerné tant qu'il reste à côté — mais sous 768 px la grille passe à quatre colonnes et le fait tomber dessous : il redevient concerné, et c'est précisément là que quatre paragraphes démarraient à zéro pixel, dans les jambages du titre. Le plancher est donc posé une fois pour toutes dans `base.css`, au même endroit que la bascule qui le rend nécessaire :
+
+```css
+@media (max-width: 767px) {
+  :where(.grille, .colonnes) > :where(h1, h2, .t-h1, .t-h2, .sombre-titre)
+    + :is(p, div, ul, ol) { margin-top: 32px; }
+}
+```
+
+`:where` ne pèse rien : la moindre classe de composant qui déclare sa propre marge remplace le plancher sans avoir à lutter. N'ajoutez pas de marge section par section — corrigez ici.
