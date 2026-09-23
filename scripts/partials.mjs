@@ -138,13 +138,24 @@ ${c.liens
 
   const legal = pied.legal.map((l) => `<a href="${l.href}">${l.libelle}</a>`).join('\n            ')
 
+  /**
+   * Lot 6 — le bouton « Parlons-en » faisait doublon avec « Discuter de
+   * mon projet », le vrai bouton de soumission de la section Contact, à
+   * quelques centaines de pixels au-dessus (voir build-accueil.mjs,
+   * contact()). Un seul bouton principal suffit : celui-ci disparaît, et
+   * son libellé est déclaré en retrait dans verifier-copy.mjs.
+   *
+   * Le statut et la mention, eux, restent : simplement rangés sur la même
+   * colonne l'un au-dessus de l'autre — ils étaient jusqu'ici sur la même
+   * ligne, l'un à gauche, l'autre plaqué à droite, sans rapport visuel
+   * entre eux.
+   */
   return `  <footer class="pied sombre" id="footer">
     <div class="grille">
       <div class="sombre sombre sombre--pleine-largeur" style="--col: 1 / -1">
-        <div class="colonnes">
-          <p class="statut" style="--col: 1 / span 6">${pied.cta.statut}</p>
-          <p class="sombre-mention" style="--col: 9 / span 4">${pied.cta.mention}</p>
-          <a class="bouton bouton--principal" style="--col: 1 / span 4; margin-top: 40px" href="${resoudre(pied.cta.lien.href, prefixe)}">${pied.cta.lien.libelle}${fleche}</a>
+        <div class="pied-cta-statut" style="--col: 1 / span 6">
+          <p class="statut">${pied.cta.statut}</p>
+          <p class="sombre-mention">${pied.cta.mention}</p>
         </div>
       </div>
 

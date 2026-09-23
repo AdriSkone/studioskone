@@ -403,9 +403,20 @@ body { padding-top: var(--nav-h); }
 .engagement-titre { font-size: var(--text-corps); }
 .engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
-/* ─── Contact ───────────────────────────────────────────────── */
-.contact-lead { display: flex; flex-direction: column; gap: 16px; }
+/* ─── Contact ─────────────────────────────────────────────────
+   Lot 6 — le texte démarrait sous les jambages du titre : aucune marge ne
+   séparait `.contact-lead` du h2 qui le précède. Règle du style guide,
+   appliquée ici comme partout : 48 px de bureau, 32 px sous 768 px. */
+.contact-lead { display: flex; flex-direction: column; gap: 16px; margin-top: 48px; }
 #contact-form-root { margin-top: var(--section-s); }
+
+/* Lot 6 — la section Contact (padding-block du .section-m) et le pied de
+   page qui la suit immédiatement (padding-block du .pied) cumulaient
+   chacun une pleine valeur d'espacement de section : ~256 px de trou
+   entre le bouton et « Disponible pour de nouveaux projets », plutôt
+   qu'un espacement de section standard. En retirant le padding bas d'ici,
+   seul celui du pied (déjà une des trois valeurs : 96/160/240) subsiste. */
+#contact { padding-bottom: 0; }
 
 /* ─── Petit écran ───────────────────────────────────────────── */
 @media (max-width: 1023px) {
@@ -429,6 +440,8 @@ body { padding-top: var(--nav-h); }
   .engagements { grid-template-columns: 1fr; }
   .metiers { flex-direction: column; align-items: stretch; }
   .hero-preuves { align-self: start; }
+  .contact-lead { margin-top: 32px; }
+  .transparence-corps h3 + p { margin-top: 12px; }
 }
 
 /* ─── Ouverture du hero ─────────────────────────────────────

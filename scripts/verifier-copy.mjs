@@ -345,6 +345,14 @@ const TARIFS_RETIRES = [
   // quand l'accueil annonce 15 € depuis les tâches précédentes.
   'Comptez une quinzaine d euros par an pour le domaine.',
   'Le nom de domaine, autour de 12 € par an, et l hébergement, de 0 à 15 € par mois. Vous les payez en direct, à votre nom, sans marge de ma part.',
+
+  // Lot 6 — section Contact, 23 septembre 2026. Le pied de page (servi sur
+  // les vingt pages) répétait un second bouton, « Parlons-en », à quelques
+  // centaines de pixels de « Discuter de mon projet », le vrai bouton de
+  // soumission de la section Contact/estimateur. Un seul bouton principal
+  // suffit ; celui du pied de page est retiré (scripts/partials.mjs,
+  // piedDePage()). Le statut et la mention qui l'entouraient restent.
+  'Parlons-en',
 ]
 
 /**
