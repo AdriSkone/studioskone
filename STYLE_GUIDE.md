@@ -274,3 +274,27 @@ Un texte posé **à côté** du titre (note de tête de section, sous-titre en c
 ```
 
 `:where` ne pèse rien : la moindre classe de composant qui déclare sa propre marge remplace le plancher sans avoir à lutter. N'ajoutez pas de marge section par section — corrigez ici.
+
+## 15. L'échelle est continue, pas à deux jeux
+
+Une valeur qui dépend de la largeur d'écran s'écrit **une fois**, en `clamp()`, avec son plancher mobile et son plafond bureau. Elle ne s'écrit pas deux fois, un jeu dans `:root` et un jeu dans `@media (max-width: 767px)`.
+
+La raison est mesurable : à deux jeux, la valeur saute en un pixel de largeur. Le titre du hero passait de 44 à 61 px, le texte de 16 à 20, la hauteur de section de 128 à 240 — et personne ne voyait ces marches, parce que les contrôles se faisaient à 390 et à 1440, jamais entre les deux.
+
+Les trois bornes du site :
+
+| | 390 px | interpolation | 1024 px et + |
+|---|---|---|---|
+| `--text-display` | 44 px | `8vw` | 136 px (plafond à 1700) |
+| `--text-corps-l` | 16 px | `0.85rem + 0.63vw` | 20 px |
+| `--section-l` | 128 px | `59px + 17.7vw` | 240 px |
+| `--section-m` | 96 px | `57px + 10.1vw` | 160 px |
+| `--section-s` | 64 px | `44px + 5.05vw` | 96 px |
+| `--grille-marge` | 40 px | `25px + 3.8vw` | 64 px |
+| `--grille-gouttiere` | 16 px | `11px + 1.26vw` | 24 px |
+
+Ce qui reste dans un `@media` est ce qui ne peut pas s'interpoler : un nombre de colonnes, un interlignage qui rogne ou pas, un menu qui devient plein écran.
+
+**La règle qui va avec, pour les grilles de cartes : une carte ne rétrécit jamais quand l'écran grandit.** Trois colonnes de cartes tarifaires à 1024 px donnaient 253 px — plus étroit que la même carte sur un téléphone de 390 px. Avant d'ajouter une colonne, vérifiez la largeur qu'elle laisse : en dessous de 300 px, gardez le compte précédent. Les tarifs et les prestations passent donc à trois colonnes à **1180 px**, pas à 1024.
+
+**Comment le vérifier.** `scripts/recette.mjs` mesure une largeur à la fois. Pour l'échelle, il faut balayer : ouvrez la même page dans une série de cadres de largeurs différentes et comparez les valeurs calculées d'un palier au suivant. Toute variation de plus de 40 % entre deux paliers voisins est une marche à justifier ou à supprimer.
