@@ -94,15 +94,55 @@ window.addEventListener('load', () => setTimeout(() => {
     if(h<24||w<24) petites.push((el.textContent||'').trim().slice(0,24)+' '+Math.round(w)+'x'+Math.round(h));
   });
 
-  const pre=document.createElement('pre'); pre.id='recette';
-  pre.textContent=JSON.stringify({h1:document.querySelectorAll('h1').length,
+  const charge=JSON.stringify({h1:document.querySelectorAll('h1').length,
     contraste,ombres:[...new Set(ombres)],degrades:[...new Set(degrades)],
     capitales:[...capitales],debord:[...debord],petites,
     scrollWidth:document.documentElement.scrollWidth,viewport:vw});
+
+  // La page est mesurée dans un cadre (voir CADRE plus bas) : le résultat
+  // remonte à la page hôte, seule dont Chrome dumpe le DOM.
+  if (window.parent !== window) { parent.postMessage({ recette: charge }, '*'); return }
+
+  const pre=document.createElement('pre'); pre.id='recette';
+  pre.textContent=charge;
   document.body.prepend(pre);
 }, 2400));
 </script>
 `
+
+/**
+ * La largeur demandée n'était pas la largeur mesurée.
+ *
+ * `--window-size=375,900` ne donne pas une fenêtre de 375 px : sur macOS,
+ * Chrome refuse de descendre sous ~500 px et rend ce plancher sans rien
+ * dire. La recette « 375 » validait donc une largeur que personne
+ * n'utilise, et laissait passer tout ce qui ne casse qu'en dessous — la
+ * bascule de la grille à quatre colonnes, par exemple, se déclenche à
+ * 767 px et n'était jamais testée dans ses vraies conditions.
+ *
+ * Un cadre n'a pas ce plancher : une iframe de 375 px de large donne à la
+ * page qu'elle contient un viewport de 375 px, avec les mêmes media
+ * queries, le même `position: fixed` et le même défilement qu'un
+ * téléphone. On ouvre donc une page hôte de la taille que Chrome veut
+ * bien, on y pose le cadre à la largeur exacte, et la sonde renvoie son
+ * diagnostic à l'hôte, seul dont le DOM est dumpé.
+ */
+function pageHote(url, w, h) {
+  return `<!doctype html><html><head><meta charset="utf-8"><title>recette</title>
+<style>html,body{margin:0;padding:0;background:#fff}
+iframe{display:block;width:${w}px;height:${h}px;border:0}</style></head>
+<body><iframe src="${url}"></iframe>
+<script>
+addEventListener('message', (e) => {
+  if (!e.data || typeof e.data.recette !== 'string') return
+  const pre = document.createElement('pre'); pre.id = 'recette'
+  pre.textContent = e.data.recette
+  document.body.prepend(pre)
+})
+</script></body></html>`
+}
+
+const HAUTEUR = 900
 
 let echecs = 0
 console.log(`Recette — ${base} · largeur ${largeur}\n`)
@@ -113,22 +153,29 @@ for (const nom of PAGES) {
     console.log(`  —  ${nom} (absent du build)`)
     continue
   }
-  const temp = resolve(dist, `_recette_${nom.replace(/\//g, '_')}.html`)
+  const slug = nom.replace(/\//g, '_')
+  const temp = resolve(dist, `_recette_${slug}.html`)
+  const hote = resolve(dist, `_hote_${slug}.html`)
   writeFileSync(temp, readFileSync(source, 'utf8').replace('</body>', SONDE + '</body>'), 'utf8')
+  writeFileSync(hote, pageHote(`${base}/_recette_${slug}.html`, largeur, HAUTEUR), 'utf8')
 
   let dom = ''
   try {
     dom = execFileSync(
       CHROME,
-      ['--headless=new', '--disable-gpu', '--no-sandbox', `--window-size=${largeur},900`,
-       '--virtual-time-budget=11000', '--dump-dom',
-       `${base}/_recette_${nom.replace(/\//g, '_')}.html`],
+      // La fenêtre est plus large que le cadre : elle ne fait que le
+      // contenir. C'est le cadre qui porte la largeur mesurée.
+      ['--headless=new', '--disable-gpu', '--no-sandbox',
+       `--window-size=${Number(largeur) + 80},${HAUTEUR + 80}`,
+       '--virtual-time-budget=12000', '--dump-dom',
+       `${base}/_hote_${slug}.html`],
       { encoding: 'utf8', maxBuffer: 60e6, stdio: ['ignore', 'pipe', 'ignore'] }
     )
   } catch {
     /* Chrome sort parfois en erreur tout en ayant écrit le DOM */
   }
   unlinkSync(temp)
+  unlinkSync(hote)
 
   const m = dom.match(/<pre id="recette">(.*?)<\/pre>/s)
   if (!m) {
@@ -139,6 +186,10 @@ for (const nom of PAGES) {
   const d = JSON.parse(m[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>'))
 
   const soucis = []
+  // Le garde-fou qui manquait : tant qu'on ne le vérifie pas, une largeur
+  // silencieusement remplacée par une autre fait passer la recette pour
+  // ce qu'elle n'a pas mesuré.
+  if (d.viewport !== Number(largeur)) soucis.push(`largeur mesurée ${d.viewport}px ≠ ${largeur}px demandés`)
   if (d.h1 !== 1) soucis.push(`${d.h1} h1`)
   if (d.contraste.length) soucis.push(`${d.contraste.length} contraste`)
   if (d.ombres.length) soucis.push(`${d.ombres.length} ombre(s)`)
