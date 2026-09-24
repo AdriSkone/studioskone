@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url'
 import { pagesProjet } from './contenu/projets-pages.mjs'
 import { projets } from './contenu/projets.mjs'
 import { navigation, piedDePage, bandeauCookies, fleche } from './partials.mjs'
+import { attributsTaille } from './dimensions-image.mjs'
 
 const ici = dirname(fileURLToPath(import.meta.url))
 const racine = resolve(ici, '..')
@@ -34,7 +35,7 @@ function page(slug, d) {
   const galerie = d.galerie
     .map(
       (g) => `          <figure class="projet-vue${g.large ? ' projet-vue--large' : ''}">
-            <img src="${g.src}" alt="${g.alt}" loading="lazy">
+            <img src="${g.src}" alt="${g.alt}" loading="lazy"${attributsTaille(g.src)}>
             ${g.label ? `<figcaption>${g.label}</figcaption>` : ''}
           </figure>`
     )
@@ -43,7 +44,7 @@ function page(slug, d) {
   const suite = autresProjets(slug)
     .map(
       (p) => `          <a class="carte-projet" href="/projets/${p.slug}">
-            <img class="carte-projet-image" src="${p.image}" alt="${p.alt}" loading="lazy" width="1200" height="750">
+            <img class="carte-projet-image" src="${p.image}" alt="${p.alt}" loading="lazy"${attributsTaille(p.image)}>
             <div>
               <div class="carte-projet-tete">
                 <h3 class="carte-projet-titre">${p.titre}</h3>
@@ -78,7 +79,7 @@ ${navigation({ prefixe: '/' })}
         <p class="projet-desc" style="--col: 8 / span 5">${d.desc}</p>
 
         <figure class="projet-visuel" style="--col: 1 / -1">
-          <img src="${d.heroImg}" alt="${d.heroAlt}" loading="eager" fetchpriority="high">
+          <img src="${d.heroImg}" alt="${d.heroAlt}" loading="eager" fetchpriority="high"${attributsTaille(d.heroImg)}>
         </figure>
       </div>
     </section>

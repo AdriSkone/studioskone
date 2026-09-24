@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url'
 import * as C from './contenu/accueil.mjs'
 import { projets } from './contenu/projets.mjs'
 import { navigation, piedDePage, bandeauCookies, fleche } from './partials.mjs'
+import { attributsTaille } from './dimensions-image.mjs'
 import { ORIGIN, lastmodFor, ecrireLastmod } from './sitemap.mjs'
 
 const ici = dirname(fileURLToPath(import.meta.url))
@@ -260,7 +261,7 @@ function realisations() {
   const vignette = (p, copie = false) => `            <a class="carte-projet" href="/projets/${p.slug}"${
     copie ? ' aria-hidden="true" tabindex="-1"' : ''
   }>
-              <img class="carte-projet-image" src="${p.image}" alt="${copie ? '' : p.alt}" loading="lazy" width="1200" height="750">
+              <img class="carte-projet-image" src="${p.image}" alt="${copie ? '' : p.alt}" loading="lazy"${attributsTaille(p.image)}>
               <div>
                 <div class="carte-projet-tete">
                   <h3 class="carte-projet-titre">${p.titre}</h3>
