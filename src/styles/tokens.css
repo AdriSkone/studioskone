@@ -72,11 +72,20 @@
   --font-texte:   'Switzer', 'Switzer Fallback', ui-sans-serif, system-ui, sans-serif;
   --font-data:    'JetBrains Mono', 'Mono Fallback', ui-monospace, monospace;
 
-  --text-display: clamp(3.5rem, 8vw, 8.5rem);
+  /* Le plancher descend à 2.75rem pour que la taille display reste la
+     même expression du plus petit téléphone au plus grand écran. Avant,
+     le hero changeait de token sous 768 px et le titre tombait de 61 à
+     44 px en un pixel de largeur. 8vw atteint 44 px vers 550 px de
+     large : en dessous le titre est posé, au-dessus il grandit sans
+     marche. */
+  --text-display: clamp(2.75rem, 8vw, 8.5rem);
   --text-h1:      clamp(2.75rem, 5.5vw, 5rem);
   --text-h2:      clamp(2rem, 3.5vw, 3rem);
   --text-h3:      1.5rem;
-  --text-corps-l: 1.25rem;
+  /* 16 px à 390, 20 px à 1024, et tout ce qu'il y a entre les deux.
+     La valeur mobile était posée à la main dans le hero (1rem) : le
+     texte sautait de 16 à 20 px à 768 px. */
+  --text-corps-l: clamp(1rem, 0.85rem + 0.63vw, 1.25rem);
   --text-corps:   1.0625rem;
   --text-petit:   0.875rem;
   --text-data:    0.8125rem;
@@ -98,15 +107,27 @@
   --rond-pleine:     0;     /* sections bord à bord */
 
   /* ─── Espacement ──────────────────────────────────────────
-     Échelle de 8. Entre sections : trois valeurs, jamais d'intermédiaire. */
-  --section-s: 96px;
-  --section-m: 160px;
-  --section-l: 240px;
+     Échelle de 8, et trois valeurs seulement entre sections — jamais
+     d'intermédiaire choisi à la main.
 
-  /* ─── Grille ──────────────────────────────────────────────── */
+     Ces trois valeurs étaient posées deux fois : une fois pour le
+     bureau, une fois pour le mobile, avec la bascule à 768 px. L'écart
+     entre les deux jeux allait jusqu'à 88 % (128 px contre 240), franchi
+     en un pixel de largeur : sur une tablette, la page changeait de
+     respiration d'un coup. Chaque valeur va maintenant de son plancher
+     mobile à son plafond bureau en continu, et atteint le plafond à
+     1024 px. Les deux bornes sont inchangées : 390 px et 1440 px rendent
+     exactement ce qu'ils rendaient. */
+  --section-s: clamp(64px,  44px +  5.05vw,  96px);
+  --section-m: clamp(96px,  57px + 10.10vw, 160px);
+  --section-l: clamp(128px, 59px + 17.70vw, 240px);
+
+  /* ─── Grille ────────────────────────────────────────────────
+     Même principe : la marge et la gouttière montent avec l'écran au
+     lieu de sauter à leur breakpoint. */
   --grille-colonnes:  12;
-  --grille-gouttiere: 24px;
-  --grille-marge:     64px;
+  --grille-gouttiere: clamp(16px, 11px + 1.26vw, 24px);
+  --grille-marge:     clamp(40px, 25px + 3.80vw, 64px);
   --grille-max:       1440px;
 
   /* ─── Mouvement ───────────────────────────────────────────
@@ -121,19 +142,14 @@
   --nav-h-reduite: 72px;
 }
 
-/* Breakpoints de référence : 390, 768, 1024, 1440. */
-@media (max-width: 1023px) {
-  :root { --grille-marge: 40px; }
-}
+/* Breakpoints de référence : 390, 768, 1024, 1440.
 
+   Les marges, gouttières et hauteurs de section ne sont plus redéclarées
+   ici : elles interpolent d'elles-mêmes entre leur plancher mobile et
+   leur plafond bureau. Ce qui reste sous 768 px est ce qui ne peut pas
+   s'interpoler — un interlignage qui rogne, ou pas. */
 @media (max-width: 767px) {
   :root {
-    --grille-marge: 40px;
-    --grille-gouttiere: 16px;
-    --section-s: 64px;
-    --section-m: 96px;
-    --section-l: 128px;
-
     /* Lot 6 — un accent circonflexe se rogne dès que l'interlignage d'un
        titre display descend sous 1.0 : au-dessus de 767 px, 0.90 à 0.92
        restent la norme (STYLE_GUIDE.md), mais sur mobile aucun titre ne

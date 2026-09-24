@@ -130,8 +130,11 @@ body { padding-top: var(--nav-h); }
    700 px. */
 @media (max-width: 767px) {
   .hero { padding-top: 48px; }
-  .hero-titre { font-size: var(--text-h1); }
-  .hero-statement { margin-top: 32px; max-width: 34em; font-size: 1rem; }
+  /* Le titre et le statement gardaient chacun une taille écrite ici, ce
+     qui les faisait sauter de 44 à 61 px et de 16 à 20 px au passage de
+     768. Les deux tokens interpolent maintenant tout seuls et rendent
+     ces mêmes valeurs à 390 px : la règle n'a plus lieu d'être. */
+  .hero-statement { margin-top: 32px; max-width: 34em; }
   .hero-actions { margin-top: 28px; }
   /* Les deux actions s'empilent, pleine largeur, sans décalage. Le lien
      « Voir les réalisations » prend l'allure d'un bouton secondaire :
@@ -364,7 +367,24 @@ body { padding-top: var(--nav-h); }
 .tarifs-charge-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 @media (max-width: 1023px) {
-  .tarifs-grille { grid-template-columns: 1fr; }
+  /* Deux colonnes, pas une. En une seule, la carte s'étalait sur 688 à
+     820 px : un bandeau, plus une carte, et trois prix qu'on ne pouvait
+     plus comparer d'un regard. Trois colonnes ici seraient l'excès
+     inverse — à 1024 px elles tombaient à 253 px, plus étroites que la
+     même carte sur un téléphone. À deux, chaque carte tient 436 px, et
+     la troisième prend sa ligne seule, comme les engagements. */
+  .tarifs-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Les trois colonnes n'arrivent qu'une fois la place réellement là :
+   1 180 px, la largeur à partir de laquelle la plus étroite des trois
+   dépasse 300 px. Entre 1024 et 1179, les cartes tombaient à 253 px et
+   les prestations à 283 — dans les deux cas plus étroites que la même
+   carte sur un téléphone de 390 px, ce qui n'a aucun sens : l'écran a
+   grandi, la carte a rétréci. */
+@media (min-width: 1024px) and (max-width: 1179px) {
+  .tarifs-grille,
+  .prestations-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 767px) {
   .tarifs-grille { display: flex; flex-direction: column; }
