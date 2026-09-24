@@ -70,15 +70,17 @@ C'est la matière du site, elle n'est pas optionnelle.
 Échelle en `clamp()` :
 
 ```
-display  clamp(3.5rem, 8vw, 8.5rem)   Bricolage 800, wdth 92, -0.035em
-h1       clamp(2.75rem, 5.5vw, 5rem)  Bricolage 800, wdth 92, -0.03em
-h2       clamp(2rem, 3.5vw, 3rem)     Bricolage 700, -0.025em
-h3       1.5rem                        Bricolage 700, -0.02em
-corps L  1.25rem                       Switzer 400
-corps    1.0625rem                     Switzer 400
-petit    0.875rem                      Switzer 400
-data     0.8125rem                     JetBrains Mono 400
+display  clamp(2.75rem, 8vw, 8.5rem)              Bricolage 800, wdth 92, -0.035em
+h1       clamp(2.75rem, 5.5vw, 5rem)              Bricolage 800, wdth 92, -0.03em
+h2       clamp(2rem, 3.5vw, 3rem)                 Bricolage 700, -0.025em
+h3       1.5rem                                   Bricolage 700, -0.02em
+corps L  clamp(1rem, 0.85rem + 0.63vw, 1.25rem)   Switzer 400
+corps    1.0625rem                                Switzer 400
+petit    0.875rem                                 Switzer 400
+data     0.8125rem                                JetBrains Mono 400
 ```
+
+Le plancher de `display` et celui de `corps L` descendent aux valeurs mobiles au lieu d'être redéclarés dans un `@media` : voir §15. Aucun titre ne porte de taille écrite dans une feuille de page.
 
 - Titres en **casse de phrase**, jamais en capitales
 - Le monospace ne sert qu'à de la donnée réelle : prix, numéros d'étape, durées, années
@@ -103,14 +105,14 @@ Aucune valeur intermédiaire ailleurs. Aucune pilule.
 
 ## 5. Grille et espacement
 
-- 12 colonnes, gouttière 24 px, marges 40 px en mobile et 64 px au-delà, largeur max 1440 px
+- 12 colonnes, largeur max 1440 px. Marge et gouttière ne sautent pas d'une valeur à l'autre : la marge va de 40 px à 390 à 64 px à 1024, la gouttière de 16 à 24 px sur la même course (§15).
 - **Aucun filet vertical.** La grille est un système d'alignement, elle n'est pas dessinée.
 - Filets horizontaux uniquement, 1 px, encre à 12 % d'opacité, en séparation entre sections. Jamais dans une zone sans contenu.
 - **Pas de filet entre la navigation et le hero.**
 - **Aucun filet comme séparateur de liste.** Un filet sépare des sections, jamais les items d'une même liste. Deux traitements selon le contenu :
   - **Liste courte de phrases** (symptômes, bandeau de réassurance du hero) : l'espace seul, aucun trait, un espacement vertical franc.
   - **Liste d'arguments avec un titre et un texte** (engagements, avantages, formules, nuances de tarifs) : des cartes. Fond `--papier-ombre` (ou `--papier` quand la carte tombe dans une section déjà `--papier-ombre`), rayon 16 px, padding généreux, aucune bordure, aucune ombre. Grille de deux colonnes sur desktop, une colonne sur mobile. Dans une carte à fond `--papier-ombre`, le texte secondaire s'écrit en `--encre`, jamais en `--gris`, qui y tombe à 4.67 de contraste.
-- Espacement vertical sur une échelle de 8 px. Entre sections : **96, 160 ou 240 px**. Trois valeurs, jamais une intermédiaire.
+- Espacement vertical sur une échelle de 8 px. Entre sections : **trois valeurs seulement**, `--section-s`, `--section-m`, `--section-l` — jamais une quatrième choisie à la main. Chacune vaut 64, 96 ou 128 px à 390, et 96, 160 ou 240 px à partir de 1024, en montant sans marche entre les deux (§15). C'est le token qu'on pose, jamais le pixel.
 - Les blocs ne sont jamais centrés par défaut. L'asymétrie est la norme.
 - Breakpoints de référence : **390, 768, 1024, 1440**.
 
