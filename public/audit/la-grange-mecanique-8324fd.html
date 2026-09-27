@@ -63,6 +63,9 @@
   .offre .bouton { margin-top: 0; background: var(--prusse); color: var(--papier); }
   .offre .alt { color: var(--prusse); font-weight: 600; text-decoration: none; }
   header p + p { margin-top: 14px; }
+  .tarif { display: flex; align-items: baseline; gap: 16px; margin: 14px 0 18px; }
+  .tarif s { font-size: 22px; color: var(--doux); }
+  .tarif strong { font-family: "Bricolage Grotesque"; font-size: 52px; line-height: 1; color: var(--prusse); }
   .piste { margin-top: 18px; font-size: 15px; color: var(--doux); max-width: 620px; }
   .prix { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; margin-top: 8px; }
   .prix strong { font-family: "Bricolage Grotesque"; font-size: 44px; color: var(--prusse); }
@@ -302,9 +305,12 @@
   <section>
     <div class="offre">
       <h2>Et si vous préférez qu'on s'en occupe</h2>
-      <p>Je m'appelle Adrien Bidet, je suis installé à Casson, à un quart d'heure de chez vous.</p>
-      <p>Pour un site comme celui de la maquette, avec l'accueil, les prestations, vos réalisations et le contact, comptez autour de <strong>1 500 €</strong>.</p>
-      <p>C'est un repère, pas un devis. Le prix se cale sur ce que vous voulez vraiment : on peut faire plus simple, ou garder vos textes et n'en reprendre que la forme.</p>
+      <p>Je m'appelle Adrien, je suis installé à Casson, pas loin de chez vous.</p>
+      <p>Un site comme celui de la maquette, avec l'accueil, les prestations, vos réalisations et le contact :</p>
+      <p class="tarif"><s>1 500 €</s><strong>990 €</strong></p>
+      <p>En échange, deux choses : un avis Google une fois le site en ligne, et l'autorisation de le montrer comme exemple de mon travail.</p>
+      <p>Vous versez 30 % au départ. Le reste, seulement quand le site est en ligne et que vous l'avez validé.</p>
+      <p>Ce prix n'est pas figé : on peut faire plus simple, ou garder vos textes et n'en reprendre que la forme.</p>
       <p>Si ça vous parle, écrivez-moi ou appelez-moi. Sinon, ce document est à vous, faites-en ce que vous voulez.</p>
       <div class="contact">
         <a class="bouton" href="mailto:contact@studioskone.com?subject=Site%20La%20Grange%20M%C3%A9canique">contact@studioskone.com</a>
@@ -316,7 +322,7 @@
 </main>
 
 <footer>
-  <div class="wrap">Adrien Bidet, Studio Skøne, Casson (44). studioskone.com</div>
+  <div class="wrap">Adrien, Studio Skøne, Casson (44). studioskone.com</div>
 </footer>
 
 </body>
