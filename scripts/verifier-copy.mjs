@@ -88,6 +88,10 @@ const REMPLACEMENTS_DEMANDES = [
   // nom change ; sa page passe à /projets/ofria, l'ancienne adresse
   // redirige (vercel.json).
   { avant: 'GiftMatch', apres: 'Ofria' },
+  // Même jour : la phrase de design de la page Ofria décrivait l'ancienne
+  // identité (dark mode, sphère terracotta). Réécrite avec Adri pour
+  // coller aux nouvelles captures.
+  { avant: 'un dark mode chaud et une petite sphère terracotta', apres: 'un fond papier clair et un nœud aubergine et mimosa' },
 ]
 
 /**

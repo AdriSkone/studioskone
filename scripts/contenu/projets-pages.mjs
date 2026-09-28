@@ -225,7 +225,7 @@ export const pagesProjet = {
     "labelGalerie": "Écrans de l'app",
     "contextes": [
       "Offrir un cadeau, c'est souvent la galère : on sèche, on repousse, et on prend la carte cadeau par défaut. Ofria s'attaque à ce moment-là. On décrit la personne en trois mots et on récupère des pistes qui tiennent la route, avec un prix et une adresse pour acheter.",
-      "L'app est en React Native (Expo). L'IA tourne derrière un proxy : la clé API reste sur le serveur et ne se retrouve jamais dans le code de l'app. Les réponses arrivent en JSON structuré, donc affichables directement sans retouche. Côté design, un dark mode chaud et une petite sphère terracotta qui sert de repère."
+      "L'app est en React Native (Expo). L'IA tourne derrière un proxy : la clé API reste sur le serveur et ne se retrouve jamais dans le code de l'app. Les réponses arrivent en JSON structuré, donc affichables directement sans retouche. Côté design, un fond papier clair et un nœud aubergine et mimosa qui sert de repère."
     ]
   },
   "m-bivouak": {
