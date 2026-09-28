@@ -206,12 +206,10 @@ body { padding-top: var(--nav-h); }
   background: var(--papier-ombre);
   border-radius: var(--rond-bloc);
   overflow: hidden;
-  transition:
-    background-color var(--dur-moyenne) var(--ease),
-    opacity var(--dur-moyenne) var(--ease);
 }
 .symptome::before,
 .studio-portrait::before,
+.transparence::before,
 .benefice::before {
   content: '';
   position: absolute;
@@ -226,7 +224,7 @@ body { padding-top: var(--nav-h); }
   opacity: calc(var(--grain-opacite) * 1.6);
   pointer-events: none;
 }
-.symptome-point {
+.carte-point {
   display: block;
   width: 8px;
   height: 8px;
@@ -245,24 +243,42 @@ body { padding-top: var(--nav-h); }
   transition: transform 450ms var(--ease);
 }
 
-/* Survol. Le point s'étire en filet d'accent tracé de gauche à droite —
-   le geste de survol de la charte pour une ligne de prestation —, la
-   carte fonce d'un cran, le constat monte de 4 px. Les cinq autres
-   s'effacent en partie : on lit celle qu'on pointe.
+/* Survol, commun aux symptômes et aux avantages du studio. Le point
+   s'étire en filet d'accent tracé de gauche à droite — le geste de survol
+   de la charte pour une ligne de prestation —, la carte fonce d'un cran,
+   son texte monte de 4 px. Les autres cartes de la liste s'effacent en
+   partie : on lit celle qu'on pointe.
 
    Réservé aux vrais pointeurs : au doigt, :hover reste collé après le
-   toucher et laisserait une carte allumée et cinq éteintes. */
+   toucher et laisserait une carte allumée et les autres éteintes. */
+.symptome,
+.benefice {
+  transition:
+    background-color var(--dur-moyenne) var(--ease),
+    opacity var(--dur-moyenne) var(--ease);
+}
+.benefice-titre,
+.benefice-texte { transition: transform 450ms var(--ease); }
+
 @media (hover: hover) and (pointer: fine) {
-  .symptome:hover { background: color-mix(in srgb, var(--encre) 6%, var(--papier-ombre)); }
-  .symptome:hover .symptome-point { width: 40px; }
-  .symptome:hover .symptome-texte { transform: translateY(-4px); }
-  .probleme-liste:has(.symptome:hover) .symptome:not(:hover) { opacity: 0.6; }
+  .symptome:hover,
+  .benefice:hover { background: color-mix(in srgb, var(--encre) 6%, var(--papier-ombre)); }
+  .symptome:hover .carte-point,
+  .benefice:hover .carte-point { width: 40px; }
+  .symptome:hover .symptome-texte,
+  .benefice:hover .benefice-titre,
+  .benefice:hover .benefice-texte { transform: translateY(-4px); }
+  .probleme-liste:has(.symptome:hover) .symptome:not(:hover),
+  .benefices:has(.benefice:hover) .benefice:not(:hover) { opacity: 0.6; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .symptome,
-  .symptome-point,
-  .symptome-texte { transition: none; }
+  .benefice,
+  .carte-point,
+  .symptome-texte,
+  .benefice-titre,
+  .benefice-texte { transition: none; }
 }
 
 /* Trois colonnes seulement une fois la place là, comme les tarifs : sous
@@ -373,6 +389,7 @@ body { padding-top: var(--nav-h); }
   border-radius: var(--rond-bloc);
   overflow: hidden;
 }
+.benefice .carte-point { margin-bottom: 28px; }
 .benefice-titre { font-size: var(--text-h3); }
 /* Sur --papier-ombre, --gris tombe à 4.67 : le texte secondaire d'une
    carte s'écrit en --encre. */
@@ -390,17 +407,43 @@ body { padding-top: var(--nav-h); }
     align-items: baseline;
   }
   .benefice-texte { margin-top: 0; }
+  .benefice .carte-point { grid-column: 1 / -1; }
 }
 
-/* ─── Transparence ──────────────────────────────────────────── */
-.transparence-corps { display: flex; flex-direction: column; gap: 20px; }
-.transparence-corps p { max-width: 60ch; }
-/* Lot 6 — le h3.t-h2 et le premier paragraphe partagent ce flex column,
-   donc son `gap` de 20 px : 28 px de plus portent l'écart titre/texte à
-   48 px de bureau (le mobile retombe à 12, pour un total de 32, dans le
-   bloc 767 px plus haut). Les paragraphes suivants gardent le gap seul :
-   la règle ne vise que la sortie du titre, pas le rythme interne du bloc. */
-.transparence-corps h3 + p { margin-top: 28px; }
+/* ─── Transparence ─────────────────────────────────────────────
+   Un encart, pas trois lignes en marge. Posé à gauche sur sept colonnes,
+   le bloc laissait toute la droite vide et se perdait entre le studio et
+   les prestations. Il devient une carte de papier grainé pleine largeur :
+   le titre à gauche, en grand ; le texte calé en bas à droite, la
+   contrepartie marquée du point du logo. */
+.transparence {
+  --col: 1 / -1;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(40px, 6vw, 96px);
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+  overflow: hidden;
+}
+.transparence > .tete-bloc { margin-bottom: 16px; }
+.transparence-titre { --col: 1 / span 6; font-size: var(--text-h1); line-height: var(--leading-display); letter-spacing: var(--tracking-h1); }
+.transparence-corps {
+  --col: 8 / span 5;
+  grid-row: 2;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: var(--text-corps-l);
+  line-height: var(--leading-corps);
+}
+.transparence-echange { font-weight: 500; }
+.transparence-echange .carte-point { margin-bottom: 16px; }
+
+@media (max-width: 1023px) {
+  .transparence-titre { --col: 1 / -1; }
+  .transparence-corps { --col: 1 / span 9; grid-row: auto; margin-top: 40px; }
+}
 
 /* ─── Prestations ───────────────────────────────────────────── */
 .prestations-grille {
@@ -607,7 +650,6 @@ body { padding-top: var(--nav-h); }
   .metiers { flex-direction: column; align-items: stretch; }
   .hero-preuves { align-self: start; }
   .contact-lead { margin-top: 32px; }
-  .transparence-corps h3 + p { margin-top: 12px; }
   .symptome { min-height: 0; gap: 32px; padding: 24px; }
   .benefice { display: block; padding: 24px; }
   .benefice-texte { margin-top: 12px; }

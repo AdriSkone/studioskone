@@ -107,7 +107,7 @@ function probleme() {
   const items = C.probleme.symptomes
     // Pas de data-reveal : l'apparition de la section est orchestrée à part
     // (src/scripts/probleme.ts), cartes et points compris.
-    .map((s) => `        <li class="symptome"><span class="symptome-point" aria-hidden="true"></span><span class="symptome-texte">${s}</span></li>`)
+    .map((s) => `        <li class="symptome"><span class="carte-point" aria-hidden="true"></span><span class="symptome-texte">${s}</span></li>`)
     .join('\n')
 
   return `  <section class="section-m" id="probleme">
@@ -148,6 +148,7 @@ function studio() {
   const benefices = C.studio.benefices
     .map(
       (b) => `        <li class="benefice" data-reveal>
+          <span class="carte-point" aria-hidden="true"></span>
           <h3 class="benefice-titre">${b.titre}</h3>
           <p class="benefice-texte">${b.texte}</p>
         </li>`
@@ -181,13 +182,23 @@ ${benefices}
 }
 
 function transparence() {
-  const textes = C.transparence.textes.map((t) => `        <p>${t}</p>`).join('\n')
-  return `  <section class="section-s" id="transparence">
+  // Le second paragraphe est la contrepartie demandée : il porte le point
+  // du logo, qui le détache du constat qui précède.
+  const textes = C.transparence.textes
+    .map((t, i) =>
+      i === 1
+        ? `          <p class="transparence-echange"><span class="carte-point" aria-hidden="true"></span>${t}</p>`
+        : `          <p>${t}</p>`
+    )
+    .join('\n')
+  return `  <section class="section-m" id="transparence">
     <div class="grille">
-      <p class="tete-bloc">${C.transparence.label}</p>
-      <div class="transparence-corps" style="--col: 1 / span 7">
-        <h3 class="t-h2">${C.transparence.titre}</h3>
+      <div class="transparence colonnes" data-reveal>
+        <p class="tete-bloc">${C.transparence.label}</p>
+        <h3 class="t-h2 transparence-titre">${C.transparence.titre}</h3>
+        <div class="transparence-corps">
 ${textes}
+        </div>
       </div>
     </div>
   </section>`

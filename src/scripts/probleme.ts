@@ -46,7 +46,7 @@ export function initProbleme(): void {
         '-=0.3'
       )
 
-    const points = cartes.map((c) => c.querySelector<HTMLElement>('.symptome-point'))
+    const points = cartes.map((c) => c.querySelector<HTMLElement>('.carte-point'))
     gsap.set(cartes, { y: 32, clipPath: 'inset(100% 0% 0% 0%)' })
     gsap.set(points, { scale: 0 })
 
@@ -54,7 +54,7 @@ export function initProbleme(): void {
       start: 'top 90%',
       once: true,
       onEnter: (lot) => {
-        const lotPoints = lot.map((c) => c.querySelector('.symptome-point'))
+        const lotPoints = lot.map((c) => c.querySelector('.carte-point'))
         gsap
           .timeline({ defaults: { ease: 'power3.out' } })
           .to(lot, {
