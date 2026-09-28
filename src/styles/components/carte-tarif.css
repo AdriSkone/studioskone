@@ -6,22 +6,44 @@
    ============================================================ */
 
 .carte-tarif {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 28px 24px 32px;
-  border: 1px solid var(--filet-moyen);
   border-radius: var(--rond-bloc);
-  background: var(--papier);
+  background: var(--papier-ombre);
+  overflow: hidden;
 }
 
-/* Plus de colonnes, plus d'air, un prix d'un cran plus grand, et elle
-   dépasse verticalement ses voisines. */
+/* Aucune bordure, comme toutes les cartes du site (STYLE_GUIDE § 7).
+   Les tarifs étaient l'exception : un filet autour des trois, un trait
+   encre autour de la recommandée. La matière les remplace — le même
+   grain que les autres cartes, sans quoi l'aplat se fond dans le papier
+   de la page. */
+.carte-tarif::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: var(--grain-taille) var(--grain-taille);
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
+  mix-blend-mode: multiply;
+  opacity: calc(var(--grain-opacite) * 1.6);
+  pointer-events: none;
+}
+
+/* Plus d'air, un prix d'un cran plus grand, un fond plus dense, et elle
+   dépasse verticalement ses voisines — la place et la densité, jamais un
+   contour ni un aplat d'accent. */
 .carte-tarif--recommandee {
   padding: 40px 32px 44px;
   margin-block: -16px;
-  border-color: var(--encre);
-  background: var(--papier-ombre);
+  background: var(--papier-dense);
 }
 
 .carte-tarif-nom { font-size: var(--text-corps); font-weight: 500; }
@@ -43,7 +65,10 @@
   font-weight: 500;
   font-size: var(--text-petit);
   letter-spacing: 0;
-  color: var(--gris);
+  /* Sur papier ombré, --gris tombe sous 4.5 (STYLE_GUIDE § 7) : le
+     texte secondaire d'une carte s'écrit en --encre, allégé par la
+     graisse et le corps plutôt que par la couleur. */
+  color: var(--encre);
 }
 
 .carte-tarif-positionnement { font-size: var(--text-corps); font-weight: 500; }
@@ -85,7 +110,7 @@
 .carte-tarif-note {
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
-  color: var(--gris);
+  color: var(--encre);
 }
 
 /* Le bouton tombe en bas de carte, aligné sur les trois. */

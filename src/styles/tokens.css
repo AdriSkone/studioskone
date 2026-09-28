@@ -18,6 +18,7 @@
      assombrir le fond ou éclaircir le gris la ferait basculer.            */
   --papier:         #F6ECDB;
   --papier-ombre:   #EEE2CC;
+  --papier-dense:   #DFD4C0;  /* papier ombré + 7 % d'encre : carte survolée, formule recommandée */
   --encre:          #14181C;
   --accent:         #12455C;
   --accent-profond: #0C3242;

@@ -107,7 +107,7 @@ function probleme() {
   const items = C.probleme.symptomes
     // Pas de data-reveal : l'apparition de la section est orchestrée à part
     // (src/scripts/probleme.ts), cartes et points compris.
-    .map((s) => `        <li class="symptome"><span class="carte-point" aria-hidden="true"></span><span class="symptome-texte">${s}</span></li>`)
+    .map((s) => `        <li class="symptome carte"><span class="carte-point" aria-hidden="true"></span><span class="symptome-texte">${s}</span></li>`)
     .join('\n')
 
   return `  <section class="section-m" id="probleme">
@@ -147,7 +147,7 @@ function studio() {
 
   const benefices = C.studio.benefices
     .map(
-      (b) => `        <li class="benefice" data-reveal>
+      (b) => `        <li class="benefice carte" data-reveal>
           <span class="carte-point" aria-hidden="true"></span>
           <h3 class="benefice-titre">${b.titre}</h3>
           <p class="benefice-texte">${b.texte}</p>
@@ -357,7 +357,8 @@ ${items}
 
   const toujours = C.tarifs.toujours.items
     .map(
-      (i) => `          <div class="tarifs-argument">
+      (i) => `          <div class="tarifs-argument carte">
+            <span class="carte-point" aria-hidden="true"></span>
             <h3 class="tarifs-argument-titre">${i.titre}</h3>
             <p class="tarifs-argument-texte">${i.texte}</p>
           </div>`
@@ -366,7 +367,8 @@ ${items}
 
   const charge = C.tarifs.charge.items
     .map(
-      (i) => `          <li class="tarifs-charge-carte">
+      (i) => `          <li class="tarifs-charge-carte carte">
+            <span class="carte-point" aria-hidden="true"></span>
             <p class="tarifs-charge-chiffre">${i.chiffre}</p>
             <p class="tarifs-charge-texte">${i.texte}</p>
           </li>`
@@ -375,7 +377,8 @@ ${items}
 
   const verites = C.tarifs.verites
     .map(
-      (v) => `        <div class="verite">
+      (v) => `        <div class="verite carte">
+          <span class="carte-point" aria-hidden="true"></span>
           <h3 class="verite-titre">${v.titre}</h3>
           <p class="verite-texte">${v.texte}</p>
         </div>`
@@ -552,7 +555,7 @@ function faqSection() {
         <p>${C.faq.relance.question}<br>${C.faq.relance.texte}</p>
         <a class="lien" href="${C.faq.relance.lien.href}">${C.faq.relance.lien.libelle}</a>
       </div>
-      <div class="faq" style="--col: 1 / span 8">
+      <div class="faq" style="--col: 1 / -1">
 ${items}
       </div>
     </div>
@@ -565,7 +568,8 @@ function engagements() {
       // Sans numéro : « Numérotation hors les 4 étapes de la méthode »
       // figure dans les interdits. Cinq engagements ne sont pas une
       // séquence, ils n'ont pas d'ordre à suivre.
-      (e) => `        <li class="engagement" data-reveal>
+      (e) => `        <li class="engagement carte" data-reveal>
+          <span class="carte-point" aria-hidden="true"></span>
           <h3 class="engagement-titre">${e.titre}</h3>
           <p class="engagement-texte">${e.texte}</p>
         </li>`

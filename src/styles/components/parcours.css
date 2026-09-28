@@ -41,10 +41,12 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-stretch: calc(var(--wdth-display) * 1%);
-  font-size: var(--text-h2);
+  /* Un cran sous le titre de la section : au même corps que « Pas sûr de
+     l'offre… », la question lui disputait la hiérarchie. */
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
   line-height: var(--leading-titre);
-  letter-spacing: var(--tracking-h2);
-  margin-bottom: 40px;
+  letter-spacing: var(--tracking-h3);
+  margin-bottom: 32px;
 }
 
 /* ─── Choix ─────────────────────────────────────────────────
@@ -61,10 +63,10 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 20px 28px;
+  padding: 14px 22px;
   border: 1px solid var(--filet-sombre);
   border-radius: var(--rond-interactif);
-  font-size: var(--text-corps-l);
+  font-size: var(--text-corps);
   font-weight: 500;
   transition:
     border-color var(--dur-rapide) var(--ease),
@@ -214,8 +216,12 @@
    n'avaient donc ni la même largeur ni le même alignement. Plutôt que de
    les laisser dimensionnés par leur texte, ils se partagent la ligne à
    parts égales — l'un des deux traitements que permet la règle du style
-   guide, l'autre étant « tous dimensionnés par leur contenu ». */
-.parcours-actions .bouton { flex: 1 1 0; }
+   guide, l'autre étant « tous dimensionnés par leur contenu ».
+
+   À parts égales de toute la ligne, chacun faisait pourtant 900 px de
+   large : deux bandeaux plutôt que deux boutons. La largeur reste
+   commune, mais fixe — celle qu'il faut à « Continuer », pas plus. */
+.parcours-actions .bouton { flex: none; width: 12rem; justify-content: center; }
 
 .parcours-actions .bouton:disabled,
 .parcours-actions .bouton[aria-disabled='true'] {

@@ -186,7 +186,9 @@ body { padding-top: var(--nav-h); }
 
    Trois colonnes sur deux lignes, à pleine largeur ; les cartes d'une
    même ligne prennent la hauteur de la plus haute, le texte se pose en
-   bas. L'apparition est dans src/scripts/probleme.ts. */
+   bas. L'apparition est dans src/scripts/probleme.ts.
+
+   `.carte-point` et le survol vivent dans components/carte.css. */
 .probleme-liste {
   --col: 1 / -1;
   display: grid;
@@ -194,44 +196,14 @@ body { padding-top: var(--nav-h); }
   gap: var(--grille-gouttiere);
 }
 .symptome {
-  position: relative;
-  isolation: isolate;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   gap: 48px;
   min-height: 15rem;
-  padding: 32px;
-  background: var(--papier-ombre);
-  border-radius: var(--rond-bloc);
-  overflow: hidden;
 }
-.symptome::before,
-.studio-portrait::before,
-.transparence::before,
-.benefice::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--grain-teinte);
-  mask-image: url('/grain.svg');
-  mask-size: var(--grain-taille) var(--grain-taille);
-  -webkit-mask-image: url('/grain.svg');
-  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
-  mix-blend-mode: multiply;
-  opacity: calc(var(--grain-opacite) * 1.6);
-  pointer-events: none;
-}
-.carte-point {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-  background: var(--accent);
-  transition: width 450ms var(--ease);
-}
+.symptome .carte-point { margin-bottom: 0; }
 .symptome-texte {
   font-family: var(--font-display);
   font-weight: 600;
@@ -240,45 +212,6 @@ body { padding-top: var(--nav-h); }
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-wrap: pretty;
-  transition: transform 450ms var(--ease);
-}
-
-/* Survol, commun aux symptômes et aux avantages du studio. Le point
-   s'étire en filet d'accent tracé de gauche à droite — le geste de survol
-   de la charte pour une ligne de prestation —, la carte fonce d'un cran,
-   son texte monte de 4 px. Les autres cartes de la liste s'effacent en
-   partie : on lit celle qu'on pointe.
-
-   Réservé aux vrais pointeurs : au doigt, :hover reste collé après le
-   toucher et laisserait une carte allumée et les autres éteintes. */
-.symptome,
-.benefice {
-  transition:
-    background-color var(--dur-moyenne) var(--ease),
-    opacity var(--dur-moyenne) var(--ease);
-}
-.benefice-titre,
-.benefice-texte { transition: transform 450ms var(--ease); }
-
-@media (hover: hover) and (pointer: fine) {
-  .symptome:hover,
-  .benefice:hover { background: color-mix(in srgb, var(--encre) 6%, var(--papier-ombre)); }
-  .symptome:hover .carte-point,
-  .benefice:hover .carte-point { width: 40px; }
-  .symptome:hover .symptome-texte,
-  .benefice:hover .benefice-titre,
-  .benefice:hover .benefice-texte { transform: translateY(-4px); }
-  .probleme-liste:has(.symptome:hover) .symptome:not(:hover),
-  .benefices:has(.benefice:hover) .benefice:not(:hover) { opacity: 0.6; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .symptome,
-  .benefice,
-  .carte-point,
-  .symptome-texte,
-  .benefice-titre,
-  .benefice-texte { transition: none; }
 }
 
 /* Trois colonnes seulement une fois la place là, comme les tarifs : sous
@@ -374,22 +307,13 @@ body { padding-top: var(--nav-h); }
   flex: none;
 }
 
-/* Trois avantages, en cartes grainées comme les symptômes. */
+/* Trois avantages, en cartes (components/carte.css). */
 .benefices {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--grille-gouttiere);
   margin-top: var(--section-s);
 }
-.benefice {
-  position: relative;
-  isolation: isolate;
-  padding: 32px;
-  background: var(--papier-ombre);
-  border-radius: var(--rond-bloc);
-  overflow: hidden;
-}
-.benefice .carte-point { margin-bottom: 28px; }
 .benefice-titre { font-size: var(--text-h3); }
 /* Sur --papier-ombre, --gris tombe à 4.67 : le texte secondaire d'une
    carte s'écrit en --encre. */
@@ -507,11 +431,6 @@ body { padding-top: var(--nav-h); }
   row-gap: var(--grille-gouttiere);
   margin-top: 24px;
 }
-.tarifs-argument {
-  padding: 28px;
-  background: var(--papier-ombre);
-  border-radius: var(--rond-bloc);
-}
 .tarifs-argument-titre {
   font-family: var(--font-display);
   font-weight: 700;
@@ -531,15 +450,15 @@ body { padding-top: var(--nav-h); }
   row-gap: var(--grille-gouttiere);
   margin-top: 24px;
 }
-.tarifs-charge-carte {
-  padding: 28px;
-  background: var(--papier-ombre);
-  border-radius: var(--rond-bloc);
-}
 .tarifs-charge-chiffre {
-  font-family: var(--font-data);
+  /* En display, comme les titres des autres cartes : la mono à cette
+     taille lisait « 15 € / an » comme une ligne de code. */
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
   font-size: var(--text-h3);
-  color: var(--encre);
+  letter-spacing: var(--tracking-h3);
+  font-variant-numeric: tabular-nums;
 }
 .tarifs-charge-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
@@ -577,12 +496,7 @@ body { padding-top: var(--nav-h); }
   row-gap: var(--grille-gouttiere);
   margin-top: var(--section-s);
 }
-.verite {
-  padding: 28px;
-  background: var(--papier-ombre);
-  border-radius: var(--rond-bloc);
-}
-.verite-titre { font-size: var(--text-corps); font-weight: 500; font-family: var(--font-texte); letter-spacing: 0; }
+.verite-titre { font-size: var(--text-h3); }
 .verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 /* ─── Estimateur ────────────────────────────────────────────── */
@@ -598,8 +512,9 @@ body { padding-top: var(--nav-h); }
 .faq { margin-top: 48px; }
 
 /* ─── Engagements ─────────────────────────────────────────────
-   Cinq cartes, deux colonnes sur desktop : la dernière tombe seule sur
-   sa ligne, ce qui est voulu — l'asymétrie est la norme sur ce site. */
+   Cinq cartes, deux colonnes sur desktop. La dernière prend la ligne
+   entière : seule sur une demi-ligne, elle se lisait comme une carte
+   oubliée plutôt que comme une conclusion. */
 .engagements {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -607,12 +522,8 @@ body { padding-top: var(--nav-h); }
   row-gap: var(--grille-gouttiere);
   margin-top: 48px;
 }
-.engagement {
-  padding: 28px;
-  background: var(--papier-ombre);
-  border-radius: var(--rond-bloc);
-}
-.engagement-titre { font-size: var(--text-corps); }
+.engagement:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.engagement-titre { font-size: var(--text-h3); }
 .engagement-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 /* ─── Contact ─────────────────────────────────────────────────
@@ -655,8 +566,8 @@ body { padding-top: var(--nav-h); }
   .metiers { flex-direction: column; align-items: stretch; }
   .hero-preuves { align-self: start; }
   .contact-lead { margin-top: 32px; }
-  .symptome { min-height: 0; gap: 32px; padding: 24px; }
-  .benefice { display: block; padding: 24px; }
+  .symptome { min-height: 0; gap: 32px; }
+  .benefice { display: block; }
   .benefice-texte { margin-top: 12px; }
 }
 

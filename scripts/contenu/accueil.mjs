@@ -116,14 +116,14 @@ export const prestations = {
       href: '/creation-site-internet-nantes',
       cible: 'artisans, commerçants, thérapeutes, indépendants qui veulent être trouvés et contactés.',
       texte: "Un site rapide, lisible sur téléphone, pensé pour déclencher l'appel ou le formulaire. Du one-pager à la page de vente. Au-delà, c'est la formule Site complet.",
-      prix: '900 €',
+      prix: '900&nbsp;€',
     },
     {
       titre: 'Site e-commerce',
       href: '/creation-site-ecommerce-nantes',
       cible: 'marques et commerçants qui veulent vendre en ligne sans se battre avec leur outil.',
       texte: 'Boutique Shopify ou sur mesure, fiches produits, paiement, livraison, et une prise en main que vous maîtrisez en une heure.',
-      prix: 'Dès 3 000 €',
+      prix: 'Dès 3&nbsp;000&nbsp;€',
     },
     {
       titre: 'Application web &amp; SaaS',
@@ -144,14 +144,14 @@ export const prestations = {
       href: '/refonte-site-internet',
       cible: "ceux qui ont déjà un site, qui n'en sont plus fiers, et qui ne veulent pas repartir de zéro.",
       texte: 'Audit, reprise du contenu existant, nouveau design, migration, redirections. Vous ne perdez pas votre référencement acquis.',
-      prix: 'Dès 900 €',
+      prix: 'Dès 900&nbsp;€',
     },
     {
       titre: 'Direction artistique &amp; UI',
       href: null,
       cible: "ceux qui ont déjà un développeur, ou qui veulent d'abord voir avant d'engager.",
       texte: 'Maquettes haute fidélité, design system, identité visuelle. Rien ne part en développement sans votre validation.',
-      prix: 'Dès 600 €',
+      prix: 'Dès 600&nbsp;€',
     },
   ],
 }
@@ -225,7 +225,7 @@ export const tarifs = {
     {
       nom: 'Une page',
       h3: 'Site internet une page',
-      prix: '900 €',
+      prix: '900&nbsp;€',
       recommandee: false,
       positionnement: 'Pour exister en ligne sans attendre.',
       paragraphe:
@@ -247,7 +247,7 @@ export const tarifs = {
     {
       nom: 'Site complet',
       h3: 'Site vitrine complet, 4 à 6 pages',
-      prix: '1 900 €',
+      prix: '1&nbsp;900&nbsp;€',
       recommandee: true,
       positionnement: 'Recommandé si vous avez plusieurs services à présenter.',
       paragraphe:
@@ -275,7 +275,7 @@ export const tarifs = {
     {
       nom: 'Sur mesure',
       h3: 'E-commerce et applications sur mesure',
-      prix: 'À partir de 3 000 €',
+      prix: 'À partir de 3&nbsp;000&nbsp;€',
       recommandee: false,
       positionnement: "Quand un site vitrine ne suffit plus.",
       paragraphe:

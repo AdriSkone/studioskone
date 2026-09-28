@@ -5,7 +5,20 @@
 /* Plus de filets entre les questions : l'espace seul les sépare, et la
    question ouverte se distingue par un bloc plein — fond --papier-ombre,
    rayon 16 px — plutôt que par un trait. */
-.faq { display: flex; flex-direction: column; row-gap: 4px; }
+/* Deux colonnes sur grand écran : sur une seule, huit questions
+   s'étiraient sur 1 200 px de large avec leur signe perdu au milieu de
+   la page. `align-items: start` — une question ouverte agrandit sa ligne
+   sans étirer le fond de sa voisine fermée. */
+.faq {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: calc(var(--grille-gouttiere) * 2);
+  row-gap: 4px;
+  align-items: start;
+}
+@media (max-width: 1023px) {
+  .faq { grid-template-columns: 1fr; }
+}
 
 .faq-item {
   /* La question et sa réponse portent 16 px de padding horizontal (voir

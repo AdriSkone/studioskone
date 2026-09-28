@@ -1,0 +1,82 @@
+/* ============================================================
+   Carte — le modèle unique des cartes de liste
+   Symptômes, avantages du studio, arguments et charges des tarifs,
+   vérités, engagements : une seule carte, déclinée par sa seule
+   typographie. Avant, chaque liste avait la sienne — mêmes couleurs,
+   mais pas de grain ici, pas de point là, un survol sur deux sur trois.
+
+   Règles de la charte (§ 7) : fond papier ombré, rayon de bloc, aucune
+   bordure, aucune ombre. Ce qui la détache du papier de la page, c'est
+   la matière : son propre grain, en multiply comme la page. Sans lui,
+   l'aplat opaque masque le grain global et la carte se lit comme un trou
+   lisse de la même valeur que le papier.
+
+   Les cartes tarif (carte-tarif.css) gardent leur gabarit — prix, liste,
+   bouton — mais reçoivent la même matière.
+   ============================================================ */
+
+.carte {
+  position: relative;
+  isolation: isolate;
+  padding: 32px;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+  overflow: hidden;
+  transition:
+    background-color var(--dur-moyenne) var(--ease),
+    opacity var(--dur-moyenne) var(--ease);
+}
+
+.carte::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: var(--grain-taille) var(--grain-taille);
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
+  mix-blend-mode: multiply;
+  opacity: calc(var(--grain-opacite) * 1.6);
+  pointer-events: none;
+}
+
+/* Le point du logo, en tête de carte. */
+.carte-point {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-bottom: 28px;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 450ms var(--ease);
+}
+
+/* Tout ce qui suit le point monte d'un cran au survol. */
+.carte > :not(.carte-point) { transition: transform 450ms var(--ease); }
+
+/* Survol. Le point s'étire en filet d'accent tracé de gauche à droite —
+   le geste de survol de la charte pour une ligne de prestation —, la
+   carte fonce d'un cran, son contenu monte de 4 px, et les autres cartes
+   de la même liste s'effacent en partie : on lit celle qu'on pointe.
+
+   Réservé aux vrais pointeurs : au doigt, :hover reste collé après le
+   toucher et laisserait une carte allumée et les autres éteintes. */
+@media (hover: hover) and (pointer: fine) {
+  .carte:hover { background: var(--papier-dense); }
+  .carte:hover .carte-point { width: 40px; }
+  .carte:hover > :not(.carte-point) { transform: translateY(-4px); }
+  :has(> .carte:hover) > .carte:not(:hover) { opacity: 0.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carte,
+  .carte-point,
+  .carte > * { transition: none; }
+}
+
+@media (max-width: 767px) {
+  .carte { padding: 24px; }
+  .carte-point { margin-bottom: 20px; }
+}
