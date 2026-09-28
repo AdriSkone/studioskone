@@ -119,7 +119,15 @@ body { padding-top: var(--nav-h); }
   max-width: 22ch;
 }
 
+/* Posé dans .pres-head, le libellé en héritait la police display, sa
+   chasse étroite et son interlettrage négatif : un corps de 14 px tassé
+   au point de se lire mal. Il reprend ici le dessin de la tête de bloc
+   de l'accueil, en texte. */
 .section-label {
+  font-family: var(--font-texte);
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: var(--leading-corps);
   font-size: var(--text-petit);
   font-weight: 500;
   color: var(--gris);

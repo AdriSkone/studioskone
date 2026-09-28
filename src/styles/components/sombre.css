@@ -57,3 +57,18 @@
 }
 
 .sombre .tete-bloc { color: var(--sombre-texte); opacity: 0.72; }
+
+/* Le libellé se lit sur la ligne de base du titre qu'il accompagne.
+   Posés tous deux en haut de leur piste, un libellé de 14 px et un titre
+   de 48 à 79 px ne se touchent pas : l'interligne et la hauteur de
+   capitale du titre font démarrer ses lettres 15 à 25 px plus bas, et le
+   libellé flotte au-dessus. L'alignement de grille par ligne de base
+   règle ça sans nombre magique : il vaut quelle que soit la taille du
+   titre, et pour un paragraphe voisin comme pour un titre.
+
+   Les deux éléments doivent y souscrire — la grille n'aligne que ceux
+   qui le demandent. Le voisin est l'élément suivant ; le studio fait
+   exception, le portrait s'intercale entre le libellé et son titre. */
+.grille > .tete-bloc,
+.grille > .tete-bloc + :not(.studio-portrait),
+.grille > .studio-titre { align-self: first baseline; }

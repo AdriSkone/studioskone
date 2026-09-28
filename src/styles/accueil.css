@@ -417,7 +417,7 @@ body { padding-top: var(--nav-h); }
 .estimateur-disclaimer { margin-top: 16px; }
 
 /* ─── FAQ ───────────────────────────────────────────────────── */
-.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-size: var(--text-petit); color: var(--gris); }
+.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; align-self: end; font-size: var(--text-petit); color: var(--gris); }
 .faq { margin-top: 48px; }
 
 /* ─── Engagements ─────────────────────────────────────────────
