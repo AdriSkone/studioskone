@@ -105,7 +105,9 @@ function ruban() {
 
 function probleme() {
   const items = C.probleme.symptomes
-    .map((s) => `        <li class="symptome" data-reveal>${s}</li>`)
+    // La troisième carte passe en négatif : une seule, en haut à droite,
+    // loin du pivot sombre qui suit la section.
+    .map((s, i) => `        <li class="symptome${i === 2 ? ' symptome--sombre sombre' : ''}" data-reveal><span class="symptome-texte">${s}</span></li>`)
     .join('\n')
 
   return `  <section class="section-m" id="probleme">

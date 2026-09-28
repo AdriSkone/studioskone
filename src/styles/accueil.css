@@ -170,12 +170,22 @@ body { padding-top: var(--nav-h); }
 /* ─── Problème ──────────────────────────────────────────────── */
 .probleme-titre { font-size: var(--text-h1); margin-bottom: 48px; }
 
-/* Six symptômes, pas un paragraphe. Portés par l'espace seul, en corps
-   de texte, ils se lisaient comme un bloc découpé. Chacun a désormais sa
-   carte, sur le modèle des engagements : fond papier ombré, rondeur de
-   bloc, aucun trait ni ombre. Trois colonnes sur deux lignes, à pleine
-   largeur ; les cartes d'une même ligne prennent la hauteur de la plus
-   haute. */
+/* Six symptômes, pas un paragraphe. Chacun est une carte, et la carte
+   tient son caractère de la charte seule — ni bordure ni ombre (§ 7) :
+
+   - la matière : la carte porte son propre grain, en multiply comme la
+     page. Sans lui, son aplat opaque masquait le grain global et la
+     carte se lisait comme un trou lisse dans le papier, de la même
+     valeur que lui ; avec, elle devient une feuille plus dense ;
+   - la voix : le texte passe en display. Ce sont des constats qu'on
+     reconnaît, pas des paragraphes qu'on lit ;
+   - le point du logo, en accent, en tête de carte. Il glisse au survol ;
+   - une carte en négatif, une seule, pour que les six ne soient pas six
+     fois la même.
+
+   Trois colonnes sur deux lignes, à pleine largeur ; les cartes d'une
+   même ligne prennent la hauteur de la plus haute, le texte se pose en
+   bas. */
 .probleme-liste {
   --col: 1 / -1;
   display: grid;
@@ -183,15 +193,62 @@ body { padding-top: var(--nav-h); }
   gap: var(--grille-gouttiere);
 }
 .symptome {
-  padding: 28px 32px;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: 15rem;
+  padding: 32px;
   background: var(--papier-ombre);
-  /* Sous le grain, le papier ombré ne se détache plus du papier : le
-     filet dessine le bord que la couleur seule ne tient pas. */
-  border: 1px solid var(--filet-moyen);
   border-radius: var(--rond-bloc);
-  font-size: var(--text-corps-l);
-  line-height: 1.45;
+  overflow: hidden;
+}
+.symptome:not(.sombre)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: var(--grain-taille) var(--grain-taille);
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
+  mix-blend-mode: multiply;
+  opacity: calc(var(--grain-opacite) * 1.6);
+  pointer-events: none;
+}
+.symptome::after {
+  content: '';
+  order: -1;
+  position: relative;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 300ms var(--ease);
+}
+.symptome:hover::after { transform: translateX(8px); }
+
+.symptome-texte {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   text-wrap: pretty;
+}
+
+/* En négatif : fond et grain des sections sombres (.sombre), point en
+   accent clair — le bleu de Prusse ne se lit pas sur ce fond. */
+.symptome--sombre { background: var(--sombre); }
+.symptome--sombre::after { background: var(--accent-clair); }
+
+@media (prefers-reduced-motion: reduce) {
+  .symptome::after { transition: none; }
 }
 
 /* Trois colonnes seulement une fois la place là, comme les tarifs : sous
@@ -498,7 +555,7 @@ body { padding-top: var(--nav-h); }
   .hero-preuves { align-self: start; }
   .contact-lead { margin-top: 32px; }
   .transparence-corps h3 + p { margin-top: 12px; }
-  .symptome { padding: 24px; }
+  .symptome { min-height: 0; gap: 32px; padding: 24px; }
 }
 
 /* ─── Ouverture du hero ─────────────────────────────────────
