@@ -132,13 +132,16 @@ body { padding-top: var(--nav-h); }
   background: var(--papier-ombre);
 }
 
-/* Une vue large presque carrée (la maquette MyBoat, 1,21) montait à
-   1 083 px sur toute la largeur : plus haute que l'écran. Elle plafonne
-   à 70 % de sa hauteur et garde son rapport, calée à gauche. */
+/* Vues larges : plafonnées à 70 % de la hauteur d'écran, sans jamais
+   se déformer. Un premier plafond (width: auto + max-height) les
+   étirait : dans la colonne flex de .projet-vue, l'image restait tirée
+   à toute la largeur pendant que sa hauteur était coupée — 1,21 affiché
+   en 2,08. Elles gardent désormais la pleine largeur, pour que toutes
+   aient la même emprise, et l'image se loge dedans (contain) sur le
+   papier ombré de la boîte, comme le visuel principal. */
 .projet-vue--large img {
-  width: auto;
-  max-width: 100%;
   max-height: min(70vh, 640px);
+  object-fit: contain;
 }
 
 .projet-vue figcaption {
