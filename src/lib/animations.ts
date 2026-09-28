@@ -37,12 +37,47 @@ export function chargerGsap(): Promise<Gsap> {
     promesse = Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
       ([{ gsap }, { ScrollTrigger }]) => {
         gsap.registerPlugin(ScrollTrigger)
+        garderLAncre(ScrollTrigger)
         return { gsap, ScrollTrigger }
       }
     )
   }
   return promesse
 }
+
+/**
+ * Garde l'ancre de l'adresse (/#work, /#tarifs…) malgré ScrollTrigger.
+ *
+ * Pour mesurer ses déclencheurs, `ScrollTrigger.refresh()` remonte la
+ * page à 0 puis restaure la position qu'il avait notée. S'il passe avant
+ * que le navigateur soit descendu sur l'ancre, il note 0, restaure 0, et
+ * l'ancre est perdue : « Tous les projets », depuis une page projet,
+ * ramenait en haut de l'accueil au lieu de la section Réalisations. Selon
+ * l'ordre d'arrivée des fichiers, ça tombait d'un côté ou de l'autre —
+ * l'adresse tapée à la main marchait, le clic non.
+ *
+ * Tant que le visiteur n'a pas touché au défilement, chaque
+ * rafraîchissement le ramène donc sur l'ancre. Au premier geste — molette,
+ * doigt, clavier, clic — ou au bout de quatre secondes, on lâche : on ne
+ * confisque jamais le défilement de quelqu'un.
+ */
+function garderLAncre(ScrollTrigger: Gsap['ScrollTrigger']): void {
+  const id = decodeURIComponent(location.hash.slice(1))
+  const cible = id ? document.getElementById(id) : null
+  if (!cible) return
+
+  const rejoindre = (): void => cible.scrollIntoView({ block: 'start' })
+  const lacher = (): void => {
+    ScrollTrigger.removeEventListener('refresh', rejoindre)
+    for (const t of GESTES) window.removeEventListener(t, lacher)
+  }
+
+  ScrollTrigger.addEventListener('refresh', rejoindre)
+  for (const t of GESTES) window.addEventListener(t, lacher, { passive: true })
+  window.setTimeout(lacher, 4000)
+}
+
+const GESTES = ['wheel', 'touchstart', 'keydown', 'mousedown'] as const
 
 /**
  * Ouvre un contexte GSAP et le retient. Tout ce qui est créé dedans se
