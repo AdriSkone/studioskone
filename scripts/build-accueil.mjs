@@ -112,7 +112,7 @@ function probleme() {
     <div class="grille">
       <p class="tete-bloc">${C.probleme.label}</p>
       <h2 class="probleme-titre" style="--col: 1 / span 8">${C.probleme.titre.debut} ${C.probleme.titre.accent}</h2>
-      <ul class="probleme-liste" style="--col: 1 / span 9">
+      <ul class="probleme-liste">
 ${items}
       </ul>
     </div>

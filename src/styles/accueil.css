@@ -170,16 +170,35 @@ body { padding-top: var(--nav-h); }
 /* ─── Problème ──────────────────────────────────────────────── */
 .probleme-titre { font-size: var(--text-h1); margin-bottom: 48px; }
 
-/* Une liste courte de phrases : l'espace seul la porte, aucun trait. */
+/* Six symptômes, pas un paragraphe. Portés par l'espace seul, en corps
+   de texte, ils se lisaient comme un bloc découpé. Chacun a désormais sa
+   carte, sur le modèle des engagements : fond papier ombré, rondeur de
+   bloc, aucun trait ni ombre. Trois colonnes sur deux lignes, à pleine
+   largeur ; les cartes d'une même ligne prennent la hauteur de la plus
+   haute. */
 .probleme-liste {
+  --col: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
-  row-gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grille-gouttiere);
 }
 .symptome {
-  font-size: var(--text-corps);
-  line-height: var(--leading-corps);
+  padding: 28px 32px;
+  background: var(--papier-ombre);
+  /* Sous le grain, le papier ombré ne se détache plus du papier : le
+     filet dessine le bord que la couleur seule ne tient pas. */
+  border: 1px solid var(--filet-moyen);
+  border-radius: var(--rond-bloc);
+  font-size: var(--text-corps-l);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* Trois colonnes seulement une fois la place là, comme les tarifs : sous
+   1 180 px chaque carte tomberait sous 330 px. Deux, puis une (plus bas,
+   sous 768 px). */
+@media (max-width: 1179px) {
+  .probleme-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* ─── Le pivot ──────────────────────────────────────────────
@@ -479,6 +498,7 @@ body { padding-top: var(--nav-h); }
   .hero-preuves { align-self: start; }
   .contact-lead { margin-top: 32px; }
   .transparence-corps h3 + p { margin-top: 12px; }
+  .symptome { padding: 24px; }
 }
 
 /* ─── Ouverture du hero ─────────────────────────────────────
