@@ -38,10 +38,8 @@ function logoSvg(fichier, classe) {
   return brut
     .replace(/<\?xml[^>]*\?>\s*/, '')
     .replace(/id="Calque_2"/, `class="${classe}" role="img" aria-label="Studio Skøne"`)
-    .replace(/fill:\s*#c5603a/gi, 'fill: var(--accent)')
-    .replace(/fill:\s*#1d1d1b/gi, 'fill: currentColor')
-    .replace(/fill:\s*#C56039/gi, 'fill: var(--accent)')
-    .replace(/fill:\s*#FAEEDF/gi, 'fill: currentColor')
+    .replace(/fill:\s*#12455C/gi, 'fill: var(--accent)')
+    .replace(/fill:\s*#14181C/gi, 'fill: currentColor')
     // Les identifiants internes sont préfixés : deux logos dans la même
     // page partageraient sinon leurs classes .cls-1 et .cls-2.
     .replace(/cls-(\d)/g, `${classe}-c$1`)
