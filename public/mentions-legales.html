@@ -133,5 +133,37 @@
       </nav>
     </div>
   </footer>
+
+  <a class="remonter" href="#" aria-label="Revenir en haut de la page">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </a>
+  <script>
+    // Version autonome de src/scripts/remonter.ts : ces pages sont servies
+    // telles quelles depuis public/, sans passer par Vite.
+    (function () {
+      var lien = document.querySelector('.remonter')
+      if (!lien) return
+      var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      var attente = false
+      function maj() {
+        attente = false
+        lien.classList.toggle('est-visible', window.scrollY > window.innerHeight * 2)
+        var r = lien.getBoundingClientRect()
+        var dessous = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)
+          .filter(function (el) { return el !== lien && !lien.contains(el) })[0]
+        lien.classList.toggle('sur-sombre', Boolean(dessous && dessous.closest('.legal-footer')))
+      }
+      function demander() { if (!attente) { attente = true; requestAnimationFrame(maj) } }
+      window.addEventListener('scroll', demander, { passive: true })
+      window.addEventListener('resize', demander, { passive: true })
+      maj()
+      lien.addEventListener('click', function (e) {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: reduit ? 'auto' : 'smooth' })
+        if (e.detail === 0) document.querySelector('.legal-back').focus({ preventScroll: true })
+        else lien.blur()
+      })
+    })()
+  </script>
 </body>
 </html>
