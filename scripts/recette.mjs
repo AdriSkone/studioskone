@@ -44,7 +44,7 @@ const PAGES = [
   'projets/archeon',
   'projets/cafeo',
   'projets/garantibox',
-  'projets/giftmatch',
+  'projets/ofria',
   'projets/m-bivouak',
   'projets/merel-et-fils',
   'projets/myboat',

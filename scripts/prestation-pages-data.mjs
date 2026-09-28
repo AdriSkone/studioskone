@@ -650,7 +650,7 @@ export const PAGES = [
         label: 'À regarder',
         h2: 'Trois applications, <span class="text-accent">trois partis pris.</span>',
         items: [
-          { tag: 'Projet de studio', href: '/projets/giftmatch', title: 'GiftMatch', desc: "Transformer trois mots sur une personne en cinq idées cadeaux, en dix secondes." },
+          { tag: 'Projet de studio', href: '/projets/ofria', title: 'Ofria', desc: "Transformer trois mots sur une personne en cinq idées cadeaux, en dix secondes." },
           { tag: 'Projet de studio', href: '/projets/pepite', title: 'Pépite', desc: "Deux utilisateurs très différents sur le même téléphone, dont un qui ne lit pas encore." },
           { tag: 'Exercice de conception', href: '/projets/myboat', title: 'MyBoat', desc: "Connaître le prix total d'une location avant la moindre inscription." },
         ],

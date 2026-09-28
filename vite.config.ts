@@ -22,7 +22,7 @@ export default defineConfig({
         presEcommerce: resolve(__dirname, 'creation-site-ecommerce-nantes.html'),
         presMobile:    resolve(__dirname, 'creation-application-mobile.html'),
 
-        giftmatch:   resolve(__dirname, 'projets/giftmatch.html'),
+        ofria:       resolve(__dirname, 'projets/ofria.html'),
         tasq:        resolve(__dirname, 'projets/tasq.html'),
         myboat:      resolve(__dirname, 'projets/myboat.html'),
         garantibox:  resolve(__dirname, 'projets/garantibox.html'),

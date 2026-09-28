@@ -50,8 +50,8 @@ export const projets = [
     grand: true,
   },
   {
-    slug: 'giftmatch',
-    titre: "GiftMatch",
+    slug: 'ofria',
+    titre: "Ofria",
     badge: "App mobile",
     tagline: "Cinq idées cadeaux qui tiennent la route, en dix secondes",
     nature: "Projet de studio",
@@ -59,8 +59,8 @@ export const projets = [
     note: "Né d'un besoin réel : je sèche systématiquement sur les cadeaux. J'ai construit une app qui transforme trois mots sur une personne en cinq propositions concrètes.",
     signature: "Studio Skøne · Produit maison",
     lienLibelle: "Voir le projet",
-    image: '/work/giftmatch.png',
-    alt: "GiftMatch · application mobile qui génère des idées cadeaux personnalisées par IA",
+    image: '/work/ofria-accueil.webp',
+    alt: "Ofria · application mobile qui génère des idées cadeaux personnalisées par IA",
     grand: false,
   },
   {

@@ -112,6 +112,19 @@ const CHANGEMENTS_DECLARES = {
  */
 const ALTS_DEVENUS_TEXTE = ['Studio Skøne']
 
+/**
+ * Les alt renommés : l'ancien peut disparaître si, et seulement si, le
+ * nouveau est présent sur la même page.
+ *
+ * 28 septembre 2026 — GiftMatch s'appelle désormais Ofria. Sa vignette,
+ * reprise sur l'accueil et en bas des autres pages projet, change de nom
+ * et d'image ; la description, elle, ne bouge pas.
+ */
+const ALTS_RENOMMES = {
+  'GiftMatch · application mobile qui génère des idées cadeaux personnalisées par IA':
+    'Ofria · application mobile qui génère des idées cadeaux personnalisées par IA',
+}
+
 /** Les alt d'image : ils comptent autant que les meta. */
 function alts(html) {
   return [...html.matchAll(/<img\b[^>]*\balt="([^"]*)"[^>]*>/gi)].map((m) => m[1]).sort()
@@ -150,7 +163,11 @@ for (const fichier of process.argv.slice(2)) {
   const altAvant = alts(avant)
   const altApres = alts(apres)
   const altPerdus = altAvant.filter(
-    (x) => x && !altApres.includes(x) && !ALTS_DEVENUS_TEXTE.includes(x)
+    (x) =>
+      x &&
+      !altApres.includes(x) &&
+      !ALTS_DEVENUS_TEXTE.includes(x) &&
+      !(ALTS_RENOMMES[x] && altApres.includes(ALTS_RENOMMES[x]))
   )
   if (altPerdus.length) soucis.push(`  − ${altPerdus.length} attribut(s) alt perdu(s) :\n      ${altPerdus.slice(0, 6).join('\n      ')}`)
 

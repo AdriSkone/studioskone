@@ -173,42 +173,42 @@ export const pagesProjet = {
       "J'ai conçu l'architecture d'information, dessiné les écrans sur Figma et développé l'interface complète, du dashboard à la version mobile. L'ajout d'un produit prend quelques secondes, photo de la facture comprise."
     ]
   },
-  "giftmatch": {
-    "titre": "GiftMatch",
+  "ofria": {
+    "titre": "Ofria",
     "badge": "App mobile",
     "type": "App mobile d'idées cadeaux par IA",
-    "desc": "GiftMatch génère des idées cadeaux par IA. On décrit la personne en quelques mots, on choisit l'occasion et le budget, et l'app propose cinq idées en quelques secondes, chacune avec son prix et où l'acheter.",
-    "heroImg": "/work/giftmatch.png",
-    "heroAlt": "GiftMatch · écran d'accueil « Offrir juste. »",
+    "desc": "Ofria génère des idées cadeaux par IA. On décrit la personne en quelques mots, on choisit l'occasion et le budget, et l'app propose cinq idées en quelques secondes, chacune avec son prix et où l'acheter.",
+    "heroImg": "/work/ofria-accueil.webp",
+    "heroAlt": "Ofria · écran d'accueil « Offrir juste. », avec le nœud aubergine et mimosa",
     "contexteTitre": "",
     "galerie": [
       {
-        "src": "/work/giftmatch.png",
-        "alt": "GiftMatch · onboarding avec la sphère terracotta",
+        "src": "/work/ofria-accueil.webp",
+        "alt": "Ofria · écran d'accueil avec le nœud aubergine et mimosa",
         "label": "Onboarding",
         "large": false
       },
       {
-        "src": "/work/giftmatch-input.png",
-        "alt": "GiftMatch · saisie de l'occasion, de la personne et du budget",
+        "src": "/work/ofria-recherche.webp",
+        "alt": "Ofria · saisie de l'occasion, de la personne et du budget",
         "label": "Saisie",
         "large": false
       },
       {
-        "src": "/work/giftmatch-loading.png",
-        "alt": "GiftMatch · écran de recherche animé pendant la génération des idées",
+        "src": "/work/ofria-generation.webp",
+        "alt": "Ofria · écran de recherche animé pendant la génération des idées",
         "label": "Recherche",
         "large": false
       },
       {
-        "src": "/work/giftmatch-results.png",
-        "alt": "GiftMatch · cinq idées cadeaux avec leur niveau d'accord",
+        "src": "/work/ofria-resultats.webp",
+        "alt": "Ofria · idées cadeaux, la meilleure en tête avec son niveau d'accord",
         "label": "Résultats",
         "large": false
       },
       {
-        "src": "/work/giftmatch-detail.png",
-        "alt": "GiftMatch · détail d'une idée cadeau et où l'acheter",
+        "src": "/work/ofria-detail.webp",
+        "alt": "Ofria · détail d'une idée cadeau et où l'acheter",
         "label": "Détail",
         "large": false
       }
@@ -224,7 +224,7 @@ export const pagesProjet = {
     "labelContexte": "Contexte &amp; enjeux",
     "labelGalerie": "Écrans de l'app",
     "contextes": [
-      "Offrir un cadeau, c'est souvent la galère : on sèche, on repousse, et on prend la carte cadeau par défaut. GiftMatch s'attaque à ce moment-là. On décrit la personne en trois mots et on récupère des pistes qui tiennent la route, avec un prix et une adresse pour acheter.",
+      "Offrir un cadeau, c'est souvent la galère : on sèche, on repousse, et on prend la carte cadeau par défaut. Ofria s'attaque à ce moment-là. On décrit la personne en trois mots et on récupère des pistes qui tiennent la route, avec un prix et une adresse pour acheter.",
       "L'app est en React Native (Expo). L'IA tourne derrière un proxy : la clé API reste sur le serveur et ne se retrouve jamais dans le code de l'app. Les réponses arrivent en JSON structuré, donc affichables directement sans retouche. Côté design, un dark mode chaud et une petite sphère terracotta qui sert de repère."
     ]
   },

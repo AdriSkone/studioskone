@@ -83,6 +83,11 @@ const REMPLACEMENTS_DEMANDES = [
   // formules distinctes (Une page / Site complet) et se lisait comme un
   // seul intervalle continu. Trois mots ajoutés, rien d'autre ne bouge.
   { avant: 'Livré en 5 jours à 3 semaines, à partir de 900', apres: 'Livré en 5 jours à 3 semaines selon la formule, à partir de 900' },
+  // 28 septembre 2026 — le projet GiftMatch a changé de nom : il s'appelle
+  // désormais Ofria (nouvelle identité, nœud aubergine et mimosa). Seul le
+  // nom change ; sa page passe à /projets/ofria, l'ancienne adresse
+  // redirige (vercel.json).
+  { avant: 'GiftMatch', apres: 'Ofria' },
 ]
 
 /**
@@ -713,8 +718,15 @@ function executerCli(fichiers) {
       .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
       .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
       .filter((f) => !TARIFS_RETIRES.some((t) => correspondTarifRetire(t, f, fichier)))
+    // Le miroir de `remplace` : un fragment neuf qui, ramené à l'ancien
+    // texte, existait déjà n'est pas un ajout mais l'autre moitié d'un
+    // remplacement demandé.
+    const retablit = (f) =>
+      REMPLACEMENTS_DEMANDES.reduce((acc, r) => acc.split(r.apres).join(r.avant), f)
+
     const ajoutes = absentsApres
       .filter((f) => !estUnRegroupement(f, toutAvant))
+      .filter((f) => retablit(f) === f || !toutAvant.includes(retablit(f)))
       .filter((f) => {
         const nettoye = sansAutorises(f)
         if (nettoye.length <= 2) return false
