@@ -11,6 +11,7 @@ import { initFaq } from './scripts/faq'
 import { initNav } from './scripts/nav'
 import { initCookies, lireConsentement } from './scripts/cookies'
 import { initTarifs } from './scripts/tarifs'
+import { initProbleme } from './scripts/probleme'
 import { rafraichirAuChargementDesFontes } from './lib/animations'
 
 import { initParcours } from './scripts/parcours'
@@ -37,6 +38,7 @@ initHero(() => initCursor())
 
 initNav()
 initReveal()
+initProbleme()
 initFaq()
 initCookies()
 initRail()

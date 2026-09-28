@@ -179,13 +179,14 @@ body { padding-top: var(--nav-h); }
      valeur que lui ; avec, elle devient une feuille plus dense ;
    - la voix : le texte passe en display. Ce sont des constats qu'on
      reconnaît, pas des paragraphes qu'on lit ;
-   - le point du logo, en accent, en tête de carte. Il glisse au survol ;
-   - une carte en négatif, une seule, pour que les six ne soient pas six
-     fois la même.
+   - le point du logo, en accent, en tête de carte.
+
+   Toutes au même régime : aucune n'est mise en avant, le texte les
+   présente à égalité.
 
    Trois colonnes sur deux lignes, à pleine largeur ; les cartes d'une
    même ligne prennent la hauteur de la plus haute, le texte se pose en
-   bas. */
+   bas. L'apparition est dans src/scripts/probleme.ts. */
 .probleme-liste {
   --col: 1 / -1;
   display: grid;
@@ -198,14 +199,18 @@ body { padding-top: var(--nav-h); }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 48px;
   min-height: 15rem;
   padding: 32px;
   background: var(--papier-ombre);
   border-radius: var(--rond-bloc);
   overflow: hidden;
+  transition:
+    background-color var(--dur-moyenne) var(--ease),
+    opacity var(--dur-moyenne) var(--ease);
 }
-.symptome:not(.sombre)::before {
+.symptome::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -219,19 +224,14 @@ body { padding-top: var(--nav-h); }
   opacity: calc(var(--grain-opacite) * 1.6);
   pointer-events: none;
 }
-.symptome::after {
-  content: '';
-  order: -1;
-  position: relative;
-  z-index: 1;
+.symptome-point {
+  display: block;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: 4px;
   background: var(--accent);
-  transition: transform 300ms var(--ease);
+  transition: width 450ms var(--ease);
 }
-.symptome:hover::after { transform: translateX(8px); }
-
 .symptome-texte {
   font-family: var(--font-display);
   font-weight: 600;
@@ -240,15 +240,27 @@ body { padding-top: var(--nav-h); }
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-wrap: pretty;
+  transition: transform 450ms var(--ease);
 }
 
-/* En négatif : fond et grain des sections sombres (.sombre), point en
-   accent clair — le bleu de Prusse ne se lit pas sur ce fond. */
-.symptome--sombre { background: var(--sombre); }
-.symptome--sombre::after { background: var(--accent-clair); }
+/* Survol. Le point s'étire en filet d'accent tracé de gauche à droite —
+   le geste de survol de la charte pour une ligne de prestation —, la
+   carte fonce d'un cran, le constat monte de 4 px. Les cinq autres
+   s'effacent en partie : on lit celle qu'on pointe.
+
+   Réservé aux vrais pointeurs : au doigt, :hover reste collé après le
+   toucher et laisserait une carte allumée et cinq éteintes. */
+@media (hover: hover) and (pointer: fine) {
+  .symptome:hover { background: color-mix(in srgb, var(--encre) 6%, var(--papier-ombre)); }
+  .symptome:hover .symptome-point { width: 40px; }
+  .symptome:hover .symptome-texte { transform: translateY(-4px); }
+  .probleme-liste:has(.symptome:hover) .symptome:not(:hover) { opacity: 0.6; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .symptome::after { transition: none; }
+  .symptome,
+  .symptome-point,
+  .symptome-texte { transition: none; }
 }
 
 /* Trois colonnes seulement une fois la place là, comme les tarifs : sous
