@@ -6,6 +6,7 @@ import { initCursor } from './scripts/cursor'
 import { initReveal } from './scripts/reveal'
 import { initNav } from './scripts/nav'
 import { initCookies, lireConsentement } from './scripts/cookies'
+import { initRemonter } from './scripts/remonter'
 import { rafraichirAuChargementDesFontes } from './lib/animations'
 
 // Umami ne se charge qu'avec un consentement donné et mémorisé. Le
@@ -27,4 +28,5 @@ initCursor()
 initNav()
 initReveal()
 initCookies()
+initRemonter()
 void rafraichirAuChargementDesFontes()

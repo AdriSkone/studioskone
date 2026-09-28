@@ -7,6 +7,7 @@ import { initReveal } from './scripts/reveal'
 import { initNav } from './scripts/nav'
 import { initFaq } from './scripts/faq'
 import { initCookies, lireConsentement } from './scripts/cookies'
+import { initRemonter } from './scripts/remonter'
 import { rafraichirAuChargementDesFontes } from './lib/animations'
 
 // Umami ne se charge qu'avec un consentement donné et mémorisé. Le
@@ -29,4 +30,5 @@ initNav()
 initReveal()
 initFaq()
 initCookies()
+initRemonter()
 void rafraichirAuChargementDesFontes()

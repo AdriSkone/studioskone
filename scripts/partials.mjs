@@ -180,7 +180,22 @@ ${colonnes}
         </div>
       </div>
     </div>
-  </footer>`
+  </footer>
+
+${boutonRemonter()}`
+}
+
+/**
+ * Remonter en haut de page. Posé avec le pied, donc présent partout où
+ * il l'est. Un lien vers « # » plutôt qu'un bouton : sans script, il
+ * remonte quand même. Le script (src/scripts/remonter.ts) le montre
+ * après deux écrans de défilement, adoucit la remontée et rend le focus
+ * au haut de page.
+ */
+function boutonRemonter() {
+  return `  <a class="remonter" href="#" aria-label="Revenir en haut de la page">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </a>`
 }
 
 /* ── Bandeau cookies ──────────────────────────────────────────────── */
