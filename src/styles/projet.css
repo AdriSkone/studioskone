@@ -41,14 +41,51 @@ body { padding-top: var(--nav-h); }
   line-height: var(--leading-corps);
 }
 
-.projet-visuel { margin-top: 64px; }
-
-.projet-visuel img {
-  width: 100%;
+/* ─── Visuel principal ──────────────────────────────────────
+   Une carte de papier grainé au format 16/10, et l'image entière dedans.
+   Avant, l'image était recadrée en 16/10 (object-fit: cover) et gardait
+   la hauteur en pixels de son attribut height : sur téléphone, une
+   capture de 1 796 × 1 482 s'affichait en bande de 342 × 1 482. Les
+   visuels n'ont pas tous le même format — captures d'écran, maquettes
+   composées, téléphones — : aucun n'est plus rogné, la carte les tient. */
+.projet-visuel {
+  position: relative;
+  isolation: isolate;
+  margin-top: 64px;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-radius: var(--rond-bloc);
   background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+  overflow: hidden;
+}
+.projet-visuel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: var(--grain-taille) var(--grain-taille);
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
+  mix-blend-mode: multiply;
+  opacity: calc(var(--grain-opacite) * 1.6);
+  pointer-events: none;
+}
+.projet-visuel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Un téléphone ne remplit pas un cadre 16/10 : il y flotte, avec de
+   l'air autour. Sur mobile, le cadre se redresse en 4/5 — en 16/10,
+   l'écran du téléphone y tombait à 98 px de large. */
+.projet-visuel--vertical { padding: clamp(24px, 4vw, 56px); }
+
+@media (max-width: 767px) {
+  .projet-visuel { margin-top: 40px; }
+  .projet-visuel--vertical { aspect-ratio: 4 / 5; padding: 16px; }
 }
 
 /* ─── Contexte ──────────────────────────────────────────────── */
@@ -64,26 +101,60 @@ body { padding-top: var(--nav-h); }
 }
 
 /* ─── Galerie ───────────────────────────────────────────────
-   Deux colonnes, une vue peut en occuper deux. Les images gardent leur
-   rapport : une capture d'écran rognée ne montre plus ce qu'elle montrait. */
+   Douze pistes, et chaque vue prend la largeur que son format demande.
+   Une capture d'ordinateur : une demi-ligne (la ligne entière si elle
+   est déclarée large). Une capture de téléphone : un quart. À la même
+   largeur, la seconde faisait trois fois la hauteur de la première — et
+   deux fois celle de l'écran.
+
+   Les images gardent leur rapport (height: auto, jamais de cover) : une
+   capture rognée ne montre plus ce qu'elle montrait. */
 .projet-galerie {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--grille-gouttiere) var(--grille-gouttiere);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grille-gouttiere);
+  align-items: start;
 }
 
-.projet-vue { display: flex; flex-direction: column; gap: 12px; }
+.projet-vue { grid-column: span 6; display: flex; flex-direction: column; gap: 12px; margin: 0; }
 .projet-vue--large { grid-column: 1 / -1; }
+.projet-vue--verticale { grid-column: span 3; }
 
 .projet-vue img {
+  display: block;
   width: 100%;
+  height: auto;
   border-radius: var(--rond-bloc);
   background: var(--papier-ombre);
+}
+
+/* Une vue large presque carrée (la maquette MyBoat, 1,21) montait à
+   1 083 px sur toute la largeur : plus haute que l'écran. Elle plafonne
+   à 85 % de sa hauteur et garde son rapport, calée à gauche. */
+.projet-vue--large img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(85vh, 900px);
 }
 
 .projet-vue figcaption {
   font-size: var(--text-petit);
   color: var(--gris);
+}
+
+/* Tablette : une capture d'ordinateur par ligne — en demi-ligne, son
+   texte n'était plus lisible —, trois téléphones. */
+@media (max-width: 1023px) {
+  .projet-vue { grid-column: 1 / -1; }
+  .projet-vue--verticale { grid-column: span 4; }
+}
+
+/* Téléphone : deux pistes. L'ordinateur en pleine largeur, les
+   téléphones deux par deux. */
+@media (max-width: 767px) {
+  .projet-galerie { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projet-vue { grid-column: 1 / -1; }
+  .projet-vue--verticale { grid-column: span 1; }
 }
 
 /* ─── Suite ─────────────────────────────────────────────────── */
@@ -110,9 +181,7 @@ body { padding-top: var(--nav-h); }
 }
 
 @media (max-width: 767px) {
-  .projet-galerie,
   .projet-suite { grid-template-columns: 1fr; }
-  .projet-vue--large { grid-column: auto; }
   .projet-desc { margin-top: 24px; }
   .projet-type { margin-top: 20px; }
 }

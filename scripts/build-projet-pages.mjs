@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url'
 import { pagesProjet } from './contenu/projets-pages.mjs'
 import { projets } from './contenu/projets.mjs'
 import { navigation, piedDePage, bandeauCookies, fleche } from './partials.mjs'
-import { attributsTaille } from './dimensions-image.mjs'
+import { attributsTaille, dimensions } from './dimensions-image.mjs'
 
 const ici = dirname(fileURLToPath(import.meta.url))
 const racine = resolve(ici, '..')
@@ -29,12 +29,23 @@ function autresProjets(slug) {
   return projets.filter((p) => p.slug !== slug).slice(0, 3)
 }
 
+/**
+ * Vertical (capture de téléphone) ou non. La galerie ne place pas une
+ * vue de 0,46 comme une vue de 1,6 : à la même largeur, la première
+ * faisait trois fois la hauteur de l'écran. Le format se lit dans le
+ * fichier, pour qu'aucune image ajoutée plus tard n'ait à le déclarer.
+ */
+function estVertical(src) {
+  const t = dimensions(src)
+  return Boolean(t && t[0] / t[1] < 0.8)
+}
+
 function page(slug, d) {
   const head = readFileSync(resolve(ici, 'contenu/heads', `${slug}.html`), 'utf8')
 
   const galerie = d.galerie
     .map(
-      (g) => `          <figure class="projet-vue${g.large ? ' projet-vue--large' : ''}">
+      (g) => `          <figure class="projet-vue${estVertical(g.src) ? ' projet-vue--verticale' : g.large ? ' projet-vue--large' : ''}">
             <img src="${g.src}" alt="${g.alt}" loading="lazy"${attributsTaille(g.src)}>
             ${g.label ? `<figcaption>${g.label}</figcaption>` : ''}
           </figure>`
@@ -78,7 +89,7 @@ ${navigation({ prefixe: '/' })}
 
         <p class="projet-desc" style="--col: 8 / span 5">${d.desc}</p>
 
-        <figure class="projet-visuel" style="--col: 1 / -1">
+        <figure class="projet-visuel${estVertical(d.heroImg) ? ' projet-visuel--vertical' : ''}" style="--col: 1 / -1">
           <img src="${d.heroImg}" alt="${d.heroAlt}" loading="eager" fetchpriority="high"${attributsTaille(d.heroImg)}>
         </figure>
       </div>
