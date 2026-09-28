@@ -51,6 +51,14 @@
    enfants prennent directement leur place dans la grille de la barre. */
 .nav-panneau { display: contents; }
 
+/* En display:contents, les enfants du panneau deviennent des cases de la
+   grille, mais .colonnes > * ne les atteint pas : ce ne sont pas des
+   enfants directs. Et --col n'hérite pas (inherits: false), donc rien ne
+   leur donne leur place. Sans cette règle, chacun s'auto-place sur une
+   colonne de 87 px : les liens disparaissent, la mention passe sous le
+   logo. */
+.nav-panneau > * { grid-column: var(--col, auto); }
+
 .nav-liens {
   --col: 4 / span 5;
   display: flex;
@@ -129,6 +137,18 @@
 }
 
 .nav-mention { font-size: 0.9375rem; color: var(--gris); }
+
+/* Sous 1440 px, les six liens ne tiennent pas dans leurs cinq colonnes :
+   à 1024 px, logo, liens, mention et bouton demandent près de 990 px pour
+   896 disponibles, et les liens se rognent encore jusqu'à 1344 px. La
+   mention cède sa place — elle est reprise sous le hero — et les liens
+   prennent les colonnes libérées. Le seuil garde une quarantaine de pixels
+   de marge pour une fonte de secours plus large. */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .nav-mention { display: none; }
+  .nav-liens { --col: 3 / span 7; gap: 24px; justify-content: center; }
+  .nav-actions { --col: 10 / span 3; }
+}
 
 /* ─── Bascule mobile ─────────────────────────────────────────
    Trois barres qui deviennent une croix. En bordures et non en fond :
