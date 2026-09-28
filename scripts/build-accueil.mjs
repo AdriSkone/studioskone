@@ -111,8 +111,8 @@ function probleme() {
   return `  <section class="section-m" id="probleme">
     <div class="grille">
       <p class="tete-bloc">${C.probleme.label}</p>
-      <h2 class="probleme-titre" style="--col: 3 / span 8">${C.probleme.titre.debut} ${C.probleme.titre.accent}</h2>
-      <ul class="probleme-liste" style="--col: 3 / span 9">
+      <h2 class="probleme-titre" style="--col: 1 / span 8">${C.probleme.titre.debut} ${C.probleme.titre.accent}</h2>
+      <ul class="probleme-liste" style="--col: 1 / span 9">
 ${items}
       </ul>
     </div>
@@ -178,7 +178,7 @@ function transparence() {
   return `  <section class="section-s" id="transparence">
     <div class="grille">
       <p class="tete-bloc">${C.transparence.label}</p>
-      <div class="transparence-corps" style="--col: 3 / span 7">
+      <div class="transparence-corps" style="--col: 1 / span 7">
         <h3 class="t-h2">${C.transparence.titre}</h3>
 ${textes}
       </div>
@@ -206,7 +206,7 @@ function prestations() {
   return `  <section class="section-m" id="services">
     <div class="grille">
       <p class="tete-bloc">${C.prestations.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 8">${C.prestations.titre.debut} ${C.prestations.titre.accent}</h2>
+      <h2 class="t-h1" style="--col: 1 / span 8">${C.prestations.titre.debut} ${C.prestations.titre.accent}</h2>
       <div class="prestations-grille" style="--col: 1 / -1">
 ${cartes}
       </div>
@@ -235,7 +235,7 @@ function methode() {
   // tracé plein, sans épingle : voir l'en-tête de ce fichier CSS.
   return `  <section class="section-m sombre methode" id="process">
     <div class="grille">
-      <p class="tete-bloc" style="--col: 1 / -1">${C.methode.label}</p>
+      <p class="tete-bloc">${C.methode.label}</p>
       <h2 class="t-h2" style="--col: 1 / span 6">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
       <p class="methode-cloture" style="--col: 8 / span 5">${C.methode.cloture}</p>
       <div class="methode-scene" style="--col: 1 / -1">
@@ -292,8 +292,8 @@ ${liste.map((p) => vignette(p, true)).join('\n')}
   return `  <section class="section-m" id="work">
     <div class="grille">
       <p class="tete-bloc">${C.realisations.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 6">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${C.realisations.titre.accent}</h2>
-      <p class="realisations-intro" style="--col: 9 / span 4">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
+      <h2 class="t-h1" style="--col: 1 / span 6">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${C.realisations.titre.accent}</h2>
+      <p class="realisations-intro" style="--col: 8 / span 5">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
     </div>
 
     <div class="realisations-rubans" id="realisationsRubans">
@@ -367,8 +367,8 @@ ${items}
   return `  <section class="section-m" id="tarifs">
     <div class="grille">
       <p class="tete-bloc">${C.tarifs.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 5">${C.tarifs.titre.debut} ${C.tarifs.titre.accent}${C.tarifs.titre.fin}<br>${C.tarifs.titre.suite}</h2>
-      <p class="tarifs-note" style="--col: 9 / span 4">${C.tarifs.note[0]}<br>${C.tarifs.note[1]}</p>
+      <h2 class="t-h1" style="--col: 1 / span 5">${C.tarifs.titre.debut} ${C.tarifs.titre.accent}${C.tarifs.titre.fin}<br>${C.tarifs.titre.suite}</h2>
+      <p class="tarifs-note" style="--col: 8 / span 5">${C.tarifs.note[0]}<br>${C.tarifs.note[1]}</p>
 
       <aside class="tarifs-lancement" style="--col: 1 / -1">
         <p class="pastille">${C.tarifs.lancement.tag}</p>
@@ -459,7 +459,7 @@ ${options}
   return `  <section class="section-m sombre" id="estimator">
     <div class="grille">
       <p class="tete-bloc">${P.label}</p>
-      <div class="parcours-tete" style="--col: 3 / span 7">
+      <div class="parcours-tete" style="--col: 1 / span 7">
         <h2 class="t-h2">${P.titre}</h2>
         <p class="t-corps-l">${P.sousTitre}</p>
       </div>
@@ -529,12 +529,12 @@ function faqSection() {
   return `  <section class="section-m" id="faq">
     <div class="grille">
       <p class="tete-bloc">${C.faq.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 6">${C.faq.titre.debut}<br>${C.faq.titre.suite} ${C.faq.titre.accent}</h2>
-      <div class="faq-relance" style="--col: 10 / span 3">
+      <h2 class="t-h1" style="--col: 1 / span 6">${C.faq.titre.debut}<br>${C.faq.titre.suite} ${C.faq.titre.accent}</h2>
+      <div class="faq-relance" style="--col: 8 / span 4">
         <p>${C.faq.relance.question}<br>${C.faq.relance.texte}</p>
         <a class="lien" href="${C.faq.relance.lien.href}">${C.faq.relance.lien.libelle}</a>
       </div>
-      <div class="faq" style="--col: 3 / span 8">
+      <div class="faq" style="--col: 1 / span 8">
 ${items}
       </div>
     </div>
@@ -557,7 +557,7 @@ function engagements() {
   return `  <section class="section-m" id="garanties">
     <div class="grille">
       <p class="tete-bloc">${C.engagements.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 8">${C.engagements.titre.debut} ${C.engagements.titre.accent}</h2>
+      <h2 class="t-h1" style="--col: 1 / span 8">${C.engagements.titre.debut} ${C.engagements.titre.accent}</h2>
       <ul class="engagements" style="--col: 1 / -1">
 ${items}
       </ul>
@@ -570,11 +570,11 @@ function contact() {
   return `  <section class="section-m sombre" id="contact">
     <div class="grille">
       <p class="tete-bloc">${C.contact.label}</p>
-      <h2 class="t-h1" style="--col: 3 / span 8">${C.contact.titre.debut}<br>${C.contact.titre.suite} ${C.contact.titre.accent}</h2>
-      <div class="contact-lead" style="--col: 3 / span 6">
+      <h2 class="t-h1" style="--col: 1 / span 8">${C.contact.titre.debut}<br>${C.contact.titre.suite} ${C.contact.titre.accent}</h2>
+      <div class="contact-lead" style="--col: 1 / span 6">
 ${textes}
       </div>
-      <a class="bouton bouton--principal" style="--col: 3 / span 3; margin-top: 40px" href="#estimator">${C.parcours.actions.envoyer}${fleche}</a>
+      <a class="bouton bouton--principal" style="--col: 1 / span 3; margin-top: 40px" href="#estimator">${C.parcours.actions.envoyer}${fleche}</a>
     </div>
   </section>`
 }

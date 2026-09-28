@@ -46,29 +46,25 @@
 .sombre .filet--accent { border-top-color: var(--accent-clair); opacity: 1; }
 
 /* ─── Tête de bloc ───────────────────────────────────────────
-   Le libellé de section, en marge du titre. Casse de phrase et corps de
-   texte : ce n'est pas un eyebrow en capitales, et il n'en prend pas la
-   place — les capitales restent réservées aux deux libellés de statut. */
+   Le libellé de section, posé au-dessus de son titre et sur le même bord
+   gauche. Casse de phrase et corps de texte : ce n'est pas un eyebrow en
+   capitales — les capitales restent réservées aux deux libellés de statut.
+
+   Il a d'abord vécu en marge, colonnes 1-2, le titre démarrant en 3.
+   Abandonné : côte à côte, un libellé de 14 px et un titre de 79 px ne
+   partagent aucune ligne que l'œil suive, et le décalage se lisait comme
+   un défaut. Empilé, il partage le bord du titre, comme sur les pages
+   prestation. Il prend donc sa ligne entière ; le contenu de la section
+   démarre au même bord que lui. */
 .tete-bloc {
-  --col: 1 / span 2;
+  --col: 1 / -1;
   font-size: var(--text-petit);
   font-weight: 500;
   color: var(--gris);
 }
 
+/* 16 px : l'écart du libellé des pages prestation. Réservé à l'enfant
+   direct de grille — ailleurs (tarifs), le conteneur règle l'espacement. */
+.grille > .tete-bloc { margin-bottom: 16px; }
+
 .sombre .tete-bloc { color: var(--sombre-texte); opacity: 0.72; }
-
-/* Le libellé se lit sur la ligne de base du titre qu'il accompagne.
-   Posés tous deux en haut de leur piste, un libellé de 14 px et un titre
-   de 48 à 79 px ne se touchent pas : l'interligne et la hauteur de
-   capitale du titre font démarrer ses lettres 15 à 25 px plus bas, et le
-   libellé flotte au-dessus. L'alignement de grille par ligne de base
-   règle ça sans nombre magique : il vaut quelle que soit la taille du
-   titre, et pour un paragraphe voisin comme pour un titre.
-
-   Les deux éléments doivent y souscrire — la grille n'aligne que ceux
-   qui le demandent. Le voisin est l'élément suivant ; le studio fait
-   exception, le portrait s'intercale entre le libellé et son titre. */
-.grille > .tete-bloc,
-.grille > .tete-bloc + :not(.studio-portrait),
-.grille > .studio-titre { align-self: first baseline; }

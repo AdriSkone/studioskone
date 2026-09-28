@@ -87,7 +87,7 @@ ${navigation({ prefixe: '/' })}
     <section class="section-m sombre" id="contexte">
       <div class="grille">
         <p class="tete-bloc">${d.labelContexte}</p>
-        <div class="projet-contexte" style="--col: 3 / span 7">
+        <div class="projet-contexte" style="--col: 1 / span 7">
 ${d.contextes.map((t) => `          <p>${t}</p>`).join('\n')}
         </div>
       </div>
@@ -96,7 +96,7 @@ ${d.contextes.map((t) => `          <p>${t}</p>`).join('\n')}
     <section class="section-m" id="nature">
       <div class="grille">
         <p class="tete-bloc">${d.testiBadge}</p>
-        <div class="projet-contexte" style="--col: 3 / span 7">
+        <div class="projet-contexte" style="--col: 1 / span 7">
           <p class="projet-note">${d.testiNote}</p>
           ${d.testiSign ? `<p class="projet-signature">${d.testiSign}</p>` : ''}
         </div>
@@ -115,9 +115,9 @@ ${galerie}
     <section class="section-m" id="suite">
       <div class="grille">
         <p class="tete-bloc">Réalisations</p>
-        <h2 class="t-h2" style="--col: 3 / span 6">${d.ctaTitre}</h2>
-        <p class="projet-cta-sous" style="--col: 9 / span 4">${d.ctaSub}</p>
-        <a class="bouton bouton--principal" style="--col: 3 / span 4; margin-top: 32px" href="${d.ctaHref}">${d.ctaLibelle}${fleche}</a>
+        <h2 class="t-h2" style="--col: 1 / span 6">${d.ctaTitre}</h2>
+        <p class="projet-cta-sous" style="--col: 8 / span 5">${d.ctaSub}</p>
+        <a class="bouton bouton--principal" style="--col: 1 / span 4; margin-top: 32px" href="${d.ctaHref}">${d.ctaLibelle}${fleche}</a>
 
         <div class="projet-suite" style="--col: 1 / -1">
 ${suite}

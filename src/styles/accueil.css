@@ -195,18 +195,18 @@ body { padding-top: var(--nav-h); }
 
 /* ─── Le studio ─────────────────────────────────────────────
    Le portrait tient la colonne de gauche sur toute la hauteur de la
-   section ; le texte se range à sa droite. Les lignes sont posées à la
+   section ; le texte se range à sa droite, libellé compris. Les lignes sont posées à la
    main parce que le portrait les traverse toutes.
 
    L'image est sortie du flux : elle prend la hauteur que le texte donne à
    la section, au lieu de l'imposer et de creuser un vide sous les
    bénéfices. */
-.studio-label    { --col: 1 / span 3;  grid-row: 1; position: relative; z-index: 1; }
-.studio-portrait { --col: 1 / span 3;  grid-row: 1 / span 3; position: relative; margin: 0; }
-.studio-titre    { --col: 4 / span 9;  grid-row: 1; font-size: var(--text-h1); margin-bottom: 48px; }
-.metiers         { --col: 4 / span 6;  grid-row: 2; }
-.studio-texte    { --col: 10 / span 3; grid-row: 2; }
-.benefices       { --col: 4 / -1;      grid-row: 3; }
+.studio-label    { --col: 4 / -1;      grid-row: 1; }
+.studio-portrait { --col: 1 / span 3;  grid-row: 1 / span 4; position: relative; margin: 0; }
+.studio-titre    { --col: 4 / span 9;  grid-row: 2; font-size: var(--text-h1); margin-bottom: 48px; }
+.metiers         { --col: 4 / span 6;  grid-row: 3; }
+.studio-texte    { --col: 10 / span 3; grid-row: 3; }
+.benefices       { --col: 4 / -1;      grid-row: 4; }
 
 /* La photo est déjà détourée sur blanc. En multiply, le blanc devient
    papier et le fondu du bas se perd dans la page ; en niveaux de gris,
@@ -462,7 +462,9 @@ body { padding-top: var(--nav-h); }
   /* Le portrait passe au-dessus du titre, à largeur mesurée. */
   .studio-label, .studio-portrait, .studio-titre,
   .metiers, .studio-texte, .benefices { --col: 1 / -1; grid-row: auto; }
-  .studio-portrait { max-width: 220px; margin-bottom: 32px; }
+  /* Le libellé reste collé à son titre : c'est le portrait qui passe
+     devant les deux. */
+  .studio-portrait { order: -1; max-width: 220px; margin-bottom: 32px; }
   .studio-portrait img { position: static; height: auto; }
   .studio-texte { margin-top: 32px; }
 }

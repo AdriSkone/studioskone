@@ -205,7 +205,7 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
 
      Ça ne suffit pourtant pas partout : les générateurs posent --col en
      style inline sur certains enfants (les titres de section, les notes
-     à droite du titre — --col: 3 / span N et 9 / span 4). Un style inline
+     à droite du titre — --col: 1 / span N et 8 / span 5). Un style inline
      bat n'importe quel sélecteur de feuille de style, doublé ou non, quelle
      que soit sa spécificité. Sans !important ici, ces enfants gardent leur
      colonne de bureau sous 768 px, réclament une 13e ligne de grille qui
