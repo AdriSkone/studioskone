@@ -210,7 +210,9 @@ body { padding-top: var(--nav-h); }
     background-color var(--dur-moyenne) var(--ease),
     opacity var(--dur-moyenne) var(--ease);
 }
-.symptome::before {
+.symptome::before,
+.studio-portrait::before,
+.benefice::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -282,32 +284,58 @@ body { padding-top: var(--nav-h); }
 }
 
 /* ─── Le studio ─────────────────────────────────────────────
-   Le portrait tient la colonne de gauche sur toute la hauteur de la
-   section ; le texte se range à sa droite, libellé compris. Les lignes sont posées à la
-   main parce que le portrait les traverse toutes.
+   Deux bandes, et un seul ordre de lecture dans chacune.
 
-   L'image est sortie du flux : elle prend la hauteur que le texte donne à
-   la section, au lieu de l'imposer et de creuser un vide sous les
-   bénéfices. */
-.studio-label    { --col: 4 / -1;      grid-row: 1; }
-.studio-portrait { --col: 1 / span 3;  grid-row: 1 / span 4; position: relative; margin: 0; }
-.studio-titre    { --col: 4 / span 9;  grid-row: 2; font-size: var(--text-h1); margin-bottom: 48px; }
-.metiers         { --col: 4 / span 6;  grid-row: 3; }
-.studio-texte    { --col: 10 / span 3; grid-row: 3; }
-.benefices       { --col: 4 / -1;      grid-row: 4; }
+   L'intro en deux colonnes. À gauche, le portrait, posé sur une carte de
+   papier grainé : détouré à même la page, il flottait sans rien pour le
+   tenir. À droite, de haut en bas : libellé, titre, le mot d'Adrien, puis
+   le pinceau et le marteau, calés sur le bas du portrait — la dernière
+   ligne de la colonne ferme la bande au même niveau que l'image.
 
-/* La photo est déjà détourée sur blanc. En multiply, le blanc devient
-   papier et le fondu du bas se perd dans la page ; en niveaux de gris,
-   elle quitte le terracotta de l'ancienne charte pour l'encre. */
+   Dessous, les trois avantages sur une ligne de trois cartes. À deux
+   colonnes, le troisième tombait seul sur sa ligne.
+
+   Avant, titre, métiers, texte et cartes se partageaient la même zone en
+   quatre registres différents, et rien ne disait par où commencer. */
+.studio-grille { grid-template-rows: auto auto auto 1fr auto; }
+
+.studio-label    { --col: 7 / -1;     grid-row: 1; }
+.studio-titre    { --col: 7 / -1;     grid-row: 2; font-size: clamp(2.5rem, 4.2vw, 4rem); margin-bottom: 40px; }
+.studio-texte    { --col: 7 / span 5; grid-row: 3; }
+.metiers         { --col: 7 / -1;     grid-row: 4; align-self: end; margin-top: 56px; }
+.studio-portrait { --col: 1 / span 5; grid-row: 1 / span 4; }
+.benefices       { --col: 1 / -1;     grid-row: 5; }
+
+/* La photo est déjà détourée sur blanc. En multiply, le blanc prend la
+   couleur de la carte et le fondu du bas s'y perd ; en niveaux de gris,
+   elle quitte le terracotta de l'ancienne charte pour l'encre. Sortie du
+   flux, elle prend la hauteur que la colonne de texte donne à la bande. */
+.studio-portrait {
+  position: relative;
+  isolation: isolate;
+  min-height: 34rem;
+  margin: 0;
+  background: var(--papier-ombre);
+  border-radius: var(--rond-bloc);
+  overflow: hidden;
+}
 .studio-portrait img {
   position: absolute;
-  inset: 64px 0 0;
+  inset: 48px 0 0;
   width: 100%;
-  height: calc(100% - 64px);
+  height: calc(100% - 48px);
   object-fit: contain;
   object-position: center bottom;
   filter: grayscale(1) contrast(1.08);
   mix-blend-mode: multiply;
+}
+
+.studio-texte {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: var(--text-corps-l);
+  line-height: var(--leading-corps);
 }
 
 /* Deux colonnes courtes : l'espace seul les sépare, aucun trait. */
@@ -330,26 +358,39 @@ body { padding-top: var(--nav-h); }
   flex: none;
 }
 
-.studio-texte { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
-
-/* Trois avantages, en cartes : deux colonnes sur desktop, une sur mobile. */
+/* Trois avantages, en cartes grainées comme les symptômes. */
 .benefices {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-self: start;
-  column-gap: var(--grille-gouttiere);
-  row-gap: var(--grille-gouttiere);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grille-gouttiere);
   margin-top: var(--section-s);
 }
 .benefice {
-  padding: 28px;
+  position: relative;
+  isolation: isolate;
+  padding: 32px;
   background: var(--papier-ombre);
   border-radius: var(--rond-bloc);
+  overflow: hidden;
 }
 .benefice-titre { font-size: var(--text-h3); }
 /* Sur --papier-ombre, --gris tombe à 4.67 : le texte secondaire d'une
    carte s'écrit en --encre. */
 .benefice-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
+
+/* Sous 1 180 px, trois colonnes laisseraient des cartes de moins de
+   300 px (§ 15). Une carte par ligne, titre à gauche et texte à droite :
+   la ligne reste pleine, sans orpheline. */
+@media (max-width: 1179px) {
+  .benefices { grid-template-columns: 1fr; }
+  .benefice {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    column-gap: var(--grille-gouttiere);
+    align-items: baseline;
+  }
+  .benefice-texte { margin-top: 0; }
+}
 
 /* ─── Transparence ──────────────────────────────────────────── */
 .transparence-corps { display: flex; flex-direction: column; gap: 20px; }
@@ -547,14 +588,14 @@ body { padding-top: var(--nav-h); }
      base : rien à resserrer ici. */
   .prestations-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-  /* Le portrait passe au-dessus du titre, à largeur mesurée. */
+  /* L'intro s'empile dans l'ordre du DOM : libellé, titre, portrait,
+     texte, métiers. Le portrait garde sa carte, à largeur mesurée. */
+  .studio-grille { grid-template-rows: none; }
   .studio-label, .studio-portrait, .studio-titre,
   .metiers, .studio-texte, .benefices { --col: 1 / -1; grid-row: auto; }
-  /* Le libellé reste collé à son titre : c'est le portrait qui passe
-     devant les deux. */
-  .studio-portrait { order: -1; max-width: 220px; margin-bottom: 32px; }
-  .studio-portrait img { position: static; height: auto; }
-  .studio-texte { margin-top: 32px; }
+  .studio-titre { margin-bottom: 32px; }
+  .studio-portrait { width: min(100%, 360px); min-height: 0; aspect-ratio: 4 / 5; margin-bottom: 40px; }
+  .metiers { margin-top: 40px; }
 }
 
 @media (max-width: 767px) {
@@ -568,6 +609,8 @@ body { padding-top: var(--nav-h); }
   .contact-lead { margin-top: 32px; }
   .transparence-corps h3 + p { margin-top: 12px; }
   .symptome { min-height: 0; gap: 32px; padding: 24px; }
+  .benefice { display: block; padding: 24px; }
+  .benefice-texte { margin-top: 12px; }
 }
 
 /* ─── Ouverture du hero ─────────────────────────────────────

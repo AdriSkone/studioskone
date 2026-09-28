@@ -154,19 +154,24 @@ function studio() {
     )
     .join('\n')
 
+  // Ordre du DOM = ordre de lecture au téléphone : libellé et titre
+  // d'abord, le portrait ensuite. Le bureau replace le portrait à gauche
+  // par grid-row, sans toucher à cet ordre.
   return `  <section class="section-m" id="approach">
-    <div class="grille">
+    <div class="grille studio-grille">
       <p class="tete-bloc studio-label">${C.studio.label}</p>
+      <h2 class="studio-titre">${C.studio.titre.debut} ${C.studio.titre.accent}</h2>
       <figure class="studio-portrait">
         <img src="/adrien-studio.webp" alt="Adrien, fondateur de Studio Skøne, bras croisés et souriant"
              width="624" height="1200" decoding="async" loading="lazy">
       </figure>
-      <h2 class="studio-titre">${C.studio.titre.debut} ${C.studio.titre.accent}</h2>
-
+      <div class="studio-texte">
+        <p>${C.studio.texte[0]}</p>
+        <p>${C.studio.texte[1]}</p>
+      </div>
       <div class="metiers">
 ${metiers}
       </div>
-      <p class="studio-texte">${C.studio.texte[0]}<br><br>${C.studio.texte[1]}</p>
 
       <ul class="benefices">
 ${benefices}
