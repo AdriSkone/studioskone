@@ -88,7 +88,7 @@ body { padding-top: var(--nav-h); }
 
 /* ─── Suite ─────────────────────────────────────────────────── */
 .projet-cta-sous {
-  align-self: end;
+  margin-top: 24px;
   font-size: 0.9375rem;
   line-height: var(--leading-corps);
   color: var(--gris);

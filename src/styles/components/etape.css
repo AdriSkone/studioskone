@@ -32,6 +32,7 @@
 .methode .grille { align-items: end; }
 
 .methode-cloture {
+  margin-top: 32px;
   font-size: var(--text-corps);
   line-height: var(--leading-corps);
   opacity: 0.72;

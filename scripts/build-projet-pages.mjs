@@ -115,8 +115,8 @@ ${galerie}
     <section class="section-m" id="suite">
       <div class="grille">
         <p class="tete-bloc">Réalisations</p>
-        <h2 class="t-h2" style="--col: 1 / span 6">${d.ctaTitre}</h2>
-        <p class="projet-cta-sous" style="--col: 8 / span 5">${d.ctaSub}</p>
+        <h2 class="t-h2" style="--col: 1 / span 10">${d.ctaTitre}</h2>
+        <p class="projet-cta-sous" style="--col: 1 / span 5">${d.ctaSub}</p>
         <a class="bouton bouton--principal" style="--col: 1 / span 4; margin-top: 32px" href="${d.ctaHref}">${d.ctaLibelle}${fleche}</a>
 
         <div class="projet-suite" style="--col: 1 / -1">

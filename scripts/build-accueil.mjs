@@ -254,8 +254,8 @@ function methode() {
   return `  <section class="section-m sombre methode" id="process">
     <div class="grille">
       <p class="tete-bloc">${C.methode.label}</p>
-      <h2 class="t-h2" style="--col: 1 / span 6">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
-      <p class="methode-cloture" style="--col: 8 / span 5">${C.methode.cloture}</p>
+      <h2 class="t-h2" style="--col: 1 / span 10">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
+      <p class="methode-cloture" style="--col: 1 / span 5">${C.methode.cloture}</p>
       <div class="methode-scene" style="--col: 1 / -1">
         <div class="rail-h" aria-hidden="true"><div class="rail-h-plein"></div></div>
         <div class="methode-liste">
@@ -310,8 +310,8 @@ ${liste.map((p) => vignette(p, true)).join('\n')}
   return `  <section class="section-m" id="work">
     <div class="grille">
       <p class="tete-bloc">${C.realisations.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 6">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${C.realisations.titre.accent}</h2>
-      <p class="realisations-intro" style="--col: 8 / span 5">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
+      <h2 class="t-h1" style="--col: 1 / span 10">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${C.realisations.titre.accent}</h2>
+      <p class="realisations-intro" style="--col: 1 / span 5">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
     </div>
 
     <div class="realisations-rubans" id="realisationsRubans">
@@ -385,8 +385,8 @@ ${items}
   return `  <section class="section-m" id="tarifs">
     <div class="grille">
       <p class="tete-bloc">${C.tarifs.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 5">${C.tarifs.titre.debut} ${C.tarifs.titre.accent}${C.tarifs.titre.fin}<br>${C.tarifs.titre.suite}</h2>
-      <p class="tarifs-note" style="--col: 8 / span 5">${C.tarifs.note[0]}<br>${C.tarifs.note[1]}</p>
+      <h2 class="t-h1" style="--col: 1 / span 10">${C.tarifs.titre.debut} ${C.tarifs.titre.accent}${C.tarifs.titre.fin}<br>${C.tarifs.titre.suite}</h2>
+      <p class="tarifs-note" style="--col: 1 / span 5">${C.tarifs.note[0]}<br>${C.tarifs.note[1]}</p>
 
       <aside class="tarifs-lancement" style="--col: 1 / -1">
         <p class="pastille">${C.tarifs.lancement.tag}</p>
@@ -547,8 +547,8 @@ function faqSection() {
   return `  <section class="section-m" id="faq">
     <div class="grille">
       <p class="tete-bloc">${C.faq.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 6">${C.faq.titre.debut}<br>${C.faq.titre.suite} ${C.faq.titre.accent}</h2>
-      <div class="faq-relance" style="--col: 8 / span 4">
+      <h2 class="t-h1" style="--col: 1 / span 10">${C.faq.titre.debut}<br>${C.faq.titre.suite} ${C.faq.titre.accent}</h2>
+      <div class="faq-relance" style="--col: 1 / span 5">
         <p>${C.faq.relance.question}<br>${C.faq.relance.texte}</p>
         <a class="lien" href="${C.faq.relance.lien.href}">${C.faq.relance.lien.libelle}</a>
       </div>

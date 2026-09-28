@@ -459,11 +459,16 @@ body { padding-top: var(--nav-h); }
    components/etape.css, avec le reste du composant qu'elle habille. */
 
 /* ─── Réalisations ──────────────────────────────────────────── */
-.realisations-intro { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
+/* Les notes d'en-tête (Réalisations, Tarifs, FAQ, et la clôture de la
+   Méthode) passent sous le titre au lieu de se loger à sa droite : sur
+   cinq colonnes, le titre se cassait en trois ou quatre lignes et la note
+   flottait sans appui. Titre sur dix colonnes, une ou deux lignes ; note
+   dessous, sur cinq, à 32 px. */
+.realisations-intro { font-size: 0.9375rem; line-height: var(--leading-corps); margin-top: 32px; }
 .realisations-intro-fort { font-weight: 500; }
 
 /* ─── Tarifs ────────────────────────────────────────────────── */
-.tarifs-note { font-size: 0.9375rem; line-height: var(--leading-corps); align-self: end; }
+.tarifs-note { font-size: 0.9375rem; line-height: var(--leading-corps); margin-top: 32px; }
 
 .tarifs-lancement {
   margin-top: 48px;
@@ -589,7 +594,7 @@ body { padding-top: var(--nav-h); }
 .estimateur-disclaimer { margin-top: 16px; }
 
 /* ─── FAQ ───────────────────────────────────────────────────── */
-.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; align-self: end; font-size: var(--text-petit); color: var(--gris); }
+.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }
 .faq { margin-top: 48px; }
 
 /* ─── Engagements ─────────────────────────────────────────────
