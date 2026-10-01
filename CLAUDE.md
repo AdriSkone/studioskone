@@ -32,7 +32,7 @@ MyBoat is built on Bubble.io — there are no CLI build, lint, or test commands.
 
 ## Studio Skøne
 
-**Location**: `~/Desktop/Freelance - studio skøne/Projets/studio-skone/`
+**Location**: `~/Desktop/Agence Studio Skøne/studio skone site web/`
 **Stack**: Vanilla TypeScript + Vite (MPA) + CSS écrit à la main — pas de framework. GSAP + ScrollTrigger pour les animations, seule dépendance du projet.
 **Deploy**: `git push` sur `main` → Vercel build et déploie automatiquement (repo GitHub `AdriSkone/studioskone` connecté au projet Vercel). Pas besoin de `vercel --prod`, ni de Node local.
 **SEO local**: marché cible Nantes et périphérie, domiciliation légale à Paris. `address.addressLocality` du JSON-LD reste Paris ; Nantes vit dans `areaServed`, les titres et le contenu. Ne pas nommer d'outils (Figma, IA) dans les meta.

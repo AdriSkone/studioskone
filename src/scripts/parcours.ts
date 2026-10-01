@@ -21,6 +21,7 @@
 
 import { estimate } from '../components/estimator-pricing'
 import type { SiteType, SizeChoice, ContentChoice } from '../components/estimator-pricing'
+import { suivre } from '../lib/suivi'
 
 const ENDPOINT = 'https://formspree.io/f/mjgjwdka'
 
@@ -40,6 +41,36 @@ export function initParcours(): void {
   const LIBELLE_ENVOYER = 'Discuter de mon projet'
 
   let courant = 0
+
+  /* ── Suivi de l'entonnoir ───────────────────────────────── */
+
+  // Un événement par marche, dans l'ordre où le visiteur les franchit :
+  // parcours-vu → parcours-type → parcours-taille → parcours-contenu →
+  // parcours-budget → parcours-resultat → estimation-envoyee.
+  // Chaque marche n'est comptée qu'une fois par visite : revenir en arrière
+  // puis repasser ne gonfle pas l'entonnoir.
+  // `origine` distingue le visiteur arrivé par une carte tarifaire, dont
+  // les premières réponses sont déjà cochées, de celui qui part de zéro.
+  const MARCHES: Record<string, string> = {
+    type: 'parcours-type',
+    size: 'parcours-taille',
+    content: 'parcours-contenu',
+    budget: 'parcours-budget',
+  }
+  const franchies = new Set<string>()
+  let origine = 'direct'
+
+  function marche(nom: string, donnees: Record<string, string> = {}): void {
+    if (franchies.has(nom)) return
+    franchies.add(nom)
+    suivre(nom, { origine, ...donnees })
+  }
+
+  // L'écran qu'on quitte en avançant est celui auquel on vient de répondre.
+  function marquerReponse(index: number): void {
+    const question = ecrans[index].dataset.question
+    if (question && MARCHES[question]) marche(MARCHES[question])
+  }
 
   /* ── Affichage ──────────────────────────────────────────── */
 
@@ -94,6 +125,14 @@ export function initParcours(): void {
   }
 
   /* ── Résultat ───────────────────────────────────────────── */
+
+  function formuleAffichee(): string {
+    return estimate({
+      type: reponse('type') as SiteType,
+      size: reponse('size') as SizeChoice,
+      content: reponse('content') as ContentChoice,
+    }).formule
+  }
 
   function calculer(): void {
     const type = reponse('type') as SiteType
@@ -150,11 +189,7 @@ export function initParcours(): void {
     suivant!.disabled = true
     suivant!.classList.add('est-en-cours')
 
-    // Umami ne pose pas de cookie : rien à demander au visiteur.
-    ;(window as unknown as { umami?: { track: (n: string, d?: unknown) => void } }).umami?.track(
-      'estimation-envoyee',
-      { formule: r.formule }
-    )
+    marche('estimation-envoyee', { formule: r.formule })
 
     void fetch(ENDPOINT, {
       method: 'POST',
@@ -168,6 +203,7 @@ export function initParcours(): void {
         succes!.focus?.()
       })
       .catch(() => {
+        suivre('parcours-erreur', { origine })
         suivant!.disabled = false
         suivant!.textContent = 'Erreur · réessayer'
       })
@@ -176,16 +212,24 @@ export function initParcours(): void {
 
   /* ── Liaisons ───────────────────────────────────────────── */
 
+  function avancer(): void {
+    marquerReponse(courant)
+    // L'écran du résultat se calcule au moment où on y arrive.
+    if (ecrans[courant + 1].hasAttribute('data-resultat')) {
+      calculer()
+      marche('parcours-resultat', { formule: formuleAffichee() })
+    }
+    montrer(courant + 1)
+    majBoutonSuivant()
+  }
+
   suivant.addEventListener('click', () => {
     if (!ecranValide(courant)) return
     if (courant === ecrans.length - 1) {
       envoyer()
       return
     }
-    // L'écran du résultat se calcule au moment où on y arrive.
-    if (ecrans[courant + 1].hasAttribute('data-resultat')) calculer()
-    montrer(courant + 1)
-    majBoutonSuivant()
+    avancer()
   })
 
   precedent.addEventListener('click', () => {
@@ -204,9 +248,7 @@ export function initParcours(): void {
     if (cible instanceof HTMLInputElement && cible.type === 'radio' && ecranValide(courant)) {
       window.setTimeout(() => {
         if (courant === ecrans.length - 1) return
-        if (ecrans[courant + 1].hasAttribute('data-resultat')) calculer()
-        montrer(courant + 1)
-        majBoutonSuivant()
+        avancer()
       }, 250)
     }
   })
@@ -247,8 +289,26 @@ export function initParcours(): void {
   const pre = formule ? PRESELECTION[formule] : undefined
   let depart = 0
   if (pre) {
+    origine = 'carte'
     if (cocher('type', pre.type)) depart = 1
     if (pre.size && cocher('size', pre.size)) depart = 2
+  }
+  // Les réponses cochées par la carte comptent comme données : sans cela,
+  // ces visiteurs sauteraient les premières marches de l'entonnoir. Ils
+  // ont cliqué pour venir ici : le parcours compte aussi comme vu, et
+  // avant leurs réponses, pour garder l'ordre des marches.
+  if (depart > 0) marche('parcours-vu')
+  for (let i = 0; i < depart; i++) marquerReponse(i)
+
+  // Première marche : le parcours a été vu, pas seulement chargé.
+  if ('IntersectionObserver' in window) {
+    const observateur = new IntersectionObserver((entrees) => {
+      if (entrees.some((e) => e.isIntersecting)) {
+        marche('parcours-vu')
+        observateur.disconnect()
+      }
+    }, { threshold: 0.25 })
+    observateur.observe(racine)
   }
   montrer(depart, false)
   majBoutonSuivant()
