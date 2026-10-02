@@ -17,7 +17,7 @@ import { rafraichirAuChargementDesFontes } from './lib/animations'
 
 import { initParcours } from './scripts/parcours'
 import { initTrait } from './scripts/trait'
-import { essaiActif, ouverture, fond } from './scripts/essai-s'
+import { ouverture } from './scripts/ouverture'
 
 // Umami ne se charge qu'avec un consentement donné et mémorisé. Le
 // bandeau annonce « vous pouvez refuser » : le charger avant la réponse,
@@ -37,14 +37,8 @@ if (
 // Le curseur s'allume à la fin de l'ouverture du hero — c'est la dernière
 // marche de la séquence. Quand celle-ci ne se joue pas (mouvement réduit,
 // ou retour sur la page dans la même session), le rappel est immédiat.
-// ESSAI ?essai-s : l'ouverture au s passe avant le hero, et le grand s
-// s'installe en fond. Sans le paramètre, rien ne change.
-if (essaiActif()) {
-  fond()
-  void ouverture().then(() => initHero(() => initCursor()))
-} else {
-  initHero(() => initCursor())
-}
+// L'ouverture au s passe avant le hero (une fois par visite).
+void ouverture().then(() => initHero(() => initCursor()))
 
 initNav()
 initReveal()

@@ -1,34 +1,42 @@
 # Studio Skøne
 
-> Studio digital indépendant spécialisé en design produit et développement web & mobile. Fondé par Adrien Bidet. Basé à Paris, disponible partout en France.
+> Studio de création de sites internet à Nantes, pour les artisans, les commerçants et les TPE. Fondé par Adrien Bidet. Basé à Nantes, disponible partout en France.
 
-Studio Skøne conçoit et développe des produits numériques — sites vitrines, applications web, e-commerce, applications mobiles — en gérant l'intégralité du projet de la conception au lancement. Une seule personne tient le design et le développement : Adrien Bidet.
+Studio Skøne dessine et code des sites vitrines, des boutiques en ligne et des applications web ou mobiles, du premier croquis à la mise en ligne. Une seule personne s'occupe de tout le site, de son apparence à son fonctionnement : Adrien Bidet. Prix ferme écrit sur le devis, délai écrit, aucun abonnement : le site, le code et les accès sont au nom du client.
 
 ## Services et tarifs
 
-- **Une page** : 900 €, livrée en 5 jours ouvrés
-- **Site complet, 2 à 6 pages** : 1 900 €, livré en 3 semaines
+- **Une page** : 900 €, livrée en 5 jours ouvrés, à partir de la réception des textes et des photos
+- **Site complet, 2 à 6 pages** : 1 900 €, livré en 3 semaines, à partir de la réception des textes et des photos
 - **E-commerce, application web ou mobile** : à partir de 3 000 €, délais définis au cadrage
-- **Direction artistique & UI** : dès 600 €
+- **Maquettes & identité visuelle** : dès 600 €
+- **Rédaction des textes** : 200 € par page, en option
 
 ## Méthode de travail
 
-1. Cadrage — atelier de découverte, structure du projet
-2. Conception visuelle — maquettes validées par le client avant développement
-3. Développement — pixel-perfect, testé sur tous les supports
-4. Mise en ligne — déploiement, configuration domaine, suivi post-lancement
+1. Cadrage du projet : un échange d'une heure pour comprendre le métier et structurer le site
+2. Conception visuelle : chaque écran est validé avec le client avant d'être développé
+3. Développement : les maquettes deviennent un vrai site, testé sur téléphone, tablette et ordinateur
+4. Mise en ligne et suivi : installation, prise en main en visio, un mois de suivi inclus
 
-## Projets réalisés
+## Projets
 
-- **ele — Ateliers Caféologie** : site web & identité visuelle
-- **MyBoat** : marketplace iOS & Android (5 semaines de la maquette au store)
-- **Garantibox** : application SaaS pour centraliser garanties & factures
+Chaque projet dit ce qu'il est : projet client, produit maison ou exercice de conception.
+
+- **ele · Ateliers Caféologie** : site web et identité visuelle, projet client
+- **Mérel & Fils** : site d'atelier d'ébénisterie, exercice de conception
+- **Archéon** : portfolio et site vitrine pour un cabinet d'architecture, exercice de conception
+- **M.Bivouak** : identité de marque outdoor et boutique Shopify, marque maison
+- **Tasq** : application web de pilotage de projets pour freelances, produit maison
+- **Ofria** : application mobile d'idées cadeaux, produit maison
+- **MyBoat** : application mobile de location de bateaux, exercice de conception
+- **Garantibox** : application web pour centraliser garanties et factures, exercice de conception
+- **Pépite** : application mobile de récompenses familiales, produit maison en développement
 - **Niort Basket** : refonte site club & e-commerce
-- **M.Bivouak** : identité de marque outdoor & boutique Shopify
-- **Archéon** : portfolio & site vitrine architecture
 
 ## Contact
 
 - Site : https://www.studioskone.com
 - Email : contact@studioskone.com
+- Téléphone : 07 68 08 47 52
 - Instagram : https://www.instagram.com/studio.skone/

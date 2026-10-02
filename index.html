@@ -6,7 +6,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon-2026.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Création de site internet à Nantes pour artisans et TPE · Studio Skøne</title>
+  <title>Studio Skøne · Création de site internet à Nantes pour artisans et TPE</title>
   <meta name="description" content="Création de site internet à Nantes pour artisans, commerçants et TPE. Conçu et codé par la même personne, prix ferme dès 900 €, livré en 5 jours à 3 semaines. Devis gratuit." />
   <meta name="author" content="Studio Skøne" />
   <meta name="robots" content="index, follow" />
@@ -20,7 +20,7 @@
   <meta property="og:type"        content="website" />
   <meta property="og:locale"      content="fr_FR" />
   <meta property="og:site_name"   content="Studio Skøne" />
-  <meta property="og:title"       content="Création de site internet à Nantes pour artisans et TPE · Studio Skøne" />
+  <meta property="og:title"       content="Studio Skøne · Création de site internet à Nantes pour artisans et TPE" />
   <meta property="og:description" content="Un site pensé pour faire sonner votre téléphone, conçu et codé par la même personne. Prix ferme dès 900 €, livré en 5 jours à 3 semaines." />
   <meta property="og:image"        content="https://studioskone.com/og-image.png" />
   <meta property="og:image:width"  content="1200" />
@@ -30,7 +30,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Création de site internet à Nantes pour artisans et TPE · Studio Skøne" />
+  <meta name="twitter:title"       content="Studio Skøne · Création de site internet à Nantes pour artisans et TPE" />
   <meta name="twitter:description" content="Un site pensé pour faire sonner votre téléphone, conçu et codé par la même personne. Prix ferme dès 900 €, livré en 5 jours à 3 semaines." />
   <meta name="twitter:image"       content="https://studioskone.com/og-image.png" />
   <meta name="twitter:image:alt"   content="Studio Skøne, création de site internet à Nantes pour artisans et TPE" />
@@ -154,6 +154,18 @@
       }
     ]
   }
+  </script>
+  <script>
+    /* L'ouverture au s : décidée avant le premier rendu, pour que la page
+       ne s'affiche pas une fraction de seconde avant le voile. Une fois par
+       visite, jamais en mouvement réduit. Filet : la page revient au bout
+       de 4 s, quoi qu'il arrive au script principal. */
+    try {
+      if (sessionStorage.getItem('skone-ouverture-vue') !== '1' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('a-ouverture')
+        setTimeout(function () { document.documentElement.classList.remove('a-ouverture') }, 4000)
+      }
+    } catch (e) {}
   </script>
 </head>
 <body>
@@ -430,11 +442,71 @@
               <p class="carrousel-meta"><span>Studio Skøne · Produit maison</span> <a class="lien carrousel-lien" href="/projets/tasq">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
             </div>
           </li>
+          <li class="carrousel-carte" data-index="5">
+            <a class="carrousel-image" href="/projets/ofria">
+              <img src="/work/ofria-accueil.webp" alt="Ofria · application mobile qui génère des idées cadeaux personnalisées par IA" loading="lazy" width="720" height="1440">
+            </a>
+            <div class="carrousel-info">
+              <div class="carrousel-tete">
+                <h3 class="carrousel-titre">Ofria</h3>
+                <span class="carrousel-type">App mobile</span>
+              </div>
+              <p class="carrousel-tagline">Cinq idées cadeaux qui tiennent la route, en dix secondes</p>
+              <p class="carrousel-nature">Projet de studio</p>
+              <p class="carrousel-note">Né d'un besoin réel : je sèche systématiquement sur les cadeaux. J'ai construit une app qui transforme trois mots sur une personne en cinq propositions concrètes.</p>
+              <p class="carrousel-meta"><span>Studio Skøne · Produit maison</span> <a class="lien carrousel-lien" href="/projets/ofria">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+            </div>
+          </li>
+          <li class="carrousel-carte" data-index="6">
+            <a class="carrousel-image" href="/projets/myboat">
+              <img src="/work/myboat.webp" alt="MyBoat · application mobile marketplace bateaux iOS et Android" loading="lazy" width="1796" height="1482">
+            </a>
+            <div class="carrousel-info">
+              <div class="carrousel-tete">
+                <h3 class="carrousel-titre">MyBoat</h3>
+                <span class="carrousel-type">App mobile</span>
+              </div>
+              <p class="carrousel-tagline">Louer un bateau sans créer de compte pour connaître le prix</p>
+              <p class="carrousel-nature">Exercice de conception</p>
+              <p class="carrousel-note">Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique où l'on connaît le prix total, assurance et caution comprises, avant la moindre inscription.</p>
+              <p class="carrousel-meta"><span>Studio Skøne · Démo sectorielle</span> <a class="lien carrousel-lien" href="/projets/myboat">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+            </div>
+          </li>
+          <li class="carrousel-carte" data-index="7">
+            <a class="carrousel-image" href="/projets/garantibox">
+              <img src="/work/garantibox.png" alt="Garantibox · application SaaS pour centraliser garanties et factures" loading="lazy" width="1800" height="960">
+            </a>
+            <div class="carrousel-info">
+              <div class="carrousel-tete">
+                <h3 class="carrousel-titre">Garantibox</h3>
+                <span class="carrousel-type">Web App SaaS</span>
+              </div>
+              <p class="carrousel-tagline">Ajouter sa première garantie sans avoir besoin d'explication</p>
+              <p class="carrousel-nature">Exercice de conception</p>
+              <p class="carrousel-note">Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre sa première facture en moins d'une minute, sans tutoriel et sans compte à créer d'abord.</p>
+              <p class="carrousel-meta"><span>Studio Skøne · Démo sectorielle</span> <a class="lien carrousel-lien" href="/projets/garantibox">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+            </div>
+          </li>
+          <li class="carrousel-carte" data-index="8">
+            <a class="carrousel-image" href="/projets/pepite">
+              <img src="/work/pepite.webp" alt="Pépite · application mobile de récompenses familiales, écran de passation du téléphone à l'enfant" loading="lazy" width="540" height="1171">
+            </a>
+            <div class="carrousel-info">
+              <div class="carrousel-tete">
+                <h3 class="carrousel-titre">Pépite</h3>
+                <span class="carrousel-type">App mobile</span>
+              </div>
+              <p class="carrousel-tagline">Une étoile gagnée mène à une vraie récompense, décidée en famille</p>
+              <p class="carrousel-nature">Projet de studio</p>
+              <p class="carrousel-note">Né d'un besoin à la maison : les tableaux de récompenses en carton finissent tous au fond d'un tiroir. J'ai fait le pari qu'une récompense décidée ensemble vaut mieux qu'un système de points imposé.</p>
+              <p class="carrousel-meta"><span>Studio Skøne · Produit maison, en développement</span> <a class="lien carrousel-lien" href="/projets/pepite">Voir le projet<svg class="bouton-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="carrousel-commandes">
         <button type="button" class="carrousel-fleche" data-sens="-1" aria-label="Projet précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg></button>
-        <div class="carrousel-points"><button type="button" class="carrousel-point" data-index="0" aria-label="Voir ele · Ateliers Caféologie"></button><button type="button" class="carrousel-point" data-index="1" aria-label="Voir Mérel &amp; Fils"></button><button type="button" class="carrousel-point" data-index="2" aria-label="Voir Archéon"></button><button type="button" class="carrousel-point" data-index="3" aria-label="Voir M.Bivouak"></button><button type="button" class="carrousel-point" data-index="4" aria-label="Voir Tasq"></button></div>
+        <div class="carrousel-points"><button type="button" class="carrousel-point" data-index="0" aria-label="Voir ele · Ateliers Caféologie"></button><button type="button" class="carrousel-point" data-index="1" aria-label="Voir Mérel &amp; Fils"></button><button type="button" class="carrousel-point" data-index="2" aria-label="Voir Archéon"></button><button type="button" class="carrousel-point" data-index="3" aria-label="Voir M.Bivouak"></button><button type="button" class="carrousel-point" data-index="4" aria-label="Voir Tasq"></button><button type="button" class="carrousel-point" data-index="5" aria-label="Voir Ofria"></button><button type="button" class="carrousel-point" data-index="6" aria-label="Voir MyBoat"></button><button type="button" class="carrousel-point" data-index="7" aria-label="Voir Garantibox"></button><button type="button" class="carrousel-point" data-index="8" aria-label="Voir Pépite"></button></div>
         <button type="button" class="carrousel-fleche" data-sens="1" aria-label="Projet suivant"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19"/></svg></button>
       </div>
     </div>
@@ -477,7 +549,7 @@
             <p class="etape-tete"><span class="etape-numero">04</span><span class="etape-phase">Lancement</span></p>
             <h3 class="etape-titre">Mise en ligne &amp; suivi</h3>
             <p class="etape-texte">Mise en ligne, prise en main en visio, suivi inclus. Je reste joignable si quelque chose doit changer après le lancement.</p>
-            <p class="etape-temps">Votre temps : 45 min de formation, et le site est à vous.</p>
+            <p class="etape-temps">Votre temps : 30 min de formation, et le site est à vous.</p>
           </li>
           </ol>
         </div>

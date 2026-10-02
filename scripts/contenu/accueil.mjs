@@ -188,7 +188,7 @@ export const methode = {
     {
       numero: '04', phase: 'Lancement', titre: 'Mise en ligne &amp; suivi',
       texte: 'Mise en ligne, prise en main en visio, suivi inclus. Je reste joignable si quelque chose doit changer après le lancement.',
-      temps: 'Votre temps : 45 min de formation, et le site est à vous.',
+      temps: 'Votre temps : 30 min de formation, et le site est à vous.',
     },
   ],
   cloture: "Et si vous n'avez ni textes ni photos : je m'en occupe aussi. C'est prévu dans le cadrage.",
@@ -200,10 +200,10 @@ export const realisations = {
   intro:
     "Des projets clients, des produits que j'ai conçus pour mes propres besoins, et des démonstrations par secteur. Chaque projet dit lequel il est.",
   introFort: 'Regardez surtout comment je réfléchis.',
-  // Les cinq projets montrés sur l'accueil, dans cet ordre (1er octobre
-  // 2026). Les autres gardent leur page, leur place dans le sitemap et
-  // dans la série « autres projets » des pages projet.
-  accueil: ['cafeo', 'merel-et-fils', 'archeon', 'm-bivouak', 'tasq'],
+  // Les projets du carrousel de l'accueil, dans cet ordre. Les cinq
+  // premiers ont été choisis le 1er octobre 2026 ; les quatre autres
+  // reviennent le 2 octobre, le carrousel leur fait de la place.
+  accueil: ['cafeo', 'merel-et-fils', 'archeon', 'm-bivouak', 'tasq', 'ofria', 'myboat', 'garantibox', 'pepite'],
   // Correctif mobile du 21 septembre 2026 : sous 768 px, seules les trois
   // premières cartes s'affichaient, ce bouton révélait les six autres.
   // Retiré le même jour par le ruban de cartes à défilement horizontal,

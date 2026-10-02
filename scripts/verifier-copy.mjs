@@ -109,6 +109,14 @@ const REMPLACEMENTS_DEMANDES = [
   // parle, et le tiret cadratin quitte la zone d'intervention.
   { avant: 'Studio Skøne — création de sites internet', apres: 'Création de sites internet' },
   { avant: 'Ancenis — et partout en France', apres: 'Ancenis, et partout en France' },
+  // Le nom du studio passe en tête du titre : c'est lui qu'on lit dans
+  // l'onglet, la requête locale suit (2 octobre 2026).
+  { avant: 'Création de site internet à Nantes pour artisans et TPE Studio Skøne', apres: 'Studio Skøne Création de site internet à Nantes pour artisans et TPE' },
+  // Même jour : la formation passe à 30 min, pour que les quatre étapes
+  // fassent bien les « deux heures de votre temps » du titre ; l'appel
+  // découverte dure 30 minutes partout, comme sur l'accueil.
+  { avant: '45 min de formation', apres: '30 min de formation' },
+  { avant: 'Vingt minutes', apres: 'Trente minutes' },
 ]
 
 /**
@@ -671,6 +679,23 @@ const REECRITURE_ACCUEIL_AJOUTES = [
   '2 à 3 pages',
   'Répondez aux trois questions : le prix se construit ici.',
   'Modifier mes réponses',
+  // 2 octobre 2026 : Ofria, MyBoat, Garantibox et Pépite reviennent dans
+  // le carrousel de l'accueil. Leurs textes sont ceux de projets.mjs,
+  // inchangés, qui vivent aussi sur leurs pages.
+  { texte: 'Ofria', exact: true },
+  { texte: 'MyBoat', exact: true },
+  { texte: 'Garantibox', exact: true },
+  { texte: 'Pépite', exact: true },
+  { texte: 'App mobile', exact: true },
+  'Cinq idées cadeaux qui tiennent la route',
+  "Né d'un besoin réel : je sèche systématiquement sur les cadeaux.",
+  'Louer un bateau sans créer de compte pour connaître le prix',
+  'Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique',
+  "Ajouter sa première garantie sans avoir besoin d'explication",
+  "Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre",
+  'Une étoile gagnée mène à une vraie récompense',
+  "Né d'un besoin à la maison : les tableaux de récompenses en carton",
+  { texte: 'Studio Skøne Produit maison, en développement Voir le projet', exact: true },
 ]
 
 function correspondReecriture(entree, fragment, fichier) {

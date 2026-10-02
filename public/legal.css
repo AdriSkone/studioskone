@@ -98,11 +98,37 @@ ul, ol { list-style: none; }
 .legal-brand img { display: block; height: 26px; width: auto; }
 
 /* ─── Contenu ───────────────────────────────────────────────── */
-.legal-content {
-  max-width: 76ch;
+/* La page entière tient dans une colonne de lecture centrée. Le titre,
+   la date, l'intro et le sommaire n'avaient aucun style et collaient au
+   bord gauche de l'écran (2 octobre 2026). */
+.legal-main {
+  max-width: calc(76ch + 128px);
   margin-inline: auto;
   padding: 96px 64px;
 }
+.legal-eyebrow { display: block; }
+.legal-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 92%;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.legal-meta { margin-top: 20px; font-size: 0.875rem; color: var(--gris); }
+.legal-intro { margin-top: 32px; line-height: 1.6; }
+.legal-toc {
+  margin-top: 40px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  background: var(--papier-ombre);
+}
+.legal-toc-label { font-size: 0.875rem; font-weight: 500; color: var(--encre); margin-bottom: 12px; }
+.legal-toc ol { list-style: none; display: grid; gap: 6px; }
+.legal-toc a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.legal-toc a:hover { color: var(--accent-profond); }
+.legal-content { margin-top: 24px; }
 
 .legal-eyebrow {
   font-size: 0.875rem;
@@ -199,8 +225,7 @@ ul, ol { list-style: none; }
 
 @media (max-width: 767px) {
   .legal-header-inner,
-  .legal-footer-inner { padding-inline: 40px; }
-  .legal-content { padding: 64px 40px; }
+  .legal-footer-inner { padding-inline: 24px; }
 }
 
 /* ─── Remonter en haut de page ──────────────────────────────
@@ -243,5 +268,7 @@ ul, ol { list-style: none; }
 .remonter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .remonter.sur-sombre { border-color: var(--papier); background: var(--encre); color: var(--papier); }
 .remonter.sur-sombre:hover { background: var(--papier); color: var(--encre); }
-@media (max-width: 767px) { .remonter { right: 16px; bottom: 16px; } }
+@media (max-width: 767px) {
+  .legal-main { padding: 56px 24px; }
+  .legal-toc { padding: 22px 20px; } .remonter { right: 16px; bottom: 16px; } }
 @media (prefers-reduced-motion: reduce) { .remonter, .remonter svg { transition: none; } }

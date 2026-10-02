@@ -276,7 +276,7 @@ export const PAGES = [
         kind: 'cta',
         h2: 'Appelez-moi <span class="text-accent">entre deux chantiers.</span>',
         paragraphs: [
-          "Vingt minutes, quand ça vous arrange, même depuis la camionnette. Je vous dis ce que je ferais pour votre métier, ce que ça coûte, et si ça vaut le coup pour vous maintenant.",
+          "Trente minutes, quand ça vous arrange, même depuis la camionnette. Je vous dis ce que je ferais pour votre métier, ce que ça coûte, et si ça vaut le coup pour vous maintenant.",
         ],
         primary: { label: 'Écrire au studio', href: '/#contact' },
         secondary: { label: 'Estimer mon site', href: '/#estimator' },
@@ -415,7 +415,7 @@ export const PAGES = [
       },
       {
         kind: 'cta',
-        h2: 'Vingt minutes pour savoir <span class="text-accent">ce que vaut votre projet.</span>',
+        h2: 'Trente minutes pour savoir <span class="text-accent">ce que vaut votre projet.</span>',
         paragraphs: [
           "On parle de votre activité, de ce que vous attendez du site et de votre budget. Je vous dis ce que je ferais, ce que ça coûte et combien de temps ça prend.",
           "Vous repartez avec une recommandation claire, même si vous décidez de ne pas travailler avec moi.",
@@ -548,7 +548,7 @@ export const PAGES = [
         kind: 'cta',
         h2: 'Parlons de <span class="text-accent">ce que vous vendez.</span>',
         paragraphs: [
-          "Vingt minutes pour comprendre votre catalogue, votre logistique et votre marge. Je vous dis quelle base choisir, ce que ça coûte, et ce que ça demande de votre côté. Même si vous décidez de partir seul sur Shopify.",
+          "Trente minutes pour comprendre votre catalogue, votre logistique et votre marge. Je vous dis quelle base choisir, ce que ça coûte, et ce que ça demande de votre côté. Même si vous décidez de partir seul sur Shopify.",
         ],
         primary: { label: 'Écrire au studio', href: '/#contact' },
         secondary: { label: 'Estimer ma boutique', href: '/#estimator' },

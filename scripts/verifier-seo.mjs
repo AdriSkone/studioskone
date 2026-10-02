@@ -61,7 +61,7 @@ const CHANGEMENTS_DECLARES = {
     // reprennent le nouveau H1 « Un site pensé pour faire sonner votre téléphone ».
     // og et twitter description avaient déjà changé le 18 septembre
     // (délai « 5 jours à 3 semaines »), qui reste dans le nouveau texte.
-    'title':                   'Réécriture de l’accueil du 1er octobre 2026 : requête locale et cible dans le titre.',
+    'title':                   'Le nom du studio en tête du titre, lisible dans l’onglet (2 octobre 2026). Requête locale et cible gardées.',
     'meta:description':        'Réécriture de l’accueil du 1er octobre 2026 : requête locale, cible, prix ferme, délai, devis gratuit.',
     'meta:og:title':           'Réécriture de l’accueil du 1er octobre 2026 : même valeur que le title.',
     'meta:twitter:title':      'Réécriture de l’accueil du 1er octobre 2026 : même valeur que le title.',

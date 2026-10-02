@@ -622,7 +622,19 @@ const head = readFileSync(resolve(ici, 'contenu/head-accueil.html'), 'utf8').rep
 const page = `<!doctype html>
 <html lang="fr">
 <head>
-${head}</head>
+${head}  <script>
+    /* L'ouverture au s : décidée avant le premier rendu, pour que la page
+       ne s'affiche pas une fraction de seconde avant le voile. Une fois par
+       visite, jamais en mouvement réduit. Filet : la page revient au bout
+       de 4 s, quoi qu'il arrive au script principal. */
+    try {
+      if (sessionStorage.getItem('skone-ouverture-vue') !== '1' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('a-ouverture')
+        setTimeout(function () { document.documentElement.classList.remove('a-ouverture') }, 4000)
+      }
+    } catch (e) {}
+  </script>
+</head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 

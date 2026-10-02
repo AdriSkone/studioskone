@@ -1,15 +1,8 @@
 /**
- * ESSAI, 1er octobre 2026 : ouverture au s du logo, et grand s en fond.
- *
- * Prototype à juger, inspiré de beetogreen.com. Il ne s'active qu'avec
- * `?essai-s` dans l'adresse : sans ce paramètre, ce module ne fait rien
- * et le site est strictement celui d'avant.
- *
- *   1. Ouverture : le s se trace d'un trait, se remplit pour devenir le s
- *      du logo, le point tombe, « køne » arrive. Moins de 2 s, une fois
- *      par session, un clic ou une touche la passe.
- *   2. Fond : un grand s se trace au défilement derrière le hero, la
- *      méthode et le contact.
+ * L'ouverture du site (en ligne depuis le 2 octobre 2026) : le s du logo
+ * se trace d'un trait, puis le point tombe et k, ø, n, e arrivent. Une
+ * fois par visite, jamais en mouvement réduit ; un clic ou une touche la
+ * passe.
  *
  * Le s « au trait » n'existe pas dans le logo, qui est fait de formes
  * pleines : son tracé central a été dessiné par-dessus le s du logo.
@@ -18,7 +11,7 @@
 import { chargerGsap, mouvementReduit } from '../lib/animations'
 
 const NS = 'http://www.w3.org/2000/svg'
-const CLE_SESSION = 'skone-essai-s-vu'
+const CLE_SESSION = 'skone-ouverture-vue'
 
 /** Tracé central du s, dans le repère du logo (viewBox 0 0 283.25 71.1). */
 const S_TRAIT = "M 62,34.5 C 62,26 56,22 48,22 C 39,22 32.2,25.5 32.2,31.8 C 32.2,38.5 39.5,41 48,43.2 C 57.5,45.6 64,48 64,55.6 C 64,62 57,65.3 48,65.3 C 38.5,65.3 32,61 32,53.8"
@@ -29,10 +22,6 @@ const POINT = "m2.26,68.44c-1.51-1.51-2.26-3.4-2.26-5.67s.74-4.25,2.21-5.72,3.38
 /** La barre du ø, telle qu'elle est dans le logo. */
 const BARRE_O = { x: '144.62', y: '21.55', width: '9.32', height: '45.88', rx: '.8', ry: '.8', transform: 'translate(75.18 -92.53) rotate(45)' }
 const RESTE: string[] = ["m77.98,69.95c-.24-.23-.35-.52-.35-.85V1.21c0-.33.12-.62.35-.85.23-.23.52-.35.85-.35h11.75c.33,0,.62.12.85.35.23.24.35.52.35.85v33.84c0,.2.07.32.2.35.13.03.27-.02.4-.15l13.66-15.87c.47-.47.97-.7,1.51-.7h13.36c.67,0,1,.24,1,.7,0,.2-.1.47-.3.8l-12.75,16.17c-.13.27-.17.5-.1.7l14.96,31.83c.13.27.2.47.2.6,0,.54-.37.8-1.1.8h-12.35c-.67,0-1.14-.3-1.41-.9l-9.94-23.5c-.07-.13-.19-.22-.35-.25-.17-.03-.29.02-.35.15l-6.43,8.03c-.14.27-.2.47-.2.6v14.66c0,.34-.12.62-.35.85-.24.24-.52.35-.85.35h-11.75c-.34,0-.62-.12-.85-.35Z", "m134.87,66.68c-4.02-2.95-6.76-6.96-8.23-12.05-.94-3.15-1.41-6.56-1.41-10.24,0-3.95.47-7.5,1.41-10.65,1.54-4.95,4.32-8.84,8.33-11.65,4.02-2.81,8.84-4.22,14.46-4.22s10.18,1.39,14.06,4.17c3.88,2.78,6.63,6.65,8.24,11.6,1.07,3.35,1.61,6.86,1.61,10.54s-.47,7-1.41,10.14c-1.47,5.22-4.2,9.32-8.18,12.3-3.98,2.98-8.79,4.47-14.41,4.47s-10.44-1.47-14.46-4.42Zm20.08-9.74c1.54-1.34,2.64-3.18,3.31-5.52.54-2.14.8-4.48.8-7.03,0-2.81-.27-5.19-.8-7.13-.74-2.28-1.88-4.05-3.41-5.32-1.54-1.27-3.42-1.91-5.62-1.91s-4.17.64-5.67,1.91c-1.51,1.27-2.6,3.05-3.26,5.32-.54,1.61-.8,3.98-.8,7.13s.23,5.36.7,7.03c.67,2.34,1.79,4.18,3.36,5.52,1.57,1.34,3.5,2.01,5.77,2.01s4.08-.67,5.62-2.01Z", "m222.34,22.8c3.28,3.28,4.92,7.73,4.92,13.36v32.94c0,.34-.12.62-.35.85s-.52.35-.85.35h-11.75c-.34,0-.62-.12-.85-.35-.24-.23-.35-.52-.35-.85v-30.03c0-2.68-.75-4.85-2.26-6.53-1.51-1.67-3.5-2.51-5.98-2.51s-4.47.84-5.97,2.51c-1.51,1.67-2.26,3.85-2.26,6.53v30.03c0,.34-.12.62-.35.85s-.52.35-.85.35h-11.75c-.34,0-.62-.12-.85-.35-.24-.23-.35-.52-.35-.85V19.88c0-.33.12-.62.35-.85s.52-.35.85-.35h11.75c.33,0,.62.12.85.35.23.24.35.52.35.85v3.51c0,.2.07.34.2.4.13.07.23.04.3-.1,2.74-3.88,6.83-5.83,12.25-5.83s9.67,1.64,12.96,4.92Z", "m283.2,47.7c-.07.8-.5,1.21-1.3,1.21h-31.03c-.4,0-.54.17-.4.5.2,1.34.57,2.68,1.1,4.02,1.74,3.75,5.29,5.62,10.65,5.62,4.28-.07,7.67-1.81,10.14-5.22.27-.4.57-.6.9-.6.2,0,.43.13.7.4l7.23,7.13c.33.34.5.64.5.9,0,.13-.13.4-.4.8-2.21,2.75-5.06,4.87-8.54,6.38-3.48,1.51-7.3,2.26-11.45,2.26-5.76,0-10.63-1.31-14.61-3.92-3.98-2.61-6.85-6.26-8.59-10.95-1.41-3.35-2.11-7.73-2.11-13.16,0-3.68.5-6.93,1.51-9.74,1.54-4.75,4.23-8.54,8.08-11.35,3.85-2.81,8.42-4.22,13.71-4.22,6.69,0,12.07,1.94,16.12,5.83,4.05,3.88,6.51,9.07,7.38,15.57.4,2.54.54,5.39.4,8.54Zm-32.14-11.75c-.27.87-.5,1.94-.7,3.21,0,.34.17.5.5.5h17.37c.4,0,.54-.17.4-.5-.33-1.94-.5-2.88-.5-2.81-.6-2.01-1.66-3.57-3.16-4.67-1.51-1.1-3.36-1.66-5.57-1.66-4.22,0-7,1.98-8.34,5.92Z"]
-
-export function essaiActif(): boolean {
-  return new URLSearchParams(location.search).has('essai-s')
-}
 
 function el<K extends keyof SVGElementTagNameMap>(nom: K, attrs: Record<string, string>): SVGElementTagNameMap[K] {
   const e = document.createElementNS(NS, nom)
@@ -51,36 +40,41 @@ function cheminAuTrait(): SVGPathElement {
   })
 }
 
-/* ── 1. Ouverture ─────────────────────────────────────────────── */
-
 export async function ouverture(): Promise<void> {
-  // Le temps de l'essai, l'ouverture rejoue à chaque chargement, même en
-  // mouvement réduit, pour qu'Adri puisse la juger. En production, elle
-  // ne jouerait qu'une fois par session, et jamais en mouvement réduit
-  // (voir CLE_SESSION et mouvementReduit()).
+  // En ligne depuis le 2 octobre 2026 : une fois par visite, jamais en
+  // mouvement réduit. Le script du head (build-accueil.mjs) a déjà masqué
+  // la page s'il fallait jouer l'ouverture ; on la rend à la fin.
+  let vu = false
+  try { vu = sessionStorage.getItem(CLE_SESSION) === '1' } catch { vu = true }
+  if (vu || mouvementReduit()) {
+    document.documentElement.classList.remove('a-ouverture')
+    return
+  }
 
   const voile = document.createElement('div')
-  voile.className = 'essai-ouverture'
+  voile.className = 'ouverture'
   voile.setAttribute('aria-hidden', 'true')
-  const logo = el('svg', { viewBox: '0 0 283.25 71.1', class: 'essai-ouverture-logo' })
+  const logo = el('svg', { viewBox: '0 0 283.25 71.1', class: 'ouverture-logo' })
   const chemin = cheminAuTrait()
-  const point = el('path', { d: POINT, class: 'essai-accent' })
+  const point = el('path', { d: POINT, class: 'ouverture-accent' })
   // k, ø, n, e : rangées de gauche à droite, pour arriver dans l'ordre de
   // lecture quel que soit l'ordre des tracés dans le fichier du logo.
   // Chaque lettre est un groupe : le ø porte en plus sa barre, un
   // rectangle à part dans le fichier du logo.
   const lettres = RESTE.map((d) => {
     const g = el('g', {})
-    g.append(el('path', { d, class: 'essai-encre' }))
+    g.append(el('path', { d, class: 'ouverture-encre' }))
     return g
   })
   logo.append(chemin, point, ...lettres)
   voile.append(logo)
   document.body.append(voile)
+  // Le voile est posé : la page peut redevenir visible dessous.
+  document.documentElement.classList.remove('a-ouverture')
   // getBBox ne mesure qu'un élément déjà dans la page.
   lettres.sort((a, b) => a.getBBox().x - b.getBBox().x)
-  lettres[1].append(el('rect', { ...BARRE_O, class: 'essai-encre' }))
-  document.documentElement.classList.add('essai-ouverture-en-cours')
+  lettres[1].append(el('rect', { ...BARRE_O, class: 'ouverture-encre' }))
+  document.documentElement.classList.add('ouverture-en-cours')
 
   const { gsap } = await chargerGsap()
   const longueur = chemin.getTotalLength()
@@ -104,44 +98,6 @@ export async function ouverture(): Promise<void> {
   })
 
   voile.remove()
-  document.documentElement.classList.remove('essai-ouverture-en-cours')
+  document.documentElement.classList.remove('ouverture-en-cours', 'a-ouverture')
   try { sessionStorage.setItem(CLE_SESSION, '1') } catch { /* rien */ }
-}
-
-/* ── 2. Grand s en fond ───────────────────────────────────────── */
-
-const SECTIONS = ['#hero', '#process', '#contact']
-
-export function fond(): void {
-  document.documentElement.classList.add('essai-s')
-  const traces: Array<{ section: HTMLElement; chemin: SVGPathElement }> = []
-  for (const sel of SECTIONS) {
-    const section = document.querySelector<HTMLElement>(sel)
-    if (!section) continue
-    const svg = el('svg', { viewBox: '24 14 48 60', class: 'essai-fond', 'aria-hidden': 'true', focusable: 'false' })
-    const chemin = cheminAuTrait()
-    svg.append(chemin)
-    section.prepend(svg)
-    traces.push({ section, chemin })
-  }
-  // Mouvement réduit : le s est simplement là, déjà tracé.
-  if (mouvementReduit()) return
-
-  void chargerGsap().then(({ gsap }) => {
-    for (const { section, chemin } of traces) {
-      const longueur = chemin.getTotalLength()
-      const hero = section.id === 'hero'
-      gsap.set(chemin, { strokeDasharray: longueur, strokeDashoffset: longueur })
-      gsap.to(chemin, {
-        strokeDashoffset: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: hero ? 'top top' : 'top 85%',
-          end: hero ? 'bottom 30%' : 'bottom 60%',
-          scrub: 0.6,
-        },
-      })
-    }
-  })
 }

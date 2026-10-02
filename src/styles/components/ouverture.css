@@ -1,0 +1,21 @@
+/* ============================================================
+   L'ouverture du site : le s du logo se trace, puis le reste du
+   logo arrive (src/scripts/ouverture.ts).
+   ============================================================ */
+
+.ouverture {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: var(--papier);
+  cursor: pointer;
+}
+.ouverture-logo { width: min(64vw, 560px); height: auto; overflow: visible; color: var(--encre); }
+.ouverture-encre { fill: var(--encre); }
+.ouverture-accent { fill: var(--accent); }
+.ouverture-en-cours body { overflow: hidden; }
+/* Posée par le script du head avant le premier rendu : la page attend
+   le voile de l'ouverture au lieu d'apparaître une fraction de seconde. */
+.a-ouverture body { visibility: hidden; }
