@@ -39,8 +39,11 @@
 }
 
 /* ─── Principal ─────────────────────────────────────────────── */
+/* Fond accent, comme le demande le style guide (§ 7). Le papier y tient
+   à 8.83. Le cadre suit le fond, sinon il resterait un liseré encre. */
 .bouton--principal {
-  background: var(--encre);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--papier);
 }
 .bouton--principal:hover,
@@ -182,3 +185,15 @@
   stroke: currentColor;
   stroke-width: 2;
 }
+
+/* ─── Le trait sous un mot de titre (2 octobre 2026) ────────────
+   Dessiné par src/scripts/trait.ts. En encre, ou en papier sur une
+   section sombre : il suit la couleur du texte, jamais l'accent. */
+.trait-mot { position: relative; display: inline-block; white-space: nowrap; }
+.trait-mot svg { position: absolute; left: 0; bottom: -0.14em; overflow: visible; pointer-events: none; }
+/* Un titre sur plusieurs lignes : le trait d'un mot qui n'est pas sur la
+   dernière ligne se collait à la ligne suivante, et se lisait comme un
+   trait au-dessus d'elle. L'interligne s'ouvre d'un cran, ici seulement. */
+:is(h1, h2):has(.trait-mot) { line-height: 1.1; }
+.trait-mot path { fill: none; stroke: currentColor; stroke-linecap: butt; }
+.trait-mot path.est-trace { transition: stroke-dashoffset 700ms var(--ease) 120ms; }

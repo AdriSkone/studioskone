@@ -1,0 +1,181 @@
+/* ============================================================
+   Réalisations — carrousel centré (2 octobre 2026)
+
+   Le projet actif au centre, en grand et en couleur ; ses voisins plus
+   petits, en niveaux de gris, comme le portrait du studio. Son texte
+   s'affiche dessous. Flèches rondes (un bouton sans texte est un cercle),
+   points, clic sur un voisin, glissement au doigt ou au pavé tactile,
+   flèches du clavier. Aucun défilement automatique.
+
+   Les largeurs sont posées par src/scripts/carrousel.ts (--a, --n,
+   --ecart) : le script s'en sert aussi pour centrer la carte active, les
+   deux calculs ne peuvent donc pas diverger.
+
+   Sans script, une rangée qu'on fait défiler à la main, toutes les
+   cartes au même format, chacune avec son texte.
+   ============================================================ */
+
+.carrousel { margin-top: 64px; }
+
+.carrousel-fenetre {
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.carrousel-fenetre::-webkit-scrollbar { display: none; }
+
+.carrousel-piste {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  width: max-content;
+  padding-inline: var(--grille-marge);
+  list-style: none;
+}
+
+.carrousel-carte {
+  flex: none;
+  width: min(80vw, 340px);
+  scroll-snap-align: center;
+}
+
+.carrousel-image { display: block; border-radius: var(--rond-bloc); overflow: hidden; }
+.carrousel-image img {
+  display: block;
+  width: 100%;
+  /* Sans height: auto, l'attribut height de l'image l'emporte sur le
+     ratio, et chaque vignette garde sa hauteur d'origine. */
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+.carrousel-info { padding-top: 24px; }
+.carrousel-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+.carrousel-titre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
+  letter-spacing: var(--tracking-h3);
+  line-height: 1.05;
+}
+.carrousel-type { font-size: var(--text-petit); color: var(--gris); }
+.carrousel-tagline { margin-top: 10px; font-weight: 500; line-height: 1.35; }
+.carrousel-nature { margin-top: 8px; font-size: var(--text-petit); }
+.carrousel-nature::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+.carrousel-note { margin-top: 10px; max-width: 52em; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--gris); }
+.carrousel-meta { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-top: 16px; font-size: var(--text-petit); color: var(--gris); }
+.carrousel-lien { color: var(--encre); font-weight: 500; }
+
+/* Les commandes n'ont de sens qu'avec le script. */
+.carrousel-commandes { display: none; }
+
+/* ─── Avec le script ─────────────────────────────────────────── */
+.carrousel.est-anime .carrousel-fenetre {
+  overflow: hidden;
+  scroll-snap-type: none;
+  /* Le défilement vertical de la page passe ; le glissement horizontal
+     revient au carrousel. */
+  touch-action: pan-y;
+  cursor: grab;
+}
+.carrousel.est-anime .carrousel-fenetre:active { cursor: grabbing; }
+
+.carrousel.est-anime .carrousel-piste {
+  gap: var(--ecart);
+  padding-inline: 0;
+  transition: transform 600ms var(--ease);
+}
+
+/* Les voisins s'alignent sur le milieu de l'image active : leur image est
+   plus petite, le décalage vaut la moitié de l'écart de hauteur (16/10). */
+.carrousel.est-anime .carrousel-carte {
+  width: var(--n);
+  padding-top: calc((var(--a) - var(--n)) * 0.3125);
+  transition: width 600ms var(--ease), padding-top 600ms var(--ease);
+}
+.carrousel.est-anime .carrousel-carte.est-active { width: var(--a); padding-top: 0; }
+
+.carrousel.est-anime .carrousel-image img {
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: filter 600ms var(--ease), opacity 600ms var(--ease);
+}
+.carrousel.est-anime .carrousel-carte.est-active .carrousel-image img { filter: none; opacity: 1; }
+.carrousel.est-anime .carrousel-carte:not(.est-active) .carrousel-image:hover img { opacity: 0.8; }
+
+.carrousel.est-anime .carrousel-info {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms var(--ease), visibility 0s linear 300ms;
+}
+.carrousel.est-anime .carrousel-carte.est-active .carrousel-info {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 400ms var(--ease) 200ms, visibility 0s;
+}
+
+.carrousel.est-anime .carrousel-commandes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.carrousel-fleche {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--encre);
+  color: var(--encre);
+  transition: background-color var(--dur-rapide) var(--ease), border-color var(--dur-rapide) var(--ease), color var(--dur-rapide) var(--ease);
+}
+.carrousel-fleche:hover { background: var(--accent); border-color: var(--accent); color: var(--papier); }
+.carrousel-fleche svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+
+.carrousel-points { display: flex; gap: 6px; }
+.carrousel-point {
+  /* La cible fait 24 px, le point dessiné 8 : assez grand pour le doigt,
+     assez petit pour rester un point. */
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+.carrousel-point::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  border: 1.5px solid var(--encre);
+  transform: translate(-50%, -50%);
+  transition: width 300ms var(--ease), background-color 300ms var(--ease);
+}
+.carrousel-point.est-actif::before { width: 22px; background: var(--encre); }
+
+.carrousel-fleche:focus-visible,
+.carrousel-point:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carrousel.est-anime .carrousel-piste,
+  .carrousel.est-anime .carrousel-carte,
+  .carrousel.est-anime .carrousel-image img,
+  .carrousel.est-anime .carrousel-info,
+  .carrousel-point::before { transition: none; }
+}

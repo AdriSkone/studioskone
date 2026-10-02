@@ -3,17 +3,19 @@
    Deux états : posée sur le hero, puis réduite une fois dépassé.
    ============================================================ */
 
+/* Barre flottante adaptative (2 octobre 2026). Elle ne touche plus les
+   bords : posée à 12 px, coins de 16 px, son propre grain, aucune ombre.
+   Elle prend toujours la couleur opposée à la section dessous : encre
+   sur le papier, papier sur les sections sombres (src/scripts/nav.ts).
+   La hauteur totale ne change pas : 12 px de marge + la barre = --nav-h. */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 900;
-  background: var(--papier);
-  /* Aucun filet sous la barre : le style guide l'interdit explicitement
-     entre la navigation et le hero. La barre se distingue par son fond,
-     et par le resserrement qui suit le défilement. */
-  transition: height var(--dur-rapide) var(--ease);
+  padding: 12px 12px 0;
+  pointer-events: none;
 }
 
 .nav-interieur {
@@ -21,16 +23,44 @@
      consommer --col aux enfants. La redéclarer ici donnerait bien douze
      pistes, mais sans cette règle : chaque bloc s'auto-placerait sur une
      seule colonne de 87 px et déborderait par-dessus le suivant. */
+  position: relative;
+  isolation: isolate;
+  pointer-events: auto;
   align-items: center;
-  max-width: var(--grille-max);
+  max-width: calc(var(--grille-max) - 24px);
   margin-inline: auto;
-  padding-inline: var(--grille-marge);
-  height: var(--nav-h);
-  transition: height var(--dur-rapide) var(--ease);
+  /* La marge intérieure compense les 12 px de la barre : le logo reste à
+     l'aplomb de la grille de la page. */
+  padding-inline: calc(var(--grille-marge) - 12px);
+  height: calc(var(--nav-h) - 12px);
+  border-radius: var(--rond-bloc);
+  background: var(--sombre);
+  color: var(--sombre-texte);
+  transition:
+    height var(--dur-rapide) var(--ease),
+    background-color var(--dur-moyenne) var(--ease),
+    color var(--dur-moyenne) var(--ease);
+}
+/* Le grain de la barre, comme sur toutes les surfaces : en screen sur
+   l'encre, en multiply sur le papier. */
+.nav-interieur::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--grain-teinte);
+  mask-image: url('/grain.svg');
+  mask-size: var(--grain-taille) var(--grain-taille);
+  -webkit-mask-image: url('/grain.svg');
+  -webkit-mask-size: var(--grain-taille) var(--grain-taille);
+  mix-blend-mode: screen;
+  opacity: var(--grain-opacite-sombre);
 }
 
 /* Une fois le hero dépassé, la barre se resserre. */
-.nav.est-reduite .nav-interieur { height: var(--nav-h-reduite); }
+.nav.est-reduite .nav-interieur { height: calc(var(--nav-h-reduite) - 12px); }
 
 .nav-logo {
   --col: 1 / span 2;
@@ -74,11 +104,13 @@
 
    La copie est posée par le CSS, via ::after et attr(), et non dupliquée
    dans le HTML : un lecteur d'écran lirait sinon deux fois le même mot.
-   Le cadre rogne ce qui dépasse, d'où l'overflow. */
+   Le cadre rogne ce qui dépasse. Un clip-path et non un overflow : il
+   laisse 14 px sous le libellé, la place du point de la section en
+   cours (le overflow le coupait, et le point ne s'affichait jamais). */
 .nav-lien {
   position: relative;
   display: block;
-  overflow: hidden;
+  clip-path: inset(0 0 -14px 0);
   /* La hauteur est fixée pour que le masque ait un cadre : sans elle,
      l'overflow n'a rien à rogner. */
   line-height: 1.6;
@@ -93,7 +125,8 @@
   content: attr(data-libelle);
   position: absolute;
   inset: 0;
-  transform: translateY(100%);
+  /* Au repos, la copie attend sous la marge du point, hors du masque. */
+  transform: translateY(160%);
   transition: transform var(--dur-moyenne) var(--ease);
 }
 
@@ -103,29 +136,31 @@
 .nav-lien:hover::after,
 .nav-lien:focus-visible::after { transform: translateY(0); }
 
-/* L'entrée de la section en cours de lecture porte un point d'accent.
-   Un point, et non une couleur : l'état ne peut pas tenir à la teinte
-   seule. */
-.nav-lien[aria-current='true']::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  width: 4px;
-  height: 4px;
-  margin-left: -2px;
-  border-radius: 50%;
-  background: var(--accent);
-}
 
-/* Sur une section sombre, la barre inverse ses couleurs. */
-.nav.sur-sombre {
-  background: var(--sombre);
-  color: var(--sombre-texte);
-}
-.nav.sur-sombre .nav-mention { color: var(--sombre-texte); opacity: 0.72; }
-.nav.sur-sombre .nav-cta { border-color: var(--sombre-texte); color: var(--sombre-texte); }
-.nav.sur-sombre .nav-lien[aria-current='true']::before { background: var(--accent-clair); }
+/* Barre encre (sur une section claire) : texte papier, point bleu clair,
+   bouton en contour papier. */
+.nav .nav-logo { color: inherit; }
+.nav .logo .logo-c1 { fill: var(--accent-clair); transition: fill var(--dur-moyenne) var(--ease); }
+.nav .nav-mention { color: inherit; opacity: 0.72; }
+.nav .nav-cta { border-color: var(--sombre-texte); color: var(--sombre-texte); }
+.nav .nav-cta:hover { background: var(--sombre-texte); border-color: var(--sombre-texte); color: var(--encre); }
+
+/* Barre papier (sur une section sombre) : texte encre, point et bouton
+   en bleu de Prusse, comme le bouton principal du hero. */
+.nav.sur-sombre .nav-interieur { background: var(--papier-ombre); color: var(--encre); }
+.nav.sur-sombre .nav-interieur::before { mix-blend-mode: multiply; opacity: calc(var(--grain-opacite) * 1.6); }
+.nav.sur-sombre .logo .logo-c1 { fill: var(--accent); }
+.nav.sur-sombre .nav-cta { border-color: var(--accent); color: var(--accent); }
+.nav.sur-sombre .nav-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--papier); }
+.nav .nav-cta:active { background: var(--accent-profond); border-color: var(--accent-profond); color: var(--papier); }
+
+/* Menu ouvert au téléphone : le panneau est sombre quelle que soit la
+   section dessous. La barre reprend ses couleurs d'encre, le bouton du
+   panneau garde son fond accent et son libellé papier. */
+.nav.est-menu-ouvert .nav-interieur { background: var(--sombre); color: var(--sombre-texte); }
+.nav.est-menu-ouvert .logo .logo-c1 { fill: var(--accent-clair); }
+.nav.est-menu-ouvert .nav-panneau .nav-cta,
+.nav.est-menu-ouvert .nav-panneau .nav-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--papier); }
 
 .nav-actions {
   --col: 9 / span 4;
@@ -275,7 +310,7 @@
     width: 44px;
     height: 44px;
     z-index: 2;
-    color: var(--encre);
+    color: inherit;
     transition: transform var(--dur-moyenne) var(--ease);
   }
   .nav-bascule span {
@@ -304,4 +339,37 @@
   .nav-panneau.est-ouvert .nav-lien,
   .nav-panneau.est-ouvert .nav-actions { opacity: 1; transform: none; }
   .nav-bascule.est-en-fermeture { transform: none; }
+}
+
+/* ─── L'entrée de la section en cours (2 octobre 2026) ───────────
+   Un seul point de 6 px, comme ceux du ruban, glisse sous l'entrée de
+   la section lue ; les autres entrées passent en retrait. L'état ne tient
+   donc pas à la seule teinte : il y a le point. */
+.nav-liens { position: relative; }
+.nav-indicateur {
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-clair);
+  opacity: 0;
+  transition: transform 500ms var(--ease), opacity 300ms var(--ease), background-color var(--dur-moyenne) var(--ease);
+  pointer-events: none;
+}
+.nav-indicateur.est-visible { opacity: 1; }
+.nav.sur-sombre .nav-indicateur { background: var(--accent); }
+
+.nav-lien { transition: opacity 300ms var(--ease); }
+.nav-liens:has([aria-current='true']) .nav-lien:not([aria-current='true']) { opacity: 0.55; }
+.nav-liens:has([aria-current='true']) .nav-lien:hover { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-indicateur, .nav-lien { transition: none; }
+}
+/* Dans le panneau plein écran du téléphone, les entrées s'empilent : un
+   point qui glisse à l'horizontale n'y veut rien dire. Le retrait reste. */
+@media (max-width: 1023px) {
+  .nav-indicateur { display: none; }
 }

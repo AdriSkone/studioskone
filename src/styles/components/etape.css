@@ -1,10 +1,8 @@
 /* ============================================================
    Méthode — frise animée.
 
-   Une seule scène, deux mises en page : à partir de 1024 px le tracé est
-   horizontal et la section s'épingle pendant qu'on la parcourt ; en
-   dessous, le tracé devient vertical et suit le défilement normal, sans
-   épingle.
+   Une seule scène, un tracé vertical qui suit le défilement, sans
+   épingle. Au bureau, la tête de section reste collée à gauche.
 
    Tout l'allumage (remplissage du tracé, opacité des étapes, points
    atteints) est piloté par src/scripts/methode.ts au moyen de
@@ -44,8 +42,7 @@
 .methode-liste { position: relative; }
 
 /* Décor seul : jamais lu, jamais annoncé. */
-.rail-h, .rail-v { display: none; }
-.rail-h-plein, .rail-v-plein { position: absolute; inset: 0; background: var(--accent-clair); }
+.rail-v-plein { position: absolute; inset: 0; background: var(--accent-clair); }
 
 .etapes { list-style: none; }
 .etape { position: relative; }
@@ -83,108 +80,67 @@
 }
 
 /* ============================================================
-   Grand écran (≥1024 px) : tracé horizontal, section épinglée.
+   Tracé vertical, à toutes les largeurs (1er octobre 2026).
+
+   La frise horizontale épinglée du bureau est abandonnée : Adri préfère
+   lire les étapes de haut en bas, comme au téléphone. À partir de
+   1024 px, la tête de section (libellé, titre, clôture) tient la colonne
+   de gauche et reste collée pendant que les étapes défilent à droite ;
+   en dessous, tout s'empile.
    ============================================================ */
-@media (min-width: 1024px) {
-  /* La scène occupe tout l'écran pendant l'épingle : la section réserve
-     déjà `--section-m` en haut et en bas (`.section-m`), il ne manque que
-     le contenu pour remplir le reste. */
-  .methode .grille { min-height: calc(100vh - (var(--section-m) * 2)); align-content: center; }
+.methode-tete { --col: 1 / -1; }
+.methode-scene { --col: 1 / -1; margin-top: 56px; }
 
-  /* D'un bord de l'écran à l'autre, quelle que soit la largeur de la
-     grille : le tracé sort des marges de la page. */
-  .rail-h {
-    display: block;
-    position: absolute;
-    top: 5.75px;
-    left: calc(50% - 50vw);
-    width: 100vw;
-    height: 1.5px;
-    background: var(--filet-sombre);
-  }
-  .rail-h-plein { transform: none; transform-origin: left; }
+.rail-v {
+  display: block;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 1.5px;
+  background: var(--filet-sombre);
+}
+.rail-v-plein { transform: none; transform-origin: top; }
 
-  /* Quatre rangées communes aux quatre colonnes (subgrid) : les durées
-     tombent sur la même ligne quelle que soit la longueur des textes —
-     l'argument de la section tient dans cet alignement au pixel près. */
-  .etapes {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(4, auto);
-    column-gap: var(--grille-gouttiere);
-    position: relative;
-  }
-  .etape {
-    grid-row: span 4;
-    display: grid;
-    grid-template-rows: subgrid;
-    padding-top: 40px;
-    padding-right: 20px;
-  }
-  .point { left: 0; top: 0; }
-  .etape-tete  { grid-row: 1; }
-  .etape-temps { grid-row: 2; }
-  .etape-titre { grid-row: 3; margin-top: 0; }
-  .etape-texte { grid-row: 4; margin-top: 8px; }
+.etapes { padding-left: 40px; display: flex; flex-direction: column; gap: 44px; }
+.point { left: -40px; top: 4px; }
 
-  .etape-temps {
-    position: relative;
-    margin: 14px 0 22px;
-    padding: 14px 0 16px;
-    border-top: 1px solid var(--accent-clair);
-    border-bottom: 1px solid var(--filet-sombre);
-  }
-  /* Filet épaissi au-dessus de la durée active : une marque de forme, en
-     plus de la lumière des textes. Posé en surimpression, sans décaler
-     le reste. */
-  .etape-temps::before {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; top: -2px;
-    height: 3px;
-    background: var(--accent-clair);
-    transform: none;
-    transform-origin: left;
-  }
+.etape { display: flex; flex-direction: column; }
+.etape-tete  { order: 1; }
+.etape-titre { order: 2; }
+.etape-texte { order: 3; }
+.etape-temps { order: 4; align-self: flex-start; margin-top: 16px; margin-bottom: 4px; position: relative; }
+
+/* La durée reste accrochée à la ligne par un petit trait, jamais en
+   retrait. */
+.etape-temps::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 33px;
+  height: 1.5px;
+  background: var(--accent-clair);
 }
 
-/* ============================================================
-   Sous 1024 px : même principe à la verticale, sans épingle.
-   ============================================================ */
-@media (max-width: 1023px) {
-  .methode-scene { margin-top: 56px; }
-
-  .rail-v {
-    display: block;
-    position: absolute;
-    left: 6px;
-    top: 6px;
-    bottom: 6px;
-    width: 1.5px;
-    background: var(--filet-sombre);
+@media (min-width: 1024px) {
+  .methode .grille { align-items: start; }
+  .methode-tete {
+    --col: 1 / span 5;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--nav-h-reduite) + 48px);
   }
-  .rail-v-plein { transform: none; transform-origin: top; }
-
-  .etapes { padding-left: 40px; display: flex; flex-direction: column; gap: 44px; }
-  .point { left: -40px; top: 4px; }
-
-  .etape { display: flex; flex-direction: column; }
-  .etape-tete  { order: 1; }
-  .etape-temps { order: 2; align-self: flex-start; margin-top: 12px; margin-bottom: 4px; position: relative; }
-  .etape-titre { order: 3; }
-  .etape-texte { order: 4; }
-
-  /* La durée reste accrochée à la ligne par un petit trait, jamais en
-     retrait — même principe qu'en haut, à l'horizontale. */
-  .etape-temps::before {
-    content: '';
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    width: 33px;
-    height: 1.5px;
-    background: var(--accent-clair);
-  }
+  .methode-scene { --col: 7 / -1; grid-row: 1; margin-top: 0; }
+  /* Quand le script fige la section, la tête n'a plus à coller : collée
+     dans une section figée, elle glissait vers le bas pendant le
+     défilement. Le collage ne reste que sans script ou en mouvement
+     réduit, où la section n'est pas figée. */
+  .methode--animee .methode-tete { position: static; }
+  .etapes { gap: 72px; }
+  /* Un cran sous le titre de section, pour ne pas lui disputer la place. */
+  .etape-titre { font-size: 2rem; }
+  .etape-texte { font-size: var(--text-corps); max-width: 34em; }
 }
 
 /* ============================================================
@@ -192,7 +148,6 @@
    s'éteignent, et c'est le défilement — jamais une transition — qui les
    rallume une à une.
    ============================================================ */
-.methode--animee .rail-h-plein { transform: scaleX(0); }
 .methode--animee .rail-v-plein { transform: scaleY(0); }
 
 .methode--animee .point {
@@ -225,13 +180,5 @@
 .methode--animee .etape-phase { color: var(--sombre-texte); }
 .methode--animee .etape.est-active .etape-phase { color: var(--accent-clair); }
 
-@media (min-width: 1024px) {
-  .methode--animee .etape-temps { border-top-color: var(--filet-sombre); }
-  .methode--animee .etape.est-atteinte .etape-temps { border-top-color: var(--accent-clair); }
-  .methode--animee .etape-temps::before { transform: scaleX(0); }
-  .methode--animee .etape.est-active .etape-temps::before { transform: none; }
-}
-@media (max-width: 1023px) {
-  .methode--animee .etape-temps::before { background: var(--filet-sombre); }
-  .methode--animee .etape.est-atteinte .etape-temps::before { background: var(--accent-clair); }
-}
+.methode--animee .etape-temps::before { background: var(--filet-sombre); }
+.methode--animee .etape.est-atteinte .etape-temps::before { background: var(--accent-clair); }

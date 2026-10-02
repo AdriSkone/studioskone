@@ -10,7 +10,7 @@
 1. **Le copywriting ne change jamais.** Pas un mot, pas une virgule, pas un titre. Les textes viennent de studioskone.com. Si un texte ne rentre pas dans une mise en page, on change la mise en page.
 2. **Aucune régression SEO.** URL, meta, canonical, Open Graph, geo, données structurées et attributs alt repris à l'identique.
 3. **Aucune ombre, aucun dégradé, aucun flou.** Seules exceptions : l'anneau de focus clavier, et un futur menu déroulant ou une modale, où l'ombre signale une vraie superposition.
-4. **Un seul mot en accent sur tout le site** : « même personne » dans le hero. Aucun autre titre, sur aucune page, n'a de mot coloré.
+4. **Un seul mot en accent sur tout le site** : « votre téléphone » dans le hero (« même personne » jusqu'au 1er octobre 2026). Aucun autre titre, sur aucune page, n'a de mot coloré. Le trait sous un mot de titre (§ 7) est en encre, jamais en accent.
 
 ---
 
@@ -129,45 +129,51 @@ Quatre sections sombres, jamais deux à la suite. Transitions franches, bord à 
 | 3 | Votre site ne travaille pas pour vous | clair |
 | 4 | Rien de tout ça n'est votre métier | **sombre** |
 | 5 | Le studio, avec le portrait | clair |
-| 6 | Transparence | clair |
-| 7 | Prestations | clair |
+| 6 | Prestations | clair |
+| 7 | Réalisations | clair |
 | 8 | Méthode | **sombre** |
-| 9 | Réalisations, double ruban | clair |
-| 10 | Tarifs | clair |
+| 9 | Tarifs, avec l'encart de lancement | clair |
+| 10 | Engagements | clair |
 | 11 | Estimateur et contact fusionnés | **sombre** |
 | 12 | FAQ | clair |
-| 13 | Engagements | clair |
-| 14 | Contact et pied de page | **sombre** |
+| 13 | Contact et pied de page | **sombre** |
 
-L'ordre des sections ne change pas.
+Ordre revu le 2 octobre 2026 avec Adri : la preuve (réalisations) avant le « comment » (méthode), les garanties (engagements) juste après le prix. « Transparence » a rejoint l'encart de lancement des tarifs.
+
 
 ---
 
 ## 7. Composants
 
-**Navigation.** Collée en haut, sans filet de séparation avec le hero. Au survol, le libellé glisse vers le haut et sort du cadre pendant qu'une copie identique arrive par le bas, en masque, 300 ms. Aucun soulignement, aucun changement de couleur : le mouvement est le seul signal. L'entrée active porte un point de 4 px en accent. Sur les sections sombres, le texte passe automatiquement en `--sombre-texte` et le CTA en contour clair, transition 200 ms.
+**Navigation.** Barre flottante : à 12 px des bords, coins de 16 px, son propre grain, aucune ombre. Elle prend toujours la couleur opposée à la section dessous : encre sur le papier, papier sur une section sombre (300 ms). Elle se resserre une fois le hero dépassé. Au survol, le libellé glisse vers le haut et sort du cadre pendant qu'une copie identique arrive par le bas, en masque, 300 ms. Aucun soulignement. Sous l'entrée de la section en cours de lecture, un point de 6 px en accent, comme le ruban : un seul point pour tout le menu, qui glisse d'une entrée à l'autre (500 ms) ; les autres entrées passent à 55 % d'opacité, pleines au survol. Sur les sections sombres, le texte passe automatiquement en `--sombre-texte` et le CTA en contour clair, transition 200 ms.
 
 **Bouton principal.** Fond `--accent`, texte `--papier`, radius 10 px. Survol : fond `--accent-profond`. Aucun scale, aucune ombre.
 
 **Bouton secondaire et lien de texte.** Soulignement qui se redessine de gauche à droite, 250 ms. Le texte passe en accent.
 
-**Hero.** Titre pleine largeur en display. Paragraphe à gauche, bloc d'action à droite avec les deux boutons **sur une même ligne**, bouton plein à gauche, lien souligné à droite, 24 px entre les deux. Bandeau de réassurance à quatre mentions séparées par l'espace seul, aucun filet. Une seule forme graphique : un grand arc en débord du bord droit, 8 à 10 % d'opacité, dans la moitié basse, jamais derrière un mot. Le hero reste sous la hauteur d'écran et la section suivante affleure sur 80 à 120 px.
+**Hero.** Titre pleine largeur en display. Paragraphe à gauche, bloc d'action à droite avec les deux boutons **sur une même ligne**, bouton plein à gauche, lien souligné à droite, 24 px entre les deux. Bandeau de réassurance à quatre mentions séparées par l'espace, chacune précédée du point du logo (6 px, accent), aucun filet, aucun pictogramme. Une seule forme graphique : un grand arc en débord du bord droit, 8 à 10 % d'opacité, dans la moitié basse, jamais derrière un mot. Le hero reste sous la hauteur d'écran et la section suivante affleure sur 80 à 120 px.
 
 **Ruban des prestations.** Bandeau défilant sous le hero. **Aucun filet** — ni au-dessus, ni en dessous, ni entre les prestations. Les éléments sont séparés par un grand espace et un point de 6 px en accent (un vrai cercle, jamais un point médian typographique) : il fait écho au point du logo. Arrêt au survol et au focus.
 
 **Vignette de projet.** Ratio uniforme 16/10, **toutes de la même taille**, radius 16 px, cadrage sur le haut du site, jamais rognée sur son contenu. Aucun badge posé dessus, aucun cadre de navigateur dessiné. Au survol, l'image ne bouge pas : le curseur passe en pastille « Voir le projet » et le titre passe en accent.
 
-**Réalisations.** Cartes de 260 à 280 px sur mobile, 340 à 360 px sur desktop, toutes de la même taille. Double ruban, deux rangées en sens inverse, 45 à 60 s par cycle, boucle sans couture par duplication, arrêt au survol, défilement possible à la souris. Jamais d'auto-défilement sur écran tactile (`pointer: coarse`) ni en mouvement réduit : dans les deux cas, le défilement redevient entièrement manuel, avec un ancrage par carte (`scroll-snap`) et la carte suivante qui dépasse pour montrer qu'il y a une suite. Les copies de boucle, dupliquées dans le DOM pour la couture, portent `aria-hidden="true"` et ne sont jamais focalisables ; sans le défilement automatique elles n'ont plus lieu d'être et sont masquées.
+**Réalisations.** Carrousel centré de cinq projets : l'actif en grand et en couleur, son texte dessous ; les voisins plus petits, en niveaux de gris. Flèches rondes, points, clic sur un voisin, glissement au doigt ou au pavé tactile, flèches du clavier. Aucun défilement automatique. Tous les textes restent dans le DOM.
 
-**Prestations.** Six blocs de tailles variables selon l'importance. **Aucune numérotation**, ce n'est pas une séquence. Prix en JetBrains Mono.
+**Pied de page.** La phrase du studio et son statut à gauche, trois colonnes de liens à droite, puis « .skøne » sur toute la largeur, point en bleu clair : la signature du site. Dessous, la zone d'intervention et les mentions.
 
-**Tarifs.** Trois offres. **Aucun filet entre les lignes d'une liste** : une liste se lit par l'espace. L'offre recommandée se distingue franchement, par la taille, l'air et la densité de fond : plus de colonnes, prix en display, peut dépasser verticalement. **Jamais d'aplat en couleur d'accent derrière une offre.**
+**FAQ.** Le titre et la relance à gauche, collés pendant qu'on parcourt les questions à droite. Exception au § 5 : un filet à 12 % sépare les questions, il dit où chacune commence. Le signe est un « + » dans un rond qui devient « − ». Plusieurs réponses peuvent être ouvertes à la fois.
 
-**Estimateur et contact, parcours unique.** L'estimateur et le formulaire sont fusionnés : le visiteur ne saisit jamais deux fois la même information. Une question par écran, en display, grandes zones cliquables. Progression par un filet horizontal qui se remplit, jamais un compteur « étape 2 sur 5 ». Navigation clavier complète. La fourchette s'affiche après les trois questions, puis deux champs seulement.
+**Prestations.** Cinq cartes (§ 5 : un titre et un texte, c'est une carte), dans l'ordre d'un artisan : vitrine, refonte, e-commerce, maquettes, application. **Aucune numérotation**, ce n'est pas une séquence. Prix en JetBrains Mono.
 
-**Méthode.** Quatre étapes numérotées, **seule séquence numérotée du site**. Sticky sur fond sombre, l'étape active se distingue nettement.
+**Tarifs.** Trois offres. **Aucun filet entre les lignes d'une liste** : une liste se lit par l'espace. L'offre recommandée se distingue franchement, par la taille, l'air et la densité de fond : plus de colonnes, prix en display, peut dépasser verticalement. **Jamais d'aplat en couleur d'accent derrière une offre.** Chaque carte a deux faces : devant, le prix, une phrase, quatre inclus clés, le délai et le bouton ; « Voir ce qui est compris » fait monter le détail du bas dans un tiroir, que la flèche du haut (ou Échap) referme. Aucune 3D, aucun retournement : seul un glissement vertical. Survol : la carte fonce d'un cran, sans effacer ses voisines.
 
-**Engagements.** Cinq items, aucune numérotation.
+**Estimateur et contact, parcours unique.** L'estimateur et le formulaire sont fusionnés : le visiteur ne saisit jamais deux fois la même information. Deux écrans. Le premier montre les trois questions du prix d'un coup, grandes zones cliquables, et à côté le prix qui se construit à chaque réponse ; au téléphone, ce prix devient un bandeau collé en bas de l'écran. Le second est le contact : budget, coordonnées, consentement. Jamais un compteur « étape 2 sur 5 ». Navigation clavier complète. La rédaction des textes à créer est comprise dans le prix affiché.
+
+**Méthode.** Quatre étapes numérotées, **seule séquence numérotée du site**. Frise verticale à toutes les largeurs. Au bureau, la section se fige à l'arrivée : le titre reste à gauche, les étapes défilent à droite jusqu'à la fin de la quatrième, puis la section se libère. L'étape active se distingue nettement. « Votre temps » conclut chaque étape.
+
+**Trait sous un titre.** Un trait courbé, épais, bouts coupés net comme le s du logo, sous un seul mot, sur quatre titres seulement (prestations, réalisations, tarifs, contact). Il se trace une fois, à l'arrivée du titre, en 0,7 s ; en mouvement réduit, il est simplement là. En encre, ou en papier sur une section sombre, jamais en accent.
+
+**Engagements.** Six items, aucune numérotation, juste après les tarifs.
 
 ---
 
@@ -249,6 +255,8 @@ Vérifiables par `grep`, doivent revenir vides.
 ---
 
 ## 13. Boutons — une règle unique, sans exception
+
+**Pilule ou pas (2 octobre 2026).** Un bouton qui porte un libellé garde 10 px de rayon, jamais la pilule. Un bouton sans texte, une icône seule, est un cercle : remonter, flèches du carrousel, signe de la FAQ.
 
 Tout `.bouton`, seul ou en groupe, sur toute page et à toute largeur :
 

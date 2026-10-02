@@ -25,10 +25,12 @@ export const pied = {
     lien: { libelle: 'Parlons-en', href: '#contact' },
   },
   tagline:
-    'Studio Skøne — création de sites internet, boutiques en ligne et applications, à Nantes et dans toute la France. ' +
+    // Sans « Studio Skøne — » (2 octobre 2026) : le logo en grand, juste
+    // dessous, dit déjà qui parle, et le tiret cadratin est banni.
+    'Création de sites internet, boutiques en ligne et applications, à Nantes et dans toute la France. ' +
     'Conçus et développés par la même personne, du croquis à la mise en ligne.',
   zone:
-    'Basé à Nantes · J\'interviens à Carquefou, La Chapelle-sur-Erdre, Sucé-sur-Erdre, Nort-sur-Erdre, Treillières, Ancenis — et partout en France en visio.',
+    'Basé à Nantes · J\'interviens à Carquefou, La Chapelle-sur-Erdre, Sucé-sur-Erdre, Nort-sur-Erdre, Treillières, Ancenis, et partout en France en visio.',
   colonnes: [
     {
       titre: 'Le studio',

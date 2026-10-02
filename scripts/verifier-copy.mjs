@@ -92,6 +92,23 @@ const REMPLACEMENTS_DEMANDES = [
   // identité (dark mode, sphère terracotta). Réécrite avec Adri pour
   // coller aux nouvelles captures.
   { avant: 'un dark mode chaud et une petite sphère terracotta', apres: 'un fond papier clair et un nœud aubergine et mimosa' },
+  // 1er octobre 2026 — le hero dit « conçu et codé », le titre du studio
+  // disait « conçu et construit » : deux verbes pour la même promesse.
+  // Adri aligne le studio sur le hero, dont le verbe est aussi celui des
+  // balises de partage (og, twitter), qu'on ne touche pas.
+  { avant: 'Conçu et construit par la', apres: 'Conçu et codé par la' },
+  // 2 octobre 2026 — Site complet couvre 2 à 6 pages au lieu de 4 à 6 :
+  // entre une page à 900 € et quatre pages à 1 900 €, un site de deux ou
+  // trois pages n'avait pas de formule. Décision d'Adri.
+  { avant: 'Site complet, 4 à 6 pages', apres: 'Site complet, 2 à 6 pages' },
+  { avant: 'Refonte complète, 4 à 6 pages', apres: 'Refonte complète, 2 à 6 pages' },
+  { avant: 'Site vitrine complet, 4 à 6 pages', apres: 'Site vitrine complet, 2 à 6 pages' },
+  // Même jour : le menu suit l'ordre de la page, Projets avant Méthode.
+  { avant: 'Méthode Projets', apres: 'Projets Méthode' },
+  // Pied de page refait le même jour : le logo en grand dit déjà qui
+  // parle, et le tiret cadratin quitte la zone d'intervention.
+  { avant: 'Studio Skøne — création de sites internet', apres: 'Création de sites internet' },
+  { avant: 'Ancenis — et partout en France', apres: 'Ancenis, et partout en France' },
 ]
 
 /**
@@ -527,6 +544,141 @@ const TARIFS_AJOUTES = [
   'cession des droits sur les livrables ne devient effective',
 ]
 
+/**
+ * Réécriture du copywriting de l'accueil, 1er octobre 2026, branche
+ * copy/hero-storytelling. Demandée et rédigée par Adri : hero, ruban,
+ * studio, prestations, méthode, réalisations, tarifs, contact.
+ *
+ * Portée : index.html seulement. Une entrée `exact` ne pardonne que le
+ * fragment identique, pour les textes courts (« Ofria », « App mobile »)
+ * qui existent ailleurs et doivent continuer d'y être contrôlés. Les
+ * autres se comparent au début du fragment.
+ *
+ * Les quatre projets retirés de l'accueil (Ofria, MyBoat, Garantibox,
+ * Pépite) gardent leur page : leur texte y est toujours vérifié.
+ */
+const REECRITURE_ACCUEIL_RETIRES = [
+  // Le <title>, que ce script lit aussi. Ses balises sociales sont
+  // déclarées dans verifier-seo.mjs.
+  { texte: "Création de sites internet et d'applications Studio Skøne", exact: true },
+  'Le site que vos clients méritent, conçu et codé par la même personne.',
+  'Je dessine et je développe vos sites et vos applications, du premier croquis',
+  'Site Vitrine Refonte de site E-Commerce Application Web & SaaS',
+  { texte: 'UX Interface Direction artistique', exact: true },
+  { texte: 'Intégration Performance Mise en ligne', exact: true },
+  { texte: 'Application web & SaaS', exact: true },
+  'Pour qui entreprises et porteurs de projet avec un outil métier à créer ou un process à automatiser.',
+  'Back-office, interfaces métier, applications complexes.',
+  "Pour qui porteurs de projet qui veulent être sur l'App Store et le Play Store, pas juste",
+  "iOS et Android, du premier écran jusqu'à la publication.",
+  { texte: 'Direction artistique & UI', exact: true },
+  'Maquettes haute fidélité, design system, identité visuelle.',
+  { texte: 'Une méthode claire. Zéro surprise.', exact: true },
+  'Chaque écran est validé avec vous avant le développement. Typo, mise en page, DA',
+  { texte: 'Build & intégration', exact: true },
+  'Les maquettes deviennent du code. Pixel-perfect',
+  'Le studio a ouvert récemment. Vous trouverez ici des projets clients',
+  // Section studio réorganisée le même jour : la conviction et la phrase
+  // Skøne sont réécrites avec Adri.
+  { texte: "Je suis Adrien. Je conçois et je développe. Jamais l'un sans l'autre.", exact: true },
+  "Skøne, c'est ça : un bon produit ne naît que si la même personne tient le pinceau et le marteau.",
+  { texte: 'Ofria', exact: true },
+  { texte: 'MyBoat', exact: true },
+  { texte: 'Garantibox', exact: true },
+  { texte: 'Pépite', exact: true },
+  { texte: 'App mobile', exact: true },
+  'Cinq idées cadeaux qui tiennent la route',
+  "Né d'un besoin réel : je sèche systématiquement sur les cadeaux.",
+  'Louer un bateau sans créer de compte pour connaître le prix',
+  "Pas de client sur ce projet. Le brief que je me suis donné : un parcours de location nautique",
+  "Ajouter sa première garantie sans avoir besoin d'explication",
+  "Pas de client sur ce projet. Le brief que je me suis donné : une application où l'on enregistre",
+  'Une étoile gagnée mène à une vraie récompense',
+  "Né d'un besoin à la maison : les tableaux de récompenses en carton",
+  { texte: 'Studio Skøne Produit maison, en développement Voir le projet', exact: true },
+  { texte: 'Des offres claires, des résultats concrets.', exact: true },
+  'Le studio démarre. Sur les prochains projets, −30 %',
+  { texte: 'Vingt minutes pour savoir ce que vaut votre projet.', exact: true },
+  // Moins de cartes, même jour : « Dans toutes les formules » rejoint les
+  // engagements (doublons retirés, le paiement en deux fois y passe), et
+  // la FAQ perd les trois questions qui répétaient engagements et tarifs.
+  { texte: 'Dans toutes les formules', exact: true },
+  { texte: 'Le site vous appartient.', exact: true },
+  { texte: 'Le code est à vous, pas loué. Vous pouvez partir avec, quand vous voulez.', exact: true },
+  { texte: "Je conçois, je développe, je mets en ligne. Vous n'avez qu'un numéro.", exact: true },
+  { texte: 'Paiement en deux fois.', exact: true },
+  { texte: 'Aucun abonnement obligatoire.', exact: true },
+  { texte: 'Pas de mensualité pour garder votre site en ligne.', exact: true },
+  { texte: "Le site m'appartient vraiment ?", exact: true },
+  'Oui, entièrement. Le code, le design, le nom de domaine, les accès à l',
+  { texte: "Combien d'allers-retours sont inclus ?", exact: true },
+  'Deux séries de retouches sur la formule Une page, trois sur la formule Site complet. Au-delà, on en parle avant',
+  { texte: 'Que se passe-t-il après la mise en ligne ?', exact: true },
+  'Un mois de suivi est inclus sur tous les projets : je corrige tout ce qui ne fonctionne pas comme prévu',
+  // 2 octobre 2026 : « Comment on paie » et « Pour situer » retirés,
+  // doublons de l'engagement de paiement et du prix d'une seule personne.
+  { texte: 'Comment on paie', exact: true },
+  'En deux fois : la moitié à la commande, la moitié à la mise en ligne. En trois fois sur les projets sur mesure',
+  { texte: 'Pour situer', exact: true },
+  'Une agence facture généralement le même site entre 3 500 et 8 000 €',
+  // 2 octobre 2026, intégration des maquettes validées par Adri :
+  // « Le studio est jeune » passe dans l'encart de lancement ; Site
+  // complet couvre 2 à 6 pages ; l'estimateur montre le prix en direct.
+  { texte: 'En toute transparence', exact: true },
+  { texte: 'Le studio est jeune, et je le dis.', exact: true },
+  "Studio Skøne a ouvert en 2026. Concrètement, pour vous : j'ai le temps de m'investir",
+  'En échange, je demande une chose : si le travail vous plaît, un avis honnête',
+  'Quatre à six pages pour détailler votre offre',
+  { texte: 'Animations et interactions soignées', exact: true },
+  { texte: 'Quelle taille ?', exact: true },
+  { texte: '2 à 5 pages', exact: true },
+  { texte: '6 à 12 pages', exact: true },
+  { texte: 'Continuer', exact: true },
+  'Une page à 900 €, un site complet de quatre à six pages à 1 900 €',
+]
+
+const REECRITURE_ACCUEIL_AJOUTES = [
+  'Création de site internet à Nantes pour artisans et TPE Studio Skøne',
+  'Un site pensé pour faire sonner votre téléphone.',
+  'Création de site internet à Nantes',
+  'Je le dessine et je le code moi-même, du premier croquis à la mise en ligne.',
+  'Site vitrine Refonte de site Boutique en ligne Prise de rendez-vous Fiche Google',
+  'Moi aussi, je gère une petite entreprise.',
+  'Un bon site a besoin des deux.',
+  "Je suis Adrien. Je m'occupe de tout votre site : à quoi il ressemble, et comment il fonctionne.",
+  "« Un site réussi, ça ne se voit pas. Ça s'entend : le téléphone sonne. »",
+  "Un site réussi, ça ne se voit pas. Ça s'entend : le téléphone sonne.",
+  'Adrien, fondateur',
+  'En danois, skøn veut dire beau, mais aussi jugement.',
+  'Parcours Mise en page Identité visuelle',
+  'Code Vitesse Mise en ligne',
+  'Maquettes & identité visuelle',
+  'Maquettes détaillées de chaque écran, règles graphiques, identité visuelle.',
+  'Application web ou mobile',
+  'Pour qui entreprises et porteurs de projet avec un outil métier à créer, un process à automatiser ou une app',
+  'Outil interne, espace client, application iOS et Android.',
+  "Deux heures de votre temps. Le reste, c'est mon travail.",
+  'Chaque écran est validé avec vous avant le développement. Typographie, couleurs, mise en page',
+  'Les maquettes deviennent un vrai site, testé sur téléphone, tablette et ordinateur.',
+  "Des projets clients, des produits que j'ai conçus pour mes propres besoins",
+  'Regardez surtout comment je réfléchis.',
+  'Trois formules. Un prix écrit. Aucune surprise à la fin.',
+  'Sur les prochains projets : la formule Une page à 630 €',
+  'Trente minutes pour savoir ce que vaut votre projet.',
+  'Animations soignées',
+  'Deux à six pages pour détailler votre offre',
+  'Combien de pages ?',
+  '2 à 3 pages',
+  'Répondez aux trois questions : le prix se construit ici.',
+  'Modifier mes réponses',
+]
+
+function correspondReecriture(entree, fragment, fichier) {
+  if (fichier !== 'index.html') return false
+  if (typeof entree === 'string') return fragment.startsWith(entree)
+  return entree.exact ? fragment === entree.texte : fragment.startsWith(entree.texte)
+}
+
 /** Signes purement décoratifs. Le cahier des charges interdit d'écrire une
  *  flèche dans une chaîne de texte : elle devient un SVG aria-hidden, et
  *  disparaît donc légitimement du texte rendu. */
@@ -722,6 +874,7 @@ function executerCli(fichiers) {
       .filter((f) => remplace(f) === f || !toutApres.includes(remplace(f)))
       .filter((f) => !TEXTES_DE_COMPOSANTS_RETIRES.some((t) => f.includes(t)))
       .filter((f) => !TARIFS_RETIRES.some((t) => correspondTarifRetire(t, f, fichier)))
+      .filter((f) => !REECRITURE_ACCUEIL_RETIRES.some((t) => correspondReecriture(t, f, fichier)))
     // Le miroir de `remplace` : un fragment neuf qui, ramené à l'ancien
     // texte, existait déjà n'est pas un ajout mais l'autre moitié d'un
     // remplacement demandé.
@@ -736,6 +889,7 @@ function executerCli(fichiers) {
         if (nettoye.length <= 2) return false
         if (TEXTES_SORTIS_DU_SCRIPT.some((t) => nettoye.includes(t))) return false
         if (TARIFS_AJOUTES.some((t) => nettoye.includes(t))) return false
+        if (REECRITURE_ACCUEIL_AJOUTES.some((t) => correspondReecriture(t, nettoye, fichier))) return false
         // Déjà présent sur l'accueil : c'est un partiel, pas un ajout.
         if (fichier !== 'index.html' && estUnRegroupement(nettoye, texteAccueil)) return false
         return !estUnRegroupement(nettoye, toutAvant)

@@ -46,6 +46,15 @@
   background: var(--papier-dense);
 }
 
+/* Survol léger (1er octobre 2026) : la carte fonce d'un cran, rien de
+   plus. Pas d'effacement des voisines comme sur les autres cartes : ici
+   on compare trois offres, elles doivent rester lisibles ensemble. La
+   recommandée porte déjà ce fond, elle ne change pas. */
+.carte-tarif { transition: background-color var(--dur-moyenne) var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .carte-tarif:hover { background: var(--papier-dense); }
+}
+
 .carte-tarif-nom { font-size: var(--text-corps); font-weight: 500; }
 
 .carte-tarif-prix {
@@ -92,10 +101,6 @@
   line-height: var(--leading-corps);
 }
 
-/* Le bouton de repli n'existe que sous 768 px (voir plus bas) : au-delà,
-   la liste est toujours entièrement visible et il ne sert à rien. */
-.carte-tarif-toggle { display: none; }
-
 /* La ligne de délai est la plus regardée de la carte : c'est elle qui dit
    quand le site sera en ligne. Elle passe en --text-petit sur tous les
    écrans, pas seulement sous 768 px — 13 px la rendait trop discrète. */
@@ -113,8 +118,97 @@
   color: var(--encre);
 }
 
-/* Le bouton tombe en bas de carte, aligné sur les trois. */
+/* ─── Deux faces : le recto et le tiroir (2 octobre 2026) ─────
+   Les deux faces partagent la même case de grille : la carte prend la
+   hauteur de la plus haute, et le tiroir glisse par-dessus le recto sans
+   rien déplacer autour. Il part du bas, sous la carte, rognée par son
+   overflow : aucune profondeur, seul un glissement vertical. */
+.carte-tarif { display: grid; padding: 0; }
+.carte-tarif-recto,
+.carte-tarif-tiroir { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 16px; padding: 28px 24px 24px; }
+.carte-tarif--recommandee .carte-tarif-recto,
+.carte-tarif--recommandee .carte-tarif-tiroir { padding: 40px 32px 28px; }
+.carte-tarif--recommandee { padding: 0; }
+
+.carte-tarif-cles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.9375rem;
+  line-height: var(--leading-corps);
+}
+.carte-tarif-cles li,
+.carte-tarif-liste li { display: flex; gap: 10px; align-items: baseline; }
+.carte-tarif-cles li::before,
+.carte-tarif-liste li::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Le bouton tombe en bas du recto, aligné sur les trois cartes. */
 .carte-tarif .bouton { margin-top: auto; align-self: flex-start; }
+
+.carte-tarif-ouvrir,
+.carte-tarif-fermer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  font-size: var(--text-petit);
+  font-weight: 500;
+  color: var(--encre);
+  text-align: left;
+}
+.carte-tarif-ouvrir { padding-top: 14px; border-top: 1px solid var(--filet); }
+.carte-tarif-fermer { padding-bottom: 14px; border-bottom: 1px solid var(--filet); }
+.carte-tarif-ouvrir:hover,
+.carte-tarif-fermer:hover { color: var(--accent); }
+.carte-tarif-ouvrir:focus-visible,
+.carte-tarif-fermer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.carte-tarif-tiroir {
+  /* Au-dessus du recto : les puces du recto, décalées par un transform,
+     passaient sinon par-dessus le tiroir. */
+  position: relative;
+  z-index: 1;
+  background: var(--papier);
+  border-radius: var(--rond-bloc);
+  overflow: auto;
+  transform: translateY(101%);
+  visibility: hidden;
+  transition: transform 450ms var(--ease), visibility 0s linear 450ms;
+}
+.carte-tarif.est-ouvert .carte-tarif-tiroir {
+  transform: none;
+  visibility: visible;
+  transition: transform 450ms var(--ease), visibility 0s;
+}
+/* Sans script, rien ne s'ouvre : le détail reste lisible sous le recto. */
+.carte-tarif:not(:has(.carte-tarif-recto[inert], .carte-tarif-tiroir[inert])) .carte-tarif-tiroir {
+  grid-area: 2 / 1;
+  transform: none;
+  visibility: visible;
+}
+.carte-tarif:not(:has(.carte-tarif-recto[inert], .carte-tarif-tiroir[inert])) :is(.carte-tarif-ouvrir, .carte-tarif-fermer) { display: none; }
+
+/* Toute la carte se touche : le curseur le dit, sur les vrais pointeurs. */
+@media (hover: hover) and (pointer: fine) {
+  .carte-tarif:has(.carte-tarif-recto[inert], .carte-tarif-tiroir[inert]) { cursor: pointer; }
+  .carte-tarif:hover .carte-tarif-ouvrir,
+  .carte-tarif:hover .carte-tarif-fermer { color: var(--accent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carte-tarif-tiroir,
+  .carte-tarif.est-ouvert .carte-tarif-tiroir { transition: none; }
+}
 
 /* Sous 1023 px, la grille passe déjà sur une colonne (voir
    .tarifs-grille) : la carte recommandée doit y passer en premier, et
@@ -123,38 +217,8 @@
   .carte-tarif--recommandee { order: -1; margin-block: 0; }
 }
 
-/* Sous 768 px, le bouton remonte avant la liste : le visiteur n'a pas à
-   dérouler sept lignes pour l'atteindre. L'ordre du DOM ne bouge pas, donc
-   ni la lecture au clavier ni celle d'un lecteur d'écran ne changent —
-   c'est pourquoi on ordonne en flex plutôt que de replier la liste dans un
-   <details>, qui aurait caché le contenu à l'indexation. */
 @media (max-width: 767px) {
-  .carte-tarif--recommandee { padding: 28px 24px 32px; }
+  .carte-tarif--recommandee .carte-tarif-recto,
+  .carte-tarif--recommandee .carte-tarif-tiroir { padding: 28px 24px 24px; }
   .carte-tarif--recommandee .carte-tarif-prix { font-size: var(--text-h2); }
-  .carte-tarif-delai { order: 1; }
-  .carte-tarif .bouton { order: 2; margin-top: 8px; }
-  .carte-tarif-liste-bloc { order: 3; }
-  .carte-tarif-liste { gap: 10px; }
-  .carte-tarif-note { order: 4; }
-
-  /* Une carte de trois formules à sept lignes d'inclus chacune fait à elle
-     seule plus d'un écran. La liste se replie derrière un bouton : le
-     texte reste dans le DOM, seule sa hauteur visible tombe à zéro. Pas de
-     display: none, pour que Google et un lecteur d'écran le lisent quand
-     même. */
-  .carte-tarif-liste {
-    max-height: 0;
-    overflow: hidden;
-  }
-  .carte-tarif-liste-bloc.est-ouvert .carte-tarif-liste {
-    max-height: none;
-    overflow: visible;
-  }
-
-  .carte-tarif-toggle {
-    display: inline-block;
-    margin-top: 4px;
-    /* La cible tactile est reprise de .lien (voir components/boutons.css) :
-       son pseudo-élément s'agrandit déjà sous 768 px. */
-  }
 }

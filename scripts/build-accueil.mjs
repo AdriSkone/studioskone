@@ -26,6 +26,13 @@ import { ORIGIN, lastmodFor, ecrireLastmod } from './sitemap.mjs'
 const ici = dirname(fileURLToPath(import.meta.url))
 const racine = resolve(ici, '..')
 
+/**
+ * Le trait courbé sous un mot de titre (2 octobre 2026). Cinq titres
+ * seulement : prestations, réalisations, méthode, tarifs, contact. Le trait est
+ * dessiné par src/scripts/trait.ts ; sans script, le mot reste un mot.
+ */
+const trait = (mot) => `<span class="trait-mot">${mot}</span>`
+
 /** Le texte des données porte déjà ses entités ; on ne réencode rien. */
 const html = (s) => s
 
@@ -58,6 +65,7 @@ function hero() {
 
   return `  <section class="hero" id="hero">
     <div class="grille hero-corps">
+      <p class="tete-bloc hero-surtitre">${C.hero.surtitre}</p>
       <h1 class="t-display hero-titre" style="--col: 1 / -1">
         ${C.hero.titre.avant} <span class="hero-accent">${C.hero.titre.accent}</span>
       </h1>
@@ -167,8 +175,12 @@ function studio() {
              width="624" height="1200" decoding="async" loading="lazy">
       </figure>
       <div class="studio-texte">
-        <p>${C.studio.texte[0]}</p>
-        <p>${C.studio.texte[1]}</p>
+        <p>${C.studio.intro}</p>
+        <figure class="studio-citation">
+          <blockquote><p>«&nbsp;${C.studio.citation.texte}&nbsp;»</p></blockquote>
+          <figcaption>${C.studio.citation.signature}</figcaption>
+        </figure>
+${C.studio.texte.map((t) => `        <p>${t}</p>`).join('\n')}
       </div>
       <div class="metiers">
 ${metiers}
@@ -210,7 +222,8 @@ function prestations() {
       const titre = p.href
         ? `<a class="carte-prestation-titre" href="${p.href}">${p.titre}</a>`
         : `<span class="carte-prestation-titre">${p.titre}</span>`
-      return `        <article class="carte-prestation" data-reveal>
+      return `        <article class="carte-prestation carte" data-reveal>
+          <span class="carte-point" aria-hidden="true"></span>
           <div class="carte-prestation-tete">
             <h3>${titre}</h3>
             <span class="carte-prestation-prix">${p.prix}</span>
@@ -224,7 +237,7 @@ function prestations() {
   return `  <section class="section-m" id="services">
     <div class="grille">
       <p class="tete-bloc">${C.prestations.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 8">${C.prestations.titre.debut} ${C.prestations.titre.accent}</h2>
+      <h2 class="t-h1" style="--col: 1 / span 8">${C.prestations.titre.debut} ${trait(C.prestations.titre.accent)}</h2>
       <div class="prestations-grille" style="--col: 1 / -1">
 ${cartes}
       </div>
@@ -245,19 +258,18 @@ function methode() {
     )
     .join('\n')
 
-  // La frise s'épingle et se remplit au défilement à partir de 1024 px
-  // (src/scripts/methode.ts pilote un tracé horizontal ; en dessous,
-  // le tracé devient vertical et suit le défilement normal, sans
-  // épingle). Sans JavaScript ou en mouvement réduit,
+  // Le tracé vertical se remplit au défilement, à toutes les largeurs
+  // (src/scripts/methode.ts). Au bureau, la tête reste collée à gauche. Sans JavaScript ou en mouvement réduit,
   // components/etape.css affiche les quatre étapes pleinement lisibles,
   // tracé plein, sans épingle : voir l'en-tête de ce fichier CSS.
   return `  <section class="section-m sombre methode" id="process">
     <div class="grille">
-      <p class="tete-bloc">${C.methode.label}</p>
-      <h2 class="t-h2" style="--col: 1 / span 10">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${C.methode.titre.accent}${C.methode.titre.fin}</h2>
-      <p class="methode-cloture" style="--col: 1 / span 5">${C.methode.cloture}</p>
-      <div class="methode-scene" style="--col: 1 / -1">
-        <div class="rail-h" aria-hidden="true"><div class="rail-h-plein"></div></div>
+      <div class="methode-tete">
+        <p class="tete-bloc">${C.methode.label}</p>
+        <h2 class="t-h2">${C.methode.titre.debut}<br>${C.methode.titre.suite} ${trait(C.methode.titre.accent)}${C.methode.titre.fin}</h2>
+        <p class="methode-cloture">${C.methode.cloture}</p>
+      </div>
+      <div class="methode-scene">
         <div class="methode-liste">
           <div class="rail-v" aria-hidden="true"><div class="rail-v-plein"></div></div>
           <ol class="etapes">
@@ -271,129 +283,130 @@ ${etapes}
 
 function realisations() {
   /**
-   * Une vignette. `copie` marque les exemplaires que la boucle duplique :
-   * ils sont retirés de l'arbre d'accessibilité et du parcours clavier,
-   * sinon un lecteur d'écran annoncerait neuf projets deux fois et la
-   * tabulation passerait deux fois par chacun.
+   * Carrousel centré (2 octobre 2026). Une carte par projet : l'image, et
+   * dessous son nom, son statut et sa note. Le projet actif est en grand
+   * et en couleur, ses voisins plus petits et en niveaux de gris. Tous les
+   * textes restent dans le DOM : seul l'actif se voit, les autres restent
+   * lisibles par Google et par un lecteur d'écran.
+   *
+   * Sans script, la piste reste une rangée qu'on fait défiler à la main,
+   * toutes les cartes au même format, chacune avec son texte.
    */
-  const vignette = (p, copie = false) => `            <a class="carte-projet" href="/projets/${p.slug}"${
-    copie ? ' aria-hidden="true" tabindex="-1"' : ''
-  }>
-              <img class="carte-projet-image" src="${p.image}" alt="${copie ? '' : p.alt}" loading="lazy"${attributsTaille(p.image)}>
-              <div>
-                <div class="carte-projet-tete">
-                  <h3 class="carte-projet-titre">${p.titre}</h3>
-                  <span class="carte-projet-type">${p.badge}</span>
-                </div>
-                <p class="carte-projet-tagline">${p.tagline}</p>
-                <p class="carte-projet-nature">${p.nature}</p>
-                <p class="carte-projet-note">${p.note}</p>
-                <div class="carte-projet-meta">
-                  <span>${p.signature}</span>
-                  <span class="carte-projet-lien">${p.lienLibelle}${fleche}</span>
-                </div>
+  const choisis = C.realisations.accueil.map((slug) => {
+    const p = projets.find((x) => x.slug === slug)
+    if (!p) throw new Error(`Projet inconnu sur l'accueil : ${slug}`)
+    return p
+  })
+
+  const cartes = choisis
+    .map(
+      (p, i) => `          <li class="carrousel-carte" data-index="${i}">
+            <a class="carrousel-image" href="/projets/${p.slug}">
+              <img src="${p.image}" alt="${p.alt}" loading="lazy"${attributsTaille(p.image)}>
+            </a>
+            <div class="carrousel-info">
+              <div class="carrousel-tete">
+                <h3 class="carrousel-titre">${p.titre}</h3>
+                <span class="carrousel-type">${p.badge}</span>
               </div>
-            </a>`
+              <p class="carrousel-tagline">${p.tagline}</p>
+              <p class="carrousel-nature">${p.nature}</p>
+              <p class="carrousel-note">${p.note}</p>
+              <p class="carrousel-meta"><span>${p.signature}</span> <a class="lien carrousel-lien" href="/projets/${p.slug}">${p.lienLibelle}${fleche}</a></p>
+            </div>
+          </li>`
+    )
+    .join('\n')
 
-  // Deux rangées qui défilent en sens inverse. Cinq projets sur la
-  // première, quatre sur la seconde : la série se lit comme un ensemble,
-  // sans qu'aucun projet ne soit mis en avant par sa place.
-  const rangees = [projets.slice(0, 5), projets.slice(5)]
-
-  const piste = (liste, sens) => `        <div class="ruban-projets" data-sens="${sens}">
-          <div class="ruban-projets-piste">
-${liste.map((p) => vignette(p)).join('\n')}
-${liste.map((p) => vignette(p, true)).join('\n')}
-          </div>
-        </div>`
+  const points = choisis
+    .map((p, i) => `<button type="button" class="carrousel-point" data-index="${i}" aria-label="Voir ${p.titre}"></button>`)
+    .join('')
 
   return `  <section class="section-m" id="work">
     <div class="grille">
       <p class="tete-bloc">${C.realisations.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 10">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${C.realisations.titre.accent}</h2>
+      <h2 class="t-h1" style="--col: 1 / span 10">${C.realisations.titre.debut}<br>${C.realisations.titre.suite} ${trait(C.realisations.titre.accent)}</h2>
       <p class="realisations-intro" style="--col: 1 / span 5">${C.realisations.intro} <span class="realisations-intro-fort">${C.realisations.introFort}</span></p>
     </div>
 
-    <div class="realisations-rubans" id="realisationsRubans">
-${piste(rangees[0], 'avant')}
-${piste(rangees[1], 'arriere')}
+    <div class="carrousel" id="carrousel" aria-roledescription="carrousel" aria-label="Réalisations">
+      <div class="carrousel-fenetre">
+        <ul class="carrousel-piste">
+${cartes}
+        </ul>
+      </div>
+      <div class="carrousel-commandes">
+        <button type="button" class="carrousel-fleche" data-sens="-1" aria-label="Projet précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg></button>
+        <div class="carrousel-points">${points}</div>
+        <button type="button" class="carrousel-fleche" data-sens="1" aria-label="Projet suivant"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19"/></svg></button>
+      </div>
     </div>
   </section>`
 }
 
 function tarifs() {
+  const chevron = (sens) =>
+    `<svg class="carte-tarif-chevron" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="${sens === 'haut' ? 'M2 9 L7 4 L12 9' : 'M2 5 L7 10 L12 5'}" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`
+
+  // Deux faces dans une même carte (2 octobre 2026). Devant : de quoi
+  // comparer d'un coup d'œil. Derrière, dans un tiroir qui monte du bas :
+  // le détail complet. Le tiroir reste dans le DOM, hors de l'écran,
+  // jamais en display: none, pour que Google et un lecteur d'écran le
+  // lisent ; le script le rend inerte tant qu'il est fermé.
   const cartes = C.tarifs.formules
     .map((f, i) => {
-      const items = f.inclus.map((it) => `                <li>${it}</li>`).join('\n')
+      const cles = f.cles.map((it) => `              <li>${it}</li>`).join('\n')
+      const items = f.inclus.map((it) => `              <li>${it}</li>`).join('\n')
       const variante = f.recommandee ? 'principal' : 'secondaire'
-      // La ligne d'écart n'existe que sur la formule recommandée : elle
-      // répond à « pourquoi le double pour trois pages de plus ? ».
-      const ecart = f.ecart ? `\n          <p class="carte-tarif-ecart">${f.ecart}</p>` : ''
-      const variation = f.variation ? `\n          <p class="carte-tarif-note">${f.variation}</p>` : ''
-      // Correctif mobile du 21 septembre 2026 : la liste des inclus se
-      // replie sous 768 px derrière un bouton. Elle reste dans le DOM,
-      // rognée par une hauteur maximale — jamais par display: none — pour
-      // rester lisible par Google et par un lecteur d'écran.
-      const idListe = `tarif-inclus-${i}`
+      const ecart = f.ecart ? `\n            <p class="carte-tarif-ecart">${f.ecart}</p>` : ''
+      const variation = f.variation ? `\n            <p class="carte-tarif-note">${f.variation}</p>` : ''
+      const idTiroir = `tarif-detail-${i}`
       return `        <article class="carte-tarif${f.recommandee ? ' carte-tarif--recommandee' : ''}" data-reveal>
-          <p class="carte-tarif-nom">${f.nom}</p>
-          <p class="carte-tarif-prix">${f.prix}</p>
-          <h3 class="carte-tarif-h3">${f.h3}</h3>
-          <p class="carte-tarif-positionnement">${f.positionnement}</p>
-          <p class="carte-tarif-resume">${f.paragraphe}</p>${ecart}
-          <div class="carte-tarif-liste-bloc">
-            <ul class="carte-tarif-liste" id="${idListe}">
-${items}
+          <div class="carte-tarif-recto">
+            <p class="carte-tarif-nom">${f.nom}</p>
+            <p class="carte-tarif-prix">${f.prix}</p>
+            <h3 class="carte-tarif-h3">${f.h3}</h3>
+            <p class="carte-tarif-positionnement">${f.positionnement}</p>
+            <ul class="carte-tarif-cles">
+${cles}
             </ul>
-            <button type="button" class="lien carte-tarif-toggle" aria-expanded="false" aria-controls="${idListe}">${C.tarifs.voirInclus}</button>
+            <p class="carte-tarif-delai">${f.delai}</p>
+            <a class="bouton bouton--${variante}" href="${f.cta.href}" data-umami-event="${f.cta.umami}">${f.cta.libelle}${f.cta.fleche ? fleche : ''}</a>
+            <button type="button" class="carte-tarif-ouvrir" aria-expanded="false" aria-controls="${idTiroir}"><span>${C.tarifs.voirInclus}</span>${chevron('haut')}</button>
           </div>
-          <p class="carte-tarif-delai">${f.delai}</p>${variation}
-          <a class="bouton bouton--${variante}" href="${f.cta.href}" data-umami-event="${f.cta.umami}">${f.cta.libelle}${f.cta.fleche ? fleche : ''}</a>
+          <div class="carte-tarif-tiroir" id="${idTiroir}">
+            <button type="button" class="carte-tarif-fermer" aria-controls="${idTiroir}" aria-label="Fermer le détail de la formule ${f.nom}"><span>${f.nom} · ${f.prix}</span>${chevron('bas')}</button>
+            <p class="carte-tarif-resume">${f.paragraphe}</p>${ecart}
+            <ul class="carte-tarif-liste">
+${items}
+            </ul>${variation}
+          </div>
         </article>`
     })
     .join('\n')
 
   const options = C.tarifs.options.items.map((o) => `          <li>${o}</li>`).join('\n')
 
-  const toujours = C.tarifs.toujours.items
-    .map(
-      (i) => `          <div class="tarifs-argument carte">
-            <span class="carte-point" aria-hidden="true"></span>
-            <h3 class="tarifs-argument-titre">${i.titre}</h3>
-            <p class="tarifs-argument-texte">${i.texte}</p>
-          </div>`
-    )
-    .join('\n')
-
   const charge = C.tarifs.charge.items
     .map(
-      (i) => `          <li class="tarifs-charge-carte carte">
-            <span class="carte-point" aria-hidden="true"></span>
+      // Une liste de phrases courtes, plus des cartes (1er octobre 2026) :
+      // STYLE_GUIDE § 5, l'espace seul les sépare.
+      (i) => `          <li class="tarifs-charge-ligne">
             <p class="tarifs-charge-chiffre">${i.chiffre}</p>
             <p class="tarifs-charge-texte">${i.texte}</p>
           </li>`
     )
     .join('\n')
 
-  const verites = C.tarifs.verites
-    .map(
-      (v) => `        <div class="verite carte">
-          <span class="carte-point" aria-hidden="true"></span>
-          <h3 class="verite-titre">${v.titre}</h3>
-          <p class="verite-texte">${v.texte}</p>
-        </div>`
-    )
-    .join('\n')
-
   return `  <section class="section-m" id="tarifs">
     <div class="grille">
       <p class="tete-bloc">${C.tarifs.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 10">${C.tarifs.titre.debut} ${C.tarifs.titre.accent}${C.tarifs.titre.fin}<br>${C.tarifs.titre.suite}</h2>
+      <h2 class="t-h1" style="--col: 1 / span 10">${C.tarifs.titre.debut} ${trait(C.tarifs.titre.accent)}${C.tarifs.titre.fin}<br>${C.tarifs.titre.suite}</h2>
       <p class="tarifs-note" style="--col: 1 / span 5">${C.tarifs.note[0]}<br>${C.tarifs.note[1]}</p>
 
       <aside class="tarifs-lancement" style="--col: 1 / -1">
         <p class="pastille">${C.tarifs.lancement.tag}</p>
-        <p class="tarifs-lancement-texte">${C.tarifs.lancement.avant} <strong>${C.tarifs.lancement.remise}</strong> ${C.tarifs.lancement.apres}</p>
+        <p class="tarifs-lancement-texte">${C.tarifs.lancement.texte}</p>
       </aside>
 
       <div class="tarifs-grille" style="--col: 1 / -1">
@@ -407,22 +420,11 @@ ${options}
         </ul>
       </div>
 
-      <div class="tarifs-toujours" style="--col: 1 / -1">
-        <p class="tete-bloc" style="--col: auto">${C.tarifs.toujours.titre}</p>
-        <div class="tarifs-arguments">
-${toujours}
-        </div>
-      </div>
-
       <div class="tarifs-charge" style="--col: 1 / -1">
         <p class="tete-bloc" style="--col: auto">${C.tarifs.charge.titre}</p>
         <ul class="tarifs-charge-liste">
 ${charge}
         </ul>
-      </div>
-
-      <div class="verites" style="--col: 1 / -1">
-${verites}
       </div>
     </div>
   </section>`
@@ -441,25 +443,28 @@ ${verites}
 function parcours() {
   const P = C.parcours
 
-  const ecransQuestions = P.questions
-    .map((q, i) => {
-      const options = q.options
-        .map(
-          (o) => `              <label class="parcours-option">
+  // Les trois questions du prix d'un côté, le budget de l'autre : depuis
+  // le 2 octobre 2026, le prix se construit en direct à chaque réponse,
+  // et le budget passe à l'étape contact.
+  const questionsPrix = P.questions.filter((q) => q.cle !== 'budget')
+  const questionBudget = P.questions.find((q) => q.cle === 'budget')
+
+  const groupe = (q) => {
+    const options = q.options
+      .map(
+        (o) => `              <label class="parcours-option">
                 <input type="radio" name="${q.cle}" value="${o.valeur}">
                 <span>${o.libelle}</span>
               </label>`
-        )
-        .join('\n')
-
-      return `        <fieldset class="parcours-ecran" data-ecran="${i}" data-question="${q.cle}">
-          <legend class="parcours-legende">${q.legende}</legend>
-          <div class="parcours-choix">
+      )
+      .join('\n')
+    return `          <fieldset class="parcours-question" data-question="${q.cle}">
+            <legend class="parcours-legende">${q.legende}</legend>
+            <div class="parcours-choix">
 ${options}
-          </div>
-        </fieldset>`
-    })
-    .join('\n')
+            </div>
+          </fieldset>`
+  }
 
   const champs = P.coordonnees.champs
     .map((c) =>
@@ -485,26 +490,29 @@ ${options}
         <p class="t-corps-l">${P.sousTitre}</p>
       </div>
 
-      <div class="parcours" id="parcours" style="--col: 1 / -1">
-        <div class="parcours-progression" aria-hidden="true">
-          <span class="parcours-progression-remplissage"></span>
-        </div>
-
+      <div class="parcours" id="parcours" style="--col: 1 / -1" data-note-budget="${P.noteBudget}">
         <form class="parcours-form" id="parcoursForm" novalidate>
-${ecransQuestions}
-
-          <fieldset class="parcours-ecran" data-ecran="${P.questions.length}" data-resultat>
-            <legend class="parcours-legende">${P.resultat.label}</legend>
-            <div class="parcours-resultat">
-              <p class="parcours-offre" id="parcoursOffre"></p>
-              <p class="parcours-prix" id="parcoursPrix"></p>
-              <p class="parcours-delai" id="parcoursDelai"></p>
+          <div class="parcours-ecran parcours-direct" data-ecran="0">
+            <div class="parcours-questions">
+${questionsPrix.map(groupe).join('\n')}
             </div>
-            <p class="parcours-mention">${P.resultat.mention}</p>
-          </fieldset>
 
-          <fieldset class="parcours-ecran" data-ecran="${P.questions.length + 1}">
+            <aside class="parcours-panneau" aria-live="polite">
+              <p class="parcours-panneau-label">${P.resultat.label}</p>
+              <p class="parcours-offre" id="parcoursOffre">${P.resultat.attente}</p>
+              <p class="parcours-prix" id="parcoursPrix" hidden></p>
+              <p class="parcours-delai" id="parcoursDelai" hidden></p>
+              <p class="parcours-ajustement" id="parcoursAjustement" hidden></p>
+              <button class="bouton bouton--principal parcours-cta" type="button" id="parcoursSuivant" disabled aria-disabled="true">${P.actions.suivant}</button>
+              <p class="parcours-mention">${P.resultat.mention}</p>
+            </aside>
+          </div>
+
+          <fieldset class="parcours-ecran parcours-contact" data-ecran="1" hidden>
             <legend class="parcours-legende">${P.coordonnees.legende}</legend>
+            <p class="parcours-recap"><span id="parcoursRecap"></span> <button type="button" class="lien parcours-modifier" id="parcoursModifier">${P.actions.modifier}</button></p>
+${groupe(questionBudget)}
+            <p class="parcours-note-budget" id="parcoursNoteBudget" hidden></p>
             <div class="parcours-champs">
 ${champs}
             </div>
@@ -517,15 +525,14 @@ ${champs}
                 <a href="${rgpd.lien.href}" target="_blank" rel="noopener noreferrer">${rgpd.lien.libelle}</a>.
               </span>
             </label>
+            <div class="parcours-actions">
+              <button class="bouton bouton--secondaire" type="button" id="parcoursPrecedent">${P.actions.precedent}</button>
+              <button class="bouton bouton--principal" type="button" id="parcoursEnvoyer" disabled aria-disabled="true">${P.actions.envoyer}</button>
+            </div>
           </fieldset>
-
-          <div class="parcours-actions">
-            <button class="bouton bouton--secondaire" type="button" id="parcoursPrecedent">${P.actions.precedent}</button>
-            <button class="bouton bouton--principal" type="button" id="parcoursSuivant">${P.actions.suivant}</button>
-          </div>
         </form>
 
-        <div class="parcours-succes" id="parcoursSucces" role="status" aria-live="polite" hidden>
+        <div class="parcours-succes" id="parcoursSucces" role="status" aria-live="polite" tabindex="-1" hidden>
           <p class="parcours-succes-titre">${P.succes.titre} <em>${P.succes.accent}</em></p>
           <p>${P.succes.texte}</p>
         </div>
@@ -547,15 +554,19 @@ function faqSection() {
     )
     .join('\n')
 
+  // Deux colonnes depuis le 2 octobre 2026 : le titre et la relance à
+  // gauche, collés pendant qu'on parcourt les questions à droite.
   return `  <section class="section-m" id="faq">
     <div class="grille">
-      <p class="tete-bloc">${C.faq.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 10">${C.faq.titre.debut}<br>${C.faq.titre.suite} ${C.faq.titre.accent}</h2>
-      <div class="faq-relance" style="--col: 1 / span 5">
-        <p>${C.faq.relance.question}<br>${C.faq.relance.texte}</p>
-        <a class="lien" href="${C.faq.relance.lien.href}">${C.faq.relance.lien.libelle}</a>
+      <div class="faq-tete">
+        <p class="tete-bloc">${C.faq.label}</p>
+        <h2 class="t-h1">${C.faq.titre.debut}<br>${C.faq.titre.suite} ${C.faq.titre.accent}</h2>
+        <div class="faq-relance">
+          <p>${C.faq.relance.question}<br>${C.faq.relance.texte}</p>
+          <a class="lien" href="${C.faq.relance.lien.href}">${C.faq.relance.lien.libelle}</a>
+        </div>
       </div>
-      <div class="faq" style="--col: 1 / -1">
+      <div class="faq">
 ${items}
       </div>
     </div>
@@ -592,7 +603,7 @@ function contact() {
   return `  <section class="section-m sombre" id="contact">
     <div class="grille">
       <p class="tete-bloc">${C.contact.label}</p>
-      <h2 class="t-h1" style="--col: 1 / span 8">${C.contact.titre.debut}<br>${C.contact.titre.suite} ${C.contact.titre.accent}</h2>
+      <h2 class="t-h1" style="--col: 1 / span 8">${C.contact.titre.debut}<br>${C.contact.titre.suite} ${trait(C.contact.titre.accent)}</h2>
       <div class="contact-lead" style="--col: 1 / span 6">
 ${textes}
       </div>
@@ -618,7 +629,13 @@ ${head}</head>
 ${navigation()}
 
   <main id="contenu">
-${[hero(), ruban(), probleme(), pivot(), studio(), transparence(), prestations(), methode(), realisations(), tarifs(), parcours(), faqSection(), engagements(), contact()].join('\n\n')}
+${[
+  // Ordre du 2 octobre 2026 : qui, quoi, la preuve, le comment, le prix
+  // et ses garanties, l'estimation, les questions, le contact. « Le
+  // studio est jeune » a rejoint l'encart de lancement des tarifs.
+  hero(), ruban(), probleme(), pivot(), studio(), prestations(), realisations(),
+  methode(), tarifs(), engagements(), parcours(), faqSection(), contact(),
+].join('\n\n')}
   </main>
 
 ${piedDePage()}

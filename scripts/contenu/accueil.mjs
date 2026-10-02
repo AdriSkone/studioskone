@@ -14,8 +14,10 @@ export const nav = {
   liens: [
     { libelle: 'Le studio',   href: '#approach' },
     { libelle: 'Prestations', href: '#services' },
-    { libelle: 'Méthode',     href: '#process' },
+    // Dans l'ordre de la page depuis le 2 octobre 2026 : les réalisations
+    // passent avant la méthode.
     { libelle: 'Projets',     href: '#work' },
+    { libelle: 'Méthode',     href: '#process' },
     { libelle: 'Tarifs',      href: '#tarifs' },
     { libelle: 'Contact',     href: '#contact' },
   ],
@@ -24,16 +26,18 @@ export const nav = {
 }
 
 export const hero = {
-  // L'accent tombe sur la chute, pas sur le milieu de la phrase : c'est
-  // « même personne » qui porte la promesse, et c'est ce que colorent les
-  // maquettes. Le texte, lui, ne bouge pas.
+  // Réécriture du 1er octobre 2026. Le surtitre porte la requête locale,
+  // le titre porte la promesse. « Pensé pour » plutôt que « qui fait » :
+  // on décrit l'intention, on ne promet pas un résultat. L'accent tombe
+  // toujours sur la chute, « votre téléphone ».
+  surtitre: 'Création de site internet à Nantes',
   titre: {
-    avant: 'Le site que vos clients méritent, conçu et codé par la',
-    accent: 'même personne.',
+    avant: 'Un site pensé pour faire sonner',
+    accent: 'votre téléphone.',
   },
   statement:
-    'Je dessine et je développe vos sites et vos applications, du premier croquis à la mise en ligne. ' +
-    'Un seul interlocuteur, un seul devis, un seul responsable du résultat. Livré en 5 jours à 3 semaines selon la formule, à partir de 900&nbsp;€.',
+    'Je le dessine et je le code moi-même, du premier croquis à la mise en ligne. ' +
+    'Un seul interlocuteur, un prix ferme, un délai écrit. Livré en 5 jours à 3 semaines selon la formule, à partir de 900&nbsp;€.',
   ctas: [
     { libelle: 'Estimer mon projet',   href: '#estimator', variante: 'principal' },
     { libelle: 'Voir les réalisations', href: '#work',      variante: 'secondaire' },
@@ -43,9 +47,8 @@ export const hero = {
 
 /** Le ruban du hero. La série est doublée à l'affichage, pas ici. */
 export const ruban = [
-  'Site Vitrine', 'Refonte de site', 'E-Commerce', 'Application Web &amp; SaaS',
-  'Application Mobile', 'Landing Page', 'UX / UI Design', 'Branding',
-  'SEO &amp; Performance', 'Maintenance',
+  'Site vitrine', 'Refonte de site', 'Boutique en ligne', 'Prise de rendez-vous',
+  'Fiche Google', 'Référencement local', 'Application mobile', 'Maintenance',
 ]
 
 export const probleme = {
@@ -73,14 +76,26 @@ export const pivot = {
 
 export const studio = {
   label: 'Le studio',
-  titre: { debut: 'Conçu et construit par la', accent: 'même personne.' },
+  titre: { debut: 'Conçu et codé par la', accent: 'même personne.' },
   metiers: [
-    { label: 'Le pinceau', titre: 'Conception',     items: 'UX · Interface · Direction artistique' },
-    { label: 'Le marteau', titre: 'Développement',  items: 'Intégration · Performance · Mise en ligne' },
+    { label: 'Le pinceau', titre: 'Conception',     items: 'Parcours · Mise en page · Identité visuelle' },
+    { label: 'Le marteau', titre: 'Développement',  items: 'Code · Vitesse · Mise en ligne' },
   ],
+  // Section réorganisée le 1er octobre 2026, sur le rythme que voulait
+  // Adri : une conviction courte, une phrase en grand qu'on retient,
+  // signée, puis le détail.
+  intro: "Je suis Adrien. Je m'occupe de tout votre site : à quoi il ressemble, et comment il fonctionne.",
+  citation: {
+    texte: "Un site réussi, ça ne se voit pas. Ça s'entend : le téléphone sonne.",
+    signature: 'Adrien, fondateur',
+  },
+  // Raccourci le 1er octobre 2026 : trop de lecture. Une idée par
+  // paragraphe. L'histoire de l'outil maison reste dans la carte Tasq.
   texte: [
-    "Je suis Adrien. Je conçois et je développe. Jamais l'un sans l'autre.",
-    "Skøne, c'est ça : un bon produit ne naît que si la même personne tient le pinceau et le marteau.",
+    // Le double sens de skøn (adjectif : beau ; nom : estimation,
+    // jugement) est vérifié par Adri le 1er octobre 2026 (Wiktionary).
+    'En danois, <em>skøn</em> veut dire beau, mais aussi jugement. Un bon site a besoin des deux.',
+    "Moi aussi, je gère une petite entreprise. Votre métier passe d'abord : je vous demande donc peu de temps.",
   ],
   benefices: [
     {
@@ -110,6 +125,8 @@ export const transparence = {
 export const prestations = {
   label: 'Ce que je construis',
   titre: { debut: 'Mes', accent: 'prestations' },
+  // Ordre et fusion du 1er octobre 2026 : les offres d'un artisan
+  // d'abord, les applications en dernier, en une seule carte.
   cartes: [
     {
       titre: 'Site vitrine &amp; landing page',
@@ -119,27 +136,6 @@ export const prestations = {
       prix: '900&nbsp;€',
     },
     {
-      titre: 'Site e-commerce',
-      href: '/creation-site-ecommerce-nantes',
-      cible: 'marques et commerçants qui veulent vendre en ligne sans se battre avec leur outil.',
-      texte: 'Boutique Shopify ou sur mesure, fiches produits, paiement, livraison, et une prise en main que vous maîtrisez en une heure.',
-      prix: 'Dès 3&nbsp;000&nbsp;€',
-    },
-    {
-      titre: 'Application web &amp; SaaS',
-      href: null,
-      cible: 'entreprises et porteurs de projet avec un outil métier à créer ou un process à automatiser.',
-      texte: 'Back-office, interfaces métier, applications complexes. De la conception au déploiement.',
-      prix: 'Sur devis',
-    },
-    {
-      titre: 'Application mobile',
-      href: '/creation-application-mobile',
-      cible: "porteurs de projet qui veulent être sur l'App Store et le Play Store, pas juste « avoir une appli ».",
-      texte: "iOS et Android, du premier écran jusqu'à la publication. Une interface conçue pour le pouce, pas un site rétréci.",
-      prix: 'Sur devis',
-    },
-    {
       titre: 'Refonte de site',
       href: '/refonte-site-internet',
       cible: "ceux qui ont déjà un site, qui n'en sont plus fiers, et qui ne veulent pas repartir de zéro.",
@@ -147,18 +143,32 @@ export const prestations = {
       prix: 'Dès 900&nbsp;€',
     },
     {
-      titre: 'Direction artistique &amp; UI',
+      titre: 'Site e-commerce',
+      href: '/creation-site-ecommerce-nantes',
+      cible: 'marques et commerçants qui veulent vendre en ligne sans se battre avec leur outil.',
+      texte: 'Boutique Shopify ou sur mesure, fiches produits, paiement, livraison, et une prise en main que vous maîtrisez en une heure.',
+      prix: 'Dès 3&nbsp;000&nbsp;€',
+    },
+    {
+      titre: 'Maquettes &amp; identité visuelle',
       href: null,
       cible: "ceux qui ont déjà un développeur, ou qui veulent d'abord voir avant d'engager.",
-      texte: 'Maquettes haute fidélité, design system, identité visuelle. Rien ne part en développement sans votre validation.',
+      texte: 'Maquettes détaillées de chaque écran, règles graphiques, identité visuelle. Rien ne part en développement sans votre validation.',
       prix: 'Dès 600&nbsp;€',
+    },
+    {
+      titre: 'Application web ou mobile',
+      href: '/creation-application-mobile',
+      cible: "entreprises et porteurs de projet avec un outil métier à créer, un process à automatiser ou une app à publier sur l'App Store et le Play Store.",
+      texte: 'Outil interne, espace client, application iOS et Android. On définit le périmètre ensemble avant le premier écran.',
+      prix: 'Sur devis',
     },
   ],
 }
 
 export const methode = {
   label: 'Ma méthode',
-  titre: { debut: 'Une méthode claire.', suite: 'Zéro', accent: 'surprise', fin: '.' },
+  titre: { debut: 'Deux heures de votre temps.', suite: "Le reste, c'est mon", accent: 'travail', fin: '.' },
   etapes: [
     {
       numero: '01', phase: 'Découverte', titre: 'Cadrage du projet',
@@ -167,12 +177,12 @@ export const methode = {
     },
     {
       numero: '02', phase: 'Design', titre: 'Conception visuelle',
-      texte: 'Chaque écran est validé avec vous avant le développement. Typo, mise en page, DA : rien ne part en prod sans votre accord.',
+      texte: "Chaque écran est validé avec vous avant le développement. Typographie, couleurs, mise en page : rien n'est développé sans votre accord.",
       temps: 'Votre temps : 30 min de retours sur les maquettes.',
     },
     {
-      numero: '03', phase: 'Développement', titre: 'Build &amp; intégration',
-      texte: "Les maquettes deviennent du code. Pixel-perfect, testé sur tous les supports. Vous suivez l'avancement sur un lien privé, en temps réel.",
+      numero: '03', phase: 'Développement', titre: 'Développement',
+      texte: "Les maquettes deviennent un vrai site, testé sur téléphone, tablette et ordinateur. Vous suivez l'avancement sur un lien privé, en temps réel.",
       temps: 'Votre temps : zéro. Vous regardez avancer.',
     },
     {
@@ -188,10 +198,12 @@ export const realisations = {
   label: 'Réalisations',
   titre: { debut: "Ce que j'ai construit,", suite: 'et', accent: 'pourquoi.' },
   intro:
-    "Le studio a ouvert récemment. Vous trouverez ici des projets clients, des outils que j'ai conçus pour mes propres besoins, " +
-    'et des exercices de conception menés pour un secteur précis. Chaque projet dit lequel il est.',
-  introFort:
-    "Je préfère vous montrer comment je réfléchis plutôt que de vous vendre une ancienneté que je n'ai pas.",
+    "Des projets clients, des produits que j'ai conçus pour mes propres besoins, et des démonstrations par secteur. Chaque projet dit lequel il est.",
+  introFort: 'Regardez surtout comment je réfléchis.',
+  // Les cinq projets montrés sur l'accueil, dans cet ordre (1er octobre
+  // 2026). Les autres gardent leur page, leur place dans le sitemap et
+  // dans la série « autres projets » des pages projet.
+  accueil: ['cafeo', 'merel-et-fils', 'archeon', 'm-bivouak', 'tasq'],
   // Correctif mobile du 21 septembre 2026 : sous 768 px, seules les trois
   // premières cartes s'affichaient, ce bouton révélait les six autres.
   // Retiré le même jour par le ruban de cartes à défilement horizontal,
@@ -203,7 +215,7 @@ export const realisations = {
 
 export const tarifs = {
   label: 'Mes tarifs',
-  titre: { debut: 'Des offres', accent: 'claires', fin: ',', suite: 'des résultats concrets.' },
+  titre: { debut: 'Trois formules. Un prix', accent: 'écrit', fin: '.', suite: 'Aucune surprise à la fin.' },
   note: [
     "Tous les projets démarrent par un appel gratuit de 30 minutes. Vous en repartez avec une fourchette et une recommandation, même si on ne travaille pas ensemble.",
     'Pas de frais cachés. Pas de surprise en fin de mission.',
@@ -213,9 +225,12 @@ export const tarifs = {
   voirInclus: 'Voir ce qui est compris',
   lancement: {
     tag: 'Offre de lancement',
-    avant: 'Le studio démarre. Sur les prochains projets,',
-    remise: '−30 %',
-    apres: "sur les formules Une page et Site complet, en échange d'un témoignage et de l'autorisation de publier le projet.",
+    // Réécrit le 1er octobre 2026 : les prix remisés en clair plutôt
+    // qu'un pourcentage à calculer. Les montants en gras.
+    texte:
+      'Le studio a ouvert en 2026. Sur les prochains projets : la formule Une page à <strong>630&nbsp;€</strong> au lieu de 900&nbsp;€, ' +
+      'et le Site complet à <strong>1&nbsp;330&nbsp;€</strong> au lieu de 1&nbsp;900&nbsp;€. ' +
+      "En échange, un avis honnête et l'autorisation de publier le projet.",
   },
   /**
    * `nom` est le nom court, lisible en tête de carte. `h3` est le titre
@@ -231,6 +246,14 @@ export const tarifs = {
       paragraphe:
         'Une seule page, mais complète : qui vous êtes, ce que vous faites, comment vous joindre. ' +
         "C'est souvent tout ce dont un artisan a besoin pour être trouvé et appelé.",
+      // Le recto de la carte ne montre que ces quatre inclus ; la liste
+      // complète passe dans le tiroir (2 octobre 2026).
+      cles: [
+        'Design sur mesure, à votre image',
+        'Formulaire de contact ou de demande de devis',
+        'Fiche Google et référencement local configurés',
+        'Deux séries de retouches incluses',
+      ],
       inclus: [
         'Design sur mesure, à votre image',
         'Une page, tous les contenus essentiels',
@@ -246,12 +269,12 @@ export const tarifs = {
     },
     {
       nom: 'Site complet',
-      h3: 'Site vitrine complet, 4 à 6 pages',
+      h3: 'Site vitrine complet, 2 à 6 pages',
       prix: '1&nbsp;900&nbsp;€',
       recommandee: true,
       positionnement: 'Recommandé si vous avez plusieurs services à présenter.',
       paragraphe:
-        'Quatre à six pages pour détailler votre offre, montrer vos réalisations et être trouvé ' +
+        'Deux à six pages pour détailler votre offre, montrer vos réalisations et être trouvé ' +
         'sur les recherches de votre métier dans votre secteur.',
       // La seule ligne qui justifie le passage de 900 à 1 900 €. Traitée en
       // argument, pas en mention : sans elle, le visiteur croit payer des
@@ -259,11 +282,17 @@ export const tarifs = {
       ecart:
         "Ce qui change vraiment par rapport à la formule Une page : ce n'est pas le nombre de pages qui coûte, " +
         "c'est l'architecture du site, une page dédiée par service pour le référencement, et les contenus à produire pour chacune.",
+      cles: [
+        '2 à 6 pages : accueil, services, réalisations, à propos, contact',
+        'Une page par service, pour le référencement',
+        'Animations soignées',
+        'Trois séries de retouches incluses',
+      ],
       inclus: [
         'Tout ce que contient la formule Une page',
-        '4 à 6 pages : accueil, services, réalisations, à propos, contact',
+        '2 à 6 pages : accueil, services, réalisations, à propos, contact',
         'Une page par service, pour le référencement',
-        'Animations et interactions soignées',
+        'Animations soignées',
         'Référencement technique intégré',
         'Trois séries de retouches incluses',
       ],
@@ -281,6 +310,12 @@ export const tarifs = {
       paragraphe:
         'Boutique en ligne, application web ou mobile, outil métier. On définit le périmètre ensemble ' +
         'avant de chiffrer, et vous savez où vous allez avant de signer.',
+      cles: [
+        'Boutique en ligne à partir de 3 000 €',
+        'Application web ou mobile sur devis',
+        'Périmètre et budget définis ensemble',
+        'Suivi rapproché tout au long du projet',
+      ],
       inclus: [
         'Boutique en ligne à partir de 3 000 €',
         'Application web ou mobile sur devis',
@@ -301,15 +336,10 @@ export const tarifs = {
       'Séance photo : sur devis, avec un photographe partenaire',
     ],
   },
-  toujours: {
-    titre: 'Dans toutes les formules',
-    items: [
-      { titre: 'Le site vous appartient.', texte: "Le code est à vous, pas loué. Vous pouvez partir avec, quand vous voulez." },
-      { titre: 'Un seul interlocuteur.', texte: "Je conçois, je développe, je mets en ligne. Vous n'avez qu'un numéro." },
-      { titre: 'Paiement en deux fois.', texte: 'La moitié à la commande, la moitié à la mise en ligne. En trois fois pour les projets sur mesure.' },
-      { titre: 'Aucun abonnement obligatoire.', texte: 'Pas de mensualité pour garder votre site en ligne.' },
-    ],
-  },
+  // « Dans toutes les formules » a rejoint les engagements le 1er octobre
+  // 2026 : deux listes disaient la même chose (le site vous appartient /
+  // tout est à vous). Seul le paiement en deux fois y était propre, il
+  // devient un engagement.
   charge: {
     titre: 'Ce qui reste à votre charge',
     // Chantier « lot 3 » du 21 septembre 2026 — les quatre lignes deviennent
@@ -323,23 +353,10 @@ export const tarifs = {
       { chiffre: 'Option', texte: "La maintenance après livraison, si vous en voulez une. Elle n'est jamais imposée." },
     ],
   },
-  verites: [
-    {
-      titre: 'Comment on paie',
-      texte:
-        'En deux fois : la moitié à la commande, la moitié à la mise en ligne. En trois fois sur les projets sur mesure — ' +
-        '30&nbsp;% à la commande, 40&nbsp;% à la validation des maquettes, 30&nbsp;% à la mise en ligne. ' +
-        'Le site, le code et tous les accès vous appartiennent, sans abonnement.',
-    },
-    {
-      titre: 'Pour situer',
-      texte:
-        'Une agence facture généralement le même site entre 3&nbsp;500 et 8&nbsp;000&nbsp;€, avec un chef de projet à payer entre vous et la personne qui travaille. ' +
-        'Une plateforme à 29&nbsp;€/mois vous coûte 350&nbsp;€ par an, à vie, pour un template que trois de vos concurrents utilisent déjà. ' +
-        "Je ne suis pas moins cher parce que j'en fais moins. Je suis moins cher parce qu'il n'y a personne à payer entre vous et moi. " +
-        "Pas de chef de projet qui transmet, pas de commercial qui vend, pas de bureaux à financer. Le même travail, sans la chaîne.",
-    },
-  ],
+  // « Comment on paie » et « Pour situer » retirés le 2 octobre 2026 : le
+  // premier répétait l'engagement « Paiement en deux fois », le second
+  // l'argument du prix d'une seule personne, déjà dans le studio, les
+  // symptômes et la FAQ.
 }
 
 /**
@@ -389,6 +406,9 @@ export const estimateur = {
  * que l'ancienne page décrivait comme « miroir exact ». Ils sont désormais
  * tirés d'ici tous les deux, et ne peuvent donc plus diverger.
  */
+// FAQ ramenée à 9 questions le 1er octobre 2026 : « Le site m'appartient
+// vraiment ? », « Combien d'allers-retours ? » et « Que se passe-t-il
+// après la mise en ligne ? » répétaient les engagements et les tarifs.
 export const faq = {
   label: 'Questions fréquentes',
   titre: { debut: 'Les questions qu\'on me pose', suite: 'avant de', accent: 'signer.' },
@@ -398,18 +418,15 @@ export const faq = {
     lien: { libelle: 'Écrire au studio', href: 'mailto:contact@studioskone.com' },
   },
   items: [
-    { numero: '01', q: 'Combien coûte un site chez vous ?', r: "Une page à 900 €, un site complet de quatre à six pages à 1 900 €, une boutique en ligne ou une application à partir de 3 000 €. Le prix est ferme : il figure sur le devis et ne bouge pas si le périmètre ne bouge pas." },
+    { numero: '01', q: 'Combien coûte un site chez vous ?', r: "Une page à 900 €, un site complet de deux à six pages à 1 900 €, une boutique en ligne ou une application à partir de 3 000 €. Le prix est ferme : il figure sur le devis et ne bouge pas si le périmètre ne bouge pas." },
     { numero: '02', q: 'Combien de temps ça prend ?', r: "Cinq jours ouvrés pour une page, trois semaines pour un site complet, à partir du moment où j'ai vos textes et vos photos. Le délai est écrit sur le devis. Si je le dépasse de mon fait, vous ne payez pas le dépassement." },
     { numero: '03', q: "Qu'est-ce que j'ai à fournir ?", r: "Une heure d'échange au démarrage, et 30 minutes de retours sur les maquettes. Le reste, je m'en occupe. Si vous avez des textes et des photos, tant mieux. Si vous n'en avez pas, je peux les rédiger, en option, à 200 € la page." },
-    { numero: '04', q: "Le site m'appartient vraiment ?", r: "Oui, entièrement. Le code, le design, le nom de domaine, les accès à l'hébergement : tout est à votre nom, dès la mise en ligne. Vous n'êtes lié à moi par aucun abonnement. Si vous voulez confier la suite à quelqu'un d'autre un jour, vous le pouvez sans rien me demander." },
-    { numero: '05', q: 'Je pourrai modifier mon site moi-même ?', r: "Oui. Selon le projet, je mets en place une interface d'administration simple pour changer vos textes, vos photos, vos horaires ou vos tarifs. Je vous forme en visio à la mise en ligne, et je vous laisse un guide écrit. Si vous préférez me confier les modifications, c'est possible aussi, à la demande." },
-    { numero: '06', q: 'Pourquoi pas Wix, Squarespace ou un site à 400 € ?', r: "Parce que ce sont deux besoins différents. Une plateforme vous donne un template que d'autres utilisent, un abonnement à vie, et un site que vous ne pourrez pas emporter ailleurs. C'est une solution honnête si votre site est une carte de visite. Si votre site doit vous apporter des clients, vous faire sortir sur Google et vous ressembler, ça ne suffira pas. Je vous le dirai franchement pendant l'appel si votre besoin relève plutôt de la plateforme." },
-    { numero: '07', q: 'Le référencement est-il inclus ?', r: "Le référencement technique, oui : structure, vitesse, balises, données structurées, version mobile, indexation. C'est la base sans laquelle rien ne remonte. Le référencement éditorial, celui qui vous fait ranker sur des requêtes précises, demande un travail dans la durée. On peut le prévoir en accompagnement mensuel si vous le souhaitez." },
-    { numero: '08', q: "Combien d'allers-retours sont inclus ?", r: "Deux séries de retouches sur la formule Une page, trois sur la formule Site complet. Au-delà, on en parle avant, jamais après." },
-    { numero: '09', q: "Que se passe-t-il après la mise en ligne ?", r: "Un mois de suivi est inclus sur tous les projets : je corrige tout ce qui ne fonctionne pas comme prévu, sans facturer. Au-delà, je reste joignable à la demande, ou avec un forfait de maintenance mensuel si vous préférez ne pas y penser." },
-    { numero: '10', q: "Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose ?", r: "Question légitime, et c'est pour ça que tout est à votre nom dès le départ : domaine, hébergement, code, accès. Je travaille avec des technologies standards et documentées, pas avec un système maison que personne d'autre ne saurait reprendre. N'importe quel développeur peut prendre la suite. C'est exactement ce qui n'est pas vrai avec les plateformes propriétaires." },
-    { numero: '11', q: 'Le studio est récent. Pourquoi vous faire confiance ?', r: "Studio Skøne a ouvert en 2026, et je ne vais pas vous inventer dix ans d'ancienneté. Ce que je peux vous proposer à la place : une maquette complète avant que vous n'engagiez le budget de développement, un devis ferme, un délai écrit, des tarifs de lancement, et une disponibilité que je n'aurai plus dans deux ans. Regardez les projets : ils vous montrent comment je réfléchis, ce qui est plus utile qu'un compteur de clients." },
-    { numero: '12', q: "J'ai déjà un site, faut-il tout refaire ?", r: "Pas forcément. Je regarde d'abord ce qui existe. Parfois une refonte du design et de la structure suffit et coûte moitié moins qu'un site neuf. Parfois le socle est trop ancien et repartir est plus économique. Je vous dis lequel des deux pendant l'appel gratuit, même si la réponse est « gardez votre site actuel »." },
+    { numero: '04', q: 'Je pourrai modifier mon site moi-même ?', r: "Oui. Selon le projet, je mets en place une interface d'administration simple pour changer vos textes, vos photos, vos horaires ou vos tarifs. Je vous forme en visio à la mise en ligne, et je vous laisse un guide écrit. Si vous préférez me confier les modifications, c'est possible aussi, à la demande." },
+    { numero: '05', q: 'Pourquoi pas Wix, Squarespace ou un site à 400 € ?', r: "Parce que ce sont deux besoins différents. Une plateforme vous donne un template que d'autres utilisent, un abonnement à vie, et un site que vous ne pourrez pas emporter ailleurs. C'est une solution honnête si votre site est une carte de visite. Si votre site doit vous apporter des clients, vous faire sortir sur Google et vous ressembler, ça ne suffira pas. Je vous le dirai franchement pendant l'appel si votre besoin relève plutôt de la plateforme." },
+    { numero: '06', q: 'Le référencement est-il inclus ?', r: "Le référencement technique, oui : structure, vitesse, balises, données structurées, version mobile, indexation. C'est la base sans laquelle rien ne remonte. Le référencement éditorial, celui qui vous fait ranker sur des requêtes précises, demande un travail dans la durée. On peut le prévoir en accompagnement mensuel si vous le souhaitez." },
+    { numero: '07', q: "Vous êtes seul. Que se passe-t-il s'il vous arrive quelque chose ?", r: "Question légitime, et c'est pour ça que tout est à votre nom dès le départ : domaine, hébergement, code, accès. Je travaille avec des technologies standards et documentées, pas avec un système maison que personne d'autre ne saurait reprendre. N'importe quel développeur peut prendre la suite. C'est exactement ce qui n'est pas vrai avec les plateformes propriétaires." },
+    { numero: '08', q: 'Le studio est récent. Pourquoi vous faire confiance ?', r: "Studio Skøne a ouvert en 2026, et je ne vais pas vous inventer dix ans d'ancienneté. Ce que je peux vous proposer à la place : une maquette complète avant que vous n'engagiez le budget de développement, un devis ferme, un délai écrit, des tarifs de lancement, et une disponibilité que je n'aurai plus dans deux ans. Regardez les projets : ils vous montrent comment je réfléchis, ce qui est plus utile qu'un compteur de clients." },
+    { numero: '09', q: "J'ai déjà un site, faut-il tout refaire ?", r: "Pas forcément. Je regarde d'abord ce qui existe. Parfois une refonte du design et de la structure suffit et coûte moitié moins qu'un site neuf. Parfois le socle est trop ancien et repartir est plus économique. Je vous dis lequel des deux pendant l'appel gratuit, même si la réponse est « gardez votre site actuel »." },
   ],
 }
 
@@ -422,12 +439,13 @@ export const engagements = {
     { numero: '03', titre: 'Délai écrit', texte: 'Le délai figure sur le devis. Un retard de mon fait ne vous est pas facturé.' },
     { numero: '04', titre: 'Tout est à vous', texte: 'Code, design, domaine, hébergement, accès. À votre nom, sans abonnement, sans dépendance.' },
     { numero: '05', titre: 'Un mois de suivi inclus', texte: "Après la mise en ligne, je corrige ce qui doit l'être, sans facturer." },
+    { numero: '06', titre: 'Paiement en deux fois', texte: 'La moitié à la commande, la moitié à la mise en ligne. En trois fois pour les projets sur mesure.' },
   ],
 }
 
 export const contact = {
   label: 'Travaillons ensemble',
-  titre: { debut: 'Vingt minutes pour savoir', suite: 'ce que vaut', accent: 'votre projet.' },
+  titre: { debut: 'Trente minutes pour savoir', suite: 'ce que vaut', accent: 'votre projet.' },
   textes: [
     "On parle de votre activité, de ce que vous attendez du site, et de votre budget. Je vous dis ce que je ferais, ce que ça coûte et combien de temps ça prend.",
     'Vous repartez avec une recommandation claire, même si vous décidez de ne pas travailler avec moi. Pas de relance commerciale, pas de blabla.',
@@ -462,10 +480,14 @@ export const parcours = {
       { valeur: 'boutique',     libelle: 'Boutique en ligne' },
       { valeur: 'application',  libelle: 'Application' },
     ]},
-    { cle: 'size', legende: 'Quelle taille ?', options: [
+    // Tailles alignées sur les formules le 2 octobre 2026 : Site complet
+    // couvre 2 à 6 pages. 2-3 et 4-6 restent séparés pour chiffrer la
+    // rédaction au plus juste.
+    { cle: 'size', legende: 'Combien de pages ?', options: [
       { valeur: '1',       libelle: 'Une page' },
-      { valeur: '2-5',     libelle: '2 à 5 pages' },
-      { valeur: '6-12',    libelle: '6 à 12 pages' },
+      { valeur: '2-3',     libelle: '2 à 3 pages' },
+      { valeur: '4-6',     libelle: '4 à 6 pages' },
+      { valeur: 'plus',    libelle: 'Plus de 6' },
       { valeur: 'inconnu', libelle: 'Je ne sais pas encore' },
     ]},
     { cle: 'content', legende: 'Textes et photos prêts ?', options: [
@@ -484,6 +506,7 @@ export const parcours = {
 
   resultat: {
     label: 'Votre projet ressemble à',
+    attente: 'Répondez aux trois questions : le prix se construit ici.',
     mention: 'Prix ferme sur les formules Une page et Site complet, estimation à cadrer ensemble sur le sur mesure, le tout hors taxes.',
   },
 
@@ -501,7 +524,10 @@ export const parcours = {
     },
   },
 
-  actions: { precedent: 'Retour', suivant: 'Continuer', envoyer: 'Discuter de mon projet' },
+  actions: { precedent: 'Retour', suivant: 'Discuter de ce projet', envoyer: 'Discuter de mon projet', modifier: 'Modifier mes réponses' },
+  // Un budget plus bas que le prix affiché ne bloque rien : le prospect
+  // envoie quand même, prévenu. {prix} est remplacé par le script.
+  noteBudget: 'Le projet que vous décrivez démarre à {prix}. Envoyez quand même : je vous dirai franchement ce qui tient dans votre budget.',
 
   succes: { titre: 'Merci,', accent: "c'est envoyé.", texte: 'Je reviens vers vous sous 24h.' },
   erreur: { titre: 'Erreur · réessayer' },

@@ -90,7 +90,7 @@ export const PAGES = [
         h2: 'Combien coûte <span class="text-accent">une refonte ?</span>',
         tiers: [
           { name: "Refonte d'une page", price: '900 €', desc: "Nouveau design sur une page complète, reprise du contenu existant, corrections mobile et vitesse, livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos." },
-          { name: 'Refonte complète, 4 à 6 pages', price: '1 900 €', desc: "Nouvelle structure sur l'ensemble du site, nouveau design, contenu repris, migration et redirections, livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
+          { name: 'Refonte complète, 2 à 6 pages', price: '1 900 €', desc: "Nouvelle structure sur l'ensemble du site, nouveau design, contenu repris, migration et redirections, livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
           { name: 'Changement de technologie', price: 'sur devis', desc: "Quand le site actuel repose sur une base obsolète, ou sur un outil dont vous voulez sortir." },
         ],
         notes: [
@@ -365,7 +365,7 @@ export const PAGES = [
         h2: 'Combien coûte un site internet <span class="text-accent">à Nantes ?</span>',
         tiers: [
           { name: "Site d'une page", price: '900 €', desc: "Design sur mesure, mobile, mise en ligne. Livré en 5 jours ouvrés, à partir du moment où j'ai vos textes et vos photos." },
-          { name: 'Site complet, 4 à 6 pages', price: '1 900 €', desc: "Architecture complète, référencement technique, animations. Livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
+          { name: 'Site complet, 2 à 6 pages', price: '1 900 €', desc: "Architecture complète, référencement technique, animations. Livré en 3 semaines, à partir du moment où j'ai vos textes et vos photos." },
           { name: 'Avec réservation ou paiement', price: 'à partir de 3 000 €', desc: "Selon les fonctionnalités à construire et les outils à connecter." },
         ],
         notes: [

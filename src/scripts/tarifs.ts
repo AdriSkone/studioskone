@@ -1,37 +1,55 @@
 /**
- * Cartes tarif — repli de la liste des inclus sous 768 px.
+ * Cartes tarif — le tiroir du détail (2 octobre 2026).
  *
- * La liste reste dans le DOM en permanence : c'est `max-height` qui la
- * rogne en CSS (voir components/carte-tarif.css), jamais `display: none`.
- * Ce module bascule une classe, l'attribut `aria-expanded` du bouton, et
- * pose `inert` sur la liste tant qu'elle est repliée : aujourd'hui elle ne
- * contient que du texte, mais si un lien s'y ajoute un jour, `inert`
- * l'empêchera d'entrer dans l'ordre de tabulation tant qu'il est invisible
- * — au-delà de 768 px, la liste est toujours visible et n'est jamais
- * inerte.
+ * Devant, de quoi comparer les trois formules d'un coup d'œil. « Voir ce
+ * qui est compris » fait monter le détail du bas de la carte ; la flèche
+ * du haut du tiroir le referme, comme la touche Échap. Le même geste au
+ * bureau et au doigt : un libellé et une flèche, comme la FAQ.
+ *
+ * Un clic n'importe où sur la carte fait aussi basculer, dans les deux
+ * sens (demande d'Adri, 2 octobre 2026) — sauf sur le bouton de la
+ * formule, qui garde son lien, et sauf quand le visiteur sélectionne du
+ * texte : il lisait, il ne voulait pas tourner la carte.
+ *
+ * Le tiroir est dans le HTML en permanence, poussé hors de la carte par
+ * le CSS, jamais en display: none : Google et un lecteur d'écran lisent
+ * le détail. Fermé, il est inerte (hors tabulation) ; ouvert, c'est le
+ * recto qui le devient.
  */
 export function initTarifs(): void {
-  const boutons = document.querySelectorAll<HTMLButtonElement>('.carte-tarif-toggle')
-  const mq = window.matchMedia('(max-width: 767px)')
+  document.querySelectorAll<HTMLElement>('.carte-tarif').forEach((carte) => {
+    const recto = carte.querySelector<HTMLElement>('.carte-tarif-recto')
+    const tiroir = carte.querySelector<HTMLElement>('.carte-tarif-tiroir')
+    const ouvrir = carte.querySelector<HTMLButtonElement>('.carte-tarif-ouvrir')
+    const fermer = carte.querySelector<HTMLButtonElement>('.carte-tarif-fermer')
+    if (!recto || !tiroir || !ouvrir || !fermer) return
 
-  boutons.forEach((bouton) => {
-    const bloc = bouton.closest<HTMLElement>('.carte-tarif-liste-bloc')
-    const liste = bloc?.querySelector<HTMLElement>('.carte-tarif-liste')
-    if (!bloc || !liste) return
-
-    function appliquerInert(): void {
-      const doitEtreInerte = mq.matches && !bloc!.classList.contains('est-ouvert')
-      if (doitEtreInerte) liste!.setAttribute('inert', '')
-      else liste!.removeAttribute('inert')
+    function poser(ouvert: boolean, focus = true): void {
+      carte.classList.toggle('est-ouvert', ouvert)
+      ouvrir!.setAttribute('aria-expanded', String(ouvert))
+      if (ouvert) {
+        tiroir!.removeAttribute('inert')
+        recto!.setAttribute('inert', '')
+        if (focus) fermer!.focus({ preventScroll: true })
+      } else {
+        tiroir!.setAttribute('inert', '')
+        recto!.removeAttribute('inert')
+        if (focus) ouvrir!.focus({ preventScroll: true })
+      }
     }
 
-    appliquerInert()
-    mq.addEventListener('change', appliquerInert)
+    poser(false, false)
+    ouvrir.addEventListener('click', () => poser(true))
+    fermer.addEventListener('click', () => poser(false))
 
-    bouton.addEventListener('click', () => {
-      const ouvert = bloc!.classList.toggle('est-ouvert')
-      bouton.setAttribute('aria-expanded', String(ouvert))
-      appliquerInert()
+    carte.addEventListener('click', (e) => {
+      const cible = e.target as HTMLElement
+      if (cible.closest('a, button, input, label')) return
+      if (window.getSelection()?.toString()) return
+      poser(!carte.classList.contains('est-ouvert'), false)
+    })
+    carte.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && carte.classList.contains('est-ouvert')) poser(false)
     })
   })
 }

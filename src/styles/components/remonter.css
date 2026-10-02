@@ -55,8 +55,11 @@
   transition: transform var(--dur-moyenne) var(--ease);
 }
 
+/* Survol en accent, comme le bouton de la barre : sur le papier, tout
+   ce qui se survole passe au bleu de Prusse (1er octobre 2026). */
 .remonter:hover {
-  background: var(--encre);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--papier);
 }
 /* La flèche monte de 2 px : le geste annonce la direction. */

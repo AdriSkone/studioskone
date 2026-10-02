@@ -37,13 +37,6 @@ import { chargerGsap, mouvementReduit } from '../lib/animations'
 // reprise telle quelle du prototype validé le 17 septembre.
 const FENETRE = 0.05
 
-// Durée de l'épingle, en pourcentage de la hauteur de la fenêtre.
-const LONGUEUR_PIN = '240%'
-
-// Les derniers 12 % du parcours épinglé tiennent le tracé plein sur la
-// dernière étape avant de libérer la section.
-const RELACHE = 0.88
-
 interface Geometrie {
   fractions: number[]
   remplir(p: number): void
@@ -88,23 +81,6 @@ export function initMethode(): void {
     }
   }
 
-  // Tracé horizontal : d'un bord de l'écran à l'autre. Il touche déjà le
-  // premier point au départ — l'étape 01 est active dès l'arrivée, son
-  // point ne peut pas être vide.
-  function horizontale(): Geometrie {
-    const rail = section.querySelector('.rail-h') as HTMLElement
-    const plein = rail.querySelector('.rail-h-plein') as HTMLElement
-    const largeur = rail.getBoundingClientRect().width
-    const xs = points().map((p) => centre(p, rail).x / largeur)
-    const depart = xs[0]
-    return {
-      fractions: xs.map((x) => (x - depart) / (1 - depart)),
-      remplir: (p) => {
-        plein.style.transform = `scaleX(${depart + p * (1 - depart)})`
-      },
-    }
-  }
-
   let geo: Geometrie | undefined
 
   function rendre(p: number): void {
@@ -128,26 +104,61 @@ export function initMethode(): void {
 
     section.classList.add('methode--animee')
 
+    const liste = section.querySelector('.etapes') as HTMLElement
+    const scene = section.querySelector('.methode-scene') as HTMLElement
+
     ScrollTrigger.matchMedia({
-      // Grand écran : la section s'épingle, le tracé est horizontal.
+      // Grand écran : la section se fige à l'arrivée et reste figée jusqu'à
+      // la fin de l'étape 4 (demande d'Adri, 1er octobre 2026). Pendant ce
+      // temps, la colonne des étapes remonte dans la section, juste assez
+      // pour que la dernière durée apparaisse, et le tracé se remplit.
       '(min-width: 1024px)': () => {
+        let course = 0
+        // La section figée fait exactement la hauteur de l'écran : ses
+        // étapes y remontent de `course`. Gardée à sa hauteur naturelle,
+        // elle laissait ces mêmes pixels de vide sombre sous l'étape 4,
+        // une fois libérée (2 octobre 2026).
+        function preparer(): void {
+          section.style.height = ''
+          section.style.overflow = ''
+          scene.style.transform = ''
+          course = Math.max(0, section.offsetHeight - window.innerHeight)
+          if (course > 0) {
+            section.style.height = `${window.innerHeight}px`
+            section.style.overflow = 'clip'
+          }
+        }
         const st = ScrollTrigger.create({
           trigger: section,
           start: 'top top',
-          end: `+=${LONGUEUR_PIN}`,
+          end: () => {
+            preparer()
+            return `+=${course + window.innerHeight * 1.2}`
+          },
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
           onRefresh: (self) => {
-            geo = horizontale()
-            rendre(borne(self.progress / RELACHE))
+            geo = verticale()
+            rendre(self.progress)
           },
-          onUpdate: (self) => rendre(borne(self.progress / RELACHE)),
+          onUpdate: (self) => {
+            // La colonne a fini de remonter aux trois quarts du parcours :
+            // le dernier quart tient l'étape 4 à l'écran avant de libérer.
+            const t = borne(self.progress / 0.75)
+            scene.style.transform = `translateY(${-t * course}px)`
+            rendre(self.progress)
+          },
         })
-        return () => st.kill()
+        return () => {
+          st.kill()
+          scene.style.transform = ''
+          section.style.height = ''
+          section.style.overflow = ''
+        }
       },
-      // Sous 1024 px : pas d'épingle, le tracé vertical suit le défilement.
+      // Sous 1024 px : pas d'épingle, le tracé suit le défilement.
       '(max-width: 1023px)': () => {
-        const liste = section.querySelector('.etapes') as HTMLElement
         const st = ScrollTrigger.create({
           trigger: liste,
           start: 'top 62%',

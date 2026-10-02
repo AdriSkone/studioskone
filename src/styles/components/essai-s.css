@@ -1,0 +1,49 @@
+/* ============================================================
+   ESSAI, 1er octobre 2026 : ouverture au s du logo, grand s en fond.
+   Inerte sans ?essai-s dans l'adresse (src/scripts/essai-s.ts).
+   ============================================================ */
+
+.essai-ouverture {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: var(--papier);
+  cursor: pointer;
+}
+.essai-ouverture-logo { width: min(64vw, 560px); height: auto; overflow: visible; color: var(--encre); }
+.essai-encre { fill: var(--encre); }
+.essai-accent { fill: var(--accent); }
+.essai-ouverture-en-cours body { overflow: hidden; }
+
+/* Le grand s : derrière le contenu, jamais devant. Il déborde, la section
+   le rogne sans devenir un conteneur de défilement (clip et non hidden :
+   l'en-tête collant de la méthode continue de coller). */
+.essai-s #hero,
+.essai-s #process,
+.essai-s #contact { position: relative; overflow-x: clip; isolation: isolate; }
+.essai-s #hero > :not(.essai-fond),
+.essai-s #process > :not(.essai-fond),
+.essai-s #contact > :not(.essai-fond) { position: relative; z-index: 1; }
+
+.essai-fond {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  /* Il tient dans sa section : au-delà, la section suivante le recouvre
+     et le coupe net. */
+  height: 86%;
+  width: auto;
+  top: 7%;
+  right: -6%;
+  color: var(--encre);
+  opacity: 0.07;
+}
+.sombre > .essai-fond { color: var(--accent-clair); opacity: 0.14; }
+#process > .essai-fond { right: auto; left: -14%; top: 7%; height: 86%; }
+
+@media (max-width: 767px) {
+  .essai-fond { height: 60%; top: 34%; right: -30%; }
+  #process > .essai-fond { left: -45%; height: 60%; top: 20%; }
+}

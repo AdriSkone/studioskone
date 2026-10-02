@@ -58,6 +58,13 @@
   line-height: var(--leading-corps);
   color: var(--gris);
 }
+/* Posée en carte depuis le 1er octobre 2026 (STYLE_GUIDE § 5 : un titre
+   et un texte, c'est une carte). Sur le papier ombré, le gris tombe à
+   4.67 : le texte secondaire repasse en encre, comme le veut la charte. */
+.carte-prestation.carte { padding-top: 32px; gap: 0; }
+.carte-prestation.carte .carte-prestation-texte { color: var(--encre); }
+.carte-prestation.carte .carte-prestation-texte + .carte-prestation-texte { margin-top: 12px; }
+.carte-prestation.carte .carte-prestation-tete { margin-bottom: 16px; }
 
 /* « Pour qui » : l'intitulé reste en encre, la réponse passe en gris. */
 .carte-prestation-cible strong { font-weight: 500; color: var(--encre); }

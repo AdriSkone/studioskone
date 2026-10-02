@@ -4,61 +4,69 @@
 
 .pied { padding-block: var(--section-s); }
 
-/* Lot 6 — statut et mention rangés sur la même colonne, l'un sous
-   l'autre : ils partageaient jusqu'ici une ligne avec la mention plaquée
-   à droite, sans rapport visuel avec le statut. */
-.pied-cta-statut { display: flex; flex-direction: column; gap: 12px; }
+/* ─── Refonte du 2 octobre 2026 ────────────────────────────────
+   En haut, la phrase et le statut à gauche, trois colonnes à droite. Au
+   milieu, « .skøne » sur toute la largeur : la signature du site. En
+   bas, la zone d'intervention puis les mentions. */
+.pied-marque { --col: 1 / span 5; display: flex; flex-direction: column; gap: 28px; }
+.pied-phrase {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  max-width: 24em;
+}
+.pied-statut { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
 
-/* Le bloc de clôture ouvre le pied : un filet le sépare de ce qui suit,
-   il n'a pas besoin d'un second fond puisque la section est déjà sombre. */
-.pied-clore { padding-bottom: var(--section-s); }
-
-/* Le pied est une section sombre : le mot passe au papier, et le point
-   du logo au bleu clair — le bleu de Prusse y tombe à 1.7 de contraste,
-   il n'y est lisible ni comme texte ni comme signe. La règle vise la
-   classe interne du SVG, posée par partials.mjs. */
+/* Le logo en grand. Sa largeur suit celle de la grille ; le point passe
+   au bleu clair, le bleu de Prusse y tombe à 1.7 de contraste. */
 .pied-logo {
+  --col: 1 / -1;
   display: block;
+  margin-top: var(--section-s);
   color: var(--sombre-texte);
+  transition: opacity var(--dur-rapide) var(--ease);
 }
+.pied-logo .logo { width: 100%; height: auto; }
 .pied-logo .logo .logo-c1 { fill: var(--accent-clair); }
-
-.pied-intro {
-  --col: 1 / span 4;
-  margin-top: 20px;
-  font-size: 0.9375rem;
-  line-height: var(--leading-corps);
-}
+.pied-logo:hover { opacity: 0.9; }
 
 .pied-zone {
-  --col: 1 / span 4;
-  margin-top: 16px;
+  --col: 1 / span 8;
+  margin-top: 40px;
   font-size: var(--text-petit);
   line-height: var(--leading-corps);
   color: var(--gris);
 }
 
-.pied-colonne { display: flex; flex-direction: column; gap: 10px; }
-
-/* Au-dessus de 1024 px, les lignes sont posées à la main. Placées
-   d'elles-mêmes, les colonnes de liens tombaient à la suite du dernier
-   bloc de gauche — le paragraphe de localisation —, et « Le studio »
-   démarrait 180 px sous le logo. Elles prennent désormais les trois
-   lignes du bloc de marque, avec la même marge haute que le logo : leurs
-   titres s'alignent sur lui. */
-@media (min-width: 1024px) {
-  .pied-logo    { grid-row: 2; }
-  .pied-intro   { grid-row: 3; }
-  .pied-zone    { grid-row: 4; }
-  .pied-colonne { grid-row: 2 / span 3; align-self: start; margin-top: var(--section-s); }
+.pied-colonne--1 { --col: 7 / span 2; }
+.pied-colonne--2 { --col: 9 / span 2; }
+.pied-colonne--contact { --col: 11 / span 2; }
+/* Entre 1024 et 1279 px, deux colonnes de grille ne suffisent pas à
+   l'adresse mail : la colonne contact en prend trois. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .pied-colonne--1 { --col: 6 / span 2; }
+  .pied-colonne--2 { --col: 8 / span 2; }
+  .pied-colonne--contact { --col: 10 / span 3; }
 }
 
-/* Sous 1024 px, les colonnes passent sous le paragraphe de localisation :
-   sans cet écart, « Le studio » venait s'y coller et se lisait comme la
-   suite de la phrase. */
+/* Tablette : la phrase sur toute la largeur, les trois colonnes dessous. */
 @media (max-width: 1023px) {
-  .pied-colonne { margin-top: 48px; }
+  .pied-marque { --col: 1 / -1; }
+  .pied .pied-colonne { --col: span 4; margin-top: 56px; }
+  .pied-zone { --col: 1 / -1; }
 }
+/* Téléphone (grille de quatre colonnes) : deux colonnes de liens côte à
+   côte, le contact sur toute la largeur dessous. */
+@media (max-width: 767px) {
+  .pied .pied-colonne { --col: span 2; margin-top: 48px; }
+  .pied .pied-colonne--contact { --col: 1 / -1; }
+  .pied-logo { margin-top: 64px; }
+}
+
+.pied-colonne { display: flex; flex-direction: column; gap: 10px; }
 
 .pied-titre {
   font-size: var(--text-petit);

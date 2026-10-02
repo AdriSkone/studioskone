@@ -105,6 +105,22 @@ body { padding-top: var(--nav-h); }
   color: var(--gris);
 }
 
+/* Chaque mention porte le point du logo, en accent : la même signature
+   que le ruban et les cartes, pas un pictogramme (1er octobre 2026). */
+.hero-preuves span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-preuves span::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
 /* Le ruban est une section : il touche les deux bords et n'a pas besoin
    de sortir des marges d'une autre. */
 .ruban { margin-top: var(--section-s); }
@@ -221,6 +237,22 @@ body { padding-top: var(--nav-h); }
   .probleme-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+/* L'encart « Le studio est jeune » prolonge la section studio, il n'en
+   ouvre pas une nouvelle : 160 px de chaque côté s'additionnaient à
+   ceux des sections voisines, soit plus de 300 px de vide autour d'une
+   carte qui a déjà son propre padding (1er octobre 2026). Il colle au
+   studio et ne garde qu'un --section-s avant les prestations. */
+#transparence { padding-top: 0; padding-bottom: var(--section-s); }
+
+/* La phrase du pivot répond à la liste : « ça », ce sont les six
+   symptômes. À 160 px de chaque côté de la bascule clair / sombre, le
+   lien se perdait (1er octobre 2026). La liste descend donc presque au
+   bord de sa section, et la phrase remonte vers le haut de la sienne :
+   l'écart tombe de 320 à 144 px au bureau. Le bas du pivot garde sa
+   respiration entière avant le studio. */
+#probleme { padding-bottom: 48px; }
+#pivot    { padding-top: var(--section-s); }
+
 /* ─── Le pivot ──────────────────────────────────────────────
    Une phrase, seule, en grand. C'est tout ce que porte la section. */
 .pivot-texte {
@@ -285,6 +317,25 @@ body { padding-top: var(--nav-h); }
   gap: 16px;
   font-size: var(--text-corps-l);
   line-height: var(--leading-corps);
+}
+
+/* La phrase qu'on retient, en grand et signée (1er octobre 2026). En
+   Bricolage, pas en italique : la charte n'a pas de caractère à
+   empattements. Les guillemets sont dans le texte, en encre : aucun
+   ornement, aucun accent de couleur. */
+.studio-citation { margin: 32px 0 24px; }
+.studio-citation blockquote p {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: calc(var(--wdth-display) * 1%);
+  font-size: clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-h2);
+}
+.studio-citation figcaption {
+  margin-top: 16px;
+  font-size: var(--text-petit);
+  color: var(--gris);
 }
 
 /* Deux colonnes courtes : l'espace seul les sépare, aucun trait. */
@@ -421,46 +472,28 @@ body { padding-top: var(--nav-h); }
 .tarifs-options-intro { font-size: var(--text-petit); color: var(--gris); }
 .tarifs-options-liste { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: var(--text-petit); }
 
-.tarifs-toujours, .tarifs-charge { margin-top: var(--section-s); }
+.tarifs-charge { margin-top: var(--section-s); }
 
-/* « Dans toutes les formules » : quatre cartes, 2 × 2 sur desktop. */
-.tarifs-arguments {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
-  row-gap: var(--grille-gouttiere);
-  margin-top: 24px;
-}
-.tarifs-argument-titre {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-stretch: calc(var(--wdth-display) * 1%);
-  font-size: var(--text-h3);
-  letter-spacing: var(--tracking-h3);
-}
-.tarifs-argument-texte { margin-top: 8px; font-family: var(--font-texte); font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
-
-/* « Ce qui reste à votre charge » : même grille de cartes, mais le chiffre
-   mène — c'est le fond inversé du bloc précédent : là, ce que fait le
-   studio ; ici, ce qui reste au client. */
+/* « Ce qui reste à votre charge » : une liste de phrases courtes, plus
+   des cartes (1er octobre 2026). Le montant mène, le texte suit, l'espace
+   seul sépare les lignes (STYLE_GUIDE § 5). */
 .tarifs-charge-liste {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--grille-gouttiere);
-  row-gap: var(--grille-gouttiere);
+  row-gap: 32px;
   margin-top: 24px;
+  max-width: 64rem;
 }
+.tarifs-charge-ligne { display: grid; grid-template-columns: 9rem 1fr; column-gap: 24px; align-items: baseline; }
 .tarifs-charge-chiffre {
-  /* En display, comme les titres des autres cartes : la mono à cette
-     taille lisait « 15 € / an » comme une ligne de code. */
   font-family: var(--font-display);
   font-weight: 700;
   font-stretch: calc(var(--wdth-display) * 1%);
-  font-size: var(--text-h3);
-  letter-spacing: var(--tracking-h3);
+  font-size: var(--text-corps-l);
   font-variant-numeric: tabular-nums;
 }
-.tarifs-charge-texte { margin-top: 8px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
+.tarifs-charge-texte { font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 @media (max-width: 1023px) {
   /* Deux colonnes, pas une. En une seule, la carte s'étalait sur 688 à
@@ -484,20 +517,9 @@ body { padding-top: var(--nav-h); }
 }
 @media (max-width: 767px) {
   .tarifs-grille { display: flex; flex-direction: column; }
-  .tarifs-arguments,
   .tarifs-charge-liste { grid-template-columns: 1fr; }
+  .tarifs-charge-ligne { grid-template-columns: 1fr; row-gap: 4px; }
 }
-
-/* Les deux « vérités » : même traitement en carte. */
-.verites {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--grille-gouttiere);
-  row-gap: var(--grille-gouttiere);
-  margin-top: var(--section-s);
-}
-.verite-titre { font-size: var(--text-h3); }
-.verite-texte { margin-top: 12px; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--encre); }
 
 /* ─── Estimateur ────────────────────────────────────────────── */
 .estimateur-tete { display: flex; flex-direction: column; gap: 12px; }
@@ -508,8 +530,7 @@ body { padding-top: var(--nav-h); }
 .estimateur-disclaimer { margin-top: 16px; }
 
 /* ─── FAQ ───────────────────────────────────────────────────── */
-.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; margin-top: 32px; font-size: var(--text-petit); color: var(--gris); }
-.faq { margin-top: 48px; }
+.faq-relance { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; margin-top: 40px; font-size: var(--text-petit); color: var(--gris); }
 
 /* ─── Engagements ─────────────────────────────────────────────
    Cinq cartes, deux colonnes sur desktop. La dernière prend la ligne
@@ -540,10 +561,14 @@ body { padding-top: var(--nav-h); }
    qu'un espacement de section standard. En retirant le padding bas d'ici,
    seul celui du pied (déjà une des trois valeurs : 96/160/240) subsiste. */
 #contact { padding-bottom: 0; }
+/* Le pied porte --section-s (96 px) : il manquait la différence pour que
+   le vide entre le bouton du contact et le pied vaille --section-m, comme
+   entre toutes les autres sections (2 octobre 2026). */
+body:has(#contact.sombre) .pied { padding-top: var(--section-m); }
 
 /* ─── Petit écran ───────────────────────────────────────────── */
 @media (max-width: 1023px) {
-  /* .verites, .benefices et .engagements sont déjà à deux colonnes en
+  /* .benefices et .engagements sont déjà à deux colonnes en
      base : rien à resserrer ici. */
   .prestations-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -560,7 +585,6 @@ body { padding-top: var(--nav-h); }
 @media (max-width: 767px) {
   .probleme-liste,
   .prestations-grille,
-  .verites,
   .benefices,
   .engagements { grid-template-columns: 1fr; }
   .metiers { flex-direction: column; align-items: stretch; }

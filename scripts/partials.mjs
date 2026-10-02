@@ -115,68 +115,57 @@ export function navigation({ prefixe = '' } = {}) {
  *   repris du générateur des pages prestation, qui le faisait déjà.
  */
 export function piedDePage({ prefixe = '', pageCourante = '' } = {}) {
-  // Chaque colonne dit où elle va. Sans --col, la grille les plaçait
-  // d'elle-même, à la suite des blocs précédents — d'où un pied où les
-  // rubriques dérivaient vers la droite sans alignement.
-  const placements = ['6 / span 2', '8 / span 3']
+  // Refonte du 2 octobre 2026 : la phrase et le statut à gauche, les
+  // trois colonnes à droite, puis « .skøne » sur toute la largeur, la
+  // signature du site. Les colonnes se placent en CSS (pied-de-page.css) :
+  // un --col écrit ici battrait celui de la tablette et du téléphone.
 
   const colonnes = pied.colonnes
     .map(
-      (c, i) => `        <nav class="pied-colonne" style="--col: ${placements[i] ?? 'auto'}" aria-label="${c.aria}">
-          <span class="pied-titre">${c.titre}</span>
-          <div class="pied-liste">
+      (c, i) => `      <nav class="pied-colonne pied-colonne--${i + 1}" aria-label="${c.aria}">
+        <span class="pied-titre">${c.titre}</span>
+        <div class="pied-liste">
 ${c.liens
   .filter((l) => l.href !== pageCourante)
-  .map((l) => `            <a href="${l.href}">${l.libelle}</a>`)
+  .map((l) => `          <a href="${l.href}">${l.libelle}</a>`)
   .join('\n')}
-          </div>
-        </nav>`
+        </div>
+      </nav>`
     )
     .join('\n')
 
-  const legal = pied.legal.map((l) => `<a href="${l.href}">${l.libelle}</a>`).join('\n            ')
+  const legal = pied.legal.map((l) => `<a href="${l.href}">${l.libelle}</a>`).join('\n          ')
 
-  /**
-   * Lot 6 — le bouton « Parlons-en » faisait doublon avec « Discuter de
-   * mon projet », le vrai bouton de soumission de la section Contact, à
-   * quelques centaines de pixels au-dessus (voir build-accueil.mjs,
-   * contact()). Un seul bouton principal suffit : celui-ci disparaît, et
-   * son libellé est déclaré en retrait dans verifier-copy.mjs.
-   *
-   * Le statut et la mention, eux, restent : simplement rangés sur la même
-   * colonne l'un au-dessus de l'autre — ils étaient jusqu'ici sur la même
-   * ligne, l'un à gauche, l'autre plaqué à droite, sans rapport visuel
-   * entre eux.
-   */
   return `  <footer class="pied sombre" id="footer">
     <div class="grille">
-      <div class="sombre sombre sombre--pleine-largeur" style="--col: 1 / -1">
-        <div class="pied-cta-statut" style="--col: 1 / span 6">
+      <div class="pied-marque">
+        <p class="pied-phrase">${pied.tagline}</p>
+        <div class="pied-statut">
           <p class="statut">${pied.cta.statut}</p>
           <p class="sombre-mention">${pied.cta.mention}</p>
         </div>
       </div>
 
-      <a class="pied-logo" style="--col: 1 / span 4; margin-top: var(--section-s)" href="${prefixe || '#'}" aria-label="${studio.nom}, accueil">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
-      <p class="pied-intro">${pied.tagline}</p>
-      <p class="pied-zone">${icones.lieu} ${pied.zone}</p>
-
 ${colonnes}
 
-        <div class="pied-colonne" style="--col: 11 / span 2">
-          <span class="pied-titre">Contact</span>
-          <div class="pied-liste">
-            <a href="mailto:${studio.email}">${studio.email}</a>
-            <a href="tel:${studio.telephoneLien}">${icones.telephone} ${studio.telephone}</a>
-            <a href="${studio.instagram}" target="_blank" rel="noopener noreferrer">${icones.instagram} Instagram</a>
-            <a href="${studio.ficheGoogle}" target="_blank" rel="noopener noreferrer">${icones.etoile} ${pied.ficheGoogleLibelle}</a>
-          </div>
+      <div class="pied-colonne pied-colonne--contact">
+        <span class="pied-titre">Contact</span>
+        <div class="pied-liste">
+          <a href="mailto:${studio.email}">${studio.email}</a>
+          <a href="tel:${studio.telephoneLien}">${icones.telephone} ${studio.telephone}</a>
+          <a href="${studio.instagram}" target="_blank" rel="noopener noreferrer">${icones.instagram} Instagram</a>
+          <a href="${studio.ficheGoogle}" target="_blank" rel="noopener noreferrer">${icones.etoile} ${pied.ficheGoogleLibelle}</a>
         </div>
+      </div>
+
+      <a class="pied-logo" href="${prefixe || '#'}" aria-label="${studio.nom}, revenir en haut">${logoSvg('logo_skone_sansh2.svg', 'logo')}</a>
+
+      <p class="pied-zone">${icones.lieu} ${pied.zone}</p>
 
       <div class="pied-bas">
         <span>${pied.copyright}</span>
         <div class="pied-bas-liens">
-            ${legal}
+          ${legal}
         </div>
       </div>
     </div>

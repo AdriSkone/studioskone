@@ -1,6 +1,7 @@
 /* ============================================================
    Parcours unique — estimateur et contact fusionnés
-   Une question par écran, sur fond sombre.
+   Deux écrans, sur fond sombre (2 octobre 2026) : les trois questions
+   du prix avec le prix en direct à côté, puis le contact.
    ============================================================ */
 
 .parcours { margin-top: 64px; }
@@ -11,24 +12,6 @@
 .parcours-tete { display: flex; flex-direction: column; gap: 48px; }
 @media (max-width: 767px) {
   .parcours-tete { gap: 32px; }
-}
-
-/* ─── Progression ───────────────────────────────────────────
-   Un filet qui se remplit, jamais un compteur « étape 2 sur 5 » : le
-   visiteur voit où il en est sans qu'on lui annonce ce qui reste. */
-.parcours-progression {
-  height: 1px;
-  background: var(--filet-sombre);
-  margin-bottom: 64px;
-}
-
-.parcours-progression-remplissage {
-  display: block;
-  height: 100%;
-  background: var(--accent-clair);
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform var(--dur-base) var(--ease);
 }
 
 /* ─── Écrans ────────────────────────────────────────────────
@@ -47,6 +30,70 @@
   line-height: var(--leading-titre);
   letter-spacing: var(--tracking-h3);
   margin-bottom: 32px;
+}
+
+/* ─── Écran 1 : questions et prix en direct ────────────────────
+   Les questions à gauche, toutes visibles ; le prix à droite, collé
+   pendant qu'on répond. Au téléphone, le prix devient un bandeau collé
+   en bas de l'écran : formule, prix, bouton. */
+.parcours-direct {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--grille-gouttiere);
+  align-items: start;
+}
+.parcours-direct[hidden] { display: none; }
+.parcours-questions { display: flex; flex-direction: column; gap: 48px; }
+.parcours-question { border: 0; padding: 0; margin: 0; min-width: 0; }
+.parcours-question .parcours-legende { margin-bottom: 20px; }
+
+.parcours-panneau {
+  position: sticky;
+  top: calc(var(--nav-h-reduite) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--rond-bloc);
+  border: 1px solid var(--filet-sombre);
+}
+.parcours-panneau-label { font-size: var(--text-petit); opacity: 0.72; }
+.parcours-ajustement { font-size: var(--text-petit); line-height: var(--leading-corps); opacity: 0.85; }
+.parcours-cta { margin-top: 16px; align-self: flex-start; }
+.parcours-panneau .parcours-mention { margin-top: 8px; }
+
+.parcours-recap { font-size: var(--text-corps); margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; }
+.parcours-recap > span { opacity: 0.85; }
+.parcours-modifier { font-size: var(--text-petit); color: var(--sombre-texte); text-decoration: underline; text-underline-offset: 3px; }
+.parcours-modifier:hover { color: var(--accent-clair); }
+.parcours-note-budget { margin: -24px 0 40px; max-width: 60ch; font-size: var(--text-petit); line-height: var(--leading-corps); color: var(--accent-clair); }
+.parcours-contact .parcours-question { margin-bottom: 40px; }
+.parcours-contact .parcours-question .parcours-legende { font-size: var(--text-h3); }
+
+@media (max-width: 1023px) {
+  .parcours-direct { grid-template-columns: 1fr; }
+  .parcours-panneau {
+    top: auto;
+    bottom: 12px;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2px 16px;
+    padding: 16px 18px;
+    background: var(--sombre);
+  }
+  .parcours-panneau-label,
+  .parcours-delai,
+  .parcours-ajustement,
+  .parcours-panneau .parcours-mention { display: none; }
+  .parcours-panneau .parcours-offre { grid-column: 1; font-size: var(--text-petit); }
+  .parcours-panneau .parcours-prix { grid-column: 1; font-size: 1.75rem; }
+  .parcours-panneau .parcours-cta { grid-column: 2; grid-row: 1 / span 2; margin: 0; padding: 12px 16px; font-size: var(--text-petit); }
+  /* Avant la première réponse, le bandeau ne dit qu'une phrase, sur
+     toute sa largeur : le bouton n'a encore rien à proposer. */
+  .parcours-panneau .parcours-cta:disabled { display: none; }
+  .parcours-panneau:has(.parcours-cta:disabled) .parcours-offre { grid-column: 1 / -1; }
 }
 
 /* ─── Choix ─────────────────────────────────────────────────
@@ -102,7 +149,6 @@
 }
 
 /* ─── Résultat ──────────────────────────────────────────────── */
-.parcours-resultat { display: flex; flex-direction: column; gap: 12px; }
 
 .parcours-offre { font-size: var(--text-corps-l); font-weight: 500; }
 
@@ -110,7 +156,7 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-stretch: calc(var(--wdth-display) * 1%);
-  font-size: var(--text-h1);
+  font-size: clamp(2.25rem, 1.4rem + 2.6vw, 4rem);
   line-height: var(--leading-titre);
   letter-spacing: var(--tracking-h1);
 }

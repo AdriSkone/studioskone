@@ -237,6 +237,13 @@ h3, .t-h3 { font-size: var(--text-h3); line-height: 1.15; }
 .section-m { padding-block: var(--section-m); }
 .section-l { padding-block: var(--section-l); }
 
+/* Un seul vide entre deux sections du même fond (2 octobre 2026). Deux
+   sections claires qui se suivent additionnaient leurs marges : 160 en
+   bas de l'une plus 160 en haut de l'autre, le double de ce qu'on voit
+   au passage du clair au sombre. La seconde perd sa marge haute : le
+   vide entre deux sections vaut partout --section-m. */
+.section-m:not(.sombre) + .section-m:not(.sombre) { padding-top: 0; }
+
 /* ─── Filets ─────────────────────────────────────────────────
    Le site sépare au filet, jamais à l'ombre ni au cadre flou. */
 .filet {

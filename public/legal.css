@@ -90,6 +90,13 @@ ul, ol { list-style: none; }
 }
 .legal-back:hover { color: var(--accent-profond); }
 
+/* La flèche et le logo n'avaient pas de taille : la flèche prenait toute
+   la largeur, le logo ses 283 px d'origine et faisait déborder la page
+   au téléphone (2 octobre 2026). */
+.legal-back { display: inline-flex; align-items: center; gap: 8px; }
+.legal-back svg { width: 18px; height: 18px; flex: none; }
+.legal-brand img { display: block; height: 26px; width: auto; }
+
 /* ─── Contenu ───────────────────────────────────────────────── */
 .legal-content {
   max-width: 76ch;

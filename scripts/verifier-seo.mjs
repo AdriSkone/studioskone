@@ -54,11 +54,21 @@ function balises(html) {
  */
 const CHANGEMENTS_DECLARES = {
   'index.html': {
-    // La balise meta:description elle-même n'a pas changé : seules ces deux
-    // balises portaient le délai, désormais « 5 jours à 3 semaines » au lieu
-    // de « 2 à 6 semaines ».
-    'meta:og:description':     'Nouvelle grille tarifaire du 18 septembre 2026 : le délai passe de « 2 à 6 semaines » à « 5 jours à 3 semaines ».',
-    'meta:twitter:description':'Nouvelle grille tarifaire du 18 septembre 2026 : le délai passe de « 2 à 6 semaines » à « 5 jours à 3 semaines ».',
+    // Réécriture de l'accueil du 1er octobre 2026 (branche
+    // copy/hero-storytelling), textes fournis par Adri : le title et ses
+    // copies sociales portent la requête locale « création de site
+    // internet à Nantes » et la cible (artisans, TPE) ; les descriptions
+    // reprennent le nouveau H1 « Un site pensé pour faire sonner votre téléphone ».
+    // og et twitter description avaient déjà changé le 18 septembre
+    // (délai « 5 jours à 3 semaines »), qui reste dans le nouveau texte.
+    'title':                   'Réécriture de l’accueil du 1er octobre 2026 : requête locale et cible dans le titre.',
+    'meta:description':        'Réécriture de l’accueil du 1er octobre 2026 : requête locale, cible, prix ferme, délai, devis gratuit.',
+    'meta:og:title':           'Réécriture de l’accueil du 1er octobre 2026 : même valeur que le title.',
+    'meta:twitter:title':      'Réécriture de l’accueil du 1er octobre 2026 : même valeur que le title.',
+    'meta:og:description':     'Réécriture de l’accueil du 1er octobre 2026 : reprend le nouveau H1. Délai inchangé depuis le 18 septembre.',
+    'meta:twitter:description':'Réécriture de l’accueil du 1er octobre 2026 : reprend le nouveau H1. Délai inchangé depuis le 18 septembre.',
+    'meta:og:image:alt':       'Réécriture de l’accueil du 1er octobre 2026 : l’alt ne cite plus l’ancien H1.',
+    'meta:twitter:image:alt':  'Réécriture de l’accueil du 1er octobre 2026 : l’alt ne cite plus l’ancien H1.',
     'jsonld:ProfessionalService': 'Les six Offer deviennent trois formules à prix fermes (900, 1900, 3000) plus l’option design à 600, avec priceCurrency et availability.',
     'jsonld:FAQPage': 'Les réponses aux questions 01, 02 et 08 suivent la même nouvelle grille tarifaire (900 / 1 900 / 3 000, délais en jours et en semaines) que le reste de la page.',
   },
@@ -125,6 +135,23 @@ const ALTS_RENOMMES = {
     'Ofria · application mobile qui génère des idées cadeaux personnalisées par IA',
 }
 
+/**
+ * Les alt qui quittent une page avec leur image, et pourquoi.
+ *
+ * 1er octobre 2026 — l'accueil ne montre plus que cinq projets. Les
+ * vignettes d'Ofria, MyBoat, Garantibox et Pépite en sortent, leur alt
+ * avec elles. Chaque projet garde sa page, où son image et son alt sont
+ * toujours vérifiés.
+ */
+const ALTS_RETIRES = {
+  'index.html': [
+    'Garantibox · application SaaS pour centraliser garanties et factures',
+    'MyBoat · application mobile marketplace bateaux iOS et Android',
+    'Ofria · application mobile qui génère des idées cadeaux personnalisées par IA',
+    "Pépite · application mobile de récompenses familiales, écran de passation du téléphone à l'enfant",
+  ],
+}
+
 /** Les alt d'image : ils comptent autant que les meta. */
 function alts(html) {
   return [...html.matchAll(/<img\b[^>]*\balt="([^"]*)"[^>]*>/gi)].map((m) => m[1]).sort()
@@ -167,6 +194,7 @@ for (const fichier of process.argv.slice(2)) {
       x &&
       !altApres.includes(x) &&
       !ALTS_DEVENUS_TEXTE.includes(x) &&
+      !(ALTS_RETIRES[fichier] || []).includes(x) &&
       !(ALTS_RENOMMES[x] && altApres.includes(ALTS_RENOMMES[x]))
   )
   if (altPerdus.length) soucis.push(`  − ${altPerdus.length} attribut(s) alt perdu(s) :\n      ${altPerdus.slice(0, 6).join('\n      ')}`)

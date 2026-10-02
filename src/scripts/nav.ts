@@ -25,6 +25,9 @@ export function initNav(): void {
     observateur.observe(hero)
   }
 
+  suivreLaSection()
+  suivreLeFond(nav)
+
   const bascule = document.getElementById('navBascule')
   const panneau = document.getElementById('navPanneau')
   if (!bascule || !panneau) return
@@ -110,4 +113,112 @@ export function initNav(): void {
   window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
     if (e.matches && panneau.classList.contains('est-ouvert')) fermer(false)
   })
+}
+
+/**
+ * Le point d'accent sous l'entrée de la section en cours de lecture
+ * (STYLE_GUIDE § 7). Le CSS existait, rien ne posait `aria-current` :
+ * branché le 2 octobre 2026.
+ *
+ * Une ligne de lecture au milieu de l'écran : la section qui la traverse
+ * est la section lue. Les engagements prolongent les tarifs et allument
+ * « Tarifs » ; l'estimateur et la FAQ n'ont pas d'entrée, rien ne s'allume.
+ */
+function suivreLaSection(): void {
+  const liens = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav-lien[href^="#"]'))
+  const parId = new Map<string, HTMLAnchorElement[]>()
+  liens.forEach((l) => {
+    const id = l.getAttribute('href')!.slice(1)
+    parId.set(id, [...(parId.get(id) ?? []), l])
+  })
+  const sections = Array.from(parId.keys())
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null)
+    // Dans l'ordre de la page, pas du menu : les réalisations passent
+    // avant la méthode dans la page, après elle dans le menu.
+    .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+  if (!sections.length) return
+
+  // Un seul point pour tout le menu : il glisse sous l'entrée de la
+  // section lue au lieu de réapparaître d'une entrée à l'autre. Les autres
+  // entrées passent en retrait (CSS). Choisi par Adri le 2 octobre 2026.
+  const barre = document.getElementById('navLiens')
+  let indicateur: HTMLElement | null = null
+  if (barre) {
+    indicateur = document.createElement('span')
+    indicateur.className = 'nav-indicateur'
+    indicateur.setAttribute('aria-hidden', 'true')
+    barre.append(indicateur)
+  }
+
+  function placerIndicateur(): void {
+    if (!indicateur || !barre) return
+    const lien = barre.querySelector<HTMLElement>('.nav-lien[aria-current="true"]')
+    indicateur.classList.toggle('est-visible', Boolean(lien))
+    if (!lien) return
+    const x = lien.offsetLeft + lien.offsetWidth / 2 - 3
+    indicateur.style.transform = `translateX(${x}px)`
+  }
+
+  let courante = ''
+  function allumer(id: string): void {
+    if (id === courante) return
+    courante = id
+    liens.forEach((l) => l.removeAttribute('aria-current'))
+    parId.get(id)?.forEach((l) => l.setAttribute('aria-current', 'true'))
+    placerIndicateur()
+  }
+
+  // Les sections qui allument l'entrée d'une autre.
+  const PROLONGE: Record<string, string> = { garanties: 'tarifs' }
+  const zones = [...sections, ...Object.keys(PROLONGE).map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null)]
+
+  // Mesurée à la frame, pas à chaque événement de défilement.
+  let attente = false
+  function mesurer(): void {
+    attente = false
+    const ligne = window.innerHeight * 0.5
+    let id = ''
+    for (const s of zones) {
+      const r = (s.closest<HTMLElement>('.pin-spacer') ?? s).getBoundingClientRect()
+      if (r.top <= ligne && r.bottom > ligne) id = PROLONGE[s.id] ?? s.id
+    }
+    allumer(id)
+  }
+  const demander = (): void => {
+    if (attente) return
+    attente = true
+    requestAnimationFrame(mesurer)
+  }
+  window.addEventListener('scroll', demander, { passive: true })
+  window.addEventListener('resize', () => { demander(); placerIndicateur() })
+  mesurer()
+}
+
+/**
+ * La barre flottante prend la couleur opposée à ce qu'il y a dessous :
+ * encre sur le papier, papier sur une section sombre (2 octobre 2026).
+ * On regarde ce qui est sous le centre de la barre, la barre et le
+ * curseur mis de côté. Mesuré à la frame, au défilement.
+ */
+function suivreLeFond(nav: HTMLElement): void {
+  const barre = nav.querySelector<HTMLElement>('.nav-interieur')
+  if (!barre) return
+  let attente = false
+  function mesurer(): void {
+    attente = false
+    const r = barre!.getBoundingClientRect()
+    const dessous = document
+      .elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)
+      .find((el) => !nav.contains(el) && el.id !== 'curseur')
+    nav.classList.toggle('sur-sombre', Boolean(dessous?.closest('.sombre')))
+  }
+  const demander = (): void => {
+    if (attente) return
+    attente = true
+    requestAnimationFrame(mesurer)
+  }
+  window.addEventListener('scroll', demander, { passive: true })
+  window.addEventListener('resize', demander)
+  mesurer()
 }
